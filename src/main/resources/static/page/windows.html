@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <script>
+        function openWin(){
+            myWindow=window.open("","","width=200,height=100");
+            myWindow.document.write("<p>这是'我的窗口'</p>");
+        }
+        function closeWin(){
+            myWindow.close();
+        }
+    </script>
+</head>
+<body>
+
+<input type="button" value="打开我的窗口" onclick="openWin()" />
+<input type="button" value="关闭我的窗口" onclick="closeWin()" />
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>app</title>
+</head>
+
+<script src="js/jquery-1.8.3.js"></script>
+<body>
+
+<div>
+
+
+    <button onclick="f()">click</button>
+    <input type="button" onclick="f()"value="qowiruwoieyr">
+
+    <form action="/exportExcel" method="post">
+        <button>exportExcel</button>
+        <input type="submit" value="123123">
+    </form>
+
+    <form action="/exportUtilTest" method="post">
+        <button>exportUtilTest</button>
+    </form>
+
+</div>
+<script>
+    function f() {
+
+        $.ajax({
+            type: "post",
+            url: "localhost:8989/test/exportExcel",
+            async: true,
+            success: function (res) {
+                console.log(res, "res")
+            },
+            error: function (error) {
+                console.log("error" + error.status)
+            }
+        })
+    }
+</script>
+
+</body>
+</html>
