@@ -28,7 +28,7 @@ public class MyAspect {
      * @author: wg
      * @time: 2020/4/28 13:16
      *************************************************************/
-    @Before("deciphering()")
+    //@Before("deciphering()")
     public Object encryptUserName(ProceedingJoinPoint joinPoint) {
         BASE64Encoder encoder = new BASE64Encoder();
         String encode = "";

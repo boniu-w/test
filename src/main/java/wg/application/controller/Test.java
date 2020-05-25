@@ -38,6 +38,17 @@ public class Test {
 
     private Result result;
 
+    @RequestMapping(value = "/wg")
+    @ResponseBody
+    public List wg(){
+        ArrayList<Object> arrayList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            arrayList.add(i,i+"--i");
+        }
+
+        return arrayList;
+    }
+
 
     @RequestMapping(value = "/test")
     @ResponseBody
