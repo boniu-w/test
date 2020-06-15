@@ -1,16 +1,16 @@
-package wg.beichengamble.controller;
+package wg.application.beichengamble.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import wg.beichengamble.mapper.GambleMapper;
+import wg.application.beichengamble.mapper.GambleMapper;
 
 import java.util.List;
 
 /**
  * @author wg
- * @Package wg.beichengamble.controller
+ * @Package wg.application.beichengamble.controller
  * @date 2020/5/9 15:23
  * @Copyright
  */
@@ -20,7 +20,7 @@ public class GambleController {
 
 
     @Autowired
-    GambleMapper gambleMapper;
+    public GambleMapper gambleMapper;
 
 
     @RequestMapping(value = "/test1")

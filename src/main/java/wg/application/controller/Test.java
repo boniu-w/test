@@ -12,17 +12,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import wg.application.annotation.Log;
 import wg.application.entity.BankFlow;
 import wg.application.entity.Result;
+import wg.application.exception.WgException;
 import wg.application.service.AspectService;
 import wg.application.util.ExcelUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.util.*;
 
 
 /**
@@ -40,10 +42,10 @@ public class Test {
 
     @RequestMapping(value = "/wg")
     @ResponseBody
-    public List wg(){
+    public List wg() {
         ArrayList<Object> arrayList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            arrayList.add(i,i+"--i");
+            arrayList.add(i, i + "--i");
         }
 
         return arrayList;
@@ -260,7 +262,152 @@ public class Test {
     @ResponseBody
     public void testAspect(@PathVariable String userName) {
         aspectService.add(userName);
-        System.out.println("----------userName"+userName);
+        System.out.println("----------userName" + userName);
     }
 
+    /*************************************************************
+     * 科学计数法
+     * @author: wg
+     * @time: 2020/6/15 11:02
+     *************************************************************/
+    @ResponseBody
+    @RequestMapping(value = "/kexuejishufa")
+    public void kexuejishufa() {
+        double d = 6.22848E+18;
+        BigDecimal bigDecimal = new BigDecimal(d);
+        System.out.println(bigDecimal);
+    }
+
+    /*************************************************************
+     * 截字符串
+     * @author: wg
+     * @time: 2020/6/15 14:02
+     *************************************************************/
+    @ResponseBody
+    @RequestMapping(value = "/splitString")
+    public String[] splitString() {
+        //String reg = "\\u007c\\u0021";
+        String reg = "\\|!";
+        String reg1 = "\\!";
+        String res = "6228270021221339476|!20170527|!102048|!215859072|!EP010000|!1611500899736286|!薛芳                                                                                                |!-1800.00|!31904.16|!EPAY|!财付通    |!                                                                                                    |!                                                                                                    |!029999                        |!41007801941001021               |!                |!财付通支付科技有限公司客户备付金                                                                    |!0.00|!029999|!天津市分行资金清算中心                                      |!|!|!";
+
+        String[] split = res.split(reg);
+        String[] finallyString = new String[split.length];
+        for (int i = 0; i < split.length; i++) {
+            finallyString[i] = split[i].trim();
+        }
+
+        System.out.println(split.length);
+        System.out.println(finallyString.length);
+
+        return finallyString;
+    }
+
+    /*************************************************************
+     * hashmap的数据结构 一个例证 put的返回值;
+     * @author: wg
+     * @time: 2020/6/15 14:34
+     *************************************************************/
+    @ResponseBody
+    @RequestMapping(value = "/obj")
+    public Object obj() {
+        HashMap map = new HashMap();
+
+        Object put = map.put(0, "23");
+        System.out.println(put);
+
+        Object put1 = map.put(1, "2323");
+        System.out.println(put1);
+
+        Object put2 = map.put(1, "777");
+        System.out.println(put2);
+
+        System.out.println(map);
+        return put;
+    }
+
+    /*************************************************************
+     * for循环的i++ 是在 方法体内 执行的
+     * @author: wg
+     * @time: 2020/6/15 14:51
+     *************************************************************/
+    @RequestMapping("loopTest")
+    @ResponseBody
+    private HashMap loopTest() {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+
+        for (int j = 0; j < 10; j++) {
+            int i = 0;
+            for (; i < 10; ) {
+                System.out.println(i);
+            }
+            i++;
+            hashMap.put(i, i);
+        }
+
+        return hashMap;
+
+    }
+
+    /*************************************************************
+     * file
+     * @author: wg
+     * @time: 2020/6/15 14:59
+     *************************************************************/
+    @RequestMapping(value = "/getFileInfo")
+    @ResponseBody
+    public void getFileInfo() {
+        try {
+            File file = new File("E:\\dir\\流水\\线下调取农行流水\\农行司法查控系统个人活期交易明细查询结果_20200526164539\\E_03_6228270021221339476_1_b9c2d06b-8397-4073-9e03-fce59e7f5554.dat");
+
+            String fileName = file.getName();
+            String absolutePath = file.getAbsolutePath();
+            String canonicalPath = file.getCanonicalPath();
+            String parent = file.getParent();
+            String path = file.getPath();
+
+            System.out.println(fileName);
+            System.out.println(absolutePath);
+            System.out.println(canonicalPath);
+            System.out.println(parent);
+            System.out.println(path);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*************************************************************
+     * 数组 Array
+     * @author: wg
+     * @time: 2020/6/15 15:16
+     *************************************************************/
+    @RequestMapping(value = "/arrayTest1")
+    @ResponseBody
+    public void arrayTest1() {
+        String s = "123123.dat";
+        String[] split = s.split("\\.");
+        System.out.println(split.length);
+
+        String substring = s.substring(s.length() - 4);
+        if (".dat".equals(substring)) {
+            System.out.println("√√√√√√√√√√√√√√√√√");
+        } else {
+            System.out.println("×××××××××××");
+        }
+
+    }
+
+    @RequestMapping(value = "/exceptionTest")
+    @ResponseBody
+    public void exceptionTest() {
+
+        if (0 == 0) {
+            throw new WgException("sha cha");
+        }
+
+        System.out.println("--------");
+
+    }
 }

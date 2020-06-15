@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--对应dao-->
-<mapper namespace="wg.beichengamble.mapper.GambleMapper">
+<mapper namespace="wg.application.beichengamble.mapper.GambleMapper">
 
     <select id="selectForCardNo">
 
