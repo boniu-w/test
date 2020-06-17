@@ -1,9 +1,17 @@
 package wg.application.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -451,5 +459,65 @@ public class Test {
         System.out.println(s);
 
 
+    }
+
+    /******************************************************************
+     * lamda
+     * @author: wg
+     * @time: 2020/6/17 14:50
+     ******************************************************************/
+    @RequestMapping(value = "/testLamda")
+    @ResponseBody
+    public void testLamda() {
+        String[] array = {"aaaa", "bbbb", "cccc"};
+        List<String> list = Arrays.asList(array);
+
+        //Java 7
+        for (String s : list) {
+            System.out.println(s);
+        }
+
+        //Java 8
+        list.forEach(System.out::println);
+    }
+
+
+    @RequestMapping(value = "/test12")
+    @ResponseBody
+    public String[] test12(HttpServletResponse response) {
+        response.setCharacterEncoding("utf-8");
+        String s = "产品号\t交易日期\t交易时间\t日志号\t传票号\t客户代码\t客户名称\t交易金额\t交易后余额\t交易渠道\t摘要\t商户名称\t交易地点\tAPSH地点线索\t交易对手账号\t交易对手客户代码\t交易对手户名\t对手交易后余额\t交易行号\t交易行名称";
+        String[] split = s.split("\\t");
+
+        String[] a = split;
+        return a;
+    }
+
+    //@Value("classpath:json/nongHangTitles.json")
+    //Resource resource;
+
+    @RequestMapping(value = "/testJson")
+    @ResponseBody
+    public void testJson() {
+        ClassPathResource resource = new ClassPathResource("static/json/nongHangTitles.json");
+        try {
+            if (resource.exists()) {
+
+                File file = resource.getFile();
+                String s = FileUtils.readFileToString(file);
+
+                System.out.println(s);
+
+
+                JSONArray jsonArray = JSON.parseArray(s);
+                System.out.println(jsonArray.toString());
+
+
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
