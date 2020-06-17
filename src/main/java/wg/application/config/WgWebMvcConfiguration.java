@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 
 @Configuration
-public class WebMvcConfiguration extends WebMvcConfigurationSupport {
+public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
 
     /***************************************************
      * 这里配置静态资源文件的路径导包都是默认的直接导入就可以

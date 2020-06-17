@@ -286,10 +286,15 @@ public class Test {
     @ResponseBody
     @RequestMapping(value = "/splitString")
     public String[] splitString() {
+        String[] strings = {"账号", "交易日期", "交易时间", "日志号", "传票号", "产品号", "户名", "交易金额", "交易余额", "交易渠道", "摘要", "1", "2", "交易行号", "对手卡号", "7", "3", "4", "5", "6"};
+
         //String reg = "\\u007c\\u0021";
         String reg = "\\|!";
         String reg1 = "\\!";
-        String res = "6228270021221339476|!20170527|!102048|!215859072|!EP010000|!1611500899736286|!薛芳                                                                                                |!-1800.00|!31904.16|!EPAY|!财付通    |!                                                                                                    |!                                                                                                    |!029999                        |!41007801941001021               |!                |!财付通支付科技有限公司客户备付金                                                                    |!0.00|!029999|!天津市分行资金清算中心                                      |!|!|!";
+
+        String res = "6228270021221339476|!20170526|!162921|!404666835|!EP010000|!1611500899736286|!薛芳                                                                                                |!-64.54|!37481.16|!EPAY|!支付宝    |!                                                                                                    |!                                                                                                    |!029999                        |!19036401948872579               |!                |!支付宝（中国）网络技术有限公司                                                                      |!0.00|!029999|!天津市分行资金清算中心                                      |!|!|!";
+        //res = "账号\t交易日期\t交易时间\t日志号\t传票号\t产品号\t户名\t交易金额\t交易余额\t交易渠道\t摘要\t1\t2\t交易行号\t对手卡号\t\t3\t4\t5\t6";
+        //reg="\t";
 
         String[] split = res.split(reg);
         String[] finallyString = new String[split.length];
@@ -366,6 +371,7 @@ public class Test {
             String parent = file.getParent();
             String path = file.getPath();
 
+
             System.out.println(fileName);
             System.out.println(absolutePath);
             System.out.println(canonicalPath);
@@ -397,6 +403,11 @@ public class Test {
             System.out.println("×××××××××××");
         }
 
+
+        if (".dat".equals(s.substring(s.lastIndexOf(".")))) {
+            System.out.println("nnnnnnnnnnbbbbbbb");
+        }
+
     }
 
     @RequestMapping(value = "/exceptionTest")
@@ -408,6 +419,37 @@ public class Test {
         }
 
         System.out.println("--------");
+
+    }
+
+    /******************************************************************
+     * continue
+     * @author: wg
+     * @time: 2020/6/17 11:03
+     ******************************************************************/
+    @RequestMapping(value = "/continueTest")
+    @ResponseBody
+    public void continueTest() {
+        int s = 0;
+
+        for (int i = 0; i < 10; i++) {
+            if (i == 2) {
+
+                s = s - 10;
+                continue;
+            }
+
+
+            if (i == 3) {
+                System.out.println("true");
+                continue;
+            }
+
+            s = s + 10;
+        }
+
+        System.out.println(s);
+
 
     }
 }
