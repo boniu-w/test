@@ -14,9 +14,9 @@ public class AspectServiceImpl implements AspectService {
 
 
     @Override
-    public Object add(String userName) {
+    public String add(String userName) {
 
         System.out.println("AspectServiceImpl userName: "+userName);
-        return null;
+        return "\\\\";
     }
 }

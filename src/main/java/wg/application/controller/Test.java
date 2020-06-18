@@ -2,34 +2,33 @@ package wg.application.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONReader;
+import com.alibaba.fastjson.parser.JSONLexer;
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import wg.application.annotation.Log;
+import wg.application.component.DecipherPhone;
+import wg.application.component.TransformTitle;
 import wg.application.entity.BankFlow;
 import wg.application.entity.Result;
 import wg.application.exception.WgException;
 import wg.application.service.AspectService;
 import wg.application.util.ExcelUtil;
+import wg.application.util.IPUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.*;
@@ -44,6 +43,7 @@ import java.util.*;
 @Controller
 @RequestMapping(value = "/test")
 @EnableAspectJAutoProxy
+@Slf4j
 public class Test {
 
     private Result result;
@@ -280,10 +280,12 @@ public class Test {
      *************************************************************/
     @ResponseBody
     @RequestMapping(value = "/kexuejishufa")
-    public void kexuejishufa() {
+    public double kexuejishufa() {
         double d = 6.22848E+18;
         BigDecimal bigDecimal = new BigDecimal(d);
         System.out.println(bigDecimal);
+
+        return d;
     }
 
     /*************************************************************
@@ -411,6 +413,10 @@ public class Test {
             System.out.println("×××××××××××");
         }
 
+        int i = s.lastIndexOf("23");
+
+        System.out.println(i+"..............");
+
 
         if (".dat".equals(s.substring(s.lastIndexOf(".")))) {
             System.out.println("nnnnnnnnnnbbbbbbb");
@@ -486,38 +492,202 @@ public class Test {
     @ResponseBody
     public String[] test12(HttpServletResponse response) {
         response.setCharacterEncoding("utf-8");
-        String s = "产品号\t交易日期\t交易时间\t日志号\t传票号\t客户代码\t客户名称\t交易金额\t交易后余额\t交易渠道\t摘要\t商户名称\t交易地点\tAPSH地点线索\t交易对手账号\t交易对手客户代码\t交易对手户名\t对手交易后余额\t交易行号\t交易行名称";
-        String[] split = s.split("\\t");
+        String s = "本方账号,本人账号,付款方帐号,付款方账号,付款人账号,付款帐号,付款账号,付款支付帐号,核算账号,交易卡号,交易帐户,交易账号,交易账户,交易主体账号,客户帐号,客户账号,客户账户,内部结算账号,内部帐户,涉案账号,帐号,账 号,账号,转出卡号,转出卡号/账号,转出账户";
+        String[] split = s.split(",");
 
         String[] a = split;
         return a;
     }
 
-    //@Value("classpath:json/nongHangTitles.json")
-    //Resource resource;
 
-    @RequestMapping(value = "/testJson")
+    /****************************************************************
+     * 读取json文件
+     * @author: wg
+     * @time: 2020/6/17 18:16
+     ****************************************************************/
+    @RequestMapping(value = "getJsonFile")
     @ResponseBody
-    public void testJson() {
-        ClassPathResource resource = new ClassPathResource("static/json/nongHangTitles.json");
+    public String[] getJsonFile(String path) {
+        path = "static/json/nongHangTitles.json";
+        ClassPathResource resource = new ClassPathResource(path);
+        String[] strings = null;
         try {
             if (resource.exists()) {
-
                 File file = resource.getFile();
                 String s = FileUtils.readFileToString(file);
 
                 System.out.println(s);
 
-
                 JSONArray jsonArray = JSON.parseArray(s);
-                System.out.println(jsonArray.toString());
+                strings = new String[jsonArray.size()];
+                for (int i = 0; i < jsonArray.size(); i++) {
+                    strings[i] = (String) jsonArray.get(i);
+                }
 
-
-
+                return strings;
+            } else {
+                throw new RuntimeException("在 " + path + " 路径下找不到json文件");
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return new String[]{};
     }
+
+    /****************************************************************
+     * json 文件路径问题 classpath 应该 是项目 配置的 , 我的这个 只能在 resources下,
+     * 如要修改,应该是在application.properties 文件中修改,但是 我配置了 不管用
+     * @author: wg
+     * @time: 2020/6/18 9:28
+     ****************************************************************/
+    @RequestMapping(value = "/readJson")
+    @ResponseBody
+    private String readJson(String jsonSrc) {
+        //jsonSrc = "classpath:wgjson/nongHangTitles.json";
+        jsonSrc = "classpath:static/json/nongHangTitles.json";
+        String json = "";
+        try {
+            //File jsonFile = ResourceUtils.getFile(jsonSrc);
+            //json = FileUtils.re.readFileToString(jsonFile);
+            //换个写法，解决springboot读取jar包中文件的问题
+            InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(jsonSrc.replace("classpath:", ""));
+
+            InputStreamReader reader = new InputStreamReader(resourceAsStream, "utf-8");
+
+            int content = 0;
+
+            StringBuffer stringBuffer = new StringBuffer();
+            while ((content = reader.read()) != -1) {
+                stringBuffer.append((char) content);
+
+            }
+
+            reader.close();
+            resourceAsStream.close();
+
+            json = stringBuffer.toString();
+            System.out.println(json);
+            return json;
+
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return json;
+    }
+
+
+    @Autowired
+    TransformTitle transformTitle;
+
+    /****************************************************************
+     * 关于spring注入的 一些测试
+     * @author: wg
+     * @time: 2020/6/18 14:38
+     ****************************************************************/
+    @RequestMapping(value = "/springIOCTest")
+    @ResponseBody
+    public void springIOCTest() {
+
+        //TransformTitle transformTitle = new TransformTitle();
+
+        this.transformTitle.test();
+        System.out.println(".............");
+
+        //////////////////////////////////////////////
+        //  现有一个类a 它并没有@component 注解,但其中 有全局定义的 由ioc注入的 变量 b, 例 @Autowired B b;
+        //  另一个类 c 引用a的这个方法, 则不能 通过 new a(); 的 方式调用 a中的方法
+        //////////////////////////////////////////////
+
+        DecipherPhone decipherPhone = new DecipherPhone();
+        decipherPhone.test();
+        System.out.println(">>>>>>>");
+
+    }
+
+
+    /****************************************************************
+     * 浮点数的等值 判断
+     * Java中的解决方法，是通过设立一个阈值来消除计算机计算所带来的误差引起的误差
+     * @author: wg
+     * @time: 2020/6/18 15:17
+     ****************************************************************/
+    @RequestMapping(value = "/floatJudge")
+    @ResponseBody
+    public void floatJudge() {
+        float a = 1.0f - 0.9f;
+        float b = 0.9f - 0.8f;
+
+        System.out.println(a);
+        System.out.println(b);
+
+        if (a == b) {
+            System.out.println("a == b");
+        } else {
+            System.out.println("a != b");
+        }
+
+        final double e = 1E-14;
+        BigDecimal bigDecimal = new BigDecimal(e);
+        System.out.println("bigDecimal -> " + bigDecimal);
+
+        float abs = Math.abs(a - b);
+        System.out.println("abs -> " + abs);
+
+
+        final double e2 = 1E-7;
+
+        if (Math.abs(a - b) < e2) {
+            System.out.println("a 终于 == b");
+        } else {
+            System.out.println("a 还是 != b");
+        }
+
+
+        BigDecimal a_bigdecimal = new BigDecimal(a);
+        BigDecimal b_bigdecimal = new BigDecimal(b);
+
+        System.out.println("a_bigdecimal -> " + a_bigdecimal);
+        System.out.println("b_bigdecimal -> " + b_bigdecimal);
+
+        int i = a_bigdecimal.compareTo(b_bigdecimal);
+
+        boolean kk = a_bigdecimal.equals(b_bigdecimal) ? true : false;
+
+        System.out.println("i -> " + i);
+
+        System.out.println("kk -> " + kk);
+
+
+    }
+
+    /****************************************************************
+     * 除法
+     * @author: wg
+     * @time: 2020/6/18 15:58
+     ****************************************************************/
+    @ResponseBody
+    @RequestMapping(value = "test23")
+    public void test23() {
+        long round = Math.round((2 + 3) / 2);
+        System.out.println(round);  // 2  为什么是2
+
+        long l = Math.round(2.5);
+        System.out.println(l); // 3
+        double ceil = Math.ceil(2.5);
+        System.out.println("ceil : " + ceil); // 3
+
+        double b = (2d + 3d) / 2d;
+        System.out.println("b : " + b);  // 2.5
+
+    }
+
+    @RequestMapping(value = "/ipTest")
+    @ResponseBody
+    public String ipTest(HttpServletRequest request) {
+        String ipAddr = IPUtils.getIpAddr(request);
+
+        return ipAddr;
+
+    }
+
 }
