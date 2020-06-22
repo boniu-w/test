@@ -2,6 +2,7 @@ package wg.application.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import wg.application.service.AspectService;
 import wg.application.service.impl.AspectServiceImpl;
 
 /*************************************************************
@@ -15,7 +16,7 @@ import wg.application.service.impl.AspectServiceImpl;
 public class TransformTitle {
 
     @Autowired
-    AspectServiceImpl service;
+    AspectService service;
 
 
     public void test(){

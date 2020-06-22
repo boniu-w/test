@@ -10,22 +10,31 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
+import wg.application.config.SpringIOCTest;
 import wg.application.entity.BankFlow;
 import wg.application.entity.Result;
 import wg.application.exception.WgException;
 import wg.application.service.AspectService;
+import wg.application.service.MovieInterface;
+import wg.application.service.TestInterface;
+import wg.application.service.impl.TestImpl_1;
+import wg.application.service.impl.TestImpl_2;
 import wg.application.util.ExcelUtil;
 import wg.application.util.IPUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -415,7 +424,7 @@ public class Test {
 
         int i = s.lastIndexOf("23");
 
-        System.out.println(i+"..............");
+        System.out.println(i + "..............");
 
 
         if (".dat".equals(s.substring(s.lastIndexOf(".")))) {
@@ -424,15 +433,25 @@ public class Test {
 
     }
 
+    /****************************************************************
+     * 有try catch 和 无try catch 的差别
+     * 有: 下方语句会执行
+     * 无: 下方语句不会执行
+     * @author: wg
+     * @time: 2020/6/22 15:17
+     ****************************************************************/
     @RequestMapping(value = "/exceptionTest")
     @ResponseBody
     public void exceptionTest() {
+        try {
+            if (0 == 0) {
+                throw new WgException("sha cha");
+            }
+        } catch (WgException we) {
 
-        if (0 == 0) {
-            throw new WgException("sha cha");
+            we.printStackTrace();
         }
-
-        System.out.println("--------");
+        System.out.println("->>>>>>>><<<<<<<<-");
 
     }
 
@@ -673,6 +692,7 @@ public class Test {
 
         long l = Math.round(2.5);
         System.out.println(l); // 3
+
         double ceil = Math.ceil(2.5);
         System.out.println("ceil : " + ceil); // 3
 
@@ -690,7 +710,84 @@ public class Test {
 
     }
 
+    /************ ->接口测试 开始 ************/
+    /****************************************************************
+     * 可以看出 autowired 和  resource 两个注入 的区别
+     * autowired 是 先类别 后 按名称
+     * resource 是 按 名称
+     * @author: wg
+     * @time: 2020/6/22 14:33
+     ****************************************************************/
 
+    @Qualifier(value = "testImpl_2")
+    @Autowired
+    TestInterface testInterface;
+
+    @Resource
+    TestInterface testImpl_2;
+
+
+    @RequestMapping(value = "/testInterface")
+    @ResponseBody
+    private String testInterface() {
+
+        System.out.println(testInterface.getname());
+
+        return testImpl_2.getname();
+
+
+    }
+
+    /************ -> 接口测试 结束 ************/
+
+    @Autowired
+    MovieInterface movieInterface;
+
+    @RequestMapping(value = "/testMovieNeo4j")
+    @ResponseBody
+    private String testMovieNeo4j(HttpServletRequest request, HttpServletResponse response) {
+
+        movieInterface.testNeo4j(request, response);
+
+        return "123";
+    }
+
+
+    /****************************************************************
+     * ioc test
+     * @author: wg
+     * @time: 2020/6/22 15:05
+     ****************************************************************/
+    @ResponseBody
+    @RequestMapping(value = "/IOCtest")
+    public void IOCtest() {
+        // 1.无参构造器 创建 AnnotationConfigApplicationContext
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+
+        // 2. 设置 需要激活 的环境 允许 test dev 加载
+        applicationContext.getEnvironment().setActiveProfiles("test", "dev");
+
+        // 3. 开始 注册 配置类
+        applicationContext.register(SpringIOCTest.class);
+
+        // 4. 刷新容器
+        applicationContext.refresh();
+
+        // 获取所有bean 的名字
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            System.out.println(beanDefinitionName);
+        }
+
+        String[] beanNamesForType = applicationContext.getBeanNamesForType(SpringIOCTest.class);
+        for (String s : beanNamesForType) {
+            System.out.println("容器的beans名字-- " + s);
+        }
+
+        applicationContext.close();
+
+
+    }
 
 
 }
