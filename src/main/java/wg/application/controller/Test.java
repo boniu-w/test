@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONReader;
 import com.alibaba.fastjson.parser.JSONLexer;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -14,6 +17,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +29,10 @@ import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
 import wg.application.config.SpringIOCTest;
 import wg.application.entity.BankFlow;
+import wg.application.entity.Liushui;
 import wg.application.entity.Result;
 import wg.application.exception.WgException;
+import wg.application.mapper.WgMapper;
 import wg.application.service.AspectService;
 import wg.application.service.MovieInterface;
 import wg.application.service.TestInterface;
@@ -788,6 +795,119 @@ public class Test {
 
 
     }
+
+    /****************************************************************
+     * springframework security 加密
+     * @author: wg
+     * @time: 2020/6/23 14:44
+     ****************************************************************/
+    @RequestMapping(value = "/encode")
+    @ResponseBody
+    private void encode() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encode = encoder.encode("123456");
+        String encode2 = encoder.encode("111");
+
+        System.out.println("encode -> "+encode);
+        System.out.println(encode2);
+
+
+        boolean matches = encoder.matches("111", "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe");
+        boolean matches2 = encoder.matches("$2a$10$FzFf3R.wOpL4GSfBM6Evj.o71tSHVH4oRrNtwpki941OiDBdd2NjW", "$2a$10$f2Ou9THT.kG71jkSVglKUu6DDZlE6LAC5lQaM6le.qJcNcp/PuA0i");
+
+        System.out.println(matches);
+        System.out.println(matches2);
+
+        if (matches2) {
+            System.out.println("---------");
+        }
+
+    }
+
+    @Autowired
+    WgMapper wgMapper;
+
+    /****************************************************************
+     * mybatisplus test
+     * @author: wg
+     * @time: 2020/6/23 16:19
+     ****************************************************************/
+    @RequestMapping(value = "/mybatisplusTest")
+    @ResponseBody
+    public void mybatisplusTest() {
+        //String newBeiZhu = "123";
+        //String sql = "bei_zhu=" + "'" + newBeiZhu + "'";
+
+        QueryWrapper<Liushui> queryWrapper = new QueryWrapper<>();
+
+        Integer integer = wgMapper.selectCount(queryWrapper);
+        System.out.println(integer);
+
+        Liushui liushui = new Liushui();
+        liushui.setBeiZhu("<><><><><><><><><><><>");
+
+        UpdateWrapper<Liushui> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id", 2).eq("card_no", "11457000000616141");
+
+
+        int update = wgMapper.update(liushui, updateWrapper);
+
+        System.out.println(update);
+
+    }
+
+    /****************************************************************
+     * 乘法 除法 的移位
+     * @author: wg
+     * @time: 2020/6/24 10:36
+     ****************************************************************/
+    @RequestMapping(value = "/transpose")
+    @ResponseBody
+    public void transpose() {
+
+        int a = 10;
+
+        int i = a << 1;
+        System.out.println(i);  // 20 = a * 2的1次方
+
+
+        int i1 = a << 2;
+        System.out.println(i1);  // 40 = a * 2的2次方
+
+
+        int i2 = a << 3;
+        System.out.println(i2);  // 80 = a * 2的3次方
+
+
+        int i3 = a * (a ^ 3);  // ^  二进制的异或符
+        System.out.println(i3);
+
+        // a*3;
+        int i4 = (a << 1) + a;
+        System.out.println(i4);
+
+
+        /* 除法 */
+        int i5 = a >> 3;
+        System.out.println(i5); // 1
+
+        int i6 = (a >> 1) - a;
+        System.out.println(i6);
+
+
+        /* 取模 (取余)*/
+        int i7 = a & 2;
+        int i9 = a % 4;
+        System.out.println("10 & 2 = " + i7 + "  " + i9);  // 2
+
+        int i8 = a & 1;
+        int i10 = a % 2;
+        System.out.println("a & (2 - 1) = " + i8 + "  " + i10);  // 0
+
+
+    }
+
+
 
 
 }
