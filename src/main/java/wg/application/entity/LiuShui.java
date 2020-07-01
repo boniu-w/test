@@ -3,7 +3,7 @@ package wg.application.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 @TableName(value = "liushui")
-public class Liushui {
+public class LiuShui {
 
   private long id;
   private String cardNo;

@@ -54,4 +54,11 @@ public class TestApplicationTests {
 
     }
 
+    @Test
+    public void defaultValue() {
+        boolean b;
+        b = 0 < 0;
+        System.out.println(b);
+    }
+
 }

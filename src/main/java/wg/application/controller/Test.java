@@ -2,25 +2,16 @@ package wg.application.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONReader;
-import com.alibaba.fastjson.parser.JSONLexer;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,17 +20,15 @@ import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
 import wg.application.config.SpringIOCTest;
 import wg.application.entity.BankFlow;
-import wg.application.entity.Liushui;
 import wg.application.entity.Result;
+import wg.application.enumeration.Title;
 import wg.application.exception.WgException;
-import wg.application.mapper.WgMapper;
 import wg.application.service.AspectService;
 import wg.application.service.MovieInterface;
 import wg.application.service.TestInterface;
-import wg.application.service.impl.TestImpl_1;
-import wg.application.service.impl.TestImpl_2;
 import wg.application.util.ExcelUtil;
 import wg.application.util.IPUtils;
+import wg.application.util.TokenUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +50,9 @@ import java.util.*;
 @EnableAspectJAutoProxy
 @Slf4j
 public class Test {
+
+    //@Autowired
+    //LiuShuiMapper liuShuiMapper;
 
     private Result result;
 
@@ -695,7 +687,7 @@ public class Test {
     @RequestMapping(value = "test23")
     public void test23() {
         long round = Math.round((2 + 3) / 2);
-        System.out.println(round);  // 2  为什么是2
+        System.out.println(round);  // 2  为什么是2 因为 "/" 是 取商 操作
 
         long l = Math.round(2.5);
         System.out.println(l); // 3
@@ -808,53 +800,93 @@ public class Test {
         String encode = encoder.encode("123456");
         String encode2 = encoder.encode("111");
 
-        System.out.println("encode -> "+encode);
+        System.out.println("encode -> " + encode);
         System.out.println(encode2);
 
 
         boolean matches = encoder.matches("111", "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe");
-        boolean matches2 = encoder.matches("$2a$10$FzFf3R.wOpL4GSfBM6Evj.o71tSHVH4oRrNtwpki941OiDBdd2NjW", "$2a$10$f2Ou9THT.kG71jkSVglKUu6DDZlE6LAC5lQaM6le.qJcNcp/PuA0i");
+        boolean matches2 = encoder.matches("123456", "$2a$10$ib.SiGEAJPbl.11WhriGfuFYxwZzp.IlN0U3ttYXOboirSuOqChzy");
 
         System.out.println(matches);
-        System.out.println(matches2);
+        System.out.println("matches2  " + matches2);
 
         if (matches2) {
             System.out.println("---------");
         }
 
+
+        /************ matches() 源码分析 -> 开始 ************/
+
+        String a = "$2a$10$ib.SiGEAJPbl.11WhriGfuFYxwZzp.IlN0U3ttYXOboirSuOqChzy";
+        String b = "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe";
+
+        try {
+            byte[] a_bytes = a.getBytes("utf-8");
+            byte[] b_bytes = b.getBytes("utf-8");
+
+            if (a_bytes.length != b_bytes.length) {
+                System.out.println(false);
+            }
+
+            for (int i = 0; i < a_bytes.length; i++) {
+                System.out.println("a_bytes[" + i + "]   -> " + a_bytes[i]);
+
+            }
+            for (int i = 0; i < b.length(); i++) {
+
+                System.out.println("b_bytes[" + i + "]   -> " + b_bytes[i]);
+            }
+
+            if (a_bytes == b_bytes) {
+                System.out.println("a_bytes == b_bytes  " + true);
+
+            }
+
+            int result = 0;
+            // time-constant comparison
+            for (int i = 0; i < a_bytes.length; i++) {
+                result |= a_bytes[i] ^ b_bytes[i];
+            }
+
+            System.out.println("result  -> " + result);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        /************ matches() 源码分析 -> 结束 ************/
+
+
     }
 
-    @Autowired
-    WgMapper wgMapper;
 
     /****************************************************************
      * mybatisplus test
      * @author: wg
      * @time: 2020/6/23 16:19
      ****************************************************************/
-    @RequestMapping(value = "/mybatisplusTest")
-    @ResponseBody
-    public void mybatisplusTest() {
-        //String newBeiZhu = "123";
-        //String sql = "bei_zhu=" + "'" + newBeiZhu + "'";
-
-        QueryWrapper<Liushui> queryWrapper = new QueryWrapper<>();
-
-        Integer integer = wgMapper.selectCount(queryWrapper);
-        System.out.println(integer);
-
-        Liushui liushui = new Liushui();
-        liushui.setBeiZhu("<><><><><><><><><><><>");
-
-        UpdateWrapper<Liushui> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("id", 2).eq("card_no", "11457000000616141");
-
-
-        int update = wgMapper.update(liushui, updateWrapper);
-
-        System.out.println(update);
-
-    }
+    //@RequestMapping(value = "/mybatisplusTest")
+    //@ResponseBody
+    //public void mybatisplusTest() {
+    //    //String newBeiZhu = "123";
+    //    //String sql = "bei_zhu=" + "'" + newBeiZhu + "'";
+    //
+    //    QueryWrapper<LiuShui> queryWrapper = new QueryWrapper<>();
+    //
+    //    Integer integer = liuShuiMapper.selectCount(queryWrapper);
+    //    System.out.println(integer);
+    //
+    //    LiuShui liushui = new LiuShui();
+    //    liushui.setBeiZhu("<><><><><><><><><><><>");
+    //
+    //    UpdateWrapper<LiuShui> updateWrapper = new UpdateWrapper<>();
+    //    updateWrapper.eq("id", 2).eq("card_no", "11457000000616141");
+    //
+    //
+    //    int update = liuShuiMapper.update(liushui, updateWrapper);
+    //
+    //    System.out.println(update);
+    //
+    //}
 
     /****************************************************************
      * 乘法 除法 的移位
@@ -865,10 +897,11 @@ public class Test {
     @ResponseBody
     public void transpose() {
 
-        int a = 10;
+        int a = 10;  // 二进制 1010
 
         int i = a << 1;
         System.out.println(i);  // 20 = a * 2的1次方
+        System.out.println("20 的二进制表示 : " + Integer.toBinaryString(i));
 
 
         int i1 = a << 2;
@@ -895,19 +928,135 @@ public class Test {
         System.out.println(i6);
 
 
-        /* 取模 (取余)*/
+        /* 与运算符用符号 "&" */
         int i7 = a & 2;
         int i9 = a % 4;
-        System.out.println("10 & 2 = " + i7 + "  " + i9);  // 2
+        System.out.println("i7 ->= " + i7 + "   ####  i9 ->= " + i9);  // 2
 
         int i8 = a & 1;
         int i10 = a % 2;
-        System.out.println("a & (2 - 1) = " + i8 + "  " + i10);  // 0
+        System.out.println("i8 ->= " + i8 + "   ####  i10->  " + i10);  // 0
+        System.out.println();
+
+        int n = 1;
+        int m = (n << 3) + 2;
+        System.out.println("m - > " + m);
+        System.out.println(Integer.toBinaryString(m));
+        System.out.println();
+        int l = Integer.parseInt("10", 3);
+        System.out.println("三进制数 l 转成 10进制 -> " + l);  //
+        int p = Integer.parseInt("1010", 2);
+        System.out.println("三进制数 l 转成 10进制 -> " + p);  //
+
+        // 负数的 左右 移位
+        int k = -1;
+        System.out.println("k 的二进制表示 : " + Integer.toBinaryString(k));
+        int h = k << 1;
+        System.out.println(h);
+        System.out.println("h 的二进制表示 : " + Integer.toBinaryString(h));
+
+    }
+
+    /****************************************************************
+     * 枚举测试
+     * @author: wg
+     * @time: 2020/6/28 9:48
+     ****************************************************************/
+    @RequestMapping(value = "/enumTest")
+    @ResponseBody
+    private void enumTest() {
+        Title ip = Title.valueOf("TRANSACTION_SUBJECT");
+        System.out.println(ip);
+    }
+
+    /****************************************************************
+     * 运算符 测试
+     * @author: wg
+     * @time: 2020/6/28 11:52
+     ****************************************************************/
+    @RequestMapping(value = "/operatorTest")
+    @ResponseBody
+    public void operatorTest() {
+
+        /* 与运算符 "&" */
+        int a = 129;
+        int b = 128;
+        int i = a & b;
+        System.out.println("a & b   " + i); // 128
+        System.out.println("b & a   " + (b & a));  // 128
+
+        int k = a | b;
+        System.out.println("a | b   " + k);  // 129
+
+        int kk = b | a;
+        System.out.println("b | a    " + kk);   // 129
+
+
+
+
+        /* 01 10  */
+        int m = 1;
+        int n = 2;
+        System.out.println("1&2  -> " + (1 & 2));  // 0
+        System.out.println("1|2  ->  " + (1 | 2));  // 3
 
 
     }
 
 
+    @RequestMapping(value = "/byteTest")
+    @ResponseBody
+    public void byteTest() {
+        try {
+            String s = "我$2a$10$ib.SiGEAJPbl.11WhriGfuFYxwZzp.IlN0U3ttYXOboirSuOqChzy";
+
+
+            byte[] bytes = s.getBytes("utf-8");
+            byte[] bytes1 = s.getBytes("ISO-8859-1");
+            byte[] bytes2 = s.getBytes("utf-16");
+
+            System.out.println("s.length() -> " + s.length());
+            System.out.println(bytes.length + "  bytes -> " + Arrays.toString(bytes));
+            System.out.println(bytes1.length + "  bytes1 -> " + Arrays.toString(bytes1));
+            System.out.println(bytes2.length + "  bytes2 -> " + Arrays.toString(bytes2));
+
+            System.out.println();
+
+            String name = "我";
+
+            String isoName = new String(name.getBytes("utf-8"), "iso-8859-1");
+            System.out.println(isoName);
+
+
+            String utf8Name = new String(isoName.getBytes("iso-8859-1"), "utf-8");
+            System.out.println(utf8Name);
+
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /****************************************************************
+     * token
+     * @author: wg
+     * @time: 2020/7/1 13:39
+     ****************************************************************/
+    @RequestMapping(value = "/tokenTest")
+    @ResponseBody
+    public void tokenTest() {
+
+        String subject = "1";
+        int expirationSeconds = 1;
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", 1);
+
+        String token = TokenUtil.createToken(subject, expirationSeconds, map);
+
+        System.out.println("token -> " + token);
+
+    }
 
 
 }
