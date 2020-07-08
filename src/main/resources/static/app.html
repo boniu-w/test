@@ -12,7 +12,7 @@
 
 
     <button onclick="f()">click</button>
-    <input type="button" onclick="f()"value="qowiruwoieyr">
+    <input type="button" onclick="f1()" value="qowiruwoieyr">
 
     <form action="/exportExcel" method="post">
         <button>exportExcel</button>
@@ -33,12 +33,47 @@
             async: true,
             success: function (res) {
                 console.log(res, "res")
+
+
             },
             error: function (error) {
                 console.log("error" + error.status)
             }
         })
+
     }
+
+    function f1() {
+        function dateFormat(fmt, date) {
+            var ret;
+            var opt = {
+                "Y+": date.getFullYear().toString(),        // 年
+                "M+": (date.getMonth() + 1).toString(),     // 月
+                "D+": date.getDate().toString(),            // 日
+                "h+": date.getHours().toString(),           // 时
+                "m+": date.getMinutes().toString(),         // 分
+                "s+": date.getSeconds().toString()          // 秒
+                // 有其他格式化字符需求可以继续添加，必须转化成字符串
+            };
+            for (var k in opt) {
+                ret = new RegExp("(" + k + ")").exec(fmt);
+                if (ret) {
+                    fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+                }
+                ;
+            }
+            ;
+            return fmt;
+        }
+
+        var s = "2020-06-23 13:58:00";
+        var date = new Date(s);
+        var birthday = dateFormat("YYYY-MM-DD hh:mm:ss", date);
+
+        console.log(birthday)
+    }
+
+
 </script>
 
 </body>

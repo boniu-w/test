@@ -2,6 +2,7 @@ package wg.application;
 
 import com.alibaba.druid.support.json.JSONUtils;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.util.WgJsonUtil;
 
@@ -59,6 +60,16 @@ public class TestApplicationTests {
         boolean b;
         b = 0 < 0;
         System.out.println(b);
+    }
+
+
+
+
+    @Test
+    public void dateTest(){
+        wg.application.controller.Test test = new wg.application.controller.Test();
+
+        test.dateTest();
     }
 
 }

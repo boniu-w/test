@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /*************************************************************
  * @Package wg.application.controller
@@ -24,9 +25,8 @@ public class StringTest {
     public void getBytesTest(){
         String s="王刚";
         byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
-        for (byte aByte : bytes) {
-            System.out.println(aByte);
-        }
+
+        System.out.println(Arrays.toString(bytes));
 
     }
 }

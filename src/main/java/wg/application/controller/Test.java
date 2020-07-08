@@ -12,10 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
 import wg.application.config.SpringIOCTest;
@@ -26,7 +23,6 @@ import wg.application.exception.WgException;
 import wg.application.service.AspectService;
 import wg.application.service.MovieInterface;
 import wg.application.service.TestInterface;
-import wg.application.util.ExcelUtil;
 import wg.application.util.IPUtils;
 import wg.application.util.TokenUtil;
 
@@ -36,7 +32,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.time.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
@@ -188,7 +187,7 @@ public class Test {
     public void setResponseHeader(HttpServletResponse response, String fileName) {
         try {
             try {
-                fileName = new String(fileName.getBytes(), "ISO8859-1");
+                fileName = new String(fileName.getBytes(), "ISO-8859-1");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -246,24 +245,24 @@ public class Test {
         return wb;
     }
 
-    @RequestMapping(value = "/exportUtilTest")
-    public void exportUtilTest(HttpServletResponse response) {
-        List<BankFlow> list = new ArrayList<>();
-        String sheetName = "123";
-
-        for (int i = 0; i < 10; i++) {
-            BankFlow bankFlow = new BankFlow();
-            bankFlow.setTick("conditionExcel" + i);
-            bankFlow.setTransactionAmount(i + 100);
-            list.add(bankFlow);
-        }
-
-
-        Class<BankFlow> bankFlowClass = BankFlow.class;
-        ExcelUtil excelUtil = new ExcelUtil(bankFlowClass);
-        excelUtil.exportExcel(list, sheetName, response);
-
-    }
+    //@RequestMapping(value = "/exportUtilTest")
+    //public void exportUtilTest(HttpServletResponse response) {
+    //    List<BankFlow> list = new ArrayList<>();
+    //    String sheetName = "123";
+    //
+    //    for (int i = 0; i < 10; i++) {
+    //        BankFlow bankFlow = new BankFlow();
+    //        bankFlow.setTick("conditionExcel" + i);
+    //        bankFlow.setTransactionAmount(i + 100);
+    //        list.add(bankFlow);
+    //    }
+    //
+    //
+    //    Class<BankFlow> bankFlowClass = BankFlow.class;
+    //    ExcelUtil excelUtil = new ExcelUtil(bankFlowClass);
+    //    excelUtil.exportExcel(list, sheetName, response);
+    //
+    //}
 
 
     @Autowired
@@ -805,7 +804,7 @@ public class Test {
 
 
         boolean matches = encoder.matches("111", "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe");
-        boolean matches2 = encoder.matches("123456", "$2a$10$ib.SiGEAJPbl.11WhriGfuFYxwZzp.IlN0U3ttYXOboirSuOqChzy");
+        boolean matches2 = encoder.matches("123456", "$2a$10$/WHx6nglmwRLQTvh4cUipuDbpWPDNSKrwdYfeb0Jousty4gBnRh.y");
 
         System.out.println(matches);
         System.out.println("matches2  " + matches2);
@@ -1011,25 +1010,35 @@ public class Test {
             String s = "我$2a$10$ib.SiGEAJPbl.11WhriGfuFYxwZzp.IlN0U3ttYXOboirSuOqChzy";
 
 
-            byte[] bytes = s.getBytes("utf-8");
-            byte[] bytes1 = s.getBytes("ISO-8859-1");
-            byte[] bytes2 = s.getBytes("utf-16");
+            byte[] utf8_bytes = s.getBytes("utf-8");
+            byte[] iso88591_bytes = s.getBytes("ISO-8859-1");
+            byte[] utf16_bytes = s.getBytes("utf-16");
 
             System.out.println("s.length() -> " + s.length());
-            System.out.println(bytes.length + "  bytes -> " + Arrays.toString(bytes));
-            System.out.println(bytes1.length + "  bytes1 -> " + Arrays.toString(bytes1));
-            System.out.println(bytes2.length + "  bytes2 -> " + Arrays.toString(bytes2));
+            System.out.println(utf8_bytes.length + "  utf8_bytes -> " + Arrays.toString(utf8_bytes));
+            System.out.println(iso88591_bytes.length + "  iso88591_bytes -> " + Arrays.toString(iso88591_bytes));
+            System.out.println(utf16_bytes.length + "  utf16_bytes -> " + Arrays.toString(utf16_bytes));
 
             System.out.println();
 
             String name = "我";
 
             String isoName = new String(name.getBytes("utf-8"), "iso-8859-1");
-            System.out.println(isoName);
+            System.out.println("isoName -> " + isoName);
 
 
             String utf8Name = new String(isoName.getBytes("iso-8859-1"), "utf-8");
-            System.out.println(utf8Name);
+            System.out.println("utf8Name -> " + utf8Name);
+
+
+            String iso = new String(name.getBytes(), "iso-8859-1");
+            System.out.println("iso -> " + iso);
+
+            String s1 = new String(iso.getBytes(), "utf-8");
+            System.out.println("s1 -> " + s1);
+
+            String s2 = new String(iso.getBytes("iso-8859-1"), "utf-8");
+            System.out.println("s2 -> " + s2);
 
 
         } catch (UnsupportedEncodingException e) {
@@ -1055,6 +1064,106 @@ public class Test {
         String token = TokenUtil.createToken(subject, expirationSeconds, map);
 
         System.out.println("token -> " + token);
+
+    }
+
+
+    /****************************************************************
+     * 三元
+     * @author: wg
+     * @time: 2020/7/7 15:27
+     ****************************************************************/
+    @RequestMapping(value = "sanYuan")
+    @ResponseBody
+    public void sanYuan() {
+        boolean b = 1 > 2 || 1 > 0 ? false : true;
+
+        System.out.println(b); // false
+
+    }
+
+    /****************************************************************
+     * streamTest
+     * @author: wg
+     * @time: 2020/7/8 10:18
+     ****************************************************************/
+    @RequestMapping(value = "streamTest")
+    @ResponseBody
+    public void streamTest() {
+        List<String> collect = Stream.of("one", "two", "three", "four")
+          .filter(e -> e.length() > 3)
+          .peek(e -> System.out.println("Filtered value: " + e))
+          .map(String::toUpperCase)
+          .peek(e -> System.out.println("Mapped value: " + e))
+          .collect(Collectors.toList());
+
+        System.out.println(collect);
+    }
+
+
+    /****************************************************************
+     * local time date
+     * @author: wg
+     * @time: 2020/7/8 14:03
+     ****************************************************************/
+    public void dateTest() {
+        LocalTime localTime = LocalTime.now();
+        System.out.println(localTime);
+
+        LocalDate localDate = LocalDate.now();
+        System.out.println(localDate);
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(localDateTime);
+
+        LocalDateTime of = LocalDateTime.of(localDate, localTime);
+        System.out.println(of);
+
+        DayOfWeek dayOfWeek = DayOfWeek.from(localDateTime);
+        System.out.println(dayOfWeek);
+
+        LocalDateTime atTime = localDate.atTime(14, 25, 8);
+        System.out.println("atTime -> " + atTime);
+
+
+        int dayOfYear = localDateTime.getDayOfYear();
+        System.out.println(dayOfYear);
+
+        int monthValue = localDateTime.getMonthValue();
+        System.out.println(monthValue);
+
+        Month month = localDateTime.getMonth();
+        System.out.println(month);
+
+        Date date = new Date();
+        System.out.println(date);
+
+
+        Instant instant = Instant.now();
+        System.out.println("类似时间戳 instant -> " + instant);
+
+        LocalDateTime atTime1 = localDate.atTime(8, 0, 0);
+        Duration duration = Duration.between(atTime1, atTime);
+
+        int nano = duration.getNano();
+        System.out.println("nano -> " + nano);
+
+        long l = duration.toNanos();
+        System.out.println(l);
+
+        Duration between = Duration.between(atTime, atTime1);
+        int nano1 = between.getNano();
+        System.out.println(nano1);
+
+        long l1 = between.toNanos();
+        System.out.println(l1);
+
+        Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
+        System.out.println(availableZoneIds.size()+" : "+availableZoneIds);
+
+        ZoneId americaPanamaZone = ZoneId.of("America/Panama");
+        ZonedDateTime americaDateTime = ZonedDateTime.of(localDateTime, americaPanamaZone);
+        System.out.println("americaDateTime -> "+americaDateTime);
 
     }
 

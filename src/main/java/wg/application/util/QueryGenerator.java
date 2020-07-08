@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.jeecgframework.core.util.ApplicationContextUtil;
-import org.springframework.util.NumberUtils;
 import wg.application.constant.CommonConstant;
 import wg.application.enumeration.QueryRuleEnum;
 
@@ -17,8 +15,6 @@ import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Slf4j
 public class QueryGenerator {
