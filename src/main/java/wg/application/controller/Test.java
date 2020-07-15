@@ -794,7 +794,7 @@ public class Test {
      ****************************************************************/
     @RequestMapping(value = "/encode")
     @ResponseBody
-    private void encode() {
+    private void encode(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encode = encoder.encode("123456");
         String encode2 = encoder.encode("111");
@@ -804,7 +804,7 @@ public class Test {
 
 
         boolean matches = encoder.matches("111", "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe");
-        boolean matches2 = encoder.matches("123456", "$2a$10$/WHx6nglmwRLQTvh4cUipuDbpWPDNSKrwdYfeb0Jousty4gBnRh.y");
+        boolean matches2 = encoder.matches(password, "$2a$10$36OcV5ass16uhYBg0MWkiOZRNjIkAR0/APho.m9UoE4sZhUngsR8K");
 
         System.out.println(matches);
         System.out.println("matches2  " + matches2);

@@ -18,6 +18,7 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/**")
           .addResourceLocations("classpath:/static/")
           .addResourceLocations("classpath:/templates/");
+
         super.addResourceHandlers(registry);
     }
 
