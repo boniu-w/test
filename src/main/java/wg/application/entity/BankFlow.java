@@ -1,13 +1,13 @@
 package wg.application.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+//import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import wg.application.util.Excel;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@TableName(value = "BANK_STATEMENT")
+//@TableName(value = "BANK_STATEMENT")
 @Data
 public class BankFlow implements Serializable {
 

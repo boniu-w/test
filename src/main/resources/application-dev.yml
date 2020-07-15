@@ -1,7 +1,6 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/beichen?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
-    type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
@@ -10,3 +9,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: true

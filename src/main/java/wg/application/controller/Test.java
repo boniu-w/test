@@ -17,10 +17,12 @@ import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
 import wg.application.config.SpringIOCTest;
 import wg.application.entity.BankFlow;
+import wg.application.entity.LiuShui;
 import wg.application.entity.Result;
 import wg.application.enumeration.Title;
 import wg.application.exception.WgException;
 import wg.application.service.AspectService;
+import wg.application.service.LiuShuiInterface;
 import wg.application.service.MovieInterface;
 import wg.application.service.TestInterface;
 import wg.application.util.IPUtils;
@@ -1159,13 +1161,31 @@ public class Test {
         System.out.println(l1);
 
         Set<String> availableZoneIds = ZoneId.getAvailableZoneIds();
-        System.out.println(availableZoneIds.size()+" : "+availableZoneIds);
+        System.out.println(availableZoneIds.size() + " : " + availableZoneIds);
 
         ZoneId americaPanamaZone = ZoneId.of("America/Panama");
         ZonedDateTime americaDateTime = ZonedDateTime.of(localDateTime, americaPanamaZone);
-        System.out.println("americaDateTime -> "+americaDateTime);
+        System.out.println("americaDateTime -> " + americaDateTime);
 
     }
 
+
+    @Autowired
+    LiuShuiInterface liuShuiInterface;
+
+
+    @RequestMapping(value = "/getAllLiuShui")
+    @ResponseBody
+    public LiuShui getAllLiuShui() {
+
+        LiuShui one = liuShuiInterface.getOne();
+
+        //System.out.println(one);
+
+        String s = JSON.toJSONString(one);
+        System.out.println(s);
+
+        return one;
+    }
 
 }

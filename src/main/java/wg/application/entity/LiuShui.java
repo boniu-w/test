@@ -1,18 +1,24 @@
 package wg.application.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 
-@TableName(value = "liushui")
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "liushui")
+@Entity
 public class LiuShui {
 
+  @Id
   private long id;
+
   private String cardNo;
   private String jiaoYiHuMing;
   private String jiaoYiZhangHao;
   private java.sql.Timestamp jiaoYiShiJian;
   private String shouFuBiaoZhi;
-  private double jiaoYiJinE;
-  private double yuE;
+  private double jiao_yi_jin_e;
+  private double yu_e;
   private String duiShouZhangHao;
   private String duiShouHuMing;
   private String duiShouKaiHuHang;
@@ -81,23 +87,21 @@ public class LiuShui {
   }
 
 
-  public double getJiaoYiJinE() {
-    return jiaoYiJinE;
+  public double getJiao_yi_jin_e() {
+    return jiao_yi_jin_e;
   }
 
-  public void setJiaoYiJinE(double jiaoYiJinE) {
-    this.jiaoYiJinE = jiaoYiJinE;
+  public void setJiao_yi_jin_e(double jiao_yi_jin_e) {
+    this.jiao_yi_jin_e = jiao_yi_jin_e;
   }
 
-
-  public double getYuE() {
-    return yuE;
+  public double getYu_e() {
+    return yu_e;
   }
 
-  public void setYuE(double yuE) {
-    this.yuE = yuE;
+  public void setYu_e(double yu_e) {
+    this.yu_e = yu_e;
   }
-
 
   public String getDuiShouZhangHao() {
     return duiShouZhangHao;
@@ -206,4 +210,29 @@ public class LiuShui {
     this.beiZhu = beiZhu;
   }
 
+  @Override
+  public String toString() {
+    return "LiuShui{" +
+      "id=" + id +
+      ", cardNo='" + cardNo + '\'' +
+      ", jiaoYiHuMing='" + jiaoYiHuMing + '\'' +
+      ", jiaoYiZhangHao='" + jiaoYiZhangHao + '\'' +
+      ", jiaoYiShiJian=" + jiaoYiShiJian +
+      ", shouFuBiaoZhi='" + shouFuBiaoZhi + '\'' +
+      ", jiao_yi_jin_e=" + jiao_yi_jin_e +
+      ", yu_e=" + yu_e +
+      ", duiShouZhangHao='" + duiShouZhangHao + '\'' +
+      ", duiShouHuMing='" + duiShouHuMing + '\'' +
+      ", duiShouKaiHuHang='" + duiShouKaiHuHang + '\'' +
+      ", zhaiYao='" + zhaiYao + '\'' +
+      ", biZhong='" + biZhong + '\'' +
+      ", jiaoYiWangDian='" + jiaoYiWangDian + '\'' +
+      ", jiaoYiChangSuo='" + jiaoYiChangSuo + '\'' +
+      ", jiaoYiFaShengDi='" + jiaoYiFaShengDi + '\'' +
+      ", jiaoYiShiFouChengGong='" + jiaoYiShiFouChengGong + '\'' +
+      ", ip='" + ip + '\'' +
+      ", mac='" + mac + '\'' +
+      ", beiZhu='" + beiZhu + '\'' +
+      '}';
+  }
 }
