@@ -18,7 +18,8 @@ public class AopTestController {
 
     @RequestMapping(value = "/add")
     @ResponseBody
-    public void add(String name) {
+    public void add(String name,String age) {
         System.out.println("-----------  " + name);
+        System.out.println("--------   "+ age);
     }
 }

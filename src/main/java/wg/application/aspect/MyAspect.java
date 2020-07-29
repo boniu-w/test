@@ -87,7 +87,7 @@ public class MyAspect {
         }
     }
 
-    @Pointcut("execution(public * wg.application.controller.AopTestController.add(*))")
+    @Pointcut("execution(public * wg.application.controller.AopTestController.add(..))")
     public void executeAdd() {
     }
 
@@ -111,6 +111,7 @@ public class MyAspect {
         Object[] arg = point.getArgs();
 
         arg[0] = "-----";
+        arg[1] = "=====";
 
 
         return point.proceed(arg);
