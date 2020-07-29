@@ -26,6 +26,7 @@ public class MyAspect {
     public void deciphering() {
     }
 
+
     /*************************************************************
      * 加密
      * @author: wg
@@ -86,6 +87,35 @@ public class MyAspect {
         }
     }
 
+    @Pointcut("execution(public * wg.application.controller.AopTestController.add(*))")
+    public void executeAdd() {
+    }
+
+    /****************************************************************
+     * before 暂时改变不了参数
+     * @author: wg
+     * @time: 2020/7/29 17:29
+     ****************************************************************/
+    @Before(value = "executeAdd()")
+    public Object execute(JoinPoint joinPoint) {
+        Object arg = joinPoint.getArgs()[0];
+
+        String name = "xiaohei";
+        arg = name;
+        System.out.println("[][][][][][][]");
+        return arg;
+    }
+
+    @Around(value = "executeAdd()")
+    public Object executeAdd(ProceedingJoinPoint point) throws Throwable {
+        Object[] arg = point.getArgs();
+
+        arg[0] = "-----";
+
+
+        return point.proceed(arg);
+
+    }
 
 
 }
