@@ -106,6 +106,11 @@ public class MyAspect {
         return arg;
     }
 
+    /****************************************************************
+     * around 可以改变参数, 且必须有 返回值
+     * @author: wg
+     * @time: 2020/7/29 18:59
+     ****************************************************************/
     @Around(value = "executeAdd()")
     public Object executeAdd(ProceedingJoinPoint point) throws Throwable {
         Object[] arg = point.getArgs();

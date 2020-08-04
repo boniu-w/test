@@ -2,21 +2,63 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>菜鸟教程(runoob.com)</title>
-    <script>
-        function openWin(){
-            myWindow=window.open("","","width=200,height=100");
-            myWindow.document.write("<p>这是'我的窗口'</p>");
-        }
-        function closeWin(){
-            myWindow.close();
-        }
-    </script>
+    <title>localSession</title>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+
 </head>
 <body>
 
-<input type="button" value="打开我的窗口" onclick="openWin()" />
-<input type="button" value="关闭我的窗口" onclick="closeWin()" />
+<input type="button" value="打开我的窗口" onclick="openWin()"/>
+<input type="button" value="关闭我的窗口" onclick="closeWin()"/>
+<input id="localSession" type="text" value=localSession()>
 
+
+<script>
+    $().ready(function () {
+        initLocalSession();
+        $("#localSession").val(localStorage.getItem("localName"));
+    })
+
+    function openWin() {
+        myWindow = window.open("", "", "width=200,height=100");
+        myWindow.document.write("<p>这是'我的窗口'</p>");
+    }
+
+    function closeWin() {
+        myWindow.close();
+    }
+
+    function localSession() {
+        var name = localStorage.getItem("name");
+        return name;
+    }
+
+    function initLocalSession() {
+        sessionStorage.setItem("age", "12");
+
+        var localName = "123";
+        $.ajax({
+            url: "http://127.0.0.1:33333/localSession/setLocalSession",
+            method: "get",
+            data: {age: "12"},
+            success: function (res) {
+                console.log(res.result)
+                var age = sessionStorage.getItem("age");
+                console.log(age, "-------------  ");
+
+                localStorage.setItem("localName", res.result.name);
+
+            },
+            err: function () {
+                console.log(11111)
+            }
+        })
+
+    }
+
+
+</script>
 </body>
+
+
 </html>
