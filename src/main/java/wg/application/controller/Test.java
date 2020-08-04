@@ -1174,6 +1174,11 @@ public class Test {
     LiuShuiInterface liuShuiInterface;
 
 
+    /****************************************************************
+     * jpa 
+     * @author: wg
+     * @time: 2020/8/4 15:55
+     ****************************************************************/
     @RequestMapping(value = "/getAllLiuShui")
     @ResponseBody
     public LiuShui getAllLiuShui() {

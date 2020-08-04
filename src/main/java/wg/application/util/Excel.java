@@ -75,7 +75,7 @@ public @interface Excel {
     public String name();
 
     @AliasFor("name")
-    public String value();
+    public String value() default "";
 
     /**
      * 是否需要纵向合并单元格(用于含有list中,单个的单元格,合并list创建的多个row)
