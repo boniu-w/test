@@ -1,5 +1,6 @@
 package wg.application.exception;
 
+
 /********************************************************
  * @Package wg.application.exception
  * @author wg
@@ -12,4 +13,8 @@ public class WgException extends RuntimeException {
     public WgException(String message) {
         super(message);
     }
+
+    public WgException() {
+    }
+
 }

@@ -15,8 +15,13 @@
 
 <script>
     $().ready(function () {
-        initLocalSession();
-        $("#localSession").val(localStorage.getItem("localName"));
+        // initLocalSession();
+        if (!window.localStorage) {
+            alert("浏览器不支持localstorage");
+            return false;
+        } else {
+            $("#localSession").val(localStorage.getItem("localName"));
+        }
     })
 
     function openWin() {
