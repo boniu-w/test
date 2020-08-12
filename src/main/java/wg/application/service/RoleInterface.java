@@ -9,5 +9,6 @@ package wg.application.service;
  *************************************************************/
 public interface RoleInterface {
 
+    String[] getRoleCode();
 
 }

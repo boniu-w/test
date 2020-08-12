@@ -10,7 +10,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import wg.application.annotation.RequiredRole;
-import wg.application.service.impl.RoleInterfaceImpl;
+import wg.application.service.RoleInterface;
 import wg.application.vo.Result;
 
 import java.lang.reflect.Method;
@@ -28,7 +28,7 @@ public class RoleAspect {
 
 
     @Autowired
-    RoleInterfaceImpl roleInterface;
+    RoleInterface roleInterface;
 
     @Pointcut("@annotation(wg.application.annotation.RequiredRole)")
     public void requiredRole() {
@@ -69,12 +69,6 @@ public class RoleAspect {
             return joinPoint.proceed();
         } else {
             throw new Exception("required admin ");
-
-            //Result result = (Result) joinPoint.proceed();
-            //result.setMessage("required " + value);
-            //result.setSuccess(false);
-            //
-            //return result;
         }
 
     }
