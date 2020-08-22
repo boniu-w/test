@@ -17,16 +17,20 @@ import wg.application.vo.Result;
 public class RedisTestController {
 
 
-
+    /***************************************************
+     * 链接redis
+     * @author: wg
+     * @time: 2020/8/22 22:39
+     ***************************************************/
     @RequestMapping(value = "/redisTest1")
-    public Result redisTest1(){
+    public Result redisTest1() {
         Jedis jedis = new Jedis("localhost");
 
         String info = jedis.info();
         System.out.println(info);
 
-        System.out.println("redis is running  "+jedis.ping());
-        return Result.ok();
+        System.out.println("redis is running  " + jedis.ping());
+        return Result.ok("redis is running  " + jedis.ping());
     }
 
 

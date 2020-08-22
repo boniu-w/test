@@ -9,9 +9,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 /*************************************************************
  * @Package wg.application.token.util
@@ -33,7 +31,7 @@ public class JwtTokenUtil {
         ZonedDateTime zonedDateTime = now.atZone(ZoneId.systemDefault());
         Date date = Date.from(Instant.from(zonedDateTime));
 
-        LocalDateTime plus = now.plus(60, ChronoUnit.SECONDS);
+        LocalDateTime plus = now.plus(10, ChronoUnit.SECONDS);
         ZonedDateTime time = plus.atZone(ZoneId.systemDefault());
         Date expirationDate = Date.from(time.toInstant());
 
@@ -51,13 +49,48 @@ public class JwtTokenUtil {
         return jwtToken;
     }
 
+
+    /***************************************************
+     * 根据用户信息 生成token
+     * @author: wg
+     * @time: 2020/8/22 23:11
+     ***************************************************/
+    public static String generateJwtToken(AuthorizerDetail authorizerDetail) {
+        LocalDateTime now = LocalDateTime.now();
+        ZonedDateTime zonedDateTime = now.atZone(ZoneId.systemDefault());
+        Date date = Date.from(Instant.from(zonedDateTime));
+
+        LocalDateTime plus = now.plus(10, ChronoUnit.SECONDS);
+        ZonedDateTime time = plus.atZone(ZoneId.systemDefault());
+        Date expirationDate = Date.from(time.toInstant());
+
+        String jwtToken = Jwts.builder()
+          .setHeaderParam("type", "JWT")
+          .setIssuedAt(date)
+          .setExpiration(expirationDate)
+          .setIssuer(authorizerDetail.getUserId())
+          .claim(authorizerDetail.userName, authorizerDetail.getUserName())
+          .claim("authorizerDetail.authorityCodeList", new ArrayList<String>())
+          .signWith(SignatureAlgorithm.HS512, "SignatureAlgorithm.HS512")
+          .compact();
+
+        System.out.println("jwtToken:  " + jwtToken);
+        return jwtToken;
+    }
+
     /****************************************************************
      * token是否过期
      * @author: wg
      * @time: 2020/8/21 14:51
      ****************************************************************/
-    public static boolean isTokenExpired(Date expirationDate) {
-        return expirationDate.before(new Date());
+    public static boolean isTokenExpired(String token) {
+        Jws<Claims> claimsJws = analyseJwtToken(token);
+        Claims claims = claimsJws.getBody();
+        Date expiration = claims.getExpiration();
+
+
+
+        return expiration.before(new Date());
     }
 
 
