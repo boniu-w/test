@@ -6,6 +6,7 @@ import wg.application.token.util.JwtTokenUtil;
 import wg.application.vo.Result;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 /*************************************************************
  * @Package wg.application.token.controller
@@ -34,6 +35,33 @@ public class TokenTestController {
         System.out.println("jwtToken:  "+jwtToken);
         return Result.ok(hashMap);
     }
+
+
+    /***************************************************
+     * 验证是否过期
+     * @author: wg
+     * @time: 2020/8/22 22:46
+     ***************************************************/
+    @RequestMapping(value = "/isExpiration")
+    public Result isExpiration(){
+        String jwtToken = JwtTokenUtil.generateJwtToken();
+
+        try {
+            TimeUnit.SECONDS.sleep(11);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        boolean expired = JwtTokenUtil.isTokenExpired(jwtToken);
+        HashMap<Object, Object> hashMap = new HashMap<>();
+        hashMap.put("expired",expired);
+
+        return Result.ok(hashMap);
+
+
+    }
+
+
 
 
 
