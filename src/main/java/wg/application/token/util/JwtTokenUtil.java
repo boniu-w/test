@@ -1,7 +1,6 @@
 package wg.application.token.util;
 
 import io.jsonwebtoken.*;
-import wg.application.token.entity.AuthorizerDetail;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -9,9 +8,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 /*************************************************************
  * @Package wg.application.token.util
