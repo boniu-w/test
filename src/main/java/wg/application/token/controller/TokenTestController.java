@@ -1,10 +1,14 @@
 package wg.application.token.controller;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wg.application.token.util.JwtTokenUtil;
 import wg.application.vo.Result;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -28,11 +32,11 @@ public class TokenTestController {
         // .uqMvSGWaSMvXnyPQ6FogKsp-XqBviu1489oEL4KYAdUCrzquuB4SW1zFB71zoEHSIRzHA61XIfGNJFqy5BoTvg  // signature
 
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("jwtToken",jwtToken);
+        hashMap.put("jwtToken", jwtToken);
 
         JwtTokenUtil.analyseJwtToken(jwtToken);
 
-        System.out.println("jwtToken:  "+jwtToken);
+        System.out.println("jwtToken:  " + jwtToken);
         return Result.ok(hashMap);
     }
 
@@ -43,26 +47,33 @@ public class TokenTestController {
      * @time: 2020/8/22 22:46
      ***************************************************/
     @RequestMapping(value = "/isExpiration")
-    public Result isExpiration(){
+    public Result isExpiration() {
         String jwtToken = JwtTokenUtil.generateJwtToken();
+        JwtTokenUtil.analyseJwtToken(jwtToken);
+
+        String currentToken = "";
 
         try {
-            TimeUnit.SECONDS.sleep(11);
+            TimeUnit.SECONDS.sleep(3);
+            boolean expired = JwtTokenUtil.isTokenExpired(jwtToken);
+            if (expired == true) {
+                currentToken = JwtTokenUtil.generateJwtToken();
+                System.out.println("if");
+            }
+
+        } catch (ExpiredJwtException expiredJwtException) {
+            currentToken = JwtTokenUtil.generateJwtToken();
+            System.out.println("exception");
+            Jws<Claims> claimsJws = JwtTokenUtil.analyseJwtToken(currentToken);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        boolean expired = JwtTokenUtil.isTokenExpired(jwtToken);
-        HashMap<Object, Object> hashMap = new HashMap<>();
-        hashMap.put("expired",expired);
 
-        return Result.ok(hashMap);
+        return Result.ok(currentToken);
 
 
     }
-
-
-
 
 
 }

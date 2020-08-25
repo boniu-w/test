@@ -1,6 +1,7 @@
 package wg.application.token.util;
 
 import io.jsonwebtoken.*;
+import wg.application.entity.AuthorizerDetail;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -44,7 +45,6 @@ public class JwtTokenUtil {
           .signWith(SignatureAlgorithm.HS512, "SignatureAlgorithm.HS512")
           .compact();
 
-        System.out.println("jwtToken:  " + jwtToken);
         return jwtToken;
     }
 
@@ -82,14 +82,14 @@ public class JwtTokenUtil {
      * @author: wg
      * @time: 2020/8/21 14:51
      ****************************************************************/
-    public static boolean isTokenExpired(String token) {
-        Jws<Claims> claimsJws = analyseJwtToken(token);
-        Claims claims = claimsJws.getBody();
-        Date expiration = claims.getExpiration();
+    public static boolean isTokenExpired(String token) throws ExpiredJwtException {
+        try {
+            analyseJwtToken(token);
+            return false;
+        } catch (ExpiredJwtException e) {
+            return true;
+        }
 
-
-
-        return expiration.before(new Date());
     }
 
 
@@ -107,9 +107,35 @@ public class JwtTokenUtil {
         System.out.println("header:  " + header);
         System.out.println("body:  " + claims);
 
-
         return claimsJws;
     }
 
+    /****************************************************************
+     * 过期 重新生成
+     * @author: wg
+     * @time: 2020/8/24 14:49
+     ****************************************************************/
+    public static Jws<Claims> refurbishJwtToken(String jwtToken) {
+
+        Jws<Claims> claimsJws = Jwts.parser().setSigningKey("SignatureAlgorithm.HS512").parseClaimsJws(jwtToken);
+        Claims claims = claimsJws.getBody();
+
+        Date expiration = claims.getExpiration();
+
+        // 如果不过期 刷新 时间
+        if (expiration.after(new Date())) {
+            LocalDateTime now = LocalDateTime.now();
+            ZonedDateTime zonedDateTime = now.atZone(ZoneId.systemDefault());
+            Date date = Date.from(Instant.from(zonedDateTime));
+
+            LocalDateTime plus = now.plus(60, ChronoUnit.SECONDS);
+            ZonedDateTime time = plus.atZone(ZoneId.systemDefault());
+            Date expirationDate = Date.from(time.toInstant());
+            claims.setExpiration(expirationDate);
+
+        }
+
+        return claimsJws;
+    }
 
 }

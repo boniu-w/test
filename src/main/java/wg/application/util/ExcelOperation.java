@@ -11,8 +11,8 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.multipart.MultipartFile;
 //
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
+//import javax.internet.http.HttpServletRequest;
+//import javax.internet.http.HttpServletResponse;
 //import java.io.IOException;
 //import java.io.OutputStream;
 //import java.io.UnsupportedEncodingException;

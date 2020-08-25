@@ -3,6 +3,7 @@ package wg.application.redis.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
+import wg.application.token.util.JwtTokenUtil;
 import wg.application.vo.Result;
 
 /*************************************************************
@@ -33,5 +34,17 @@ public class RedisTestController {
         return Result.ok("redis is running  " + jedis.ping());
     }
 
+
+    public Result redisTest2() {
+
+        String token = JwtTokenUtil.generateJwtToken();
+        Jedis jedis = new Jedis("localhost");
+
+        jedis.append("token", token);
+        jedis.expire("token", 12);
+
+
+        return Result.ok();
+    }
 
 }

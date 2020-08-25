@@ -1,4 +1,4 @@
-package wg.application.token.entity;
+package wg.application.entity;
 
 import lombok.Data;
 

@@ -4,6 +4,7 @@ package wg.application.entity;
 import lombok.Data;
 import wg.application.util.Excel;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -136,6 +137,9 @@ public class BankFlow implements Serializable {
     private String excelName;
 
     private String tick;
+
+    @Transient
+    private String birthday;
 
 
     @Override

@@ -2,6 +2,8 @@ package wg.application.entity;
 
 import lombok.Data;
 
+import javax.persistence.Transient;
+
 /**
  * @author wg
  * @Package wg.application.entity
@@ -13,4 +15,7 @@ public class User {
 
     private String name;
     private String age;
+
+    @Transient
+    private String birthday;
 }
