@@ -5,10 +5,9 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wg.application.token.util.JwtTokenUtil;
+import wg.application.util.JwtTokenUtil;
 import wg.application.vo.Result;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 

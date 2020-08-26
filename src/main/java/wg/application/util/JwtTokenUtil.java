@@ -1,4 +1,4 @@
-package wg.application.token.util;
+package wg.application.util;
 
 import io.jsonwebtoken.*;
 import wg.application.entity.AuthorizerDetail;

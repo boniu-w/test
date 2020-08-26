@@ -1,4 +1,7 @@
 HELP.md
+node_modules
+package.json
+package-lock.json
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**

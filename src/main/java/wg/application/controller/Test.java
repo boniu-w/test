@@ -26,12 +26,10 @@ import wg.application.service.LiuShuiInterface;
 import wg.application.service.MovieInterface;
 import wg.application.service.TestInterface;
 import wg.application.util.IPUtils;
-import wg.application.util.TokenUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -1051,27 +1049,6 @@ public class Test {
 
 
     /****************************************************************
-     * token
-     * @author: wg
-     * @time: 2020/7/1 13:39
-     ****************************************************************/
-    @RequestMapping(value = "/tokenTest")
-    @ResponseBody
-    public void tokenTest() {
-
-        String subject = "1";
-        int expirationSeconds = 1;
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", 1);
-
-        String token = TokenUtil.createToken(subject, expirationSeconds, map);
-
-        System.out.println("token -> " + token);
-
-    }
-
-
-    /****************************************************************
      * 三元
      * @author: wg
      * @time: 2020/7/7 15:27
@@ -1194,7 +1171,25 @@ public class Test {
         return one;
     }
 
+    /****************************************************************
+     * 为true 后面就不走了
+     * @author: wg
+     * @time: 2020/8/25 10:05
+     ****************************************************************/
+    @RequestMapping(value = "/ifElseTest")
+    @ResponseBody
+    public String ifElseTest() {
+        String s = "123";
+        if (s.equals("")) {
+            System.out.println(1);
+        } else if (1 == 1) {
+            System.out.println(2);
+        } else if (true) {
+            System.out.println(3);
+        }
 
+        return s;
+    }
 
 
 }

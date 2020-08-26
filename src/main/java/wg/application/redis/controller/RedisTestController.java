@@ -3,7 +3,7 @@ package wg.application.redis.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
-import wg.application.token.util.JwtTokenUtil;
+import wg.application.util.JwtTokenUtil;
 import wg.application.vo.Result;
 
 /*************************************************************

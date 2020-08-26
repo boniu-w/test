@@ -4,14 +4,13 @@ import javax.servlet.*;
 import java.io.IOException;
 
 /*************************************************************
- * @Package wg.application.filter.config
+ * @Package wg.application.cas.filter
  * @author wg
- * @date 2020/8/24 16:43
+ * @date 2020/8/25 15:16
  * @version
  * @Copyright
  *************************************************************/
-public class WgFilter implements Filter {
-
+public class CasFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -19,7 +18,9 @@ public class WgFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("=========");
+
+
+
         filterChain.doFilter(servletRequest,servletResponse);
     }
 

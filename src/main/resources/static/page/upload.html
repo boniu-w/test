@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>upload</title>
+    <script src="../js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
@@ -10,6 +11,27 @@
     <input type="file">
     <input type="submit" value="tijiao">
 </form>
+
+
+<input type="button" value="ifElseTest" onclick="ifElseTest()">
+<script>
+    function ifElseTest() {
+
+        $.ajax({
+            url: "http://127.0.0.1:33333/test/ifElseTest",
+            method: "get",
+            data: {age: "12"},
+            success: function (res) {
+                console.log(res);
+                console.log("----------",res.data.data);
+            },
+            err: function () {
+                console.log(11111)
+            }
+        })
+    }
+
+</script>
 
 </body>
 </html>
