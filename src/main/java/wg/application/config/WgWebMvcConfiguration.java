@@ -1,5 +1,7 @@
 package wg.application.config;
 
+import jzsso.ticketFilter.TicketFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -22,6 +24,10 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
         super.addResourceHandlers(registry);
     }
 
+    //@Bean
+    //public TicketFilter initTicketFilter(){
+    //    return  new TicketFilter();
+    //}
 
 
 

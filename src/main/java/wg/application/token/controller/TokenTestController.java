@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import wg.application.util.JwtTokenUtil;
 import wg.application.vo.Result;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -22,21 +27,20 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class TokenTestController {
 
+    /****************************************************************
+     * 模拟登录,生成token,发送cookie
+     * token有效期是10秒
+     * @author: wg
+     * @time: 2020/8/26 15:00
+     ****************************************************************/
+    @RequestMapping(value = "/generateToken")
+    public Result tokenTest1(HttpServletRequest request, HttpServletResponse response) {
 
-    @RequestMapping(value = "/jwtTokenTest1")
-    public Result tokenTest1() {
-        String jwtToken = JwtTokenUtil.generateJwtToken();
-        //eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ   // header
-        // .eyJpYXQiOjE1OTc5OTE1MzUsImlzcyI6IndnIiwidXNlcm5hbWUiOiJ3d3ciLCJhdXRob3JpdHlDb2RlcyI6ImF1dGhvcml0eUNvZGVzIn0  // payload
-        // .uqMvSGWaSMvXnyPQ6FogKsp-XqBviu1489oEL4KYAdUCrzquuB4SW1zFB71zoEHSIRzHA61XIfGNJFqy5BoTvg  // signature
+        String token = JwtTokenUtil.generateJwtToken();
+        Cookie cookie = new Cookie("ssoTicket", token);
+        response.addCookie(cookie);
 
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("jwtToken", jwtToken);
-
-        JwtTokenUtil.analyseJwtToken(jwtToken);
-
-        System.out.println("jwtToken:  " + jwtToken);
-        return Result.ok(hashMap);
+        return Result.ok();
     }
 
 
@@ -74,5 +78,17 @@ public class TokenTestController {
 
     }
 
+
+    /****************************************************************
+     *
+     * @author: wg
+     * @time: 2020/8/26 14:43
+     ****************************************************************/
+    @RequestMapping(value = "/ticketTest")
+    public Result ticketTest(HttpServletRequest request, HttpServletResponse response) {
+
+
+        return Result.ok();
+    }
 
 }

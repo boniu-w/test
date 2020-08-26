@@ -104,8 +104,8 @@ public class JwtTokenUtil {
         JwsHeader header = claimsJws.getHeader();
         Claims claims = claimsJws.getBody();
 
-        System.out.println("header:  " + header);
-        System.out.println("body:  " + claims);
+        //System.out.println("header:  " + header);
+        //System.out.println("body:  " + claims);
 
         return claimsJws;
     }
