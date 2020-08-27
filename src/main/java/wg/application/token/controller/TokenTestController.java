@@ -3,6 +3,7 @@ package wg.application.token.controller;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wg.application.util.JwtTokenUtil;
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
  *************************************************************/
 @RequestMapping(value = "/tokenTestController")
 @RestController
+@Slf4j
 public class TokenTestController {
 
     /****************************************************************
@@ -35,8 +37,8 @@ public class TokenTestController {
      ****************************************************************/
     @RequestMapping(value = "/generateToken")
     public Result tokenTest1(HttpServletRequest request, HttpServletResponse response) {
-
         String token = JwtTokenUtil.generateJwtToken();
+        log.info(token);
         Cookie cookie = new Cookie("ssoTicket", token);
         response.addCookie(cookie);
 

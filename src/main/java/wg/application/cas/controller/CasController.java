@@ -1,5 +1,6 @@
 package wg.application.cas.controller;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,12 +40,28 @@ public class CasController {
      * @time: 2020/8/25 17:26
      ****************************************************************/
     @RequestMapping(value = "/getCurrentUser")
-    public void getCurrentUser() {
+    public void getCurrentUser(HttpServletRequest request) {
+        String name = request.getParameter("username");
+        String password = request.getParameter("password");
+        String id = request.getParameter("id");
+
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
+          = new UsernamePasswordAuthenticationToken(name,password);
+
+        Object credentials = usernamePasswordAuthenticationToken.getCredentials();
+        String name1 = usernamePasswordAuthenticationToken.getName();
+
+        System.out.println(credentials);
+        System.out.println(name1);
+
         SecurityContext context = SecurityContextHolder.getContext();
+        context.setAuthentication(usernamePasswordAuthenticationToken);
+
         Authentication authentication = context.getAuthentication();
         Object principal = authentication.getPrincipal();
 
         String toString = principal.toString();
+
         System.out.println(toString);
 
     }
