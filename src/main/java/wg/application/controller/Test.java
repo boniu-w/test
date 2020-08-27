@@ -1198,7 +1198,7 @@ public class Test {
      ****************************************************************/
     public void zifu() {
         System.out.println(123 + "\u0020" + 123 + "\u3000" + 123);
-
+        System.out.println("---------");
     }
 
 }
