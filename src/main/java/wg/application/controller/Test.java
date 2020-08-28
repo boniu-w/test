@@ -1078,6 +1078,27 @@ public class Test {
           .collect(Collectors.toList());
 
         System.out.println(collect);
+
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        for (int i = 0; i < 10; i++) {
+            arrayList.add(String.valueOf(i));
+            hashMap.put(String.valueOf(i), "String.valueOf " + i);
+        }
+
+        arrayList.stream().filter(item -> item.equals(String.valueOf(2))).forEach(item -> System.out.println(item));
+
+        hashMap.forEach((key, value) -> {
+            if ("5".equals(key)) {
+                value = value.concat("123");
+                arrayList.clear();
+            }
+            System.out.println("arrayList.size() -> " + arrayList.size());
+            System.out.println(key + " -> " + value);
+        });
+
+
     }
 
 

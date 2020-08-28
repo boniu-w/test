@@ -2,12 +2,17 @@ package wg.application.cas.controller;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.Map;
 
 /*************************************************************
  * @Package wg.application.cas.controller
@@ -21,6 +26,11 @@ import javax.servlet.http.HttpServletRequest;
 public class CasController {
 
 
+    /****************************************************************
+     * request
+     * @author: wg
+     * @time: 2020/8/28 15:11
+     ****************************************************************/
     @RequestMapping(value = "/test1")
     public void test1(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
@@ -32,6 +42,26 @@ public class CasController {
 
         String queryString = request.getQueryString();
         System.out.println(queryString);
+
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        parameterMap.forEach((key, value) -> {
+            System.out.println(key + ": " + Arrays.toString(value));
+        });
+
+        Enumeration<String> headerNames = request.getHeaderNames();
+        if (headerNames.hasMoreElements()) {
+            String s = headerNames.nextElement();
+            System.out.println(s);
+        }
+
+        String header = request.getHeader("Access-Control-Request-Headers");
+        System.out.println("header: " + header);
+
+
+        String pathInfo = request.getPathInfo();
+        System.out.println("pathInfo: " + pathInfo);
+
+
     }
 
     /****************************************************************
@@ -46,16 +76,21 @@ public class CasController {
         String id = request.getParameter("id");
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-          = new UsernamePasswordAuthenticationToken(name,password);
+          = new UsernamePasswordAuthenticationToken(name, password);
 
         Object credentials = usernamePasswordAuthenticationToken.getCredentials();
         String name1 = usernamePasswordAuthenticationToken.getName();
+        Object principal1 = usernamePasswordAuthenticationToken.getPrincipal();
+        Collection<GrantedAuthority> authorities = usernamePasswordAuthenticationToken.getAuthorities();
 
-        System.out.println(credentials);
-        System.out.println(name1);
+        System.out.println("credentials: " + credentials);
+        System.out.println("name1: " + name1);
+        System.out.println("principal1: " + principal1);
+        System.out.println("authorities: " );
 
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(usernamePasswordAuthenticationToken);
+
 
         Authentication authentication = context.getAuthentication();
         Object principal = authentication.getPrincipal();
