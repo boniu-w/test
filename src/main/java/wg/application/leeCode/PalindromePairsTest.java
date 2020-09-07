@@ -1,4 +1,4 @@
-package wg.application.LeeCode;
+package wg.application.leeCode;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import java.util.List;
 public class PalindromePairsTest {
 
     /****************************************************************
-     * 回文对
+     * 回文对 177毫秒
      * @author: wg
      * @time: 2020/8/6 10:09
      ****************************************************************/

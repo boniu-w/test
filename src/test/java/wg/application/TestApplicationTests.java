@@ -152,5 +152,37 @@ public class TestApplicationTests {
         System.out.println(s);
     }
 
+    /****************************************************************
+     * 进制
+     * @author: wg
+     * @time: 2020/9/7 15:10
+     ****************************************************************/
+    @Test
+    public void radix() {
+        int l = Integer.parseInt("12", 3);
+        System.out.println("表明 参数 是 3进制数 , 转成十进制后是: " + l);  //
+
+        String s = Integer.toString(10, 3);
+        System.out.println("任意10进制数 转化成任意进制 : "+s);
+
+        int i = 1/3;
+        System.out.println(i);
+
+    }
+
+    /****************************************************************
+     * 字符串
+     * @author: wg
+     * @time: 2020/9/7 15:28
+     ****************************************************************/
+    @Test
+    public void substr() {
+        String s = "abcdefghijklmn";
+
+        String substring = s.substring(2, 4);
+        System.out.println(substring);
+
+    }
+
 
 }

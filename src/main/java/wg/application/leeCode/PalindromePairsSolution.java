@@ -1,4 +1,4 @@
-package wg.application.LeeCode;
+package wg.application.leeCode;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +34,11 @@ public class PalindromePairsSolution {
         return true;
     }
 
+    /****************************************************************
+     * 3毫秒
+     * @author: wg
+     * @time: 2020/9/7 16:30
+     ****************************************************************/
     @RequestMapping(value = "/palindromePairs")
     @ResponseBody
     public List<List<Integer>> palindromePairs() {

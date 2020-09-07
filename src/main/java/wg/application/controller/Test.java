@@ -64,6 +64,10 @@ public class Test {
             arrayList.add(i, i + "--i");
         }
 
+        arrayList.add(3,333);
+
+        arrayList.set(2,222);
+
         return arrayList;
     }
 
@@ -322,6 +326,19 @@ public class Test {
 
         System.out.println(split.length);
         System.out.println(finallyString.length);
+
+        // ******************************************************
+
+        String name= "foobarbar";
+        String substring = name.substring(5);
+        System.out.println(substring);
+
+
+        String t="  bar  ";
+        String trim = t.trim();
+        System.out.println(t.length());
+        System.out.println(trim.length()+"  "+trim);
+
 
         return finallyString;
     }
@@ -943,10 +960,10 @@ public class Test {
         System.out.println("m - > " + m);
         System.out.println(Integer.toBinaryString(m));
         System.out.println();
-        int l = Integer.parseInt("10", 3);
-        System.out.println("三进制数 l 转成 10进制 -> " + l);  //
+        int l = Integer.parseInt("12", 3);
+        System.out.println("表明 参数 是 3进制数 , 转成十进制后是:  -> " + l);  //
         int p = Integer.parseInt("1010", 2);
-        System.out.println("三进制数 l 转成 10进制 -> " + p);  //
+        System.out.println("表明 参数 是 2进制数 , 转成十进制后是:  -> " + p);  //
 
         // 负数的 左右 移位
         int k = -1;
