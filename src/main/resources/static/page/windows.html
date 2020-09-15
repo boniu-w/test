@@ -3,66 +3,147 @@
 <head>
     <meta charset="utf-8">
     <title>localSession</title>
+    <link href="../css/bootstrap.min.css">
+    <link href="../css/normalize.css">
+    <link href="../css/bootstrap-theme.css">
     <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
+<div>
+    <input type="button" value="打开我的窗口" onclick="openWin()"/>
+    <input type="button" value="关闭我的窗口" onclick="closeWin()"/>
+    <input id="localSession" type="text" value=localSession()>
 
-<input type="button" value="打开我的窗口" onclick="openWin()"/>
-<input type="button" value="关闭我的窗口" onclick="closeWin()"/>
-<input id="localSession" type="text" value=localSession()>
 
-
-<script>
-    $().ready(function () {
-        // initLocalSession();
-        if (!window.localStorage) {
-            alert("浏览器不支持localstorage");
-            return false;
-        } else {
-            $("#localSession").val(localStorage.getItem("localName"));
-        }
-    })
-
-    function openWin() {
-        myWindow = window.open("", "", "width=200,height=100");
-        myWindow.document.write("<p>这是'我的窗口'</p>");
-    }
-
-    function closeWin() {
-        myWindow.close();
-    }
-
-    function localSession() {
-        var name = localStorage.getItem("name");
-        return name;
-    }
-
-    function initLocalSession() {
-        sessionStorage.setItem("age", "12");
-
-        var localName = "123";
-        $.ajax({
-            url: "http://127.0.0.1:33333/localSession/setLocalSession",
-            method: "get",
-            data: {age: "12"},
-            success: function (res) {
-                console.log(res.result)
-                var age = sessionStorage.getItem("age");
-                console.log(age, "-------------  ");
-
-                localStorage.setItem("localName", res.result.name);
-
-            },
-            err: function () {
-                console.log(11111)
+    <script>
+        $().ready(function () {
+            // initLocalSession();
+            if (!window.localStorage) {
+                alert("浏览器不支持localstorage");
+                return false;
+            } else {
+                $("#localSession").val(localStorage.getItem("localName"));
             }
         })
 
+        function openWin() {
+            myWindow = window.open("", "", "width=200,height=100");
+            myWindow.document.write("<p>这是'我的窗口'</p>");
+        }
+
+        function closeWin() {
+            myWindow.close();
+        }
+
+        function localSession() {
+            var name = localStorage.getItem("name");
+            return name;
+        }
+
+        function initLocalSession() {
+            sessionStorage.setItem("age", "12");
+
+            var localName = "123";
+            $.ajax({
+                url: "http://127.0.0.1:33333/localSession/setLocalSession",
+                method: "get",
+                data: {age: "12"},
+                success: function (res) {
+                    console.log(res.result)
+                    var age = sessionStorage.getItem("age");
+                    console.log(age, "-------------  ");
+
+                    localStorage.setItem("localName", res.result.name);
+
+                },
+                err: function () {
+                    console.log(11111)
+                }
+            })
+
+        }
+    </script>
+
+
+</div>
+<div>
+
+
+    <form>
+        <input type="checkbox" id="check1"/>
+        <br/>
+        <input type="text" value="Set focus"/>
+        <input type="button" onclick="loseFocus()" value="Lose focus"/>
+    </form>
+    <script type="text/javascript">
+        $("input").focus(function () {
+            $("input").css("background-color", "#FFFFCC");
+        })
+
+        function setFocus() {
+            document.getElementById('check1').focus()
+        }
+
+        function loseFocus() {
+            document.getElementById('check1').blur()
+        }
+    </script>
+</div>
+
+
+<div id="aaa" style="width:100px; position:relative; white-space:nowrap; overflow:hidden; height:20px;">
+    <div id="noticeList" style="position:absolute; top:0; height:20px;">
+        <span>jQuery文字横向滚动</span>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $("#aaa").textScroll();//aaa为最外层div的Id  也可写Class  如：$(".aaa") 此处aaa为class名
+    });
+
+    $.fn.textScroll = function () {
+        var p = $(this), c = p.children(), speed = 3000; //值越大速度越小
+        var cw = c.width(), pw = p.width();
+        var t = (cw / 100) * speed;
+        var f = null, t1 = 0;
+
+        function ani(tm) {
+            counttime();
+            c.animate({left: -cw}, tm, "linear", function () {
+                c.css({left: pw});
+                clearInterval(f);
+                t1 = 0;
+                t = ((cw + pw) / 100) * speed;
+                ani(t);
+            });
+        }
+
+        function counttime() {
+            f = setInterval(function () {
+                t1 += 10;
+            }, 10);
+        }
+
+        p.on({
+            mouseenter: function () {
+                c.stop(false, false);
+                clearInterval(f);
+                console.log(t1);
+            }, mouseleave: function () {
+                ani(t - t1);
+                console.log(t1);
+            }
+        });
+        ani(t);
     }
-
-
 </script>
+
+
 </body>
 
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test body include header.html</title>
+    <script src="http://localhost:33333/js/common.js"></script>
+    <% Object name = (Object)request.setAttribute("name",123);%>
+</head>
+<body>
+
+<div id="yy"></div>
+<script>
+    $().ready(function () {
+        $("#yy").load("http://localhost:33333/page/templet/header.html");
+    })
+
+</script>
+
+
+<div>
+    <input type="text" value="${request.getAttribute(name)}">
+</div>
+</body>
+</html>
