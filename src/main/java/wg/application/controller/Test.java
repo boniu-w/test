@@ -74,7 +74,7 @@ public class Test {
 
     @RequestMapping(value = "/test")
     @ResponseBody
-    public String test() {
+    public boolean test() {
 
         System.out.println(result);
 
@@ -87,7 +87,7 @@ public class Test {
 
         System.out.println(name);
 
-        return name;
+        return false;
     }
 
     /**
@@ -135,6 +135,7 @@ public class Test {
     }
 
     public Result test2() {
+        result=new Result();
         result.setName("wg");
         return result;
     }
