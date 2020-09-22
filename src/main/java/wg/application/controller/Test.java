@@ -64,9 +64,9 @@ public class Test {
             arrayList.add(i, i + "--i");
         }
 
-        arrayList.add(3,333);
+        arrayList.add(3, 333);
 
-        arrayList.set(2,222);
+        arrayList.set(2, 222);
 
         return arrayList;
     }
@@ -135,7 +135,7 @@ public class Test {
     }
 
     public Result test2() {
-        result=new Result();
+        result = new Result();
         result.setName("wg");
         return result;
     }
@@ -330,15 +330,15 @@ public class Test {
 
         // ******************************************************
 
-        String name= "foobarbar";
+        String name = "foobarbar";
         String substring = name.substring(5);
         System.out.println(substring);
 
 
-        String t="  bar  ";
+        String t = "  bar  ";
         String trim = t.trim();
         System.out.println(t.length());
-        System.out.println(trim.length()+"  "+trim);
+        System.out.println(trim.length() + "  " + trim);
 
 
         return finallyString;
@@ -448,6 +448,36 @@ public class Test {
             System.out.println("nnnnnnnnnnbbbbbbb");
         }
 
+    }
+
+    /****************************
+     * array
+     * @Author wg
+     * @Date 2020/9/18 14:10
+     ****************************/
+    @RequestMapping(value = "arrayTest2")
+    @ResponseBody
+    public wg.application.vo.Result arrayTest2() {
+
+        String[] s = {"1", "2", "123"};
+        for (String s1 : s) {
+            if ("23".contains(s1)) {
+                System.out.println(23);
+                return wg.application.vo.Result.ok("23");
+            }
+        }
+
+//        for (String s1 : s) {
+//            if ("23".contains(s1)){
+//
+//            }else {
+//                System.out.println(false);
+//                return wg.application.vo.Result.ok(false);
+//            }
+//        }
+
+
+        return wg.application.vo.Result.ok(true);
     }
 
     /****************************************************************

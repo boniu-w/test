@@ -66,8 +66,8 @@ public class WgFilter implements Filter {
             }
         }else {
 
-            response.sendRedirect("");
-            request.getRequestDispatcher("").forward(request,response);
+//            response.sendRedirect("");
+//            request.getRequestDispatcher("").forward(request,response);
         }
         System.out.println("servletRequest.getCharacterEncoding() -> " + servletRequest.getCharacterEncoding());
         filterChain.doFilter(servletRequest, servletResponse);
