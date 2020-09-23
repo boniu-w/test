@@ -369,6 +369,15 @@ public class Test {
 
     /*************************************************************
      * for循环的i++ 是在 方法体内 执行的
+     * for (int j = 0; j < 10; j++) {
+     *             int i = 0;
+     *             for (; i < 10; ) {
+     *                 System.out.println(i);
+     *             }
+     *             i++;
+     *             hashMap.put(i, i);
+     *         }
+     *  这种i++写在外面是不对的, 会无限循环下去
      * @author: wg
      * @time: 2020/6/15 14:51
      *************************************************************/
@@ -381,8 +390,8 @@ public class Test {
             int i = 0;
             for (; i < 10; ) {
                 System.out.println(i);
+                i++;
             }
-            i++;
             hashMap.put(i, i);
         }
 
@@ -1228,16 +1237,19 @@ public class Test {
      ****************************************************************/
     @RequestMapping(value = "/getAllLiuShui")
     @ResponseBody
-    public LiuShui getAllLiuShui() {
+    public wg.application.vo.Result getAllLiuShui() {
 
-        LiuShui one = liuShuiInterface.getOne();
+//        LiuShui one = liuShuiInterface.getOne();
+//
+//        //System.out.println(one);
+//
+//        String s = JSON.toJSONString(one);
+//        System.out.println(s);
 
-        //System.out.println(one);
+        List<LiuShui> liuShuis = liuShuiInterface.getByJiaoYiJinErBetween(1d, 2d);
 
-        String s = JSON.toJSONString(one);
-        System.out.println(s);
 
-        return one;
+        return wg.application.vo.Result.ok(liuShuis);
     }
 
     /****************************************************************

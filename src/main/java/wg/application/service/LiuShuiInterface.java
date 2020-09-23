@@ -14,4 +14,5 @@ import java.util.List;
 public interface LiuShuiInterface  {
 
     public LiuShui getOne();
+    List<LiuShui> getByJiaoYiJinErBetween(double min, double max);
 }
