@@ -301,6 +301,29 @@ public class Test {
         return d;
     }
 
+    /*******************************************************************
+     * math
+     * @Author wg
+     * @Date 2020/9/24 14:59
+     *******************************************************************/
+    @RequestMapping(value = "testMath")
+    @ResponseBody
+    public wg.application.vo.Result testMath() {
+
+        if (1000 == 1000) {
+            log.info("true");
+        }
+
+        Integer i = 1000;
+        Integer i1 = 1000;
+
+        System.out.println((i == i1) + " i==i1 ");
+
+
+        return wg.application.vo.Result.ok();
+    }
+
+
     /*************************************************************
      * 截字符串
      * @author: wg
