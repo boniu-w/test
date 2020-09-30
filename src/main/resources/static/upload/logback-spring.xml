@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright(C) 2019 FUYUN DATA SERVICES CO.,LTD. - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ 该源代码版权归属福韵数据服务有限公司所有
+  ~ 未经授权，任何人不得复制、泄露、转载、使用，否则将视为侵权
+  -->
+
+<configuration>
+  <property name="BASE_HOME" value="logs"/>
+  <springProperty name="instanceId" source="spring.cloud.consul.discovery.instance-id"/>
+  <springProperty name="appId" source="spring.application.name"/>
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}spring.log}"/>
+  <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+  <property name="COMMON_JSON_PATTERN" value='{"time":"%d{yyyy-MM-dd HH:mm:ss.SSS}","level":"%level","app_id":"${appId}","instance_id":"${instanceId}","log":"%m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}","data":"%X{data}"}'/>
+  
+  <appender name="SYSTEM_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${BASE_HOME}/system.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${BASE_HOME}/system.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>3GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <pattern>
+          <pattern>
+            ${COMMON_JSON_PATTERN}
+          </pattern>
+        </pattern>
+      </providers>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>info</level>
+    </filter>
+  </appender>
+
+  <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${BASE_HOME}/error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${BASE_HOME}/error.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+      <maxHistory>60</maxHistory>
+      <totalSizeCap>3GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <pattern>
+          <pattern>
+            ${COMMON_JSON_PATTERN}
+          </pattern>
+        </pattern>
+      </providers>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="ACCESS_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${BASE_HOME}/access.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${BASE_HOME}/access.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>3GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <pattern>
+          <pattern>
+            ${COMMON_JSON_PATTERN}
+          </pattern>
+        </pattern>
+      </providers>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>NEUTRAL</onMismatch>
+    </filter>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>WARN</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter">
+    <level value="DEBUG"/>
+  </logger>
+
+  <appender name="SYSTEM_FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="SYSTEM_FILE" />
+    <discardingThreshold>0</discardingThreshold>
+  </appender>
+
+  <appender name="ERROR_FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="ERROR_FILE" />
+    <discardingThreshold>0</discardingThreshold>
+  </appender>
+
+  <appender name="ACCESS_FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="ACCESS_FILE" />
+    <discardingThreshold>0</discardingThreshold>
+  </appender>
+
+  <appender name="FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="FILE" />
+    <discardingThreshold>0</discardingThreshold>
+  </appender>
+
+  <springProfile name="dev">
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+      <appender-ref ref="FILE_ASYNC"/>
+      <appender-ref ref="ERROR_FILE"/>
+    </root>
+
+<!--    <logger name="com.fybdp">-->
+<!--      <appender-ref ref="ACCESS_FILE_ASYNC"/>-->
+<!--    </logger>-->
+  </springProfile>
+
+  <springProfile name="pre">
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+      <appender-ref ref="ERROR_FILE_ASYNC"/>
+      <appender-ref ref="SYSTEM_FILE_ASYNC"/>
+    </root>
+
+    <logger name="com.fybdp">
+      <appender-ref ref="ACCESS_FILE_ASYNC"/>
+    </logger>
+  </springProfile>
+
+<!--  <springProfile name="prod">-->
+<!--    <root level="INFO">-->
+<!--      <appender-ref ref="CONSOLE"/>-->
+<!--      <appender-ref ref="ERROR_FILE_ASYNC"/>-->
+<!--      <appender-ref ref="SYSTEM_FILE_ASYNC"/>-->
+<!--    </root>-->
+
+<!--    <logger name="com.fybdp">-->
+<!--      <appender-ref ref="ACCESS_FILE_ASYNC"/>-->
+<!--    </logger>-->
+<!--  </springProfile>-->
+
+  <springProfile name="product">
+    <root level="INFO">
+      <appender-ref ref="CONSOLE"/>
+      <appender-ref ref="FILE_ASYNC"/>
+      <appender-ref ref="ERROR_FILE"/>
+    </root>
+
+<!--    <logger name="com.fybdp">-->
+<!--      <appender-ref ref="ACCESS_FILE"/>-->
+<!--    </logger>-->
+  </springProfile>
+
+</configuration>

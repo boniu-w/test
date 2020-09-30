@@ -64,9 +64,9 @@ public class Test {
             arrayList.add(i, i + "--i");
         }
 
-        arrayList.add(3,333);
+        arrayList.add(3, 333);
 
-        arrayList.set(2,222);
+        arrayList.set(2, 222);
 
         return arrayList;
     }
@@ -74,7 +74,7 @@ public class Test {
 
     @RequestMapping(value = "/test")
     @ResponseBody
-    public String test() {
+    public boolean test() {
 
         System.out.println(result);
 
@@ -87,7 +87,7 @@ public class Test {
 
         System.out.println(name);
 
-        return name;
+        return false;
     }
 
     /**
@@ -135,6 +135,7 @@ public class Test {
     }
 
     public Result test2() {
+        result = new Result();
         result.setName("wg");
         return result;
     }
@@ -300,6 +301,29 @@ public class Test {
         return d;
     }
 
+    /*******************************************************************
+     * math
+     * @Author wg
+     * @Date 2020/9/24 14:59
+     *******************************************************************/
+    @RequestMapping(value = "testMath")
+    @ResponseBody
+    public wg.application.vo.Result testMath() {
+
+        if (1000 == 1000) {
+            log.info("true");
+        }
+
+        Integer i = 1000;
+        Integer i1 = 1000;
+
+        System.out.println((i == i1) + " i==i1 ");
+
+
+        return wg.application.vo.Result.ok();
+    }
+
+
     /*************************************************************
      * 截字符串
      * @author: wg
@@ -329,15 +353,15 @@ public class Test {
 
         // ******************************************************
 
-        String name= "foobarbar";
+        String name = "foobarbar";
         String substring = name.substring(5);
         System.out.println(substring);
 
 
-        String t="  bar  ";
+        String t = "  bar  ";
         String trim = t.trim();
         System.out.println(t.length());
-        System.out.println(trim.length()+"  "+trim);
+        System.out.println(trim.length() + "  " + trim);
 
 
         return finallyString;
@@ -368,6 +392,15 @@ public class Test {
 
     /*************************************************************
      * for循环的i++ 是在 方法体内 执行的
+     * for (int j = 0; j < 10; j++) {
+     *             int i = 0;
+     *             for (; i < 10; ) {
+     *                 System.out.println(i);
+     *             }
+     *             i++;
+     *             hashMap.put(i, i);
+     *         }
+     *  这种i++写在外面是不对的, 会无限循环下去
      * @author: wg
      * @time: 2020/6/15 14:51
      *************************************************************/
@@ -380,8 +413,8 @@ public class Test {
             int i = 0;
             for (; i < 10; ) {
                 System.out.println(i);
+                i++;
             }
-            i++;
             hashMap.put(i, i);
         }
 
@@ -447,6 +480,36 @@ public class Test {
             System.out.println("nnnnnnnnnnbbbbbbb");
         }
 
+    }
+
+    /****************************
+     * array
+     * @Author wg
+     * @Date 2020/9/18 14:10
+     ****************************/
+    @RequestMapping(value = "arrayTest2")
+    @ResponseBody
+    public wg.application.vo.Result arrayTest2() {
+
+        String[] s = {"1", "2", "123"};
+        for (String s1 : s) {
+            if ("23".contains(s1)) {
+                System.out.println(23);
+                return wg.application.vo.Result.ok("23");
+            }
+        }
+
+//        for (String s1 : s) {
+//            if ("23".contains(s1)){
+//
+//            }else {
+//                System.out.println(false);
+//                return wg.application.vo.Result.ok(false);
+//            }
+//        }
+
+
+        return wg.application.vo.Result.ok(true);
     }
 
     /****************************************************************
@@ -1197,16 +1260,19 @@ public class Test {
      ****************************************************************/
     @RequestMapping(value = "/getAllLiuShui")
     @ResponseBody
-    public LiuShui getAllLiuShui() {
+    public wg.application.vo.Result getAllLiuShui() {
 
-        LiuShui one = liuShuiInterface.getOne();
+//        LiuShui one = liuShuiInterface.getOne();
+//
+//        //System.out.println(one);
+//
+//        String s = JSON.toJSONString(one);
+//        System.out.println(s);
 
-        //System.out.println(one);
+        List<LiuShui> liuShuis = liuShuiInterface.getByJiaoYiJinErBetween(1d, 2d);
 
-        String s = JSON.toJSONString(one);
-        System.out.println(s);
 
-        return one;
+        return wg.application.vo.Result.ok(liuShuis);
     }
 
     /****************************************************************

@@ -28,4 +28,9 @@ public class LiuShuiInterfaceImpl implements LiuShuiInterface {
 
         return one;
     }
+
+    public List<LiuShui> getByJiaoYiJinErBetween(double min, double max){
+
+        return liuShuiRepository.getByJiaoYiJinErBetween(min, max);
+    }
 }

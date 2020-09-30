@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cas test</title>
+    <script src="http://localhost:33333/js/common.js"></script>
+
+</head>
+<body>
+
+
+<script>
+    $().ready(redirect());
+
+    function redirect() {
+        $.ajax({
+            url: "http://localhost:33333/test/test",
+            data: "",
+            success: function (res) {
+                var loginResult = res;
+                console.log("loginResult "+ loginResult);
+
+                if (loginResult === true){
+                    window.location.href="http://www.baidu.com";
+                    // location.replace("http://www.baidu.com");
+                }
+            }
+        })
+
+    }
+
+</script>
+
+
+</body>
+</html>
