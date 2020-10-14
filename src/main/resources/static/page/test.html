@@ -49,23 +49,75 @@
 
     <div id="">
         <input id="admin" type="number" value="1">
-        <input id="wg-text" type="text" value="text112323">
+        <input id="wg-text" style="width: 500px" type="text" value="text112323">
     </div>
 </div>
 
 
 <script>
-    $().ready(a(), hash())
+    $().ready(a(), hash(), setWidth())
 
     function a() {
         var arr = [];
-        alert(arr == null);
-        alert(arr == undefined);
+        console.log(arr == null);
+        console.log(arr == undefined);
     }
 
     function hash() {
         // window.location.hash = "searchInput";
         $("#searchInput").focus();
+    }
+
+    function setWidth() {
+        $("#admin").css("width", $("#wg-text").css("width"))
+    }
+
+</script>
+
+
+<div>
+    <label>文本</label>
+    <input id="test-weekday" type="text" placeholder="">
+</div>
+<script>
+    $().ready(setPlaceholderValue())
+
+    function switchWeekday(weekdayEN) {
+        var weekCN = ["一", "二", "三", "四", "五", "六", "日"];
+        var weekday = "";
+        switch (weekdayEN) {
+            case 1:
+                weekday = weekCN[0];
+                break;
+            case 2:
+                weekday = weekCN[1];
+                break;
+            case 3:
+                weekday = weekCN[2];
+                break;
+            case 4:
+                weekday = weekCN[3];
+                break;
+            case 5:
+                weekday = weekCN[4];
+                break;
+            case 6:
+                weekday = weekCN[5];
+                break;
+            case 7:
+                weekday = weekCN[6];
+                break;
+        }
+
+        return weekday;
+    }
+
+    function setPlaceholderValue() {
+        var date = new Date();
+        var weekday = date.getDay()
+        console.log(typeof (weekday))
+        $("#test-weekday").attr("placeholder", switchWeekday(weekday));
+
     }
 
 </script>

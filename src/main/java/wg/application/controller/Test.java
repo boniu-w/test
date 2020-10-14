@@ -1130,6 +1130,8 @@ public class Test {
 
     /****************************************************************
      * 三元
+     * 断路 双的是断路
+     * 按位与 按位或
      * @author: wg
      * @time: 2020/7/7 15:27
      ****************************************************************/
@@ -1139,6 +1141,24 @@ public class Test {
         boolean b = 1 > 2 || 1 > 0 ? false : true;
 
         System.out.println(b); // false
+
+        int i = 0;
+        if (i++ == 0 | i++ == 1) {
+            System.out.println(i+"  ---");
+        }
+
+        if (i++ == 3 | i++ == 3) {
+            System.out.println(i+" 4 ]]]]");
+        }
+
+        if (i++ == 4 & i++ == 5) {
+            System.out.println("===");
+        }
+
+        if (i++ == 6 & i++ == 7) {
+            System.out.println("---");
+        }
+
 
     }
 
