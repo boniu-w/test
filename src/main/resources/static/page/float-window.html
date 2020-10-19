@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="http://localhost:33333/js/common.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>漂浮窗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            left: 0;
+            top: 0;
+            border: 1px solid #eee;
+            box-shadow: 0 0 5px #ccc;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img style="height: 200px;width: 200px" src="../img/367631.jpg" onclick="window.open('https://www.baidu.com')">
+    <div onClick="closeBanner();"
+         style="color:gray;font-size:9pt;cursor:hand;text-align:center;width:100%;background-color: #efefef;line-height:200%">关闭</div>
+</div>
+<script>
+    let box = document.getElementById('box');
+
+    let speedX = 5, speedY = 3;
+
+    //水平方向运动最大值
+    let maxL = document.documentElement.clientWidth - box.offsetWidth;
+    let maxT = document.documentElement.clientHeight - box.offsetHeight;
+
+    let timer = null;
+
+    box.onmouseenter = function () {
+        clearInterval(timer);
+    };
+    box.onmouseleave = function () {
+        autoMove();
+    };
+    autoMove();
+
+    function autoMove() {
+        timer = setInterval(function () {
+                let nextX = box.offsetLeft + speedX;
+                let nextY = box.offsetTop + speedY;
+
+                //左侧边界
+                if (nextX <= 0) {
+                    nextX = 0;
+                    speedX *= -1;
+                }
+
+                //上侧边界
+                if (nextY <= 0) {
+                    nextY = 0;
+                    speedY *= -1;
+                }
+
+                //右侧边界
+                if (nextX >= maxL) {
+                    nextX = maxL;
+                    speedX *= -1;
+                }
+
+                //底侧边界
+                if (nextY >= maxT) {
+                    nextY = maxT;
+                    speedY *= -1;
+                }
+                box.style.left = nextX + 'px';
+                box.style.top = nextY + 'px';
+
+            },
+            50
+        )
+        ;
+    }
+
+    function closeBanner() {
+        $("div").remove("#box")
+
+        return;
+    }
+
+</script>
+</body>
+</html>

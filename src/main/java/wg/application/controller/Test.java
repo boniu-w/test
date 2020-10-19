@@ -1144,11 +1144,11 @@ public class Test {
 
         int i = 0;
         if (i++ == 0 | i++ == 1) {
-            System.out.println(i+"  ---");
+            System.out.println(i + "  ---");
         }
 
         if (i++ == 3 | i++ == 3) {
-            System.out.println(i+" 4 ]]]]");
+            System.out.println(i + " 4 ]]]]");
         }
 
         if (i++ == 4 & i++ == 5) {
@@ -1353,16 +1353,32 @@ public class Test {
         String[] strings = s.split("、");
 
 
-        String[] st= new String[strings.length];
+        String[] st = new String[strings.length];
 
         for (int i = 0; i < strings.length; i++) {
-            st[i]=strings[i].trim();
+            st[i] = strings[i].trim();
         }
 
         System.out.println(Arrays.toString(strings));
         System.out.println(Arrays.toString(st));
 
 
+    }
+
+    /****************************************************************
+     *
+     * @author: wg
+     * @time: 2020/10/14 10:48
+     ****************************************************************/
+    @RequestMapping(value = "/getPrescription")
+    @ResponseBody
+    public wg.application.vo.Result getPrescription() {
+        double sqrt = Math.sqrt(25d);
+
+        double sqrt1 = Math.sqrt(24d);
+        System.out.println("24d 开平方 : "+sqrt1);
+
+        return wg.application.vo.Result.ok(sqrt);
     }
 
 }

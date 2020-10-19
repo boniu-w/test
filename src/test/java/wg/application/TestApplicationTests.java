@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.util.WgJsonUtil;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -183,6 +184,37 @@ public class TestApplicationTests {
         System.out.println(substring);
 
     }
+
+    @Test
+    public void getPrescription(){
+        double sqrt = sqrt(24, 5);
+        System.out.println(sqrt);
+    }
+
+    /**
+     * 用二分法将正整数n开方
+     * @param n
+     * @param precision 保留的小数精度
+     * @return
+     */
+    public static double sqrt(int n,int precision){
+        double lower = 0;
+        double high = n;
+        double mid = 0;
+        double threshold = Math.pow(10,-precision);
+        do{
+            mid = lower + (high - lower)/2;
+            if(mid*mid > n){
+                high = mid;
+            }else{
+                lower = mid;
+            }
+
+        }while (Math.abs(mid*mid-n) > threshold);
+
+        return new BigDecimal(mid).setScale(precision, BigDecimal.ROUND_DOWN).doubleValue();
+    }
+
 
 
 }
