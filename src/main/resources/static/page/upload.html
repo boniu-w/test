@@ -7,13 +7,20 @@
 </head>
 <body>
 
-<form action="/fileTest/getFileInfo" method="post" enctype="multipart/form-data">
-    <input type="file">
-    <input type="submit" value="tijiao">
+<form action="/fileTest/getUploadFiles" method="post" enctype="multipart/form-data">
+    选择文件: <input type="file" name="importFile">
+    <input type="submit" value="上传">
 </form>
 
+<div>-------------------------------------------------------------</div>
+<div>
+    <input type="button" value="ifElseTest" onclick="ifElseTest()">
 
-<input type="button" value="ifElseTest" onclick="ifElseTest()">
+</div>
+
+<div>
+    <a href="/fileTest/export">导出模板</a>
+</div>
 <script>
     function ifElseTest() {
 
@@ -23,13 +30,29 @@
             data: {age: "12"},
             success: function (res) {
                 console.log(res);
-                console.log("----------",res.data.data);
+                console.log("----------", res.data.data);
             },
             err: function () {
                 console.log(11111)
             }
         })
     }
+
+
+   function exportTest() {
+       $.ajax({
+           url: "http://127.0.0.1:33333/fileTest/export",
+           data: "",
+           success: function (res) {
+               console.log(res);
+               console.log("----------", res.data.data);
+           },
+           err: function () {
+               console.log(11111)
+           }
+       })
+
+   }
 
 </script>
 
