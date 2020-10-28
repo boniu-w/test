@@ -21,6 +21,19 @@
 <div>
     <a href="/fileTest/export">导出模板</a>
 </div>
+
+
+<div>
+    <form id="uploadDutyExcel" enctype="multipart/form-data">
+        导入值班文件: <input type="file" name="importFile">
+        <input type="submit" value="上传" onclick="uploadDutyExcel()">
+    </form>
+</div>
+<div>
+    <span id="msg"></span>
+</div>
+
+
 <script>
     function ifElseTest() {
 
@@ -39,20 +52,46 @@
     }
 
 
-   function exportTest() {
-       $.ajax({
-           url: "http://127.0.0.1:33333/fileTest/export",
-           data: "",
-           success: function (res) {
-               console.log(res);
-               console.log("----------", res.data.data);
-           },
-           err: function () {
-               console.log(11111)
-           }
-       })
+    function exportTest() {
+        $.ajax({
+            url: "http://127.0.0.1:33333/fileTest/export",
+            data: "",
+            success: function (res) {
+                console.log(res);
+                console.log("----------", res.data.data);
+            },
+            err: function () {
+                console.log(11111)
+            }
+        })
 
-   }
+    }
+
+    function uploadDutyExcel() {
+        // $("#msg").html("");
+        var formData = new FormData($("#uploadDutyExcel")[0]);
+
+        $.ajax({
+            url: "http:localhost:15424/ms-mcms/dutyDetail/importDutyData",
+            data: formData,
+            type: "post",
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                console.log("上传成功")
+                console.log(res)
+                if (res.code === 200) {
+                    msg = $("#msg").html("导入成功");
+                }
+            },
+            error: function (res) {
+                console.log("上传失败")
+            }
+        })
+
+    }
 
 </script>
 

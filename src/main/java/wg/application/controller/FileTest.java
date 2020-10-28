@@ -92,7 +92,11 @@ public class FileTest {
         return "fou";
     }
 
-
+    /****************************************************************
+     * 上传 导入
+     * @author: wg
+     * @time: 2020/10/27 19:11
+     ****************************************************************/
     @RequestMapping(value = "/getUploadFiles")
     @ResponseBody
     public void getUploadFiles(HttpServletRequest request) {

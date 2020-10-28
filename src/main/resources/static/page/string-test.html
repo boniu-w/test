@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>string-test</title>
+</head>
+<body>
+
+
+<script>
+
+    window.onload = f();
+
+    function f() {
+        var s = "xiaohei,erbai,张三"
+
+        var a = s.split(",")
+        console.log(a)
+        if (s.split(",")) {
+            for (var i = 0; i < a.length; i++) {
+                console.log(a[i])
+            }
+        }
+
+
+        var i = 10;
+        console.log(Math.floor(10 / 3))
+
+        if (i > 2) {
+            var string = ""
+            var s = " <tr>\n" + string + "</tr>"
+
+
+        }
+    }
+
+
+</script>
+
+
+<table border=1 id="table_id">
+</table>
+<script language="javascript">
+    var table = document.getElementById("table_id");
+    for (let j = 0; j < 10; j++) {
+        var tr = table.insertRow(j);
+        for (var i = 0; i < 4; i++) {
+            var td = tr.insertCell(i);
+            td.innerText = i;
+        }
+    }
+
+</script>
+</body>
+</html>

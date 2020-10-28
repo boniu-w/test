@@ -164,9 +164,9 @@ public class TestApplicationTests {
         System.out.println("表明 参数 是 3进制数 , 转成十进制后是: " + l);  //
 
         String s = Integer.toString(10, 3);
-        System.out.println("任意10进制数 转化成任意进制 : "+s);
+        System.out.println("任意10进制数 转化成任意进制 : " + s);
 
-        int i = 1/3;
+        int i = 1 / 3;
         System.out.println(i);
 
     }
@@ -186,35 +186,83 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void getPrescription(){
+    public void getPrescription() {
         double sqrt = sqrt(24, 5);
         System.out.println(sqrt);
     }
 
     /**
      * 用二分法将正整数n开方
+     *
      * @param n
      * @param precision 保留的小数精度
      * @return
      */
-    public static double sqrt(int n,int precision){
+    public static double sqrt(int n, int precision) {
         double lower = 0;
         double high = n;
         double mid = 0;
-        double threshold = Math.pow(10,-precision);
-        do{
-            mid = lower + (high - lower)/2;
-            if(mid*mid > n){
+        double threshold = Math.pow(10, -precision);
+        do {
+            mid = lower + (high - lower) / 2;
+            if (mid * mid > n) {
                 high = mid;
-            }else{
+            } else {
                 lower = mid;
             }
 
-        }while (Math.abs(mid*mid-n) > threshold);
+        } while (Math.abs(mid * mid - n) > threshold);
 
         return new BigDecimal(mid).setScale(precision, BigDecimal.ROUND_DOWN).doubleValue();
     }
 
+    @Test
+    public void test3() {
+        String[] arr={"展昭","小黑","二哈","张无忌","张三丰","123","小323","二23哈","张232无忌","2323三丰"};
+        int[] a = {1, 2, 3, 4, 5};
+        int k = 2;
+        String tr = "";
+
+        int i = 0;
+        int n = 0;
+        int m = 3 * (i + 1);
+        for (; n < 2; ) {
+            for (int j = 0; j < k; j++) {
+
+                for (; i < m; i++) {
+                    tr = a[i] + "";
+                    System.out.print(tr);
+                }
+
+                System.out.println();
+            }
+        }
+
+
+        System.out.println(tr);
+    }
+
+    @Test
+    public void test23() {
+        int[] arr = {1, 2, 3, 4, 5};
+        int m = 3;
+        int len = arr.length;
+        int line = len / m;
+
+        for (int i = 0; i <line ; i++) {
+            for (int j = m*i; j <m*(i+1) ; j++) {
+                System.out.print(j+" ");
+            }
+            System.out.println();
+
+        }
+
+        for (int i = m*line; i < len; i++) {
+            System.out.print(arr[i]);
+        }
+
+
+    }
 
 
 }
