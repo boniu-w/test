@@ -1,14 +1,12 @@
 package wg.application.config;
 
-import jzsso.ticketFilter.TicketFilter;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 
 @Configuration
-public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
+public class WgWebMvcConfiguration extends  WebMvcConfigurationSupport{
 
     /***************************************************
      * 这里配置静态资源文件的路径导包都是默认的直接导入就可以
@@ -16,10 +14,12 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
      * @time: 2020/4/20 15:54
      ***************************************************/
     @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
           .addResourceLocations("classpath:/static/")
-          .addResourceLocations("classpath:/templates/");
+          .addResourceLocations("classpath:/templates/")
+        ;
+
 
         super.addResourceHandlers(registry);
     }
@@ -28,7 +28,6 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
     //public TicketFilter initTicketFilter(){
     //    return  new TicketFilter();
     //}
-
 
 
 }

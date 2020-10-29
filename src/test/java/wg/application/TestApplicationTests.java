@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.util.WgJsonUtil;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -163,9 +164,9 @@ public class TestApplicationTests {
         System.out.println("表明 参数 是 3进制数 , 转成十进制后是: " + l);  //
 
         String s = Integer.toString(10, 3);
-        System.out.println("任意10进制数 转化成任意进制 : "+s);
+        System.out.println("任意10进制数 转化成任意进制 : " + s);
 
-        int i = 1/3;
+        int i = 1 / 3;
         System.out.println(i);
 
     }
@@ -185,17 +186,47 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void layoutTest(){
-        String[] arr={"展昭","小黑","二哈","张无忌","张三丰","123","小323","二23哈","张232无忌","2323三丰"};
-        String tr="";
+    public void layoutTest() {
+        String[] arr = {"展昭", "小黑", "二哈", "张无忌", "张三丰", "123", "小323", "二23哈", "张232无忌", "2323三丰"};
+        String tr = "";
         for (int i = 0; i < arr.length; i++) {
-            tr+=" "+arr[i];
-            if((i+1)%3==0) {
+            tr += " " + arr[i];
+            if ((i + 1) % 3 == 0) {
                 System.err.println(tr.replaceFirst(",", ""));
-                tr="";
+                tr = "";
             }
         }
-        System.err.println(tr!=null?tr.replaceFirst(",", ""):"");
+        System.err.println(tr != null ? tr.replaceFirst(",", "") : "");
+    }
+
+    public void getPrescription() {
+        double sqrt = sqrt(24, 5);
+        System.out.println(sqrt);
+    }
+
+    /**
+     * 用二分法将正整数n开方
+     *
+     * @param n
+     * @param precision 保留的小数精度
+     * @return
+     */
+    public static double sqrt(int n, int precision) {
+        double lower = 0;
+        double high = n;
+        double mid = 0;
+        double threshold = Math.pow(10, -precision);
+        do {
+            mid = lower + (high - lower) / 2;
+            if (mid * mid > n) {
+                high = mid;
+            } else {
+                lower = mid;
+            }
+
+        } while (Math.abs(mid * mid - n) > threshold);
+
+        return new BigDecimal(mid).setScale(precision, BigDecimal.ROUND_DOWN).doubleValue();
     }
 
 

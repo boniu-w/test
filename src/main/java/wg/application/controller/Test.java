@@ -64,9 +64,9 @@ public class Test {
             arrayList.add(i, i + "--i");
         }
 
-        arrayList.add(3,333);
+        arrayList.add(3, 333);
 
-        arrayList.set(2,222);
+        arrayList.set(2, 222);
 
         return arrayList;
     }
@@ -74,7 +74,7 @@ public class Test {
 
     @RequestMapping(value = "/test")
     @ResponseBody
-    public String test() {
+    public boolean test() {
 
         System.out.println(result);
 
@@ -87,7 +87,7 @@ public class Test {
 
         System.out.println(name);
 
-        return name;
+        return false;
     }
 
     /**
@@ -135,6 +135,7 @@ public class Test {
     }
 
     public Result test2() {
+        result = new Result();
         result.setName("wg");
         return result;
     }
@@ -300,6 +301,29 @@ public class Test {
         return d;
     }
 
+    /*******************************************************************
+     * math
+     * @Author wg
+     * @Date 2020/9/24 14:59
+     *******************************************************************/
+    @RequestMapping(value = "testMath")
+    @ResponseBody
+    public wg.application.vo.Result testMath() {
+
+        if (1000 == 1000) {
+            log.info("true");
+        }
+
+        Integer i = 1000;
+        Integer i1 = 1000;
+
+        System.out.println((i == i1) + " i==i1 ");
+
+
+        return wg.application.vo.Result.ok();
+    }
+
+
     /*************************************************************
      * 截字符串
      * @author: wg
@@ -329,15 +353,15 @@ public class Test {
 
         // ******************************************************
 
-        String name= "foobarbar";
+        String name = "foobarbar";
         String substring = name.substring(5);
         System.out.println(substring);
 
 
-        String t="  bar  ";
+        String t = "  bar  ";
         String trim = t.trim();
         System.out.println(t.length());
-        System.out.println(trim.length()+"  "+trim);
+        System.out.println(trim.length() + "  " + trim);
 
 
         return finallyString;
@@ -368,6 +392,15 @@ public class Test {
 
     /*************************************************************
      * for循环的i++ 是在 方法体内 执行的
+     * for (int j = 0; j < 10; j++) {
+     *             int i = 0;
+     *             for (; i < 10; ) {
+     *                 System.out.println(i);
+     *             }
+     *             i++;
+     *             hashMap.put(i, i);
+     *         }
+     *  这种i++写在外面是不对的, 会无限循环下去
      * @author: wg
      * @time: 2020/6/15 14:51
      *************************************************************/
@@ -380,8 +413,8 @@ public class Test {
             int i = 0;
             for (; i < 10; ) {
                 System.out.println(i);
+                i++;
             }
-            i++;
             hashMap.put(i, i);
         }
 
@@ -447,6 +480,36 @@ public class Test {
             System.out.println("nnnnnnnnnnbbbbbbb");
         }
 
+    }
+
+    /****************************
+     * array
+     * @Author wg
+     * @Date 2020/9/18 14:10
+     ****************************/
+    @RequestMapping(value = "arrayTest2")
+    @ResponseBody
+    public wg.application.vo.Result arrayTest2() {
+
+        String[] s = {"1", "2", "123"};
+        for (String s1 : s) {
+            if ("23".contains(s1)) {
+                System.out.println(23);
+                return wg.application.vo.Result.ok("23");
+            }
+        }
+
+//        for (String s1 : s) {
+//            if ("23".contains(s1)){
+//
+//            }else {
+//                System.out.println(false);
+//                return wg.application.vo.Result.ok(false);
+//            }
+//        }
+
+
+        return wg.application.vo.Result.ok(true);
     }
 
     /****************************************************************
@@ -1067,6 +1130,8 @@ public class Test {
 
     /****************************************************************
      * 三元
+     * 断路 双的是断路
+     * 按位与 按位或
      * @author: wg
      * @time: 2020/7/7 15:27
      ****************************************************************/
@@ -1076,6 +1141,24 @@ public class Test {
         boolean b = 1 > 2 || 1 > 0 ? false : true;
 
         System.out.println(b); // false
+
+        int i = 0;
+        if (i++ == 0 | i++ == 1) {
+            System.out.println(i + "  ---");
+        }
+
+        if (i++ == 3 | i++ == 3) {
+            System.out.println(i + " 4 ]]]]");
+        }
+
+        if (i++ == 4 & i++ == 5) {
+            System.out.println("===");
+        }
+
+        if (i++ == 6 & i++ == 7) {
+            System.out.println("---");
+        }
+
 
     }
 
@@ -1197,16 +1280,19 @@ public class Test {
      ****************************************************************/
     @RequestMapping(value = "/getAllLiuShui")
     @ResponseBody
-    public LiuShui getAllLiuShui() {
+    public wg.application.vo.Result getAllLiuShui() {
 
-        LiuShui one = liuShuiInterface.getOne();
+//        LiuShui one = liuShuiInterface.getOne();
+//
+//        //System.out.println(one);
+//
+//        String s = JSON.toJSONString(one);
+//        System.out.println(s);
 
-        //System.out.println(one);
+        List<LiuShui> liuShuis = liuShuiInterface.getByJiaoYiJinErBetween(1d, 2d);
 
-        String s = JSON.toJSONString(one);
-        System.out.println(s);
 
-        return one;
+        return wg.application.vo.Result.ok(liuShuis);
     }
 
     /****************************************************************
@@ -1237,6 +1323,62 @@ public class Test {
     public void zifu() {
         System.out.println(123 + "\u0020" + 123 + "\u3000" + 123);
         System.out.println("---------");
+    }
+
+
+    /*******************************************************************
+     * 转数组
+     * @Author wg
+     * @Date 2020/10/12 17:46
+     *******************************************************************/
+    @RequestMapping(value = "parseToArray")
+    @ResponseBody
+    public void parseToArray() {
+
+        String s = "备付金、京东支付、财付通、富友、天翼、汇潮、捷付睿、连连银通、九派天下、易宝、宝付、快钱、盛付通、传化、" +
+          "融宝、资和信、润物、石基、一九付、银盛、网易宝、易付宝、网银在线、东方付通、拉卡拉、" +
+          "迅付、快捷通、腾付通、美的、讯联智付、快付通、商物通、新浪、易通金服、银生宝、甬易、" +
+          "亿付、随行付、雅酷时空、合众易宝、瑞银信、畅捷通、理房通、百联优力、爱农驿站、高汇通、" +
+          "圣亚云鼎、国付宝、先锋、汇聚、银联商务、网上有名、汇付、商银信、易极付、广州银联、钱袋宝、" +
+          "邦付宝、联付通、证联、汇元银通、市民卡、百付宝、中移电子、支付宝、瀚银、中付、金运通、" +
+          "双乾、天下支付、电银、乐刷、杉德、银盈通、山东省电子、亚科、中金、投科信、杭州银行、敏付" +
+          "、桂林银行、山西万卡德、山东高速信联、银视通、江苏省电子商务、平安银行、郑州建业至尊、" +
+          "青岛百达通、江苏瑞祥商务、青岛百森通、北京商银、郑州建业至尊商务、安徽华夏、四川商通实业、" +
+          "裕福支付、陕西煤炭交易中心、昆明卡互卡、北京数码视讯、浙江航天电子、新生、上海付费通、" +
+          "上海东方汇融、安付宝、易生、易票联、易联、广东盛迪嘉电子、得仕、中钢银通信、唯品会、" +
+          "顺丰恒通、广州合利宝、商盟商务服务、易智付、通联支付网络服务、上海银联电子、恒大万通、" +
+          "钱宝、本元、平安付、智付、开联通、联动北京银联商务、平安付电子、现代金融控股、联通支付、" +
+          "东方电子支付、摩宝、首采联合电子";
+
+        String[] strings = s.split("、");
+
+
+        String[] st = new String[strings.length];
+
+        for (int i = 0; i < strings.length; i++) {
+            st[i] = strings[i].trim();
+        }
+
+        System.out.println(Arrays.toString(strings));
+        System.out.println(Arrays.toString(st));
+
+
+    }
+
+    /****************************************************************
+     *
+     * @author: wg
+     * @time: 2020/10/14 10:48
+     ****************************************************************/
+    @RequestMapping(value = "/getPrescription")
+    @ResponseBody
+    public wg.application.vo.Result getPrescription() {
+        double sqrt = Math.sqrt(25d);
+
+        double sqrt1 = Math.sqrt(24d);
+        System.out.println("24d 开平方 : "+sqrt1);
+
+        return wg.application.vo.Result.ok(sqrt);
     }
 
 }

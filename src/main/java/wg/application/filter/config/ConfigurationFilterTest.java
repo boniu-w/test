@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Configuration;
  * @version
  * @Copyright
  *************************************************************/
-@Configuration
-public class ConfigurationFilterTest {
+//@Configuration
+//public class ConfigurationFilterTest {
 
-    @Bean
-    public WgFilter initFilter(){
+    //@Bean
+    //public WgFilter initFilter(){
+    //
+    //    return  new WgFilter();
+    //}
 
-        return  new WgFilter();
-    }
-
-}
+//}

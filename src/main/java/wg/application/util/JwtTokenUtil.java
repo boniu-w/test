@@ -82,7 +82,7 @@ public class JwtTokenUtil {
      * @author: wg
      * @time: 2020/8/21 14:51
      ****************************************************************/
-    public static boolean isTokenExpired(String token) throws ExpiredJwtException {
+    public static boolean isTokenExpired(String token) {
         try {
             analyseJwtToken(token);
             return false;

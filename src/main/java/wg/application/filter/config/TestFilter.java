@@ -7,7 +7,7 @@ package wg.application.filter.config;
  * @version
  * @Copyright
  *************************************************************/
-public class TestFilter extends WgFilter {
-
-
-}
+//public class TestFilter extends WgFilter {
+//
+//
+//}

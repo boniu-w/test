@@ -20,7 +20,8 @@ public class LiuShui {
   private String jiaoYiZhangHao;
   private java.sql.Timestamp jiaoYiShiJian;
   private String shouFuBiaoZhi;
-  private double jiao_yi_jin_e;
+  private double jiaoYiJinEr;
+//  private double jiaoYiJinE;
   private double yu_e;
   private String duiShouZhangHao;
   private String duiShouHuMing;
@@ -36,4 +37,11 @@ public class LiuShui {
   private String beiZhu;
 
 
+  public double getJiaoYiJinEr() {
+    return jiaoYiJinEr;
+  }
+
+  public void setJiaoYiJinEr(double jiao_yi_jin_e) {
+    this.jiaoYiJinEr = jiao_yi_jin_e;
+  }
 }
