@@ -184,5 +184,19 @@ public class TestApplicationTests {
 
     }
 
+    @Test
+    public void layoutTest(){
+        String[] arr={"展昭","小黑","二哈","张无忌","张三丰","123","小323","二23哈","张232无忌","2323三丰"};
+        String tr="";
+        for (int i = 0; i < arr.length; i++) {
+            tr+=" "+arr[i];
+            if((i+1)%3==0) {
+                System.err.println(tr.replaceFirst(",", ""));
+                tr="";
+            }
+        }
+        System.err.println(tr!=null?tr.replaceFirst(",", ""):"");
+    }
+
 
 }
