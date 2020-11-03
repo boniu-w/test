@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>validateTest</title>
+
+    <script src="http://localhost:33333/js/common.js"></script>
+
+</head>
+<body>
+
+<div id="div1">
+
+    <input type="text" id="name">
+    <input type="number" id="age">
+    <input type="button" value="submit1" onclick="submit1()">
+    <input type="button" value="submit3 XMLHttpRequest" onclick="submit3()">
+    <input type="button" value="submit4 提交ajax-formData形式" onclick="submit4()">
+
+    <script>
+        function submit1() {
+            var name = $("#name").val();
+            var age = $("#age").val();
+
+            var obj = {};
+            obj["name"] = name;
+            obj["age"] = age;
+
+            console.log(obj)
+            $.ajax({
+                url: "http://127.0.0.1:33333/validateTestController/validate",
+                data: obj,
+                type: "get",
+
+                cache: false,
+                // processData: false,  // 告诉jQuery不要去处理发送的数据 processData 可不得了,
+                // contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
+                success: function (res) {
+                    console.log(res)
+                },
+                error: function () {
+                    console.log("error")
+                }
+            })
+
+        }
+
+        function submit3() {
+            var name = $("#name").val();
+            var age = $("#age").val();
+
+            var obj = {};
+            obj = Object.assign({
+                name: name,
+                age: age
+            }, obj)
+
+            console.log(obj)
+
+            var request = new XMLHttpRequest();
+
+            request.open("post", "http://127.0.0.1:33333/validateTestController/validatePost", false);
+            // request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.send(obj)         // 后台接收不到 数据
+
+            console.log("request  ", request)
+            if ((request.status >= 200 && request.status < 300) || request.status == 304) {
+
+                console.log("200", request.status)
+            } else {
+                console.log("xmlHttpRequest 的状态为: ", request.status)
+            }
+
+            /////////////////////////////////////////////////////////////////////////////
+            var formData = new FormData();
+
+            formData.append('name', name);
+            formData.append('age', age);
+            formData.append('birthDate', 1940);
+
+
+            var request = new XMLHttpRequest();
+            request.open('POST', 'http://127.0.0.1:33333/validateTestController/validatePost');
+            request.send(formData);    // 后台可以接收到 数据
+
+            console.log(formData)
+            if ((request.status >= 200 && request.status < 300) || request.status == 304) {
+
+                console.log("formData 200", request.status)
+            } else {
+                console.log("formData xmlHttpRequest 的状态为: ", request.status)
+            }
+
+        }
+
+        function submit4() {
+            var name = $("#name").val();
+            var age = $("#age").val();
+
+            var formData = new FormData();
+            formData.append('name', name)
+            formData.append('age', age)
+
+            console.log(formData)
+            $.ajax({
+                url: "http://127.0.0.1:33333/validateTestController/validate",
+                data: formData,
+                type: "get",
+
+                cache: false,
+                processData: false,  // 告诉jQuery不要去处理发送的数据 processData 可不得了,
+                contentType: true,  // 告诉jQuery不要去设置Content-Type请求头
+                success: function (res) {
+                    console.log(res)
+                },
+                error: function () {
+                    console.log("error")
+                }
+            })
+
+        }
+    </script>
+</div>
+
+
+<div id="div2">
+    <form action="http://127.0.0.1:33333/validateTestController/validate2">
+        <input type="text" name="name" value="">
+        <input type="number" name="age">
+        <input type="submit" value="submit2">
+    </form>
+</div>
+
+
+<div id="div3">
+
+    <form id="form3">
+        <input type="text" name="name" value="">
+        <input type="number" name="age">
+        <input type="button" value="sendForm" onclick="sendForm()">
+    </form>
+
+    <script>
+
+        var selectors = "#form3";
+        var form = document.querySelector(selectors)
+
+        function sendForm() {
+           var formData = new FormData(form);
+
+            formData.append("sex","1")
+
+            var request = new XMLHttpRequest();
+            request.open('POST', 'http://127.0.0.1:33333/validateTestController/getFormData',false);
+            request.send(formData);    // 后台可以接收到 数据
+
+            console.log(formData)
+            if ((request.status >= 200 && request.status < 300) || request.status == 304) {
+
+                console.log("formData 200", request.status)
+            } else {
+                console.log("formData xmlHttpRequest 的状态为: ", request.status)
+            }
+
+        }
+    </script>
+
+</div>
+
+
+</body>
+</html>

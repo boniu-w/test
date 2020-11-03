@@ -123,6 +123,25 @@
 </script>
 
 
+<div>
+
+    <button id="button-var" onclick="f()">test-var</button>
+
+    <script>
+
+        let a = 10;
+        // f();
+        console.log("-> ", a)
+
+        function f() {
+
+            console.log("test var -> ", a)
+            a = 20;
+            console.log("test var a=20 -> ", a)
+        }
+    </script>
+</div>
+
 </body>
 
 </html>
