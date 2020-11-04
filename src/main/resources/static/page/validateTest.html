@@ -80,7 +80,7 @@
 
 
             var request = new XMLHttpRequest();
-            request.open('POST', 'http://127.0.0.1:33333/validateTestController/validatePost');
+            request.open('POST', 'http://127.0.0.1:33333/validateTestController/validatePost',false);
             request.send(formData);    // 后台可以接收到 数据
 
             console.log(formData)

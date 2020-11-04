@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>regTest</title>
+</head>
+<body>
+
+
+<script>
+    // 验证电话
+    function regPhone(phone) {
+        var reg = /((^1[3|4|5|7|8]\d{9}$)|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/
+        var boo = reg.test(phone)
+
+        console.log(boo)
+        return boo;
+
+    }
+
+    var phone = "0371-23876785-987"
+    regPhone(phone);
+
+    // 验证姓名
+    function regName(name) {
+        var reg = /^(?:[\u4e00-\u9fa5]+)(?:·[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$/;
+        var boo = reg.test(name);
+
+        console.log(boo)
+        return boo;
+    }
+
+    var name = "smith.tell";
+    regName(name)
+
+    //判断字符是否为空
+    function isEmpty(obj) {
+        return (typeof obj === 'undefined' || obj === null || obj === "");
+    }
+
+    function f() {
+        var str = ["1", ""]
+
+        for (let i = 0; i < str.length; i++) {
+            // debugger
+            console.log(str[i], isEmpty(str[i]))
+            if (isEmpty(str[i]) == true) {
+                return;
+            }
+            console.log(999)
+        }
+
+    }
+
+    f();
+
+    // foreach 用法
+    var num = [1, 2, 3]
+    var n = [];
+    num.forEach(function (item, i) {
+        console.log(num[i])
+        n.push(item + 1)
+    })
+    console.log(n)
+</script>
+</body>
+</html>
