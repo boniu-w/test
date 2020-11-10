@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axiosTest</title>
+    <script src="http://localhost:33333/js/common.js"></script>
+
+</head>
+<body>
+<form id="form1">
+    <input type="text" name="id" value="123">
+</form>
+
+<script>
+
+
+
+    function axiosFormDataTest() {
+        let formData = new FormData();
+        formData["birthday"] = "2020-10-2";
+        formData["name"] = "wg"
+        formData["age"] = 12;
+
+        console.log("formData -> ", formData)
+
+        axios({
+            method: "post",
+            url: "http://127.0.0.1:33333/validateTestController/validatePost",
+            data: formData,
+            // headers: {
+            //     "Content-Type": "application/x-www-form-urlencoded"
+            // },
+            // transformRequest: [
+            //     function (data) {
+            //         let ret = '';
+            //         for (let it in data) {
+            //             ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
+            //         }
+            //         return ret;
+            //     }
+            // ],
+        })
+
+        // axios.get("http://127.0.0.1:33333/validateTestController/validate", formData)
+        //     .then(function (res) {
+        //         console.log("axiosFormDataTest -> ", res)
+        //     })
+        //     .catch(function (error) {
+        //         console.log("axiosFormDataTest error -> ", error)
+        //     })
+    }
+
+
+    function axiosTest() {
+        axios({
+            url: "http://127.0.0.1:33333/validateTestController/validatePost",
+            method: "post",
+            data: {name: "wg", age: 12}
+        })
+            .then(function (res) {
+                console.log(res)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+
+    }
+
+    function ajaxObjectTest() {
+        $.ajax({
+            url: "http://127.0.0.1:33333/validateTestController/validatePost",
+            method: "post",
+            data: {name: "wg", age: 12},
+            success: function (res) {
+                console.log("ajax -> ", res)
+            },
+            error: function (error) {
+                console.log("ajax error -> ", error)
+            }
+        })
+    }
+
+
+    function ajaxFormDataTest() {
+        // let form1 = $("#form1").serialize();
+        // console.log(form1)
+
+        let formData = new FormData();
+        formData["birthday"] = "2020-10-2";
+        formData["name"] = "wg"
+        formData["age"] = 12;
+        console.log("formData -> ", formData)
+
+        $.ajax({
+            url: "http://127.0.0.1:33333/validateTestController/validatePost",
+            method: "post",
+            // data: {name: "wg", age: 12},
+            data: formData,
+            // cache: false,
+            processData: false,  // 告诉jQuery不要去处理发送的数据 processData 可不得了,
+            contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
+            success: function (res) {
+                console.log("ajax -> ", res)
+            },
+            error: function (error) {
+                console.log("ajax error -> ", error)
+            }
+        })
+    }
+
+    // axiosFormDataTest()
+    // axiosTest()
+    // ajaxFormDataTest()
+    ajaxObjectTest()
+
+</script>
+
+<!--<script src="../js/jquery-3.5.1.js"></script>-->
+<!--<script src="../js/jquery-3.1.1.js"></script>-->
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package wg.application.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wg.application.entity.Student;
@@ -29,7 +30,7 @@ public class ValidateTest {
      ****************************************************************/
     @RequestMapping(value = "/validate")
     @ResponseBody
-    public ResultData validate(Map map, HttpServletRequest request, Student student) {
+    public ResultData validate(Map map, HttpServletRequest request,Student student) {
         System.out.println("student -->>> " + student);
         System.out.println("map --->>>   " + map);
         Enumeration<String> parameterNames = request.getParameterNames();
@@ -38,13 +39,13 @@ public class ValidateTest {
             System.out.println("parameterNames  -->>>   " + s);
         }
 
-        return ResultData.build().msg("$$$$$$$$$$");
+        return ResultData.build().data("student -> "+student);
     }
 
 
     @RequestMapping(value = "/validatePost",method = RequestMethod.POST)
     @ResponseBody
-    public ResultData validatePost(Map map, HttpServletRequest request, Student student) {
+    public ResultData validatePost(Map map, HttpServletRequest request,Student student) {
         System.out.println("student -->>> " + student);
         System.out.println("map --->>>   " + map);
         Enumeration<String> parameterNames = request.getParameterNames();
@@ -53,7 +54,7 @@ public class ValidateTest {
             System.out.println("parameterNames  ++-->>>   " + s);
         }
 
-        return ResultData.build().msg("$$$$$$$$$$");
+        return ResultData.build().data("student: "+student);
     }
 
     /****************************************************************

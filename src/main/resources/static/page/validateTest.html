@@ -61,6 +61,7 @@
 
             request.open("post", "http://127.0.0.1:33333/validateTestController/validatePost", false);
             // request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
             request.send(obj)         // 后台接收不到 数据
 
             console.log("request  ", request)
@@ -80,7 +81,7 @@
 
 
             var request = new XMLHttpRequest();
-            request.open('POST', 'http://127.0.0.1:33333/validateTestController/validatePost',false);
+            request.open('POST', 'http://127.0.0.1:33333/validateTestController/validatePost', false);
             request.send(formData);    // 后台可以接收到 数据
 
             console.log(formData)
@@ -98,18 +99,17 @@
             var age = $("#age").val();
 
             var formData = new FormData();
-            formData.append('name', name)
-            formData.append('age', age)
+            formData['name'] = name
+            formData['age'] = age
 
             console.log(formData)
             $.ajax({
                 url: "http://127.0.0.1:33333/validateTestController/validate",
                 data: formData,
                 type: "get",
-
                 cache: false,
                 processData: false,  // 告诉jQuery不要去处理发送的数据 processData 可不得了,
-                contentType: true,  // 告诉jQuery不要去设置Content-Type请求头
+                contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
                 success: function (res) {
                     console.log(res)
                 },
@@ -146,12 +146,12 @@
         var form = document.querySelector(selectors)
 
         function sendForm() {
-           var formData = new FormData(form);
+            var formData = new FormData(form);
 
-            formData.append("sex","1")
+            formData.append("sex", "1")
 
             var request = new XMLHttpRequest();
-            request.open('POST', 'http://127.0.0.1:33333/validateTestController/getFormData',false);
+            request.open('POST', 'http://127.0.0.1:33333/validateTestController/getFormData', false);
             request.send(formData);    // 后台可以接收到 数据
 
             console.log(formData)
