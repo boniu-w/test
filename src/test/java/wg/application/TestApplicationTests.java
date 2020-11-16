@@ -229,6 +229,42 @@ public class TestApplicationTests {
         return new BigDecimal(mid).setScale(precision, BigDecimal.ROUND_DOWN).doubleValue();
     }
 
+    /***************************************************
+     * 排序
+     * @author: wg
+     * @time: 2020/11/14 0:12
+     ***************************************************/
+    @Test
+    public void sort() {
+        int[] arr = {1, 3, 56, 4, 67, 23, 43};
+
+        int a=0;
+        for (int j = 0; j < arr.length - 1; j++) {
+            for (int i = 0; i < arr.length - j - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                     a = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = a;
+                }
+            }
+            System.out.println(Arrays.toString(arr));
+        }
+
+
+        //for (int i = 0; i < arr.length - 1; i++) {
+        //    if (arr[i] > arr[i + 1]) {
+        //         a = arr[i];
+        //        arr[i] = arr[i + 1];
+        //        arr[i + 1] = a;
+        //    }
+        //System.out.println(Arrays.toString(arr));
+        //}
+
+
+        //System.out.println(Arrays.toString(arr));
+
+
+    }
 
     /**
      转全角的方法(SBC case)<br/><br/>
