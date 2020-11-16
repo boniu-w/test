@@ -5,9 +5,8 @@
     <title>bootstrap-test</title>
 
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-<!--    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">-->
+    <!--    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">-->
     <script src="http://localhost:33333/js/common.js"></script>
-
 
 
 </head>
@@ -16,10 +15,10 @@
 <div class="container">
     <div class="row  " style="width: 800px;height: 200px; background: #9acfea">
         <div class="col-md-6">
-           123
+            123
         </div>
         <div class="col-md-6">
-           123
+            123
 
         </div>
     </div>
@@ -82,16 +81,79 @@
     let verticalFlag = true;
     let horizontalFlag = true;
     setInterval(() => {
-    (el.offsetHeight + styleTop === window.innerHeight) && (verticalFlag = false);
-    (el.offsetWidth + styleLeft === window.innerWidth) && (horizontalFlag = false);
-    verticalFlag ? styleTop++ : styleTop--;
-    horizontalFlag ? styleLeft++ : styleLeft--;
-    (styleTop <= 0) && (verticalFlag = true);
-    (styleLeft <= 0) && (horizontalFlag = true);
-    el.style.top = `${styleTop}px`;
-    el.style.left = `${styleLeft}px`;
+        (el.offsetHeight + styleTop === window.innerHeight) && (verticalFlag = false);
+        (el.offsetWidth + styleLeft === window.innerWidth) && (horizontalFlag = false);
+        verticalFlag ? styleTop++ : styleTop--;
+        horizontalFlag ? styleLeft++ : styleLeft--;
+        (styleTop <= 0) && (verticalFlag = true);
+        (styleLeft <= 0) && (horizontalFlag = true);
+        el.style.top = `${styleTop}px`;
+        el.style.left = `${styleLeft}px`;
     }, 10);
 </script>
+<p>------------------------</p><p>------------------------</p>
+
+<div class="container" id="div-container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row clearfix" >
+                <div class="col-md-12 column" >
+                    <ol>
+                        <li>
+                            Lorem ipsum dolor sit amet
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+                    <ol>
+                        <li>
+                            Lorem ipsum dolor sit amet
+                        </li>
+                        <li>
+                            Consectetur adipiscing elit
+                        </li>
+                        <li>
+                            Integer molestie lorem at massa
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-md-6 column">
+                    <ol>
+                        <li>
+                            Lorem ipsum dolor sit amet
+                        </li>
+                        <li>
+                            Consectetur adipiscing elit
+                        </li>
+                        <li>
+                            Integer molestie lorem at massa
+                        </li>
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    li {
+        overflow: hidden; /*文字溢出的部分隐藏起来*/
+        white-space: nowrap; /*不让文字内容换行*/
+        text-overflow: ellipsis; /*用...替代溢出的部分*/
+    }
+
+    #div-container {
+        background-color: yellow;
+        /*width: 200px;*/
+        /*height: 200px;*/
+        background-image: url("../img/xinxipaihang.png");
+    }
+
+</style>
+
 
 </body>
 </html>

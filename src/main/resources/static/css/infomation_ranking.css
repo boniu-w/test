@@ -1,0 +1,87 @@
+#information_adoption {
+    margin-top: 10%;
+    position: relative;
+}
+
+#information_adoption_image {
+    float: left;
+}
+
+#information_adoption div {
+    float: left;
+}
+
+#div1 {
+    margin-left: 23%;
+    margin-top: -64%;
+}
+
+#div2 {
+    margin-left: 44%;
+    margin-top: -74%;
+}
+
+#div3 {
+    margin-left: 66%;
+    margin-top: -60%;
+}
+
+.grade {
+    width: 50px;
+    height: 50px;
+    font-size: 13px;
+    font-family: PingFang-SC-Bold, PingFang-SC;
+    font-weight: 500;
+    color: black;
+}
+
+.grade img {
+    width: 30px;
+    height: 30px;
+}
+
+#ranking_div1 {
+    margin-top: -30%;
+    margin-left: 16%;
+    line-height: 32px;
+
+}
+
+#ranking_div2 {
+    float: left;
+    margin-left: 60%;
+    margin-top: -30%;
+}
+#ranking2 {
+    float: left;
+    font-size: 22px;
+    line-height: 32px;
+    font-family: PingFang-SC-Bold, PingFang-SC;
+    font-weight: 900;
+
+}
+
+#ranking3 {
+    float: left;
+
+}
+
+.ranking_li li{
+    font-size: 16px;
+    line-height: 32px;
+    font-family: PingFang-SC-Bold, PingFang-SC;
+    font-weight: 300;
+    color: black;
+}
+#infomation{
+    margin-top: -88%;
+    margin-left: 32%;
+
+}
+#infomation span{
+    font-size: 18px;
+    line-height: 32px;
+    font-family: PingFang-SC-Bold, PingFang-SC;
+    font-weight: 300;
+    color: black;
+}

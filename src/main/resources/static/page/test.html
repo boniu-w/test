@@ -129,7 +129,7 @@
 
     <script>
 
-        let a = 10;
+        var a = 10;
         // f();
         console.log("-> ", a)
 
@@ -141,6 +141,61 @@
         }
     </script>
 </div>
+
+
+<div>
+
+    <input type="text" id="enterEvent">
+    <input type="button" id="enterEventButton" onclick="f1()" value="enterEventButton">
+
+    <script>
+
+
+
+        var inputText = document.querySelector("#enterEvent");
+
+
+        $(document).keydown(function (e) {
+            var val = $("#enterEvent").val();
+            var key = e.which;
+            if (key == 13) {
+                alert(isEmpty(val))
+            }
+
+        })
+
+        function f1() {
+            var val = $("#enterEvent").val();
+            if (isEmpty(val)) {
+                console.log(val)
+            }else{
+                console.log(val)
+            }
+        }
+
+        //判断字符是否为空
+        function isEmpty(obj) {
+            return (typeof obj === 'undefined' || obj === null || obj === "");
+        }
+
+    </script>
+</div>
+
+
+<script>
+
+    var arr=[1,2,3,4]
+
+    var arr1 = arr.slice(2,3)
+    console.log("arr1 -> ", arr1.toLocaleString())
+
+    var len= arr.push(33)
+
+    console.log("len -> ", len )
+
+
+
+</script>
 
 </body>
 
