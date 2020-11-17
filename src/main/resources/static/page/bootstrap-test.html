@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>bootstrap-test</title>
+    <!--     <link rel="stylesheet" src="../css/bootstrap-2.3.2/bootstrap.css">-->
 
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <!--    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css">-->
-    <script src="http://localhost:33333/js/common.js"></script>
+    <script src="../js/common.js"></script>
+
+    <!--   <script type="text/javascript" src="http://127.0.0.1:33333/js/antd-with-locales.js"></script>-->
+    <!--   <script type="text/javascript" src="http://127.0.0.1:33333/js/antd.js"></script>-->
+    <!--   <script type="text/javascript" src="http://127.0.0.1:33333/js/react-dom.development.js"></script>-->
+    <!--   <script type="text/javascript" src="http://127.0.0.1:33333/js/react.development.js"></script>-->
+    <!--   <script type="text/javascript" src="http://127.0.0.1:33333/js/react-jsx-dev-runtime.development.js"></script>-->
 
 
 </head>
+
 <body>
 
 <div class="container">
@@ -91,13 +98,14 @@
         el.style.left = `${styleLeft}px`;
     }, 10);
 </script>
-<p>------------------------</p><p>------------------------</p>
+<p>------------------------</p>
+<p>------------------------</p>
 
 <div class="container" id="div-container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <div class="row clearfix" >
-                <div class="col-md-12 column" >
+            <div class="row clearfix">
+                <div class="col-md-12 column">
                     <ol>
                         <li>
                             Lorem ipsum dolor sit amet
@@ -140,9 +148,12 @@
 
 <style>
     li {
-        overflow: hidden; /*文字溢出的部分隐藏起来*/
-        white-space: nowrap; /*不让文字内容换行*/
-        text-overflow: ellipsis; /*用...替代溢出的部分*/
+        overflow: hidden;
+        /*文字溢出的部分隐藏起来*/
+        white-space: nowrap;
+        /*不让文字内容换行*/
+        text-overflow: ellipsis;
+        /*用...替代溢出的部分*/
     }
 
     #div-container {
@@ -151,9 +162,227 @@
         /*height: 200px;*/
         background-image: url("../img/xinxipaihang.png");
     }
-
 </style>
 
 
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle
+                                navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span
+                            class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Link</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong
+                                    class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">Link</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong
+                                    class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="btn-group">
+                <!--                <button class="btn"></button>-->
+                <!--                <span class="caret" value=""></span>-->
+                <button data-toggle="dropdown" class="btn dropdown-toggle">Action</button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">操作</a>
+                    </li>
+                    <li>
+                        <a href="#">设置栏目</a>
+                    </li>
+                    <li>
+                        <a href="#">更多设置</a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="#">更多选项</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">操作</a>
+                            </li>
+                            <li>
+                                <a href="#">设置栏目</a>
+                            </li>
+                            <li>
+                                <a href="#">更多设置</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#">首页</a>
+                </li>
+                <li>
+                    <a href="#">简介</a>
+                </li>
+                <li class="disabled">
+                    <a href="#">信息</a>
+                </li>
+                <li class="dropdown pull-right">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">下拉<strong class="caret"></strong></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">操作</a>
+                        </li>
+                        <li>
+                            <a href="#">设置栏目</a>
+                        </li>
+                        <li>
+                            <a href="#">更多设置</a>
+                        </li>
+                        <li class="divider">
+                        </li>
+                        <li>
+                            <a href="#">分割线</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="btn-group">
+                <button class="btn btn-default">Action</button>
+                <button data-toggle="dropdown"
+                        class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">操作</a>
+                    </li>
+                    <li class="disabled">
+                        <a href="#">另一操作</a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                        <a href="#">其它</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        Dropdown button
+    </button>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Link 1</a>
+        <a class="dropdown-item" href="#">Link 2</a>
+        <a class="dropdown-item" href="#">Link 3</a>
+    </div>
+</div>
+
+
+<div class="btn-group dropdown" id="dropdown">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+        超级管理员 <span class="caret"></span>
+    </button>
+    <input type="hidden" name="hidedrop_1" id="hidedrop_1" value="超级管理员"/>
+    <ul class="dropdown-menu">
+        <li><a href="#">超级管理员</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">设计总监</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">运维人员</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">发布人员</a></li>
+    </ul>
+</div>
+
+
 </body>
+
 </html>

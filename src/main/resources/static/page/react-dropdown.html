@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>react-dropdown</title>
+    <script src="http://127.0.0.1:33333/js/common.js"></script>
+
+</head>
+
+<body>
+    <div id="test1">
+    </div>
+
+    <script>
+        // 1. 创建dom
+        const h1 = ReactDOM.createElement("h1", { id: "myTitle" }, "hello");
+
+        //2. 渲染dom
+        ReactDOM.render(h1, document.getElementById("test1"))
+
+
+
+    </script>
+    <style>
+        #components-dropdown-demo-placement .ant-btn {
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .ant-row-rtl #components-dropdown-demo-placement .ant-btn {
+            margin-right: 0;
+            margin-bottom: 8px;
+            margin-left: 8px;
+        }
+    </style>
+</body>
+
+</html>
