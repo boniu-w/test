@@ -10,6 +10,7 @@
     <input type="time">
 </div>
 <style>
+    /*相对定位*/
     #relative-div{
         position: relative;
         float: left;
@@ -17,6 +18,21 @@
         top: 100px;
     }
 
+</style>
+
+
+<div>
+    <span>11111111</span> <span>11111111</span> <h1>asdasdafsd</h1>
+    <p>aaaaaaaaaaa</p>
+    <p>aaaaaaaaaaa</p>
+    <p>aaaaaaaaaaa</p>
+    <p>aaaaaaaaaaa</p>
+</div>
+<style>
+   /*从p元素的父级元素开始查 往下 偶数 为黄色*/
+    p:nth-child(even){
+        background-color: yellow;
+    }
 </style>
 
 </body>
