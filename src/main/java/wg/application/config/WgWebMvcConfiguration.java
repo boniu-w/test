@@ -20,6 +20,7 @@ public class WgWebMvcConfiguration extends  WebMvcConfigurationSupport{
           .addResourceLocations("classpath:/static/**")
           .addResourceLocations("classpath:/templates/")
           .addResourceLocations("classpath:/templates/**")
+        .addResourceLocations("classpath:/static/bootstrap/337/**")
         ;
 
 

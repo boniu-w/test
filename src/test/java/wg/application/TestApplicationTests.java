@@ -238,11 +238,11 @@ public class TestApplicationTests {
     public void sort() {
         int[] arr = {1, 3, 56, 4, 67, 23, 43};
 
-        int a=0;
+        int a = 0;
         for (int j = 0; j < arr.length - 1; j++) {
             for (int i = 0; i < arr.length - j - 1; i++) {
                 if (arr[i] > arr[i + 1]) {
-                     a = arr[i];
+                    a = arr[i];
                     arr[i] = arr[i + 1];
                     arr[i + 1] = a;
                 }
@@ -267,38 +267,35 @@ public class TestApplicationTests {
     }
 
     /**
-     转全角的方法(SBC case)<br/><br/>
-     全角空格为12288，半角空格为32
-     其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+     * 转全角的方法(SBC case)<br/><br/>
+     * 全角空格为12288，半角空格为32
+     * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+     *
      * @param input 任意字符串
      * @return 半角字符串
-     *
      */
-    public static String toSBC(String input)
-    {
+    public static String toSBC(String input) {
         //半角转全角：
-        char[] c=input.toCharArray();
-        for (int i = 0; i < c.length; i++)
-        {
-            if (c[i]==32)
-            {
-                c[i]=(char)12288;
+        char[] c = input.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == 32) {
+                c[i] = (char) 12288;
                 continue;
             }
-            if (c[i]<127)
-                c[i]=(char)(c[i]+65248);
+            if (c[i] < 127)
+                c[i] = (char) (c[i] + 65248);
         }
         return new String(c);
     }
 
 
     /**
-     转半角的函数(DBC case)<br/><br/>
-     全角空格为12288，半角空格为32
-     其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+     * 转半角的函数(DBC case)<br/><br/>
+     * 全角空格为12288，半角空格为32
+     * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+     *
      * @param input 任意字符串
      * @return 半角字符串
-     *
      */
     public static String toDBC(String input) {
         char[] c = input.toCharArray();
@@ -317,7 +314,7 @@ public class TestApplicationTests {
 
 
     @Test
-    public void testBanJiao(){
+    public void testBanJiao() {
 
         String input = "asd,阿萨,分隔符";
         String toSBC = toSBC(input);
@@ -325,8 +322,18 @@ public class TestApplicationTests {
         System.out.println(toSBC);
     }
 
+    /****************************************************************
+     * 创建 arraylist
+     * @author: wg
+     * @time: 2020/11/26 17:51
+     ****************************************************************/
+    @Test
+    public void arrayListTest() {
+        ArrayList arrayList = new ArrayList(3);
+        arrayList.add(0, 1);
+        System.out.println(arrayList.get(0));
 
-
+    }
 
 
 }
