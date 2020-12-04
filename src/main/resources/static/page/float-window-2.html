@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    body {
+        height: 1000px;
+    }
+    .fl {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        position: fixed;
+    }
+</style>
+<body>
+<div class="fl" id="fl">
+    我要飞呀飞,会随着页面的大小, 始终在页面可视区域内蹦跶
+</div>
+</body>
+<script >
+    var fl = document.getElementById('fl');
+
+    var chroX = document.documentElement.clientWidth;//yemian整个的高宽
+    var chroY = document.documentElement.clientHeight;
+
+    var offsetLeft = fl.offsetLeft;//盒子的位置
+    var offsetTop = fl.offsetTop;
+
+    var timer = 0;
+
+    console.log(offsetTop)
+
+    var x = 1;
+    var y = 1;
+
+    window.onresize = function(){
+        chroX = document.documentElement.clientWidth;//yemian整个的高宽
+        chroY = document.documentElement.clientHeight;
+    }
+
+    function move(){
+        offsetLeft += x;
+        offsetTop += y;
+        fl.style.left = offsetLeft  + 'px';
+        fl.style.top = offsetTop  + 'px';
+        console.log(chroY)
+    }
+    window.onload = function(){
+        timer = setInterval(function(){
+            move();
+            if(offsetTop+100 > chroY || offsetTop < 0){
+                y = -y;
+            }
+            if(offsetLeft+100 > chroX || offsetLeft <0){
+                x = -x;
+            }
+        },10)
+    }
+    fl.onmouseenter = function(){
+        clearInterval(timer)
+    }
+    fl.onmouseleave = function(){
+        window.onload();
+    }
+
+
+</script>
+</html>
