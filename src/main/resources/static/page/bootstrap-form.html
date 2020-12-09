@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bootstrap-form</title>
+
+    <script src="http://localhost:33333/js/common-js.js"></script>
+    <script type="text/javascript" src="../bootstrap-table/118/bootstrap-table.js"></script>
+    <link rel="stylesheet" href="../bootstrap-table/118/bootstrap-table.css">
+    <script type="text/javascript" src="http://localhost:33333/js/jquery-confirm-334/jquery-confirm.min.js"></script>
+    <link rel="stylesheet" href="../js/jquery-confirm-334/jquery-confirm.min.css">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <form>
+                <div class="form-group">
+                    <label for="dutyDate">值班日期</label>
+                    <input type="date" class="form-control" id="dutyDate" name="dutyDate">
+                </div>
+
+                <div class="form-group">
+                    <label for="dutyLeader">值班领导</label>
+                    <input type="text" class="form-control" id="dutyLeader" name="dutyLeader" placeholder="请输入值班领导">
+                </div>
+
+                <div class="form-group">
+                    <label for="onDutyMonitor">值班班长</label>
+                    <input type="text" class="form-control" id="onDutyMonitor" name="onDutyMonitor"
+                           placeholder="请输入值班班长">
+                </div>
+
+                <div class="form-group">
+                    <label for="onDutyMember">值守队员</label>
+                    <input type="text" class="form-control" id="onDutyMember" name="onDutyMember"
+                           placeholder="请输入值守队员">
+                </div>
+
+                <div class="form-group">
+                    <label for="flexibleMonitor">机动班长</label>
+                    <input type="text" class="form-control" id="flexibleMonitor" name="flexibleMonitor"
+                           placeholder="请输入机动班长">
+                </div>
+
+                <div class="form-group">
+                    <label for="flexibleMember">机动组员</label>
+                    <input type="text" class="form-control" id="flexibleMember" name="flexibleMember"
+                           placeholder="请输入机动组员">
+                </div>
+
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="modal-submit" onclick="submit_modal()">
+                    提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //   模态框js
+    function submit_modal() {
+
+        var obj={};
+        obj.dutydate=$('#dutyDate').val()+' 00:00:00';
+        obj.dutyLeader = $('#dutyLeader').val()
+        obj.onDutyMonitor = $('#onDutyMonitor').val()
+        obj.onDutyMember = $('#onDutyMember').val()
+        obj.flexibleMonitor = $('#flexibleMonitor').val()
+        obj.flexibleMember = $('#flexibleMember').val()
+
+        console.log('obj  -> ', obj)
+
+        $('#modal-submit').click(function () {
+
+            $.ajax({
+                type: 'post',
+                url: '/ms-mcms/dutyDetail/insertIntoDutyDetail',
+                data: obj,
+                success: function () {
+                    $.dialog('success')
+                    $('.update-div').modal('hide');
+                    $("#table").bootstrapTable('refresh');
+                },
+                error: function () {
+                    $.dialog('error')
+                }
+
+            })
+        })
+
+    }
+</script>
+
+</body>
+</html>
