@@ -45,10 +45,18 @@ public class DutyEntity {
     private String group;
 
 
-    @Excel(name = "值班日期")
+    @Excel(name = "值班日期(格式 2020/1/1)")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dutyDate;
+
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date date;
+    private Date createTime;
+
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
 
 
 }

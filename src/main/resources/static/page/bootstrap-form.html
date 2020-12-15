@@ -65,11 +65,18 @@
 </div>
 
 <script>
+
+    $().ready(function () {
+        // $('#dutyDate').val(new Date(Date.parse(row.dutyDate.replace(/-/g),'/')))
+        $('#dutyDate').val('2020-01-11')
+
+    })
+
     //   模态框js
     function submit_modal() {
 
         var obj={};
-        obj.dutydate=$('#dutyDate').val()+' 00:00:00';
+        obj.dutydate=$('#dutyDate').val();
         obj.dutyLeader = $('#dutyLeader').val()
         obj.onDutyMonitor = $('#onDutyMonitor').val()
         obj.onDutyMember = $('#onDutyMember').val()
