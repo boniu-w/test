@@ -7,6 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.util.WgJsonUtil;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -332,6 +335,46 @@ public class TestApplicationTests {
         ArrayList arrayList = new ArrayList(3);
         arrayList.add(0, 1);
         System.out.println(arrayList.get(0));
+
+    }
+
+    /****************************************************************
+     * 字符串去空格
+     * @author: wg
+     * @time: 2020/12/21 17:54
+     ****************************************************************/
+    @Test
+    public void trimString() {
+
+        String s = "哈 进  王帅虎            董 强（老院）";
+
+        String[] split = s.trim().split("  ");
+        System.out.println(Arrays.toString(split));
+
+        String s1 = "谢  勇";
+        String[] split1 = s1.trim().split("  ");
+        System.out.println(Arrays.toString(split1));
+
+    }
+
+    /****************************************************************
+     * 日期 字符串
+     * @author: wg
+     * @time: 2020/12/22 15:28
+     ****************************************************************/
+    @Test
+    public void formatString() {
+
+        try {
+            String dateString = "12月2日";
+            int year = LocalDate.now().getYear();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+            Date parse = simpleDateFormat.parse(year+"年"+dateString);
+            System.out.println(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

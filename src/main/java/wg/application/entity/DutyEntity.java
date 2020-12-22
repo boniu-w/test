@@ -1,11 +1,11 @@
 package wg.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
 import org.springframework.data.annotation.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 import wg.application.util.Excel;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /*************************************************************
@@ -15,7 +15,6 @@ import java.util.Date;
  * @version
  * @Copyright
  *************************************************************/
-@Data
 public class DutyEntity {
 
     private String id;
@@ -58,5 +57,111 @@ public class DutyEntity {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    @Transient
+    private  Date[] dutyDateArray;
 
+    public Date[] getDutyDateArray() {
+        return dutyDateArray;
+    }
+
+    public void setDutyDateArray(Date[] dutyDateArray) {
+        this.dutyDateArray = dutyDateArray;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDutyLeader() {
+        return dutyLeader;
+    }
+
+    public void setDutyLeader(String dutyLeader) {
+        this.dutyLeader = dutyLeader;
+    }
+
+    public String getOnDutyMonitor() {
+        return onDutyMonitor;
+    }
+
+    public void setOnDutyMonitor(String onDutyMonitor) {
+        this.onDutyMonitor = onDutyMonitor;
+    }
+
+    public String getOnDutyMember() {
+        return onDutyMember;
+    }
+
+    public void setOnDutyMember(String onDutyMember) {
+        this.onDutyMember = onDutyMember;
+    }
+
+    public String getFlexibleMonitor() {
+        return flexibleMonitor;
+    }
+
+    public void setFlexibleMonitor(String flexibleMonitor) {
+        this.flexibleMonitor = flexibleMonitor;
+    }
+
+    public String getFlexibleMember() {
+        return flexibleMember;
+    }
+
+    public void setFlexibleMember(String flexibleMember) {
+        this.flexibleMember = flexibleMember;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public Date getDutyDate() {
+        return dutyDate;
+    }
+
+    public void setDutyDate(Date dutyDate) {
+        this.dutyDate = dutyDate;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "DutyEntity{" +
+          "id='" + id + '\'' +
+          ", dutyLeader='" + dutyLeader + '\'' +
+          ", onDutyMonitor='" + onDutyMonitor + '\'' +
+          ", onDutyMember='" + onDutyMember + '\'' +
+          ", flexibleMonitor='" + flexibleMonitor + '\'' +
+          ", flexibleMember='" + flexibleMember + '\'' +
+          ", group='" + group + '\'' +
+          ", dutyDate=" + dutyDate +
+          ", createTime=" + createTime +
+          ", updateTime=" + updateTime +
+          ", dutyDateArray=" + Arrays.toString(dutyDateArray) +
+          '}';
+    }
 }
