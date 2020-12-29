@@ -1,5 +1,4 @@
 (function () {
-
     var date = {
         //格式化时间
         fmt: function (de, fmt) {

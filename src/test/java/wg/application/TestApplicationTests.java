@@ -1,6 +1,7 @@
 package wg.application;
 
 import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.druid.util.StringUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -369,12 +370,56 @@ public class TestApplicationTests {
             String dateString = "12月2日";
             int year = LocalDate.now().getYear();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
-            Date parse = simpleDateFormat.parse(year+"年"+dateString);
+            Date parse = simpleDateFormat.parse(year + "年" + dateString);
             System.out.println(parse);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
 
+    /****************************************************************
+     * 去中间空串
+     * @author: wg
+     * @time: 2020/12/24 10:57
+     ****************************************************************/
+    @Test
+    public void innerSpace() {
+
+        String s = "杨培新,,,,,齐跃,刘绍偈,孟令皓,张楷婕,鞠伟,王淼,,刘瑶,李敏,";
+
+        System.out.println(s.replace(","," "));
+        System.out.println(s.replace(",",""));
+
+
+        String[] members = s.split(",");
+        System.out.println(Arrays.toString(members));
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < members.length; i++) {
+            if (com.alibaba.druid.util.StringUtils.isEmpty(members[i])) {
+                continue;
+            }
+            stringBuilder.append(members[i].trim());
+            stringBuilder.append(",");
+        }
+
+        System.out.println(stringBuilder.toString().substring(0, stringBuilder.length() - 1));
+
+        /********************第二种情况*************************************/
+        String me = "王  刚";
+
+        System.out.println(me.replace(" ",""));
+        StringBuilder builder = new StringBuilder();
+        char[] chars = me.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            System.out.println(chars[i]);
+            if (chars[i] == 32) {
+                continue;
+            }
+            builder.append(chars[i]);
+        }
+
+        System.out.println(builder.toString());
 
     }
 
