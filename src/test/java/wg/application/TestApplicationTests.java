@@ -421,6 +421,10 @@ public class TestApplicationTests {
 
         System.out.println(builder.toString());
 
+        int a=0;
+        String as="0";
+        System.out.println(as.equals(a));
+
     }
 
 
