@@ -1,19 +1,17 @@
 package wg.application;
 
 import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.druid.util.StringUtils;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import wg.application.entity.TrafficRestriction;
 import wg.application.util.WgJsonUtil;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @SpringBootTest
 public class TestApplicationTests {
@@ -372,6 +370,12 @@ public class TestApplicationTests {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
             Date parse = simpleDateFormat.parse(year + "年" + dateString);
             System.out.println(parse);
+
+            // 获取今天是周几
+            LocalDate now = LocalDate.now();
+            DayOfWeek dayOfWeek = now.getDayOfWeek();
+            System.out.println(dayOfWeek);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -427,5 +431,26 @@ public class TestApplicationTests {
 
     }
 
+    @Test
+    public void test1(){
+        TrafficRestriction trafficRestriction = new TrafficRestriction();
+        Integer id = trafficRestriction.getId();
+        System.out.println(id);
+
+        System.out.println(trafficRestriction.getFridayRestrictedNum());
+    }
+
+    /****************************************************************
+     * @description: 找出中文
+     * @author: wg
+     * @time: 2021/1/7 17:49
+     ****************************************************************/
+    @Test
+    public void getChinese(){
+
+        String s= "0不限行";
+
+
+    }
 
 }

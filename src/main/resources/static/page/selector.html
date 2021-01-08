@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>selector</title>
+    <script src="../js/common-js.js"></script>
+    <script src="../js/jquery-confirm-334/jquery-confirm.min.js"></script>
+    <link rel="stylesheet" href="../js/jquery-confirm-334/jquery-confirm.min.css">
+</head>
+<body>
+<div>
+    <label>限行日期: </label>
+    <input type="date" id="trafficRestrictionDateStart" name="trafficRestrictionDateStart">
+    <span> -- </span>
+    <input type="date" id="trafficRestrictionDateEnd" name="trafficRestrictionDateEnd">
+</div>
+<div class="form-group fridayRestrictedNum restriction-date">
+    <label for="friday">周五:</label>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <select id="" style="width: 75px;">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="不限行">不限行</option>
+    </select>
+    <span>&nbsp;和&nbsp;</span>
+    <select id="" style="width: 75px;">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="不限行">不限行</option>
+    </select>
+</div>
+
+<div class="form-group saturdayRestrictedNum restriction-date">
+    <label for="saturday">周六:</label>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <select id="" style="width: 75px;">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="不限行">不限行</option>
+    </select>
+    <span>&nbsp;和&nbsp;</span>
+    <select id="" style="width: 75px;">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="不限行">不限行</option>
+    </select>
+</div>
+<div class="form-group sunday_restricted_num restrictionDate">
+    <label>周日:</label>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <select id="sunday-1" style="width: 75px;">
+        <option value="no">不限行</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+    <span>&nbsp;和&nbsp;</span>
+    <select id="sunday-2" style="width: 75px;">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="no">不限行</option>
+        <option value="0">0</option>
+    </select>
+</div>
+
+<button onclick="submit_modal()">submit</button>
+
+<button onclick="ergodicObj()">遍历obj 的所有属性</button>
+
+<button onclick="getChinese()">字符串中是否有中文</button>
+<div>
+    <button onclick="checkRepeat()">对象中值重复问题</button>
+</div>
+
+<script>
+    // var val = $('.sunday_restricted_num select:first').val()
+    var val = $('.sunday_restricted_num select:eq(1)').val()
+    console.log(val)
+
+    // 提交
+    function submit_modal() {
+
+        var obj = {};
+        obj.trafficRestrictionDateStart = $('#trafficRestrictionDateStart').val()
+        obj.trafficRestrictionDateEnd = $('#trafficRestrictionDateEnd').val()
+        if (obj.trafficRestrictionDateEnd < obj.trafficRestrictionDateStart) {
+            return $.dialog("终止时间小于 起始时间, 请重输")
+        }
+    }
+
+    // 遍历对象
+    function ergodicObj() {
+        var obj = {};
+        obj.trafficRestrictionDateStart = $('#trafficRestrictionDateStart').val()
+        obj.trafficRestrictionDateEnd = $('#trafficRestrictionDateEnd').val()
+
+        for (var item in obj) {
+            console.log(item)
+            if (item=='trafficRestrictionDateStart') {
+                console.log('----')
+            }
+            console.log(obj[item])
+        }
+
+        var restrictionDate = $('.restriction-date');
+        console.log('restrictionDate:  ', restrictionDate.find('select').eq(0))
+        console.log('restrictionDate:  ', restrictionDate.length,restrictionDate.eq(0).find('select').eq(0).val())
+
+        console.log(Object.keys(obj))
+        var objkeys= Object.keys(obj)
+        for (let i = 0; i < objkeys.length; i++) {
+            var objkey = objkeys[i];
+             console.log("---- ",obj[objkey])
+        }
+    }
+
+    function getChinese() {
+        var reg = /.*[\u4e00-\u9fa5]+.*$/
+        var obj = {}
+        obj.name = 0 + '' + '不限行'
+        obj.com = '不限行' + '' + 0
+
+        // console.log(obj)
+
+        for (var item in obj) {
+            if (reg.test(obj[item])) {
+                console.log("包含中文")
+                obj[item] = '收到112323';
+            }
+        }
+
+        // console.log(obj)
+    }
+
+    // 对象中值重复问题
+    function checkRepeat() {
+
+        var obj = {};
+
+        obj.name = '123';
+        obj.home = '123';
+        obj.sex = '23';
+
+        var arr = []
+
+        for (var item in obj) {
+            arr.push(obj[item])
+        }
+        console.log(arr)
+
+        var se= Array.from(new Set(arr))
+
+        console.log(se)
+
+    }
+
+</script>
+</body>
+</html>

@@ -1,63 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap/337/bootstrap.css">
     <script src="../js/jquery-1.9.1.js"></script>
+    <script src="../bootstrap/337/bootstrap.js"></script>
+    <script src="../js/react-17.0.1/react.development.js"></script>
+    <script src="../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../js/babel/babel-7.0.0"></script>
 </head>
 <body>
-<div id="div">
-    123123
-</div>
-<script>
-    $().ready(f());
+<div class="container">
+    <div id="div">
+        123123
+    </div>
+    <script>
+        $().ready(f());
 
-    function f() {
-        var arr = ["展昭", "小黑", "二哈", "张无忌", "张三丰", "123", "小323", "二23哈", "张232无忌", "2323三丰"];
-        var divId = "div"
+        function f() {
+            var arr = ["展昭", "小黑", "二哈", "张无忌", "张三丰", "123", "小323", "二23哈", "张232无忌", "2323三丰"];
+            var divId = "div"
 
-        generateTable(arr, divId);
-    }
+            generateTable(arr, divId);
+        }
 
-    function generateTable(arr, divId) {
+        function generateTable(arr, divId) {
 
-        var txt = "<table id='123'>";
+            var txt = "<table id='123'>";
 
-        var newArr = [];
-        var tempArr = [];
+            var newArr = [];
+            var tempArr = [];
 
-        for (var i = 0; i < arr.length; i++) {
-            // 临时数据来存储每行的 3个 td 的值
-            tempArr.push(arr[i]);
+            for (var i = 0; i < arr.length; i++) {
+                // 临时数据来存储每行的 3个 td 的值
+                tempArr.push(arr[i]);
 
-            // 倍数行满足条件 除以3 余数为0
-            if ((i + 1) % 3 == 0 || i == arr.length - 1) {
-                if (tempArr.length < 3) {
-                    for (var j = 0; j < 3 - tempArr.length; j++) {
+                // 倍数行满足条件 除以3 余数为0
+                if ((i + 1) % 3 == 0 || i == arr.length - 1) {
+                    if (tempArr.length < 3) {
+                        for (var j = 0; j < 3 - tempArr.length; j++) {
+                        }
                     }
+                    // 把每行数据存储起来, 形成二维数组
+                    newArr.push(tempArr);
+                    tempArr = [];
                 }
-                // 把每行数据存储起来, 形成二维数组
-                newArr.push(tempArr);
-                tempArr = [];
             }
-        }
-        console.log(newArr)
-        for (var i = 0; i < newArr.length; i++) {
-            tempArr = newArr[i];
-            txt += "<tr>";
-            for (var j = 0; j < tempArr.length; j++) {
-                txt += "<td bgcolor='#ff7f50'>" + tempArr[j] + "</td>";
+            console.log(newArr)
+            for (var i = 0; i < newArr.length; i++) {
+                tempArr = newArr[i];
+                txt += "<tr>";
+                for (var j = 0; j < tempArr.length; j++) {
+                    txt += "<td bgcolor='#ff7f50'>" + tempArr[j] + "</td>";
+                }
+                txt += "</tr>";
             }
-            txt += "</tr>";
+
+            console.log(txt)
+            txt += "</table>";
+
+            document.getElementById(divId).innerHTML = txt;
+            // $("#div").html(txt);
         }
 
-        console.log(txt)
-        txt += "</table>";
+    </script>
 
-        document.getElementById(divId).innerHTML = txt;
-        // $("#div").html(txt);
+    <div>
+        <div id="div1">
+            123
+        </div>
+
+        <div id="div2">
+            3333
+        </div>
+
+        <div id="div3">
+            44123
+        </div>
+    </div>
+
+    <style>
+        #div1 {
+            float: left;
+            border-color: #2aabd2;
+            border-style: solid;
+            margin-left: 10px;
+        }
+
+        #div2 {
+            float: left;
+            border-color: #2aabd2;
+            border-style: solid;
+            margin-left: 10px;
+        }
+
+        #div3 {
+            float: left;
+            border-color: #2aabd2;
+            border-style: solid;
+            margin-left: 10px;
+        }
+    </style>
+
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="btn-group">
+                <button class="btn btn-default">Action</button>
+                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <span>1</span>
+                    </li>
+                    <li>
+                        <span>2</span>
+                    </li>
+                    <li class="divider">
+                        3
+                    </li>
+                    <li>
+                        4
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 column">
+                <select style="width: 40px;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="col-md-2 column">
+                <button onclick="displaySelectVal()">显示select的值</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" id="wg-select">
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function displaySelectVal() {
+        var val = $('select').val()
+        console.log(val)
     }
 
+</script>
+
+<script type="text/babel">
+    class MySelect extends React.Component {
+
+        render() {
+            return (
+                <select id="" style="width: 40px;">
+                    <option value="no">不限行</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            )
+        }
+
+    }
+
+    ReactDOM.render(<MySelect/>,document.getElementById('wg-select'))
 </script>
 
 </body>
