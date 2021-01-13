@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>mouse</title>
+
+    <script src="../js/common-css.js"></script>
+    <script src="../js/common-js.js"></script>
 </head>
 <body>
 
@@ -25,7 +28,7 @@
     window.onload = function () {
         let menu = document.querySelector('.lists'),
             myBox = document.getElementById('myBox');
-        myBox.addEventListener('contextmenu', function(event){
+        myBox.addEventListener('contextmenu', function (event) {
             // 阻止浏览器鼠标右击事件。
             event.preventDefault();
             menu.style.visibility = 'visible';
@@ -95,5 +98,159 @@
     }
 </script>
 
+<div class="container">
+    <div class="row">
+        <div id="div-img" class="col-md-10 col-md-offset-1" style="width: 500px;height: 300px;">
+            <img id="img-wg" src="../img/qq/1%20(1).jpg" alt="1"
+                 onload="this.width=$('#div-img').width();this.height=$('#div-img').height();">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <button onclick="stopAutoPlay()">停止</button>
+            <button onclick="autoMove()">点击正放</button>
+            <button onclick="autoMoveDesc()">运行倒放</button>
+            <button onclick="autoPlay()">全自动运行</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // $(document).on('mousewheel DOMMouseScroll', onMouseScroll);
+    var i = 1;
+
+    function onMouseScroll(e) {
+        e.preventDefault();
+        var wheel = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        var delta = Math.max(-1, Math.min(1, wheel));
+
+        if (i > 42) {
+            i = 42;
+        }
+
+        if (i < 1) {
+            i = 1;
+        }
+
+        if (delta < 0) {//向下滚动
+            console.log('向下滚动', i);
+            $('#img-wg').attr('src', '../img/qq/1%20(' + i + ').jpg')
+            i++;
+        } else {//向上滚动
+            console.log('向上滚动');
+            $('#img-wg').attr('src', '../img/qq/1%20(' + i + ').jpg')
+            i--;
+        }
+
+    }
+
+    var j = 1;
+    var m = 20
+
+    // 下面的 代码 会导致 -> 越来越快
+    // var intervalTime = 100;
+    // var interval = setInterval(autoMove, intervalTime)
+    // var intervalDesc
+    //
+    // function autoMove() {
+    //
+    //     console.log(j, '---$$##@!!!--')
+    //     j++;
+    //     $('#img-wg').attr('src', '../img/qq/1%20(' + j + ').jpg')
+    //     if (j == 20) {
+    //         clearInterval(interval)
+    //         intervalTime = 100;
+    //         j = 1;
+    //         intervalDesc = setInterval(autoMoveDesc, intervalTime)
+    //     }
+    // }
+    //
+    // function autoMoveDesc() {
+    //     intervalTime = 100;
+    //     m--;
+    //     $('#img-wg').attr('src', '../img/qq/1%20(' + m + ').jpg')
+    //     if (m == 1) {
+    //         clearInterval(intervalDesc)
+    //         intervalTime = 100;
+    //         m = 20;
+    //         setInterval(autoMove, intervalTime)
+    //     }
+    // }
+
+    var end = ""
+    var beginTime = 0;
+    var endTime = 0;
+    var autoMoveBeginTime
+    var autoMoveEndTime
+
+    beginTime = new Date().getTime()
+
+    function autoMove() {
+        autoMoveBeginTime = beginTime;
+        clearTimeout(end)
+        j++;
+        $('#img-wg').attr('src', '../img/qq/1%20(' + j + ').jpg')
+        console.log(j, '(((((((((#######)))))))))')
+        if (j < 20) {
+            end = setTimeout(autoMove, 100);
+        }
+        if (j == 20) {
+            j = 1;
+            endTime = new Date().getTime()
+            autoMoveEndTime = endTime;
+            console.log(autoMoveBeginTime, autoMoveEndTime, autoMoveBeginTime - autoMoveEndTime)
+        }
+
+    }
+
+
+    function autoMoveDesc() {
+        clearTimeout(end)
+        m--;
+        $('#img-wg').attr('src', '../img/qq/1%20(' + m + ').jpg')
+        console.log(j, '^^^^^^^^^')
+        if (m > 1) {
+            end = setTimeout(autoMoveDesc, 100);
+        }
+
+        if (m == 1) {
+            m = 20;
+        }
+        console.log($('#img-wg').attr('src'))
+    }
+
+    function resetVar() {
+        j = 1;
+        m = 20
+        autoMove()
+    }
+
+    var endAutoPlay = ''
+    var endAutoMoveDesc = ''
+
+    function autoPlay() {
+        beginTime = new Date().getTime();
+
+        autoMove();
+
+        // endTime = new Date().getTime();
+        console.log('endTime-beginTime', beginTime, endTime, endTime - beginTime)
+
+        endAutoMoveDesc = setTimeout(autoMoveDesc, 1900);
+
+        endAutoPlay = setTimeout(autoPlay, 3900);
+    }
+
+    function stopAutoPlay() {
+        clearTimeout(end)
+        clearTimeout(endAutoMoveDesc)
+        clearTimeout(endAutoPlay);
+        console.log(j, m)
+
+    }
+
+</script>
 </body>
 </html>
