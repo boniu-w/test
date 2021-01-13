@@ -121,6 +121,7 @@
     // $(document).on('mousewheel DOMMouseScroll', onMouseScroll);
     var i = 1;
 
+    // 鼠标滚轮 控制图片显示
     function onMouseScroll(e) {
         e.preventDefault();
         var wheel = e.originalEvent.wheelDelta || -e.originalEvent.detail;
@@ -180,15 +181,17 @@
     // }
 
     var end = ""
+    var endAutoPlay = ''
+    var endAutoMoveDesc = ''
     var beginTime = 0;
     var endTime = 0;
-    var autoMoveBeginTime
-    var autoMoveEndTime
-
-    beginTime = new Date().getTime()
+    var timing = 0;
+    var ascTiming
 
     function autoMove() {
-        autoMoveBeginTime = beginTime;
+        if (j == 1) {
+            beginTime = new Date().getTime()
+        }
         clearTimeout(end)
         j++;
         $('#img-wg').attr('src', '../img/qq/1%20(' + j + ').jpg')
@@ -199,24 +202,30 @@
         if (j == 20) {
             j = 1;
             endTime = new Date().getTime()
-            autoMoveEndTime = endTime;
-            console.log(autoMoveBeginTime, autoMoveEndTime, autoMoveBeginTime - autoMoveEndTime)
+            timing = endTime - beginTime;
+            console.log('正放时长 endTime-beginTime', timing)
         }
 
     }
 
 
     function autoMoveDesc() {
+        if (m == 20) {
+            beginTime = new Date().getTime()
+        }
         clearTimeout(end)
         m--;
         $('#img-wg').attr('src', '../img/qq/1%20(' + m + ').jpg')
-        console.log(j, '^^^^^^^^^')
+        // console.log(j, '^^^^^^^^^')
         if (m > 1) {
             end = setTimeout(autoMoveDesc, 100);
         }
 
         if (m == 1) {
             m = 20;
+            endTime = new Date().getTime()
+            timing = endTime - beginTime;
+            console.log('倒放时长 endTime-beginTime', timing)
         }
         console.log($('#img-wg').attr('src'))
     }
@@ -227,20 +236,20 @@
         autoMove()
     }
 
-    var endAutoPlay = ''
-    var endAutoMoveDesc = ''
 
     function autoPlay() {
-        beginTime = new Date().getTime();
 
         autoMove();
 
-        // endTime = new Date().getTime();
-        console.log('endTime-beginTime', beginTime, endTime, endTime - beginTime)
+        console.log('timing111111111')
 
         endAutoMoveDesc = setTimeout(autoMoveDesc, 1900);
 
-        endAutoPlay = setTimeout(autoPlay, 3900);
+        console.log('timing2222222222')
+
+        endAutoPlay = setTimeout(autoPlay, 3800);
+
+        console.log('timing333333333333')
     }
 
     function stopAutoPlay() {
