@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>mouse</title>
+
+    <script src="../js/common-css.js"></script>
+    <script src="../js/common-js.js"></script>
 </head>
 <body>
 
@@ -25,7 +28,7 @@
     window.onload = function () {
         let menu = document.querySelector('.lists'),
             myBox = document.getElementById('myBox');
-        myBox.addEventListener('contextmenu', function(event){
+        myBox.addEventListener('contextmenu', function (event) {
             // 阻止浏览器鼠标右击事件。
             event.preventDefault();
             menu.style.visibility = 'visible';
@@ -95,5 +98,168 @@
     }
 </script>
 
+<div class="container">
+    <div class="row">
+        <div id="div-img" class="col-md-10 col-md-offset-1" style="width: 500px;height: 300px;">
+            <img id="img-wg" src="../img/qq/1%20(1).jpg" alt="1"
+                 onload="this.width=$('#div-img').width();this.height=$('#div-img').height();">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <button onclick="stopAutoPlay()">停止</button>
+            <button onclick="autoMove()">点击正放</button>
+            <button onclick="autoMoveDesc()">运行倒放</button>
+            <button onclick="autoPlay()">全自动运行</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // $(document).on('mousewheel DOMMouseScroll', onMouseScroll);
+    var i = 1;
+
+    // 鼠标滚轮 控制图片显示
+    function onMouseScroll(e) {
+        e.preventDefault();
+        var wheel = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+        var delta = Math.max(-1, Math.min(1, wheel));
+
+        if (i > 42) {
+            i = 42;
+        }
+
+        if (i < 1) {
+            i = 1;
+        }
+
+        if (delta < 0) {//向下滚动
+            console.log('向下滚动', i);
+            $('#img-wg').attr('src', '../img/qq/1%20(' + i + ').jpg')
+            i++;
+        } else {//向上滚动
+            console.log('向上滚动');
+            $('#img-wg').attr('src', '../img/qq/1%20(' + i + ').jpg')
+            i--;
+        }
+
+    }
+
+    var j = 1;
+    var m = 20
+
+    // 下面的 代码 会导致 -> 越来越快
+    // var intervalTime = 100;
+    // var interval = setInterval(autoMove, intervalTime)
+    // var intervalDesc
+    //
+    // function autoMove() {
+    //
+    //     console.log(j, '---$$##@!!!--')
+    //     j++;
+    //     $('#img-wg').attr('src', '../img/qq/1%20(' + j + ').jpg')
+    //     if (j == 20) {
+    //         clearInterval(interval)
+    //         intervalTime = 100;
+    //         j = 1;
+    //         intervalDesc = setInterval(autoMoveDesc, intervalTime)
+    //     }
+    // }
+    //
+    // function autoMoveDesc() {
+    //     intervalTime = 100;
+    //     m--;
+    //     $('#img-wg').attr('src', '../img/qq/1%20(' + m + ').jpg')
+    //     if (m == 1) {
+    //         clearInterval(intervalDesc)
+    //         intervalTime = 100;
+    //         m = 20;
+    //         setInterval(autoMove, intervalTime)
+    //     }
+    // }
+
+    var end = ""
+    var endAutoPlay = ''
+    var endAutoMoveDesc = ''
+    var beginTime = 0;
+    var endTime = 0;
+    var timing = 0;
+    var ascTiming
+
+    function autoMove() {
+        if (j == 1) {
+            beginTime = new Date().getTime()
+        }
+        clearTimeout(end)
+        j++;
+        $('#img-wg').attr('src', '../img/qq/1%20(' + j + ').jpg')
+        console.log(j, '(((((((((#######)))))))))')
+        if (j < 20) {
+            end = setTimeout(autoMove, 100);
+        }
+        if (j == 20) {
+            j = 1;
+            endTime = new Date().getTime()
+            timing = endTime - beginTime;
+            console.log('正放时长 endTime-beginTime', timing)
+        }
+
+    }
+
+
+    function autoMoveDesc() {
+        if (m == 20) {
+            beginTime = new Date().getTime()
+        }
+        clearTimeout(end)
+        m--;
+        $('#img-wg').attr('src', '../img/qq/1%20(' + m + ').jpg')
+        // console.log(j, '^^^^^^^^^')
+        if (m > 1) {
+            end = setTimeout(autoMoveDesc, 100);
+        }
+
+        if (m == 1) {
+            m = 20;
+            endTime = new Date().getTime()
+            timing = endTime - beginTime;
+            console.log('倒放时长 endTime-beginTime', timing)
+        }
+        console.log($('#img-wg').attr('src'))
+    }
+
+    function resetVar() {
+        j = 1;
+        m = 20
+        autoMove()
+    }
+
+
+    function autoPlay() {
+
+        autoMove();
+
+        console.log('timing111111111')
+
+        endAutoMoveDesc = setTimeout(autoMoveDesc, 1900);
+
+        console.log('timing2222222222')
+
+        endAutoPlay = setTimeout(autoPlay, 3800);
+
+        console.log('timing333333333333')
+    }
+
+    function stopAutoPlay() {
+        clearTimeout(end)
+        clearTimeout(endAutoMoveDesc)
+        clearTimeout(endAutoPlay);
+        console.log(j, m)
+
+    }
+
+</script>
 </body>
 </html>
