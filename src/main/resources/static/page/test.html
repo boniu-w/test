@@ -8,7 +8,7 @@
     <!--兼容模式-->
     <meta name="renderer" content="ie-comp">
 
-    <script src="http://localhost:33333/js/common.js"></script>
+    <script src="http://localhost:33333/js/common-js.js"></script>
 </head>
 
 <body>
@@ -210,6 +210,112 @@
 
 </script>
 
+<div>
+    <button onclick="testReduce()">测试reduce函数</button>
+    <button onclick="getRealPath()">获取当前网页地址</button>
+</div>
+
+<script>
+    // 合并数组
+    function testReduce() {
+        var a1 = [1, 2, 3, 4, 5]
+        var a2 = ['sdf', 'sdf', 'qwe', 'rty', 'zxc']
+
+        var obj = a1.reduce(function (res, value, index) {
+            res[a2[index]] = value;
+            return res;
+        }, {})
+
+        console.log(obj, typeof obj)
+
+        obj = a2.reduce(function (res, value, index) {
+            res[a1[index]] = value;
+            return res;
+        }, {})
+
+        console.log(obj, typeof obj)
+
+    }
+
+
+    function getRealPath() {
+        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+        var curWwwPath = window.document.location.href;
+
+        console.log(curWwwPath)
+        //获取主机地址之后的目录，如： myproj/view/my.jsp
+        var pathName = window.document.location.pathname;
+
+        console.log(pathName)
+
+        var pos = curWwwPath.indexOf(pathName);
+
+        console.log(pos)
+        //获取主机地址，如： http://localhost:8083
+        var localhostPaht = curWwwPath.substring(0, pos);
+
+        console.log(localhostPaht)
+        //获取带"/"的项目名，如：/myproj
+        var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+
+        console.log(projectName)
+        //得到了 http://localhost:8083/myproj
+        var realPath = localhostPaht + projectName;
+        console.log(realPath);
+    }
+</script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <button onclick="getChildPage()">测试jquery 子页面</button>
+        </div>
+    </div>
+    <div class="row" id="childPage">
+
+    </div>
+
+    <script>
+        function getChildPage() {
+
+            var data = {
+                name: 'xiaohua',
+                age: 12
+            }
+            $('#childPage').load('mouse.html', data, function (response, mes, xhr) {
+                console.log('-------- ')
+            })
+        }
+    </script>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <button>测试this</button>
+        </div>
+    </div>
+
+    <script>
+        function foo() {
+            console.log('&&&&&&&   ',this.a, this)
+        }
+
+        var a = 1
+        foo() // window.a
+
+        const obj = {
+            a: 2,
+            foo: foo
+        }
+        obj.foo() // 谁调用了函数，谁就是 this，所以在这个场景下 foo 函数中的 this 就是 obj 对象
+
+        const c = new foo()
+
+    </script>
+
+
+</div>
 
 </body>
 

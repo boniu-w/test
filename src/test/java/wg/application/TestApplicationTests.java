@@ -1,6 +1,9 @@
 package wg.application;
 
 import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.entity.TrafficRestriction;
@@ -391,8 +394,8 @@ public class TestApplicationTests {
 
         String s = "杨培新,,,,,齐跃,刘绍偈,孟令皓,张楷婕,鞠伟,王淼,,刘瑶,李敏,";
 
-        System.out.println(s.replace(","," "));
-        System.out.println(s.replace(",",""));
+        System.out.println(s.replace(",", " "));
+        System.out.println(s.replace(",", ""));
 
 
         String[] members = s.split(",");
@@ -412,7 +415,7 @@ public class TestApplicationTests {
         /********************第二种情况*************************************/
         String me = "王  刚";
 
-        System.out.println(me.replace(" ",""));
+        System.out.println(me.replace(" ", ""));
         StringBuilder builder = new StringBuilder();
         char[] chars = me.toCharArray();
         for (int i = 0; i < chars.length; i++) {
@@ -425,14 +428,14 @@ public class TestApplicationTests {
 
         System.out.println(builder.toString());
 
-        int a=0;
-        String as="0";
+        int a = 0;
+        String as = "0";
         System.out.println(as.equals(a));
 
     }
 
     @Test
-    public void test1(){
+    public void test1() {
         TrafficRestriction trafficRestriction = new TrafficRestriction();
         Integer id = trafficRestriction.getId();
         System.out.println(id);
@@ -446,11 +449,55 @@ public class TestApplicationTests {
      * @time: 2021/1/7 17:49
      ****************************************************************/
     @Test
-    public void getChinese(){
+    public void getChinese() {
 
-        String s= "0不限行";
+        String s = "0不限行";
 
 
     }
 
+
+    /****************************************************************
+     * @description: json对象数组
+     * @author: wg
+     * @time: 2021/1/20 11:25
+     ****************************************************************/
+    @Test
+    public void testJsonObject() {
+        //json字符串
+        String jsondata = "{\"contend\":[{\"bid\":\"22\",\"carid\":\"0\"},{\"bid\":\"23\",\"carid\":\"0\"}],\"result\":100,\"total\":2}";
+        JSONObject jsonObject = JSON.parseObject(jsondata);
+        //map对象
+        Map<String, Object> data = new HashMap<>();
+        //循环转换
+        Iterator it = jsonObject.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, Object> entry = (Map.Entry<String, Object>) it.next();
+            data.put(entry.getKey(), entry.getValue());
+        }
+        System.out.println("map对象:" + data.toString());
+
+        Object contend = data.get("contend");
+        System.out.println(contend);
+
+        System.out.println();
+
+        /************ -> 下面的简洁  ************/
+
+        HashMap<String, String> hashMap = new HashMap<>();
+
+        JSONArray ss = jsonObject.getJSONArray("contend");
+        if (ss != null) {
+            for (int i = 0; i < ss.size(); i++) {
+                JSONObject jsonObject1 = ss.getJSONObject(i);
+                String k = jsonObject1.getString("bid");
+                String v = jsonObject1.getString("carid");
+                hashMap.put(k, v);
+            }
+
+        }
+
+        System.out.println(hashMap);
+
+    }
 }
