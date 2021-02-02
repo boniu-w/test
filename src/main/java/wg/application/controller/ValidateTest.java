@@ -1,7 +1,9 @@
 package wg.application.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import wg.application.entity.Student;
 import wg.application.vo.Result;
@@ -10,6 +12,7 @@ import wg.application.vo.ResultData;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Map;
 
 /*************************************************************
@@ -30,7 +33,7 @@ public class ValidateTest {
      ****************************************************************/
     @RequestMapping(value = "/validate")
     @ResponseBody
-    public ResultData validate(Map map, HttpServletRequest request,Student student) {
+    public ResultData validate(Map map, HttpServletRequest request, Student student) {
         System.out.println("student -->>> " + student);
         System.out.println("map --->>>   " + map);
         Enumeration<String> parameterNames = request.getParameterNames();
@@ -39,22 +42,40 @@ public class ValidateTest {
             System.out.println("parameterNames  -->>>   " + s);
         }
 
-        return ResultData.build().data("student -> "+student);
+        return ResultData.build().data("student -> " + student);
     }
 
 
-    @RequestMapping(value = "/validatePost",method = RequestMethod.POST)
+    @RequestMapping(value = "/validatePost", method = RequestMethod.POST)
     @ResponseBody
-    public ResultData validatePost(Map map, HttpServletRequest request,Student student) {
+    public ResultData validatePost(Map map,
+                                   HttpServletRequest request,
+                                   Student student,
+                                   Model model) {
+        System.out.println("model -> " + model);
+        //System.out.println("jsonObject -> "+jsonObject); // 参数类型不匹配异常
         System.out.println("student -->>> " + student);
         System.out.println("map --->>>   " + map);
+
+        String sex = request.getParameter("sex");
+        System.out.println("sex -> "+sex);
+
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        Iterator<Map.Entry<String, String[]>> iterator = parameterMap.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, String[]> next = iterator.next();
+            String key = next.getKey();
+            System.out.println(key);
+        }
+
+
         Enumeration<String> parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             String s = parameterNames.nextElement();
             System.out.println("parameterNames  ++-->>>   " + s);
         }
 
-        return ResultData.build().data("student: "+student);
+        return ResultData.build().data("student: " + student);
     }
 
     /****************************************************************

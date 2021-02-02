@@ -66,6 +66,8 @@
         console.log(arr == undefined);
     }
 
+
+    // 页面初始化, 光标位置
     function hash() {
         // window.location.hash = "searchInput";
         $("#searchInput").focus();
@@ -298,7 +300,7 @@
 
     <script>
         function foo() {
-            console.log('&&&&&&&   ',this.a, this)
+            console.log('&&&&&&&   ', this.a, this)
         }
 
         var a = 1
@@ -314,6 +316,34 @@
 
     </script>
 
+    <div class="row" style="height: 1000px;">
+        <div id="anchor" class="column col-md-12" >
+            anchor
+        </div>
+    </div>
+    <div class="row">
+        <div class="column col-md-12">
+            <a href="#anchor">回到锚点处</a>
+        </div>
+    </div>
+
+    <div class="row" style="height:2000px;">
+        <button id="test" style="position:fixed;right:0;bottom:0">回到顶部 scrollTop 属性</button>
+        <script>
+            test.onclick = function () {
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+            }
+        </script>
+    </div>
+
+    <div class="row" style="height:2000px;">
+        <button id="test1" style="position:fixed;right:0;bottom:30px">回到顶部 scrollTo()方法</button>
+        <script>
+            test1.onclick = function () {
+                scrollTo(0, 0);
+            }
+        </script>
+    </div>
 
 </div>
 

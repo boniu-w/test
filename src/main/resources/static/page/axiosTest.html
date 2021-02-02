@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>axiosTest</title>
-    <script src="http://localhost:33333/js/common.js"></script>
+    <script src="http://localhost:33333/js/common-js.js"></script>
 
 </head>
 <body>
@@ -12,9 +12,6 @@
 </form>
 
 <script>
-
-
-
     function axiosFormDataTest() {
         let formData = new FormData();
         formData["birthday"] = "2020-10-2";
@@ -89,16 +86,21 @@
         formData["birthday"] = "2020-10-2";
         formData["name"] = "wg"
         formData["age"] = 12;
+        formData.append("sex",1);
+        formData.append("sex",0);
         console.log("formData -> ", formData)
 
         $.ajax({
             url: "http://127.0.0.1:33333/validateTestController/validatePost",
-            method: "post",
+            type: "post",
             // data: {name: "wg", age: 12},
             data: formData,
             // cache: false,
             processData: false,  // 告诉jQuery不要去处理发送的数据 processData 可不得了,
             contentType: false,  // 告诉jQuery不要去设置Content-Type请求头
+            // headers: {
+            //     "Content-Type": "application/x-www-form-urlencoded"
+            // },
             success: function (res) {
                 console.log("ajax -> ", res)
             },
