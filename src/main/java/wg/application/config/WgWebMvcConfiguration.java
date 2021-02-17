@@ -22,11 +22,19 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
           .addResourceLocations("classpath:/templates/")
           .addResourceLocations("classpath:/templates/**")
           .addResourceLocations("classpath:/static/bootstrap/337/**")
+          .addResourceLocations("classpath:/public/**")
         ;
 
 
-        super.addResourceHandlers(registry);
+        //super.addResourceHandlers(registry);
     }
+
+    //@Override
+    //public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    //    registry.addResourceHandler("/**")
+    //      .addResourceLocations("file:" + upLoadPath + "//", "file:" + webAppPath + "//")
+    //      .addResourceLocations(staticLocations.split(","));
+    //}
 
     //@Bean
     //public TicketFilter initTicketFilter(){

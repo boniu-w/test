@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -632,6 +633,7 @@ public class Test {
         return new String[]{};
     }
 
+
     /****************************************************************
      * json 文件路径问题 classpath 应该 是项目 配置的 , 我的这个 只能在 resources下,
      * 如要修改,应该是在application.properties 文件中修改,但是 我配置了 不管用
@@ -670,6 +672,34 @@ public class Test {
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
+        return json;
+    }
+
+    /****************************************************************
+     * @description: 根据json文件位置读取json  空指针异常, classpath路径里没有wgjson这个文件夹
+     * @author: wg
+     * @time: 2021/1/28 15:22
+     ****************************************************************/
+    @RequestMapping(value = "/json/{filename}", method = RequestMethod.GET)
+    public String getJsonData(@PathVariable String filename) {
+        String jsonpath = "classpath:wg/application/wgjson/"+filename+".json";
+        return getJson(jsonpath);
+    }
+
+    public String getJson(String jsonSrc) {
+        String json = "";
+        try {
+            String jsonPath = jsonSrc.replace("classpath:", "");
+            System.out.println("jsonPath -> "+jsonPath);
+            InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(jsonSrc.replace("classpath:", ""));
+            json = IOUtils.toString(resourceAsStream,"UTF-8");
+
+            return json;
+
+        } catch (IOException e) {
+            log.error(e.getMessage(),e);
+        }
+
         return json;
     }
 
@@ -1376,7 +1406,7 @@ public class Test {
         double sqrt = Math.sqrt(25d);
 
         double sqrt1 = Math.sqrt(24d);
-        System.out.println("24d 开平方 : "+sqrt1);
+        System.out.println("24d 开平方 : " + sqrt1);
 
         return wg.application.vo.Result.ok(sqrt);
     }
