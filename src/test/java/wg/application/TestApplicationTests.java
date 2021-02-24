@@ -12,8 +12,7 @@ import wg.application.util.WgJsonUtil;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.*;
 import java.util.*;
 
 @SpringBootTest
@@ -498,6 +497,26 @@ public class TestApplicationTests {
         }
 
         System.out.println(hashMap);
+
+    }
+
+    /****************************************************************
+     * @description: localTime localDateTime localDate
+     * @author: wg
+     * @time: 2021/2/24 10:00
+     ****************************************************************/
+    @Test
+    public void localTimeTest() {
+        LocalTime now = LocalTime.now();
+        System.out.println(now);
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(localDateTime);
+        System.out.println(localDateTime.plusHours(32L));
+
+        LocalDateTime localDateTime1 = new Date(1469191785768L).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        System.out.println(localDateTime1);
+
 
     }
 }
