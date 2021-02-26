@@ -13,9 +13,10 @@ public class SyncTest implements Runnable {
 
     private /*volatile*/ int count = 100;
     private Object o = new Object();
+    private Object obj = null;
 
     public void m() {
-        synchronized (o) {
+        synchronized (obj) {
             count--;
             System.out.println(Thread.currentThread().getName() + " count= " + count);
         }
@@ -49,7 +50,7 @@ public class SyncTest implements Runnable {
         //System.out.println(t.count);
 
         for (int i = 0; i < 100; i++) {
-            new Thread(t, "t" + i).start();
+            new Thread(t::m1, "t" + i).start();
         }
     }
 }

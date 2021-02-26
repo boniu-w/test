@@ -21,17 +21,16 @@ public class DclSingleton {
         if (INSTANCE == null) {
             synchronized (DclSingleton.class) {
                 if (INSTANCE == null) {
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    //try {
+                    //    Thread.sleep(1);
+                    //} catch (InterruptedException e) {
+                    //    e.printStackTrace();
+                    //}
 
                     INSTANCE = new DclSingleton();
                 }
             }
         }
-
 
         return INSTANCE;
     }
@@ -43,7 +42,7 @@ public class DclSingleton {
     public static void main(String[] args) {
         for (int i = 0; i < 100_0000L; i++) {
             DclSingleton instance = DclSingleton.getInstance();
-            System.out.println(instance.hashCode());
+            System.out.print(instance.hashCode()+" ");
         }
     }
 

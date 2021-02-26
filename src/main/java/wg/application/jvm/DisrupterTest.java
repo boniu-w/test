@@ -6,7 +6,7 @@ package wg.application.jvm;
  * @date 2021/2/19 11:20
  * @version
  * @Copyright
- * @discription cpu的乱序执行
+ * @discription cpu的乱序执行, 指令重排序验证
  *************************************************************/
 public class DisrupterTest {
 
