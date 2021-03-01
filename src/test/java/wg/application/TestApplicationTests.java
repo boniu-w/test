@@ -516,7 +516,19 @@ public class TestApplicationTests {
 
         LocalDateTime localDateTime1 = new Date(1469191785768L).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         System.out.println(localDateTime1);
-
-
     }
+
+    @Test
+    public void app() {
+        int i = 1 << 24;
+        System.out.println(i);
+
+        int maxValue = Integer.MAX_VALUE;
+        System.out.println(maxValue);
+
+        int solt = i & maxValue;
+        System.out.println(solt);
+    }
+
+
 }
