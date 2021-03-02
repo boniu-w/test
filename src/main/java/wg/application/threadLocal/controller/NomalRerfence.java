@@ -17,7 +17,8 @@ public class NomalRerfence {
         m = null;
         System.gc();
 
-        System.in.read();
+
+        System.out.println(System.in.read());
     }
 
 }

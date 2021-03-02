@@ -522,12 +522,17 @@ public class TestApplicationTests {
     public void app() {
         int i = 1 << 24;
         System.out.println(i);
+        System.out.println(Integer.toBinaryString(i));
 
         int maxValue = Integer.MAX_VALUE;
+        System.out.println(Integer.toBinaryString(maxValue));
         System.out.println(maxValue);
 
         int solt = i & maxValue;
         System.out.println(solt);
+
+
+
     }
 
 
