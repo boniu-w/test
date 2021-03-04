@@ -6,7 +6,7 @@ package wg.application.thread.volatile_test;
  * @date 2021/2/22 15:01
  * @version
  * @Copyright
- * @discription
+ * @discription 双重检查 单例
  *************************************************************/
 public class DclSingleton {
 

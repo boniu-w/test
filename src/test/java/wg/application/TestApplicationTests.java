@@ -170,8 +170,16 @@ public class TestApplicationTests {
         String s = Integer.toString(10, 3);
         System.out.println("任意10进制数 转化成任意进制 : " + s);
 
-        int i = 1 / 3;
+        int i = 1 % 3;
         System.out.println(i);
+
+
+        int wo = 5201314;
+        String s1 = Integer.toString(5201314, 16);
+        System.out.println(s1);
+
+        int i1 = Integer.parseInt("4f5da2", 16);
+        System.out.println(i1);
 
     }
 
@@ -530,7 +538,6 @@ public class TestApplicationTests {
 
         int solt = i & maxValue;
         System.out.println(solt);
-
 
 
     }
