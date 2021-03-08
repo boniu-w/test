@@ -86,11 +86,10 @@ public class CasController {
         System.out.println("credentials: " + credentials);
         System.out.println("name1: " + name1);
         System.out.println("principal1: " + principal1);
-        System.out.println("authorities: " );
+        System.out.println("authorities: " + authorities);
 
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(usernamePasswordAuthenticationToken);
-
 
         Authentication authentication = context.getAuthentication();
         Object principal = authentication.getPrincipal();

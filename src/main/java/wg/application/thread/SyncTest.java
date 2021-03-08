@@ -1,34 +1,56 @@
 package wg.application.thread;
 
-import org.openjdk.jol.info.ClassLayout;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.concurrent.atomic.AtomicInteger;
-
-/****************************************************
+/*************************************************************
  * @Package wg.application.thread
  * @author wg
- * @date 2021/2/17 22:02
+ * @date 2021/2/24 15:11
  * @version
  * @Copyright
- ****************************************************/
-@Controller
-@RequestMapping
-public class SyncTest {
+ * @discription
+ *************************************************************/
+public class SyncTest implements Runnable {
+
+
+    private /*volatile*/ int count = 100;
+    private Object o = new Object();
+    private Object obj = null;
+
+    public void m() {
+        synchronized (obj) {
+            count--;
+            System.out.println(Thread.currentThread().getName() + " count= " + count);
+        }
+    }
+
+    public void m1() {
+        synchronized (this) {
+            count--;
+            System.out.println(Thread.currentThread().getName() + " count= " + count);
+        }
+    }
+
+    public synchronized void m2() {
+        count--;
+        System.out.println(Thread.currentThread().getName() + " count= " + count);
+    }
+
+    @Override
+    public synchronized void run() {
+        count--;
+        System.out.println(Thread.currentThread().getName() + " count= " + count);
+    }
+
 
     public static void main(String[] args) {
-        AtomicInteger atomicInteger = new AtomicInteger();
-        int i = atomicInteger.incrementAndGet();
-        //System.out.println(i);
+        SyncTest t = new SyncTest();
 
-        Object o = new Object();
+        //t.m();
+        //t.m1();
+        //t.m2();
+        //System.out.println(t.count);
 
-        System.out.println(ClassLayout.parseInstance(o).toPrintable());
-
-        synchronized (o){
-            System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        for (int i = 0; i < 100; i++) {
+            new Thread(t::m1, "t" + i).start();
         }
-
     }
 }

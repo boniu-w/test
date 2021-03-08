@@ -12,8 +12,7 @@ import wg.application.util.WgJsonUtil;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.*;
 import java.util.*;
 
 @SpringBootTest
@@ -171,8 +170,16 @@ public class TestApplicationTests {
         String s = Integer.toString(10, 3);
         System.out.println("任意10进制数 转化成任意进制 : " + s);
 
-        int i = 1 / 3;
+        int i = 1 % 3;
         System.out.println(i);
+
+
+        int wo = 5201314;
+        String s1 = Integer.toString(5201314, 16);
+        System.out.println(s1);
+
+        int i1 = Integer.parseInt("4f5da2", 16);
+        System.out.println(i1);
 
     }
 
@@ -500,4 +507,40 @@ public class TestApplicationTests {
         System.out.println(hashMap);
 
     }
+
+    /****************************************************************
+     * @description: localTime localDateTime localDate
+     * @author: wg
+     * @time: 2021/2/24 10:00
+     ****************************************************************/
+    @Test
+    public void localTimeTest() {
+        LocalTime now = LocalTime.now();
+        System.out.println(now);
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(localDateTime);
+        System.out.println(localDateTime.plusHours(32L));
+
+        LocalDateTime localDateTime1 = new Date(1469191785768L).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        System.out.println(localDateTime1);
+    }
+
+    @Test
+    public void app() {
+        int i = 1 << 24;
+        System.out.println(i);
+        System.out.println(Integer.toBinaryString(i));
+
+        int maxValue = Integer.MAX_VALUE;
+        System.out.println(Integer.toBinaryString(maxValue));
+        System.out.println(maxValue);
+
+        int solt = i & maxValue;
+        System.out.println(solt);
+
+
+    }
+
+
 }

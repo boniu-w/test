@@ -14,6 +14,11 @@ import java.util.List;
  * @date 2020/8/6 14:05
  * @version
  * @Copyright
+ * @description
+ * 给定一组 互不相同 的单词， 找出所有不同 的索引对(i, j)，使得列表中的两个单词， words[i] + words[j] ，可拼接成回文串。
+ * 输入：["abcd","dcba","lls","s","sssll"]
+ * 输出：[[0,1],[1,0],[3,2],[2,4]]
+ * 解释：可拼接成的回文串为 ["dcbaabcd","abcddcba","slls","llssssll"]
  *************************************************************/
 @Controller
 @RequestMapping(value = "/palindromePairsSolution")
@@ -51,7 +56,7 @@ public class PalindromePairsSolution {
         //build TrieNode Tree
         for (int i = 0; i < n; i++) {
             String word = new StringBuilder(words[i]).reverse().toString();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            TrieNode cur = root;
+            TrieNode cur = root;
 
             if (isPalindrome(word.substring(0))) {
                 cur.suffixs.add(i);
