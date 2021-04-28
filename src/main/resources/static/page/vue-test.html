@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-test</title>
+</head>
+<body>
+
+<div id="app">
+    <!--此处的template标签中的内容显示并且在dom中不存在template标签-->
+    <template>
+        <div>我是vue-template</div>
+        <div>我是vue-template</div>
+    </template>
+</div>
+<!--此处的template标签中的内容在页面中不显示，但是在dom结构存在该标签及内部结构-->
+<template id="tem">
+    <div id="div1">我是html-template</div>
+    <div>我是html-template</div>
+</template>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#app",
+    });
+</script>
+
+
+</body>
+</html>

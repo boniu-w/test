@@ -25,13 +25,13 @@ public class SyncTest implements Runnable {
     public void m1() {
         synchronized (this) {
             count--;
-            System.out.println(Thread.currentThread().getName() + " count= " + count);
+            System.out.println(Thread.currentThread().getName() + " count m1= " + count);
         }
     }
 
     public synchronized void m2() {
         count--;
-        System.out.println(Thread.currentThread().getName() + " count= " + count);
+        System.out.println(Thread.currentThread().getName() + " count m2= " + count);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class SyncTest implements Runnable {
         //System.out.println(t.count);
 
         for (int i = 0; i < 100; i++) {
-            new Thread(t::m1, "t" + i).start();
+            new Thread(t::m2, "t" + i).start();
         }
     }
 }

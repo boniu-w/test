@@ -40,13 +40,14 @@
 
 只有下划线的文本框：
 <input style="border:0;border-bottom:1 solid black;background:;">
-
+</br>
 软件序列号式的输入框：
 <script for="T" event="onkeyup">
     if(value.length==3)document.all[event.srcElement.sourceIndex+1].select();
 </script>
 <input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">—<input name="T7" size="5" maxlength="3">
 
+</br>
 软件序列号式的输入框(完整版)：
 <script for="T" event="onkeyup">
     if(value.length==maxLength)document.all[event.srcElement.sourceIndex+1].focus();
@@ -61,7 +62,14 @@
 <input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">—<input name="T" size="5" maxlength="3">
 <input type="submit" name="Submit">
 
-
+<template>
+    <div>
+        <p>123</p>
+    </div>
+</template>
+<div>
+    <p>456</p>
+</div>
 
 </body>
 </html>

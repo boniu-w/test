@@ -5,24 +5,106 @@
     <meta charset="UTF-8">
     <title>react-dropdown</title>
 
+    <script src="https://cdn.bootcdn.net/ajax/libs/require.js/2.0.5/require.min.js"></script>
     <script src="../js/react-17.0.1/react.development.js"></script>
-    <script src="../js/react-17.0.1/react-dom.development.js"></script>
+    <script type="application/javascript" src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.6.2/browser.min.js"></script>
 </head>
 
 <body>
     <div id="test1">
     </div>
 
-    <script>
+    <script type="text/babel">
+        import ReactDom from '../js/react-dom/16-13/react-dom.development.min'
+
         // 1. 创建dom
         const h1 = ReactDOM.createElement("h1", { id: "myTitle" }, "hello");
 
         //2. 渲染dom
         ReactDOM.render(h1, document.getElementById("test1"))
 
-
-
     </script>
+
+<!--    <script type="text/babel">-->
+<!--        import React from "react"-->
+<!--        import ReactDom from '../js/react-dom/16-13/react-dom.development.min'-->
+
+<!--        class MyForm extends React.Component {-->
+
+<!--            constructor(props) {-->
+<!--                super(props)-->
+<!--                this.state = {-->
+<!--                    dataList: ['eat', 'drink', 'ride'],-->
+<!--                }-->
+<!--                this.addData = this.addData.bind(this)-->
+<!--            }-->
+
+<!--            addData(data) {-->
+<!--                const { dataList } = this.state-->
+<!--                // dataList.unshift(data);-->
+<!--                dataList.push(data)-->
+<!--                this.setState(dataList)-->
+<!--            }-->
+
+<!--            render() {-->
+<!--                const { dataList } = this.state-->
+<!--                return (-->
+<!--                    <div>-->
+<!--                        <div>hello MyForm</div>-->
+<!--                        <MyInput dataListLength={dataList.length} addData={this.addData} ></MyInput>-->
+<!--                        <MyUl dataList={dataList}></MyUl>-->
+<!--                    </div>-->
+<!--                )-->
+<!--            }-->
+
+<!--        }-->
+
+<!--        class MyInput extends React.Component {-->
+
+<!--            constructor(props) {-->
+<!--                super(props)-->
+<!--                this.add = this.add.bind(this)-->
+<!--            }-->
+<!--            add() {-->
+<!--                const inputText = this.inputVal.value.trim()-->
+<!--                if (!inputText) {-->
+<!--                    return-->
+<!--                }-->
+<!--                this.props.addData(inputText)-->
+<!--                this.inputVal.value = ''-->
+<!--            }-->
+
+<!--            render() {-->
+<!--                const { dataListLength } = this.props-->
+<!--                return (-->
+<!--                    <div>-->
+<!--                        <input type='text' ref={text => this.inputVal = text}></input>-->
+<!--                        <button onClick={this.add}>点 击{dataListLength + 1}</button>-->
+<!--                    </div>-->
+<!--                )-->
+<!--            }-->
+<!--        }-->
+
+<!--        class MyUl extends React.Component {-->
+
+<!--            render() {-->
+<!--                const { dataList } = this.props-->
+<!--                return (-->
+<!--                    <div>-->
+<!--                        <ul>-->
+<!--                            {dataList.map((data, index) => <li key={index}>{data}</li>)}-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                )-->
+<!--            }-->
+
+<!--        }-->
+
+<!--        ReactDOM.render(MyForm, document.getElementById("test1"))-->
+<!--        export default MyForm;-->
+
+<!--    </script>-->
+
     <style>
         #components-dropdown-demo-placement .ant-btn {
             margin-right: 8px;

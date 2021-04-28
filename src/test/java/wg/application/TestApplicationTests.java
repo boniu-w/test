@@ -58,7 +58,7 @@ public class TestApplicationTests {
 
         // 将字符串写入 文件 通过buffer流 D:\ideaprojects\test\src\main\resources\static\json
         String path = "D:\\ideaprojects\\test\\src\\main\\resources\\static\\json\\jsonData.json";
-        WgJsonUtil.jsonDataToFile2(path, jsonString);
+        WgJsonUtil.jsonDataToFileByBufferedWritter(path, jsonString);
 
     }
 

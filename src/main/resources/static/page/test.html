@@ -36,7 +36,8 @@
         <div class="col-md-3" style="margin-top: 2px;margin-bottom: 4px; height: 80%">
             <div class="row">
                 <div class="col-md-12 input-group input-mini">
-                    <input id="searchInput" type="text" class="form-control" placeholder="123 input username"
+                    <input id="searchInput" type="text" class="form-control"
+                           placeholder="123 input username"
                            aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="basic-addon2">@example.com</span>
                 </div>
@@ -218,7 +219,7 @@
 </div>
 
 <script>
-    // 合并数组
+    // 合并数组, 把两个数组合并成实体类
     function testReduce() {
         var a1 = [1, 2, 3, 4, 5]
         var a2 = ['sdf', 'sdf', 'qwe', 'rty', 'zxc']
@@ -285,9 +286,11 @@
                 name: 'xiaohua',
                 age: 12
             }
-            $('#childPage').load('mouse.html', data, function (response, mes, xhr) {
-                console.log('-------- ')
-            })
+            $('#childPage').load('mouse.html')
+
+            // $('#childPage').load('mouse.html', data, function (response, mes, xhr) {
+            //     console.log('-------- ')
+            // })
         }
     </script>
 
@@ -298,7 +301,7 @@
         </div>
     </div>
 
-    <script>
+    <script type="text/babel">
         function foo() {
             console.log('&&&&&&&   ', this.a, this)
         }
@@ -316,8 +319,9 @@
 
     </script>
 
+
     <div class="row" style="height: 1000px;">
-        <div id="anchor" class="column col-md-12" >
+        <div id="anchor" class="column col-md-12">
             anchor
         </div>
     </div>
@@ -326,6 +330,34 @@
             <a href="#anchor">回到锚点处</a>
         </div>
     </div>
+
+
+    <div>
+        <p>测试io流</p>
+
+        <button onclick="copyFile()"> click</button>
+
+    </div>
+    <script>
+
+        var fso, f;
+
+        function copyFile() {
+            if (window.ActiveXObject) {
+                console.log('copyFile---------')
+                fso = new ActiveXObject("Scripting.FileSystemObject");
+                f = fso.CreateTextFile("c://testfile-wg.txt", true);
+                f.WriteLine("This is a test.");
+                f.Close();
+                f = fso.GetFile("c://aaa//111.txt");
+                f.Copy("c://bbb//111.txt");
+            }
+            
+
+        }
+
+    </script>
+
 
     <div class="row" style="height:2000px;">
         <button id="test" style="position:fixed;right:0;bottom:0">回到顶部 scrollTop 属性</button>
@@ -344,6 +376,7 @@
             }
         </script>
     </div>
+
 
 </div>
 

@@ -14,3 +14,6 @@ spring:
         format_sql: true
     open-in-view: true
 
+  mvc:
+    static-path-pattern: /static/**
+

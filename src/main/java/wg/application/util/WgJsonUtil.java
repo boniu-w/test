@@ -67,7 +67,7 @@ public class WgJsonUtil {
 
             File file = ResourceUtils.getFile(path);
 
-            if (file.exists()) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
 
@@ -95,12 +95,12 @@ public class WgJsonUtil {
      * @author: wg
      * @time: 2020/6/19 16:25
      ****************************************************************/
-    public static void jsonDataToFile2(String path, String jsonData) {
+    public static void jsonDataToFileByBufferedWritter(String path, String jsonData) {
         try {
 
             File file = ResourceUtils.getFile(path);
 
-            if (file.exists()) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
 
@@ -112,13 +112,11 @@ public class WgJsonUtil {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(jsonData);
 
-
             bufferedWriter.close();
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
     }
 
