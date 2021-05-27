@@ -5,15 +5,25 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import scala.collection.mutable.HashTable;
+import wg.application.entity.MyField;
 import wg.application.entity.TrafficRestriction;
+import wg.application.entity.User;
 import wg.application.util.WgJsonUtil;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
+import java.util.Date;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @SpringBootTest
 public class TestApplicationTests {
@@ -542,5 +552,196 @@ public class TestApplicationTests {
 
     }
 
+
+    String mysqlDriver = "com.mysql.cj.jdbc.Driver";
+    String url = "jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT+8";
+    String user = "root";
+    String password = "123456";
+    Connection conn;
+
+    //@Test
+    public void createDynamicTable() {
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        hashMap.put("tableName", "test_03");
+        hashMap.put("id", new MyField("id", "int"));
+        hashMap.put("userName", new MyField("user_name", "varchar(200)"));
+
+        String dropTable = "DROP TABLE IF EXISTS " + hashMap.get("tableName");
+        String createTableSql =
+          "  CREATE TABLE " + hashMap.get("tableName") + "  (\n" +
+            ((MyField) hashMap.get("id")).getField() + "  " + ((MyField) hashMap.get("id")).getFieldType() + " not null, \n" +
+            ((MyField) hashMap.get("userName")).getField() + "  " + ((MyField) hashMap.get("userName")).getFieldType() + "  null, \n" +
+
+            "    `create_by` varchar(32) NULL DEFAULT NULL COMMENT '创建人',\n" +
+            "    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',\n" +
+            "    `update_by` varchar(32) NULL DEFAULT NULL COMMENT '更新人',\n" +
+            "    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',\n" +
+
+            "        PRIMARY KEY (`id`) USING BTREE \n" +
+            "        )";
+
+
+        try {
+            Class.forName(mysqlDriver);
+            conn = DriverManager.getConnection(url, user, password);
+            Statement statement = conn.createStatement();
+            boolean executeDrop = statement.execute(dropTable);
+            boolean executeCreate = statement.execute(createTableSql);
+
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @Test
+    public void insertValue() throws SQLException {
+        String insertValueSql = "insert into user_01(id, create_by) values(123, 'admin') ";
+        Connection connection = getConnection();
+        Statement statement = connection.createStatement();
+        int i = statement.executeUpdate(insertValueSql);
+        System.out.println(i);
+
+    }
+
+    /***************************************************
+     * @decription jdbc
+     * @author: wg
+     * @time: 2021/5/27 22:41
+     ***************************************************/
+    public Connection getConnection() {
+        try {
+            Class.forName(mysqlDriver);
+            conn = DriverManager.getConnection(url, user, password);
+
+            if (conn != null) {
+
+                return conn;
+            }
+
+            return null;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+
+    /***************************************************
+     * @decription 字符串 equals ==
+     * @author: wg
+     * @time: 2021/5/27 22:40
+     ***************************************************/
+    @Test
+    public void objStringTest() {
+
+        String s1 = "hello";
+        String s2 = new String("hello");
+        String s5 = "hello";
+
+        System.out.println(s1 == s5); // true
+
+        String s3 = "hello" + "world";
+        String s4 = "helloworld";
+
+        System.out.println(s1 == s2); // false
+
+        System.out.println(s3 == s4); // true
+
+        System.out.println(s1.intern() == s2); // false
+
+        String s6 = "world";
+
+        String s7 = s1 + s6;
+
+        System.out.println(s4 == s7); // false
+
+
+    }
+
+
+    /***************************************************
+     * @decription hashmap hashtable
+     * @author: wg
+     * @time: 2021/5/27 22:43
+     ***************************************************/
+    @Test
+    public void mapTest() {
+
+        HashMap<Object, Object> hashMap = new HashMap<>();
+        Hashtable<Object, Object> hashtable = new Hashtable<>();
+
+        hashMap.put(null, "123");
+
+        // hashtable 不允许空键, 也不允许空值
+        //hashtable.put(null, "123");
+        hashtable.put("null", null);
+
+    }
+
+    /***************************************************
+     * @decription 根据对象单个属性去重
+     * @author: wg
+     * @time: 2021/5/28 2:07
+     ***************************************************/
+    @Test
+    public void noRepeat() {
+
+        Random random = new Random();
+
+        List<User> a = new ArrayList<>();
+
+        for (int i = 0; i < 10000; i++) {
+            User user = new User();
+            int i1 = random.nextInt(10000);
+            user.setAge(i1 + "");
+
+            a.add(user);
+        }
+
+        System.out.println("===  " + a.size());
+
+        long l1 = System.currentTimeMillis();
+
+        // 第一种 常用的方式
+        HashSet<User> users = new HashSet<>(a);
+        long l2 = System.currentTimeMillis();
+        System.out.println("最简单的 用时: " + (l2 - l1));
+        System.out.println("set -> " + users.size());
+
+        long l3 = System.currentTimeMillis();
+        // 第二种, stream 方式
+        ArrayList<User> collect = a.stream().collect(Collectors.collectingAndThen(
+          Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getAge))),
+          ArrayList::new)
+        );
+
+        long l4 = System.currentTimeMillis();
+        System.out.println("stream 用时: " + (l4 - l3));
+        System.out.println("---  " + collect.size());
+
+
+    }
+
+    @Test
+    public void randomTest() {
+        Random random = new Random();
+
+        for (int i = 0; i < 5; i++) {
+            int i1 = random.nextInt(10);
+            System.out.println(i1);
+        }
+    }
 
 }

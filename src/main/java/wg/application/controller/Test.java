@@ -19,6 +19,7 @@ import wg.application.component.TransformTitle;
 import wg.application.config.SpringIOCTest;
 import wg.application.entity.BankFlow;
 import wg.application.entity.LiuShui;
+import wg.application.entity.MyField;
 import wg.application.entity.Result;
 import wg.application.enumeration.Title;
 import wg.application.exception.WgException;
@@ -29,11 +30,17 @@ import wg.application.service.TestInterface;
 import wg.application.util.IPUtils;
 
 import javax.annotation.Resource;
+//import javax.persistence.EntityManager;
+//import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -682,7 +689,7 @@ public class Test {
      ****************************************************************/
     @RequestMapping(value = "/json/{filename}", method = RequestMethod.GET)
     public String getJsonData(@PathVariable String filename) {
-        String jsonpath = "classpath:wg/application/wgjson/"+filename+".json";
+        String jsonpath = "classpath:wg/application/wgjson/" + filename + ".json";
         return getJson(jsonpath);
     }
 
@@ -690,14 +697,14 @@ public class Test {
         String json = "";
         try {
             String jsonPath = jsonSrc.replace("classpath:", "");
-            System.out.println("jsonPath -> "+jsonPath);
+            System.out.println("jsonPath -> " + jsonPath);
             InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(jsonSrc.replace("classpath:", ""));
-            json = IOUtils.toString(resourceAsStream,"UTF-8");
+            json = IOUtils.toString(resourceAsStream, "UTF-8");
 
             return json;
 
         } catch (IOException e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
         }
 
         return json;
@@ -1382,7 +1389,6 @@ public class Test {
 
         String[] strings = s.split("、");
 
-
         String[] st = new String[strings.length];
 
         for (int i = 0; i < strings.length; i++) {
@@ -1410,5 +1416,64 @@ public class Test {
 
         return wg.application.vo.Result.ok(sqrt);
     }
+
+
+
+    String mysqlDriver="com.mysql.jdbc.Driver";
+    String url="jdbc:mysql://127.0.0.1:3306/wg";
+    String user="root";
+    String password="123456";
+
+    public void createDynamicTable() {
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        hashMap.put("tableName", "user");
+        hashMap.put("id", new MyField("id", "int"));
+        hashMap.put("userName", new MyField("user_name", "varchar2(200)"));
+
+        String sql = "CREATE TABLE " + hashMap.get("tableName") + "  (\n" +
+          ((MyField) hashMap.get("id")).getField() + "  " + ((MyField) hashMap.get("id")).getFieldType() + " not null, \n" +
+          ((MyField) hashMap.get("userName")).getField() + "  " + ((MyField) hashMap.get("userName")).getFieldType() + " not null, \n" +
+          "    `create_by` varchar(32) NULL DEFAULT NULL COMMENT '创建人',\n" +
+          "    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',\n" +
+          "    `update_by` varchar(32) NULL DEFAULT NULL COMMENT '更新人',\n" +
+          "    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',\n" +
+
+          "        PRIMARY KEY (`id`) USING BTREE\n" +
+          "        )";
+
+        try {
+            Class.forName(mysqlDriver);
+            DriverManager.getConnection(url,user,password);
+            Connection conn=null;
+            Statement statement = conn.createStatement();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+
+    public void getConnection(){
+
+
+        try {
+            Class.forName(mysqlDriver);
+            DriverManager.getConnection(url,user,password);
+            Connection conn=null;
+            Statement statement = conn.createStatement();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
