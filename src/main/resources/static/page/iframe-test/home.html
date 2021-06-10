@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+
+</head>
+
+<body>
+  <p>123123</p>
+  <button onclick="testPost()">postmessage</button>
+</body>
+
+<script>
+  function testPost() {
+    window.parent.postMessage({
+      path: '/equipment/platformdetail/detail',
+      query: { equipId: "QHD|QHD32-6CEPI", platformId: "QHD|QHD32-6CEPI" }
+    },
+      "http://localhost:33333")
+  }
+
+
+</script>
+
+</html>

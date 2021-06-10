@@ -12,373 +12,372 @@
 </head>
 
 <body>
-<div class="container" style="background: #a6e1ec; ">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="riqi">2020年7月30日</span>
-                </div>
-                <div class="col-md-4">
-                    <span class="xianxing">今日限行 0 5</span>
-                </div>
-                <div class="col-md-4">
-                    <span class="kuaisubobao"> 快速播报</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-5">
-
-            <marquee>文本从左向右滚动</marquee>
-
-        </div>
-        <div class="col-md-3" style="margin-top: 2px;margin-bottom: 4px; height: 80%">
-            <div class="row">
-                <div class="col-md-12 input-group input-mini">
-                    <input id="searchInput" type="text" class="form-control"
-                           placeholder="123 input username"
-                           aria-describedby="basic-addon2">
-                    <span class="input-group-addon" id="basic-addon2">@example.com</span>
+    <div class="container" style="background: #a6e1ec; ">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="riqi">2020年7月30日</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="xianxing">今日限行 0 5</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="kuaisubobao"> 快速播报</span>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-md-5">
+
+                <marquee>文本从左向右滚动</marquee>
+
+            </div>
+            <div class="col-md-3" style="margin-top: 2px;margin-bottom: 4px; height: 80%">
+                <div class="row">
+                    <div class="col-md-12 input-group input-mini">
+                        <input id="searchInput" type="text" class="form-control" placeholder="123 input username"
+                            aria-describedby="basic-addon2">
+                        <span class="input-group-addon" id="basic-addon2">@example.com</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
+
     </div>
 
+    <div>
 
-</div>
-
-<div>
-
-    <div id="">
-        <input id="admin" type="number" value="1">
-        <input id="wg-text" style="width: 500px" type="text" value="text112323">
+        <div id="">
+            <input id="admin" type="number" value="1">
+            <input id="wg-text" style="width: 500px" type="text" value="text112323">
+        </div>
     </div>
-</div>
 
-
-<script>
-    $().ready(a(), hash(), setWidth())
-
-    function a() {
-        var arr = [];
-        console.log(arr == null);
-        console.log(arr == undefined);
-    }
-
-
-    // 页面初始化, 光标位置
-    function hash() {
-        // window.location.hash = "searchInput";
-        $("#searchInput").focus();
-    }
-
-    function setWidth() {
-        $("#admin").css("width", $("#wg-text").css("width"))
-    }
-
-</script>
-
-
-<div>
-    <label>文本</label>
-    <input id="test-weekday" type="text" placeholder="">
-</div>
-<script>
-    $().ready(setPlaceholderValue())
-
-    function switchWeekday(weekdayEN) {
-        var weekCN = ["一", "二", "三", "四", "五", "六", "日"];
-        var weekday = "";
-        switch (weekdayEN) {
-            case 1:
-                weekday = weekCN[0];
-                break;
-            case 2:
-                weekday = weekCN[1];
-                break;
-            case 3:
-                weekday = weekCN[2];
-                break;
-            case 4:
-                weekday = weekCN[3];
-                break;
-            case 5:
-                weekday = weekCN[4];
-                break;
-            case 6:
-                weekday = weekCN[5];
-                break;
-            case 7:
-                weekday = weekCN[6];
-                break;
-        }
-
-        return weekday;
-    }
-
-    function setPlaceholderValue() {
-        var date = new Date();
-        var weekday = date.getDay()
-        console.log(typeof (weekday))
-        $("#test-weekday").attr("placeholder", switchWeekday(weekday));
-
-    }
-
-</script>
-
-
-<div>
-
-    <button id="button-var" onclick="f()">test-var</button>
 
     <script>
+        $().ready(a(), hash(), setWidth())
 
-        var a = 10;
-        // f();
-        console.log("-> ", a)
-
-        function f() {
-
-            console.log("test var -> ", a)
-            a = 20;
-            console.log("test var a=20 -> ", a)
+        function a() {
+            var arr = [];
+            console.log(arr == null);
+            console.log(arr == undefined);
         }
+
+
+        // 页面初始化, 光标位置
+        function hash() {
+            // window.location.hash = "searchInput";
+            $("#searchInput").focus();
+        }
+
+        function setWidth() {
+            $("#admin").css("width", $("#wg-text").css("width"))
+        }
+
     </script>
-</div>
 
 
-<div>
-
-    <input type="text" id="enterEvent">
-    <input type="button" id="enterEventButton" onclick="f1()" value="enterEventButton">
-
+    <div>
+        <label>文本</label>
+        <input id="test-weekday" type="text" placeholder="">
+    </div>
     <script>
-        var inputText = document.querySelector("#enterEvent");
+        $().ready(setPlaceholderValue())
 
-        $(document).keydown(function (e) {
-            var val = $("#enterEvent").val();
-            var key = e.which;
-            if (key == 13) {
-                alert(isEmpty(val))
+        function switchWeekday(weekdayEN) {
+            var weekCN = ["一", "二", "三", "四", "五", "六", "日"];
+            var weekday = "";
+            switch (weekdayEN) {
+                case 1:
+                    weekday = weekCN[0];
+                    break;
+                case 2:
+                    weekday = weekCN[1];
+                    break;
+                case 3:
+                    weekday = weekCN[2];
+                    break;
+                case 4:
+                    weekday = weekCN[3];
+                    break;
+                case 5:
+                    weekday = weekCN[4];
+                    break;
+                case 6:
+                    weekday = weekCN[5];
+                    break;
+                case 7:
+                    weekday = weekCN[6];
+                    break;
             }
 
-        })
-
-        function f1() {
-            var val = $("#enterEvent").val();
-            if (isEmpty(val)) {
-                console.log(val)
-            } else {
-                console.log(val)
-            }
+            return weekday;
         }
 
-        //判断字符是否为空
-        function isEmpty(obj) {
-            return (typeof obj === 'undefined' || obj === null || obj === "");
+        function setPlaceholderValue() {
+            var date = new Date();
+            var weekday = date.getDay()
+            console.log(typeof (weekday))
+            $("#test-weekday").attr("placeholder", switchWeekday(weekday));
+
         }
-
-    </script>
-</div>
-
-
-<!--数组-->
-<script>
-
-    var arr = [1, 2, 3, 4]
-
-    var arr1 = arr.slice(2, 3)
-    console.log("arr1 -> ", arr1.toLocaleString())
-
-    var len = arr.push(33)
-
-    console.log("len -> ", len)
-
-</script>
-
-<!--el-->
-<script>
-    sessionStorage.setItem("name", "123")
-
-    var req = new Request();
-
-    req.get("name")
-    var name = req.getAttribute("name")
-    var name1 = $("name")
-
-
-    console.log("name -> ", name, name1)
-
-</script>
-
-<div>
-    <button onclick="testReduce()">测试reduce函数</button>
-    <button onclick="getRealPath()">获取当前网页地址</button>
-</div>
-
-<script>
-    // 合并数组, 把两个数组合并成实体类
-    function testReduce() {
-        var a1 = [1, 2, 3, 4, 5]
-        var a2 = ['sdf', 'sdf', 'qwe', 'rty', 'zxc']
-
-        var obj = a1.reduce(function (res, value, index) {
-            res[a2[index]] = value;
-            return res;
-        }, {})
-
-        console.log(obj, typeof obj)
-
-        obj = a2.reduce(function (res, value, index) {
-            res[a1[index]] = value;
-            return res;
-        }, {})
-
-        console.log(obj, typeof obj)
-
-    }
-
-
-    function getRealPath() {
-        //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
-        var curWwwPath = window.document.location.href;
-
-        console.log(curWwwPath)
-        //获取主机地址之后的目录，如： myproj/view/my.jsp
-        var pathName = window.document.location.pathname;
-
-        console.log(pathName)
-
-        var pos = curWwwPath.indexOf(pathName);
-
-        console.log(pos)
-        //获取主机地址，如： http://localhost:8083
-        var localhostPaht = curWwwPath.substring(0, pos);
-
-        console.log(localhostPaht)
-        //获取带"/"的项目名，如：/myproj
-        var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-
-        console.log(projectName)
-        //得到了 http://localhost:8083/myproj
-        var realPath = localhostPaht + projectName;
-        console.log(realPath);
-    }
-</script>
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <button onclick="getChildPage()">测试jquery 子页面</button>
-        </div>
-    </div>
-    <div class="row" id="childPage">
-
-    </div>
-
-    <script>
-        function getChildPage() {
-
-            var data = {
-                name: 'xiaohua',
-                age: 12
-            }
-            $('#childPage').load('mouse.html')
-
-            // $('#childPage').load('mouse.html', data, function (response, mes, xhr) {
-            //     console.log('-------- ')
-            // })
-        }
-    </script>
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <button>测试this</button>
-        </div>
-    </div>
-
-    <script type="text/babel">
-        function foo() {
-            console.log('&&&&&&&   ', this.a, this)
-        }
-
-        var a = 1
-        foo() // window.a
-
-        const obj = {
-            a: 2,
-            foo: foo
-        }
-        obj.foo() // 谁调用了函数，谁就是 this，所以在这个场景下 foo 函数中的 this 就是 obj 对象
-
-        const c = new foo()
 
     </script>
 
 
-    <div class="row" style="height: 1000px;">
-        <div id="anchor" class="column col-md-12">
-            anchor
-        </div>
-    </div>
-    <div class="row">
-        <div class="column col-md-12">
-            <a href="#anchor">回到锚点处</a>
-        </div>
+    <div>
+
+        <button id="button-var" onclick="f()">test-var</button>
+
+        <script>
+
+            var a = 10;
+            // f();
+            console.log("-> ", a)
+
+            function f() {
+
+                console.log("test var -> ", a)
+                a = 20;
+                console.log("test var a=20 -> ", a)
+            }
+        </script>
     </div>
 
 
     <div>
-        <p>测试io流</p>
 
-        <button onclick="copyFile()"> click</button>
+        <input type="text" id="enterEvent">
+        <input type="button" id="enterEventButton" onclick="f1()" value="enterEventButton">
 
+        <script>
+            var inputText = document.querySelector("#enterEvent");
+
+            $(document).keydown(function (e) {
+                var val = $("#enterEvent").val();
+                var key = e.which;
+                if (key == 13) {
+                    alert(isEmpty(val))
+                }
+
+            })
+
+            function f1() {
+                var val = $("#enterEvent").val();
+                if (isEmpty(val)) {
+                    console.log(val)
+                } else {
+                    console.log(val)
+                }
+            }
+
+            //判断字符是否为空
+            function isEmpty(obj) {
+                return (typeof obj === 'undefined' || obj === null || obj === "");
+            }
+
+        </script>
     </div>
+
+
+    <!--数组-->
     <script>
 
-        var fso, f;
+        var arr = [1, 2, 3, 4]
 
-        function copyFile() {
-            if (window.ActiveXObject) {
-                console.log('copyFile---------')
-                fso = new ActiveXObject("Scripting.FileSystemObject");
-                f = fso.CreateTextFile("c://testfile-wg.txt", true);
-                f.WriteLine("This is a test.");
-                f.Close();
-                f = fso.GetFile("c://aaa//111.txt");
-                f.Copy("c://bbb//111.txt");
-            }
-            
+        var arr1 = arr.slice(2, 3)
+        console.log("arr1 -> ", arr1.toLocaleString())
 
-        }
+        var len = arr.push(33)
+
+        console.log("len -> ", len)
 
     </script>
 
+    <!--el-->
+    <script>
+        sessionStorage.setItem("name", "123")
 
-    <div class="row" style="height:2000px;">
-        <button id="test" style="position:fixed;right:0;bottom:0">回到顶部 scrollTop 属性</button>
-        <script>
-            test.onclick = function () {
-                document.body.scrollTop = document.documentElement.scrollTop = 0;
-            }
-        </script>
+        var req = new Request();
+
+        req.get("name")
+        var name = req.getAttribute("name")
+        var name1 = $("name")
+
+
+        console.log("name -> ", name, name1)
+
+    </script>
+
+    <div>
+        <button onclick="testReduce()">测试reduce函数</button>
+        <button onclick="getRealPath()">获取当前网页地址</button>
     </div>
 
-    <div class="row" style="height:2000px;">
-        <button id="test1" style="position:fixed;right:0;bottom:30px">回到顶部 scrollTo()方法</button>
+    <script>
+        // 合并数组, 把两个数组合并成实体类
+        function testReduce() {
+            var a1 = [1, 2, 3, 4, 5]
+            var a2 = ['sdf', 'sdf', 'qwe', 'rty', 'zxc']
+
+            var obj = a1.reduce(function (res, value, index) {
+                res[a2[index]] = value;
+                return res;
+            }, {})
+
+            console.log(obj, typeof obj)
+
+            obj = a2.reduce(function (res, value, index) {
+                res[a1[index]] = value;
+                return res;
+            }, {})
+
+            console.log(obj, typeof obj)
+
+        }
+
+
+        function getRealPath() {
+            //获取当前网址，如： http://localhost:8083/myproj/view/my.jsp
+            var curWwwPath = window.document.location.href;
+
+            console.log(curWwwPath)
+            //获取主机地址之后的目录，如： myproj/view/my.jsp
+            var pathName = window.document.location.pathname;
+
+            console.log(pathName)
+
+            var pos = curWwwPath.indexOf(pathName);
+
+            console.log(pos)
+            //获取主机地址，如： http://localhost:8083
+            var localhostPaht = curWwwPath.substring(0, pos);
+
+            console.log(localhostPaht)
+            //获取带"/"的项目名，如：/myproj
+            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+
+            console.log(projectName)
+            //得到了 http://localhost:8083/myproj
+            var realPath = localhostPaht + projectName;
+            console.log(realPath);
+        }
+    </script>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <button onclick="getChildPage()">测试jquery 子页面</button>
+            </div>
+        </div>
+        <div class="row" id="childPage">
+
+        </div>
+
         <script>
-            test1.onclick = function () {
-                scrollTo(0, 0);
+            function getChildPage() {
+
+                var data = {
+                    name: 'xiaohua',
+                    age: 12
+                }
+                $('#childPage').load('mouse.html')
+
+                // $('#childPage').load('mouse.html', data, function (response, mes, xhr) {
+                //     console.log('-------- ')
+                // })
             }
         </script>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <button>测试this</button>
+            </div>
+        </div>
+
+        <script type="text/babel">
+            function foo() {
+                console.log('&&&&&&&   ', this.a, this)
+            }
+
+            var a = 1
+            foo() // window.a
+
+            const obj = {
+                a: 2,
+                foo: foo
+            }
+            obj.foo() // 谁调用了函数，谁就是 this，所以在这个场景下 foo 函数中的 this 就是 obj 对象
+
+            const c = new foo()
+
+        </script>
+
+
+        <div class="row" style="height: 1000px;">
+            <div id="anchor" class="column col-md-12">
+                anchor
+            </div>
+        </div>
+        <div class="row">
+            <div class="column col-md-12">
+                <a href="#anchor">回到锚点处</a>
+            </div>
+        </div>
+
+
+        <div>
+            <p>测试io流</p>
+
+            <button onclick="copyFile()"> click</button>
+
+        </div>
+        <script>
+
+            var fso, f;
+
+            function copyFile() {
+                if (window.ActiveXObject) {
+                    console.log('copyFile---------')
+                    fso = new ActiveXObject("Scripting.FileSystemObject");
+                    f = fso.CreateTextFile("c://testfile-wg.txt", true);
+                    f.WriteLine("This is a test.");
+                    f.Close();
+                    f = fso.GetFile("c://aaa//111.txt");
+                    f.Copy("c://bbb//111.txt");
+                }
+
+
+            }
+
+        </script>
+
+
+        <div class="row" style="height:2000px;">
+            <button id="test" style="position:fixed;right:0;bottom:0">回到顶部 scrollTop 属性</button>
+            <script>
+                test.onclick = function () {
+                    document.body.scrollTop = document.documentElement.scrollTop = 0;
+                }
+            </script>
+        </div>
+
+        <div class="row" style="height:2000px;">
+            <button id="test1" style="position:fixed;right:0;bottom:30px">回到顶部 scrollTo()方法</button>
+            <script>
+                test1.onclick = function () {
+                    scrollTo(0, 0);
+                }
+            </script>
+        </div>
+
+
     </div>
-
-
-</div>
 
 </body>
 

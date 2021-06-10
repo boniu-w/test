@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class LiuShuiInterfaceImpl implements LiuShuiInterface {
 
-    @Autowired
+    @Autowired(required = false)
     LiuShuiRepository liuShuiRepository;
 
 

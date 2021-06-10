@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class RoleInterfaceImpl implements RoleInterface {
 
-    @Autowired
+    @Autowired(required=false)
     RoleRepository roleRepository;
 
     public String[] getRoleName() {

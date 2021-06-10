@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>window.postMessage</title>
+    <meta charset="utf-8" />
+    <h1>test接收区</h1>
+</head>
+
+<body>
+
+</body>
+<iframe id="f" src="http://localhost:33333/page/iframe-test/home.html"></iframe>
+<script>
+    window.addEventListener("message", this.receiveMessage, false);
+    function receiveMessage(event) {
+        var origin = event.origin;
+        console.log(event);
+    }
+</script>
+
+</html>
