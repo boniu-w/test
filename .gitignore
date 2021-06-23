@@ -3,6 +3,8 @@ node_modules
 package.json
 package-lock.json
 target/
+classes/
+out/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -32,3 +34,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+mvnw.cmd
+mvnw
+.mvn/
