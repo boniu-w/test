@@ -24,6 +24,7 @@ import java.util.*;
 import java.util.Date;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @SpringBootTest
 public class TestApplicationTests {
@@ -570,17 +571,17 @@ public class TestApplicationTests {
 
         String dropTable = "DROP TABLE IF EXISTS " + hashMap.get("tableName");
         String createTableSql =
-          "  CREATE TABLE " + hashMap.get("tableName") + "  (\n" +
-            ((MyField) hashMap.get("id")).getField() + "  " + ((MyField) hashMap.get("id")).getFieldType() + " not null, \n" +
-            ((MyField) hashMap.get("userName")).getField() + "  " + ((MyField) hashMap.get("userName")).getFieldType() + "  null, \n" +
+                "  CREATE TABLE " + hashMap.get("tableName") + "  (\n" +
+                        ((MyField) hashMap.get("id")).getField() + "  " + ((MyField) hashMap.get("id")).getFieldType() + " not null, \n" +
+                        ((MyField) hashMap.get("userName")).getField() + "  " + ((MyField) hashMap.get("userName")).getFieldType() + "  null, \n" +
 
-            "    `create_by` varchar(32) NULL DEFAULT NULL COMMENT '创建人',\n" +
-            "    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',\n" +
-            "    `update_by` varchar(32) NULL DEFAULT NULL COMMENT '更新人',\n" +
-            "    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',\n" +
+                        "    `create_by` varchar(32) NULL DEFAULT NULL COMMENT '创建人',\n" +
+                        "    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',\n" +
+                        "    `update_by` varchar(32) NULL DEFAULT NULL COMMENT '更新人',\n" +
+                        "    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',\n" +
 
-            "        PRIMARY KEY (`id`) USING BTREE \n" +
-            "        )";
+                        "        PRIMARY KEY (`id`) USING BTREE \n" +
+                        "        )";
 
 
         try {
@@ -723,8 +724,8 @@ public class TestApplicationTests {
         long l3 = System.currentTimeMillis();
         // 第二种, stream 方式
         ArrayList<User> collect = a.stream().collect(Collectors.collectingAndThen(
-          Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getAge))),
-          ArrayList::new)
+                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getAge))),
+                ArrayList::new)
         );
 
         long l4 = System.currentTimeMillis();
@@ -744,4 +745,39 @@ public class TestApplicationTests {
         }
     }
 
+    /*****************************************************
+     * @params:
+     * @description: char 测试
+     * @author: wg
+     * @date: 2021/6/29 10:14
+     *****************************************************/
+    @Test
+    public void basicDataType() {
+
+        char a = 1;
+        System.out.println(a);
+
+        char b = '1';
+        System.out.println(b);
+
+        char c = 2;
+        char d = c;
+        int e = c;
+        System.out.println(c);
+        System.out.println(d);
+        System.out.println(e);
+
+    }
+
+    /*****************************************************
+     * @params:
+     * @description: stream test
+     * @author: wg
+     * @date: 2021/6/30 15:03
+     *****************************************************/
+    @Test
+    public void streamTest() {
+        Stream<Double> limit = Stream.generate(Math::random).limit(5);
+        limit.forEach(System.out::println);
+    }
 }
