@@ -4,10 +4,12 @@ import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import scala.collection.mutable.HashTable;
+import wg.application.entity.BankFlow;
 import wg.application.entity.MyField;
 import wg.application.entity.TrafficRestriction;
 import wg.application.entity.User;
@@ -15,8 +17,10 @@ import wg.application.util.WgJsonUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.beans.PropertyDescriptor;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -777,7 +781,113 @@ public class TestApplicationTests {
      *****************************************************/
     @Test
     public void streamTest() {
+        // 生成若干个随机数
         Stream<Double> limit = Stream.generate(Math::random).limit(5);
         limit.forEach(System.out::println);
+
+        List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
+        List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
+
+        System.out.println("筛选列表: " + filtered);
+        String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
+        System.out.println("合并字符串: " + mergedString);
+
+        Map<String, String> map = filtered.stream().collect(Collectors.toMap(item -> item, item -> item + "  wg"));
+        map.forEach((k, v) -> {
+            System.out.print(k);
+            System.out.print("  ");
+            System.out.print(v);
+            System.out.println();
+        });
+
     }
+
+    /*****************************************************
+     * @params:
+     * @description: PropertyUtils test
+     * @author: wg
+     * @date: 2021/6/30 17:38
+     *****************************************************/
+    @Test
+    public void propertyTest() {
+        BankFlow bankFlow = new BankFlow();
+        PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(bankFlow);
+        Stream<PropertyDescriptor> stream = Arrays.stream(propertyDescriptors);
+        stream.forEach(System.out::println);
+
+        for (int i = 0; i < propertyDescriptors.length; i++) {
+            String fieldType = propertyDescriptors[i].getPropertyType().toString();
+            System.out.println(fieldType);
+        }
+
+    }
+
+    /*****************************************************
+     * @params:
+     * @description: stream filter
+     * @author: wg
+     * @date: 2021/7/8 11:15
+     *****************************************************/
+    @Test
+    public void filterTest() {
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("展昭");
+        arrayList.add("包拯");
+        arrayList.add("赵虎");
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("1", "wg");
+        hashMap.put("2", "lisi");
+        hashMap.put("3", "zhangsan");
+
+
+        List<String> collect = arrayList.stream().filter(item -> {
+            return hashMap.entrySet().stream().allMatch(map -> {
+                return item.equals(map.getValue()) || item.equals("展昭");
+            });
+        }).collect(Collectors.toList());
+
+
+        System.out.println(collect);
+    }
+
+    /*****************************************************
+     * @params:
+     * @description: string to BigDecimal
+     * @author: wg
+     * @date: 2021/7/8 12:30
+     *****************************************************/
+    @Test
+    public void decimalTest() {
+
+        BigDecimal bigDecimal = new BigDecimal(11.0000);
+        String s = "11.123344";
+
+        System.out.println(bigDecimal.equals(s));
+
+        System.out.println(bigDecimal.hashCode());
+        System.out.println(s.hashCode());
+
+        System.out.println(bigDecimal.toString());
+        System.out.println(String.valueOf(bigDecimal));
+
+        DecimalFormat decimalFormat = new DecimalFormat("0.0000");
+
+        String format = decimalFormat.format(Float.valueOf(s));
+        System.out.println(Float.valueOf(s));
+        System.out.println(format);
+
+        BigDecimal bigDecimal1 = new BigDecimal(format);
+
+        System.out.println(bigDecimal1.compareTo(bigDecimal));
+
+        System.out.println("new BigDecimal(format): "+new BigDecimal(format));
+
+        DecimalFormat decimalFormat1 = new DecimalFormat("0.00");
+        String s1 = decimalFormat1.format(Double.valueOf(s));
+        System.out.println("new BigDecimal(s1): " + new BigDecimal(s1));
+
+    }
+
 }
