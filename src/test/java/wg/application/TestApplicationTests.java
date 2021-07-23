@@ -9,15 +9,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import scala.collection.mutable.HashTable;
-import wg.application.entity.BankFlow;
-import wg.application.entity.MyField;
-import wg.application.entity.TrafficRestriction;
-import wg.application.entity.User;
+import wg.application.entity.*;
 import wg.application.util.WgJsonUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.text.DecimalFormat;
@@ -92,8 +90,14 @@ public class TestApplicationTests {
         test.dateTest();
     }
 
+    /*****************************************************
+     * @params:
+     * @description: 反射
+     * @author: wg
+     * @date: 2021/7/12 14:38
+     *****************************************************/
     @Test
-    public void instanceTest() {
+    public void instanceTest() throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         String s = "123";
 
         if (s.getClass().isInstance(String.class)) {  // false
@@ -107,6 +111,26 @@ public class TestApplicationTests {
         if (s instanceof String) {  // true
             System.out.println("<<<<<<<<<<<<<<<<<");
         }
+
+        Student student = new Student();
+        student.setAge(123);
+        student.setName("wg");
+
+        Field field = Student.class.getField("id");
+        System.out.println(field.get(student));
+
+        // Class<?> aClass = Class.forName("wg.application.entity.Student");
+        // Field[] declaredFields = aClass.getDeclaredFields();
+        // for (Field field: declaredFields){
+        //     System.out.println(field);
+        //     try {
+        //         Object o = field.get(aClass.newInstance());
+        //         System.out.println(o.toString());
+        //     } catch (IllegalAccessException | InstantiationException e) {
+        //         e.printStackTrace();
+        //     }
+        // }
+
 
     }
 
@@ -848,6 +872,9 @@ public class TestApplicationTests {
             });
         }).collect(Collectors.toList());
 
+        arrayList.forEach(System.out::println);
+        List<String> collect1 = arrayList.stream().sorted().collect(Collectors.toList());
+        collect1.forEach(System.out::println);
 
         System.out.println(collect);
     }
@@ -882,12 +909,121 @@ public class TestApplicationTests {
 
         System.out.println(bigDecimal1.compareTo(bigDecimal));
 
-        System.out.println("new BigDecimal(format): "+new BigDecimal(format));
+        System.out.println("new BigDecimal(format): " + new BigDecimal(format));
 
         DecimalFormat decimalFormat1 = new DecimalFormat("0.00");
         String s1 = decimalFormat1.format(Double.valueOf(s));
         System.out.println("new BigDecimal(s1): " + new BigDecimal(s1));
 
+    }
+
+    /*****************************************************
+     * @params:
+     * @description: decimalFormat 中 占位符 0 和 # 的区别
+     * @author: wg
+     * @date: 2021/7/9 15:31
+     *****************************************************/
+    @Test
+    public void decimalTest2() {
+        DecimalFormat format1 = new DecimalFormat("000,000.000");
+        DecimalFormat format2 = new DecimalFormat("###,###.###");
+
+        System.out.println("format1.format('11111111111') :  " + format1.format(new BigDecimal("11111111111")));
+
+        System.out.println("format2.format('11111111111') :  " + format2.format(new BigDecimal("11111111111")));
+
+        DecimalFormat format3 = new DecimalFormat("0,000.000");
+        DecimalFormat format4 = new DecimalFormat("#,###.###");
+
+        System.out.println("format3.format('0011111111111') :  " + format3.format(new BigDecimal("0011111111111")));
+
+        System.out.println("format4.format('0011111111111') :  " + format4.format(new BigDecimal("0011111111111")));
+    }
+
+    /*****************************************************
+     * @params:
+     * @description:
+     * @author: wg
+     * @date: 2021/7/9 15:57
+     *****************************************************/
+    @Test
+    public void zhuangxiangTest() {
+        // 没有异常
+        Double aDouble = Double.valueOf("0011111111111");
+        System.out.println("aDouble:  " + aDouble);
+
+        // 没有异常
+        String s = "1123123";
+        Double aDouble1 = Double.valueOf(s);
+        System.out.println("aDouble1:  " + aDouble1);
+
+        // 有异常 NumberFormatException , 因为数字里有逗号
+        DecimalFormat decimalFormat = new DecimalFormat("0,000.000");
+        String format = decimalFormat.format(new BigDecimal("0011111111111"));
+        System.out.println("format:  " + format);
+        Double aDouble2 = Double.valueOf(format);
+        System.out.println("aDouble2:  " + aDouble2);
+
+    }
+
+    /*****************************************************
+     * @params:
+     * @description: 得出结论, optional 不能判断空串
+     * @author: wg
+     * @date: 2021/7/12 14:10
+     *****************************************************/
+    @Test
+    public void optionalTest() {
+
+        String name = "123";
+        Optional<Object> o = Optional.ofNullable(name);
+
+        System.out.println(o);
+        System.out.println(o.get());
+        System.out.println(o.isPresent());
+
+        ArrayList<Object> list = new ArrayList<>();
+        Optional.ofNullable("").ifPresent(it -> list.add(it));
+
+        System.out.println(list.size());
+    }
+
+    /*****************************************************
+     * @params:
+     * @description:
+     * @author: wg
+     * @date: 2021/7/15 14:09
+     *****************************************************/
+    @Test
+    public void twoDimensionalToOneDimensional() {
+        ArrayList<String> list1 = new ArrayList<>();
+        ArrayList<ArrayList<String>> list2 = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list1.add("wg" + i);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            list2.add(list1);
+        }
+
+        list2.forEach(System.out::println);
+        System.out.println();
+
+        ArrayList<Object> list3 = new ArrayList<>();
+        for (int i = 0; i < list2.size(); i++) {
+            ArrayList<String> strings = list2.get(i);
+            for (int j = 0; j < strings.size(); j++) {
+                String s = strings.get(j);
+                list3.add(s);
+            }
+        }
+
+        list3.forEach(System.out::println);
+    }
+
+    @Test
+    public void size(){
+        System.out.println(Integer.MAX_VALUE);
     }
 
 }

@@ -29,6 +29,25 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!--        &lt;!&ndash;mybatis-plus自动的维护了mybatis以及mybatis-spring的依赖，在springboot中这三者不能同时的出现，避免版本的冲突，表示：跳进过这个坑&ndash;&gt;-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -41,14 +60,12 @@
             </exclusions>
         </dependency>
 
-
         <!-- wgjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.60</version>
+<!--            <version>1.2.60</version>-->
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
         <dependency>
@@ -68,14 +85,13 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
+<!--            <version>5.1.47</version>-->
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
 
         <!--        <dependency>-->
         <!--            <groupId>com.baomidou</groupId>-->
@@ -87,12 +103,6 @@
         <!--            <groupId>org.mybatis</groupId>-->
         <!--            <artifactId>mybatis-spring</artifactId>-->
         <!--            <version>2.0.1</version>-->
-        <!--        </dependency>-->
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.mybatis.spring.boot</groupId>-->
-        <!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
-        <!--            <version>2.1.1</version>-->
         <!--        </dependency>-->
 
         <dependency>
@@ -136,11 +146,6 @@
             <version>5.3.2.RELEASE</version>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-        <!--        </dependency>-->
-
         <!--        fast json -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -155,19 +160,10 @@
             <version>1.5.22</version>
         </dependency>
 
-        <!--        &lt;!&ndash;mybatis-plus自动的维护了mybatis以及mybatis-spring的依赖，在springboot中这三者不能同时的出现，避免版本的冲突，表示：跳进过这个坑&ndash;&gt;-->
-                <dependency>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>mybatis-plus-boot-starter</artifactId>
-                    <version>3.1.2</version>
-                </dependency>
-
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -210,11 +206,6 @@
             <version>3.9</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
         <dependency>
             <groupId>redis.clients</groupId>
@@ -228,13 +219,13 @@
             <version>0.9.0</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>com.wg.lib</groupId>-->
-<!--            <artifactId>lib</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/lib/jzsso.ticketFilter-1.4.8.jar</systemPath>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.wg.lib</groupId>-->
+        <!--            <artifactId>lib</artifactId>-->
+        <!--            <version>1.0</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/lib/jzsso.ticketFilter-1.4.8.jar</systemPath>-->
+        <!--        </dependency>-->
 
 
         <!-- freemarker  -->
@@ -249,7 +240,6 @@
             <artifactId>pagehelper</artifactId>
             <version>5.1.8</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -263,19 +253,19 @@
             </plugin>
         </plugins>
 
-<!--        <resources>-->
-<!--            <resource>-->
-<!--                <directory>lib</directory>-->
-<!--                <targetPath>BOOT-INF/lib/</targetPath>-->
-<!--                <includes>-->
-<!--                    <include>**/*.jar</include>-->
-<!--                </includes>-->
-<!--            </resource>-->
-<!--            <resource>-->
-<!--                <directory>src/main/resources</directory>-->
-<!--                <targetPath>BOOT-INF/classes/</targetPath>-->
-<!--            </resource>-->
-<!--        </resources>-->
+        <!--        <resources>-->
+        <!--            <resource>-->
+        <!--                <directory>lib</directory>-->
+        <!--                <targetPath>BOOT-INF/lib/</targetPath>-->
+        <!--                <includes>-->
+        <!--                    <include>**/*.jar</include>-->
+        <!--                </includes>-->
+        <!--            </resource>-->
+        <!--            <resource>-->
+        <!--                <directory>src/main/resources</directory>-->
+        <!--                <targetPath>BOOT-INF/classes/</targetPath>-->
+        <!--            </resource>-->
+        <!--        </resources>-->
     </build>
 
 </project>
