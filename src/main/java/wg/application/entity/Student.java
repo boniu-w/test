@@ -30,4 +30,9 @@ public class Student {
     private int id;
 
     private String birthday;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 }

@@ -2,6 +2,7 @@ package wg.application.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -17,10 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
 import wg.application.config.SpringIOCTest;
-import wg.application.entity.BankFlow;
-import wg.application.entity.LiuShui;
-import wg.application.entity.MyField;
-import wg.application.entity.Result;
+import wg.application.entity.*;
 import wg.application.enumeration.Title;
 import wg.application.exception.WgException;
 import wg.application.service.AspectService;
@@ -80,6 +78,12 @@ public class Test {
     }
 
 
+    /*****************************************************
+     * @params:
+     * @description: 是否可以作为垃圾回收的 例子呢? 感觉可以
+     * @author: wg
+     * @date: 2021/7/29 11:22
+     *****************************************************/
     @RequestMapping(value = "/test")
     @ResponseBody
     public boolean test() {
@@ -1208,11 +1212,11 @@ public class Test {
     @ResponseBody
     public void streamTest() {
         List<String> collect = Stream.of("one", "two", "three", "four")
-          .filter(e -> e.length() > 3)
-          .peek(e -> System.out.println("Filtered value: " + e))
-          .map(String::toUpperCase)
-          .peek(e -> System.out.println("Mapped value: " + e))
-          .collect(Collectors.toList());
+                .filter(e -> e.length() > 3)
+                .peek(e -> System.out.println("Filtered value: " + e))
+                .map(String::toUpperCase)
+                .peek(e -> System.out.println("Mapped value: " + e))
+                .collect(Collectors.toList());
 
         System.out.println(collect);
 
@@ -1373,19 +1377,19 @@ public class Test {
     public void parseToArray() {
 
         String s = "备付金、京东支付、财付通、富友、天翼、汇潮、捷付睿、连连银通、九派天下、易宝、宝付、快钱、盛付通、传化、" +
-          "融宝、资和信、润物、石基、一九付、银盛、网易宝、易付宝、网银在线、东方付通、拉卡拉、" +
-          "迅付、快捷通、腾付通、美的、讯联智付、快付通、商物通、新浪、易通金服、银生宝、甬易、" +
-          "亿付、随行付、雅酷时空、合众易宝、瑞银信、畅捷通、理房通、百联优力、爱农驿站、高汇通、" +
-          "圣亚云鼎、国付宝、先锋、汇聚、银联商务、网上有名、汇付、商银信、易极付、广州银联、钱袋宝、" +
-          "邦付宝、联付通、证联、汇元银通、市民卡、百付宝、中移电子、支付宝、瀚银、中付、金运通、" +
-          "双乾、天下支付、电银、乐刷、杉德、银盈通、山东省电子、亚科、中金、投科信、杭州银行、敏付" +
-          "、桂林银行、山西万卡德、山东高速信联、银视通、江苏省电子商务、平安银行、郑州建业至尊、" +
-          "青岛百达通、江苏瑞祥商务、青岛百森通、北京商银、郑州建业至尊商务、安徽华夏、四川商通实业、" +
-          "裕福支付、陕西煤炭交易中心、昆明卡互卡、北京数码视讯、浙江航天电子、新生、上海付费通、" +
-          "上海东方汇融、安付宝、易生、易票联、易联、广东盛迪嘉电子、得仕、中钢银通信、唯品会、" +
-          "顺丰恒通、广州合利宝、商盟商务服务、易智付、通联支付网络服务、上海银联电子、恒大万通、" +
-          "钱宝、本元、平安付、智付、开联通、联动北京银联商务、平安付电子、现代金融控股、联通支付、" +
-          "东方电子支付、摩宝、首采联合电子";
+                "融宝、资和信、润物、石基、一九付、银盛、网易宝、易付宝、网银在线、东方付通、拉卡拉、" +
+                "迅付、快捷通、腾付通、美的、讯联智付、快付通、商物通、新浪、易通金服、银生宝、甬易、" +
+                "亿付、随行付、雅酷时空、合众易宝、瑞银信、畅捷通、理房通、百联优力、爱农驿站、高汇通、" +
+                "圣亚云鼎、国付宝、先锋、汇聚、银联商务、网上有名、汇付、商银信、易极付、广州银联、钱袋宝、" +
+                "邦付宝、联付通、证联、汇元银通、市民卡、百付宝、中移电子、支付宝、瀚银、中付、金运通、" +
+                "双乾、天下支付、电银、乐刷、杉德、银盈通、山东省电子、亚科、中金、投科信、杭州银行、敏付" +
+                "、桂林银行、山西万卡德、山东高速信联、银视通、江苏省电子商务、平安银行、郑州建业至尊、" +
+                "青岛百达通、江苏瑞祥商务、青岛百森通、北京商银、郑州建业至尊商务、安徽华夏、四川商通实业、" +
+                "裕福支付、陕西煤炭交易中心、昆明卡互卡、北京数码视讯、浙江航天电子、新生、上海付费通、" +
+                "上海东方汇融、安付宝、易生、易票联、易联、广东盛迪嘉电子、得仕、中钢银通信、唯品会、" +
+                "顺丰恒通、广州合利宝、商盟商务服务、易智付、通联支付网络服务、上海银联电子、恒大万通、" +
+                "钱宝、本元、平安付、智付、开联通、联动北京银联商务、平安付电子、现代金融控股、联通支付、" +
+                "东方电子支付、摩宝、首采联合电子";
 
         String[] strings = s.split("、");
 
@@ -1417,12 +1421,10 @@ public class Test {
         return wg.application.vo.Result.ok(sqrt);
     }
 
-
-
-    String mysqlDriver="com.mysql.jdbc.Driver";
-    String url="jdbc:mysql://127.0.0.1:3306/wg";
-    String user="root";
-    String password="123456";
+    String mysqlDriver = "com.mysql.jdbc.Driver";
+    String url = "jdbc:mysql://127.0.0.1:3306/wg";
+    String user = "root";
+    String password = "123456";
 
     public void createDynamicTable() {
 
@@ -1433,46 +1435,66 @@ public class Test {
         hashMap.put("userName", new MyField("user_name", "varchar2(200)"));
 
         String sql = "CREATE TABLE " + hashMap.get("tableName") + "  (\n" +
-          ((MyField) hashMap.get("id")).getField() + "  " + ((MyField) hashMap.get("id")).getFieldType() + " not null, \n" +
-          ((MyField) hashMap.get("userName")).getField() + "  " + ((MyField) hashMap.get("userName")).getFieldType() + " not null, \n" +
-          "    `create_by` varchar(32) NULL DEFAULT NULL COMMENT '创建人',\n" +
-          "    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',\n" +
-          "    `update_by` varchar(32) NULL DEFAULT NULL COMMENT '更新人',\n" +
-          "    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',\n" +
+                ((MyField) hashMap.get("id")).getField() + "  " + ((MyField) hashMap.get("id")).getFieldType() + " not null, \n" +
+                ((MyField) hashMap.get("userName")).getField() + "  " + ((MyField) hashMap.get("userName")).getFieldType() + " not null, \n" +
+                "    `create_by` varchar(32) NULL DEFAULT NULL COMMENT '创建人',\n" +
+                "    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',\n" +
+                "    `update_by` varchar(32) NULL DEFAULT NULL COMMENT '更新人',\n" +
+                "    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',\n" +
 
-          "        PRIMARY KEY (`id`) USING BTREE\n" +
-          "        )";
+                "        PRIMARY KEY (`id`) USING BTREE\n" +
+                "        )";
 
         try {
             Class.forName(mysqlDriver);
-            DriverManager.getConnection(url,user,password);
-            Connection conn=null;
+            DriverManager.getConnection(url, user, password);
+            Connection conn = null;
             Statement statement = conn.createStatement();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
-
-    public void getConnection(){
-
-
+    public void getConnection() {
         try {
             Class.forName(mysqlDriver);
-            DriverManager.getConnection(url,user,password);
-            Connection conn=null;
+            DriverManager.getConnection(url, user, password);
+            Connection conn = null;
             Statement statement = conn.createStatement();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    /*****************************************************
+     * @params:
+     * @description:
+     * @author: wg
+     * @date: 2021/7/28 9:48
+     *****************************************************/
+    @RequestMapping(value = "/datavApiTest")
+    @ResponseBody
+    public ArrayList<HashMap<String, String>> datavApiTest(@RequestParam(name = "platformId") String platformId) {
+        System.out.println(platformId);
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            HashMap<String, String> map = new HashMap<>();
+            map.put("name", "平台" + i);
+            map.put("field", "能耗" + i);
+            map.put("data", "1000万" + i);
+            list.add(i, map);
+        }
+
+        return list;
+    }
+
+    @PostMapping(value = "/aa")
+    public void aa(@RequestBody List<User> users) {
+        System.out.println("user.getUsers().size() :  " + users);
     }
 
 

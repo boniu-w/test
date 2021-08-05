@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <style>
+    #canvas{
+      border:1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<button id="go">go</button>
+<button id="back">back</button>
+<button id="clear">clear</button>
+</body>
+</html>
+<!--<script>-->
+<!--var canvas = document.getElementById('canvas');-->
+<!--var ctx = canvas.getContext('2d');-->
+
+<!--canvas.onmousedown = function(ev){-->
+<!--  var x = ev.clientX - this.offsetLeft;-->
+<!--  var y = ev.clientY - this.offsetTop;-->
+<!--  ctx.beginPath();-->
+<!--  ctx.moveTo(x,y);-->
+<!--  canvas.onmousemove = function(ev){-->
+<!--    var targetX = ev.clientX - this.offsetLeft;-->
+<!--    var targetY = ev.clientY - this.offsetTop;-->
+<!--    -->
+<!--    ctx.lineWidth = 1;-->
+<!--    ctx.lineTo(targetX,targetY);-->
+<!--    ctx.stroke();-->
+<!--  };-->
+<!--  window.onmouseup = function(ev){-->
+<!--    canvas.onmousemove = null;-->
+<!--    canvas.onmouseup = null;-->
+<!--  };-->
+<!--};-->
+<!--</script>-->
+
+<script>
+    function Graffiti(dom,context){
+  this.canvas = document.querySelector(dom);
+  this.context = this.canvas.getContext("2d");
+  this.imgList = [];
+
+  this.prevIndex = 0;
+  this.nextIndex = 0;
+  this.currentIndex = 0;
+
+  this.init();
+}
+
+Graffiti.prototype = {
+  constructor:this,
+  init:function(){
+  	var _this = this;
+    this.move(function(){
+    	_this.pushImg();
+
+    	_this.upIndex(_this.imgList.length - 1);
+    });
+  },
+  move:function(endCallback){
+  	var _this = this;
+    var canvas = this.canvas;
+    var context = this.context;
+
+    canvas.onmousedown = function(ev){
+      var x = ev.clientX - this.offsetLeft;
+      var y = ev.clientY - this.offsetTop;
+      context.beginPath();
+      context.moveTo(x,y);
+
+      canvas.onmousemove = function(ev){
+        var targetX = ev.clientX - this.offsetLeft;
+        var targetY = ev.clientY - this.offsetTop;
+
+        context.lineWidth = 1;
+        context.lineTo(targetX,targetY);
+        context.stroke();
+      };
+      window.onmouseup = function(ev){
+        canvas.onmousemove = null;
+        canvas.onmouseup = null;
+        endCallback&&ev.target.matches("#canvas")&&endCallback();
+      };
+    };
+  },
+  back:function(){
+    this.clear();
+    this.context.putImageData(this.imgList[this.prevIndex],0,0);
+    this.upIndex(this.prevIndex);
+  },
+  go:function(){
+  	this.clear();
+  	this.context.putImageData(this.imgList[this.nextIndex],0,0);
+  	this.upIndex(this.nextIndex);
+  },
+  pushImg:function(){
+  	this.imgList.push(this.context.getImageData(0,0,this.canvas.width,this.canvas.height));
+  },
+  clear:function(){
+    this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
+  },
+  upIndex:function(index){
+  	if(index===0){
+  		this.prevIndex = 0;
+  	}else{
+  		this.prevIndex = index - 1;
+  	}
+
+  	if(index===this.imgList.length-1){
+  		this.nextIndex = index;
+  	}else{
+  		this.nextIndex = index + 1;
+  	}
+
+	  this.currentIndex = index;
+  }
+};
+
+var can = new Graffiti("#canvas");
+
+var back = document.getElementById("back");
+var go = document.getElementById("go");
+var clear = document.getElementById("clear");
+
+back.onclick = can.back.bind(can);
+go.onclick = can.go.bind(can);
+clear.onclick = can.clear.bind(can);
+</script>

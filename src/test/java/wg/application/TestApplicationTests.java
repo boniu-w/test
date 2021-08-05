@@ -1,19 +1,16 @@
 package wg.application;
 
 import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import scala.collection.mutable.HashTable;
 import wg.application.entity.*;
 import wg.application.util.WgJsonUtil;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -25,7 +22,6 @@ import java.time.*;
 import java.util.*;
 import java.util.Date;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @SpringBootTest
@@ -816,7 +812,7 @@ public class TestApplicationTests {
         String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
         System.out.println("合并字符串: " + mergedString);
 
-        Map<String, String> map = filtered.stream().collect(Collectors.toMap(item -> item, item -> item + "  wg"));
+        Map<String, String> map = filtered.stream().collect(Collectors.toMap(item -> item, item -> item + "  wg", (k1, k2) -> k2));
         map.forEach((k, v) -> {
             System.out.print(k);
             System.out.print("  ");
@@ -1022,8 +1018,78 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void size(){
+    public void size() {
         System.out.println(Integer.MAX_VALUE);
+    }
+
+    /*****************************************************
+     * @params:
+     * @description: string test
+     * @author: wg
+     * @date: 2021/7/23 15:30
+     *****************************************************/
+    @Test
+    public void stringTest() {
+        String str2 = String.format("Hi,%s:%s.%s", "老鹰", "是一种", "鸟类");
+        System.out.println(str2);
+    }
+
+    /*****************************************************
+     * @params:
+     * @description: BeanUtils.copyProperties(destination, origin);
+     * @author: wg
+     * @date: 2021/7/26 13:47
+     *****************************************************/
+
+    /*****************************************************
+     * @params:
+     * @description: collectors.tomap
+     * @author: wg
+     * @date: 2021/8/4 15:49
+     *****************************************************/
+    @Test
+    public void toMapTest() {
+        List<Student> list = new ArrayList<>(3);
+
+        list.add(new Student("name1", 1));
+        list.add(new Student("name1", 2));
+        list.add(new Student("name1", 3));
+
+        // 生成的 map 集合中只有一个键值对：{version=6.28}
+        Map<String, Object> map = list.stream().collect(Collectors.toMap(Student::getName, Student::getAge, (v1, v2) -> v1));
+
+        System.out.println(map);
+    }
+
+    /*****************************************************
+    * @params:
+    * @description: StringUtils
+    * @author: wg
+    * @date: 2021/8/5 15:21
+    *****************************************************/
+    @Test
+    public void testStringUtils(){
+        String s="";
+        System.out.println(s.length());
+        System.out.println(StringUtils.isEmpty(s));
+
+        boolean blank = org.apache.commons.lang3.StringUtils.isBlank(s);
+        System.out.println(blank);
+        boolean empty = org.apache.commons.lang3.StringUtils.isEmpty(s);
+        System.out.println(empty);
+
+        System.out.println("~~~~~~~~~~~~~~~~");
+        String s1="  ";
+
+        System.out.println(s1.length());
+        System.out.println(StringUtils.isEmpty(s1));
+
+        boolean blank1 = org.apache.commons.lang3.StringUtils.isBlank(s1);
+        System.out.println(blank1);
+        boolean empty1 = org.apache.commons.lang3.StringUtils.isEmpty(s1);
+        System.out.println(empty1);
+
+
     }
 
 }

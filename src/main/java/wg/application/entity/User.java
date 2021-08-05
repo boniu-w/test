@@ -3,6 +3,7 @@ package wg.application.entity;
 import lombok.Data;
 
 import javax.persistence.Transient;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,6 +20,10 @@ public class User {
 
     @Transient
     private String birthday;
+
+    private String key;
+    private String value;
+    private List<User> users;
 
     //@Override
     //public boolean equals(Object o) {
