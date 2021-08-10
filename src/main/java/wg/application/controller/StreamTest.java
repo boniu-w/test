@@ -14,14 +14,14 @@ public class StreamTest {
 
     public static void main(String[] args) {
         List<Integer> myList = new ArrayList<>();
-        for (int i = 0; i < 10000000; i++) {
+        for (int i = 0; i < 1E+7; i++) {
             myList.add(i);
         }
         long result = 0;
         long loopStartTime = System.currentTimeMillis();
         for (int i : myList) {
             if (i % 2 == 0) {
-                result += i;
+                result += i; // 所有偶数的和
             }
         }
         long loopEndTime = System.currentTimeMillis();

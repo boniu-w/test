@@ -2,7 +2,6 @@ package wg.application.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
+import wg.application.config.Animal;
 import wg.application.config.SpringIOCTest;
 import wg.application.entity.*;
 import wg.application.enumeration.Title;
@@ -1493,9 +1493,24 @@ public class Test {
     }
 
     @PostMapping(value = "/aa")
+    @ResponseBody
     public void aa(@RequestBody List<User> users) {
         System.out.println("user.getUsers().size() :  " + users);
     }
 
+     // @Resource(name = "animal")
+     // public Animal animal;
+
+    /*****************************************************
+    * @params:
+    * @description: 测试 @Resource
+    * @author: wg
+    * @date: 2021/8/5 17:38
+    *****************************************************/
+    @RequestMapping(value = "/testResource")
+    @ResponseBody
+    public void testResource(){
+        // System.out.println(animal.getGenus());
+    }
 
 }

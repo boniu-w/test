@@ -692,6 +692,10 @@ public class TestApplicationTests {
 
         System.out.println(s4 == s7); // false
 
+        Integer i=1;
+        if (i==1){
+            System.out.println("Integer == 1");
+        }
 
     }
 
@@ -844,7 +848,7 @@ public class TestApplicationTests {
 
     /*****************************************************
      * @params:
-     * @description: stream filter
+     * @description: stream filter sort 过滤 ,  排序
      * @author: wg
      * @date: 2021/7/8 11:15
      *****************************************************/
@@ -867,12 +871,29 @@ public class TestApplicationTests {
                 return item.equals(map.getValue()) || item.equals("展昭");
             });
         }).collect(Collectors.toList());
+        System.out.println(collect);
+        System.out.println();
 
         arrayList.forEach(System.out::println);
+        System.out.println();
+
         List<String> collect1 = arrayList.stream().sorted().collect(Collectors.toList());
         collect1.forEach(System.out::println);
+        System.out.println();
 
-        System.out.println(collect);
+        Student student = new Student("111",111);
+        Student student1 = new Student("222",222);
+        Student student2 = new Student("333",333);
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(student1);
+        students.add(student2);
+        students.add(student);
+
+        System.out.println(students);
+        System.out.println();
+
+        students.sort(Comparator.comparing(Student::getAge).reversed());
+        System.out.println(students);
     }
 
     /*****************************************************
@@ -1088,8 +1109,23 @@ public class TestApplicationTests {
         System.out.println(blank1);
         boolean empty1 = org.apache.commons.lang3.StringUtils.isEmpty(s1);
         System.out.println(empty1);
-
-
     }
 
+    /*****************************************************
+    * @params:
+    * @description: 科学计数法
+    * @author: wg
+    * @date: 2021/8/9 11:13
+    *****************************************************/
+    @Test
+    public void kexuejishufa() {
+        double d = 6.22848E+18;
+        BigDecimal bigDecimal = new BigDecimal(d);
+        System.out.println(bigDecimal);
+        System.out.println();
+
+        long l = bigDecimal.longValue();
+        String format = String.format("{0:NO}", l);
+        System.out.println(format);
+    }
 }
