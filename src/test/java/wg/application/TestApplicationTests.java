@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -692,8 +693,8 @@ public class TestApplicationTests {
 
         System.out.println(s4 == s7); // false
 
-        Integer i=1;
-        if (i==1){
+        Integer i = 1;
+        if (i == 1) {
             System.out.println("Integer == 1");
         }
 
@@ -861,18 +862,42 @@ public class TestApplicationTests {
         arrayList.add("赵虎");
 
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("1", "wg");
-        hashMap.put("2", "lisi");
-        hashMap.put("3", "zhangsan");
+        hashMap.put("1", "展昭");
+        hashMap.put("2", "包拯");
+
+        boolean b = arrayList.stream().anyMatch(e -> {
+            return e.contains(hashMap.get("1"));
+        });
+        System.out.println("b -> " + b);
+        System.out.println();
+
+        List<String> collect3 = hashMap.entrySet().stream().map(entry -> entry.getValue()).collect(Collectors.toList());
+        System.out.println("collect3 -> " + collect3);
+        System.out.println();
+
+        boolean b1 = arrayList.containsAll(collect3);
+        System.out.println("b1 -> " + b1);
+        System.out.println();
 
 
+        List<String> collect2 = arrayList.stream().filter(e -> {
+            System.out.println(e);
+            return e.equals(collect3.get(0));
+        }).collect(Collectors.toList());
+
+        System.out.println("collect2 -> " + collect2);
+        System.out.println();
+
+        AtomicInteger count = new AtomicInteger();
         List<String> collect = arrayList.stream().filter(item -> {
-            return hashMap.entrySet().stream().allMatch(map -> {
-                return item.equals(map.getValue()) || item.equals("展昭");
+            return hashMap.entrySet().stream().allMatch(entry -> {
+                System.out.println(entry.getValue());
+                System.out.println(count.getAndIncrement());
+                return item.equals(entry.getValue());
             });
         }).collect(Collectors.toList());
         System.out.println(collect);
-        System.out.println();
+        System.out.println("-------");
 
         arrayList.forEach(System.out::println);
         System.out.println();
@@ -881,9 +906,9 @@ public class TestApplicationTests {
         collect1.forEach(System.out::println);
         System.out.println();
 
-        Student student = new Student("111",111);
-        Student student1 = new Student("222",222);
-        Student student2 = new Student("333",333);
+        Student student = new Student("111", 111);
+        Student student1 = new Student("222", 222);
+        Student student2 = new Student("333", 333);
         ArrayList<Student> students = new ArrayList<>();
         students.add(student1);
         students.add(student2);
@@ -895,6 +920,28 @@ public class TestApplicationTests {
         students.sort(Comparator.comparing(Student::getAge).reversed());
         System.out.println(students);
     }
+
+    /*****************************************************
+     * @params:
+     * @description: 多字段联合 搜索 过滤
+     * @author: wg
+     * @date: 2021/8/11 18:24
+     *****************************************************/
+    @Test
+    public void dutest() {
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(new Student("11", 11, 1));
+        students.add(new Student("22", 22, 0));
+        students.add(new Student("33", 33, 1));
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", 11);
+        map.put("age", 11);
+        map.put("sex", 0);
+
+
+    }
+
 
     /*****************************************************
      * @params:
@@ -1083,14 +1130,14 @@ public class TestApplicationTests {
     }
 
     /*****************************************************
-    * @params:
-    * @description: StringUtils
-    * @author: wg
-    * @date: 2021/8/5 15:21
-    *****************************************************/
+     * @params:
+     * @description: StringUtils
+     * @author: wg
+     * @date: 2021/8/5 15:21
+     *****************************************************/
     @Test
-    public void testStringUtils(){
-        String s="";
+    public void testStringUtils() {
+        String s = "";
         System.out.println(s.length());
         System.out.println(StringUtils.isEmpty(s));
 
@@ -1100,7 +1147,7 @@ public class TestApplicationTests {
         System.out.println(empty);
 
         System.out.println("~~~~~~~~~~~~~~~~");
-        String s1="  ";
+        String s1 = "  ";
 
         System.out.println(s1.length());
         System.out.println(StringUtils.isEmpty(s1));
@@ -1112,11 +1159,11 @@ public class TestApplicationTests {
     }
 
     /*****************************************************
-    * @params:
-    * @description: 科学计数法
-    * @author: wg
-    * @date: 2021/8/9 11:13
-    *****************************************************/
+     * @params:
+     * @description: 科学计数法
+     * @author: wg
+     * @date: 2021/8/9 11:13
+     *****************************************************/
     @Test
     public void kexuejishufa() {
         double d = 6.22848E+18;

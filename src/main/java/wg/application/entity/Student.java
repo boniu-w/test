@@ -28,11 +28,18 @@ public class Student {
     private int age;
 
     private int id;
+    private int sex;
 
     private String birthday;
 
     public Student(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public Student(String name, int age, int sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
     }
 }
