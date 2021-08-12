@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.ObjectUtils;
 import wg.application.entity.*;
 import wg.application.util.WgJsonUtil;
 
@@ -937,9 +938,24 @@ public class TestApplicationTests {
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", 11);
         map.put("age", 11);
-        map.put("sex", 0);
+        map.put("sex", 1);
 
+        List<Student> collect = new ArrayList<>();
+        if (map.containsKey("name")) {
+            collect = students.stream().filter(student -> student.getName().equals(String.valueOf(map.get("name")))).collect(Collectors.toList());
+        }
+        if (map.containsKey("age")) {
+            collect = students.stream().filter(student -> student.getAge() == (Integer) map.get("age")).collect(Collectors.toList());
+        }
 
+        // List<Student> collect = students.stream().filter((Student student) -> {
+        //             return student.getAge() == (Integer) map.get("age")
+        //                     && student.getName().equals(String.valueOf(map.get("name")))
+        //                     && student.getSex() == (Integer) map.get("sex");
+        //         }
+        // ).collect(Collectors.toList());
+
+        System.out.println(collect);
     }
 
 
@@ -978,6 +994,11 @@ public class TestApplicationTests {
         DecimalFormat decimalFormat1 = new DecimalFormat("0.00");
         String s1 = decimalFormat1.format(Double.valueOf(s));
         System.out.println("new BigDecimal(s1): " + new BigDecimal(s1));
+
+        Object aa = "  ";
+        System.out.println(ObjectUtils.isEmpty(aa)); // false
+        System.out.println(ObjectUtils.isEmpty(String.valueOf(aa).trim())); // true
+        decimalFormat.format(Double.valueOf(String.valueOf(aa).trim()));
 
     }
 
@@ -1137,7 +1158,7 @@ public class TestApplicationTests {
      *****************************************************/
     @Test
     public void testStringUtils() {
-        String s = "";
+        String s = " ";
         System.out.println(s.length());
         System.out.println(StringUtils.isEmpty(s));
 
