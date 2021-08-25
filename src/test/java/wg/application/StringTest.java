@@ -36,4 +36,18 @@ public class StringTest {
         Object a = new Integer(1);
         String as = (String) a; // 报异常 ClassCastException  .Integer cannot be cast to java.lang.String
     }
+
+    @Test
+    public void testContains() {
+        String s1 = "混合动力";
+
+        if (s1.contains("混合")) {
+            System.out.println("****8  " + s1.indexOf("混合"));
+        }
+
+        if (s1.contains("混里")) {
+            System.out.println("----- " + s1.indexOf("混里"));
+        }
+    }
+
 }

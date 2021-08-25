@@ -33,32 +33,32 @@ public class DiskTest {
      * @time: 2020/8/12 14:41
      ****************************************************************/
     @GetMapping("/queryDiskInfo")
-    public Result<List<Map<String,Object>>> queryDiskInfo(HttpServletRequest request, HttpServletResponse response){
-        Result<List<Map<String,Object>>> res = new Result<>();
+    public Result<List<Map<String, Object>>> queryDiskInfo(HttpServletRequest request, HttpServletResponse response) {
+        Result<List<Map<String, Object>>> res = new Result<>();
         try {
             // 当前文件系统类
             FileSystemView fsv = FileSystemView.getFileSystemView();
             // 列出所有windows 磁盘
             File[] fs = File.listRoots();
-            log.info("查询磁盘信息:"+fs.length+"个");
-            List<Map<String,Object>> list = new ArrayList<>();
+            log.info("查询磁盘信息:" + fs.length + "个");
+            List<Map<String, Object>> list = new ArrayList<>();
 
             for (int i = 0; i < fs.length; i++) {
-                if(fs[i].getTotalSpace()==0) {
-                                                           continue;
+                if (fs[i].getTotalSpace() == 0) {
+                    continue;
                 }
-                Map<String,Object> map = new HashMap<>();
+                Map<String, Object> map = new HashMap<>();
                 map.put("name", fsv.getSystemDisplayName(fs[i]));
                 map.put("max", fs[i].getTotalSpace());
                 map.put("rest", fs[i].getFreeSpace());
-                map.put("restPPT", (fs[i].getTotalSpace()-fs[i].getFreeSpace())*100/fs[i].getTotalSpace());
+                map.put("restPPT", (fs[i].getTotalSpace() - fs[i].getFreeSpace()) * 100 / fs[i].getTotalSpace());
                 list.add(map);
                 log.info(map.toString());
             }
             res.setResult(list);
             res.success("查询成功");
         } catch (Exception e) {
-            res.error500("查询失败"+e.getMessage());
+            res.error500("查询失败" + e.getMessage());
         }
         return res;
     }

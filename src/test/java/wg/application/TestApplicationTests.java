@@ -1196,4 +1196,30 @@ public class TestApplicationTests {
         String format = String.format("{0:NO}", l);
         System.out.println(format);
     }
+
+    @Test
+    public void switchTest() {
+        String s = "123";
+        switch (s) {
+            case "123":
+            case "1":
+                System.out.println("----");
+                break;
+        }
+
+        for (int i = 0; i < 5; i++) {
+            if (i == 1) {
+                System.out.println("111111");
+            }
+            System.out.println("000");
+        }
+
+        Double[] doubles= {1D,2D,3D,4D};
+
+        String ss= org.apache.commons.lang3.StringUtils.join(doubles," ");
+        System.out.println(ss);
+
+    }
+
+
 }
