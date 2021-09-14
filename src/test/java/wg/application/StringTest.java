@@ -4,6 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /*****************************************
  * description:
  * date: 13:43 2021/7/26
@@ -37,6 +41,11 @@ public class StringTest {
         String as = (String) a; // 报异常 ClassCastException  .Integer cannot be cast to java.lang.String
     }
 
+    /************************************************************************
+     * @description: contains
+     * @author: wg
+     * @date: 17:00  2021/9/6
+     ************************************************************************/
     @Test
     public void testContains() {
         String s1 = "混合动力";
@@ -48,6 +57,18 @@ public class StringTest {
         if (s1.contains("混里")) {
             System.out.println("----- " + s1.indexOf("混里"));
         }
+
+        String s2 = "2021-08-18 风险评价 10";
+        String s3 = " 2021-08-18 风险评价 10";
+
+        // System.out.println(s2.contains(s3.trim()));
+        // System.out.println(s3.contains(s2.trim()));
+
+        List<String> list = Collections.singletonList(s2);
+
+        list = list.stream().filter(s -> s.contains(s3.trim())).collect(Collectors.toList());
+
+        System.out.println(list);
     }
 
 }

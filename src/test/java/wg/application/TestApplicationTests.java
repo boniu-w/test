@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.collections.MultiMap;
+import org.apache.commons.collections.map.MultiValueMap;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ObjectUtils;
@@ -23,6 +25,9 @@ import java.time.*;
 import java.util.*;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -161,12 +166,12 @@ public class TestApplicationTests {
 
         int count = 0;
         HashMap<String, Integer> hashMap = new HashMap<>();
-        for (int j = 0; j < useridList.size(); j++) {
-            for (int i = 0; i < list.size(); i++) {
-                String[] playId = list.get(i).split(",");
+        for (String s : useridList) {
+            for (String value : list) {
+                String[] playId = value.split(",");
 
-                for (int k = 0; k < playId.length; k++) {
-                    if (playId[k].equals(useridList.get(j))) {
+                for (String item : playId) {
+                    if (item.equals(s)) {
                         count++;
                     }
                 }
@@ -180,7 +185,7 @@ public class TestApplicationTests {
                 //    count++;
                 //}
             }
-            hashMap.put(useridList.get(j), count);
+            hashMap.put(s, count);
             count = 0;
         }
         System.out.println(hashMap);
@@ -234,18 +239,23 @@ public class TestApplicationTests {
 
     }
 
+    /************************************************************************
+     * @description: 依据一行3个的样式 输出
+     * @author:
+     * @date: 9:45  2021/9/1
+     ************************************************************************/
     @Test
     public void layoutTest() {
         String[] arr = {"展昭", "小黑", "二哈", "张无忌", "张三丰", "123", "小323", "二23哈", "张232无忌", "2323三丰"};
-        String tr = "";
+        StringBuilder tr = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
-            tr += " " + arr[i];
+            tr.append(" ").append(arr[i]);
             if ((i + 1) % 3 == 0) {
-                System.err.println(tr.replaceFirst(",", ""));
-                tr = "";
+                System.err.println(tr.toString().replaceFirst(",", ""));
+                tr = new StringBuilder();
             }
         }
-        System.err.println(tr != null ? tr.replaceFirst(",", "") : "");
+        System.err.println(tr.toString().replaceFirst(",", ""));
     }
 
     public void getPrescription() {
@@ -1214,12 +1224,148 @@ public class TestApplicationTests {
             System.out.println("000");
         }
 
-        Double[] doubles= {1D,2D,3D,4D};
+        Double[] doubles = {1D, 2D, 3D, 4D};
 
-        String ss= org.apache.commons.lang3.StringUtils.join(doubles," ");
+        String ss = org.apache.commons.lang3.StringUtils.join(doubles, " ");
         System.out.println(ss);
 
     }
 
+    /************************************
+     * description:
+     * String[] s1 = {"10", "20", "30", "40", "50"};
+     *       给定一个数 问 这个数 离谁最近
+     * author:
+     * date:
+     ************************************/
+    @Test
+    public void testM() {
+        ArrayList<Integer> integers = new ArrayList<>();
+        String a = "31";
+        a = "90";
+        String[] s1 = {"0", "10", "90", "100", "200"};
+        int[] diff = new int[s1.length];
 
+        for (int i = 0; i < s1.length; i++) {
+            diff[i] = Integer.parseInt(s1[i]) - Integer.parseInt(a);
+            ;
+            if (diff[i] <= 0) {
+                integers.add(diff[i]);
+            }
+        }
+
+        int i = integers.indexOf(Collections.max(integers));
+
+        System.out.println(i + " " + s1[i]);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("index", i);
+        hashMap.put("value", s1[i]);
+    }
+
+    /************************************************************************
+     * @description: 驼峰转下划线
+     * @author:
+     * @date: 11:22  2021/9/1
+     ************************************************************************/
+    @Test
+    public void humpToLine() {
+        Pattern humpPattern = Pattern.compile("[A-Z]");
+        String str = "sectionLayoutHistoryId";
+        Matcher matcher = humpPattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(sb);
+
+        System.out.println(sb.toString());
+
+    }
+
+    /************************************************************************
+     * @description: 双三元
+     * @author:
+     * @date: 12:38  2021/9/1
+     ************************************************************************/
+    @Test
+    public void testSan() {
+        int a = 1;
+        int b = 1;
+        int c = 0;
+        c = a == 1 ? a == b ? 0 : 2 : 1;
+
+        System.out.println(c);
+
+        String s = "---";
+        Integer i = new Integer(1);
+        Object d = 2D;
+        Object e = 2.12;
+
+        String s1 = s instanceof String ? (String) s : null;
+        String s2 = d instanceof String ? (String) d : null;
+        Double aDouble = d instanceof Double ? (Double) d : null;
+        Double ee = e instanceof Double ? (Double) e : null;
+        String s3 = e instanceof String ? ((String) e) : null;
+
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(aDouble);
+        System.out.println(ee);
+        System.out.println(s3);
+    }
+
+    /************************************************************************
+     * @description: atomicReference
+     * @author: wg
+     * @date: 9:50  2021/9/2
+     ************************************************************************/
+    @Test
+    public void testAtomicReference() {
+        AtomicReference<User> userAtomicReference = new AtomicReference<>();
+
+        long l = System.currentTimeMillis();
+        for (int i = 0; i < 10000000; i++) {
+            User user = new User();
+            user.setName("wg" + i);
+        }
+        long l1 = System.currentTimeMillis() - l;
+        System.out.println(l1);
+
+        long l2 = System.currentTimeMillis();
+        for (int i = 0; i < 10000000; i++) {
+            userAtomicReference.set(new User());
+            userAtomicReference.get().setName("ll" + i);
+        }
+        long l3 = System.currentTimeMillis() - l2;
+        System.out.println(l3);
+        System.out.println(userAtomicReference.get().getName());
+    }
+
+    /************************************************************************
+     * @description: assert
+     * @author: wg
+     * @date: 10:40  2021/9/2
+     ************************************************************************/
+    @Test
+    public void testAssert() {
+        System.out.println("start");
+        assert true;
+        System.out.println("go on");
+        assert false : "stop";
+        System.out.println("end");
+    }
+
+    /************************************************************************
+    * @description: MultiMap MultiValueMap
+    * @author: wg
+    * @date:  14:58  2021/9/10
+    ************************************************************************/
+    @Test
+    public void testMap(){
+        MultiMap multiMap = new MultiValueMap();
+
+        // new org.springframework.util.MultiValueMap<>()
+
+    }
 }
