@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,7 +15,6 @@ import java.util.Date;
  * @Copyright
  *************************************************************/
 @Data
-@Entity
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,7 +22,6 @@ public class Role implements Serializable {
     /**
      * id
      */
-    @Id
     private String id;
 
     /**

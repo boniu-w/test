@@ -16,14 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
-import wg.application.config.Animal;
 import wg.application.config.SpringIOCTest;
 import wg.application.entity.*;
 import wg.application.enumeration.Title;
 import wg.application.exception.WgException;
 import wg.application.service.AspectService;
 import wg.application.service.LiuShuiInterface;
-import wg.application.service.MovieInterface;
 import wg.application.service.TestInterface;
 import wg.application.util.IPUtils;
 
@@ -860,18 +858,6 @@ public class Test {
 
     /************ -> 接口测试 结束 ************/
 
-    @Autowired
-    MovieInterface movieInterface;
-
-    @RequestMapping(value = "/testMovieNeo4j")
-    @ResponseBody
-    private String testMovieNeo4j(HttpServletRequest request, HttpServletResponse response) {
-
-        movieInterface.testNeo4j(request, response);
-
-        return "123";
-    }
-
 
     /****************************************************************
      * ioc test
@@ -1205,6 +1191,9 @@ public class Test {
 
     /****************************************************************
      * streamTest
+     * peek接收一个Consumer，而map接收一个Function。
+     * Consumer是没有返回值的，它只是对Stream中的元素进行某些操作，但是操作之后的数据并不返回到Stream中，所以Stream中的元素还是原来的元素。
+     * 而Function是有返回值的，这意味着对于Stream的元素的所有操作都会作为新的结果返回到Stream中
      * @author: wg
      * @time: 2020/7/8 10:18
      ****************************************************************/
@@ -1219,7 +1208,6 @@ public class Test {
                 .collect(Collectors.toList());
 
         System.out.println(collect);
-
 
         ArrayList<String> arrayList = new ArrayList<>();
         HashMap<String, String> hashMap = new HashMap<String, String>();
@@ -1238,10 +1226,7 @@ public class Test {
             System.out.println("arrayList.size() -> " + arrayList.size());
             System.out.println(key + " -> " + value);
         });
-
-
     }
-
 
     /****************************************************************
      * local time date
@@ -1309,10 +1294,8 @@ public class Test {
 
     }
 
-
     @Autowired
     LiuShuiInterface liuShuiInterface;
-
 
     /****************************************************************
      * jpa 

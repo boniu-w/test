@@ -1,7 +1,6 @@
 package wg.application.cas.controller;
 
 
-import org.neo4j.graphalgo.impl.util.IntegerAdder;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,7 +17,7 @@ import java.util.concurrent.atomic.LongAdder;
 public class AtomicIntegerTest {
 
     AtomicInteger count = new AtomicInteger(0);
-    IntegerAdder count1 = new IntegerAdder();
+    // IntegerAdder count1 = new IntegerAdder();
 
 
 

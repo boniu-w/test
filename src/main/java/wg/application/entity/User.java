@@ -2,9 +2,8 @@ package wg.application.entity;
 
 import lombok.Data;
 
-import javax.persistence.Transient;
+import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author wg
@@ -15,15 +14,25 @@ import java.util.Objects;
 @Data
 public class User {
 
-    private String name;
-    private String age;
+    private Integer id;
 
-    @Transient
-    private String birthday;
+    private String name;
+
+    private Integer age;
+
+    private Date birthday;
 
     private String key;
+
     private String value;
+
     private List<User> users;
+
+    private Character gender;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     //@Override
     //public boolean equals(Object o) {

@@ -746,7 +746,7 @@ public class TestApplicationTests {
         for (int i = 0; i < 10000; i++) {
             User user = new User();
             int i1 = random.nextInt(10000);
-            user.setAge(i1 + "");
+            user.setAge(i1);
 
             a.add(user);
         }
@@ -771,8 +771,6 @@ public class TestApplicationTests {
         long l4 = System.currentTimeMillis();
         System.out.println("stream 用时: " + (l4 - l3));
         System.out.println("---  " + collect.size());
-
-
     }
 
     @Test
@@ -818,8 +816,11 @@ public class TestApplicationTests {
     @Test
     public void streamTest() {
         // 生成若干个随机数
-        Stream<Double> limit = Stream.generate(Math::random).limit(5);
+        List<Double> limit = Stream.generate(Math::random).limit(5).collect(Collectors.toList());
         limit.forEach(System.out::println);
+
+        limit.sort(Double::compare);
+        System.out.println("collect 排序:  " + limit);
 
         List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
         List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
@@ -835,6 +836,7 @@ public class TestApplicationTests {
             System.out.print(v);
             System.out.println();
         });
+
 
     }
 
@@ -1357,12 +1359,12 @@ public class TestApplicationTests {
     }
 
     /************************************************************************
-    * @description: MultiMap MultiValueMap
-    * @author: wg
-    * @date:  14:58  2021/9/10
-    ************************************************************************/
+     * @description: MultiMap MultiValueMap
+     * @author: wg
+     * @date: 14:58  2021/9/10
+     ************************************************************************/
     @Test
-    public void testMap(){
+    public void testMap() {
         MultiMap multiMap = new MultiValueMap();
 
         // new org.springframework.util.MultiValueMap<>()

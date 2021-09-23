@@ -4,7 +4,6 @@ package wg.application.entity;
 import lombok.Data;
 import wg.application.util.Excel;
 
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -138,58 +137,7 @@ public class BankFlow implements Serializable {
 
     private String tick;
 
-    @Transient
     private String birthday;
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BankFlow bankFlow = (BankFlow) o;
-        return Float.compare(bankFlow.transactionAmount, transactionAmount) == 0 &&
-          Float.compare(bankFlow.balanceTransaction, balanceTransaction) == 0 &&
-          Objects.equals(id, bankFlow.id) &&
-          Objects.equals(caseId, bankFlow.caseId) &&
-          Objects.equals(introductionId, bankFlow.introductionId) &&
-          Objects.equals(transactionSubject, bankFlow.transactionSubject) &&
-          Objects.equals(accountSubject, bankFlow.accountSubject) &&
-          Objects.equals(cardEntity, bankFlow.cardEntity) &&
-          Objects.equals(recoveryMark, bankFlow.recoveryMark) &&
-          Objects.equals(transactionDate, bankFlow.transactionDate) &&
-          Objects.equals(counterParty, bankFlow.counterParty) &&
-          Objects.equals(accountCounterparty, bankFlow.accountCounterparty) &&
-          Objects.equals(cardCounterparty, bankFlow.cardCounterparty) &&
-          Objects.equals(abstractContent, bankFlow.abstractContent) &&
-          Objects.equals(transactionBank, bankFlow.transactionBank) &&
-          Objects.equals(counterpartyBank, bankFlow.counterpartyBank) &&
-          Objects.equals(placeTransaction, bankFlow.placeTransaction) &&
-          Objects.equals(tradingPlace, bankFlow.tradingPlace) &&
-          Objects.equals(transactionNumber, bankFlow.transactionNumber) &&
-          Objects.equals(mac, bankFlow.mac) &&
-          Objects.equals(ip, bankFlow.ip) &&
-          Objects.equals(currency, bankFlow.currency) &&
-          Objects.equals(temarks, bankFlow.temarks) &&
-          Objects.equals(tradingNo, bankFlow.tradingNo) &&
-          Objects.equals(tellerNumber, bankFlow.tellerNumber) &&
-          Objects.equals(institutionParty, bankFlow.institutionParty) &&
-          Objects.equals(deleteIdentifier, bankFlow.deleteIdentifier) &&
-          Objects.equals(customerCode, bankFlow.customerCode) &&
-          Objects.equals(logNumber, bankFlow.logNumber) &&
-          Objects.equals(apshPlace, bankFlow.apshPlace) &&
-          Objects.equals(matcherCode, bankFlow.matcherCode) &&
-          Objects.equals(matcherBalance, bankFlow.matcherBalance) &&
-          Objects.equals(subjectCredentials, bankFlow.subjectCredentials) &&
-          Objects.equals(adversaryCredentials, bankFlow.adversaryCredentials) &&
-          Objects.equals(trancationRecordsId, bankFlow.trancationRecordsId) &&
-          Objects.equals(reportOrganization, bankFlow.reportOrganization) &&
-          Objects.equals(sheWaiFenLei, bankFlow.sheWaiFenLei) &&
-          Objects.equals(agentName, bankFlow.agentName) &&
-          Objects.equals(agentCredentials, bankFlow.agentCredentials) &&
-          Objects.equals(voucherNumber, bankFlow.voucherNumber) &&
-          Objects.equals(voucherType, bankFlow.voucherType) &&
-          Objects.equals(excelName, bankFlow.excelName);
-    }
 
     @Override
     public int hashCode() {

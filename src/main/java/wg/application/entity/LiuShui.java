@@ -3,16 +3,9 @@ package wg.application.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Table(name = "liushui")
-@Entity
 @Data
 public class LiuShui {
 
-  @Id
   private long id;
 
   private String cardNo;
