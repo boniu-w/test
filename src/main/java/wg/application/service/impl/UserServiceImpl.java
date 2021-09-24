@@ -16,9 +16,8 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public void getAll() {
+    public List<User> getAll() {
         UserExample userExample = new UserExample();
-        List<User> users = userMapper.selectByExample(userExample);
-        users.forEach(System.out::println);
+        return userMapper.selectByExample(userExample);
     }
 }
