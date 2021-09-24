@@ -585,18 +585,15 @@ public class TestApplicationTests {
 
         int solt = i & maxValue;
         System.out.println(solt);
-
-
     }
 
-
     String mysqlDriver = "com.mysql.cj.jdbc.Driver";
-    String url = "jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT+8";
+    String url = "jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
     String user = "root";
-    String password = "123456";
+    String password = "root";
     Connection conn;
 
-    //@Test
+    @Test
     public void createDynamicTable() {
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -626,15 +623,11 @@ public class TestApplicationTests {
             Statement statement = conn.createStatement();
             boolean executeDrop = statement.execute(dropTable);
             boolean executeCreate = statement.execute(createTableSql);
-
-
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
 
@@ -657,23 +650,17 @@ public class TestApplicationTests {
         try {
             Class.forName(mysqlDriver);
             conn = DriverManager.getConnection(url, user, password);
-
             if (conn != null) {
-
                 return conn;
             }
-
             return null;
-
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
-
     }
-
 
     /***************************************************
      * @decription 字符串 equals ==
