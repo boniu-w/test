@@ -44,8 +44,6 @@ public class IdWorker {
         return System.currentTimeMillis();
     }
 
-
-
     public IdWorker(long workerId, long datacenterId, long sequence) {
 
         // 检查机房id和机器id是否超过31 不能小于0
