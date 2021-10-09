@@ -1481,19 +1481,51 @@ public class Test {
         System.out.println("user.getUsers().size() :  " + users);
     }
 
-     // @Resource(name = "animal")
-     // public Animal animal;
+    // @Resource(name = "animal")
+    // public Animal animal;
 
     /*****************************************************
-    * @params:
-    * @description: 测试 @Resource
-    * @author: wg
-    * @date: 2021/8/5 17:38
-    *****************************************************/
+     * @params:
+     * @description: 测试 @Resource
+     * @author: wg
+     * @date: 2021/8/5 17:38
+     *****************************************************/
     @RequestMapping(value = "/testResource")
     @ResponseBody
-    public void testResource(){
+    public void testResource() {
         // System.out.println(animal.getGenus());
+    }
+
+    @GetMapping(value = "/houjian")
+    @ResponseBody
+    public ArrayList<HashMap<String, Object>> houjian() {
+        ArrayList<HashMap<String, Object>> maps = new ArrayList<>();
+        int[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        Random random = new Random();
+        for (int i = 0; i < 13; i++) {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("platform", "CEPJ-WHPE注水" + i);
+            map.put("val", a[random.nextInt(a.length)]);
+            map.put("warn", "蓝色预警");
+            map.put("message","123");
+
+            HashMap<String, Object> map1 = new HashMap<>();
+            map1.put("platform", "CEPJ-WHPE注水" + i);
+            map1.put("val", a[random.nextInt(a.length)]);
+            map1.put("warn", "黄色预警");
+            map1.put("message","sdfsdf");
+
+            HashMap<String, Object> map2 = new HashMap<>();
+            map2.put("platform", "CEPJ-WHPE注水" + i);
+            map2.put("val", a[random.nextInt(a.length)]);
+            map2.put("warn", "红色预警");
+            map2.put("message","23123asdasd");
+
+            maps.add(map);
+            maps.add(map1);
+            maps.add(map2);
+        }
+        return maps;
     }
 
 }

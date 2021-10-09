@@ -1373,11 +1373,27 @@ public class TestApplicationTests {
     /************************************************************************
      * @description: 农历
      * @author: wg
-     * @date:  16:53  2021/9/29
+     * @date: 16:53  2021/9/29
      ************************************************************************/
     @Test
-    public void lunarTest(){
+    public void lunarTest() {
         boolean gregorianLeapYear = CalendarUtil.isGregorianLeapYear(2000);
         System.out.println(gregorianLeapYear);
     }
+
+    @Test
+    public void pp() {
+        int i = 1;
+        int j = i;
+        System.out.println(i++);
+        System.out.println(i);
+        System.out.println("i -> " + i + "  " + (++i) + " i -> " + i);
+        for (i = 0; i < 10; ) {
+            System.out.println(i);
+            System.out.println(++i);
+            System.out.println();
+            // ++i;
+        }
+    }
+
 }

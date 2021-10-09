@@ -1,4 +1,4 @@
-package wg.application.controller;
+package wg.application.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class StartupMessage implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("启动完成");
+        // System.out.println("启动完成");
         log.info("启动完成");
     }
 }

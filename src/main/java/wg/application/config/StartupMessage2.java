@@ -1,4 +1,4 @@
-package wg.application.controller;
+package wg.application.config;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
  * @version
  * @Copyright
  *************************************/
-@Component
-@Order(value = 1)
-public class StartupMessage2 implements ApplicationRunner {
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        System.out.println("startup finish");
-    }
-}
+// @Component
+// @Order(value = 1)
+// public class StartupMessage2 implements ApplicationRunner {
+//     @Override
+//     public void run(ApplicationArguments args) throws Exception {
+//         System.out.println("startup finish");
+//     }
+// }

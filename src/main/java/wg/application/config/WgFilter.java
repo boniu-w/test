@@ -35,7 +35,11 @@ public class WgFilter implements Filter {
 
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        // System.out.println("request.getHeader(\"Origin\") :  " + request.getHeader("Origin"));
+        // System.out.println("Access-Control-Request-Headers :  " + request.getHeader("Access-Control-Request-Headers"));
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        // response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        // response.setHeader("Access-Control-Allow-Origin", "https://datav.aliyun.com");
         response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
 
         String token = "";
@@ -52,7 +56,7 @@ public class WgFilter implements Filter {
                     // 解析 验证token
                     // 先验证是否过期,如果过期 重新生成
                     boolean tokenExpired = JwtTokenUtil.isTokenExpired(token);
-                    System.out.println(tokenExpired);
+                    System.out.println("tokenExpired :  " + tokenExpired);
                     if (tokenExpired) {
                         token = JwtTokenUtil.generateJwtToken();
                     }
@@ -64,12 +68,13 @@ public class WgFilter implements Filter {
 
                 }
             }
-        }else {
+        } else {
 
 //            response.sendRedirect("");
 //            request.getRequestDispatcher("").forward(request,response);
         }
         System.out.println("servletRequest.getCharacterEncoding() -> " + servletRequest.getCharacterEncoding());
+        System.out.println();
         filterChain.doFilter(servletRequest, servletResponse);
 
     }
