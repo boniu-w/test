@@ -9,7 +9,7 @@ import java.util.*;
  *
  * 你可以按任意顺序返回答案。
  * @author: wg
- * @date:  15:38  2021/10/9
+ * @date: 15:38  2021/10/9
  ************************************************************************/
 public class Solution {
 
@@ -21,7 +21,7 @@ public class Solution {
         // System.out.println(Arrays.toString(ints));
 
         System.out.println(System.currentTimeMillis());
-        // int[] ints1 = twoSum(ints, 9);
+//        int[] ints1 = twoSum(ints, 9);
         int[] ints1 = test2(ints, 9);
         System.out.println(Arrays.toString(ints1));
         System.out.println(System.currentTimeMillis());
@@ -51,6 +51,12 @@ public class Solution {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = 0; i < nums.length; ++i) {
             if (map.containsKey(target - nums[i])) {
+                System.out.println(i + "  " + nums[i]);
+                map.forEach((key, value) -> {
+                    System.out.println("key -> " + key);
+                    System.out.println("value -> " + value);
+                    System.out.println();
+                });
                 return new int[]{map.get(target - nums[i]), i};
             }
             map.put(nums[i], i);
