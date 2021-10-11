@@ -21,11 +21,6 @@ public class Solution {
         System.out.println(Arrays.toString(nums));
 
         System.out.println(System.currentTimeMillis());
-<<<<<<< HEAD
-//        int[] ints1 = twoSum(ints, 9);
-        int[] ints1 = test2(ints, 9);
-        System.out.println(Arrays.toString(ints1));
-=======
         int[] index = twoSum(nums, 9);
         // int[] index = test2(nums, 9);
         System.out.println(Arrays.toString(index));
@@ -33,7 +28,6 @@ public class Solution {
             int anInt = nums[index[i]];
             System.out.println(anInt);
         }
->>>>>>> e38a34d08cb83702f82fc77eeffa2242990b1106
         System.out.println(System.currentTimeMillis());
     }
 
@@ -57,12 +51,6 @@ public class Solution {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = 0; i < nums.length; ++i) {
             if (map.containsKey(target - nums[i])) {
-                System.out.println(i + "  " + nums[i]);
-                map.forEach((key, value) -> {
-                    System.out.println("key -> " + key);
-                    System.out.println("value -> " + value);
-                    System.out.println();
-                });
                 return new int[]{map.get(target - nums[i]), i};
             }
             map.put(nums[i], i);
