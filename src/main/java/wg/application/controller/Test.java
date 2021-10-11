@@ -427,9 +427,19 @@ public class Test {
             }
             hashMap.put(i, i);
         }
-
         return hashMap;
+    }
 
+    public void forPP() {
+        int l = 10;
+        for (int i = 0; i < l; i++) {
+            System.out.print(l + " ");
+        }
+
+        System.out.println();
+        for (int j = 0; j < l; ++j) {
+            System.out.print(l + " ");
+        }
     }
 
     /*************************************************************
@@ -1507,19 +1517,19 @@ public class Test {
             map.put("platform", "CEPJ-WHPE注水" + i);
             map.put("val", a[random.nextInt(a.length)]);
             map.put("warn", "蓝色预警");
-            map.put("message","123");
+            map.put("message", "123");
 
             HashMap<String, Object> map1 = new HashMap<>();
             map1.put("platform", "CEPJ-WHPE注水" + i);
             map1.put("val", a[random.nextInt(a.length)]);
             map1.put("warn", "黄色预警");
-            map1.put("message","sdfsdf");
+            map1.put("message", "sdfsdf");
 
             HashMap<String, Object> map2 = new HashMap<>();
             map2.put("platform", "CEPJ-WHPE注水" + i);
             map2.put("val", a[random.nextInt(a.length)]);
             map2.put("warn", "红色预警");
-            map2.put("message","23123asdasd");
+            map2.put("message", "23123asdasd");
 
             maps.add(map);
             maps.add(map1);

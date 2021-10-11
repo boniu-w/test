@@ -34,20 +34,15 @@ public class LoopTest {
         long l = System.currentTimeMillis();
         // list 去重
         for (int i = 0; i < arrayList.size(); i++) {
-
             String s = arrayList.get(i);
-
             for (int j = arrayList.size() - 1; j > i; j--) {
                 String s1 = arrayList.get(j);
                 if (s.equals(s1)) {
                     //System.out.println("第 " + (j + 1) + " 行的 roleCode 值：" + s + " 已存在，忽略导入");
                     //duplicateString.add(s1);
                     arrayList.remove(j);
-
                 }
-
             }
-
             //System.out.println("<<<<>>>>  "+arrayList.size());
         }
 
@@ -59,8 +54,6 @@ public class LoopTest {
         System.out.println(duplicateString);
 
         return arrayList;
-
-
     }
 
     /****************************************************************
@@ -84,7 +77,6 @@ public class LoopTest {
 
         System.out.println(set.size());
 
-
         long l1 = System.currentTimeMillis();
 
         long l2 = l1 - l;
@@ -93,7 +85,6 @@ public class LoopTest {
         System.out.println(duplicateString);
 
         return set;
-
-
     }
+
 }

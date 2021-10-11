@@ -1396,4 +1396,10 @@ public class TestApplicationTests {
         }
     }
 
+    @Test
+    public void test() {
+        wg.application.controller.Test test = new wg.application.controller.Test();
+        test.forPP();
+    }
+
 }
