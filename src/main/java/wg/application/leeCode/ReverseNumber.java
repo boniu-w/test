@@ -24,7 +24,7 @@ package wg.application.leeCode;
  * @author: wg
  * @date: 15:40  2021/10/9
  ************************************************************************/
-public class Reverse {
+public class ReverseNumber {
 
     public static void main(String[] args) {
         int x = -123456789;

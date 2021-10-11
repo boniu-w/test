@@ -9,21 +9,25 @@ import java.util.*;
  *
  * 你可以按任意顺序返回答案。
  * @author: wg
- * @date:  15:38  2021/10/9
+ * @date: 15:38  2021/10/9
  ************************************************************************/
 public class Solution {
 
     public static void main(String[] args) {
-        int[] ints = new int[1000];
-        for (int i = 0; i < ints.length; i++) {
-            ints[i] = new Double(Math.random() * 10).intValue();
+        int[] nums = new int[100];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = new Double(Math.random() * 9).intValue();
         }
-        // System.out.println(Arrays.toString(ints));
+        System.out.println(Arrays.toString(nums));
 
         System.out.println(System.currentTimeMillis());
-        // int[] ints1 = twoSum(ints, 9);
-        int[] ints1 = test2(ints, 9);
-        System.out.println(Arrays.toString(ints1));
+        int[] index = twoSum(nums, 9);
+        // int[] index = test2(nums, 9);
+        System.out.println(Arrays.toString(index));
+        for (int i = 0; i < 2; i++) {
+            int anInt = nums[index[i]];
+            System.out.println(anInt);
+        }
         System.out.println(System.currentTimeMillis());
     }
 
@@ -33,18 +37,14 @@ public class Solution {
      * @date: 17:11  2021/10/8
      ************************************************************************/
     public static int[] twoSum(int[] nums, int target) {
-        int[] index = new int[2];
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; ++j) {
                 if (nums[i] + nums[j] == target) {
-                    index[0] = i;
-                    index[1] = j;
-                    break;
+                    return new int[]{i, j};
                 }
             }
         }
-        // System.out.println(Arrays.toString(index));
-        return index;
+        return new int[0];
     }
 
     public static int[] test2(int[] nums, int target) {
