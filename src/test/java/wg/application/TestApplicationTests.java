@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ObjectUtils;
 import wg.application.entity.*;
+import wg.application.security.CommonEncryption;
 import wg.application.util.CalendarUtil;
 import wg.application.util.WgJsonUtil;
 
@@ -1400,6 +1401,14 @@ public class TestApplicationTests {
     public void test() {
         wg.application.controller.Test test = new wg.application.controller.Test();
         test.forPP();
+    }
+
+    @Test
+    public void decrypt() {
+        String s = CommonEncryption.displacementEncryption("123");
+        System.out.println(s);
+        String decrypt = CommonEncryption.displacementDecrypt(s, CommonEncryption.getStaticDigit());
+        System.out.println(decrypt);
     }
 
 }
