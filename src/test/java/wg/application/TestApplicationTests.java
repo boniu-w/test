@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ObjectUtils;
 import wg.application.entity.*;
+import wg.application.gc.GcEntity;
 import wg.application.security.CommonEncryption;
 import wg.application.util.CalendarUtil;
 import wg.application.util.WgJsonUtil;
@@ -1409,6 +1410,20 @@ public class TestApplicationTests {
         System.out.println(s);
         String decrypt = CommonEncryption.displacementDecrypt(s, CommonEncryption.getStaticDigit());
         System.out.println(decrypt);
+    }
+
+    /************************************************************************
+     * @description: gc 垃圾回收 test
+     * @author: wg
+     * @date: 14:43  2021/10/14
+     ************************************************************************/
+    @Test
+    public void gcTest() {
+        GcEntity gcEntity = new GcEntity(new BigDecimal("10.00"));
+        new Object();
+        new GcEntity(new BigDecimal("11.00"));
+        new GcEntity(new BigDecimal("0.00"));
+        System.gc();
     }
 
 }
