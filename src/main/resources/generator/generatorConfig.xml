@@ -23,7 +23,8 @@
 
         <javaModelGenerator targetPackage="wg.application.entity" targetProject="src/main/java" />
 
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
+<!--        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />-->
+        <sqlMapGenerator targetPackage="wg.application.dao" targetProject="src/main/java" />
 
         <javaClientGenerator targetPackage="wg.application.dao" targetProject="src/main/java" type="XMLMAPPER" />
 
