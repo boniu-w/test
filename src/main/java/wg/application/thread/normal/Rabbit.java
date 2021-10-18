@@ -22,17 +22,18 @@ public class Rabbit extends Animal implements Runnable {
 
     @Override
     public void run() {
-        while (flag) {
-            running();
-        }
+        running();
     }
 
     public void running() {
+        while (!flag) {
+            return;
+        }
         try {
             length += step;
             System.out.println("rabbit run " + length);
             Thread.sleep(1000);
-            // running();
+            running();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

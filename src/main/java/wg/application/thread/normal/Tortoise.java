@@ -19,17 +19,18 @@ public class Tortoise extends Animal implements Runnable {
 
     @Override
     public void run() {
-        while (flag) {
-            running();
-        }
+        running();
     }
 
     public void running() {
+        while (!flag) {
+            return;
+        }
         try {
             length += step;
             System.out.println("tortoise run " + length);
             Thread.sleep(100);
-            // running();
+            running();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -16,6 +16,16 @@ public abstract class Animal {
 
     protected abstract void features();
 
+    public Animal(String family, String species, String name, String gender) {
+        this.family = family;
+        this.species = species;
+        this.name = name;
+        this.gender = gender;
+    }
+
+    public Animal() {
+    }
+
     public String getFamily() {
         return family;
     }

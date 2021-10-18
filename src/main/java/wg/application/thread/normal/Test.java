@@ -22,18 +22,19 @@ public class Test {
 
         // 开始跑
         Thread rabbitThread = new Thread(rabbit);
-        rabbitThread.start();
         Thread tortoiseThread = new Thread(tortoise);
+        rabbitThread.start();
         tortoiseThread.start();
 
+        long start = System.currentTimeMillis();
         System.out.println("-------------------------------------------");
-
         long count = 0;
         for (; ; ) {
             count++;
             // 当比赛结束是 返回 龟兔 所跑的距离
             if (rabbit.getLength().compareTo(course) >= 0 || tortoise.getLength().compareTo(course) >= 0) {
                 System.out.println("比赛结束");
+                System.out.println(System.currentTimeMillis() - start);
 
                 map.put("stepOfRabbit", rabbit.getLength());
                 map.put("stepOfTortoise", tortoise.getLength());
