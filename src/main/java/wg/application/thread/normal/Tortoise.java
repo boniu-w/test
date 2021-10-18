@@ -29,7 +29,7 @@ public class Tortoise extends Animal implements Runnable {
             length += step;
             System.out.println("tortoise run " + length);
             Thread.sleep(100);
-            running();
+            // running();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

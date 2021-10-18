@@ -32,7 +32,7 @@ public class Rabbit extends Animal implements Runnable {
             length += step;
             System.out.println("rabbit run " + length);
             Thread.sleep(1000);
-            running();
+            // running();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
