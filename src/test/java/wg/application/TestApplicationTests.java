@@ -14,6 +14,7 @@ import org.springframework.util.ObjectUtils;
 import wg.application.entity.*;
 import wg.application.gc.GcEntity;
 import wg.application.security.CommonEncryption;
+import wg.application.thread.TaskTest;
 import wg.application.util.CalendarUtil;
 import wg.application.util.WgJsonUtil;
 
@@ -1424,6 +1425,19 @@ public class TestApplicationTests {
         new GcEntity(new BigDecimal("11.00"));
         new GcEntity(new BigDecimal("0.00"));
         System.gc();
+    }
+
+    /************************************************************************
+     * @description:
+     * @author: wg
+     * @date: 9:58  2021/10/18
+     ************************************************************************/
+    @Test
+    public void TimerTest() {
+        TaskTest taskTest = new TaskTest();
+        // taskTest.test1();
+        taskTest.test2();
+
     }
 
 }

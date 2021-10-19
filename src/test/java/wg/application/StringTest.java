@@ -3,9 +3,12 @@ package wg.application;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.i18n.LocaleContextHolder;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /*****************************************
@@ -69,6 +72,15 @@ public class StringTest {
         list = list.stream().filter(s -> s.contains(s3.trim())).collect(Collectors.toList());
 
         System.out.println(list);
+    }
+
+    @Test
+    public void test3(){
+        String[] s = new String[0];
+        System.out.println(Arrays.toString(s));
+
+        Locale locale = LocaleContextHolder.getLocale();
+        System.out.println(locale);
     }
 
 }
