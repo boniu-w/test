@@ -6,26 +6,26 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController(value = "/race_of_rabbit_and_tortoise")
-public class Test {
+@RestController(value = "/race_of_rabbit_and_tortoise_1")
+public class Test1 {
 
     /**
      * 赛程
      */
     private static final Double course = 100D;
 
-    @GetMapping(value = "/race")
+    @GetMapping(value = "/race1")
     public static Map<String, Object> race() {
         HashMap<String, Object> map = new HashMap<>();
-        Rabbit rabbit = new Rabbit();
-        Tortoise tortoise = new Tortoise();
+        Rabbit1 rabbit = new Rabbit1();
+        Tortoise1 tortoise = new Tortoise1();
 
         // 开始跑
         Thread rabbitThread = new Thread(rabbit);
         Thread tortoiseThread = new Thread(tortoise);
         rabbitThread.start();
         tortoiseThread.start();
-
+        
         long start = System.currentTimeMillis();
         System.out.println("-------------------------------------------");
         long count = 0;
@@ -41,7 +41,7 @@ public class Test {
                 map.put("stepOfRabbit", rabbit.getLength());
                 map.put("stepOfTortoise", tortoise.getLength());
                 map.put("count", count);
-
+                
                 return map;
             }
         }
