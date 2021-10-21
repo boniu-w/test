@@ -15,7 +15,7 @@ public class Test {
     private static final Double course = 100D;
 
     @GetMapping(value = "/race")
-    public static Map<String, Object> race() {
+    public static Map<String, Object> race() throws InterruptedException {
         HashMap<String, Object> map = new HashMap<>();
         Rabbit rabbit = new Rabbit();
         Tortoise tortoise = new Tortoise();
@@ -35,6 +35,7 @@ public class Test {
             if (rabbit.getLength().compareTo(course) >= 0 || tortoise.getLength().compareTo(course) >= 0) {
                 rabbit.stopCurrentThread();
                 tortoise.stopCurrentThread();
+
                 System.out.println("比赛结束");
                 System.out.println(System.currentTimeMillis() - start);
 
@@ -44,11 +45,17 @@ public class Test {
 
                 return map;
             }
+            Thread.sleep(1);
         }
     }
 
     public static void main(String[] args) {
-        Map<String, Object> race = race();
+        Map<String, Object> race = null;
+        try {
+            race = race();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(race);
     }
 }

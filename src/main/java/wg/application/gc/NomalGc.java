@@ -18,26 +18,27 @@ public class NomalGc {
         MyObject o2 = new MyObject();
 
         o1 = o2;
-        //System.gc();
+        System.gc();
 
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     int readChar = System.in.read();
+        //     System.out.println(readChar);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
 
     }
 
     static class MyObject {
 
-        public void MyObject() {
+        public MyObject() {
             System.out.println("create");
         }
 
         public Object object;
 
         @Override
-        public void finalize() {
+        protected void finalize() {
             System.out.println("my finalize ---");
         }
 
