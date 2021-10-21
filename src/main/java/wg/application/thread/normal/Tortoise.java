@@ -4,7 +4,7 @@ public class Tortoise extends Animal implements Runnable {
 
     private Double step;
     private Double length;
-    private boolean flag;
+    private Boolean flag;
 
     {
         this.step = 1D;
@@ -57,5 +57,13 @@ public class Tortoise extends Animal implements Runnable {
 
     public void setLength(Double length) {
         this.length = length;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
     }
 }

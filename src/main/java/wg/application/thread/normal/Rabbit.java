@@ -4,7 +4,7 @@ public class Rabbit extends Animal implements Runnable {
 
     private Double step;
     private Double length;
-    private boolean flag;
+    private Boolean flag;
 
     {
         this.step = 3D;
@@ -46,14 +46,6 @@ public class Rabbit extends Animal implements Runnable {
         this.flag = false;
     }
 
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
     public Double getStep() {
         return step;
     }
@@ -68,5 +60,13 @@ public class Rabbit extends Animal implements Runnable {
 
     public void setLength(Double length) {
         this.length = length;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
     }
 }

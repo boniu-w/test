@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -75,12 +76,16 @@ public class StringTest {
     }
 
     @Test
-    public void test3(){
+    public void test3() {
         String[] s = new String[0];
         System.out.println(Arrays.toString(s));
 
         Locale locale = LocaleContextHolder.getLocale();
         System.out.println(locale);
+
+        Object obj = 2.2D;
+        System.out.println(new BigDecimal(obj.toString()));
+        System.out.println(new BigDecimal((String) obj));
     }
 
 }

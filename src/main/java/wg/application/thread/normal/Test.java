@@ -27,10 +27,13 @@ public class Test {
         tortoiseThread.start();
 
         long start = System.currentTimeMillis();
-        System.out.println("-------------------------------------------");
         long count = 0;
         for (; ; ) {
             count++;
+            // Double rabbitLength = rabbit.getLength();
+            // Double tortoiseLength = tortoise.getLength();
+            // System.out.println("rabbit  " + rabbit.getLength());
+            // System.out.println("tortoise  " + tortoise.getLength());
             // 当比赛结束是 返回 龟兔 所跑的距离
             if (rabbit.getLength().compareTo(course) >= 0 || tortoise.getLength().compareTo(course) >= 0) {
                 rabbit.stopCurrentThread();
@@ -45,7 +48,7 @@ public class Test {
 
                 return map;
             }
-            Thread.sleep(1);
+            // Thread.sleep(1);
         }
     }
 
