@@ -3,7 +3,7 @@ package wg.application.thread.normal;
 public class Tortoise extends Animal implements Runnable {
 
     private Double step;
-    private Double length;
+    private volatile Double length;
     private Boolean flag;
 
     {
