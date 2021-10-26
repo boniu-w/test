@@ -85,7 +85,10 @@ public class StringTest {
 
         Object obj = 2.2D;
         System.out.println(new BigDecimal(obj.toString()));
-        System.out.println(new BigDecimal((String) obj));
+        // System.out.println(new BigDecimal((String) obj)); // 空指针异常
+
+        obj = null;
+        System.out.println(obj.toString()); // 空指针异常
     }
 
 }
