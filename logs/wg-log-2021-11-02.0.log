@@ -1,0 +1,765 @@
+2021-11-02 09:51:10.762 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 13184 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 09:51:10.765 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 09:51:11.456 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 09:51:11.459 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 09:51:11.519 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 43ms. Found 0 repository interfaces.
+2021-11-02 09:51:11.822 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$66bb5d7e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 09:51:12.380 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 09:51:12.396 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 09:51:12.405 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 09:51:12.414 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 09:51:12.415 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 09:51:12.420 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 09:51:12.547 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 09:51:12.547 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1720 ms
+2021-11-02 09:51:13.757 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 09:51:13.801 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 09:51:13.920 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 09:51:13.926 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 09:51:13.928 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.638 seconds (JVM running for 4.089)
+2021-11-02 09:51:13.929 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 09:53:29.706 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 09:53:33.769 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 1592 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 09:53:33.773 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 09:53:34.385 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 09:53:34.387 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 09:53:34.440 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 43ms. Found 0 repository interfaces.
+2021-11-02 09:53:34.727 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3c54a83e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 09:53:35.249 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 09:53:35.262 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 09:53:35.270 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 09:53:35.279 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 09:53:35.279 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 09:53:35.285 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 09:53:35.400 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 09:53:35.400 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1568 ms
+2021-11-02 09:53:36.367 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 09:53:36.407 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 09:53:36.506 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 09:53:36.512 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 09:53:36.514 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.134 seconds (JVM running for 3.569)
+2021-11-02 09:53:36.515 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 09:57:20.485 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 09:57:24.503 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 12528 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 09:57:24.506 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 09:57:25.088 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 09:57:25.091 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 09:57:25.146 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 43ms. Found 0 repository interfaces.
+2021-11-02 09:57:25.424 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$5ec530c4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 09:57:25.946 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 09:57:25.959 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 09:57:25.968 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 09:57:25.976 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 09:57:25.977 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 09:57:25.982 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 09:57:26.117 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 09:57:26.117 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1551 ms
+2021-11-02 09:57:27.103 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 09:57:27.147 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 09:57:27.249 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 09:57:27.255 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 09:57:27.258 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.148 seconds (JVM running for 3.555)
+2021-11-02 09:57:27.259 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 09:58:45.869 [https-jsse-nio-2-exec-8] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-11-02 09:58:45.869 [https-jsse-nio-2-exec-8] INFO  org.springframework.web.servlet.DispatcherServlet:524 - Initializing Servlet 'dispatcherServlet'
+2021-11-02 09:58:45.874 [https-jsse-nio-2-exec-8] INFO  org.springframework.web.servlet.DispatcherServlet:546 - Completed initialization in 4 ms
+2021-11-02 09:58:45.917 [https-jsse-nio-2-exec-8] INFO  com.zaxxer.hikari.HikariDataSource:110 - HikariPool-1 - Starting...
+2021-11-02 09:58:46.032 [https-jsse-nio-2-exec-8] INFO  com.zaxxer.hikari.HikariDataSource:123 - HikariPool-1 - Start completed.
+2021-11-02 10:00:35.562 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 10:00:35.578 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2021-11-02 10:00:35.583 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2021-11-02 10:00:39.558 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 11492 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:00:39.562 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:00:40.148 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:00:40.150 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:00:40.204 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 44ms. Found 0 repository interfaces.
+2021-11-02 10:00:40.495 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$6994fa37] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:00:41.029 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:00:41.046 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:00:41.059 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:00:41.068 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:00:41.069 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:00:41.075 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:00:41.194 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:00:41.194 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1573 ms
+2021-11-02 10:00:41.442 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Cron expression must consist of 6 fields (found 7 in "* * * * * ? *")
+2021-11-02 10:00:41.445 [main] INFO  org.apache.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2021-11-02 10:00:41.452 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener:142 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-11-02 10:00:41.465 [main] ERROR org.springframework.boot.SpringApplication:858 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Cron expression must consist of 6 fields (found 7 in "* * * * * ? *")
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:849)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Cron expression must consist of 6 fields (found 7 in "* * * * * ? *")
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.processScheduled(ScheduledAnnotationBeanPostProcessor.java:496)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$null$1(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$postProcessAfterInitialization$2(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.postProcessAfterInitialization(ScheduledAnnotationBeanPostProcessor.java:358)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593)
+	... 15 common frames omitted
+2021-11-02 10:01:01.481 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 17860 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:01:01.485 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:01:02.072 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:01:02.075 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:01:02.126 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 42ms. Found 0 repository interfaces.
+2021-11-02 10:01:02.404 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9a4c8953] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:01:02.930 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:01:02.943 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:01:02.951 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:01:02.960 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:01:02.960 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:01:02.965 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:01:03.081 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:01:03.082 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1542 ms
+2021-11-02 10:01:03.315 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Cron expression must consist of 6 fields (found 7 in "* * * * * ? *")
+2021-11-02 10:01:03.317 [main] INFO  org.apache.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2021-11-02 10:01:03.325 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener:142 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-11-02 10:01:03.327 [main] ERROR org.springframework.boot.SpringApplication:858 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Cron expression must consist of 6 fields (found 7 in "* * * * * ? *")
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:849)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Cron expression must consist of 6 fields (found 7 in "* * * * * ? *")
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.processScheduled(ScheduledAnnotationBeanPostProcessor.java:496)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$null$1(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$postProcessAfterInitialization$2(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.postProcessAfterInitialization(ScheduledAnnotationBeanPostProcessor.java:358)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593)
+	... 15 common frames omitted
+2021-11-02 10:02:24.290 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 6472 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:02:24.293 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:02:24.865 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:02:24.868 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:02:24.920 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 42ms. Found 0 repository interfaces.
+2021-11-02 10:02:25.200 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$4e615e1e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:02:25.718 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:02:25.731 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:02:25.740 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:02:25.748 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:02:25.749 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:02:25.754 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:02:25.872 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:02:25.872 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1518 ms
+2021-11-02 10:02:26.831 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 10:02:26.873 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:02:26.974 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:02:26.980 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 10:02:26.982 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.082 seconds (JVM running for 3.478)
+2021-11-02 10:02:26.984 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 10:02:27.040 [scheduling-1] INFO  com.zaxxer.hikari.HikariDataSource:110 - HikariPool-1 - Starting...
+2021-11-02 10:02:27.151 [scheduling-1] INFO  com.zaxxer.hikari.HikariDataSource:123 - HikariPool-1 - Start completed.
+2021-11-02 10:02:35.923 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 10:02:35.936 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2021-11-02 10:02:35.939 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2021-11-02 10:15:58.455 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 8076 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:15:58.458 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:15:59.050 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:15:59.052 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:15:59.105 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 42ms. Found 0 repository interfaces.
+2021-11-02 10:15:59.388 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$34383be9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:15:59.924 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:15:59.938 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:15:59.948 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:15:59.957 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:15:59.958 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:15:59.964 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:16:00.097 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:16:00.097 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1578 ms
+2021-11-02 10:16:00.351 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': For input string: "?"
+2021-11-02 10:16:00.354 [main] INFO  org.apache.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2021-11-02 10:16:00.364 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener:142 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-11-02 10:16:00.367 [main] ERROR org.springframework.boot.SpringApplication:858 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': For input string: "?"
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:849)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': For input string: "?"
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.processScheduled(ScheduledAnnotationBeanPostProcessor.java:496)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$null$1(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$postProcessAfterInitialization$2(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.postProcessAfterInitialization(ScheduledAnnotationBeanPostProcessor.java:358)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593)
+	... 15 common frames omitted
+2021-11-02 10:16:24.292 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 17552 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:16:24.295 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:16:24.876 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:16:24.878 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:16:24.930 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 42ms. Found 0 repository interfaces.
+2021-11-02 10:16:25.212 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$a60a2caa] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:16:25.730 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:16:25.743 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:16:25.751 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:16:25.759 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:16:25.760 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:16:25.765 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:16:25.886 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:16:25.886 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1530 ms
+2021-11-02 10:16:26.864 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 10:16:26.907 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:16:27.005 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:16:27.011 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 10:16:27.013 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.11 seconds (JVM running for 3.518)
+2021-11-02 10:16:27.014 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 10:16:27.031 [scheduling-1] INFO  com.zaxxer.hikari.HikariDataSource:110 - HikariPool-1 - Starting...
+2021-11-02 10:16:27.132 [scheduling-1] INFO  com.zaxxer.hikari.HikariDataSource:123 - HikariPool-1 - Start completed.
+2021-11-02 10:16:41.790 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 10:16:41.803 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2021-11-02 10:16:41.806 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2021-11-02 10:16:56.354 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 14996 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:16:56.357 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:16:56.991 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:16:56.993 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:16:57.045 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 43ms. Found 0 repository interfaces.
+2021-11-02 10:16:57.341 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ed7b5594] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:16:57.873 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:16:57.887 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:16:57.896 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:16:57.904 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:16:57.905 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:16:57.910 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:16:58.035 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:16:58.036 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1616 ms
+2021-11-02 10:16:59.058 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 10:16:59.099 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:16:59.197 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:16:59.203 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 10:16:59.205 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.272 seconds (JVM running for 3.676)
+2021-11-02 10:16:59.206 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 10:19:34.249 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 10:19:38.235 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 14028 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:19:38.238 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:19:38.820 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:19:38.822 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:19:38.874 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 42ms. Found 0 repository interfaces.
+2021-11-02 10:19:39.155 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$77f0a62e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:19:39.667 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:19:39.681 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:19:39.689 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:19:39.697 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:19:39.697 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:19:39.703 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:19:39.819 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:19:39.820 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1522 ms
+2021-11-02 10:19:40.058 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': For input string: "TU"
+2021-11-02 10:19:40.060 [main] INFO  org.apache.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2021-11-02 10:19:40.067 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener:142 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-11-02 10:19:40.070 [main] ERROR org.springframework.boot.SpringApplication:858 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': For input string: "TU"
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:849)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': For input string: "TU"
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.processScheduled(ScheduledAnnotationBeanPostProcessor.java:496)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$null$1(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$postProcessAfterInitialization$2(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.postProcessAfterInitialization(ScheduledAnnotationBeanPostProcessor.java:358)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593)
+	... 15 common frames omitted
+2021-11-02 10:21:13.262 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 13244 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:21:13.266 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:21:13.952 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:21:13.954 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:21:14.007 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 43ms. Found 0 repository interfaces.
+2021-11-02 10:21:14.291 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1ad6ecb7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:21:14.820 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:21:14.835 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:21:14.844 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:21:14.853 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:21:14.854 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:21:14.859 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:21:14.985 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:21:14.985 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1649 ms
+2021-11-02 10:21:15.958 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 10:21:15.997 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:21:16.098 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:21:16.104 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 10:21:16.106 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.244 seconds (JVM running for 3.651)
+2021-11-02 10:21:16.107 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 10:22:00.044 [scheduling-1] INFO  com.zaxxer.hikari.HikariDataSource:110 - HikariPool-1 - Starting...
+2021-11-02 10:22:00.135 [scheduling-1] INFO  com.zaxxer.hikari.HikariDataSource:123 - HikariPool-1 - Start completed.
+2021-11-02 10:25:17.457 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 10:25:17.470 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2021-11-02 10:25:17.475 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2021-11-02 10:29:55.606 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 16068 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:29:55.608 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:29:56.199 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:29:56.201 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:29:56.253 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 42ms. Found 0 repository interfaces.
+2021-11-02 10:29:56.538 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d99ff66a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:29:57.059 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:29:57.073 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:29:57.082 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:29:57.091 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:29:57.092 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:29:57.098 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:29:57.216 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:29:57.217 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1547 ms
+2021-11-02 10:29:58.186 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 10:29:58.227 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:29:58.324 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:29:58.331 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 10:29:58.333 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.127 seconds (JVM running for 3.536)
+2021-11-02 10:29:58.334 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 10:30:00.034 [scheduling-1] INFO  com.zaxxer.hikari.HikariDataSource:110 - HikariPool-1 - Starting...
+2021-11-02 10:30:00.128 [scheduling-1] INFO  com.zaxxer.hikari.HikariDataSource:123 - HikariPool-1 - Start completed.
+2021-11-02 10:30:00.299 [https-jsse-nio-2-exec-8] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-11-02 10:30:00.299 [https-jsse-nio-2-exec-8] INFO  org.springframework.web.servlet.DispatcherServlet:524 - Initializing Servlet 'dispatcherServlet'
+2021-11-02 10:30:00.304 [https-jsse-nio-2-exec-8] INFO  org.springframework.web.servlet.DispatcherServlet:546 - Completed initialization in 4 ms
+2021-11-02 10:33:46.508 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 10:33:46.527 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2021-11-02 10:33:46.532 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2021-11-02 10:35:24.350 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 1224 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:35:24.353 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:35:24.966 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:35:24.968 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:35:25.021 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 43ms. Found 0 repository interfaces.
+2021-11-02 10:35:25.307 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3c54a83e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:35:25.829 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:35:25.842 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:35:25.850 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:35:25.859 [main] ERROR org.apache.catalina.util.LifecycleBase:175 - Failed to initialize component [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:983)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:535)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:1055)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:173)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:455)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:106)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:86)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:415)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:174)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:181)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:154)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:236)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1085)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1098)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:557)
+	at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:74)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:980)
+	... 21 common frames omitted
+2021-11-02 10:35:25.860 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:35:25.860 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:35:25.866 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:35:25.984 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:35:25.985 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1570 ms
+2021-11-02 10:35:26.241 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Range exceeds maximum (8): '2021' in expression "0 36 10 2 11 2021"
+2021-11-02 10:35:26.243 [main] INFO  org.apache.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2021-11-02 10:35:26.252 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener:142 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-11-02 10:35:26.254 [main] ERROR org.springframework.boot.SpringApplication:858 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timerTest' defined in file [D:\java-project\test\target\classes\wg\application\TimerTask\TimerTest.class]: Initialization of bean failed; nested exception is java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Range exceeds maximum (8): '2021' in expression "0 36 10 2 11 2021"
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:849)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.lang.IllegalStateException: Encountered invalid @Scheduled method 'testSpringBootTimerTask': Range exceeds maximum (8): '2021' in expression "0 36 10 2 11 2021"
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.processScheduled(ScheduledAnnotationBeanPostProcessor.java:496)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$null$1(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.lambda$postProcessAfterInitialization$2(ScheduledAnnotationBeanPostProcessor.java:359)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor.postProcessAfterInitialization(ScheduledAnnotationBeanPostProcessor.java:358)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:429)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593)
+	... 15 common frames omitted
+2021-11-02 10:35:42.361 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 1792 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 10:35:42.364 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 10:35:42.947 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 10:35:42.950 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 10:35:43.003 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 43ms. Found 0 repository interfaces.
+2021-11-02 10:35:43.288 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$557451be] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 10:35:43.817 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 10:35:43.831 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:35:43.839 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:35:43.848 [main] ERROR org.apache.catalina.util.LifecycleBase:175 - Failed to initialize component [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:983)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:535)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:1055)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:173)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:455)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:106)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:86)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:415)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:174)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:181)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:154)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:236)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1085)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1098)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:557)
+	at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:74)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:980)
+	... 21 common frames omitted
+2021-11-02 10:35:43.849 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 10:35:43.849 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 10:35:43.855 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 10:35:43.987 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 10:35:43.987 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1563 ms
+2021-11-02 10:35:44.976 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 10:35:45.019 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:35:45.120 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Stopping ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:35:45.121 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:35:45.122 [main] ERROR org.apache.catalina.util.LifecycleBase:175 - Failed to start component [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:226)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:259)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:197)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:311)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:164)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:236)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1085)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1171)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:568)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005)
+	... 14 common frames omitted
+2021-11-02 10:35:45.126 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Pausing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:35:45.336 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Pausing ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:35:45.336 [main] INFO  org.apache.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2021-11-02 10:35:45.339 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Stopping ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:35:45.342 [main] INFO  org.apache.catalina.util.LifecycleBase:173 - The stop() method was called on component [StandardServer[-1]] after stop() had already been called. The second call will be ignored.
+2021-11-02 10:35:45.342 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Destroying ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 10:35:45.342 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Stopping ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:35:45.342 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Destroying ProtocolHandler ["http-nio-8080"]
+2021-11-02 10:35:45.344 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener:142 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-11-02 10:35:45.345 [main] ERROR o.s.b.diagnostics.LoggingFailureAnalysisReporter:42 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8080, or configure this application to listen on another port.
+
+2021-11-02 10:35:45.347 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 12:54:08.674 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 17612 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 12:54:08.677 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 12:54:09.273 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 12:54:09.275 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 12:54:09.327 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 42ms. Found 0 repository interfaces.
+2021-11-02 12:54:09.610 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$8f36c1b5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 12:54:10.133 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 12:54:10.147 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:54:10.155 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:54:10.163 [main] ERROR org.apache.catalina.util.LifecycleBase:175 - Failed to initialize component [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Protocol handler initialization failed
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:983)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.core.StandardService.initInternal(StandardService.java:535)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:1055)
+	at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:136)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:173)
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:455)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:106)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:86)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:415)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:174)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:181)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:154)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:236)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1085)
+	at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1098)
+	at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:557)
+	at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:74)
+	at org.apache.catalina.connector.Connector.initInternal(Connector.java:980)
+	... 21 common frames omitted
+2021-11-02 12:54:10.164 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 12:54:10.164 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 12:54:10.170 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 12:54:10.287 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 12:54:10.288 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1554 ms
+2021-11-02 12:54:11.326 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 12:54:11.371 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:54:11.473 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Stopping ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:54:11.474 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:54:11.475 [main] ERROR org.apache.catalina.util.LifecycleBase:175 - Failed to start component [Connector[HTTP/1.1-8080]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:226)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:259)
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:197)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:311)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:164)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at wg.application.TestApplication.main(TestApplication.java:26)
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:236)
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:210)
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1085)
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1171)
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:568)
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005)
+	... 14 common frames omitted
+2021-11-02 12:54:11.479 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Pausing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:54:11.697 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Pausing ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:54:11.698 [main] INFO  org.apache.catalina.core.StandardService:173 - Stopping service [Tomcat]
+2021-11-02 12:54:11.701 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Stopping ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:54:11.703 [main] INFO  org.apache.catalina.util.LifecycleBase:173 - The stop() method was called on component [StandardServer[-1]] after stop() had already been called. The second call will be ignored.
+2021-11-02 12:54:11.704 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Destroying ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:54:11.704 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Stopping ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:54:11.704 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Destroying ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:54:11.706 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener:142 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-11-02 12:54:11.707 [main] ERROR o.s.b.diagnostics.LoggingFailureAnalysisReporter:42 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8080, or configure this application to listen on another port.
+
+2021-11-02 12:54:11.709 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 12:54:27.771 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 4988 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 12:54:27.776 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 12:54:28.366 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 12:54:28.368 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 12:54:28.420 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 41ms. Found 0 repository interfaces.
+2021-11-02 12:54:28.695 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$697ab093] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 12:54:29.212 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 12:54:29.226 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:54:29.234 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:54:29.242 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 12:54:29.243 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 12:54:29.248 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 12:54:29.365 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 12:54:29.366 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1533 ms
+2021-11-02 12:54:30.367 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 12:54:30.411 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:54:30.518 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:54:30.524 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 12:54:30.526 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.15 seconds (JVM running for 3.566)
+2021-11-02 12:54:30.527 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 12:55:14.131 [https-jsse-nio-2-exec-8] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-11-02 12:55:14.131 [https-jsse-nio-2-exec-8] INFO  org.springframework.web.servlet.DispatcherServlet:524 - Initializing Servlet 'dispatcherServlet'
+2021-11-02 12:55:14.136 [https-jsse-nio-2-exec-8] INFO  org.springframework.web.servlet.DispatcherServlet:546 - Completed initialization in 4 ms
+2021-11-02 12:58:04.966 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 12:58:09.363 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 7972 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 12:58:09.367 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 12:58:09.987 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 12:58:09.989 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 12:58:10.045 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 45ms. Found 0 repository interfaces.
+2021-11-02 12:58:10.352 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1bca7260] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 12:58:10.885 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 2 (https) 8080 (http)
+2021-11-02 12:58:10.898 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:58:10.906 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:58:10.915 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 12:58:10.916 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 12:58:10.921 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 12:58:11.041 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 12:58:11.042 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1606 ms
+2021-11-02 12:58:12.100 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 12:58:12.149 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-2"]
+2021-11-02 12:58:12.259 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 12:58:12.266 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 2 (https) 8080 (http) with context path ''
+2021-11-02 12:58:12.267 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.338 seconds (JVM running for 3.762)
+2021-11-02 12:58:12.269 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 12:58:15.332 [https-jsse-nio-2-exec-8] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-11-02 12:58:15.332 [https-jsse-nio-2-exec-8] INFO  org.springframework.web.servlet.DispatcherServlet:524 - Initializing Servlet 'dispatcherServlet'
+2021-11-02 12:58:15.337 [https-jsse-nio-2-exec-8] INFO  org.springframework.web.servlet.DispatcherServlet:546 - Completed initialization in 5 ms
+2021-11-02 13:09:26.674 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
+2021-11-02 13:09:30.824 [main] INFO  wg.application.TestApplication:50 - Starting TestApplication on DESKTOP-8ST7NBP with PID 3360 (D:\java-project\test\target\classes started by wg in D:\java-project\test)
+2021-11-02 13:09:30.827 [main] INFO  wg.application.TestApplication:679 - The following profiles are active: wg
+2021-11-02 13:09:31.408 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:244 - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-11-02 13:09:31.410 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:126 - Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-11-02 13:09:31.462 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate:182 - Finished Spring Data repository scanning in 41ms. Found 0 repository interfaces.
+2021-11-02 13:09:31.744 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker:330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ae0bf703] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-11-02 13:09:32.266 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:90 - Tomcat initialized with port(s): 33333 (https) 8080 (http)
+2021-11-02 13:09:32.280 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["https-jsse-nio-33333"]
+2021-11-02 13:09:32.288 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Initializing ProtocolHandler ["http-nio-8080"]
+2021-11-02 13:09:32.297 [main] INFO  org.apache.catalina.core.StandardService:173 - Starting service [Tomcat]
+2021-11-02 13:09:32.297 [main] INFO  org.apache.catalina.core.StandardEngine:173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
+2021-11-02 13:09:32.302 [main] INFO  org.apache.catalina.core.AprLifecycleListener:173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\java-1.8.0\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;E:\java-1.8.0\bin;E:\java-1.8.0\jre\bin;C:\Program Files\MySQL\MySQL Server 8.0\bin;E:\apache-maven-3.8.2\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\node_global\node_modules\cnpm\bin;C:\Program Files\nodejs\node_global\node_modules\yarn\bin;D:\Programs\Python\Python37\Lib\site-packages\jep;C:\Program Files\nodejs\;D:\Programs\Python\Python37\Scripts\;D:\Programs\Python\Python37\;C:\Users\wg\AppData\Local\Microsoft\WindowsApps;E:\IDEA\bin;;;C:\Users\wg\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wg\AppData\Roaming\npm;.]
+2021-11-02 13:09:32.420 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/]:173 - Initializing Spring embedded WebApplicationContext
+2021-11-02 13:09:32.420 [main] INFO  org.springframework.web.context.ContextLoader:296 - Root WebApplicationContext: initialization completed in 1539 ms
+2021-11-02 13:09:33.384 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:171 - Initializing ExecutorService 'taskScheduler'
+2021-11-02 13:09:33.427 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["https-jsse-nio-33333"]
+2021-11-02 13:09:33.529 [main] INFO  org.apache.coyote.http11.Http11NioProtocol:173 - Starting ProtocolHandler ["http-nio-8080"]
+2021-11-02 13:09:33.535 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer:204 - Tomcat started on port(s): 33333 (https) 8080 (http) with context path ''
+2021-11-02 13:09:33.537 [main] INFO  wg.application.TestApplication:59 - Started TestApplication in 3.103 seconds (JVM running for 3.502)
+2021-11-02 13:09:33.538 [main] INFO  wg.application.config.StartupMessage:23 - 启动完成
+2021-11-02 13:09:48.181 [Thread-6] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler:208 - Shutting down ExecutorService 'taskScheduler'
