@@ -51,7 +51,7 @@ public class AtomicIntegerTest {
     }
 
     public static void test2() {
-        BigDecimal bigDecimal = new BigDecimal("0");
+        BigDecimal bigDecimal = new BigDecimal("00000000");
         AtomicReference<BigDecimal> safetyFactor = new AtomicReference<>();
         safetyFactor.set(bigDecimal);
         System.out.println(safetyFactor.get());

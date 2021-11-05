@@ -5,6 +5,7 @@ import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.tools.javac.util.Context;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.MultiValueMap;
@@ -1438,6 +1439,54 @@ public class TestApplicationTests {
         // taskTest.test1();
         taskTest.test2();
 
+    }
+
+    /************************************************************************
+     * @description: 泛型
+     * @author: wg
+     * @date: 16:35  2021/11/5
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void fanxingTest() {
+        User user = new User();
+        user.setName("iii");
+
+        wg.application.controller.Test test = new wg.application.controller.Test();
+        test.testFanXing(User.class, user);
+
+        try {
+            Class<? extends User> aClass = user.getClass();
+            Field field = aClass.getDeclaredField("name");
+            String name1 = field.getName();
+            System.out.println(name1);
+
+            Class<?> type = field.getType();
+            System.out.println(type);
+
+            field.setAccessible(true);
+            Object val = field.get(user);
+            System.out.println(val);
+
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        ////////////////////////////////////////
+
+        Class<? extends User> aClass = user.getClass();
+        User cast = aClass.cast(user);
+        System.out.println(cast);
+        try {
+            User instance = aClass.newInstance();
+            System.out.println(instance);
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        Map<Class<?>, Context.Key<?>> kt = new HashMap<Class<?>, Context.Key<?>>();
+        Context.Key<?> key = kt.get(aClass);
+        System.out.println(key);
     }
 
 }

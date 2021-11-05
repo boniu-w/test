@@ -19,6 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan("wg.application.dao")
 // @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @ComponentScan(basePackages = {"wg.application"}, excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {Aspect.class})})
+// 用于定时任务
 @EnableScheduling
 public class TestApplication {
 
@@ -28,32 +29,32 @@ public class TestApplication {
     }
 
     // SpringBoot2.x配置HTTPS,并实现HTTP访问自动转向HTTPS -> 不管用
-    @Bean
-    public ServletWebServerFactory servletContainer() {
-        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory(){
-            @Override
-            protected void postProcessContext(Context context) {
-                SecurityConstraint securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/*");
-                securityConstraint.addCollection(collection);
-                context.addConstraint(securityConstraint);
-            }
-        };
-        tomcat.addAdditionalTomcatConnectors(httpConnector());
-        return tomcat;
-    }
+    // @Bean
+    // public ServletWebServerFactory servletContainer() {
+    //     TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory(){
+    //         @Override
+    //         protected void postProcessContext(Context context) {
+    //             SecurityConstraint securityConstraint = new SecurityConstraint();
+    //             securityConstraint.setUserConstraint("CONFIDENTIAL");
+    //             SecurityCollection collection = new SecurityCollection();
+    //             collection.addPattern("/*");
+    //             securityConstraint.addCollection(collection);
+    //             context.addConstraint(securityConstraint);
+    //         }
+    //     };
+    //     tomcat.addAdditionalTomcatConnectors(httpConnector());
+    //     return tomcat;
+    // }
 
-    @Bean
-    public Connector httpConnector() {
-        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        connector.setScheme("http");
-        connector.setPort(8080); // 监听Http的端口
-        connector.setSecure(false);
-        connector.setRedirectPort(33333); // 监听Http端口后转向Https端口, 33333 是自己设置的端口
-        return connector;
-    }
+    // @Bean
+    // public Connector httpConnector() {
+    //     Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+    //     connector.setScheme("http");
+    //     connector.setPort(8000); // 监听Http的端口
+    //     connector.setSecure(false);
+    //     connector.setRedirectPort(33333); // 监听Http端口后转向Https端口, 33333 是自己设置的端口
+    //     return connector;
+    // }
 
 }
 
