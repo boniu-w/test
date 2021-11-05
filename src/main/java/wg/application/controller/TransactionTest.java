@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wg.application.algorithm.IdWorker;
+import wg.application.entity.InformationSchema;
 import wg.application.entity.User;
 import wg.application.vo.Result;
 
@@ -155,5 +156,34 @@ public class TransactionTest {
         return result;
     }
 
-
+    @RequestMapping(value = "/get_all_table")
+    public void getTables() {
+        String sql = "SELECT" +
+                "* " +
+                "FROM" +
+                "INFORMATION_SCHEMA.KEY_COLUMN_USAGE " +
+                "WHERE" +
+                "referenced_table_name = 'basic_data';";
+        Connection conn = null;
+        try {
+            Class.forName(mysqlDriver);
+            conn = DriverManager.getConnection(url, user, password);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.println(resultSet.getRow());
+            System.out.println(resultSet);
+            ArrayList<InformationSchema> informationSchemas = new ArrayList<>();
+            while (resultSet.next()) {
+                InformationSchema informationSchema = new InformationSchema();
+                informationSchema.setColumnName(resultSet.getString("column_name"));
+                informationSchema.setReferencedColumnName(resultSet.getString("referenced_column_name"));
+                informationSchema.setTableName(resultSet.getString("table_name"));
+                informationSchema.setReferencedTableName(resultSet.getString("referenced_table_name"));
+                informationSchemas.add(informationSchema);
+            }
+            informationSchemas.forEach(System.out::println);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

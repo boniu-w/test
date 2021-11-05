@@ -30,8 +30,12 @@ import javax.annotation.Resource;
 //import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -1536,6 +1540,23 @@ public class Test {
             maps.add(map2);
         }
         return maps;
+    }
+
+    @PostMapping(value = "/test_fanxing")
+    @ResponseBody
+    public <T> void testFanXing(@ModelAttribute Class<T> user, User user1) {
+        System.out.println("  ModelAttribute ");
+        try {
+            // Class<? extends Class> aClass = user.getClass();
+            Field name = user.getDeclaredField("name");
+            name.setAccessible(true);
+            PropertyDescriptor propertyDescriptor = new PropertyDescriptor(name.getName(), user);
+            Method readMethod = propertyDescriptor.getReadMethod();
+            String val = readMethod.invoke(user.cast(user1)).toString();
+            System.out.println(val);
+        } catch (NoSuchFieldException | IntrospectionException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
 }

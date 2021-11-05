@@ -19,6 +19,7 @@ public class NomalGc {
 
         o1 = o2;
         System.gc();
+        // o2.finalize();
 
         // try {
         //     int readChar = System.in.read();

@@ -1,9 +1,10 @@
 package wg.application.cas.controller;
 
 
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.LongAdder;
 
 /*************************************************************
@@ -18,7 +19,6 @@ public class AtomicIntegerTest {
 
     AtomicInteger count = new AtomicInteger(0);
     // IntegerAdder count1 = new IntegerAdder();
-
 
 
     void m() {
@@ -46,5 +46,14 @@ public class AtomicIntegerTest {
         });
 
         System.out.println(t.count);
+        System.out.println();
+        test2();
+    }
+
+    public static void test2() {
+        BigDecimal bigDecimal = new BigDecimal("00000000");
+        AtomicReference<BigDecimal> safetyFactor = new AtomicReference<>();
+        safetyFactor.set(bigDecimal);
+        System.out.println(safetyFactor.get());
     }
 }
