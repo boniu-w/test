@@ -151,8 +151,6 @@ public class FileTest {
         // 2. 导出
         Class<?> aClass = Class.forName("wg.application.entity.DutyEntity");
         ExcelUtil.export(null, response, (Class<T>) aClass, excelParams);
-
-
     }
 
 }

@@ -91,4 +91,11 @@ public class StringTest {
         System.out.println(obj.toString()); // 空指针异常
     }
 
+    @Test
+    public void test4(){
+        int i =1;
+        Integer integer = Integer.valueOf(Integer.toString(i));
+        System.out.println(integer);
+    }
+
 }

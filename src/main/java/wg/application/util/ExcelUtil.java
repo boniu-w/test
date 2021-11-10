@@ -272,11 +272,9 @@ public class ExcelUtil {
         Float aFloat = null;
         String s = null;
 
-
         List<T> objectList = new ArrayList<>();
         if (!StringUtils.isEmpty(data)) {
             objectList = JSON.parseArray(data, clazz);
-
         }
 
         String fileName = excelParams.getExportFileName();
@@ -354,7 +352,6 @@ public class ExcelUtil {
             }
             /************ 导出表的正文 -> 结束 ************/
 
-
             /************ 设置响应header -> 开始  ************/
             fileName = new String(fileName.getBytes(), "ISO8859-1");
             response.setContentType("application/vnd.ms-excel");
@@ -363,7 +360,6 @@ public class ExcelUtil {
             response.addHeader("Pargam", "no-cache");
             response.addHeader("Cache-Control", "no-cache");
             /************ 设置响应header -> 结束  ************/
-
 
             /************ 流 -> 开始 ************/
             OutputStream outputStream = response.getOutputStream();

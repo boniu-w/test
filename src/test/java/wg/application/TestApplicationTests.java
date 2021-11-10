@@ -811,24 +811,31 @@ public class TestApplicationTests {
         List<Double> limit = Stream.generate(Math::random).limit(5).collect(Collectors.toList());
         limit.forEach(System.out::println);
 
-        limit.sort(Double::compare);
+        // 取最小值
+        double asDouble = limit.stream().mapToDouble(Double::valueOf).min().getAsDouble();
+        System.out.println("最小值 " + asDouble);
+
+        // 排序
+        // limit.sort(Double::compare); // 从小到大
+        limit.sort(Comparator.comparing(Double::valueOf, (e1, e2) -> e2.compareTo(e1)));  // 从大到小
         System.out.println("collect 排序:  " + limit);
 
+        // 过滤
         List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
         List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
 
         System.out.println("筛选列表: " + filtered);
-        String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
+        String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(" ?? "));
         System.out.println("合并字符串: " + mergedString);
 
+        // 转map
         Map<String, String> map = filtered.stream().collect(Collectors.toMap(item -> item, item -> item + "  wg", (k1, k2) -> k2));
         map.forEach((k, v) -> {
             System.out.print(k);
-            System.out.print("  ");
+            System.out.print(" --- ");
             System.out.print(v);
             System.out.println();
         });
-
 
     }
 
@@ -1191,6 +1198,7 @@ public class TestApplicationTests {
      *****************************************************/
     @Test
     public void kexuejishufa() {
+        long u = 1_111_111_111_111L;
         double d = 6.22848E+18;
         BigDecimal bigDecimal = new BigDecimal(d);
         System.out.println(bigDecimal);
@@ -1199,6 +1207,9 @@ public class TestApplicationTests {
         long l = bigDecimal.longValue();
         String format = String.format("{0:NO}", l);
         System.out.println(format);
+
+        double s = 1.7162910765000004E-5;
+        System.out.println(new BigDecimal(s));
     }
 
     @Test
@@ -1487,6 +1498,13 @@ public class TestApplicationTests {
         Map<Class<?>, Context.Key<?>> kt = new HashMap<Class<?>, Context.Key<?>>();
         Context.Key<?> key = kt.get(aClass);
         System.out.println(key);
+
+        /////////////////////////////////////////////
+
+        test.setter(user, "name", "1111");
+        test.setter(user, "createTime", new Date());
+        System.out.println(user);
+
     }
 
 }
