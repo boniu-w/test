@@ -1202,10 +1202,10 @@ public class TestApplicationTests {
         double d = 6.22848E+18;
         BigDecimal bigDecimal = new BigDecimal(d);
         System.out.println(bigDecimal);
-        System.out.println();
+        System.out.println(bigDecimal.toPlainString());
 
         long l = bigDecimal.longValue();
-        String format = String.format("{0:NO}", l);
+        String format = String.format("{0:C3}", l);
         System.out.println(format);
 
         double s = 1.7162910765000004E-5;
