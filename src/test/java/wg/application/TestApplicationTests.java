@@ -18,6 +18,7 @@ import wg.application.security.CommonEncryption;
 import wg.application.thread.TaskTest;
 import wg.application.util.CalendarUtil;
 import wg.application.util.WgJsonUtil;
+import wg.application.util.WgUtil;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -335,8 +336,8 @@ public class TestApplicationTests {
      * 全角空格为12288，半角空格为32
      * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
      *
-     * @param input 任意字符串
-     * @return 半角字符串
+     * @param input
+     * @return
      */
     public static String toSBC(String input) {
         //半角转全角：
@@ -1505,6 +1506,69 @@ public class TestApplicationTests {
         test.setter(user, "createTime", new Date());
         System.out.println(user);
 
+    }
+
+    /************************************************************************
+     * @description: 全角 半角 测试
+     * @author: wg
+     * @date: 11:12  2021/11/12
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testbc() {
+        String s = WgUtil.toHalfAngle("a  b");
+        System.out.println(s);
+        String s1 = WgUtil.toFullAngle("a  b");
+        System.out.println(s1);
+    }
+
+    /************************************************************************
+     * @description:
+     * 测试结论: 1. list for (Integer integer : integers)可以 break 和 continue
+     * 2. map.forEach 不能 break 和 continue
+     * 3. map for (Map.Entry<Integer, Integer> entry : map.entrySet()) 可以 break 和 continue
+     * @author: wg
+     * @date: 11:25  2021/11/12
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void forTest() {
+        ArrayList<Integer> integers = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            integers.add(i);
+        }
+
+        int count = 0, count1 = 0, count2 = 0;
+        for (Integer integer : integers) {
+            count++;
+            if (integer == 2) continue;
+            count1++;
+            if (integer == 4) break;
+            count2++;
+        }
+
+        System.out.println("count = " + count);
+        System.out.println("count1 = " + count1);
+        System.out.println("count2 = " + count2);
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            map.put(i, i);
+        }
+
+        // map.forEach((k,v)->{
+        //     if (k==2) {
+        //         continue;
+        //     }
+        // });
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getKey() == 2) {
+                continue;
+            }
+        }
     }
 
 }

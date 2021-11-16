@@ -3,17 +3,25 @@ package wg.application.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WgUtil {
     private static final Logger logger = LoggerFactory.getLogger(WgUtil.class);
+
+    private WgUtil wgUtil;
+
+    @PostConstruct
+    public void initWgUtil() {
+        wgUtil = this;
+    }
 
     /************************************************************************
      * @description: 把 Object 转成 target 类型
@@ -98,10 +106,8 @@ public class WgUtil {
     }
 
     public static void main(String[] args) {
-
         test();
     }
-
 
     public static void test() {
         String s1 = double2ScientificNotation(5.720970255000001E-6);
@@ -111,7 +117,7 @@ public class WgUtil {
     /************************************************************************
      * @description: 转成科学计数法
      * @author: wg
-     * @date:  16:04  2021/11/11
+     * @date: 16:04  2021/11/11
      * @params:
      * @return:
      ************************************************************************/
@@ -124,5 +130,51 @@ public class WgUtil {
         String f = String.format("%.3f", Double.parseDouble(temp));
         str = f + str.substring(str.indexOf("E"));
         return str;
+    }
+
+    /************************************************************************
+     * @description:
+     * 转全角的方法(SBC case) 半角转全角
+     * 全角空格为12288，半角空格为32
+     * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+     * @author: wg
+     * @date: 11:09  2021/11/12
+     * @params: 任意字符串
+     * @return: 全角字符串
+     ************************************************************************/
+    public static String toFullAngle(String input) {
+        //半角转全角：
+        char[] c = input.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == 32) {
+                c[i] = (char) 12288;
+                continue;
+            }
+            if (c[i] < 127)
+                c[i] = (char) (c[i] + 65248);
+        }
+        return new String(c);
+    }
+
+    /************************************************************************
+     * @description: 任意字符串 转 半角
+     * @author: wg
+     * @date: 11:11  2021/11/12
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static String toHalfAngle(String input) {
+        char[] c = input.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == 12288) {
+                //全角空格为12288，半角空格为32
+                c[i] = (char) 32;
+                continue;
+            }
+            if (c[i] > 65280 && c[i] < 65375)
+                //其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+                c[i] = (char) (c[i] - 65248);
+        }
+        return new String(c);
     }
 }
