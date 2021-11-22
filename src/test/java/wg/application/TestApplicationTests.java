@@ -815,6 +815,10 @@ public class TestApplicationTests {
         // 取最小值
         double asDouble = limit.stream().mapToDouble(Double::valueOf).min().getAsDouble();
         System.out.println("最小值 " + asDouble);
+        // T t1 = list.stream()
+        //         .filter((T t) -> getter(detailFieldMap.get("remainStrengthDetailFieldName"), t) != null)
+        //         .min(Comparator.comparing(e -> (BigDecimal) getter(detailFieldMap.get("remainStrengthDetailFieldName"), e)))
+        //         .get();
 
         // 排序
         // limit.sort(Double::compare); // 从小到大

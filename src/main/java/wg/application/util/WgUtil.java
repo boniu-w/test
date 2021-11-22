@@ -9,9 +9,7 @@ import javax.annotation.PostConstruct;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -108,7 +106,8 @@ public class WgUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getHumpString("avg_wt_far_from_corrosion_area"));
+        String[] s = subStringByFixedLength("0123456", 4);
+        System.out.println(Arrays.toString(s));
     }
 
     public static void test() {
@@ -228,10 +227,19 @@ public class WgUtil {
         char[] chars = halfAngle.toCharArray();
         int i = chars.length % len == 0 ? chars.length / len : chars.length / len + 1;
         String[] targetString = new String[i];
-        for (int j = 1; j <= i; j++) {
-            String substring = halfAngle.substring(len * (j - 1), len * j);
+        ArrayList<String> strings = new ArrayList<>();
+        String substring = null;
+        for (int j = 0; j < i; ) {
+            if ((j + 1) * len > chars.length) {
+                substring = halfAngle.substring(j * len, chars.length);
+                targetString[j] = substring;
+                break;
+            }
+            substring = halfAngle.substring(j * len, (j + 1) * len); // 012345
             targetString[j] = substring;
+            j++;
         }
+
         return targetString;
     }
 }
