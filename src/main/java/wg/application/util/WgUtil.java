@@ -1,15 +1,17 @@
 package wg.application.util;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
 import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -106,7 +108,7 @@ public class WgUtil {
     }
 
     public static void main(String[] args) {
-        test();
+        System.out.println(getHumpString("avg_wt_far_from_corrosion_area"));
     }
 
     public static void test() {
@@ -176,5 +178,60 @@ public class WgUtil {
                 c[i] = (char) (c[i] - 65248);
         }
         return new String(c);
+    }
+
+    /************************************************************************
+     * @description: PropertyDescriptor PropertyUtils
+     * @author: wg
+     * @date: 18:14  2021/11/17
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static void test1(Class<?> aclazz) {
+        PropertyDescriptor[] propertyDescriptors = PropertyUtils.getPropertyDescriptors(aclazz);
+        for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+            System.out.println(propertyDescriptor);
+            propertyDescriptor.getName();
+        }
+
+        // 能获取 超类 的私有字段, 但 不能获取超类的私有字段的注解
+        Field[] declaredFields = aclazz.getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+            System.out.println(declaredField);
+            // Excel annotation = declaredField.getAnnotation(Excel.class);
+            // String name = annotation.name();
+            // System.out.println(name);
+            // String value = annotation.value();
+            // System.out.println(value);
+
+            try {
+                PropertyDescriptor propertyDescriptor = new PropertyDescriptor(declaredField.getName(), aclazz);
+            } catch (IntrospectionException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /************************************************************************
+     * @description: 按 指定长度 分割字符串
+     * @author: wg
+     * @date: 14:47  2021/11/19
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static String[] subStringByFixedLength(String s, int len) {
+        if (s.length() < len) {
+            return new String[]{s};
+        }
+
+        String halfAngle = toHalfAngle(s);
+        char[] chars = halfAngle.toCharArray();
+        int i = chars.length % len == 0 ? chars.length / len : chars.length / len + 1;
+        String[] targetString = new String[i];
+        for (int j = 1; j <= i; j++) {
+            String substring = halfAngle.substring(len * (j - 1), len * j);
+            targetString[j] = substring;
+        }
+        return targetString;
     }
 }

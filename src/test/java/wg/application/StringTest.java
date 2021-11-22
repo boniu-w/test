@@ -92,10 +92,33 @@ public class StringTest {
     }
 
     @Test
-    public void test4(){
-        int i =1;
+    public void test4() {
+        int i = 1;
         Integer integer = Integer.valueOf(Integer.toString(i));
         System.out.println(integer);
+
+        String s = "      ";
+        System.out.println(s.length());
+        System.out.println(StringUtils.isEmpty(s));
+        System.out.println(s.trim().length());
+        System.out.println(StringUtils.isEmpty(s.trim()));
     }
 
+    /************************************************************************
+     * @description: string 的 最大长度
+     * @author: wg
+     * @date: 14:35  2021/11/19
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testLength() {
+        int len = 65536;
+        char[] chars = new char[len];
+        for (int i = 0; i < len; i++) {
+            chars[i] = '我';
+        }
+        String s = new String(chars);
+        System.out.println(s);
+    }
 }

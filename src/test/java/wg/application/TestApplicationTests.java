@@ -1571,4 +1571,17 @@ public class TestApplicationTests {
         }
     }
 
+    /************************************************************************
+     * @description: PropertyUtils PropertyDescriptor
+     * @author: wg
+     * @date: 17:57  2021/11/17
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void test100() {
+
+        WgUtil.test1(Test03.class);
+    }
+
 }
