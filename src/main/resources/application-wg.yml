@@ -6,3 +6,6 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+report:
+  dir: E:\pandoc-2.16.1\wg\

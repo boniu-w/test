@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
     <properties resource="application-test.properties" />
@@ -24,11 +25,11 @@
         <javaModelGenerator targetPackage="wg.application.entity" targetProject="src/main/java" />
 
 <!--        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />-->
-        <sqlMapGenerator targetPackage="wg.application.dao" targetProject="src/main/java" />
+        <sqlMapGenerator targetPackage="wg.application.dao.xml" targetProject="src/main/java" />
 
         <javaClientGenerator targetPackage="wg.application.dao" targetProject="src/main/java" type="XMLMAPPER" />
 
-        <table tableName="user">
+        <table tableName="test_03">
             <!-- <ignoreColumn column="create_time" />
             <ignoreColumn column="update_time" /> -->
             <!--mysql 配置-->

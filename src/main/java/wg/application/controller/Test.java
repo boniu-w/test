@@ -30,7 +30,9 @@ import javax.annotation.Resource;
 //import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
+import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.*;
 import java.lang.reflect.Field;
@@ -1557,6 +1559,29 @@ public class Test {
         } catch (NoSuchFieldException | IntrospectionException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    /************************************************************************
+     * @description: 通过反射 set
+     * @author: wg
+     * @date: 13:32  2021/11/8
+     * @params:
+     * @return:
+     ************************************************************************/
+    public  void setter(Object obj, String fieldName, Object attributeValue) {
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            PropertyDescriptor p = new PropertyDescriptor(fieldName, obj.getClass());
+            // for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+            //     if (fieldName.equals(propertyDescriptor.getName())) p = propertyDescriptor;
+            // }
+            Method writeMethod = p.getWriteMethod();
+            writeMethod.invoke(obj, attributeValue);
+        } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

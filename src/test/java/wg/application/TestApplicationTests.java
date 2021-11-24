@@ -18,6 +18,7 @@ import wg.application.security.CommonEncryption;
 import wg.application.thread.TaskTest;
 import wg.application.util.CalendarUtil;
 import wg.application.util.WgJsonUtil;
+import wg.application.util.WgUtil;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -335,8 +336,8 @@ public class TestApplicationTests {
      * 全角空格为12288，半角空格为32
      * 其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
      *
-     * @param input 任意字符串
-     * @return 半角字符串
+     * @param input
+     * @return
      */
     public static String toSBC(String input) {
         //半角转全角：
@@ -811,24 +812,35 @@ public class TestApplicationTests {
         List<Double> limit = Stream.generate(Math::random).limit(5).collect(Collectors.toList());
         limit.forEach(System.out::println);
 
-        limit.sort(Double::compare);
+        // 取最小值
+        double asDouble = limit.stream().mapToDouble(Double::valueOf).min().getAsDouble();
+        System.out.println("最小值 " + asDouble);
+        // T t1 = list.stream()
+        //         .filter((T t) -> getter(detailFieldMap.get("remainStrengthDetailFieldName"), t) != null)
+        //         .min(Comparator.comparing(e -> (BigDecimal) getter(detailFieldMap.get("remainStrengthDetailFieldName"), e)))
+        //         .get();
+
+        // 排序
+        // limit.sort(Double::compare); // 从小到大
+        limit.sort(Comparator.comparing(Double::valueOf, (e1, e2) -> e2.compareTo(e1)));  // 从大到小
         System.out.println("collect 排序:  " + limit);
 
+        // 过滤
         List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
         List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
 
         System.out.println("筛选列表: " + filtered);
-        String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
+        String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(" ?? "));
         System.out.println("合并字符串: " + mergedString);
 
+        // 转map
         Map<String, String> map = filtered.stream().collect(Collectors.toMap(item -> item, item -> item + "  wg", (k1, k2) -> k2));
         map.forEach((k, v) -> {
             System.out.print(k);
-            System.out.print("  ");
+            System.out.print(" --- ");
             System.out.print(v);
             System.out.println();
         });
-
 
     }
 
@@ -1191,14 +1203,18 @@ public class TestApplicationTests {
      *****************************************************/
     @Test
     public void kexuejishufa() {
+        long u = 1_111_111_111_111L;
         double d = 6.22848E+18;
         BigDecimal bigDecimal = new BigDecimal(d);
         System.out.println(bigDecimal);
-        System.out.println();
+        System.out.println(bigDecimal.toPlainString());
 
         long l = bigDecimal.longValue();
-        String format = String.format("{0:NO}", l);
+        String format = String.format("{0:C3}", l);
         System.out.println(format);
+
+        double s = 1.7162910765000004E-5;
+        System.out.println(new BigDecimal(s));
     }
 
     @Test
@@ -1487,6 +1503,89 @@ public class TestApplicationTests {
         Map<Class<?>, Context.Key<?>> kt = new HashMap<Class<?>, Context.Key<?>>();
         Context.Key<?> key = kt.get(aClass);
         System.out.println(key);
+
+        /////////////////////////////////////////////
+
+        test.setter(user, "name", "1111");
+        test.setter(user, "createTime", new Date());
+        System.out.println(user);
+
+    }
+
+    /************************************************************************
+     * @description: 全角 半角 测试
+     * @author: wg
+     * @date: 11:12  2021/11/12
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testbc() {
+        String s = WgUtil.toHalfAngle("a  b");
+        System.out.println(s);
+        String s1 = WgUtil.toFullAngle("a  b");
+        System.out.println(s1);
+    }
+
+    /************************************************************************
+     * @description:
+     * 测试结论: 1. list for (Integer integer : integers)可以 break 和 continue
+     * 2. map.forEach 不能 break 和 continue
+     * 3. map for (Map.Entry<Integer, Integer> entry : map.entrySet()) 可以 break 和 continue
+     * @author: wg
+     * @date: 11:25  2021/11/12
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void forTest() {
+        ArrayList<Integer> integers = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            integers.add(i);
+        }
+
+        int count = 0, count1 = 0, count2 = 0;
+        for (Integer integer : integers) {
+            count++;
+            if (integer == 2) continue;
+            count1++;
+            if (integer == 4) break;
+            count2++;
+        }
+
+        System.out.println("count = " + count);
+        System.out.println("count1 = " + count1);
+        System.out.println("count2 = " + count2);
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            map.put(i, i);
+        }
+
+        // map.forEach((k,v)->{
+        //     if (k==2) {
+        //         continue;
+        //     }
+        // });
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getKey() == 2) {
+                continue;
+            }
+        }
+    }
+
+    /************************************************************************
+     * @description: PropertyUtils PropertyDescriptor
+     * @author: wg
+     * @date: 17:57  2021/11/17
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void test100() {
+
+        WgUtil.test1(Test03.class);
     }
 
 }
