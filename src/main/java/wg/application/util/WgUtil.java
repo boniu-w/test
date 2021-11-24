@@ -106,7 +106,7 @@ public class WgUtil {
     }
 
     public static void main(String[] args) {
-        String[] s = subStringByFixedLength("0123456", 4);
+        String[] s = subStringByFixedLength("0123456", 6);
         System.out.println(Arrays.toString(s));
     }
 
@@ -219,7 +219,7 @@ public class WgUtil {
      * @return:
      ************************************************************************/
     public static String[] subStringByFixedLength(String s, int len) {
-        if (s.length() < len) {
+        if (s.length() <= len) {
             return new String[]{s};
         }
 
@@ -227,7 +227,6 @@ public class WgUtil {
         char[] chars = halfAngle.toCharArray();
         int i = chars.length % len == 0 ? chars.length / len : chars.length / len + 1;
         String[] targetString = new String[i];
-        ArrayList<String> strings = new ArrayList<>();
         String substring = null;
         for (int j = 0; j < i; ) {
             if ((j + 1) * len > chars.length) {
