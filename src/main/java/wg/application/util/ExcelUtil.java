@@ -346,9 +346,7 @@ public class ExcelUtil {
                         cell.setCellValue(aFloat.toString());
                         System.out.println(aFloat.toString());
                     }
-
                 }
-
             }
             /************ 导出表的正文 -> 结束 ************/
 

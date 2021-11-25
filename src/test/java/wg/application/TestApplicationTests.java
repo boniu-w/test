@@ -21,6 +21,7 @@ import wg.application.util.WgJsonUtil;
 import wg.application.util.WgUtil;
 
 import java.beans.PropertyDescriptor;
+import java.io.File;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.*;
@@ -1586,6 +1587,55 @@ public class TestApplicationTests {
     public void test100() {
 
         WgUtil.test1(Test03.class);
+    }
+
+    @Test
+    public void testFile() {
+        File file = new File("D:\\java-project\\pipeline-integrity-assessment-system\\report-cad26ac70de64a7484d8d71a008c85b6.md");
+        String absolutePath = file.getAbsolutePath();
+        System.out.println(absolutePath);
+    }
+
+    /************************************************************************
+     * @description: boolean
+     * 测试结果 :
+     *  if 条件里的 boolean 不写成 等式形式的话, 就 必须 为 true
+     *  即: if (flag) -> if (flag == true)
+     *   if (!flag) -> if (flag == false)
+     * @author: wg
+     * @date: 18:02  2021/11/25
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testBoolean() {
+        boolean d = false;
+
+        if (d) {
+            System.out.println("d = true");
+        }
+
+        if (d == false) {
+            System.out.println("d = false ");
+        }
+
+        if (!d) {
+            System.out.println("d = false ");
+        }
+
+        Boolean flag = false;
+        if (flag) {
+            System.out.println("flag = true");
+        }
+
+        if (flag == false) {
+            System.out.println("flag = false ");
+        }
+
+        if (!flag) {
+            System.out.println("flag = false ");
+        }
+
     }
 
 }
