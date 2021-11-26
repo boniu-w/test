@@ -40,12 +40,12 @@ public class Draft {
         int line = len / m;
         for (int i = 0; i < line; i++) {
             for (int j = m * i; j < m * (i + 1); j++) {
-                System.out.print(arr[j] + "   ");
+                System.out.print(String.format("%-10s", arr[j]));
             }
             System.out.println();
         }
         for (int i = m * line; i < len; i++) {
-            System.out.print(arr[i] + "    ");
+            System.out.print(String.format("%-10s", arr[i]));
         }
     }
 

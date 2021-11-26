@@ -218,12 +218,12 @@ public class WgUtil {
      * @params:
      * @return:
      ************************************************************************/
-    public static String[] subStringByFixedLength(String s, int len) {
-        if (s.length() <= len) {
-            return new String[]{s};
+    public static String[] subStringByFixedLength(String str, int len) {
+        if (str.length() <= len) {
+            return new String[]{str};
         }
 
-        String halfAngle = toHalfAngle(s);
+        String halfAngle = toHalfAngle(str);
         char[] chars = halfAngle.toCharArray();
         int i = chars.length % len == 0 ? chars.length / len : chars.length / len + 1;
         String[] targetString = new String[i];
@@ -240,5 +240,27 @@ public class WgUtil {
         }
 
         return targetString;
+    }
+
+    /************************************************************************
+     * @description: 每行显示 指定个数的字符串
+     * @author: wg
+     * @date: 9:57  2021/11/26
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static String[] arraySplitOutput(String[] strs, int m) {
+        int len = strs.length;
+        int line = len / m;
+        for (int i = 0; i < line; i++) {
+            for (int j = m * i; j < m * (i + 1); j++) {
+                System.out.print(String.format("%-10s", strs[j]));
+            }
+            System.out.println();
+        }
+        for (int i = m * line; i < len; i++) {
+            System.out.print(String.format("%-10s", strs[i]));
+        }
+        return null;
     }
 }

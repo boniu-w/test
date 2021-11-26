@@ -722,7 +722,22 @@ public class TestApplicationTests {
         // hashtable 不允许空键, 也不允许空值
         //hashtable.put(null, "123");
         hashtable.put("null", null);
+    }
 
+    /************************************************************************
+     * @description: map test 
+     * @author: wg
+     * @date: 15:17  2021/11/26
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void mapTest2() {
+        HashMap<String, String> map = new HashMap<>();
+        String a = map.remove("123");
+        System.out.println(a);
+
+        System.out.println(map.get("123"));
     }
 
     /***************************************************
@@ -925,7 +940,7 @@ public class TestApplicationTests {
         System.out.println();
 
         Student student = new Student("111", 111);
-        Student student1 = new Student("222", 222);
+        Student student1 = new Student("222", 111);
         Student student2 = new Student("333", 333);
         ArrayList<Student> students = new ArrayList<>();
         students.add(student1);
@@ -937,6 +952,10 @@ public class TestApplicationTests {
 
         students.sort(Comparator.comparing(Student::getAge).reversed());
         System.out.println(students);
+
+        System.out.println("---group---");
+        Map<Integer, List<Student>> group = students.stream().collect(Collectors.groupingBy(Student::getAge));
+        group.forEach((k, v) -> System.out.println(k + "=" + v));
     }
 
     /*****************************************************
@@ -1635,7 +1654,6 @@ public class TestApplicationTests {
         if (!flag) {
             System.out.println("flag = false ");
         }
-
     }
 
 }

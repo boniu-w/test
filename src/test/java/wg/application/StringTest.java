@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
+import wg.application.util.WgUtil;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -73,6 +74,11 @@ public class StringTest {
         list = list.stream().filter(s -> s.contains(s3.trim())).collect(Collectors.toList());
 
         System.out.println(list);
+
+        String a = "SY/T 6477-2017";
+        String b = "SY/T 6477";
+        System.out.println(a.contains(b));
+
     }
 
     @Test
@@ -113,12 +119,17 @@ public class StringTest {
      ************************************************************************/
     @Test
     public void testLength() {
-        int len = 65536;
+        int len = 65534;
         char[] chars = new char[len];
         for (int i = 0; i < len; i++) {
-            chars[i] = '我';
+            chars[i] = (char) i;
+            // chars[i] = (char) (48 + i);
         }
         String s = new String(chars);
-        System.out.println(s);
+        String[] strings = WgUtil.subStringByFixedLength(s, 10000);
+
+        for (int i = 0; i < strings.length; i++) {
+            System.out.println(strings[i]);
+        }
     }
 }
