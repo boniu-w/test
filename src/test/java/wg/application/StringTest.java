@@ -79,18 +79,22 @@ public class StringTest {
         String b = "SY/T 6477";
         System.out.println(a.contains(b));
 
+        String sss = "   ";
+        String bbb = "";
+        System.out.println(sss.equals(bbb)); // false
+
     }
 
     @Test
     public void test3() {
         String[] s = new String[0];
-        System.out.println(Arrays.toString(s));
+        System.out.println(Arrays.toString(s)); // []
 
         Locale locale = LocaleContextHolder.getLocale();
-        System.out.println(locale);
+        System.out.println(locale); // zh_CN
 
         Object obj = 2.2D;
-        System.out.println(new BigDecimal(obj.toString()));
+        System.out.println(new BigDecimal(obj.toString())); // 2.2
         // System.out.println(new BigDecimal((String) obj)); // 空指针异常
 
         obj = null;
@@ -119,7 +123,7 @@ public class StringTest {
      ************************************************************************/
     @Test
     public void testLength() {
-        int len = 65534;
+        int len = 65536;
         char[] chars = new char[len];
         for (int i = 0; i < len; i++) {
             chars[i] = (char) i;

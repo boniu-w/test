@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import wg.application.entity.User;
 
 import javax.annotation.PostConstruct;
 import java.beans.IntrospectionException;
@@ -260,6 +261,14 @@ public class WgUtil {
         }
         for (int i = m * line; i < len; i++) {
             System.out.print(String.format("%-10s", strs[i]));
+        }
+        return null;
+    }
+
+    public static <T> Object initEntity(Class<T> t) {
+        if (t.isInstance(User.class)) {
+            System.out.println("user");
+            return new User();
         }
         return null;
     }

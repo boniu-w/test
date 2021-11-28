@@ -738,6 +738,9 @@ public class TestApplicationTests {
         System.out.println(a);
 
         System.out.println(map.get("123"));
+
+        map.put("123", "1234");
+        System.out.println(map.remove("123"));
     }
 
     /***************************************************
@@ -1374,16 +1377,22 @@ public class TestApplicationTests {
 
     /************************************************************************
      * @description: assert
+     *  断言 只在 测试的时候有用, catch 捕获不到 断言异常 AssertionError 因为 他是 error 不是 异常
      * @author: wg
      * @date: 10:40  2021/9/2
      ************************************************************************/
     @Test
     public void testAssert() {
-        System.out.println("start");
-        assert true;
-        System.out.println("go on");
-        assert false : "stop";
-        System.out.println("end");
+        try {
+            // double x = Math.abs(-123.45);
+            double x = Math.round(-123.45);
+            assert x >= 0;
+            System.out.println(x);
+        } catch (Exception e) {
+            System.out.println("------");
+            System.out.println(e.getMessage());
+        }
+
     }
 
     /************************************************************************
@@ -1654,6 +1663,12 @@ public class TestApplicationTests {
         if (!flag) {
             System.out.println("flag = false ");
         }
+    }
+
+    @Test
+    public void test5() {
+        Object o = WgUtil.initEntity(User.class);
+
     }
 
 }
