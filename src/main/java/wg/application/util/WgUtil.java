@@ -10,6 +10,8 @@ import javax.annotation.PostConstruct;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -194,6 +196,13 @@ public class WgUtil {
             propertyDescriptor.getName();
         }
 
+        Class<?> superclass = aclazz.getSuperclass();
+        Field[] fields = superclass.getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println("超类的字段: " + field);
+        }
+
+
         // 能获取 超类 的私有字段, 但 不能获取超类的私有字段的注解
         Field[] declaredFields = aclazz.getDeclaredFields();
         for (Field declaredField : declaredFields) {
@@ -272,4 +281,64 @@ public class WgUtil {
         }
         return null;
     }
+
+    /************************************************************************
+     * @description: 反射 根据字段名, 执行其 get 方法
+     * @author: wg
+     * @date: 14:27  2021/11/3
+     * @params:
+     * @return: 返回 get 到的值
+     ************************************************************************/
+    public static <T> Object getter(String fieldName, T entity) {
+        Class<?> aClass = entity.getClass();
+        try {
+            Field declaredField = aClass.getDeclaredField(fieldName);
+            declaredField.setAccessible(true);
+            PropertyDescriptor propertyDescriptor = new PropertyDescriptor(declaredField.getName(), aClass);
+            Method readMethod = propertyDescriptor.getReadMethod();
+            return readMethod.invoke(entity);
+        } catch (NoSuchFieldException | IntrospectionException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /************************************************************************
+     * @description: 通过反射 set 值
+     * @author: wg
+     * @date: 13:32  2021/11/8
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static <T> void setter(T t, String fieldName, Object attributeValue) {
+        try {
+            PropertyDescriptor p = new PropertyDescriptor(fieldName, t.getClass());
+            Method writeMethod = p.getWriteMethod();
+            writeMethod.invoke(t, attributeValue);
+        } catch (IntrospectionException | InvocationTargetException | IllegalAccessException introspectionException) {
+            introspectionException.printStackTrace();
+        }
+    }
+
+    /************************************************************************
+     * @description:
+     * hashMap 的 key 是 字段名 , value 是 要 赋的值
+     * @author: wg
+     * @date: 14:30  2021/11/10
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static <T> void setter(T t, Map<String, Object> hashMap) {
+        hashMap.forEach((k, v) -> {
+            PropertyDescriptor p = null;
+            try {
+                p = new PropertyDescriptor(k, t.getClass());
+                Method writeMethod = p.getWriteMethod();
+                writeMethod.invoke(t, v);
+            } catch (IntrospectionException | InvocationTargetException | IllegalAccessException exception) {
+                exception.printStackTrace();
+            }
+        });
+    }
+
 }

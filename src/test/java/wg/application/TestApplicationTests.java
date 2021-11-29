@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.tools.javac.util.Context;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.MultiValueMap;
@@ -23,6 +24,7 @@ import wg.application.util.WgUtil;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.text.DecimalFormat;
@@ -1451,9 +1453,16 @@ public class TestApplicationTests {
         test.forPP();
     }
 
+    /************************************************************************
+     * @description: 最简单的 移位 加密
+     * @author: wg
+     * @date: 9:49  2021/11/29
+     * @params:
+     * @return:
+     ************************************************************************/
     @Test
     public void decrypt() {
-        String s = CommonEncryption.displacementEncryption("123");
+        String s = CommonEncryption.displacementEncryption("hello world!");
         System.out.println(s);
         String decrypt = CommonEncryption.displacementDecrypt(s, CommonEncryption.getStaticDigit());
         System.out.println(decrypt);
@@ -1615,6 +1624,19 @@ public class TestApplicationTests {
     public void test100() {
 
         WgUtil.test1(Test03.class);
+
+        User user = new User();
+        user.setName("wg");
+
+        try {
+            System.out.println(BeanUtils.getProperty(user, "name"));
+            BeanUtils.setProperty(user, "wealth", 12);
+            System.out.println(BeanUtils.getProperty(user, "wealth"));
+            BeanUtils.setProperty(user, "birthday", new Date());
+            System.out.println(BeanUtils.getProperty(user, "birthday"));
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
