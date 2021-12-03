@@ -274,11 +274,39 @@ public class WgUtil {
         return null;
     }
 
-    public static <T> Object initEntity(Class<T> t) {
+    /************************************************************************
+     * @description:
+     * .isInstance() : a 能否 强转为 b
+     * instanceof : a 是不是 B 这种类型
+     * @author: wg
+     * @date: 10:40  2021/12/3
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static <T> Object instanceTest(Class<T> t, T t1) {
         if (t.isInstance(User.class)) {
             System.out.println("user");
             return new User();
         }
+        if (t.isInstance(new User())) {
+            System.out.println("-------");
+        }
+
+        if (t1 instanceof String) {
+            System.out.println("string");
+        } else if (t1 instanceof Optional) {
+            System.out.println("optional");
+        } else if (t1 instanceof User) {
+            System.out.println("user");
+        }
+
+        if (t1 instanceof org.apache.el.stream.Optional) {
+            System.out.println("stream optional");
+        }
+        if (t1 instanceof Class) {
+            System.out.println("class");
+        }
+
         return null;
     }
 

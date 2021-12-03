@@ -401,6 +401,18 @@ public class TestApplicationTests {
         arrayList.add(0, 1);
         System.out.println(arrayList.get(0));
 
+        ArrayList<User> userList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            User user = new User();
+            user.setName("" + i);
+            userList.add(user);
+        }
+
+        for (User user1 : userList) {
+            user1.setName("asd");
+        }
+
+        userList.forEach(System.out::println);
     }
 
     /****************************************************************
@@ -1623,6 +1635,9 @@ public class TestApplicationTests {
     @Test
     public void test100() {
 
+        double d = 0.00D;
+        System.out.println(d == 0);
+
         WgUtil.test1(Test03.class);
 
         User user = new User();
@@ -1689,8 +1704,8 @@ public class TestApplicationTests {
 
     @Test
     public void test5() {
-        Object o = WgUtil.initEntity(User.class);
-
+        User user = new User();
+        Object o = WgUtil.instanceTest(User.class, user);
     }
 
 }

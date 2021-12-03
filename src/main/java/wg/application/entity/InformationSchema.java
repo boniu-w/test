@@ -3,10 +3,16 @@ package wg.application.entity;
 
 public class InformationSchema {
 
+    // 参照表的 表名
     private String tableName;
+    // 表里的列名
     private String columnName;
+    // 被参照的表名
     private String referencedTableName;
+    // 被参照的列名
     private String referencedColumnName;
+    // 约束名
+    private String constraintName;
 
     public String getTableName() {
         return tableName;
@@ -40,13 +46,11 @@ public class InformationSchema {
         this.referencedColumnName = referencedColumnName;
     }
 
-    @Override
-    public String toString() {
-        return "InformationSchema{" +
-                "tableName='" + tableName + '\'' +
-                ", columnName='" + columnName + '\'' +
-                ", referencedTableName='" + referencedTableName + '\'' +
-                ", referencedColumnName='" + referencedColumnName + '\'' +
-                '}';
+    public String getConstraintName() {
+        return constraintName;
+    }
+
+    public void setConstraintName(String constraintName) {
+        this.constraintName = constraintName;
     }
 }
