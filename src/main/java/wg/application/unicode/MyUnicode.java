@@ -7,7 +7,13 @@ import java.util.Arrays;
 public class MyUnicode {
 
     public static void main(String[] args) {
-        test1();
+        try {
+            test3();
+        } catch (Exception e) {
+            System.out.println("error " + e.getMessage());
+        }
+        // test1();
+        // test2();
     }
 
     public static void test1() {
@@ -26,4 +32,23 @@ public class MyUnicode {
 
         System.out.println("\u4dc5");
     }
+
+    public static void test2() {
+        String s = "\u005Ct";
+        System.out.println(s);
+
+        System.out.println("\u0050");
+    }
+
+    public static void test3() throws Exception {
+        try {
+            // double x = Math.abs(-123.45);
+            double x = Math.round(-123.45);
+            assert x >= 0 : "x must >= 0";
+            System.out.println(x);
+        } catch (Exception e) {
+            System.out.println("error=" + e.getMessage());
+        }
+    }
+
 }

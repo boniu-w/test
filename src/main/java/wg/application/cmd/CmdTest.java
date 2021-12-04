@@ -1,6 +1,7 @@
 package wg.application.cmd;
 
 import java.io.*;
+import java.util.Map;
 
 public class CmdTest {
     public static void main(String[] args) {
@@ -20,8 +21,7 @@ public class CmdTest {
     }
 
     public static void testProcessBuilder() {
-        String property = System.getProperty("report.dir");
-        String[] command = new String[]{"E:\\pandoc-2.16.1\\pandoc.exe", "test.md", "-o", property + "wg.docx"};
+        String[] command = new String[]{"E:\\pandoc-2.16.1\\pandoc", "d:\\wg\\wg.md", "-o", "D:\\wg\\wg.docx"};
         File file = new File("E:\\pandoc-2.16.1");
 
         // String[] string1 = {"mkdir", "wg-test"};
@@ -40,8 +40,9 @@ public class CmdTest {
         processBuilder.directory(file); //设置工作目录
         processBuilder.redirectErrorStream(true);
 
-        // Map<String, String> environment = processBuilder.environment();
-        // environment.forEach((k, v) -> System.out.println(k + "=" + v));
+        Map<String, String> environment = processBuilder.environment();
+        System.out.println("---------👇 environment 👇----------------");
+        environment.forEach((k, v) -> System.out.println(k + "=" + v));
 
         // List<String> commandList = processBuilder.command();
         // commandList.forEach(System.out::println);
@@ -53,6 +54,7 @@ public class CmdTest {
             Process process = processBuilder.start();
             int i = process.waitFor();
             System.out.println(i);
+
             synchronized (InputStream.class) {
                 InputStream inputStream = process.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "GBK"));
@@ -62,7 +64,7 @@ public class CmdTest {
                     line = br.readLine();
                 }
                 inputStream.close();
-                System.out.println("---success---");
+                System.out.println("---inputStream---");
             }
             int i1 = process.waitFor();
             System.out.println(i1);
@@ -91,29 +93,32 @@ public class CmdTest {
         Runtime runtime = Runtime.getRuntime();
         try {
             Process process = runtime.exec(command, null, pandocFile);
-            synchronized (InputStream.class) {
-                InputStream inputStream = process.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "GBK"));
-                String line = br.readLine();
-                while (line != null) {
-                    System.out.println(line);
-                    line = br.readLine();
-                }
-                inputStream.close();
-                System.out.println("---success---");
-            }
-            synchronized (InputStream.class) {
-                InputStream errorStream = process.getErrorStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(errorStream));
-                String line = br.readLine();
-                while (line != null) {
-                    System.out.println(line);
-                    line = br.readLine();
-                }
-                errorStream.close();
-                System.out.println("----errorStream----");
-            }
-        } catch (IOException e) {
+            int i = process.waitFor();
+            System.out.println(i);
+
+            // synchronized (InputStream.class) {
+            //     InputStream inputStream = process.getInputStream();
+            //     BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "GBK"));
+            //     String line = br.readLine();
+            //     while (line != null) {
+            //         System.out.println(line);
+            //         line = br.readLine();
+            //     }
+            //     inputStream.close();
+            //     System.out.println("---success---");
+            // }
+            // synchronized (InputStream.class) {
+            //     InputStream errorStream = process.getErrorStream();
+            //     BufferedReader br = new BufferedReader(new InputStreamReader(errorStream));
+            //     String line = br.readLine();
+            //     while (line != null) {
+            //         System.out.println(line);
+            //         line = br.readLine();
+            //     }
+            //     errorStream.close();
+            //     System.out.println("----errorStream----");
+            // }
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }

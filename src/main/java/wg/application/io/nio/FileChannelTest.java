@@ -1,6 +1,5 @@
-package wg.application.nio;
+package wg.application.io.nio;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -19,17 +18,17 @@ public class FileChannelTest {
 
         // 讀取數據到buffer中
         int read = accessFileChannel.read(byteBuffer);
-         while (read != -1){
-             System.out.println("has content");
-             byteBuffer.flip();
-             while (byteBuffer.hasRemaining()){
-                 byte b = byteBuffer.get();
-                 System.out.println((char) b);
-             }
-             byteBuffer.clear();
-             read = accessFileChannel.read(byteBuffer);
-         }
-accessFile.close();
+        while (read != -1) {
+            System.out.println("has content");
+            byteBuffer.flip();
+            while (byteBuffer.hasRemaining()) {
+                byte b = byteBuffer.get();
+                System.out.println((char) b);
+            }
+            byteBuffer.clear();
+            read = accessFileChannel.read(byteBuffer);
+        }
+        accessFile.close();
 
     }
 }

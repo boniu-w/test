@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.tools.javac.util.Context;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.MultiValueMap;
@@ -21,7 +22,9 @@ import wg.application.util.WgJsonUtil;
 import wg.application.util.WgUtil;
 
 import java.beans.PropertyDescriptor;
+import java.io.File;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.text.DecimalFormat;
@@ -398,6 +401,18 @@ public class TestApplicationTests {
         arrayList.add(0, 1);
         System.out.println(arrayList.get(0));
 
+        ArrayList<User> userList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            User user = new User();
+            user.setName("" + i);
+            userList.add(user);
+        }
+
+        for (User user1 : userList) {
+            user1.setName("asd");
+        }
+
+        userList.forEach(System.out::println);
     }
 
     /****************************************************************
@@ -721,7 +736,25 @@ public class TestApplicationTests {
         // hashtable 不允许空键, 也不允许空值
         //hashtable.put(null, "123");
         hashtable.put("null", null);
+    }
 
+    /************************************************************************
+     * @description: map test 
+     * @author: wg
+     * @date: 15:17  2021/11/26
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void mapTest2() {
+        HashMap<String, String> map = new HashMap<>();
+        String a = map.remove("123");
+        System.out.println(a);
+
+        System.out.println(map.get("123"));
+
+        map.put("123", "1234");
+        System.out.println(map.remove("123"));
     }
 
     /***************************************************
@@ -924,7 +957,7 @@ public class TestApplicationTests {
         System.out.println();
 
         Student student = new Student("111", 111);
-        Student student1 = new Student("222", 222);
+        Student student1 = new Student("222", 111);
         Student student2 = new Student("333", 333);
         ArrayList<Student> students = new ArrayList<>();
         students.add(student1);
@@ -936,6 +969,10 @@ public class TestApplicationTests {
 
         students.sort(Comparator.comparing(Student::getAge).reversed());
         System.out.println(students);
+
+        System.out.println("---group---");
+        Map<Integer, List<Student>> group = students.stream().collect(Collectors.groupingBy(Student::getAge));
+        group.forEach((k, v) -> System.out.println(k + "=" + v));
     }
 
     /*****************************************************
@@ -1354,16 +1391,22 @@ public class TestApplicationTests {
 
     /************************************************************************
      * @description: assert
+     *  断言 只在 测试的时候有用, catch 捕获不到 断言异常 AssertionError 因为 他是 error 不是 异常
      * @author: wg
      * @date: 10:40  2021/9/2
      ************************************************************************/
     @Test
     public void testAssert() {
-        System.out.println("start");
-        assert true;
-        System.out.println("go on");
-        assert false : "stop";
-        System.out.println("end");
+        try {
+            // double x = Math.abs(-123.45);
+            double x = Math.round(-123.45);
+            assert x >= 0;
+            System.out.println(x);
+        } catch (Exception e) {
+            System.out.println("------");
+            System.out.println(e.getMessage());
+        }
+
     }
 
     /************************************************************************
@@ -1422,9 +1465,16 @@ public class TestApplicationTests {
         test.forPP();
     }
 
+    /************************************************************************
+     * @description: 最简单的 移位 加密
+     * @author: wg
+     * @date: 9:49  2021/11/29
+     * @params:
+     * @return:
+     ************************************************************************/
     @Test
     public void decrypt() {
-        String s = CommonEncryption.displacementEncryption("123");
+        String s = CommonEncryption.displacementEncryption("hello world!");
         System.out.println(s);
         String decrypt = CommonEncryption.displacementDecrypt(s, CommonEncryption.getStaticDigit());
         System.out.println(decrypt);
@@ -1585,7 +1635,77 @@ public class TestApplicationTests {
     @Test
     public void test100() {
 
+        double d = 0.00D;
+        System.out.println(d == 0);
+
         WgUtil.test1(Test03.class);
+
+        User user = new User();
+        user.setName("wg");
+
+        try {
+            System.out.println(BeanUtils.getProperty(user, "name"));
+            BeanUtils.setProperty(user, "wealth", 12);
+            System.out.println(BeanUtils.getProperty(user, "wealth"));
+            BeanUtils.setProperty(user, "birthday", new Date());
+            System.out.println(BeanUtils.getProperty(user, "birthday"));
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testFile() {
+        File file = new File("D:\\java-project\\pipeline-integrity-assessment-system\\report-cad26ac70de64a7484d8d71a008c85b6.md");
+        String absolutePath = file.getAbsolutePath();
+        System.out.println(absolutePath);
+    }
+
+    /************************************************************************
+     * @description: boolean
+     * 测试结果 :
+     *  if 条件里的 boolean 不写成 等式形式的话, 就 必须 为 true
+     *  即: if (flag) -> if (flag == true)
+     *   if (!flag) -> if (flag == false)
+     * @author: wg
+     * @date: 18:02  2021/11/25
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testBoolean() {
+        boolean d = false;
+
+        if (d) {
+            System.out.println("d = true");
+        }
+
+        if (d == false) {
+            System.out.println("d = false ");
+        }
+
+        if (!d) {
+            System.out.println("d = false ");
+        }
+
+        Boolean flag = false;
+        if (flag) {
+            System.out.println("flag = true");
+        }
+
+        if (flag == false) {
+            System.out.println("flag = false ");
+        }
+
+        if (!flag) {
+            System.out.println("flag = false ");
+        }
+    }
+
+    @Test
+    public void test5() {
+        User user = new User();
+        Object o = WgUtil.instanceTest(User.class, user);
     }
 
 }
