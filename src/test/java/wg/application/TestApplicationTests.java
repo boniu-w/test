@@ -1418,10 +1418,22 @@ public class TestApplicationTests {
     public void testMap() {
         MultiMap multiMap = new MultiValueMap();
 
+        MultiValueMap multiValueMap = new MultiValueMap();
+        HashMap<Integer, Long> hashMap = new HashMap<>();
+        multiValueMap.putAll(hashMap);
+        
+
         // new org.springframework.util.MultiValueMap<>()
 
     }
 
+    /************************************************************************
+     * @description: long 转 localdatetime
+     * @author: wg
+     * @date: 9:41  2021/12/7
+     * @params:
+     * @return:
+     ************************************************************************/
     @Test
     public void testTimeStamp() {
         long t = 1632880972614L;
