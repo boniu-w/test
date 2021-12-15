@@ -395,4 +395,57 @@ public class WgUtil {
         return sumMap;
     }
 
+    /************************************************************************
+     * @description: 判断是否是数字
+     * @author: wg
+     * @date: 15:50  2021/12/14
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static boolean isNumber(String val) {
+        if (null == val || "".equals(val)) {
+            return false;
+        }
+
+        String rex = "^[+-]?\\d*\\.?\\d*$";
+        boolean numbMatch = Pattern.matches(rex, val);
+        if (numbMatch) {
+            return numbMatch;
+        }
+
+        rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
+        boolean compile = Pattern.matches(rex, val);
+        if (compile) {
+            return compile;
+        }
+        return false;
+    }
+
+    /************************************************************************
+     * @description: 是否是整数
+     * "3." 也是整数
+     * @author: wg
+     * @date: 17:02  2021/12/14
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static boolean isInteger(String val) {
+        if (null == val || "".equals(val)) {
+            return false;
+        }
+
+        String rex = "^[+-]?\\d*\\.?0*$";
+        boolean numbMatch = Pattern.matches(rex, val);
+        if (numbMatch) {
+            return numbMatch;
+        }
+
+        rex = "^[+-]?\\d*[Ee]*[+-]*\\d+$";
+        boolean science = Pattern.matches(rex, val);
+        if (science) {
+            return science;
+        }
+
+        return false;
+    }
 }

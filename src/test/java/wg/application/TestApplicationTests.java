@@ -1421,7 +1421,7 @@ public class TestApplicationTests {
         MultiValueMap multiValueMap = new MultiValueMap();
         HashMap<Integer, Long> hashMap = new HashMap<>();
         multiValueMap.putAll(hashMap);
-        
+
 
         // new org.springframework.util.MultiValueMap<>()
 
@@ -1503,7 +1503,8 @@ public class TestApplicationTests {
         new Object();
         new GcEntity(new BigDecimal("11.00"));
         new GcEntity(new BigDecimal("0.00"));
-        System.gc();
+        gcEntity = null;
+        // System.gc();
     }
 
     /************************************************************************
@@ -1718,6 +1719,26 @@ public class TestApplicationTests {
     public void test5() {
         User user = new User();
         Object o = WgUtil.instanceTest(User.class, user);
+    }
+
+    /************************************************************************
+     * @description: 装箱
+     * @author: wg
+     * @date: 17:58  2021/12/10
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void test6() {
+        Double[] doubles = {123D, 232D};
+        String[] strings = {"123", "asd"};
+        String join = org.apache.commons.lang3.StringUtils.join(doubles, " ");
+        System.out.println(join);
+
+        double[] dd = {123D, 232D};
+        Object[] objects = Arrays.stream(dd).boxed().toArray();
+        String join1 = org.apache.commons.lang3.StringUtils.join(objects, " ");
+        System.out.println(join1);
     }
 
 }
