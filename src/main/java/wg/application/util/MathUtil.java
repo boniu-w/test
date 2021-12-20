@@ -1,5 +1,6 @@
 package wg.application.util;
 
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 
 import static java.lang.Math.*;
@@ -133,6 +134,7 @@ public class MathUtil {
             return numbMatch;
         }
 
+        // 科学计数法验证
         rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
         boolean compile = Pattern.matches(rex, val);
         if (compile) {
@@ -160,12 +162,49 @@ public class MathUtil {
             return numbMatch;
         }
 
+        // 科学计数法验证
         rex = "^[+-]?\\d*[Ee]*[+-]*\\d+$";
         boolean science = Pattern.matches(rex, val);
         if (science) {
             return science;
         }
-        
+
         return false;
+    }
+
+    /************************************************************************
+     * @description: byte -> bit (-128-127)
+     * 字节 转 比特
+     * 数组长度值为8，每个值代表bit，即8个bit。bit7 -> bit0
+     * bit数组，bit7 -> bit0
+     * @author: wg
+     * @date: 15:38  2021/12/20
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static byte[] byteToBitOfArray(byte b) {
+        byte[] array = new byte[8];
+        for (int i = 7; i >= 0; i--) {
+            array[i] = (byte) (b & 1);
+            b = (byte) (b >> 1);
+        }
+        return array;
+    }
+
+    /************************************************************************
+     * @description: 字符串 转 bit
+     * @author: wg
+     * @date: 16:04  2021/12/20
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static byte[][] stringToBits(String str) {
+        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+        byte[][] bits = new byte[bytes.length][8];
+        for (int i = 0; i < bytes.length; i++) {
+            byte[] bit = byteToBitOfArray(bytes[i]);
+            bits[i] = bit;
+        }
+        return bits;
     }
 }

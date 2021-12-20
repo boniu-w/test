@@ -1,9 +1,11 @@
 package wg.application;
 
 import org.junit.Test;
+import wg.application.util.MathUtil;
 import wg.application.util.WgUtil;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public class MathTest {
 
@@ -107,5 +109,22 @@ public class MathTest {
             System.out.println(b);
         }
     }
-    
+
+    /************************************************************************
+     * @description: bit
+     * @author: wg
+     * @date: 16:07  2021/12/20
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testBit() {
+        String str = "sdf";
+        byte[][] bytes = MathUtil.stringToBits(str);
+
+        for (byte[] aByte : bytes) {
+            System.out.println(Arrays.toString(aByte));
+        }
+    }
+
 }
