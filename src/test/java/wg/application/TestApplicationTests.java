@@ -5,7 +5,6 @@ import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.tools.javac.util.Context;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.MultiMap;
@@ -13,6 +12,8 @@ import org.apache.commons.collections.map.MultiValueMap;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ObjectUtils;
+import wg.application.TimerTask.ScheduledTest;
+import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
 import wg.application.gc.GcEntity;
 import wg.application.security.CommonEncryption;
@@ -1563,9 +1564,6 @@ public class TestApplicationTests {
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        Map<Class<?>, Context.Key<?>> kt = new HashMap<Class<?>, Context.Key<?>>();
-        Context.Key<?> key = kt.get(aClass);
-        System.out.println(key);
 
         /////////////////////////////////////////////
 
@@ -1741,4 +1739,34 @@ public class TestApplicationTests {
         System.out.println(join1);
     }
 
+    /************************************************************************
+     * @description: 定时任务
+     * @author: wg
+     * @date: 11:23  2021/12/17
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void scheduledTest() {
+        ScheduledTest scheduledTest = new ScheduledTest();
+        try {
+            // scheduledTest.test01();
+            scheduledTest.test02();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /************************************************************************
+     * @description: stack 栈
+     * @author: wg
+     * @date: 13:59  2021/12/20
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testStack() {
+        DataTest dataTest = new DataTest();
+        dataTest.test01();
+    }
 }

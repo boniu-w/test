@@ -24,20 +24,20 @@ public class Student {
     private String name;
 
     @NotBlank
-    @Pattern(regexp = "^[0-9]{1,2}$",message = "年龄是1-2位整数")
-    private int age;
+    @Pattern(regexp = "^[0-9]{1,2}$", message = "年龄是1-2位整数")
+    private Integer age;
 
-    private int id;
-    private int sex;
+    private Integer id;
+    private Integer sex;
 
     private String birthday;
 
-    public Student(String name, int age) {
+    public Student(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
 
-    public Student(String name, int age, int sex) {
+    public Student(String name, Integer age, Integer sex) {
         this.name = name;
         this.age = age;
         this.sex = sex;

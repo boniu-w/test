@@ -9,9 +9,10 @@ import java.util.Date;
 public class LunarTest {
 
     public static void main(String[] args) {
-        getToday();
+        // getToday();
+        getPerson();
         System.out.println();
-        getShuJiu();
+        // getShuJiu();
     }
 
     /**
@@ -32,5 +33,12 @@ public class LunarTest {
         // Lunar lunar = Lunar.fromDate(new Date());
         ShuJiu shuJiu = lunar.getShuJiu();
         System.out.println(shuJiu.toFullString());
+    }
+
+    public static void getPerson() {
+        Solar solar = new Solar(1985, 7, 7, 20, 26, 12);
+        Lunar lunar = solar.getLunar();
+
+        System.out.println(lunar.toFullString());
     }
 }

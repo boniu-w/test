@@ -437,13 +437,13 @@ public class WgUtil {
         String rex = "^[+-]?\\d*\\.?0*$";
         boolean numbMatch = Pattern.matches(rex, val);
         if (numbMatch) {
-            return numbMatch;
+            return true;
         }
 
         rex = "^[+-]?\\d*[Ee]*[+-]*\\d+$";
         boolean science = Pattern.matches(rex, val);
         if (science) {
-            return science;
+            return true;
         }
 
         return false;

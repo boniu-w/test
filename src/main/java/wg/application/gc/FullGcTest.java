@@ -27,6 +27,7 @@ public class FullGcTest {
         Date birthdate = new Date();
 
         public void m() {
+            System.out.println(name);
         }
 
     }
@@ -44,7 +45,7 @@ public class FullGcTest {
 
     private static void modelFit() {
         List<CardInfo> taskList = getAllCardInfo();
-
+        System.out.println("taskList.size(): " + taskList.size());
         taskList.forEach(cardInfo -> {
             executor.scheduleWithFixedDelay(() -> {
                 cardInfo.m();
