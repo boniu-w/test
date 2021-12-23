@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 import wg.application.entity.User;
 
 import javax.annotation.PostConstruct;
@@ -17,10 +18,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+@Component
 public class WgUtil {
     private static final Logger logger = LoggerFactory.getLogger(WgUtil.class);
 
-    private WgUtil wgUtil;
+    private static WgUtil wgUtil;
 
     @PostConstruct
     public void initWgUtil() {

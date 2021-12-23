@@ -19,6 +19,7 @@ import wg.application.gc.GcEntity;
 import wg.application.security.CommonEncryption;
 import wg.application.thread.TaskTest;
 import wg.application.util.CalendarUtil;
+import wg.application.util.JdbcUtil;
 import wg.application.util.WgJsonUtil;
 import wg.application.util.WgUtil;
 
@@ -1769,4 +1770,5 @@ public class TestApplicationTests {
         DataTest dataTest = new DataTest();
         dataTest.test01();
     }
+    
 }

@@ -119,12 +119,21 @@ public class MathTest {
      ************************************************************************/
     @Test
     public void testBit() {
-        String str = "sdf";
+        String str = "-100";
         byte[][] bytes = MathUtil.stringToBits(str);
 
         for (byte[] aByte : bytes) {
             System.out.println(Arrays.toString(aByte));
         }
+
+        System.out.println("----------");
+
+        byte b = -100;
+        byte[] bit = MathUtil.byteToBitOfArray(b);
+        System.out.println(Arrays.toString(bit));
+
+        System.out.println("-------------");
+        
     }
 
 }
