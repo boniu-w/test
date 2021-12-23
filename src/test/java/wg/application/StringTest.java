@@ -123,11 +123,11 @@ public class StringTest {
      ************************************************************************/
     @Test
     public void testLength() {
-        int len = 65536;
+        int len = 65534;
         char[] chars = new char[len];
         for (int i = 0; i < len; i++) {
-            chars[i] = (char) i;
-            // chars[i] = (char) (48 + i);
+            // chars[i] = (char) i;
+            chars[i] = (char) (48 + i);
         }
         String s = new String(chars);
         String[] strings = WgUtil.subStringByFixedLength(s, 10000);
@@ -135,5 +135,8 @@ public class StringTest {
         for (int i = 0; i < strings.length; i++) {
             System.out.println(strings[i]);
         }
+
+        // System.out.println(String.format("%3s%n", s));
+
     }
 }
