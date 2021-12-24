@@ -1,6 +1,7 @@
 package wg.application;
 
 import org.junit.Test;
+import wg.application.math.FloatTest;
 import wg.application.util.MathUtil;
 import wg.application.util.WgUtil;
 
@@ -133,7 +134,38 @@ public class MathTest {
         System.out.println(Arrays.toString(bit));
 
         System.out.println("-------------");
-        
+
+    }
+
+    @Test
+    public void test03() {
+        FloatTest test01 = new FloatTest();
+        test01.test02();
+    }
+
+    @Test
+    public void radix() {
+        int l = Integer.parseInt("12", 3);
+        System.out.println("表明 参数 是 3进制数 , 转成十进制后是: " + l);  //
+
+        String s = Integer.toString(10, 3);
+        System.out.println("任意10进制数 转化成任意进制 : " + s);
+
+        int i = 1 % 3;
+        System.out.println(i);
+
+        int wo = 5201314;
+        String s1 = Integer.toString(5201314, 16);
+        System.out.println(s1);
+
+        int i1 = Integer.parseInt("4f5da2", 16);
+        System.out.println(i1);
+    }
+
+    @Test
+    public void float2Binary() {
+        FloatTest floatTest = new FloatTest();
+        floatTest.float2Binary();
     }
 
 }

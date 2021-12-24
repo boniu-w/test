@@ -280,7 +280,7 @@ public class WgUtil {
     /************************************************************************
      * @description:
      * .isInstance() : a 能否 强转为 b
-     * instanceof : a 是不是 B 这种类型
+     * instanceof : a的值 是不是 B 这种类型
      * @author: wg
      * @date: 10:40  2021/12/3
      * @params:
