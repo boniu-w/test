@@ -1,4 +1,4 @@
-package wg.application.util;
+package wg.application.annotation;
 
 import org.springframework.core.annotation.AliasFor;
 
@@ -94,7 +94,6 @@ public @interface Excel {
 
     /**
      * 导入路径,如果是图片可以填写,默认是upload/className/ IconEntity这个类对应的就是upload/Icon/
-     *
      */
     public String savePath() default "upload";
 
@@ -120,8 +119,8 @@ public @interface Excel {
      * 方法描述: 数据字典表
      * 作    者： yiming.zhang
      * 日    期： 2014年5月11日-下午5:26:40
-     * @return
-     * 返回类型： String
+     *
+     * @return 返回类型： String
      */
     public String dictTable() default "";
 
@@ -129,8 +128,8 @@ public @interface Excel {
      * 方法描述:  数据code
      * 作    者： yiming.zhang
      * 日    期： 2014年5月13日-下午9:37:16
-     * @return
-     * 返回类型： String
+     *
+     * @return 返回类型： String
      */
     public String dicCode() default "";
 
@@ -138,26 +137,30 @@ public @interface Excel {
      * 方法描述:  数据Text
      * 作    者： yiming.zhang
      * 日    期： 2014年5月11日-下午5:29:05
-     * @return
-     * 返回类型： String
+     *
+     * @return 返回类型： String
      */
     public String dicText() default "";
 
     /**
      * 导入数据是否需要转化
      * 若是为true,则需要在pojo中加入 方法：convertset字段名(String text)
+     *
      * @return
      */
     public boolean importConvert() default false;
+
     /**
      * 导出数据是否需要转化
      * 若是为true,则需要在pojo中加入方法:convertget字段名()
+     *
      * @return
      */
     public boolean exportConvert() default false;
 
     /**
      * 值的替换是否支持替换多个(默认true,若数据库值本来就包含逗号则需要配置该值为false)
+     *
      * @author taoYan
      * @since 2018年8月1日
      */

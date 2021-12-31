@@ -1,4 +1,4 @@
-package wg.application.util;
+package wg.application.entity;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import lombok.Data;
  *************************************************************/
 @Data
 public class ExcelParams {
-    
+
     private int sheetIndex;
     private int titleIndex;
     private int contentIndex;

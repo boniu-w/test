@@ -14,7 +14,7 @@ import static wg.application.util.Vsop87dEarthUtil.getEarthEclipticLongitudeForS
 /**
  * 使用牛顿迭代法计算24节气的时间 求解的方程为: <br />
  * <i>f(x) = Vsop87dEarthUtil.getEarthEclipticLongitudeForSun(x) - angle = 0</i>
- * 
+ *
  * @author oyyq
  */
 public class SolarTermsCalculator {
@@ -23,11 +23,9 @@ public class SolarTermsCalculator {
 
     /**
      * 用牛顿迭代计算节气时间
-     * 
-     * @param term
-     *            节气
-     * @param year
-     *            年份
+     *
+     * @param term 节气
+     * @param year 年份
      * @return 节气时间的儒略日
      */
     public static double getJulianDayInYearForTermOrder(SolarTerms term, int year) {
@@ -43,15 +41,15 @@ public class SolarTermsCalculator {
 
     public static void main(String[] args) {
         for (SolarTerms term : SolarTerms.values()) {
-            double jd = getJulianDayInYearForTermOrder(term, 2021);
+            double jd = getJulianDayInYearForTermOrder(term, 2022);
             jd -= CalendarUtil.getDeltaT(jd) / 86400; // 由TT转换成UTC
             Calendar cal = fromJulianDate(jd + 8.0 / 24.0); // 东8区
             System.out.println(term.getName()
                     + ": "
                     + String.format("%04d-%02d-%02d %02d:%02d:%02d.%03d", cal.get(Calendar.YEAR),
-                            cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DATE),
-                            cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),
-                            cal.get(Calendar.SECOND), cal.get(Calendar.MILLISECOND)));
+                    cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DATE),
+                    cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),
+                    cal.get(Calendar.SECOND), cal.get(Calendar.MILLISECOND)));
         }
     }
 
