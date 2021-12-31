@@ -16,7 +16,7 @@ public class Test {
 
     public static void main(String[] args) {
         try {
-            MessageDigest md5 = MessageDigest.getInstance("md5");
+            MessageDigest md5 = MessageDigest.getInstance("sha512");
             md5.update("Hello".getBytes(StandardCharsets.UTF_8));
             md5.update("World".getBytes(StandardCharsets.UTF_8));
             byte[] digest = md5.digest();

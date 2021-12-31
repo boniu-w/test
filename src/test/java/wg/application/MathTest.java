@@ -168,4 +168,28 @@ public class MathTest {
         floatTest.float2Binary();
     }
 
+    /************************************************************************
+     * @description: nan
+     * @author: wg
+     * @date: 11:20  2021/12/30
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testNan() {
+        double a = 0;
+        double b = 0;
+        double c = a / b;
+        System.out.println(c);
+
+        System.out.println(Double.isNaN(c));
+        System.out.println(Double.isInfinite(c));
+        System.out.println(Double.isFinite(c));
+
+        System.out.println(((Object) c).toString());
+        BigDecimal bigDecimal = new BigDecimal(c); // java.lang.NumberFormatException: Infinite or NaN
+        System.out.println(bigDecimal);
+
+        double s = Double.NaN;
+    }
 }
