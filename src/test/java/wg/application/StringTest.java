@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
+import wg.application.util.StringUtil;
 import wg.application.util.WgUtil;
 
 import java.math.BigDecimal;
@@ -138,5 +139,18 @@ public class StringTest {
 
         // System.out.println(String.format("%3s%n", s));
 
+    }
+
+    /************************************************************************
+     * @description:
+     * @author: wg
+     * @date: 10:36  2022/1/4
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void slashTest() {
+        String slash = StringUtil.slashPattern("7  ");
+        System.out.println(slash);
     }
 }

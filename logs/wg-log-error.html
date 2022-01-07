@@ -3700,3 +3700,623 @@ TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
 <td class="LineOfCaller">LineOfCaller</td>
 </tr>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Tue Jan 04 10:20:24 CST 2022</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Level">Level</td>
+<td class="Date">Date</td>
+<td class="Message">Message</td>
+<td class="MethodOfCaller">MethodOfCaller</td>
+<td class="FileOfCaller">FileOfCaller</td>
+<td class="LineOfCaller">LineOfCaller</td>
+</tr>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Fri Jan 07 10:35:11 CST 2022</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Level">Level</td>
+<td class="Date">Date</td>
+<td class="Message">Message</td>
+<td class="MethodOfCaller">MethodOfCaller</td>
+<td class="FileOfCaller">FileOfCaller</td>
+<td class="LineOfCaller">LineOfCaller</td>
+</tr>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Fri Jan 07 16:10:36 CST 2022</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Level">Level</td>
+<td class="Date">Date</td>
+<td class="Message">Message</td>
+<td class="MethodOfCaller">MethodOfCaller</td>
+<td class="FileOfCaller">FileOfCaller</td>
+<td class="LineOfCaller">LineOfCaller</td>
+</tr>
+
+
+<tr class="error even">
+<td class="Level">ERROR</td>
+<td class="Date">2022-01-07 16:12:41,039</td>
+<td class="Message">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause</td>
+<td class="MethodOfCaller">log</td>
+<td class="FileOfCaller">DirectJDKLog.java</td>
+<td class="LineOfCaller">175</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.lang.NullPointerException: null
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.cas.controller.CasController.getCurrentUser(CasController.java:97)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.config.WgFilter.doFilter(WgFilter.java:78)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Thread.run(Thread.java:748)
+</td></tr>
+<tr class="error odd">
+<td class="Level">ERROR</td>
+<td class="Date">2022-01-07 16:13:01,398</td>
+<td class="Message">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause</td>
+<td class="MethodOfCaller">log</td>
+<td class="FileOfCaller">DirectJDKLog.java</td>
+<td class="LineOfCaller">175</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.lang.NullPointerException: null
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.cas.controller.CasController.getCurrentUser(CasController.java:97)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.config.WgFilter.doFilter(WgFilter.java:78)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Thread.run(Thread.java:748)
+</td></tr>
+<tr class="error even">
+<td class="Level">ERROR</td>
+<td class="Date">2022-01-07 16:13:58,591</td>
+<td class="Message">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause</td>
+<td class="MethodOfCaller">log</td>
+<td class="FileOfCaller">DirectJDKLog.java</td>
+<td class="LineOfCaller">175</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.lang.NullPointerException: null
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.cas.controller.CasController.getCurrentUser(CasController.java:97)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.config.WgFilter.doFilter(WgFilter.java:78)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Thread.run(Thread.java:748)
+</td></tr>
+<tr class="error odd">
+<td class="Level">ERROR</td>
+<td class="Date">2022-01-07 16:14:04,224</td>
+<td class="Message">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause</td>
+<td class="MethodOfCaller">log</td>
+<td class="FileOfCaller">DirectJDKLog.java</td>
+<td class="LineOfCaller">175</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.lang.NullPointerException: null
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.cas.controller.CasController.getCurrentUser(CasController.java:97)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.config.WgFilter.doFilter(WgFilter.java:78)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Thread.run(Thread.java:748)
+</td></tr><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Fri Jan 07 16:18:13 CST 2022</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Level">Level</td>
+<td class="Date">Date</td>
+<td class="Message">Message</td>
+<td class="MethodOfCaller">MethodOfCaller</td>
+<td class="FileOfCaller">FileOfCaller</td>
+<td class="LineOfCaller">LineOfCaller</td>
+</tr>
+
+
+<tr class="error even">
+<td class="Level">ERROR</td>
+<td class="Date">2022-01-07 16:18:21,234</td>
+<td class="Message">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.ClassCastException: java.lang.String cannot be cast to wg.application.entity.User] with root cause</td>
+<td class="MethodOfCaller">log</td>
+<td class="FileOfCaller">DirectJDKLog.java</td>
+<td class="LineOfCaller">175</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.lang.ClassCastException: java.lang.String cannot be cast to wg.application.entity.User
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.cas.controller.CasController.getCurrentUser(CasController.java:101)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.config.WgFilter.doFilter(WgFilter.java:78)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Thread.run(Thread.java:748)
+</td></tr><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Logback Log Messages</title>
+<style  type="text/css">
+table { margin-left: 2em; margin-right: 2em; border-left: 2px solid #AAA; }
+TR.even { background: #FFFFFF; }
+TR.odd { background: #EAEAEA; }
+TR.warn TD.Level, TR.error TD.Level, TR.fatal TD.Level {font-weight: bold; color: #FF4040 }
+TD { padding-right: 1ex; padding-left: 1ex; border-right: 2px solid #AAA; }
+TD.Time, TD.Date { text-align: right; font-family: courier, monospace; font-size: smaller; }
+TD.Thread { text-align: left; }
+TD.Level { text-align: right; }
+TD.Logger { text-align: left; }
+TR.header { background: #596ED5; color: #FFF; font-weight: bold; font-size: larger; }
+TD.Exception { background: #A2AEE8; font-family: courier, monospace;}
+</style>
+
+  </head>
+<body>
+<hr/>
+<p>Log session start time Fri Jan 07 16:27:00 CST 2022</p><p></p>
+
+<table cellspacing="0">
+<tr class="header">
+<td class="Level">Level</td>
+<td class="Date">Date</td>
+<td class="Message">Message</td>
+<td class="MethodOfCaller">MethodOfCaller</td>
+<td class="FileOfCaller">FileOfCaller</td>
+<td class="LineOfCaller">LineOfCaller</td>
+</tr>
+
+
+<tr class="error even">
+<td class="Level">ERROR</td>
+<td class="Date">2022-01-07 16:27:08,622</td>
+<td class="Message">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NumberFormatException: null] with root cause</td>
+<td class="MethodOfCaller">log</td>
+<td class="FileOfCaller">DirectJDKLog.java</td>
+<td class="LineOfCaller">175</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.lang.NumberFormatException: null
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Long.parseLong(Long.java:552)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Long.valueOf(Long.java:803)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.cas.controller.CasController.getCurrentUser(CasController.java:82)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.config.WgFilter.doFilter(WgFilter.java:78)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Thread.run(Thread.java:748)
+</td></tr>
+<tr class="error odd">
+<td class="Level">ERROR</td>
+<td class="Date">2022-01-07 16:27:25,939</td>
+<td class="Message">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NumberFormatException: null] with root cause</td>
+<td class="MethodOfCaller">log</td>
+<td class="FileOfCaller">DirectJDKLog.java</td>
+<td class="LineOfCaller">175</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.lang.NumberFormatException: null
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Long.parseLong(Long.java:552)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Long.valueOf(Long.java:803)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.cas.controller.CasController.getCurrentUser(CasController.java:82)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.config.WgFilter.doFilter(WgFilter.java:78)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Thread.run(Thread.java:748)
+</td></tr>
+<tr class="error even">
+<td class="Level">ERROR</td>
+<td class="Date">2022-01-07 16:29:41,570</td>
+<td class="Message">Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NumberFormatException: null] with root cause</td>
+<td class="MethodOfCaller">log</td>
+<td class="FileOfCaller">DirectJDKLog.java</td>
+<td class="LineOfCaller">175</td>
+</tr>
+<tr><td class="Exception" colspan="6">java.lang.NumberFormatException: null
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Long.parseLong(Long.java:552)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Long.valueOf(Long.java:803)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.cas.controller.CasController.getCurrentUser(CasController.java:82)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.reflect.Method.invoke(Method.java:498)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at wg.application.config.WgFilter.doFilter(WgFilter.java:78)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+<br />&nbsp;&nbsp;&nbsp;&nbsp;at java.lang.Thread.run(Thread.java:748)
+</td></tr>

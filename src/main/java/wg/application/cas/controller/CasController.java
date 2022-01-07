@@ -5,8 +5,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import wg.application.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -75,8 +77,12 @@ public class CasController {
         String password = request.getParameter("password");
         String id = request.getParameter("id");
 
+        User user1 = new User();
+        user1.setName(name);
+        user1.setId(Long.valueOf(id));
+
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
-          = new UsernamePasswordAuthenticationToken(name, password);
+                = new UsernamePasswordAuthenticationToken(user1, password);
 
         Object credentials = usernamePasswordAuthenticationToken.getCredentials();
         String name1 = usernamePasswordAuthenticationToken.getName();
@@ -95,9 +101,9 @@ public class CasController {
         Object principal = authentication.getPrincipal();
 
         String toString = principal.toString();
-
         System.out.println(toString);
 
+        User user = (User) principal;
+        System.out.println(user);
     }
-
 }

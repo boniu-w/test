@@ -123,6 +123,10 @@ public class MathTest {
         String str = "-100";
         byte[][] bytes = MathUtil.stringToBits(str);
 
+        // [0, 0, 1, 0, 1, 1, 0, 1]
+        // [0, 0, 1, 1, 0, 0, 0, 1]
+        // [0, 0, 1, 1, 0, 0, 0, 0]
+        // [0, 0, 1, 1, 0, 0, 0, 0]
         for (byte[] aByte : bytes) {
             System.out.println(Arrays.toString(aByte));
         }
@@ -131,7 +135,7 @@ public class MathTest {
 
         byte b = -100;
         byte[] bit = MathUtil.byteToBitOfArray(b);
-        System.out.println(Arrays.toString(bit));
+        System.out.println(Arrays.toString(bit)); // [1, 0, 0, 1, 1, 1, 0, 0]
 
         System.out.println("-------------");
 
@@ -191,5 +195,36 @@ public class MathTest {
         System.out.println(bigDecimal);
 
         double s = Double.NaN;
+    }
+
+    /************************************************************************
+     * @description: 最长8个数字位
+     * @author: wg
+     * @date: 15:05  2021/12/31
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void floatTest() {
+        float a = 1.0000001f;
+        float b = 1.00000016f;
+        float c = 1000.0000001f;
+        float d = 1000.0001f;
+        float e = 1000.00016f;
+        float f = 1000000.11f;
+        float ff = 1000000.15f;
+        float g = 10000000.11f;
+
+        System.out.println(a); // 1.0000001
+        System.out.println(b); // 1.0000001
+        System.out.println(c); // 1000.0
+        System.out.println(d); // 1000.0001
+        System.out.println(e); // 1000.0002
+        System.out.println(f); // 1000000.1
+        System.out.println(ff); // 1000000.1
+        System.out.println(g); // 1.0E7
+
+        float maxValue = Float.MAX_VALUE;
+        System.out.println("maxValue = " + maxValue); // 3.4028235E38
     }
 }
