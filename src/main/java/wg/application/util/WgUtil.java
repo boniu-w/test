@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 import wg.application.entity.User;
 
 import javax.annotation.PostConstruct;
@@ -15,11 +16,13 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+@Component
 public class WgUtil {
     private static final Logger logger = LoggerFactory.getLogger(WgUtil.class);
 
-    private WgUtil wgUtil;
+    private static WgUtil wgUtil;
 
     @PostConstruct
     public void initWgUtil() {
@@ -277,7 +280,7 @@ public class WgUtil {
     /************************************************************************
      * @description:
      * .isInstance() : a 能否 强转为 b
-     * instanceof : a 是不是 B 这种类型
+     * instanceof : a的值 是不是 B 这种类型
      * @author: wg
      * @date: 10:40  2021/12/3
      * @params:
@@ -369,4 +372,82 @@ public class WgUtil {
         });
     }
 
+    /************************************************************************
+     * @description: 计算 list 里 的某个 项的 和
+     * map 键相同 值求和
+     * @author: wg
+     * @date: 16:51  2021/12/8
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static Map<Integer, Long> calculateSum(ArrayList<Map<Integer, Long>> list) {
+        Map<Integer, Long> sumMap = new HashMap<>();
+        list.stream().map(item -> {
+            item.forEach((k, v) -> {
+                Long aLong = sumMap.get(k);
+                if (aLong == null) {
+                    sumMap.put(k, v);
+                } else {
+                    aLong += v;
+                    sumMap.put(k, aLong);
+                }
+            });
+            return sumMap;
+        }).collect(Collectors.toList());
+        return sumMap;
+    }
+
+    /************************************************************************
+     * @description: 判断是否是数字
+     * @author: wg
+     * @date: 15:50  2021/12/14
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static boolean isNumber(String val) {
+        if (null == val || "".equals(val)) {
+            return false;
+        }
+
+        String rex = "^[+-]?\\d*\\.?\\d*$";
+        boolean numbMatch = Pattern.matches(rex, val);
+        if (numbMatch) {
+            return numbMatch;
+        }
+
+        rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
+        boolean compile = Pattern.matches(rex, val);
+        if (compile) {
+            return compile;
+        }
+        return false;
+    }
+
+    /************************************************************************
+     * @description: 是否是整数
+     * "3." 也是整数
+     * @author: wg
+     * @date: 17:02  2021/12/14
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static boolean isInteger(String val) {
+        if (null == val || "".equals(val)) {
+            return false;
+        }
+
+        String rex = "^[+-]?\\d*\\.?0*$";
+        boolean numbMatch = Pattern.matches(rex, val);
+        if (numbMatch) {
+            return true;
+        }
+
+        rex = "^[+-]?\\d*[Ee]*[+-]*\\d+$";
+        boolean science = Pattern.matches(rex, val);
+        if (science) {
+            return true;
+        }
+
+        return false;
+    }
 }

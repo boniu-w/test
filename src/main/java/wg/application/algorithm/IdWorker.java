@@ -1,7 +1,7 @@
 package wg.application.algorithm;
 
 /*****************************************
- * description:
+ * description: 雪花算法
  * date: 14:25 2021/7/26
  * auth: wg
  *****************************************/
@@ -34,12 +34,15 @@ public class IdWorker {
     private long sequenceMask = -1L ^ (-1L << sequenceBits);
     //记录产生时间毫秒数，判断是否是同1毫秒
     private long lastTimestamp = -1L;
-    public long getWorkerId(){
+
+    public long getWorkerId() {
         return workerId;
     }
+
     public long getDatacenterId() {
         return datacenterId;
     }
+
     public long getTimestamp() {
         return System.currentTimeMillis();
     }
@@ -49,13 +52,13 @@ public class IdWorker {
         // 检查机房id和机器id是否超过31 不能小于0
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(
-                    String.format("worker Id can't be greater than %d or less than 0",maxWorkerId));
+                    String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
 
         if (datacenterId > maxDatacenterId || datacenterId < 0) {
 
             throw new IllegalArgumentException(
-                    String.format("datacenter Id can't be greater than %d or less than 0",maxDatacenterId));
+                    String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         }
         this.workerId = workerId;
         this.datacenterId = datacenterId;
@@ -102,6 +105,7 @@ public class IdWorker {
 
     /**
      * 当某一毫秒的时间，产生的id数 超过4095，系统会进入等待，直到下一毫秒，系统继续产生ID
+     *
      * @param lastTimestamp
      * @return
      */
@@ -114,25 +118,27 @@ public class IdWorker {
         }
         return timestamp;
     }
+
     //获取当前时间戳
-    private long timeGen(){
+    private long timeGen() {
         return System.currentTimeMillis();
     }
 
     /**
-     *  main 测试类
+     * main 测试类
+     *
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println(1&4596);
-        System.out.println(2&4596);
-        System.out.println(6&4596);
-        System.out.println(6&4596);
-        System.out.println(6&4596);
-        System.out.println(6&4596);
-		IdWorker worker = new IdWorker(1,1,1);
-		for (int i = 0; i < 22; i++) {
-			System.out.println(worker.nextId());
-		}
+        System.out.println(1 & 4596);
+        System.out.println(2 & 4596);
+        System.out.println(6 & 4596);
+        System.out.println(6 & 4596);
+        System.out.println(6 & 4596);
+        System.out.println(6 & 4596);
+        IdWorker worker = new IdWorker(1, 1, 1);
+        for (int i = 0; i < 22; i++) {
+            System.out.println(worker.nextId());
+        }
     }
 }

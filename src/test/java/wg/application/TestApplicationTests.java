@@ -5,7 +5,6 @@ import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.tools.javac.util.Context;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.MultiMap;
@@ -13,11 +12,14 @@ import org.apache.commons.collections.map.MultiValueMap;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ObjectUtils;
+import wg.application.TimerTask.ScheduledTest;
+import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
 import wg.application.gc.GcEntity;
 import wg.application.security.CommonEncryption;
 import wg.application.thread.TaskTest;
 import wg.application.util.CalendarUtil;
+import wg.application.util.JdbcUtil;
 import wg.application.util.WgJsonUtil;
 import wg.application.util.WgUtil;
 
@@ -1418,10 +1420,22 @@ public class TestApplicationTests {
     public void testMap() {
         MultiMap multiMap = new MultiValueMap();
 
+        MultiValueMap multiValueMap = new MultiValueMap();
+        HashMap<Integer, Long> hashMap = new HashMap<>();
+        multiValueMap.putAll(hashMap);
+
+
         // new org.springframework.util.MultiValueMap<>()
 
     }
 
+    /************************************************************************
+     * @description: long 转 localdatetime
+     * @author: wg
+     * @date: 9:41  2021/12/7
+     * @params:
+     * @return:
+     ************************************************************************/
     @Test
     public void testTimeStamp() {
         long t = 1632880972614L;
@@ -1491,7 +1505,8 @@ public class TestApplicationTests {
         new Object();
         new GcEntity(new BigDecimal("11.00"));
         new GcEntity(new BigDecimal("0.00"));
-        System.gc();
+        gcEntity = null;
+        // System.gc();
     }
 
     /************************************************************************
@@ -1550,9 +1565,6 @@ public class TestApplicationTests {
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        Map<Class<?>, Context.Key<?>> kt = new HashMap<Class<?>, Context.Key<?>>();
-        Context.Key<?> key = kt.get(aClass);
-        System.out.println(key);
 
         /////////////////////////////////////////////
 
@@ -1708,4 +1720,55 @@ public class TestApplicationTests {
         Object o = WgUtil.instanceTest(User.class, user);
     }
 
+    /************************************************************************
+     * @description: 装箱
+     * @author: wg
+     * @date: 17:58  2021/12/10
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void test6() {
+        Double[] doubles = {123D, 232D};
+        String[] strings = {"123", "asd"};
+        String join = org.apache.commons.lang3.StringUtils.join(doubles, " ");
+        System.out.println(join);
+
+        double[] dd = {123D, 232D};
+        Object[] objects = Arrays.stream(dd).boxed().toArray();
+        String join1 = org.apache.commons.lang3.StringUtils.join(objects, " ");
+        System.out.println(join1);
+    }
+
+    /************************************************************************
+     * @description: 定时任务
+     * @author: wg
+     * @date: 11:23  2021/12/17
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void scheduledTest() {
+        ScheduledTest scheduledTest = new ScheduledTest();
+        try {
+            // scheduledTest.test01();
+            scheduledTest.test02();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /************************************************************************
+     * @description: stack 栈
+     * @author: wg
+     * @date: 13:59  2021/12/20
+     * @params:
+     * @return:
+     ************************************************************************/
+    @Test
+    public void testStack() {
+        DataTest dataTest = new DataTest();
+        dataTest.test01();
+    }
+    
 }

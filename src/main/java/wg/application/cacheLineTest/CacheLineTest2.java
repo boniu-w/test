@@ -27,13 +27,13 @@ public class CacheLineTest2 {
 
     public static void main(String[] args) {
         Thread t1 = new Thread(() -> {
-            for (long i = 0; i < 1000_0000L; i++) {
+            for (long i = 0; i < 10_000_000L; i++) {
                 arr[0].x = i;
             }
         });
 
         Thread t2 = new Thread(() -> {
-            for (long i = 0; i < 1000_0000L; i++) {
+            for (long i = 0; i < 10_000_000L; i++) {
                 arr[0].x = i;
             }
         });
@@ -49,7 +49,7 @@ public class CacheLineTest2 {
             e.printStackTrace();
         }
 
-        System.out.println((System.nanoTime() - start) / 100_0000);
+        System.out.println((System.nanoTime() - start) / 1_000_000);
 
     }
 }

@@ -1,6 +1,6 @@
 package wg.application.entity;
 
-import wg.application.util.Excel;
+import wg.application.annotation.Excel;
 
 public class Basic {
     @Excel(imageType = 1, name = "wg")

@@ -3,7 +3,7 @@ package wg.application.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
-import wg.application.util.Excel;
+import wg.application.annotation.Excel;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -45,20 +45,20 @@ public class DutyEntity {
 
 
     @Excel(name = "值班日期(格式 2020/1/1)")
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dutyDate;
 
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     @Transient
-    private  Date[] dutyDateArray;
+    private Date[] dutyDateArray;
 
     public Date[] getDutyDateArray() {
         return dutyDateArray;
@@ -151,17 +151,17 @@ public class DutyEntity {
     @Override
     public String toString() {
         return "DutyEntity{" +
-          "id='" + id + '\'' +
-          ", dutyLeader='" + dutyLeader + '\'' +
-          ", onDutyMonitor='" + onDutyMonitor + '\'' +
-          ", onDutyMember='" + onDutyMember + '\'' +
-          ", flexibleMonitor='" + flexibleMonitor + '\'' +
-          ", flexibleMember='" + flexibleMember + '\'' +
-          ", group='" + group + '\'' +
-          ", dutyDate=" + dutyDate +
-          ", createTime=" + createTime +
-          ", updateTime=" + updateTime +
-          ", dutyDateArray=" + Arrays.toString(dutyDateArray) +
-          '}';
+                "id='" + id + '\'' +
+                ", dutyLeader='" + dutyLeader + '\'' +
+                ", onDutyMonitor='" + onDutyMonitor + '\'' +
+                ", onDutyMember='" + onDutyMember + '\'' +
+                ", flexibleMonitor='" + flexibleMonitor + '\'' +
+                ", flexibleMember='" + flexibleMember + '\'' +
+                ", group='" + group + '\'' +
+                ", dutyDate=" + dutyDate +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", dutyDateArray=" + Arrays.toString(dutyDateArray) +
+                '}';
     }
 }

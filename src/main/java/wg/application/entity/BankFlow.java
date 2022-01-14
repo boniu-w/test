@@ -1,8 +1,9 @@
 package wg.application.entity;
 
 //import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
-import wg.application.util.Excel;
+import wg.application.annotation.Excel;
 
 import java.io.Serializable;
 import java.util.Objects;

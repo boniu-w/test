@@ -24,6 +24,7 @@ import wg.application.service.AspectService;
 import wg.application.service.LiuShuiInterface;
 import wg.application.service.TestInterface;
 import wg.application.util.IPUtils;
+import wg.application.util.JdbcUtil;
 
 import javax.annotation.Resource;
 //import javax.persistence.EntityManager;
@@ -1469,6 +1470,12 @@ public class Test {
         }
     }
 
+    @GetMapping(value = "jdbcexecute")
+    @ResponseBody
+    public void jdbcQuery() {
+        JdbcUtil.jdbcQuery("select * from user");
+    }
+
     /*****************************************************
      * @params:
      * @description:
@@ -1568,7 +1575,7 @@ public class Test {
      * @params:
      * @return:
      ************************************************************************/
-    public  void setter(Object obj, String fieldName, Object attributeValue) {
+    public void setter(Object obj, String fieldName, Object attributeValue) {
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();

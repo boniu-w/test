@@ -13,7 +13,7 @@ public class MyUnicode {
             System.out.println("error " + e.getMessage());
         }
         // test1();
-        // test2();
+        test2();
     }
 
     public static void test1() {
@@ -34,10 +34,9 @@ public class MyUnicode {
     }
 
     public static void test2() {
-        String s = "\u005Ct";
+        String s = "\u00e0";
         System.out.println(s);
 
-        System.out.println("\u0050");
     }
 
     public static void test3() throws Exception {

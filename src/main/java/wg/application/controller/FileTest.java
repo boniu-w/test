@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import wg.application.entity.DutyEntity;
-import wg.application.util.ExcelParams;
+import wg.application.entity.ExcelParams;
 import wg.application.util.ExcelUtil;
 
 import javax.servlet.ServletContext;

@@ -22,6 +22,7 @@ public class GcEntity {
 
     @Override
     protected void finalize() throws Throwable {
+        System.out.println("finalize");
         if (money.doubleValue() <= 0D) {
             System.out.println("gc dead : " + money);
         } else {
