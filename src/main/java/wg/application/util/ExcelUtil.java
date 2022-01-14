@@ -2,7 +2,6 @@ package wg.application.util;
 
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -37,7 +36,7 @@ import java.util.*;
  * @version
  * @Copyright 使用本工具 要结合 我的 Excel 注解使用,
  *************************************************************/
-@Slf4j
+
 public class ExcelUtil {
     private Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
     private static Workbook workbook;

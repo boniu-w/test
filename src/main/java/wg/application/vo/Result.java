@@ -2,7 +2,6 @@ package wg.application.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import wg.application.constant.CommonConstant;
 
 import java.io.Serializable;
@@ -13,7 +12,6 @@ import java.io.Serializable;
  * @email jeecgos@163.com
  * @date  2019年1月19日
  */
-@Data
 @ApiModel(value="接口返回对象", description="接口返回对象")
 public class Result<T> implements Serializable {
 
@@ -48,6 +46,46 @@ public class Result<T> implements Serializable {
 	 */
 	@ApiModelProperty(value = "时间戳")
 	private long timestamp = System.currentTimeMillis();
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
+	public T getResult() {
+		return result;
+	}
+
+	public void setResult(T result) {
+		this.result = result;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
 
 	public Result() {
 		

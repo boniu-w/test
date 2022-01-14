@@ -2,10 +2,11 @@ package wg.application.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -27,8 +28,6 @@ import wg.application.util.IPUtils;
 import wg.application.util.JdbcUtil;
 
 import javax.annotation.Resource;
-//import javax.persistence.EntityManager;
-//import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.beans.BeanInfo;
@@ -59,8 +58,8 @@ import java.util.stream.Stream;
 @Controller
 @RequestMapping(value = "/test")
 @EnableAspectJAutoProxy
-@Slf4j
 public class Test {
+    private static final Logger logger = LoggerFactory.getLogger(Test.class);
 
     //@Autowired
     //LiuShuiMapper liuShuiMapper;
@@ -328,7 +327,7 @@ public class Test {
     public wg.application.vo.Result testMath() {
 
         if (1000 == 1000) {
-            log.info("true");
+            logger.info("true");
         }
 
         Integer i = 1000;
@@ -696,7 +695,7 @@ public class Test {
             return json;
 
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
         }
         return json;
     }
@@ -723,7 +722,7 @@ public class Test {
             return json;
 
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
         }
 
         return json;

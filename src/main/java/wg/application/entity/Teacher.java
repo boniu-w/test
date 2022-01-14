@@ -1,8 +1,5 @@
 package wg.application.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 /*************************************************************
  * @Package wg.application.entity
  * @author wg
@@ -10,10 +7,14 @@ import lombok.Data;
  * @version
  * @Copyright
  *************************************************************/
-@Data
-@AllArgsConstructor
 public class Teacher {
     private String name;
     private int age;
     private int id;
+
+    public Teacher(String name, int age, int id) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
 }

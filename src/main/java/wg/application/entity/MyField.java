@@ -1,6 +1,5 @@
 package wg.application.entity;
 
-import lombok.Data;
 
 /****************************************************
  * @Package wg.application.entity
@@ -10,11 +9,26 @@ import lombok.Data;
  * @version
  * @Copyright
  ****************************************************/
-@Data
 public class MyField {
 
     private String field;
     private String fieldType;
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(String fieldType) {
+        this.fieldType = fieldType;
+    }
 
     public MyField(String field, String fieldType) {
         this.field = field;
