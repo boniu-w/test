@@ -42,3 +42,4 @@ mvnw
 logs/
 *.log
 wg-log-error.html
+*error.html
