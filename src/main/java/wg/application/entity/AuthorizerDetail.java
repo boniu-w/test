@@ -1,6 +1,5 @@
 package wg.application.entity;
 
-import lombok.Data;
 
 import java.util.List;
 
@@ -11,7 +10,6 @@ import java.util.List;
  * @version
  * @Copyright
  *************************************************************/
-@Data
 public class AuthorizerDetail {
 
     public List<String> authorityCodeList;
@@ -21,4 +19,51 @@ public class AuthorizerDetail {
     public String depeName;
     public String operatorId;
 
+    public List<String> getAuthorityCodeList() {
+        return authorityCodeList;
+    }
+
+    public void setAuthorityCodeList(List<String> authorityCodeList) {
+        this.authorityCodeList = authorityCodeList;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getDepeName() {
+        return depeName;
+    }
+
+    public void setDepeName(String depeName) {
+        this.depeName = depeName;
+    }
+
+    public String getOperatorId() {
+        return operatorId;
+    }
+
+    public void setOperatorId(String operatorId) {
+        this.operatorId = operatorId;
+    }
 }

@@ -1,6 +1,5 @@
 package wg.application.entity;
 
-import lombok.Data;
 
 /*************************************************************
  * @Package wg.application.util
@@ -9,7 +8,6 @@ import lombok.Data;
  * @version
  * @Copyright
  *************************************************************/
-@Data
 public class ExcelParams {
 
     private int sheetIndex;
@@ -19,5 +17,43 @@ public class ExcelParams {
     private String exportFileName;
     private String exportSheetName;
 
+    public int getSheetIndex() {
+        return sheetIndex;
+    }
 
+    public void setSheetIndex(int sheetIndex) {
+        this.sheetIndex = sheetIndex;
+    }
+
+    public int getTitleIndex() {
+        return titleIndex;
+    }
+
+    public void setTitleIndex(int titleIndex) {
+        this.titleIndex = titleIndex;
+    }
+
+    public int getContentIndex() {
+        return contentIndex;
+    }
+
+    public void setContentIndex(int contentIndex) {
+        this.contentIndex = contentIndex;
+    }
+
+    public String getExportFileName() {
+        return exportFileName;
+    }
+
+    public void setExportFileName(String exportFileName) {
+        this.exportFileName = exportFileName;
+    }
+
+    public String getExportSheetName() {
+        return exportSheetName;
+    }
+
+    public void setExportSheetName(String exportSheetName) {
+        this.exportSheetName = exportSheetName;
+    }
 }

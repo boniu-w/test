@@ -1,15 +1,13 @@
 package wg.application.controller;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wg.application.entity.LiuShui;
 import wg.application.entity.Student;
-import wg.application.entity.Teacher;
 import wg.application.vo.Result;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,8 +20,10 @@ import java.util.List;
  *************************************************************/
 @RestController
 @RequestMapping(value = "/reflectController")
-@Slf4j
+
 public class ReflectController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ReflectController.class);
 
     /****************************************************************
      * 修饰符为 private 通过反射 依然能拿到字段 即使没有get set ,但不能赋值

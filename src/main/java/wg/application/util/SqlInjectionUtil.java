@@ -1,16 +1,17 @@
 package wg.application.util;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * sql注入处理工具类
  * 
  * @author zhoujf
  */
-@Slf4j
+
 public class SqlInjectionUtil {
 	final static String xssStr = "'|and |exec |insert |select |delete |update |drop |count |chr |mid |master |truncate |char |declare |;|or |+|,";
-
+	private static final Logger logger = LoggerFactory.getLogger(SqlInjectionUtil.class);
 	/**
 	 * sql注入过滤处理，遇到注入关键字抛异常
 	 * 
@@ -26,8 +27,8 @@ public class SqlInjectionUtil {
 		String[] xssArr = xssStr.split("\\|");
 		for (int i = 0; i < xssArr.length; i++) {
 			if (value.indexOf(xssArr[i]) > -1) {
-				log.error("请注意，存在SQL注入关键词---> {}", xssArr[i]);
-				log.error("请注意，值可能存在SQL注入风险!---> {}", value);
+				logger.error("请注意，存在SQL注入关键词---> {}", xssArr[i]);
+				logger.error("请注意，值可能存在SQL注入风险!---> {}", value);
 				throw new RuntimeException("请注意，值可能存在SQL注入风险!--->" + value);
 			}
 		}
@@ -50,8 +51,8 @@ public class SqlInjectionUtil {
 			value = value.toLowerCase();
 			for (int i = 0; i < xssArr.length; i++) {
 				if (value.indexOf(xssArr[i]) > -1) {
-					log.error("请注意，存在SQL注入关键词---> {}", xssArr[i]);
-					log.error("请注意，值可能存在SQL注入风险!---> {}", value);
+					logger.error("请注意，存在SQL注入关键词---> {}", xssArr[i]);
+					logger.error("请注意，值可能存在SQL注入风险!---> {}", value);
 					throw new RuntimeException("请注意，值可能存在SQL注入风险!--->" + value);
 				}
 			}
@@ -75,8 +76,8 @@ public class SqlInjectionUtil {
 		value = value.toLowerCase();
 		for (int i = 0; i < xssArr.length; i++) {
 			if (value.indexOf(xssArr[i]) > -1 || value.startsWith(xssArr[i].trim())) {
-				log.error("请注意，存在SQL注入关键词---> {}", xssArr[i]);
-				log.error("请注意，值可能存在SQL注入风险!---> {}", value);
+				logger.error("请注意，存在SQL注入关键词---> {}", xssArr[i]);
+				logger.error("请注意，值可能存在SQL注入风险!---> {}", value);
 				throw new RuntimeException("请注意，值可能存在SQL注入风险!--->" + value);
 			}
 		}
@@ -100,8 +101,8 @@ public class SqlInjectionUtil {
 		value = value.toLowerCase();
 		for (int i = 0; i < xssArr.length; i++) {
 			if (value.indexOf(xssArr[i]) > -1 || value.startsWith(xssArr[i].trim())) {
-				log.error("请注意，存在SQL注入关键词---> {}", xssArr[i]);
-				log.error("请注意，值可能存在SQL注入风险!---> {}", value);
+				logger.error("请注意，存在SQL注入关键词---> {}", xssArr[i]);
+				logger.error("请注意，值可能存在SQL注入风险!---> {}", value);
 				throw new RuntimeException("请注意，值可能存在SQL注入风险!--->" + value);
 			}
 		}

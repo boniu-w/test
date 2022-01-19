@@ -16,7 +16,7 @@
 //import java.text.SimpleDateFormat;
 //import java.util.*;
 //
-//@Slf4j
+//
 //public class QueryGenerator {
 //	public static final String SQL_RULES_COLUMN = "SQL_RULES_COLUMN";
 //

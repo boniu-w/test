@@ -1,8 +1,6 @@
 package wg.application.enumeration;
 
 
-import lombok.Getter;
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +11,6 @@ import java.util.Map;
  * @date 2020/4/16 9:51
  * @Copyright
  */
-@Getter
 public enum Title {
 
 
@@ -61,6 +58,14 @@ public enum Title {
     private String fileName;
 
     private static final Map<String, String> titleMap = new HashMap<>();
+
+    public String getFileCode() {
+        return fileCode;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
 
     static {
         for (Title title : EnumSet.allOf(Title.class)) {

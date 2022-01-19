@@ -2,7 +2,8 @@ package wg.application.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import wg.application.util.JwtTokenUtil;
 
@@ -11,7 +12,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 /*************************************************************
  * @Package wg.application.filter
@@ -21,8 +21,10 @@ import java.util.Date;
  * @Copyright
  *************************************************************/
 @Component
-@Slf4j
 public class WgFilter implements Filter {
+
+    private static final Logger logger = LoggerFactory.getLogger(WgFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("WgCharsetFilter 初始化");
@@ -64,7 +66,7 @@ public class WgFilter implements Filter {
                     Jws<Claims> claimsJws = JwtTokenUtil.analyseJwtToken(token);
                     Claims claims = claimsJws.getBody();
 
-                    log.info("{}{}", "第一个大括号参数: " + claims.toString(), "\n 第二个大括号参数: ");
+                    logger.info("{}{}", "第一个大括号参数: " + claims.toString(), "\n 第二个大括号参数: ");
 
                 }
             }

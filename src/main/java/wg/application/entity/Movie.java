@@ -1,7 +1,5 @@
 package wg.application.entity;
 
-import lombok.Data;
-
 import java.util.List;
 
 /*************************************************************
@@ -11,7 +9,6 @@ import java.util.List;
  * @version
  * @Copyright
  *************************************************************/
-@Data
 public class Movie {
 
 
@@ -22,6 +19,27 @@ public class Movie {
     private List<String> performer;
 
 
+    public String getMovieName() {
+        return movieName;
+    }
 
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
 
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public List<String> getPerformer() {
+        return performer;
+    }
+
+    public void setPerformer(List<String> performer) {
+        this.performer = performer;
+    }
 }

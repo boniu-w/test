@@ -1,10 +1,5 @@
 package wg.application.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -15,11 +10,8 @@ import javax.validation.constraints.Pattern;
  * @version
  * @Copyright
  *************************************************************/
-@Data
-@AllArgsConstructor
-@ToString
-@NoArgsConstructor
 public class Student {
+
     @NotBlank(message = "用户名不能为空")
     private String name;
 
@@ -41,5 +33,55 @@ public class Student {
         this.name = name;
         this.age = age;
         this.sex = sex;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+    public Student(String name, Integer age, Integer id, Integer sex, String birthday) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+        this.sex = sex;
+        this.birthday = birthday;
+    }
+
+    public Student() {
     }
 }
