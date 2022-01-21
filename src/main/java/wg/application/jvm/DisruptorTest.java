@@ -4,11 +4,11 @@ package wg.application.jvm;
  * @Package wg.application.jvm
  * @author wg
  * @date 2021/2/19 11:20
- * @version
+ * @version:
  * @Copyright
- * @discription cpu的乱序执行, 指令重排序验证
+ * @discription: cpu的乱序执行, 指令重排序验证
  *************************************************************/
-public class DisrupterTest {
+public class DisruptorTest {
 
     private static int x = 0, y = 0;
     private static int a = 0, b = 0;

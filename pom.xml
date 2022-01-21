@@ -390,18 +390,16 @@
                     </dependency>
                 </dependencies>
             </plugin>
-<<<<<<< HEAD
-=======
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-<!--                    <compilerArgs>&#45;&#45;enable-preview</compilerArgs>-->
+                    <!--                    <compilerArgs>&#45;&#45;enable-preview</compilerArgs>-->
                 </configuration>
             </plugin>
->>>>>>> ef1887bb936251d596b8c5c2c23351d2e75ec404
         </plugins>
 
         <!--        <resources>-->
