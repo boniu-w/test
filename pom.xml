@@ -24,30 +24,36 @@
     </developers>
 
     <!-- 开源协议   -->
-    <!--<licenses>-->
-    <!--    <license>-->
-    <!--        <name>The Apache Software License, Version 2.0</name>-->
-    <!--        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>-->
-    <!--        <distribution>repo</distribution>-->
-    <!--    </license>-->
-    <!--</licenses>-->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-    <!--&lt;!&ndash; Software configuration management   &ndash;&gt;-->
+    <!-- Software configuration management   -->
     <!--<scm>-->
     <!--    <connection>scm:git:git@github.com:boniu-w/test.git</connection>-->
     <!--    <url>git@github.com:boniu-w/test.git</url>-->
     <!--</scm>-->
 
-    <!--<distributionManagement>-->
-    <!--    <snapshotRepository>-->
-    <!--        <id>test</id>-->
-    <!--        <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
-    <!--    </snapshotRepository>-->
-    <!--    <repository>-->
-    <!--        <id>test</id>-->
-    <!--        <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-    <!--    </repository>-->
-    <!--</distributionManagement>-->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+
+        <!--<repository>-->
+        <!--    <id>test-wg</id>-->
+        <!--    <name>wgstest</name>-->
+        <!--    <url>file://${project.basedir}/maven-repo-wg</url>-->
+        <!--</repository>-->
+    </distributionManagement>
 
     <properties>
         <java.version>1.8</java.version>
@@ -240,50 +246,22 @@
 
     <build>
         <plugins>
+            <!-- doc 插件, 非必须 -->
             <!--<plugin>-->
-            <!--    <groupId>org.sonatype.plugins</groupId>-->
-            <!--    <artifactId>nexus-staging-maven-plugin</artifactId>-->
-            <!--    <version>1.6.7</version>-->
-            <!--    <extensions>true</extensions>-->
-            <!--    <configuration>-->
-            <!--        <serverId>ossrh</serverId>-->
-            <!--        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>-->
-            <!--        <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
-            <!--    </configuration>-->
+            <!--    <groupId>org.apache.maven.plugins</groupId>-->
+            <!--    <artifactId>maven-javadoc-plugin</artifactId>-->
+            <!--    <version>3.0.1</version>-->
+            <!--    <executions>-->
+            <!--        <execution>-->
+            <!--            <id>attach-javadocs</id>-->
+            <!--            <goals>-->
+            <!--                <goal>jar</goal>-->
+            <!--            </goals>-->
+            <!--        </execution>-->
+            <!--    </executions>-->
             <!--</plugin>-->
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <!--                    <includeSystemScope>true</includeSystemScope>-->
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <!--                    <compilerArgs>&#45;&#45;enable-preview</compilerArgs>-->
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.1</version>
-                <configuration>
-                    <includes>
-                        <include>**/bvt/**/*.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-
+            <!-- 源码包插件, 非必须 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -291,6 +269,7 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
@@ -301,28 +280,44 @@
                 </configuration>
             </plugin>
 
+            <!-- Nexus Staging Maven 插件是将组件部署到 OSSRH 并将它们发布到中央存储库的推荐方法。要配置它，只需将插件添加到您的 Maven pom.xml-->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+
+            <!-- gpg 插件, Maven GPG 插件用于对具有以下配置的组件进行签名-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!--<plugin>-->
-            <!--    <artifactId>maven-javadoc-plugin</artifactId>-->
-            <!--    <version>3.0.1</version>-->
-            <!--    <executions>-->
-            <!--        <execution>-->
-            <!--            <id>attach-javadoc</id>-->
-            <!--            <goals>-->
-            <!--                <goal>jar</goal>-->
-            <!--            </goals>-->
-            <!--        </execution>-->
-            <!--    </executions>-->
+            <!--    <groupId>org.springframework.boot</groupId>-->
+            <!--    <artifactId>spring-boot-maven-plugin</artifactId>-->
             <!--    <configuration>-->
-            <!--        <skip>${javadoc.skip}</skip>-->
-            <!--        <show>public</show>-->
-            <!--        <charset>UTF-8</charset>-->
-            <!--        <encoding>UTF-8</encoding>-->
-            <!--        <docencoding>UTF-8</docencoding>-->
-            <!--        <links>-->
-            <!--            <link>http://docs.oracle.com/javase/6/docs/api</link>-->
-            <!--        </links>-->
+            <!--        <includeSystemScope>true</includeSystemScope>-->
+            <!--        <skip>true</skip>-->
             <!--    </configuration>-->
             <!--</plugin>-->
+
 
             <!--<plugin>-->
             <!--    <artifactId>maven-gpg-plugin</artifactId>-->
@@ -341,43 +336,43 @@
             <!--    </executions>-->
             <!--</plugin>-->
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                        <manifestEntries>
-                            <Implementation-Build>${buildNumber}</Implementation-Build>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+            <!--    <groupId>org.apache.maven.plugins</groupId>-->
+            <!--    <artifactId>maven-jar-plugin</artifactId>-->
+            <!--    <version>3.1.1</version>-->
+            <!--    <configuration>-->
+            <!--        <archive>-->
+            <!--            <manifest>-->
+            <!--                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>-->
+            <!--            </manifest>-->
+            <!--            <manifestEntries>-->
+            <!--                <Implementation-Build>${buildNumber}</Implementation-Build>-->
+            <!--            </manifestEntries>-->
+            <!--        </archive>-->
+            <!--    </configuration>-->
+            <!--</plugin>-->
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <format>{0,date,yyyy-MM-dd HH:mm:ss}</format>
-                    <items>
-                        <item>timestamp</item>
-                    </items>
-                    <doCheck>false</doCheck>
-                    <doUpdate>true</doUpdate>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+            <!--    <groupId>org.codehaus.mojo</groupId>-->
+            <!--    <artifactId>buildnumber-maven-plugin</artifactId>-->
+            <!--    <version>1.1</version>-->
+            <!--    <executions>-->
+            <!--        <execution>-->
+            <!--            <phase>validate</phase>-->
+            <!--            <goals>-->
+            <!--                <goal>create</goal>-->
+            <!--            </goals>-->
+            <!--        </execution>-->
+            <!--    </executions>-->
+            <!--    <configuration>-->
+            <!--        <format>{0,date,yyyy-MM-dd HH:mm:ss}</format>-->
+            <!--        <items>-->
+            <!--            <item>timestamp</item>-->
+            <!--        </items>-->
+            <!--        <doCheck>false</doCheck>-->
+            <!--        <doUpdate>true</doUpdate>-->
+            <!--    </configuration>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -400,12 +395,26 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
                 <configuration>
+                    <encoding>UTF-8</encoding>
                     <source>1.8</source>
                     <target>1.8</target>
                     <!--                    <compilerArgs>&#45;&#45;enable-preview</compilerArgs>-->
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.1</version>
+                <configuration>
+                    <includes>
+                        <include>**/bvt/**/*.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
         </plugins>
 
         <!--        <resources>-->
