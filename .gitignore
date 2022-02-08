@@ -5,6 +5,7 @@ package-lock.json
 target/
 classes/
 out/
+*.jar
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
