@@ -12,7 +12,7 @@ public class LunarTest {
         // getToday();
         getPerson();
         System.out.println();
-        // getShuJiu();
+        getShuJiu();
     }
 
     /**
@@ -28,9 +28,9 @@ public class LunarTest {
      * 某日是否在数九中, 不在-> 空指针, 在-> 打印
      */
     public static void getShuJiu() {
-        Solar solar = new Solar(2021, 12, 21, 14, 26, 12);
-        Lunar lunar = solar.getLunar();
-        // Lunar lunar = Lunar.fromDate(new Date());
+        // Solar solar = new Solar(2021, 12, 21, 14, 26, 12);
+        // Lunar lunar = solar.getLunar();
+        Lunar lunar = Lunar.fromDate(new Date());
         ShuJiu shuJiu = lunar.getShuJiu();
         System.out.println(shuJiu.toFullString());
     }

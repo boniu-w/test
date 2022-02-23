@@ -1,21 +1,25 @@
-//package wg.application.config;
+// package wg.application.security;
 //
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.context.annotation.Bean;
+// import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+// import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+// import org.springframework.security.config.http.SessionCreationPolicy;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+// import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 //
-///*************************************************************
+// /*************************************************************
 // * @Package wg.application.config
 // * @author wg
 // * @date 2020/8/4 11:39
 // * @version
 // * @Copyright
 // *************************************************************/
-//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+// public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        // 加入自定义的安全认证
-////        auth.authenticationProvider(provider);
+// //        auth.authenticationProvider(provider);
 //        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 //    }
 //
@@ -48,16 +52,16 @@
 //          .antMatchers("/**/excelImport").permitAll()
 //          //开发模拟登陆接口（默认为admin）
 //          .antMatchers("/test/GetToken").permitAll()
-////                .antMatchers("/sys/my/**").permitAll()
+// //                .antMatchers("/sys/my/**").permitAll()
 //
 //          .anyRequest()//任何请求,登录后可以访问
-////                .access("@rbacauthorityservice.hasPermission(request,authentication)") // RBAC 动态 url 认证
+// //                .access("@rbacauthorityservice.hasPermission(request,authentication)") // RBAC 动态 url 认证
 //          .authenticated()  // 除上面外的所有请求全部需要鉴权认证
 //
 //          .and()
 //          .formLogin()  //开启登录, 定义当需要用户登录时候，转到的登录页面
-////                .loginPage("/test/login.html")
-////                .loginProcessingUrl("/login")
+// //                .loginPage("/test/login.html")
+// //                .loginProcessingUrl("/login")
 //          .successHandler(authenticationSuccessHandler) // 登录成功
 //          .failureHandler(authenticationFailureHandler) // 登录失败
 //          .permitAll()
@@ -78,4 +82,4 @@
 //
 //    }
 //
-//}
+// }

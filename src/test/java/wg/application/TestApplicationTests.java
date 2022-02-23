@@ -15,6 +15,7 @@ import org.springframework.util.ObjectUtils;
 import wg.application.TimerTask.ScheduledTest;
 import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
+import wg.application.enumeration.CodeEnum;
 import wg.application.gc.GcEntity;
 import wg.application.security.CommonEncryption;
 import wg.application.thread.TaskTest;
@@ -1769,6 +1770,11 @@ public class TestApplicationTests {
     public void testStack() {
         DataTest dataTest = new DataTest();
         dataTest.test01();
+    }
+
+    @Test
+    public void testEnum(){
+        System.out.println(CodeEnum.SUCCESS.getCode());
     }
     
 }
