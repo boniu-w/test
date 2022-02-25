@@ -2,6 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>nacos-wg</module>
+    </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -267,17 +271,24 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.alibaba.nacos/nacos-client -->
-        <dependency>
-            <groupId>com.alibaba.nacos</groupId>
-            <artifactId>nacos-client</artifactId>
-            <version>2.0.3</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>com.alibaba.nacos</groupId>-->
+        <!--    <artifactId>nacos-client</artifactId>-->
+        <!--    <version>1.4.1</version>-->
+        <!--</dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
         <!--<dependency>-->
         <!--    <groupId>org.springframework.data</groupId>-->
         <!--    <artifactId>spring-data-mongodb</artifactId>-->
         <!--    <version>3.2.6</version>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.alibaba.nacos/nacos-spring-context -->
+
+        <!--<dependency>-->
+        <!--    <groupId>com.alibaba.nacos</groupId>-->
+        <!--    <artifactId>nacos-spring-context</artifactId>-->
+        <!--    <version>1.1.1</version>-->
         <!--</dependency>-->
 
     </dependencies>

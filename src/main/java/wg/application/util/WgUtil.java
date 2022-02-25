@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import wg.application.entity.User;
 
@@ -449,5 +450,17 @@ public class WgUtil {
         }
 
         return false;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: nacos 使用的密码加密策略
+     * @params:
+     * @return:
+     * @createTime: 15:25  2022/2/24
+     * @updateTime: 15:25  2022/2/24
+     ************************************************************************/
+    public static String passwordEncode(String password){
+        return new BCryptPasswordEncoder().encode(password);
     }
 }
