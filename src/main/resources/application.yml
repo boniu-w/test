@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: wg
+
+wg:
+  name: wg
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+
+

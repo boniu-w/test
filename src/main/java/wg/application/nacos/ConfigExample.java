@@ -1,12 +1,3 @@
-// /*
-// * Demo for Nacos
-// * pom.xml
-//     <dependency>
-//         <groupId>com.alibaba.nacos</groupId>
-//         <artifactId>nacos-client</artifactId>
-//         <version>${version}</version>
-//     </dependency>
-// */
 // package wg.application.nacos;
 //
 // import java.util.Properties;
@@ -27,7 +18,7 @@
 //
 //     public static void main(String[] args) throws NacosException, InterruptedException {
 //         String serverAddr = "10.12.12.210";
-//         String dataId = "test";
+//         String dataId = "sevenme-wg.yml";
 //         String group = "DEFAULT_GROUP";
 //         Properties properties = new Properties();
 //         properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
@@ -37,7 +28,7 @@
 //         configService.addListener(dataId, group, new Listener() {
 //             @Override
 //             public void receiveConfigInfo(String configInfo) {
-//                 System.out.println("recieve:" + configInfo);
+//                 System.out.println("receive:" + configInfo);
 //             }
 //
 //             @Override
@@ -59,6 +50,16 @@
 //         //
 //         // content = configService.getConfig(dataId, group, 5000);
 //         // System.out.println("content after remove : " + content);
-//         // Thread.sleep(300000);
+//         Thread.sleep(300000);
 //     }
+//
+//     public void getConfig() throws NacosException {
+//         String serverAddr = "10.12.12.210";
+//         String dataId = "test";
+//         String group = "DEFAULT_GROUP";
+//         Properties properties = new Properties();
+//         properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
+//         ConfigService configService = NacosFactory.createConfigService(properties);
+//     }
+//
 // }

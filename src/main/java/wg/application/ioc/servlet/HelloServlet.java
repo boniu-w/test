@@ -13,12 +13,12 @@ import java.util.List;
 @RequestMapping(value = "/helloservlet")
 public class HelloServlet extends HttpServlet {
 
-    public UserService userService = new UserServiceImpl();
+    // public UserService userService = new UserServiceImpl();
 
-    @GetMapping(value = "/findall")
-    public List<String> findAll() {
-        // UserService userService = new UserServiceImpl();
-        return userService.findAll();
-    }
+    // @GetMapping(value = "/findall")
+    // public List<String> findAll() {
+    //     // UserService userService = new UserServiceImpl();
+    //     return userService.findAll();
+    // }
 
 }
