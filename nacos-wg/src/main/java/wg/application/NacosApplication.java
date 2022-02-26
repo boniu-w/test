@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,31 @@ public class NacosApplication {
 
     @Resource
     ConfigurableApplicationContext configurableApplicationContext;
+
+    @Resource
+    Environment environment;
+
+    // @Value("${app.server1.config}")
+    // private String config1;
+
+    @GetMapping(value = "/config1")
+    public String getConfig1() {
+        String property = configurableApplicationContext.getEnvironment().getProperty("app.server1.config");
+        System.out.println("property : " + property);
+
+        Properties properties = System.getProperties();
+        properties.forEach((k, v) -> System.out.println(k + ": " + v));
+        System.out.println();
+
+        ConfigurableEnvironment configurableEnvironment = configurableApplicationContext.getEnvironment();
+        Map<String, Object> systemProperties = configurableEnvironment.getSystemProperties();
+        systemProperties.forEach((k, v) -> System.out.println(k + ": " + v));
+
+        String[] activeProfiles = environment.getActiveProfiles();
+
+
+        return null;
+    }
 
     public static void main(String[] args) {
         // // 是否开启鉴权
@@ -35,22 +61,4 @@ public class NacosApplication {
         System.out.println("spring boot property : " + property);
     }
 
-    // @Value("${app.server1.config}")
-    // private String config1;
-
-    @GetMapping(value = "/config1")
-    public String getConfig1() {
-        String property = configurableApplicationContext.getEnvironment().getProperty("app.server1.config");
-        System.out.println("property : " + property);
-
-        Properties properties = System.getProperties();
-        properties.forEach((k, v) -> System.out.println(k + ": " + v));
-        System.out.println();
-
-        ConfigurableEnvironment environment = configurableApplicationContext.getEnvironment();
-        Map<String, Object> systemProperties = environment.getSystemProperties();
-        systemProperties.forEach((k, v) -> System.out.println(k + ": " + v));
-
-        return null;
-    }
 }
