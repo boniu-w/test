@@ -27,9 +27,9 @@ public class TestApplication {
         ConfigurableApplicationContext context = SpringApplication.run(TestApplication.class, args);
         // context.addApplicationListener(new ListenerOf());
 
-        ConfigurableEnvironment environment = context.getEnvironment();
-        Map<String, Object> systemProperties = environment.getSystemProperties();
-        systemProperties.forEach((k, v) -> System.out.println(k + ": " + v));
+        // ConfigurableEnvironment environment = context.getEnvironment();
+        // Map<String, Object> systemProperties = environment.getSystemProperties();
+        // systemProperties.forEach((k, v) -> System.out.println(k + ": " + v));
     }
 
 }

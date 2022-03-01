@@ -1777,6 +1777,14 @@ public class TestApplicationTests {
         System.out.println(CodeEnum.SUCCESS.getCode());
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 classpath, 测试 读取 src/main/java 下面的文件
+     * @params:
+     * @return:
+     * @createTime: 14:57  2022/3/1
+     * @updateTime: 14:57  2022/3/1
+     ************************************************************************/
     @Test
     public void getErrorMessage(){
         ErrorMessageOfApp message = new ErrorMessageOfApp();

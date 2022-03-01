@@ -303,9 +303,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- includeSystemScope 代表maven打包时会将外部引入的jar包（比如在根目录下或resource文件下新加外部jar包）打包到项目jar，在服务器上项目才能运行，不加此配置，本地可以运行，因为本地可以再lib下找到外部包，但是服务器上jar中是没有的。-->
+                <!-- 项目上线时要打开 -->
                 <!--<configuration>-->
                 <!--    <includeSystemScope>true</includeSystemScope>-->
                 <!--</configuration>-->
+
                 <!--<dependencies>-->
                 <!--    <dependency>-->
                 <!--        <groupId>org.springframework</groupId>-->
@@ -423,12 +426,14 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <!-- 下面这个 targetpath 会导致 idea 读不到 配置文件, 但是 如果使用 java -java 运行, 就没事-->
                 <!--<targetPath>BOOT-INF/classes/</targetPath>-->
             </resource>
 
             <!--因为默认java包即源码包下面的xml文件不会被编译，如果想要编译加上如下代码-->
             <resource>
                 <directory>src/main/java</directory>
+                <!-- 下面这个 targetpath 会导致 idea 读不到 配置文件, 但是 如果使用 java -java 运行, 就没事-->
                 <!--<targetPath>BOOT-INF/classes/</targetPath>-->
                 <includes>
                     <include>**/*.xml</include>
@@ -437,6 +442,7 @@
                 </includes>
             </resource>
 
+            <!-- 打包时太慢, 不用了 -->
             <!--<resource>-->
             <!--    <directory>lib</directory>-->
             <!--    <targetPath>BOOT-INF/lib/</targetPath>-->

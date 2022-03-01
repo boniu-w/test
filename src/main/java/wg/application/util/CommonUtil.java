@@ -1,6 +1,7 @@
 package wg.application.util;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -485,8 +486,12 @@ public class CommonUtil {
     public static Properties getProperties(ClassPathResource classPathResource) {
         Properties properties = new Properties();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(classPathResource.getFile()));
+            File file = File.createTempFile(Objects.requireNonNull(classPathResource.getFilename()), null);
+            // File file = new File("./" + classPathResource.getFilename());
+            FileUtils.copyInputStreamToFile(classPathResource.getInputStream(), file);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             properties.load(bufferedReader);
+            // file.delete();
             return properties;
         } catch (IOException e) {
             e.printStackTrace();
