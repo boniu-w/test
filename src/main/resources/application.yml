@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: wg
+    active: ubuntu
 
 wg:
   name: wg
