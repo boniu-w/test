@@ -20,7 +20,7 @@
             <FileNamePattern>${LOG_HOME}/log-wg-%d{MM-dd-yyyy}.%i.log</FileNamePattern>
             <!--日志文件保留天数 -->
             <MaxHistory>30</MaxHistory>
-            <maxFileSize>10MB</maxFileSize>
+            <maxFileSize>100MB</maxFileSize>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
@@ -34,19 +34,12 @@
             <!--设置日志级别,过滤掉info日志,只输入error日志-->
             <level>ERROR</level>
         </filter>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!--日志文件输出的文件名 -->
-            <FileNamePattern>${LOG_HOME}/error-log-wg-%d{MM-dd-yyyy}.%i.html</FileNamePattern>
-            <!--日志文件保留天数 -->
-            <MaxHistory>30</MaxHistory>
-            <maxFileSize>10MB</maxFileSize>
-        </rollingPolicy>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.html.HTMLLayout">
                 <pattern>%p%d%msg%M%F{32}%L</pattern>
             </layout>
         </encoder>
-        <!--<file>${LOG_HOME}/wg-log-error.html</file>-->
+        <file>${LOG_HOME}/error-log-wg.html</file>
     </appender>
     <!-- 生成 error html格式日志结束 -->
 
@@ -57,7 +50,7 @@
             <FileNamePattern>${LOG_HOME}/log-wg-%d{MM-dd-yyyy}.%i.html</FileNamePattern>
             <!--日志文件保留天数 -->
             <MaxHistory>30</MaxHistory>
-            <MaxFileSize>10MB</MaxFileSize>
+            <MaxFileSize>100MB</MaxFileSize>
         </rollingPolicy>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.html.HTMLLayout">

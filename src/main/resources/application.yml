@@ -4,6 +4,11 @@ spring:
 
 wg:
   name: wg
+  gender: 1
+  birthday: "123123"
+  phone: "234324"
+  son:
+    name: "123"
 
 mybatis:
   configuration:

@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import wg.application.entity.User;
@@ -11,6 +12,10 @@ import wg.application.entity.User;
 import javax.annotation.PostConstruct;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -20,14 +25,14 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
-public class WgUtil {
-    private static final Logger logger = LoggerFactory.getLogger(WgUtil.class);
+public class CommonUtil {
+    private static final Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 
-    private static WgUtil wgUtil;
+    private static CommonUtil commonUtil;
 
     @PostConstruct
     public void initWgUtil() {
-        wgUtil = this;
+        commonUtil = this;
     }
 
     /************************************************************************
@@ -460,7 +465,33 @@ public class WgUtil {
      * @createTime: 15:25  2022/2/24
      * @updateTime: 15:25  2022/2/24
      ************************************************************************/
-    public static String passwordEncode(String password){
+    public static String passwordEncode(String password) {
         return new BCryptPasswordEncoder().encode(password);
     }
+
+    public static Properties getProperties(String path) {
+        Properties properties = new Properties();
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            properties.load(bufferedReader);
+            return properties;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Properties getProperties(ClassPathResource classPathResource) {
+        Properties properties = new Properties();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(classPathResource.getFile()));
+            properties.load(bufferedReader);
+            return properties;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

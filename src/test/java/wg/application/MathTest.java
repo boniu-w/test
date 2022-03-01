@@ -3,7 +3,7 @@ package wg.application;
 import org.junit.Test;
 import wg.application.math.FloatTest;
 import wg.application.util.MathUtil;
-import wg.application.util.WgUtil;
+import wg.application.util.CommonUtil;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -48,13 +48,13 @@ public class MathTest {
 
         double v1 = 5.63589065441568E-4; // 能够识别 科学计数法
 
-        String notation = WgUtil.double2ScientificNotation(v);
+        String notation = CommonUtil.double2ScientificNotation(v);
         System.out.println(notation);
 
-        String s = WgUtil.double2ScientificNotation(0.00005D);
+        String s = CommonUtil.double2ScientificNotation(0.00005D);
         System.out.println(s);
 
-        String s1 = WgUtil.double2ScientificNotation(0.0005D);
+        String s1 = CommonUtil.double2ScientificNotation(0.0005D);
         System.out.println(s1);
 
         v = 0.0005D;
@@ -75,7 +75,7 @@ public class MathTest {
         double v = Double.parseDouble(a);
         System.out.println(v);
 
-        String s = WgUtil.double2ScientificNotation(v);
+        String s = CommonUtil.double2ScientificNotation(v);
         System.out.println(s);
     }
 
@@ -88,7 +88,7 @@ public class MathTest {
      ************************************************************************/
     @Test
     public void test3() {
-        boolean number = WgUtil.isNumber("-1.00000000000E-4");
+        boolean number = CommonUtil.isNumber("-1.00000000000E-4");
         System.out.println(number);
     }
 
@@ -101,7 +101,7 @@ public class MathTest {
      ************************************************************************/
     @Test
     public void test4() {
-        boolean number = WgUtil.isInteger("0.001");
+        boolean number = CommonUtil.isInteger("0.001");
         System.out.println(number);
 
         int a = -10000;

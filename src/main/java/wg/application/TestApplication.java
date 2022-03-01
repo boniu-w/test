@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import wg.application.listener.ListenerOf;
+
+import java.util.Map;
 
 @SpringBootApplication
 @MapperScan("wg.application.dao")
@@ -24,6 +26,10 @@ public class TestApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(TestApplication.class, args);
         // context.addApplicationListener(new ListenerOf());
+
+        ConfigurableEnvironment environment = context.getEnvironment();
+        Map<String, Object> systemProperties = environment.getSystemProperties();
+        systemProperties.forEach((k, v) -> System.out.println(k + ": " + v));
     }
 
 }

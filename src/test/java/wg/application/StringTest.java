@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import wg.application.util.StringUtil;
-import wg.application.util.WgUtil;
+import wg.application.util.CommonUtil;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -131,7 +131,7 @@ public class StringTest {
             chars[i] = (char) (48 + i);
         }
         String s = new String(chars);
-        String[] strings = WgUtil.subStringByFixedLength(s, 10000);
+        String[] strings = CommonUtil.subStringByFixedLength(s, 10000);
 
         for (int i = 0; i < strings.length; i++) {
             System.out.println(strings[i]);

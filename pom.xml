@@ -273,19 +273,11 @@
         <!--    <version>1.4.1</version>-->
         <!--</dependency>-->
 
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+        <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-starter-alibaba-nacos-config -->
         <!--<dependency>-->
-        <!--    <groupId>org.springframework.data</groupId>-->
-        <!--    <artifactId>spring-data-mongodb</artifactId>-->
-        <!--    <version>3.2.6</version>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/com.alibaba.nacos/nacos-spring-context -->
-
-        <!--<dependency>-->
-        <!--    <groupId>com.alibaba.nacos</groupId>-->
-        <!--    <artifactId>nacos-spring-context</artifactId>-->
-        <!--    <version>1.1.1</version>-->
+        <!--    <groupId>com.alibaba.cloud</groupId>-->
+        <!--    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+        <!--    <version>2.1.2.RELEASE</version>-->
         <!--</dependency>-->
 
     </dependencies>
@@ -311,16 +303,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <includeSystemScope>true</includeSystemScope>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>${springloaded.version}</version>
-                    </dependency>
-                </dependencies>
+                <!--<configuration>-->
+                <!--    <includeSystemScope>true</includeSystemScope>-->
+                <!--</configuration>-->
+                <!--<dependencies>-->
+                <!--    <dependency>-->
+                <!--        <groupId>org.springframework</groupId>-->
+                <!--        <artifactId>springloaded</artifactId>-->
+                <!--        <version>${springloaded.version}</version>-->
+                <!--    </dependency>-->
+                <!--</dependencies>-->
             </plugin>
 
             <!-- doc 插件, 非必须 -->
@@ -426,22 +418,38 @@
                     </includes>
                 </configuration>
             </plugin>
-
         </plugins>
 
-        <!--        <resources>-->
-        <!--            <resource>-->
-        <!--                <directory>lib</directory>-->
-        <!--                <targetPath>BOOT-INF/lib/</targetPath>-->
-        <!--                <includes>-->
-        <!--                    <include>**/*.jar</include>-->
-        <!--                </includes>-->
-        <!--            </resource>-->
-        <!--            <resource>-->
-        <!--                <directory>src/main/resources</directory>-->
-        <!--                <targetPath>BOOT-INF/classes/</targetPath>-->
-        <!--            </resource>-->
-        <!--        </resources>-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--<targetPath>BOOT-INF/classes/</targetPath>-->
+            </resource>
+
+            <!--因为默认java包即源码包下面的xml文件不会被编译，如果想要编译加上如下代码-->
+            <resource>
+                <directory>src/main/java</directory>
+                <!--<targetPath>BOOT-INF/classes/</targetPath>-->
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.json</include>
+                </includes>
+            </resource>
+
+            <!--<resource>-->
+            <!--    <directory>lib</directory>-->
+            <!--    <targetPath>BOOT-INF/lib/</targetPath>-->
+            <!--    <includes>-->
+            <!--        <include>**/*.jar</include>-->
+            <!--    </includes>-->
+            <!--    &lt;!&ndash; jar 包冲突了, 排除这个包  &ndash;&gt;-->
+            <!--    <excludes>-->
+            <!--        <exclude>**/fastjson-1.2.2.jar</exclude>-->
+            <!--    </excludes>-->
+            <!--</resource>-->
+        </resources>
+
     </build>
 
 </project>

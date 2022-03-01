@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ObjectUtils;
 import wg.application.TimerTask.ScheduledTest;
+import wg.application.message.ErrorMessageOfApp;
 import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
 import wg.application.enumeration.CodeEnum;
@@ -20,9 +21,8 @@ import wg.application.gc.GcEntity;
 import wg.application.security.CommonEncryption;
 import wg.application.thread.TaskTest;
 import wg.application.util.CalendarUtil;
-import wg.application.util.JdbcUtil;
 import wg.application.util.WgJsonUtil;
-import wg.application.util.WgUtil;
+import wg.application.util.CommonUtil;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
@@ -1584,9 +1584,9 @@ public class TestApplicationTests {
      ************************************************************************/
     @Test
     public void testbc() {
-        String s = WgUtil.toHalfAngle("a  b");
+        String s = CommonUtil.toHalfAngle("a  b");
         System.out.println(s);
-        String s1 = WgUtil.toFullAngle("a  b");
+        String s1 = CommonUtil.toFullAngle("a  b");
         System.out.println(s1);
     }
 
@@ -1651,7 +1651,7 @@ public class TestApplicationTests {
         double d = 0.00D;
         System.out.println(d == 0);
 
-        WgUtil.test1(Test03.class);
+        CommonUtil.test1(Test03.class);
 
         User user = new User();
         user.setName("wg");
@@ -1718,7 +1718,7 @@ public class TestApplicationTests {
     @Test
     public void test5() {
         User user = new User();
-        Object o = WgUtil.instanceTest(User.class, user);
+        Object o = CommonUtil.instanceTest(User.class, user);
     }
 
     /************************************************************************
@@ -1775,6 +1775,14 @@ public class TestApplicationTests {
     @Test
     public void testEnum(){
         System.out.println(CodeEnum.SUCCESS.getCode());
+    }
+
+    @Test
+    public void getErrorMessage(){
+        ErrorMessageOfApp message = new ErrorMessageOfApp();
+        Properties properties = message.get();
+
+        System.out.println(properties);
     }
     
 }
