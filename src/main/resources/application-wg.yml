@@ -25,5 +25,22 @@ spring:
 report:
   dir: E:\pandoc-2.16.1\wg\
 
-
-
+# 程序监控
+management:
+  trace:
+    http:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+      show-components: always
+      status:
+        http-mapping: # 设置不同健康状态对应的响应状态码
+          DOWN: 503
+        order: FATAL, DOWN, OUT_OF_SERVICE, UP, UNKNOWN # 状态排序

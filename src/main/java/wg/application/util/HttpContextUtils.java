@@ -15,6 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 
 public class HttpContextUtils {
 
+	/************************************************************************
+	 * @author: wg
+	 * @description: 在任意地方获取 HttpServletRequest
+	 * @params:
+	 * @return:
+	 * @createTime: 14:25  2022/3/2
+	 * @updateTime: 14:25  2022/3/2
+	 ************************************************************************/
 	public static HttpServletRequest getHttpServletRequest() {
 		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	}

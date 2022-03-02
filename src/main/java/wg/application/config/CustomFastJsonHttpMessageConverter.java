@@ -1,4 +1,4 @@
-package wg.application.filter;
+package wg.application.config;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.ValueFilter;
