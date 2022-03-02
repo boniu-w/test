@@ -26,6 +26,7 @@ import wg.application.service.LiuShuiInterface;
 import wg.application.service.TestInterface;
 import wg.application.util.IPUtils;
 import wg.application.util.JdbcUtil;
+import wg.application.util.MessageUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -1586,7 +1587,16 @@ public class Test {
         } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
 
+    @GetMapping(value = "/test_message_source")
+    public void testMessageSource() {
+        String message = MessageUtils.getMessage(10001);
+        System.out.println(message);
+
+         message = MessageUtils.getMessage(10001,"skdjhfs");
+        System.out.println(message);
+        return;
     }
 
 }

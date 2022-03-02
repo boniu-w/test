@@ -11,6 +11,8 @@ import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.MultiValueMap;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.i18n.LocaleContext;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
 import wg.application.TimerTask.ScheduledTest;
 import wg.application.message.ErrorMessageOfApp;
@@ -20,9 +22,7 @@ import wg.application.enumeration.CodeEnum;
 import wg.application.gc.GcEntity;
 import wg.application.security.CommonEncryption;
 import wg.application.thread.TaskTest;
-import wg.application.util.CalendarUtil;
-import wg.application.util.WgJsonUtil;
-import wg.application.util.CommonUtil;
+import wg.application.util.*;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
@@ -1792,5 +1792,30 @@ public class TestApplicationTests {
 
         System.out.println(properties);
     }
-    
+
+    /************************************************************************
+     * @author: wg
+     * @description: http 测试
+     * @params:
+     * @return:
+     * @createTime: 10:18  2022/3/2
+     * @updateTime: 10:18  2022/3/2
+     ************************************************************************/
+    @Test
+    public void testHttp(){
+        String domain = HttpContextUtils.getDomain();
+        System.out.println(domain);
+
+        String origin = HttpContextUtils.getOrigin();
+        System.out.println(origin);
+    }
+
+    @Test
+    public void testMessage(){
+        Locale locale = LocaleContextHolder.getLocale();
+        System.out.println();
+
+        String message = MessageUtils.getMessage(10001,"123");
+        System.out.println(message);
+    }
 }

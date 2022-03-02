@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: wg
+  messages:
+    basename: i18n.messages_common
+    encoding: UTF-8
 
 wg:
   name: wg
