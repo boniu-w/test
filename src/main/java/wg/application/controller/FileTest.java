@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import wg.application.entity.DutyEntity;
 import wg.application.entity.ExcelParams;
 import wg.application.util.ExcelUtil;
 
@@ -115,9 +116,10 @@ public class FileTest {
                 excelParams.setContentIndex(2);  // 指定内容起始行
 
                 // 4. 读取标题
-                Class<?> aClass = Class.forName("wg.application.entity.DutyEntity");
-                String[] strings = ExcelUtil.readExcelTitle(excelParams, (Class<T>) aClass);
+                // Class<?> aClass = Class.forName("wg.application.entity.DutyEntity");
+                // String[] strings = ExcelUtil.readExcelTitle(excelParams, (Class<T>) aClass);
 
+                String[] strings = ExcelUtil.readExcelTitle(excelParams, new DutyEntity());
                 System.out.println(Arrays.toString(strings));
 
                 // 5. 联合标题,读取内容 最后的map 标题 内容都有

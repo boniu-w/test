@@ -1773,7 +1773,7 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void testEnum(){
+    public void testEnum() {
         System.out.println(CodeEnum.SUCCESS.getCode());
     }
 
@@ -1786,7 +1786,7 @@ public class TestApplicationTests {
      * @updateTime: 14:57  2022/3/1
      ************************************************************************/
     @Test
-    public void getErrorMessage(){
+    public void getErrorMessage() {
         ErrorMessageOfApp message = new ErrorMessageOfApp();
         Properties properties = message.get();
 
@@ -1802,7 +1802,7 @@ public class TestApplicationTests {
      * @updateTime: 10:18  2022/3/2
      ************************************************************************/
     @Test
-    public void testHttp(){
+    public void testHttp() {
         String domain = HttpContextUtils.getDomain();
         System.out.println(domain);
 
@@ -1811,11 +1811,22 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void testMessage(){
+    public void testMessage() {
         Locale locale = LocaleContextHolder.getLocale();
         System.out.println();
 
-        String message = MessageUtils.getMessage(10001,"123");
+        String message = MessageUtils.getMessage(10001, "123");
         System.out.println(message);
+    }
+
+    @Test
+    public void testImage() {
+        byte a = 52;
+        int i = MathUtil.byteToInt(a);
+        System.out.println(i);
+        // String imageFile = "C:\\Users\\wg\\Pictures\\Saved Pictures\\上云下路-大一点123.jpg";
+        // String txtFile = "C:\\Users\\wg\\Pictures\\Saved Pictures\\上云下路.txt";
+        // ImageUtil.imageToHex(imageFile, txtFile);
+        // ImageUtil.hexToImage(txtFile, imageFile);
     }
 }

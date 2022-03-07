@@ -121,7 +121,7 @@ public class MathTest {
     @Test
     public void testBit() {
         String str = "-100";
-        byte[][] bytes = MathUtil.stringToBits(str);
+        byte[][] bytes = MathUtil.stringToBit(str);
 
         // [0, 0, 1, 0, 1, 1, 0, 1]
         // [0, 0, 1, 1, 0, 0, 0, 1]
@@ -134,7 +134,7 @@ public class MathTest {
         System.out.println("----------");
 
         byte b = -100;
-        byte[] bit = MathUtil.byteToBitOfArray(b);
+        byte[] bit = MathUtil.byteToBit(b);
         System.out.println(Arrays.toString(bit)); // [1, 0, 0, 1, 1, 1, 0, 0]
 
         System.out.println("-------------");

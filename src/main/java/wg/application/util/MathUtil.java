@@ -182,7 +182,7 @@ public class MathUtil {
      * @params:
      * @return:
      ************************************************************************/
-    public static byte[] byteToBitOfArray(byte b) {
+    public static byte[] byteToBit(byte b) {
         byte[] array = new byte[8];
         for (int i = 7; i >= 0; i--) {
             array[i] = (byte) (b & 1);
@@ -192,19 +192,61 @@ public class MathUtil {
     }
 
     /************************************************************************
+     * @author: wg
+     * @description: char -> int
+     * @params:
+     * @return:
+     * @createTime: 10:37  2022/3/4
+     * @updateTime: 10:37  2022/3/4
+     ************************************************************************/
+    public static int byteToInt(byte ch) {
+        int val = 0;
+        if (ch >= 0x30 && ch <= 0x39) {
+            val = ch - 0x30;
+        } else if (ch >= 0x41 && ch <= 0x46) {
+            val = ch - 0x41 + 10;
+        }
+        return val;
+    }
+
+    /************************************************************************
      * @description: 字符串 转 bit
      * @author: wg
      * @date: 16:04  2021/12/20
      * @params:
      * @return:
      ************************************************************************/
-    public static byte[][] stringToBits(String str) {
+    public static byte[][] stringToBit(String str) {
         byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
         byte[][] bits = new byte[bytes.length][8];
         for (int i = 0; i < bytes.length; i++) {
-            byte[] bit = byteToBitOfArray(bytes[i]);
+            byte[] bit = byteToBit(bytes[i]);
             bits[i] = bit;
         }
         return bits;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 字节转16进制字符串
+     * @params:
+     * @return:
+     * @createTime: 10:06  2022/3/3
+     * @updateTime: 10:06  2022/3/3
+     ************************************************************************/
+    public static String bytesToHexString(byte[] src) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        for (int i = 0; i < src.length; i++) {
+            int v = src[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString().toUpperCase();
     }
 }

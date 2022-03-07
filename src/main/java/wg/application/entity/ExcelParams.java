@@ -10,34 +10,34 @@ package wg.application.entity;
  *************************************************************/
 public class ExcelParams {
 
-    private int sheetIndex;
-    private int titleIndex;
-    private int contentIndex;
+    private Integer sheetIndex;
+    private Integer titleIndex;
+    private Integer contentIndex;
 
     private String exportFileName;
     private String exportSheetName;
 
-    public int getSheetIndex() {
+    public Integer getSheetIndex() {
         return sheetIndex;
     }
 
-    public void setSheetIndex(int sheetIndex) {
+    public void setSheetIndex(Integer sheetIndex) {
         this.sheetIndex = sheetIndex;
     }
 
-    public int getTitleIndex() {
+    public Integer getTitleIndex() {
         return titleIndex;
     }
 
-    public void setTitleIndex(int titleIndex) {
+    public void setTitleIndex(Integer titleIndex) {
         this.titleIndex = titleIndex;
     }
 
-    public int getContentIndex() {
+    public Integer getContentIndex() {
         return contentIndex;
     }
 
-    public void setContentIndex(int contentIndex) {
+    public void setContentIndex(Integer contentIndex) {
         this.contentIndex = contentIndex;
     }
 

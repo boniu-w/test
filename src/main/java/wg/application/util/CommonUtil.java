@@ -17,6 +17,7 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -510,6 +511,40 @@ public class CommonUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 会有类型转换问题, 待解决, 错误示范 在 service/ExcelTest 里面
+     * @params:
+     * @return:
+     * @createTime: 17:24  2022/3/4
+     * @updateTime: 17:24  2022/3/4
+     ************************************************************************/
+    public static <T> T mapToObject(Map<String, Object> map, Class<T> clazz) {
+        if (map == null) {
+            return null;
+        }
+        T obj = null;
+        try {
+            obj = clazz.newInstance();
+
+            Field[] fields = obj.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                int mod = field.getModifiers();
+                if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
+                    continue;
+                }
+                field.setAccessible(true);
+                String fieldName = field.getName();
+                if (map.containsKey(fieldName)) {
+                    field.set(obj, map.get(fieldName));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return obj;
     }
 
 }

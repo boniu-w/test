@@ -12,6 +12,8 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.Nullable;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -20,14 +22,13 @@ import wg.application.entity.ExcelParams;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 
 /*************************************************************
  * @Package com.Gzs.demo.SpringSecurityDemo.Common1.Utils
@@ -59,13 +60,11 @@ public class ExcelUtil {
             InputStream is = file.getInputStream();
             switch (ext) {
                 case ".xls":
+                case ".et":
                     workbook = new HSSFWorkbook(is);
                     return workbook;
                 case ".xlsx":
                     workbook = new XSSFWorkbook(is);
-                    return workbook;
-                case ".et":
-                    workbook = new HSSFWorkbook(is);
                     return workbook;
                 default:
                     workbook = null;
@@ -80,6 +79,13 @@ public class ExcelUtil {
         return new HSSFWorkbook();
     }
 
+    public static Workbook initWorkbook(File file) throws IOException {
+        if (file == null) {
+            return null;
+        }
+        workbook = new XSSFWorkbook(new FileInputStream(file));
+        return workbook;
+    }
 
     /***************************************************
      * 获取 前端 上传的文件信息
@@ -96,11 +102,8 @@ public class ExcelUtil {
 
             Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 
-
             if (commonsMultipartResolver.isMultipart(request)) {
-
                 while (iterator.hasNext()) {
-
                     // 将当前文件名一致的文件流放入同一个集合中
                     List<MultipartFile> fileRows = multipartHttpServletRequest.getFiles(iterator.next());
 
@@ -122,13 +125,12 @@ public class ExcelUtil {
         return fileVector;
     }
 
-
     /****************************************************************
      * 读取第一行 默认是标题行
      * @author: wg
      * @time: 2020/7/2 15:05
      ****************************************************************/
-    public static String[] readExcelTitle(ExcelParams excelParams, Class<T> tClass) {
+    public static <T> String[] readExcelTitle(@Nullable ExcelParams excelParams, T t) throws NullPointerException {
         if (workbook == null) {
             try {
                 throw new Exception("Workbook对象为空！");
@@ -140,58 +142,82 @@ public class ExcelUtil {
         int numberOfSheets = workbook.getNumberOfSheets();
         //System.out.println("numberOfSheets: "+numberOfSheets);
 
-        sheet = workbook.getSheetAt(excelParams.getSheetIndex());
-        row = sheet.getRow(0);
+        // sheet 所在
+        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
+            sheet = workbook.getSheetAt(excelParams.getSheetIndex());
+        } else {
+            sheet = workbook.getSheetAt(0);
+        }
+
+        // 标题行
+        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
+            row = sheet.getRow(excelParams.getTitleIndex());
+        } else {
+            row = sheet.getRow(0);
+        }
+
         // 标题总列数
         int colNum = row.getPhysicalNumberOfCells();
-
-
+        colNum = row.getLastCellNum();
         String[] title = new String[colNum];
+        Field[] fields = t.getClass().getDeclaredFields();
 
-        Field[] fields = tClass.getDeclaredFields();
+        System.out.println(Arrays.toString(fields));
 
         String cellValue = "";
         Excel annotation = null;
         String annotationName = "";
-        try {
-            for (int i = 0; i < colNum; i++) {
-                cellValue = row.getCell(i).getStringCellValue();
-                for (int j = 0; j < fields.length; j++) {
-                    if (fields[j].isAnnotationPresent(Excel.class)) {
-                        annotation = fields[j].getAnnotation(Excel.class);
-                        annotationName = annotation.name();
-                        if (annotationName.equals(cellValue)) {
-                            title[i] = fields[j].getName();
-                        }
-                    }
 
+        for (int i = 0; i < colNum; i++) {
+            cellValue = row.getCell(i).getStringCellValue();
+            for (int j = 0; j < fields.length; j++) {
+                if (fields[j].isAnnotationPresent(Excel.class)) {
+                    annotation = fields[j].getAnnotation(Excel.class);
+                    annotationName = annotation.name();
+                    if (annotationName.equals(cellValue)) {
+                        title[i] = fields[j].getName();
+                    }
                 }
             }
-        } catch (NullPointerException nullPointer) {
-            nullPointer.printStackTrace();
         }
+
         return title;
     }
-
 
     /****************************************************************
      * 读取的 excel 内容 应该以 表头对应字段 为键 形成map
      * @author: wg
      * @time: 2020/7/2 14:09
      ****************************************************************/
-    public static Map<Integer, Map<String, Object>> readExcelContent(Workbook workbook, String[] titleArray,
-                                                                     ExcelParams excelParams) throws Exception {
+    public static Map<Integer, Map<String, Object>> readExcelContent(Workbook workbook,
+                                                                     String[] titleArray,
+                                                                     @Nullable ExcelParams excelParams) throws Exception {
         Map<Integer, Map<String, Object>> contentMap = new HashMap<Integer, Map<String, Object>>();
+
         // 得到总行数
-        sheet = workbook.getSheetAt(excelParams.getSheetIndex());
+        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
+            sheet = workbook.getSheetAt(0);
+        } else {
+            sheet = workbook.getSheetAt(excelParams.getSheetIndex());
+        }
         int rowNum = sheet.getLastRowNum();
 
         // 总列数
-        row = sheet.getRow(0);
+        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
+            row = sheet.getRow(0);
+        } else {
+            row = sheet.getRow(excelParams.getTitleIndex());
+        }
         int colNum = row.getPhysicalNumberOfCells();
 
         // 默认正文内容应该从第二行开始,第一行为表头的标题
-        for (int i = 1; i <= rowNum; i++) {
+        int i;
+        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getContentIndex())) {
+            i = 1;
+        } else {
+            i = excelParams.getContentIndex();
+        }
+        for (; i <= rowNum; i++) {
             HashMap<String, Object> cellValue = new HashMap<String, Object>();
             int j = 0;
             row = sheet.getRow(i);
@@ -203,36 +229,30 @@ public class ExcelUtil {
             contentMap.put(i, cellValue);
 
         }
-
-        //System.out.println(contentMap);
         return contentMap;
     }
 
     /**
      * 根据Cell类型设置数据
      *
-     * @param cell
+     * @param
      */
     public static Object getCellFormatValue(Cell cell) {
         Object cellvalue = "";
 
         DecimalFormat decimalFormat = new DecimalFormat();
 
-
         if (cell != null) {
-
             switch (cell.getCellType()) {
                 case Cell.CELL_TYPE_NUMERIC: {
                     short s = cell.getCellStyle().getDataFormat();
                     if (ExcelDateUtil.isCellDateFormatted(cell)) {
-                        Date date = cell.getDateCellValue();
-                        cellvalue = date;
+                        cellvalue = cell.getDateCellValue();
                     } else {
                         cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
                     }
                     break;
                 }
-
                 case Cell.CELL_TYPE_STRING:
                     cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
                     break;
@@ -258,6 +278,49 @@ public class ExcelUtil {
         return cellvalue;
     }
 
+    // apache poi 4.1.2
+    // public static Object getCellFormatValue(Cell cell) {
+    //     Object cellvalue = "";
+    //     CellType cellType = cell.getCellType();
+    //
+    //     DecimalFormat decimalFormat = new DecimalFormat();
+    //
+    //     if (cellType != null) {
+    //         switch (cellType) {
+    //             case NUMERIC: {
+    //                 short s = cell.getCellStyle().getDataFormat();
+    //                 if (ExcelDateUtil.isCellDateFormatted(cell)) {
+    //                     Date date = cell.getDateCellValue();
+    //                     cellvalue = date;
+    //                 } else {
+    //                     cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
+    //                 }
+    //                 break;
+    //             }
+    //             case STRING:
+    //                 cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
+    //                 break;
+    //             case BOOLEAN:
+    //                 cellvalue = String.valueOf(cell.getBooleanCellValue());
+    //                 break;
+    //             case FORMULA:
+    //                 cellvalue = String.valueOf(cell.getCellFormula());
+    //                 break;
+    //             case ERROR:
+    //                 cellvalue = "非法字符";
+    //                 break;
+    //             case BLANK:
+    //                 cellvalue = "";
+    //                 break;
+    //             default:
+    //                 cellvalue = "未知类型";
+    //                 break;
+    //         }
+    //     } else {
+    //         cellvalue = "";
+    //     }
+    //     return cellvalue;
+    // }
 
     /***************************************************
      * 导出excel
