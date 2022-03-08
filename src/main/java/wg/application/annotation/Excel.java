@@ -1,11 +1,10 @@
 package wg.application.annotation;
 
 import org.springframework.core.annotation.AliasFor;
+import wg.application.util.ExcelAnnotationUtil;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.validation.Constraint;
+import java.lang.annotation.*;
 
 /**
  * @author wg
@@ -15,6 +14,8 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
+// @Constraint(validatedBy = ExcelAnnotationUtil.class)
+@Documented
 public @interface Excel {
 
     /**

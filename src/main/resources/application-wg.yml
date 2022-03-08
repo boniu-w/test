@@ -44,3 +44,8 @@ management:
         http-mapping: # 设置不同健康状态对应的响应状态码
           DOWN: 503
         order: FATAL, DOWN, OUT_OF_SERVICE, UP, UNKNOWN # 状态排序
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:wg/application/mapper/xml/*Mapper.xml

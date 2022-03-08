@@ -32,7 +32,7 @@ public class IliDetailExcel {
     private BigDecimal length;
     @Excel(name = "缺陷宽度 mm")
     private BigDecimal width;
-    @Excel(name = "内外指示")
+    @Excel(name = "内外指示", replace = {"INT_1","EXT_0"})
     private String isInternal;
     @Excel(name = "ERF")
     private BigDecimal erf;

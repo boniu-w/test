@@ -1,11 +1,7 @@
 package wg.application.config;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import wg.application.dao.UserMapper;
+import wg.application.mapper.UserMapper;
 import wg.application.entity.User;
 import wg.application.entity.UserExample;
 

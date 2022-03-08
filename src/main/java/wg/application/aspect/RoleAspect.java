@@ -26,12 +26,12 @@ import java.lang.reflect.Method;
 @Component
 public class RoleAspect {
 
-
     @Autowired
     RoleInterface roleInterface;
 
     @Pointcut("@annotation(wg.application.annotation.RequiredRole)")
     public void requiredRole() {
+        System.out.println("fsjdflksdj");
     }
 
     /****************************************************************
@@ -50,7 +50,6 @@ public class RoleAspect {
         RequiredRole requiredRole = method.getAnnotation(RequiredRole.class);
         String[] values = requiredRole.value();
         for (int i = 0; i < values.length; i++) {
-
             // 注解的value 值
             value = values[i];
             // 根据value 查询数据库中角色
@@ -59,9 +58,7 @@ public class RoleAspect {
                 if (roleCodes[j].equals(value)) {
                     b = true;
                 }
-
             }
-
         }
 
         if (b == true) {
@@ -70,7 +67,6 @@ public class RoleAspect {
         } else {
             throw new Exception("required admin ");
         }
-
     }
 
 
@@ -89,7 +85,6 @@ public class RoleAspect {
         RequiredRole requiredRole = method.getAnnotation(RequiredRole.class);
         String[] values = requiredRole.value();
         for (int i = 0; i < values.length; i++) {
-
             // 注解的value 值
             value = values[i];
             // 根据value 查询数据库中角色
@@ -97,11 +92,8 @@ public class RoleAspect {
             for (int j = 0; j < roleCodes.length; j++) {
                 if (roleCodes[j].equals(value)) {
                     b = true;
-
                 }
-
             }
-
         }
 
         if (b == true) {

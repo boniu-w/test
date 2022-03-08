@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import wg.application.annotation.Excel;
 import wg.application.entity.ExcelParams;
+import wg.application.excel.IliDetailExcel;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -162,7 +163,7 @@ public class ExcelUtil {
         String[] title = new String[colNum];
         Field[] fields = t.getClass().getDeclaredFields();
 
-        System.out.println(Arrays.toString(fields));
+        // System.out.println(Arrays.toString(fields));
 
         String cellValue = "";
         Excel annotation = null;
@@ -229,6 +230,64 @@ public class ExcelUtil {
             contentMap.put(i, cellValue);
 
         }
+        return contentMap;
+    }
+
+    public static <T> Map<Integer, T> readExcelContent(Workbook workbook,
+                                                       String[] titleArray,
+                                                       @Nullable ExcelParams excelParams,
+                                                       Class<T> tClass) throws Exception {
+        Map<Integer, T> contentMap = new HashMap<Integer, T>();
+
+        // 得到总行数
+        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
+            sheet = workbook.getSheetAt(0);
+        } else {
+            sheet = workbook.getSheetAt(excelParams.getSheetIndex());
+        }
+        int rowNum = sheet.getLastRowNum();
+
+        // 总列数
+        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
+            row = sheet.getRow(0);
+        } else {
+            row = sheet.getRow(excelParams.getTitleIndex());
+        }
+        int colNum = row.getPhysicalNumberOfCells();
+
+        // 默认正文内容应该从第二行开始,第一行为表头的标题
+        int i;
+        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getContentIndex())) {
+            i = 1;
+        } else {
+            i = excelParams.getContentIndex();
+        }
+
+        Field[] declaredFields = tClass.getDeclaredFields();
+        Object o = tClass.newInstance();
+
+        for (int j = 0; j < declaredFields.length; j++) {
+            Excel annotation = declaredFields[j].getAnnotation(Excel.class);
+            String[] replace = annotation.replace();
+            if (replace.length > 0) {
+
+            }
+        }
+
+        for (; i <= rowNum; i++) {
+            Map<String, Object> cellValue = new HashMap<String, Object>();
+            int j = 0;
+            row = sheet.getRow(i);
+            while (j < colNum) {
+                Object obj = getCellFormatValue(row.getCell(j));
+                cellValue.put(titleArray[j], obj);
+                j++;
+            }
+            T t = JSON.parseObject(JSON.toJSONString(cellValue), tClass);
+            contentMap.put(i, t);
+        }
+
+
         return contentMap;
     }
 
