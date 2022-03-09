@@ -19,7 +19,7 @@ import java.util.Map;
 public class ExcelTest {
 
     public static void main(String[] args) {
-        importExcel(null);
+        importExcelReplaceTest(null);
     }
 
     public static void importExcel(MultipartFile file) {
@@ -32,44 +32,95 @@ public class ExcelTest {
             excelParams.setTitleIndex(0);
             excelParams.setSheetIndex(0);
             excelParams.setContentIndex(1);
+
+            long currentTimeMillis = System.currentTimeMillis();
+
             String[] excelTitle = ExcelUtil.readExcelTitle(excelParams, new IliDetailExcel());
             Map<Integer, Map<String, Object>> map = ExcelUtil.readExcelContent(workbook, excelTitle, excelParams);
 
+            long l = System.currentTimeMillis();
+            System.out.println("用时: " + (l - currentTimeMillis) + " 毫秒");
+
             ArrayList<String> dictList = new ArrayList<>();
-            map.forEach((k, v) -> {
-                v.forEach((key, value) -> {
-                    if ("sex".equals(key)) {
-                        switch (value.toString()) {
+            map.forEach((lineIndex, objectMap) -> {
+                objectMap.forEach((fieldName, fieldValue) -> {
+                    if ("sex".equals(fieldName)) {
+                        switch (fieldValue.toString()) {
                             case "男":
-                                value = 1;
+                                fieldValue = 1;
                                 break;
                             case "女":
-                                value = 0;
+                                fieldValue = 0;
                                 break;
                         }
-                        v.put(key, value);
+                        objectMap.put(fieldName, fieldValue);
                     }
-                    // if ("isInternal".equals(key)) {
-                    //     if ("INT".equals(value)) {
-                    //         value = 1;
-                    //     } else {
-                    //         value = 0;
-                    //     }
-                    //     v.put(key, value);
-                    // }
-                    if ("holiday".equals(key)) {
-                        if (dictList.contains(value)) {
-                            value = "123";
+                    if ("isInternal".equals(fieldName)) {
+                        if ("INT".equals(fieldValue)) {
+                            fieldValue = 1;
+                        } else {
+                            fieldValue = 0;
                         }
-                        v.put(key, value);
+                        objectMap.put(fieldName, fieldValue);
+                    }
+                    if ("holiday".equals(fieldName)) {
+                        if (dictList.contains(fieldValue)) {
+                            fieldValue = "123";
+                        }
+                        objectMap.put(fieldName, fieldValue);
                     }
                 });
 
-                IliDetailExcel iliDetailExcel = JSON.parseObject(JSON.toJSONString(v), IliDetailExcel.class);
+                IliDetailExcel iliDetailExcel = JSON.parseObject(JSON.toJSONString(objectMap), IliDetailExcel.class);
                 // 添加到数据库
                 System.out.println(iliDetailExcel);
             });
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void importExcelReplaceTest(MultipartFile file) {
+        String path = "static/excel/内检测数据.xlsx";
+        try {
+            ClassPathResource resource = new ClassPathResource(path);
+            File file1 = resource.getFile();
+            Workbook workbook = ExcelUtil.initWorkbook(file1);
+            ExcelParams excelParams = new ExcelParams();
+            excelParams.setTitleIndex(0);
+            excelParams.setSheetIndex(0);
+            excelParams.setContentIndex(1);
+
+            long currentTimeMillis = System.currentTimeMillis();
+
+            String[] excelTitle = ExcelUtil.readExcelTitle(excelParams, new IliDetailExcel());
+            Map<Integer, Map<String, Object>> map = ExcelUtil.readExcelContent(workbook, excelTitle, excelParams);
+            Map<String, Map<String, String>> replaceMap = ExcelUtil.getImportReplaceMap(IliDetailExcel.class);
+
+            ArrayList<String> dictList = new ArrayList<>();
+            map.forEach((lineIndex, objectMap) -> {
+                // objectMap(字段名, 单元格的值)
+                objectMap.forEach((fieldName, cellValue) -> {
+                    // replaceMap(字段名, replace = {"INT_1", "EXT_0"})
+                    replaceMap.forEach((fieldName$, replaceValues) -> {
+                        if (fieldName.equals(fieldName$)) {
+                            replaceValues.forEach((excelVal, tableVal) -> {
+                                if (excelVal.equals(cellValue.toString().trim())) {
+                                    objectMap.put(fieldName, tableVal);
+                                }
+                            });
+                        }
+                    });
+                });
+
+                IliDetailExcel iliDetailExcel = JSON.parseObject(JSON.toJSONString(objectMap), IliDetailExcel.class);
+
+                // 添加到数据库
+                System.out.println(iliDetailExcel);
+            });
+            long l = System.currentTimeMillis();
+            System.out.println("用时: " + (l - currentTimeMillis) + " 毫秒");
         } catch (Exception e) {
             e.printStackTrace();
         }

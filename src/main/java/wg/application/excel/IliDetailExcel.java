@@ -22,7 +22,7 @@ public class IliDetailExcel {
     private BigDecimal kp;
     @Excel(name = "特征类型")
     private String feature;
-    @Excel(name = "尺寸类型")
+    @Excel(name = "尺寸类型", replace = {"PINH_9898"})
     private String dimension;
     @Excel(name = "周向")
     private Date orientation;
@@ -32,7 +32,7 @@ public class IliDetailExcel {
     private BigDecimal length;
     @Excel(name = "缺陷宽度 mm")
     private BigDecimal width;
-    @Excel(name = "内外指示", replace = {"INT_1","EXT_0"})
+    @Excel(name = "内外指示", replace = {"INT_1", "EXT_0"}, isImport = true)
     private String isInternal;
     @Excel(name = "ERF")
     private BigDecimal erf;

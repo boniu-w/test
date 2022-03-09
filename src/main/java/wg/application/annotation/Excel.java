@@ -1,9 +1,7 @@
 package wg.application.annotation;
 
 import org.springframework.core.annotation.AliasFor;
-import wg.application.util.ExcelAnnotationUtil;
 
-import javax.validation.Constraint;
 import java.lang.annotation.*;
 
 /**
@@ -14,7 +12,6 @@ import java.lang.annotation.*;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-// @Constraint(validatedBy = ExcelAnnotationUtil.class)
 @Documented
 public @interface Excel {
 
@@ -167,4 +164,7 @@ public @interface Excel {
      */
     public boolean multiReplace() default true;
 
+    public boolean isImport() default false;
+
+    public boolean isExport() default false;
 }
