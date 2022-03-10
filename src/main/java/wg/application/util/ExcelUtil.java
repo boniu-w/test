@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import wg.application.annotation.Excel;
 import wg.application.entity.ExcelParams;
+import wg.application.excel.IliDetailExcel;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 /*************************************************************
@@ -326,6 +328,74 @@ public class ExcelUtil {
 
         }
         return fieldReplaceMap;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 导入时只需要引用这个方法就行
+     * @params:
+     * @return:
+     * @createTime: 14:19  2022/3/9
+     * @updateTime: 14:19  2022/3/9
+     ************************************************************************/
+    public static <T> List<T> getImportList(File file, @Nullable ExcelParams excelParams, T t) throws Exception {
+        List<T> list = new ArrayList<>();
+        workbook = initWorkbook(file);
+        String[] titles = readExcelTitle(excelParams, t);
+        Map<Integer, Map<String, Object>> contentMap = readExcelContent(workbook, titles, excelParams);
+        Map<String, Map<String, String>> importReplaceMap = getImportReplaceMap(t.getClass());
+        contentMap.forEach((lineIndex, objectMap) -> {
+            // objectMap(字段名, 单元格的值)
+            objectMap.forEach((fieldName, cellValue) -> {
+                // replaceMap(字段名, replace = {"INT_1", "EXT_0"})
+                importReplaceMap.forEach((fieldName$, replaceValues) -> {
+                    if (fieldName.equals(fieldName$)) {
+                        replaceValues.forEach((excelVal, tableVal) -> {
+                            if (excelVal.equals(cellValue.toString().trim())) {
+                                objectMap.put(fieldName, tableVal);
+                            }
+                        });
+                    }
+                });
+            });
+            list.add((T) JSON.parseObject(JSON.toJSONString(objectMap), t.getClass()));
+        });
+
+        return list;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 获取网络传输的excel文件
+     * @params:
+     * @return:
+     * @createTime: 14:32  2022/3/9
+     * @updateTime: 14:32  2022/3/9
+     ************************************************************************/
+    public static <T> List<T> getImportList(MultipartFile file, @Nullable ExcelParams excelParams, T t) throws Exception {
+        List<T> list = new ArrayList<>();
+        workbook = initWorkbook(file);
+        String[] titles = readExcelTitle(excelParams, t);
+        Map<Integer, Map<String, Object>> contentMap = readExcelContent(workbook, titles, excelParams);
+        Map<String, Map<String, String>> importReplaceMap = getImportReplaceMap(t.getClass());
+        contentMap.forEach((lineIndex, objectMap) -> {
+            // objectMap(字段名, 单元格的值)
+            objectMap.forEach((fieldName, cellValue) -> {
+                // replaceMap(字段名, replace = {"INT_1", "EXT_0"})
+                importReplaceMap.forEach((fieldName$, replaceValues) -> {
+                    if (fieldName.equals(fieldName$)) {
+                        replaceValues.forEach((excelVal, tableVal) -> {
+                            if (excelVal.equals(cellValue.toString().trim())) {
+                                objectMap.put(fieldName, tableVal);
+                            }
+                        });
+                    }
+                });
+            });
+            list.add((T) JSON.parseObject(JSON.toJSONString(objectMap), t.getClass()));
+        });
+
+        return list;
     }
 
     public static <T> Map<String, Map<String, String>> getExportReplaceMap(Class<T> tClass) throws InstantiationException, IllegalAccessException {

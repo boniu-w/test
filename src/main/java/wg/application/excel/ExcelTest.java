@@ -11,7 +11,9 @@ import wg.application.entity.ExcelParams;
 import wg.application.util.ExcelUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,7 +21,12 @@ import java.util.Map;
 public class ExcelTest {
 
     public static void main(String[] args) {
-        importExcelReplaceTest(null);
+        // importExcelReplaceTest(null);
+        try {
+            getList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void importExcel(MultipartFile file) {
@@ -124,6 +131,14 @@ public class ExcelTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void getList() throws Exception {
+        String path = "static/excel/内检测数据.xlsx";
+        ClassPathResource resource = new ClassPathResource(path);
+        File file = resource.getFile();
+        List<IliDetailExcel> list = ExcelUtil.getImportList(file, null, new IliDetailExcel());
+        list.forEach(System.out::println);
     }
 
     @GetMapping(value = "/test")
