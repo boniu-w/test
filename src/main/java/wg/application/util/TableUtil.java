@@ -4,6 +4,7 @@ import cn.hutool.core.io.resource.ClassPathResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Component
@@ -214,6 +216,7 @@ public class TableUtil {
     //         }
     //     }
     // }
+
     /************************************************************************
      * @author: wg
      * @description: 把 map 写入 json 文件中
@@ -223,7 +226,7 @@ public class TableUtil {
      * @updateTime: 14:16  2022/3/14
      ************************************************************************/
     public static void writeToJson(Map map, ClassPathResource resource) throws IOException {
-        String path =  resource.getAbsolutePath();
+        String path = resource.getAbsolutePath();
         File file = new File(path);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -239,20 +242,27 @@ public class TableUtil {
      * @updateTime: 14:12  2022/3/14
      ************************************************************************/
     public static JsonNode readJson(ClassPathResource resource) throws IOException {
-        StringBuffer originalFileContent = new StringBuffer();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
-
-            String s = null;
-            while ((s = br.readLine()) != null) {
-                originalFileContent.append(s + "\n");
-            }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         ObjectMapper mapper = new ObjectMapper();
 
-        return mapper.readTree(originalFileContent.toString());
+        BufferedInputStream stream = new BufferedInputStream(resource.getStream());
+        byte[] buff = new byte[1024];
+        StringBuilder builder = new StringBuilder();
+
+        int read;
+        while ((read = stream.read(buff)) != -1) {
+            builder.append(new String(buff, 0, read, StandardCharsets.US_ASCII));
+        }
+        stream.close();
+        return mapper.readTree(builder.toString());
+        //
+        // StringBuilder originalFileContent = new StringBuilder();
+        // BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+        // String s = null;
+        // while ((s = br.readLine()) != null) {
+        //     originalFileContent.append(s).append("\n");
+        // }
+        // br.close();
+
+        // return mapper.readTree(originalFileContent.toString());
     }
 }
