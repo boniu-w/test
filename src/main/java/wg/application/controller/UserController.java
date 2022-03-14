@@ -17,11 +17,19 @@ public class UserController {
     @Resource
     UserService userService;
 
-    @GetMapping(value = "/get_all")
-    public Result<List<User>> getAll() {
+    @GetMapping(value = "page")
+    public Result<List<User>> page(){
+
+        return null;
+    }
+
+    @GetMapping(value = "/list")
+    public Result<List<User>> list() {
         Result<List<User>> result = new Result<>();
-        List<User> all = userService.getAll();
+        List<User> all = userService.list();
         result.setResult(all);
         return result;
     }
+
+
 }

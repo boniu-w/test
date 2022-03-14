@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Random;
@@ -47,13 +48,17 @@ public class RandImageUtil {
 
     /**
      * 直接通过response 返回图片
-     *
+     * 返回的图片里的字符与 resultCode 一致
      * @param response
      * @param resultCode
      * @throws IOException
      */
     public static void generate(HttpServletResponse response, String resultCode) throws IOException {
         BufferedImage image = getImageBuffer(resultCode);
+
+        //写到指定位置
+        // ImageIO.write(image, "png", new File("C:\\Users\\wg\\Desktop\\test.png"));
+
         // 输出图象到页面
         ImageIO.write(image, IMG_FORMAT, response.getOutputStream());
     }
@@ -78,7 +83,7 @@ public class RandImageUtil {
         base64 = base64.replaceAll("\n", "").replaceAll("\r", "");//删除 \r\n
 
         //写到指定位置
-        //ImageIO.write(bufferedImage, "png", new File(""));
+        // ImageIO.write(image, "png", new File("C:\\Users\\wg\\Desktop\\test.png"));
 
         return BASE64_PRE + base64;
     }

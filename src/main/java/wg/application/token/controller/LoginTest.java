@@ -11,15 +11,12 @@ import wg.application.util.RandomUtil;
 import wg.application.util.RedisUtil;
 import wg.application.vo.Result;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/logintest")
 public class LoginTest {
-
-    @Resource
-    private RedisUtil redisUtil;
 
     private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
 
@@ -37,7 +34,7 @@ public class LoginTest {
             String code = RandomUtil.randomString(BASE_CHECK_CODES, 4);
             String lowerCaseCode = code.toLowerCase();
             String realKey = MD5Util.MD5Encode(lowerCaseCode + key, "utf-8");
-            redisUtil.set(realKey, lowerCaseCode, 60);
+            RedisUtil.set(realKey, lowerCaseCode, 60);
             String base64 = RandImageUtil.generate(code);
             res.setSuccess(true);
             res.setResult(base64);
@@ -46,5 +43,14 @@ public class LoginTest {
             e.printStackTrace();
         }
         return res;
+    }
+
+    @GetMapping(value = "/generator_captcha/{key}")
+    public void generatorCaptcha(HttpServletResponse response, @PathVariable String key) {
+        try {
+            RandImageUtil.generate(response, key);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

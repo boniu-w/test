@@ -1,17 +1,17 @@
 package wg.application.util;
 
+import cn.hutool.core.io.resource.ClassPathResource;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.net.URL;
+import java.util.*;
 
 @Component
 public class TableUtil {
@@ -214,5 +214,45 @@ public class TableUtil {
     //         }
     //     }
     // }
+    /************************************************************************
+     * @author: wg
+     * @description: 把 map 写入 json 文件中
+     * @params:
+     * @return:
+     * @createTime: 14:16  2022/3/14
+     * @updateTime: 14:16  2022/3/14
+     ************************************************************************/
+    public static void writeToJson(Map map, ClassPathResource resource) throws IOException {
+        String path =  resource.getAbsolutePath();
+        File file = new File(path);
 
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(file, map);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 读取 json 文件
+     * @params:
+     * @return:
+     * @createTime: 14:12  2022/3/14
+     * @updateTime: 14:12  2022/3/14
+     ************************************************************************/
+    public static JsonNode readJson(ClassPathResource resource) throws IOException {
+        StringBuffer originalFileContent = new StringBuffer();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+
+            String s = null;
+            while ((s = br.readLine()) != null) {
+                originalFileContent.append(s + "\n");
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.readTree(originalFileContent.toString());
+    }
 }

@@ -8,6 +8,8 @@
     <context id="Mysql" defaultModelType="flat">
         <property name="beginningDelimiter" value="`" />
         <property name="endingDelimiter" value="`" />
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
         <commentGenerator>
             <!-- 添加 db 表中字段的注释 -->
             <property name="suppressDate" value="true" />

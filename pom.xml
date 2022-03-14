@@ -281,6 +281,12 @@
         <!--    <version>2.1.2.RELEASE</version>-->
         <!--</dependency>-->
 
+        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-core -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.7.17</version>
+        </dependency>
     </dependencies>
 
     <build>
