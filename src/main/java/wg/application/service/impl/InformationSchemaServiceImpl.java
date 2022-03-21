@@ -1,14 +1,13 @@
 package wg.application.service.impl;
 
 import cn.hutool.core.io.resource.ClassPathResource;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import wg.application.entity.InformationSchema;
 import wg.application.mapper.InformationSchemaMapper;
 import wg.application.service.InformationSchemaService;
-import wg.application.util.TableUtil;
+import wg.application.util.FileUtil;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -41,7 +40,7 @@ public class InformationSchemaServiceImpl implements InformationSchemaService {
         ArrayList<InformationSchema> list = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            JsonNode jsonNode = TableUtil.readJson(classPathResource);
+            JsonNode jsonNode = FileUtil.readJson(classPathResource);
             JsonNode node = jsonNode.get(tableName);
             for (int i = 0; i < node.size(); i++) {
                 InformationSchema informationSchema = objectMapper.convertValue(node.get(i), InformationSchema.class);
@@ -83,7 +82,7 @@ public class InformationSchemaServiceImpl implements InformationSchemaService {
         allSchema.forEach((k, v) -> System.out.println(k + ": " + v));
         try {
             ClassPathResource resource = new ClassPathResource("/json/informationSchema.json");
-            TableUtil.writeToJson(allSchema, resource);
+            FileUtil.writeToJson(allSchema, resource);
         } catch (IOException e) {
             e.printStackTrace();
         }
