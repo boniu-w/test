@@ -1,14 +1,22 @@
 package wg.application.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 
 @Configuration
@@ -70,4 +78,34 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 实体类上 不用再写
+     *     ` @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd") `
+     *     ` @DateTimeFormat(pattern = "yyyy-MM-dd") `
+     *      这样的注解
+     * @params:
+     * @return:
+     * @createTime: 12:29  2022/3/24
+     * @updateTime: 12:29  2022/3/24
+     ************************************************************************/
+    @Bean
+    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        ObjectMapper mapper = new ObjectMapper();
+
+        //返回的日期格式转换
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+        mapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+
+        //返回时Long类型转String类型
+        SimpleModule simpleModule = new SimpleModule();
+        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
+        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+        mapper.registerModule(simpleModule);
+
+        converter.setObjectMapper(mapper);
+        return converter;
+    }
 }
