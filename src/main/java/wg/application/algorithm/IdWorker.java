@@ -1,5 +1,7 @@
 package wg.application.algorithm;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /*****************************************
  * description: 雪花算法
  * date: 14:25 2021/7/26
@@ -45,6 +47,9 @@ public class IdWorker {
 
     public long getTimestamp() {
         return System.currentTimeMillis();
+    }
+
+    public IdWorker() {
     }
 
     public IdWorker(long workerId, long datacenterId, long sequence) {
@@ -103,6 +108,46 @@ public class IdWorker {
                 (workerId << workerIdShift) | sequence;
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: mybatis-plus 的
+     * @params:
+     * @return:
+     * @createTime: 13:39  2022/3/29
+     * @updateTime: 13:39  2022/3/29
+     ************************************************************************/
+    public synchronized long nextId1() {
+        long timestamp = this.timeGen();
+        if (timestamp < this.lastTimestamp) {
+            long offset = this.lastTimestamp - timestamp;
+            if (offset > 5L) {
+                throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", offset));
+            }
+
+            try {
+                this.wait(offset << 1);
+                timestamp = this.timeGen();
+                if (timestamp < this.lastTimestamp) {
+                    throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", offset));
+                }
+            } catch (Exception var6) {
+                throw new RuntimeException(var6);
+            }
+        }
+
+        if (this.lastTimestamp == timestamp) {
+            this.sequence = this.sequence + 1L & 4095L;
+            if (this.sequence == 0L) {
+                timestamp = this.tilNextMillis(this.lastTimestamp);
+            }
+        } else {
+            this.sequence = ThreadLocalRandom.current().nextLong(1L, 3L);
+        }
+
+        this.lastTimestamp = timestamp;
+        return timestamp - 1288834974657L << 22 | this.datacenterId << 17 | this.workerId << 12 | this.sequence;
+    }
+
     /**
      * 当某一毫秒的时间，产生的id数 超过4095，系统会进入等待，直到下一毫秒，系统继续产生ID
      *
@@ -141,4 +186,5 @@ public class IdWorker {
             System.out.println(worker.nextId());
         }
     }
+
 }

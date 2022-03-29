@@ -15,6 +15,7 @@ import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
 import wg.application.TimerTask.ScheduledTest;
+import wg.application.algorithm.IdWorker;
 import wg.application.message.ErrorMessageOfApp;
 import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
@@ -1828,5 +1829,19 @@ public class TestApplicationTests {
         // String txtFile = "C:\\Users\\wg\\Pictures\\Saved Pictures\\上云下路.txt";
         // ImageUtil.imageToHex(imageFile, txtFile);
         // ImageUtil.hexToImage(txtFile, imageFile);
+    }
+
+    @Test
+    public void testIdWorker(){
+        IdWorker idWorker = new IdWorker(1, 1, 1);
+        long l = idWorker.nextId1();
+        System.out.println(l);
+
+        long l1 = idWorker.nextId();
+        System.out.println(l1);
+
+        IdWorker idWorker1 = new IdWorker();
+        long l2 = idWorker1.nextId1();
+        System.out.println(l2);
     }
 }
