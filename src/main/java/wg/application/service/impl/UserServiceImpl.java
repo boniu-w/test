@@ -61,7 +61,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         // return new org.springframework.security.core.userdetails.User(userName, "123", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
 
         String password = passwordEncoder.encode("123");
+        System.out.println("password -->>  " + password);
         userName = "wg";
         return new org.springframework.security.core.userdetails.User(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }
+
+// @Service
+// public class UserServiceImpl implements UserService {
+//
+//     @Resource
+//     UserMapper userMapper;
+//
+//     @Override
+//     public List<User> list() {
+//         UserExample userExample = new UserExample();
+//         return userMapper.selectByExample(userExample);
+//     }
+// }

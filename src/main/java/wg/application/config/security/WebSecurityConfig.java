@@ -55,8 +55,15 @@
 //
 //     @Override
 //     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//         super.configure(auth);
-//         auth.userDetailsService(userService);
+//         auth
+//                 .inMemoryAuthentication()
+//                 .withUser("user")
+//                 .password("password")
+//                 .roles("USER")
+//                 .and()
+//                 .withUser("admin")
+//                 .password("admin")
+//                 .roles("USER", "ADMIN");
 //     }
 //
 //     @Override
