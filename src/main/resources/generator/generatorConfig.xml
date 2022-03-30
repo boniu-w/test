@@ -24,9 +24,15 @@
             <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
 
+        <javaTypeResolver>
+            <!-- 默认false，为 false时把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
+            <property name="forceBigDecimals" value="true"/>
+            <!-- 此属性用于指定 MyBatis Generator 是否应强制对 DATE、TIME 和 TIMESTAMP 字段使用 JSR-310 数据类型，而不是使用 java.util.Date -->
+            <property name="useJSR310Types" value="true"/>
+        </javaTypeResolver>
+
         <javaModelGenerator targetPackage="wg.application.entity" targetProject="src/main/java" />
 
-<!--        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />-->
         <sqlMapGenerator targetPackage="wg.application.mapper.xml" targetProject="src/main/java" />
 
         <javaClientGenerator targetPackage="wg.application.mapper" targetProject="src/main/java" type="XMLMAPPER" />

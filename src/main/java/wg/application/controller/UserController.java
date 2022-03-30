@@ -1,6 +1,7 @@
 package wg.application.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wg.application.entity.User;
@@ -29,6 +30,11 @@ public class UserController {
         List<User> all = userService.list();
         result.setResult(all);
         return result;
+    }
+
+    @PostMapping(value = "/add")
+    public void add(User user){
+        System.out.println(user);
     }
 
 

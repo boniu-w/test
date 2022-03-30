@@ -11,17 +11,17 @@ import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.MultiValueMap;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
 import wg.application.TimerTask.ScheduledTest;
 import wg.application.algorithm.IdWorker;
+import wg.application.jackson.JacksonTest;
 import wg.application.message.ErrorMessageOfApp;
 import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
 import wg.application.enumeration.CodeEnum;
 import wg.application.gc.GcEntity;
-import wg.application.security.CommonEncryption;
+import wg.application.util.SimpleEncryptionUtil;
 import wg.application.thread.TaskTest;
 import wg.application.util.*;
 
@@ -1490,10 +1490,19 @@ public class TestApplicationTests {
      ************************************************************************/
     @Test
     public void decrypt() {
-        String s = CommonEncryption.displacementEncryption("hello world!");
+        String s = SimpleEncryptionUtil.displacementEncryption("hello world!");
         System.out.println(s);
-        String decrypt = CommonEncryption.displacementDecrypt(s, CommonEncryption.getStaticDigit());
+        System.out.println();
+
+        int staticDigit = SimpleEncryptionUtil.getStaticDigit();
+        System.out.println(staticDigit);
+        String decrypt = SimpleEncryptionUtil.displacementDecrypt(s, SimpleEncryptionUtil.getStaticDigit());
         System.out.println(decrypt);
+        System.out.println();
+
+        System.out.println(staticDigit);
+        String s1 = SimpleEncryptionUtil.displacementDecrypt(s);
+        System.out.println(s1);
     }
 
     /************************************************************************
@@ -1843,5 +1852,19 @@ public class TestApplicationTests {
         IdWorker idWorker1 = new IdWorker();
         long l2 = idWorker1.nextId1();
         System.out.println(l2);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: jackson
+     * @params:
+     * @return:
+     * @createTime: 10:41  2022/3/30
+     * @updateTime: 10:41  2022/3/30
+     ************************************************************************/
+    @Test
+    public void jacksonTest(){
+        JacksonTest jacksonTest = new JacksonTest();
+        jacksonTest.test1();
     }
 }

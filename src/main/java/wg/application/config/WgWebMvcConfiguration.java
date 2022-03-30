@@ -2,6 +2,7 @@ package wg.application.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
@@ -80,7 +81,7 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
 
     /************************************************************************
      * @author: wg
-     * @description: 实体类上 不用再写
+     * @description: 当实体类的日期类型为 Date 时, 不用再写 下面的注解, 当 为 LocalDateTime 时, 还是需要写的
      *     ` @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd") `
      *     ` @DateTimeFormat(pattern = "yyyy-MM-dd") `
      *      这样的注解
@@ -95,6 +96,8 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
         ObjectMapper mapper = new ObjectMapper();
 
         //返回的日期格式转换
+        // mapper.findAndRegisterModules(); // 注册 jsr310 , 不管用, 可能是版本问题, 待解决
+        // mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false); // 不管用, 可能是版本问题, 待解决
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         mapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
