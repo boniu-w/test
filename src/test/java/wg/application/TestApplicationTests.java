@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
@@ -1866,5 +1867,14 @@ public class TestApplicationTests {
     public void jacksonTest(){
         JacksonTest jacksonTest = new JacksonTest();
         jacksonTest.test1();
+    }
+
+    @Test
+    public void timeUnit(){
+        long l1 =  TimeUnit.DAYS.toSeconds(36500);
+        System.out.println(l1);
+        System.out.println(Integer.MAX_VALUE);
+        long l = TimeUnit.DAYS.toDays(36500);
+        System.out.println(l);
     }
 }

@@ -1,6 +1,8 @@
 package wg.application.util;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static java.lang.Math.*;
@@ -248,5 +250,55 @@ public class MathUtil {
             stringBuilder.append(hv);
         }
         return stringBuilder.toString().toUpperCase();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 2的n次方
+     * @params:
+     * @return:
+     * @createTime: 15:52  2022/4/8
+     * @updateTime: 15:52  2022/4/8
+     ************************************************************************/
+    public static String pow2(int n) {
+        StringBuilder res = new StringBuilder("1");
+        // 重复N次
+        for (int i = 0; i < n; i++) {
+            // 进位标志，每轮清零
+            int temp = 0;
+            // result中的字符，从前往后逐位*2
+            for (int j = res.length() - 1; j >= 0; j--) {
+                // 乘法运算,需要加上进位
+                temp = ((res.charAt(j) - '0') << 1) + temp / 10;
+                // 替换此位结果
+                res.setCharAt(j, (char) (temp % 10 + '0'));
+            }
+            // 产生进位则需添加新的数字
+            if (temp / 10 >= 1)
+                res.insert(0, '1');
+        }
+
+        return res.toString();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 求对数
+     * @params:
+     * @return:
+     * @createTime: 16:32  2022/4/8
+     * @updateTime: 16:32  2022/4/8
+     ************************************************************************/
+    public static List<Integer> log2(Long val) {
+        List<Integer> list = new ArrayList<>();
+        int ind = 0;
+        do {
+            if ((val & 1) == 1) {
+                list.add(ind);
+            }
+            ind++;
+            val = val >> 1;
+        } while (val > 0);
+        return list;
     }
 }
