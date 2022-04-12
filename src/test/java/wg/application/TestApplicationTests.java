@@ -15,6 +15,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
 import wg.application.TimerTask.ScheduledTest;
 import wg.application.algorithm.IdWorker;
+import wg.application.exception.Assert;
 import wg.application.jackson.JacksonTest;
 import wg.application.message.ErrorMessageOfApp;
 import wg.application.datastructure.DataTest;
@@ -1842,7 +1843,7 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void testIdWorker(){
+    public void testIdWorker() {
         IdWorker idWorker = new IdWorker(1, 1, 1);
         long l = idWorker.nextId1();
         System.out.println(l);
@@ -1864,17 +1865,31 @@ public class TestApplicationTests {
      * @updateTime: 10:41  2022/3/30
      ************************************************************************/
     @Test
-    public void jacksonTest(){
+    public void jacksonTest() {
         JacksonTest jacksonTest = new JacksonTest();
         jacksonTest.test1();
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: timeUnit 测试
+     * @params:
+     * @return:
+     * @createTime: 12:53  2022/4/12
+     * @updateTime: 12:53  2022/4/12
+     ************************************************************************/
     @Test
-    public void timeUnit(){
-        long l1 =  TimeUnit.DAYS.toSeconds(36500);
+    public void timeUnit() {
+        long l1 = TimeUnit.DAYS.toSeconds(36500);
         System.out.println(l1);
         System.out.println(Integer.MAX_VALUE);
         long l = TimeUnit.DAYS.toDays(36500);
         System.out.println(l);
+
+        List a = null;
+        Assert.isNull(a, "123");
+        Object collect = a.stream().collect(Collectors.toList());
     }
+
+
 }

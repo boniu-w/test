@@ -21,7 +21,9 @@ public final class Assert {
     }
 
     public static void isNull(Object object, String message, Object... params) {
-        isTrue(object == null, message, params);
+        if (object == null) {
+            throw new WgException(message);
+        }
     }
 
     public static void notNull(Object object, String message, Object... params) {
