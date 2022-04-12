@@ -1,1 +1,2 @@
-/src/main/resources/application-dev.yml merge=ours
+/application-dev.yml merge=ours
+/application-ubuntu.yml merge=ours
