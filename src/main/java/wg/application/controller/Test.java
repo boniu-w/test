@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ import wg.application.service.LiuShuiInterface;
 import wg.application.service.TestInterface;
 import wg.application.util.IPUtils;
 import wg.application.util.JdbcUtil;
+import wg.application.util.MessageUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -622,7 +624,6 @@ public class Test {
         String[] a = split;
         return a;
     }
-
 
     /****************************************************************
      * 读取json文件
@@ -1587,7 +1588,20 @@ public class Test {
         } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
 
+    @GetMapping(value = "/test_message_source")
+    public void testMessageSource() {
+        String message = MessageUtils.getMessage(10001);
+        System.out.println(message);
+
+         message = MessageUtils.getMessage(10001,"skdjhfs");
+        System.out.println(message);
+
+        // Locale.US 不能用 Locale.ENGLISH 替代, 因为配置文件的名字 不匹配
+        String message1 = MessageUtils.getMessage(10002, null, Locale.US);
+        System.out.println(message1);
+        return;
     }
 
 }

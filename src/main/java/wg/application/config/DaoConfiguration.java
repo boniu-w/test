@@ -5,21 +5,33 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-import wg.application.dao.UserMapper;
+import wg.application.mapper.UserMapper;
 import wg.application.entity.User;
 import wg.application.entity.UserExample;
 
 import java.util.List;
 
-// @Configuration
-// @ComponentScan(value = "wg.application", includeFilters = {
-//         @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Mapper.class})})
+/************************************************************************
+ * @author: wg
+ * @description: 貌似没啥作用, 待研究
+ * @params:
+ * @return:
+ * @createTime: 14:47  2022/3/30
+ * @updateTime: 14:47  2022/3/30
+ ************************************************************************/
+@Configuration
+@ComponentScan(
+        value = "wg.application",
+        includeFilters = {
+                @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Mapper.class})
+        }
+)
 public class DaoConfiguration {
 
     @Bean
     public UserMapper invokeImplController() {
 
-        return new UserMapper(){
+        return new UserMapper() {
             @Override
             public long countByExample(UserExample example) {
                 return 0;
@@ -47,7 +59,7 @@ public class DaoConfiguration {
 
             @Override
             public List<User> selectByExample(UserExample example) {
-
+                System.out.println(">>>>>>>>>  selectByExample  <<<<<<<<");
                 return null;
             }
 

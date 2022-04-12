@@ -1,0 +1,240 @@
+{
+  "sys_role_menu": [],
+  "tb_user": [],
+  "common_auto_complate": [],
+  "construction_flange": [],
+  "construction_tee": [],
+  "sys_role": [],
+  "construction_segment": [],
+  "construction_bulkhead": [],
+  "common_branch": [
+    {
+      "tableName": "common_region",
+      "columnName": "branch_id",
+      "referencedTableName": "common_branch",
+      "referencedColumnName": "id",
+      "constraintName": "fk_branch_id"
+    },
+    {
+      "tableName": "sp_basic",
+      "columnName": "branch_id",
+      "referencedTableName": "common_branch",
+      "referencedColumnName": "id",
+      "constraintName": "fk_branch_ref_basic"
+    }
+  ],
+  "sys_user": [],
+  "installation": [],
+  "design": [],
+  "sys_config": [],
+  "construction_valve": [],
+  "common_field": [
+    {
+      "tableName": "sp_basic",
+      "columnName": "field_id",
+      "referencedTableName": "common_field",
+      "referencedColumnName": "id",
+      "constraintName": "fk_field_ref_basic"
+    }
+  ],
+  "common_facility": [
+    {
+      "tableName": "sp_basic",
+      "columnName": "pipeline_from_id",
+      "referencedTableName": "common_facility",
+      "referencedColumnName": "id",
+      "constraintName": "fk_facility_ref_basic_from"
+    },
+    {
+      "tableName": "sp_basic",
+      "columnName": "pipeline_to_id",
+      "referencedTableName": "common_facility",
+      "referencedColumnName": "id",
+      "constraintName": "fk_facility_ref_basic_to"
+    }
+  ],
+  "design_span": [],
+  "common_dict_type": [
+    {
+      "tableName": "common_auto_complate",
+      "columnName": "common_dict_type_id",
+      "referencedTableName": "common_dict_type",
+      "referencedColumnName": "id",
+      "constraintName": "fk_common_dict_type_id_1"
+    },
+    {
+      "tableName": "common_dict",
+      "columnName": "common_dict_type_id",
+      "referencedTableName": "common_dict_type",
+      "referencedColumnName": "id",
+      "constraintName": "fk_common_dict_type_id"
+    }
+  ],
+  "sp_basic": [
+    {
+      "tableName": "construction_segment",
+      "columnName": "sp_basic_id",
+      "referencedTableName": "sp_basic",
+      "referencedColumnName": "id",
+      "constraintName": "construction_segment_ibfk_1"
+    },
+    {
+      "tableName": "installation",
+      "columnName": "sp_basic_id",
+      "referencedTableName": "sp_basic",
+      "referencedColumnName": "id",
+      "constraintName": "fk_basic_ref_installation"
+    },
+    {
+      "tableName": "design_span",
+      "columnName": "sp_basic_id",
+      "referencedTableName": "sp_basic",
+      "referencedColumnName": "id",
+      "constraintName": "fk_basic_ref_span"
+    },
+    {
+      "tableName": "design",
+      "columnName": "sp_basic_id",
+      "referencedTableName": "sp_basic",
+      "referencedColumnName": "id",
+      "constraintName": "fk_basic_ref_design"
+    },
+    {
+      "tableName": "construction_anode",
+      "columnName": "sp_basic_id",
+      "referencedTableName": "sp_basic",
+      "referencedColumnName": "id",
+      "constraintName": "construction_anode_ibfk_1"
+    }
+  ],
+  "common_pipe_material_type": [
+    {
+      "tableName": "construction_segment",
+      "columnName": "int_pipe_material_type_id",
+      "referencedTableName": "common_pipe_material_type",
+      "referencedColumnName": "id",
+      "constraintName": "construction_segment_ibfk_2"
+    },
+    {
+      "tableName": "construction_segment",
+      "columnName": "ext_pipe_material_type_id",
+      "referencedTableName": "common_pipe_material_type",
+      "referencedColumnName": "id",
+      "constraintName": "construction_segment_ibfk_5"
+    },
+    {
+      "tableName": "common_pipe_material",
+      "columnName": "type_id",
+      "referencedTableName": "common_pipe_material_type",
+      "referencedColumnName": "id",
+      "constraintName": "fk_type_ref_material"
+    }
+  ],
+  "sys_captcha": [],
+  "construction_anode": [],
+  "sys_user_token": [],
+  "common_pipe_material": [
+    {
+      "tableName": "construction_segment",
+      "columnName": "int_pipe_material_id",
+      "referencedTableName": "common_pipe_material",
+      "referencedColumnName": "id",
+      "constraintName": "construction_segment_ibfk_3"
+    },
+    {
+      "tableName": "construction_segment",
+      "columnName": "ext_pipe_material_id",
+      "referencedTableName": "common_pipe_material",
+      "referencedColumnName": "id",
+      "constraintName": "construction_segment_ibfk_6"
+    },
+    {
+      "tableName": "sp_basic",
+      "columnName": "external_pipe_material_id",
+      "referencedTableName": "common_pipe_material",
+      "referencedColumnName": "id",
+      "constraintName": "fk_pipe_material_ref_external"
+    },
+    {
+      "tableName": "sp_basic",
+      "columnName": "internal_pipe_material_id",
+      "referencedTableName": "common_pipe_material",
+      "referencedColumnName": "id",
+      "constraintName": "fk_pipe_material_ref_internal"
+    }
+  ],
+  "common_coating_material": [
+    {
+      "tableName": "construction_segment",
+      "columnName": "int_corr_coating_material_id",
+      "referencedTableName": "common_coating_material",
+      "referencedColumnName": "id",
+      "constraintName": "construction_segment_ibfk_4"
+    },
+    {
+      "tableName": "construction_segment",
+      "columnName": "ext_corr_coating_material_id",
+      "referencedTableName": "common_coating_material",
+      "referencedColumnName": "id",
+      "constraintName": "construction_segment_ibfk_7"
+    },
+    {
+      "tableName": "construction_segment",
+      "columnName": "insu_coating_material_id",
+      "referencedTableName": "common_coating_material",
+      "referencedColumnName": "id",
+      "constraintName": "construction_segment_ibfk_8"
+    },
+    {
+      "tableName": "installation",
+      "columnName": "joint_corrosion_coating_id",
+      "referencedTableName": "common_coating_material",
+      "referencedColumnName": "id",
+      "constraintName": "fk_coating_ref_install_corr"
+    },
+    {
+      "tableName": "installation",
+      "columnName": "joint_insulation_coating_id",
+      "referencedTableName": "common_coating_material",
+      "referencedColumnName": "id",
+      "constraintName": "fk_coating_ref_install_ins"
+    },
+    {
+      "tableName": "design",
+      "columnName": "joint_corrosion_coating_id",
+      "referencedTableName": "common_coating_material",
+      "referencedColumnName": "id",
+      "constraintName": "fk_coating_ref_design_corr"
+    },
+    {
+      "tableName": "design",
+      "columnName": "joint_insulation_coating_id",
+      "referencedTableName": "common_coating_material",
+      "referencedColumnName": "id",
+      "constraintName": "fk_coating_ref_design_ins"
+    }
+  ],
+  "sys_user_role": [],
+  "sys_oss": [],
+  "common_dict": [],
+  "common_region": [
+    {
+      "tableName": "common_field",
+      "columnName": "region_id",
+      "referencedTableName": "common_region",
+      "referencedColumnName": "id",
+      "constraintName": "fk_region_id"
+    },
+    {
+      "tableName": "sp_basic",
+      "columnName": "region_id",
+      "referencedTableName": "common_region",
+      "referencedColumnName": "id",
+      "constraintName": "fk_region_ref_basic"
+    }
+  ],
+  "sys_menu": [],
+  "z_tmp": [],
+  "sys_log": [],
+  "construction_weight": []
+}

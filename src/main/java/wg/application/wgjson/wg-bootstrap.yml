@@ -1,0 +1,35 @@
+#spring:
+#  application:
+#    name: application.yml
+#  cloud:
+#    nacos:
+#      config:
+#        enabled: true
+#        refresh:
+#          enabled: true
+#        server-addr: 127.0.0.1:8848
+#        namespace: ff4caa6f-16c4-4d8f-a9e7-3d09a4116e57
+#        group: DEFAULT_GROUP
+#        file-extension: yaml
+#        shared-configs[0]:
+#          data-id: application.yml
+#          group: DEFAULT_GROUP
+#          refresh: false
+#          #        shared-configs[1]:
+#          #          data-id: application.properties
+#        extension-configs[0]:
+#          data-id: application-wg.yml
+#          group: DEFAULT_GROUP
+#          refresh: true
+#  #        extension-configs[1]:
+#  #          data-id: application-ubuntu.yml
+#  #      discovery:
+#  #        register-enabled: false
+#  #        server-addr: 127.0.0.1:8848
+#  #        namespace: ff4caa6f-16c4-4d8f-a9e7-3d09a4116e57
+#  #        group: DEFAULT_GROUP
+#  #        file-extension: yaml
+#
+#logging:
+#  level:
+#    com.alibaba.nacos.client.config.impl: WARN

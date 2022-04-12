@@ -1,7 +1,5 @@
 package wg.application.unicode;
 
-import wg.application.util.WgUtil;
-
 import java.util.Arrays;
 
 public class MyUnicode {

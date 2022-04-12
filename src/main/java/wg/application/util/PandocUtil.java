@@ -26,8 +26,8 @@ public class PandocUtil {
      ************************************************************************/
     public static <T> File createDataFile(T entity) {
         String reportContent = null;
-        if (WgUtil.getter("reportContent", entity) != null) {
-            reportContent = WgUtil.getter("reportContent", entity).toString();
+        if (CommonUtil.getter("reportContent", entity) != null) {
+            reportContent = CommonUtil.getter("reportContent", entity).toString();
         }
 
         String path = System.getProperty("user.dir");

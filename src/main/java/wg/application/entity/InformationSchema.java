@@ -53,4 +53,15 @@ public class InformationSchema {
     public void setConstraintName(String constraintName) {
         this.constraintName = constraintName;
     }
+
+    @Override
+    public String toString() {
+        return "InformationSchema{" +
+                "tableName='" + tableName + '\'' +
+                ", columnName='" + columnName + '\'' +
+                ", referencedTableName='" + referencedTableName + '\'' +
+                ", referencedColumnName='" + referencedColumnName + '\'' +
+                ", constraintName='" + constraintName + '\'' +
+                '}';
+    }
 }

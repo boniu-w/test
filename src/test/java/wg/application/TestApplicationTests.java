@@ -11,18 +11,20 @@ import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.MultiValueMap;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
 import wg.application.TimerTask.ScheduledTest;
+import wg.application.algorithm.IdWorker;
+import wg.application.exception.Assert;
+import wg.application.jackson.JacksonTest;
+import wg.application.message.ErrorMessageOfApp;
 import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
 import wg.application.enumeration.CodeEnum;
 import wg.application.gc.GcEntity;
-import wg.application.security.CommonEncryption;
+import wg.application.util.SimpleEncryptionUtil;
 import wg.application.thread.TaskTest;
-import wg.application.util.CalendarUtil;
-import wg.application.util.JdbcUtil;
-import wg.application.util.WgJsonUtil;
-import wg.application.util.WgUtil;
+import wg.application.util.*;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
@@ -36,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
@@ -1489,10 +1492,19 @@ public class TestApplicationTests {
      ************************************************************************/
     @Test
     public void decrypt() {
-        String s = CommonEncryption.displacementEncryption("hello world!");
+        String s = SimpleEncryptionUtil.displacementEncryption("hello world!");
         System.out.println(s);
-        String decrypt = CommonEncryption.displacementDecrypt(s, CommonEncryption.getStaticDigit());
+        System.out.println();
+
+        int staticDigit = SimpleEncryptionUtil.getStaticDigit();
+        System.out.println(staticDigit);
+        String decrypt = SimpleEncryptionUtil.displacementDecrypt(s, SimpleEncryptionUtil.getStaticDigit());
         System.out.println(decrypt);
+        System.out.println();
+
+        System.out.println(staticDigit);
+        String s1 = SimpleEncryptionUtil.displacementDecrypt(s);
+        System.out.println(s1);
     }
 
     /************************************************************************
@@ -1584,9 +1596,9 @@ public class TestApplicationTests {
      ************************************************************************/
     @Test
     public void testbc() {
-        String s = WgUtil.toHalfAngle("a  b");
+        String s = CommonUtil.toHalfAngle("a  b");
         System.out.println(s);
-        String s1 = WgUtil.toFullAngle("a  b");
+        String s1 = CommonUtil.toFullAngle("a  b");
         System.out.println(s1);
     }
 
@@ -1651,7 +1663,7 @@ public class TestApplicationTests {
         double d = 0.00D;
         System.out.println(d == 0);
 
-        WgUtil.test1(Test03.class);
+        CommonUtil.test1(Test03.class);
 
         User user = new User();
         user.setName("wg");
@@ -1718,7 +1730,7 @@ public class TestApplicationTests {
     @Test
     public void test5() {
         User user = new User();
-        Object o = WgUtil.instanceTest(User.class, user);
+        Object o = CommonUtil.instanceTest(User.class, user);
     }
 
     /************************************************************************
@@ -1773,8 +1785,111 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void testEnum(){
+    public void testEnum() {
         System.out.println(CodeEnum.SUCCESS.getCode());
     }
-    
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 classpath, 测试 读取 src/main/java 下面的文件
+     * @params:
+     * @return:
+     * @createTime: 14:57  2022/3/1
+     * @updateTime: 14:57  2022/3/1
+     ************************************************************************/
+    @Test
+    public void getErrorMessage() {
+        ErrorMessageOfApp message = new ErrorMessageOfApp();
+        Properties properties = message.get();
+
+        System.out.println(properties);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: http 测试
+     * @params:
+     * @return:
+     * @createTime: 10:18  2022/3/2
+     * @updateTime: 10:18  2022/3/2
+     ************************************************************************/
+    @Test
+    public void testHttp() {
+        String domain = HttpContextUtils.getDomain();
+        System.out.println(domain);
+
+        String origin = HttpContextUtils.getOrigin();
+        System.out.println(origin);
+    }
+
+    @Test
+    public void testMessage() {
+        Locale locale = LocaleContextHolder.getLocale();
+        System.out.println();
+
+        String message = MessageUtils.getMessage(10001, "123");
+        System.out.println(message);
+    }
+
+    @Test
+    public void testImage() {
+        byte a = 52;
+        int i = MathUtil.byteToInt(a);
+        System.out.println(i);
+        // String imageFile = "C:\\Users\\wg\\Pictures\\Saved Pictures\\上云下路-大一点123.jpg";
+        // String txtFile = "C:\\Users\\wg\\Pictures\\Saved Pictures\\上云下路.txt";
+        // ImageUtil.imageToHex(imageFile, txtFile);
+        // ImageUtil.hexToImage(txtFile, imageFile);
+    }
+
+    @Test
+    public void testIdWorker() {
+        IdWorker idWorker = new IdWorker(1, 1, 1);
+        long l = idWorker.nextId1();
+        System.out.println(l);
+
+        long l1 = idWorker.nextId();
+        System.out.println(l1);
+
+        IdWorker idWorker1 = new IdWorker();
+        long l2 = idWorker1.nextId1();
+        System.out.println(l2);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: jackson
+     * @params:
+     * @return:
+     * @createTime: 10:41  2022/3/30
+     * @updateTime: 10:41  2022/3/30
+     ************************************************************************/
+    @Test
+    public void jacksonTest() {
+        JacksonTest jacksonTest = new JacksonTest();
+        jacksonTest.test1();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: timeUnit 测试
+     * @params:
+     * @return:
+     * @createTime: 12:53  2022/4/12
+     * @updateTime: 12:53  2022/4/12
+     ************************************************************************/
+    @Test
+    public void timeUnit() {
+        long l1 = TimeUnit.DAYS.toSeconds(36500);
+        System.out.println(l1);
+        System.out.println(Integer.MAX_VALUE);
+        long l = TimeUnit.DAYS.toDays(36500);
+        System.out.println(l);
+
+        List a = null;
+        Assert.isNull(a, "123");
+        Object collect = a.stream().collect(Collectors.toList());
+    }
+
+
 }

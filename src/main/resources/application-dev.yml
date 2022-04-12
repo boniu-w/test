@@ -23,9 +23,12 @@ spring:
 #      roles: admin
 
 report:
-  dir: E:\pandoc-2.16.1\wg\
+  dir: E:\pandoc-2.16.1\wg
 
-
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:wg/application/mapper/xml/*Mapper.xml
 
 
 

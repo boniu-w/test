@@ -1,13 +1,14 @@
 spring:
   profiles:
     active: wg
+  messages:
+    basename: i18n.messages_common
+    encoding: UTF-8
 
 wg:
   name: wg
-
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath:mapper/*.xml
-
-
+  gender: 1
+  birthday: "123123"
+  phone: "234324"
+  son:
+    name: "123"
