@@ -31,7 +31,7 @@ mybatis:
   mapper-locations: classpath:wg/application/mapper/xml/*Mapper.xml
 
 wg:
-  test: 2222
+  test: 111
 
 
 
