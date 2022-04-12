@@ -30,7 +30,8 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:wg/application/mapper/xml/*Mapper.xml
 
-
+wg:
+  test: 123
 
 
 
