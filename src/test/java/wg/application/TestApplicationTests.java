@@ -17,11 +17,13 @@ import wg.application.TimerTask.ScheduledTest;
 import wg.application.algorithm.IdWorker;
 import wg.application.exception.Assert;
 import wg.application.jackson.JacksonTest;
+import wg.application.jsoup.JsoupTest;
 import wg.application.message.ErrorMessageOfApp;
 import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
 import wg.application.enumeration.CodeEnum;
 import wg.application.gc.GcEntity;
+import wg.application.string.StringTest;
 import wg.application.util.SimpleEncryptionUtil;
 import wg.application.thread.TaskTest;
 import wg.application.util.*;
@@ -111,6 +113,8 @@ public class TestApplicationTests {
     /*****************************************************
      * @params:
      * @description: 反射
+     * getDeclaredField: 可以获取本类所有的字段，包括private的，但是不能获取继承来的字段
+     * getField: 只能获取public的，包括从父类继承来的字段
      * @author: wg
      * @date: 2021/7/12 14:38
      *****************************************************/
@@ -133,6 +137,16 @@ public class TestApplicationTests {
         Student student = new Student();
         student.setAge(123);
         student.setName("wg");
+
+        Field[] fields = Student.class.getFields();
+        System.out.println("fields.length -> " + fields.length);
+        Arrays.stream(fields).forEach(System.out::println);
+
+        // 可以获取本类所有的字段，包括private的，但是不能获取继承来的字段
+        Field idField = Student.class.getDeclaredField("id");
+        System.out.println(idField);
+        System.out.println(idField.get(student));
+        System.out.println(idField.getName());
 
         Field field = Student.class.getField("id");
         System.out.println(field.get(student));
@@ -1891,5 +1905,32 @@ public class TestApplicationTests {
         Object collect = a.stream().collect(Collectors.toList());
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: stringutils test
+     * @params:
+     * @return:
+     * @createTime: 11:39  2022/4/22
+     * @updateTime: 11:39  2022/4/22
+     ************************************************************************/
+    @Test
+    public void stringUtilsTest() {
+        StringTest stringTest = new StringTest();
+        String utilTest = stringTest.utilTest();
+        System.out.println("TestApplicationTests.stringUtilsTest  " + utilTest);
+    }
 
+    /************************************************************************
+     * @author: wg
+     * @description: jsoup 解析html
+     * @params:
+     * @return:
+     * @createTime: 11:39  2022/4/22
+     * @updateTime: 11:39  2022/4/22
+     ************************************************************************/
+    @Test
+    public void testJsoup(){
+        JsoupTest jsoupTest = new JsoupTest();
+        jsoupTest.test1();
+    }
 }

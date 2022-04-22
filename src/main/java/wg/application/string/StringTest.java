@@ -1,6 +1,7 @@
 package wg.application.string;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -55,6 +56,19 @@ public class StringTest {
             b = (byte) (b >> 1);
         }
         return array;
+    }
+
+    public String utilTest() {
+        String wg = StringUtils.center("wg", 19, "*");
+        System.out.println(wg);
+
+        int i = StringUtils.countMatches("sssfff", "s");
+        System.out.println(i);
+
+        int i1 = StringUtils.ordinalIndexOf("22112211", "1", 3);
+        System.out.println("第几次出现的位置: " + i1);
+
+        return "";
     }
 
 }
