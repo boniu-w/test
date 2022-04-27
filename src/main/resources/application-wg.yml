@@ -8,6 +8,8 @@ server:
     key-store-password: 123456
     key-alias: tomcat
     protocol: TLS
+  servlet:
+    context-path: /wg
 
 spring:
   datasource:
@@ -15,15 +17,6 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-#  autoconfigure:
-#    禁用 security 自动配置
-#    exclude:
-#      - org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
-#  security:
-#    user:
-#      name: wg
-#      password: wg
-#      roles: admin
 
 report:
   dir: E:\pandoc-2.16.1\wg\

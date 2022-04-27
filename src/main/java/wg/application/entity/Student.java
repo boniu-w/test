@@ -84,4 +84,15 @@ public class Student {
 
     public Student() {
     }
+
+    // @Override
+    // public String toString() {
+    //     return "Student{" +
+    //             "name='" + name + '\'' +
+    //             ", age=" + age +
+    //             ", id=" + id +
+    //             ", sex=" + sex +
+    //             ", birthday='" + birthday + '\'' +
+    //             '}';
+    // }
 }

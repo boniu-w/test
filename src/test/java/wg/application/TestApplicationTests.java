@@ -1929,8 +1929,25 @@ public class TestApplicationTests {
      * @updateTime: 11:39  2022/4/22
      ************************************************************************/
     @Test
-    public void testJsoup(){
+    public void testJsoup() {
         JsoupTest jsoupTest = new JsoupTest();
         jsoupTest.test1();
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description:
+     * @params:
+     * @return:
+     * @createTime: 10:00  2022/4/26
+     * @updateTime: 10:00  2022/4/26
+     ************************************************************************/
+    @Test
+    public void nullListTest() {
+        List<Object> list = null;
+        if (list.size() == 0) {
+            System.out.println("---");
+        }
+    }
+
 }
