@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <properties resource="application-test.properties" />
+    <properties resource="application-sevenme.properties" />
 
     <context id="Mysql" defaultModelType="flat">
         <property name="beginningDelimiter" value="`" />
@@ -37,7 +37,7 @@
 
         <javaClientGenerator targetPackage="wg.application.mapper" targetProject="src/main/java" type="XMLMAPPER" />
 
-        <table tableName="test_03">
+        <table tableName="document_file">
             <!-- <ignoreColumn column="create_time" />
             <ignoreColumn column="update_time" /> -->
             <!--mysql 配置-->

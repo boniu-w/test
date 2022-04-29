@@ -1,9 +1,11 @@
 package wg.application;
 
+import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.entity.Student;
+import wg.application.entity.User;
 import wg.application.util.CollectionUtil;
 
 import java.util.ArrayList;
@@ -116,6 +118,20 @@ public class ListTest {
         // 找出 list2 中有, list1 没有的
         Collection<Integer> different = CollectionUtil.getDifferentNoDuplicate(list1, list2);
         different.forEach(System.out::println);
+    }
+
+    @Test
+    public void test3() {
+        Student student = new Student();
+        student.setAge(4);
+        student.setId(11111);
+
+        User user = new User();
+        user.setAge(5);
+
+        BeanUtil.copyProperties(student,user);
+
+        System.out.println(user);
     }
 
 }

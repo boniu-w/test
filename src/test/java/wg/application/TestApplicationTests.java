@@ -1,5 +1,7 @@
 package wg.application;
 
+import cn.hutool.Hutool;
+import cn.hutool.system.*;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
@@ -13,6 +15,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
+import sun.awt.OSInfo;
 import wg.application.TimerTask.ScheduledTest;
 import wg.application.algorithm.IdWorker;
 import wg.application.exception.Assert;
@@ -1948,6 +1951,38 @@ public class TestApplicationTests {
         if (list.size() == 0) {
             System.out.println("---");
         }
+    }
+
+    @Test
+    public void hutoolTest(){
+        Set<Class<?>> allUtils = Hutool.getAllUtils();
+        allUtils.forEach(System.out::println);
+    }
+
+    @Test
+    public void hutoolTest1(){
+        OSInfo.WindowsVersion windowsVersion = OSInfo.getWindowsVersion();
+        System.out.println(windowsVersion);
+
+        OSInfo.OSType osType = OSInfo.getOSType();
+        System.out.println(osType);
+
+        System.out.println();
+        OsInfo osInfo = new OsInfo();
+        System.out.println(osInfo);
+
+        System.out.println();
+        JavaInfo javaInfo = SystemUtil.getJavaInfo();
+        System.out.println(javaInfo);
+
+        System.out.println();
+        JvmInfo jvmInfo = new JvmInfo();
+        System.out.println(jvmInfo);
+
+        System.out.println();
+        JvmSpecInfo jvmSpecInfo = new JvmSpecInfo();
+        System.out.println(jvmSpecInfo);
+
     }
 
 }
