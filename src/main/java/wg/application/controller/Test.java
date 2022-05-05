@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,7 @@ import wg.application.exception.WgException;
 import wg.application.service.AspectService;
 import wg.application.service.LiuShuiInterface;
 import wg.application.service.TestInterface;
-import wg.application.util.IPUtils;
+import wg.application.util.IPUtil;
 import wg.application.util.JdbcUtil;
 import wg.application.util.MessageUtils;
 
@@ -836,10 +835,18 @@ public class Test {
 
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 本机ip
+     * @params:
+     * @return:
+     * @createTime: 10:46  2022/5/5
+     * @updateTime: 10:46  2022/5/5
+     ************************************************************************/
     @RequestMapping(value = "/ipTest")
     @ResponseBody
     public String ipTest(HttpServletRequest request) {
-        String ipAddr = IPUtils.getIpAddr(request);
+        String ipAddr = IPUtil.getIp(request);
 
         return ipAddr;
 
