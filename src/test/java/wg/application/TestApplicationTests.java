@@ -1,6 +1,7 @@
 package wg.application;
 
 import cn.hutool.Hutool;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.system.*;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.druid.util.StringUtils;
@@ -1954,13 +1955,13 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void hutoolTest(){
+    public void hutoolTest() {
         Set<Class<?>> allUtils = Hutool.getAllUtils();
         allUtils.forEach(System.out::println);
     }
 
     @Test
-    public void hutoolTest1(){
+    public void hutoolTest1() {
         OSInfo.WindowsVersion windowsVersion = OSInfo.getWindowsVersion();
         System.out.println(windowsVersion);
 
@@ -1985,4 +1986,23 @@ public class TestApplicationTests {
 
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: copy test
+     * @params:
+     * @return:
+     * @createTime: 10:52  2022/5/7
+     * @updateTime: 10:52  2022/5/7
+     ************************************************************************/
+    @Test
+    public void copyTest() {
+        Student student = new Student();
+        student.setId(123);
+        student.setAge(33);
+
+        User user = new User();
+        BeanUtil.copyProperties(student, user, "age");
+
+        System.out.println(user);
+    }
 }

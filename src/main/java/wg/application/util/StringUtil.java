@@ -30,9 +30,9 @@ public class StringUtil {
      * @createTime: 14:53  2022/4/25
      * @updateTime: 14:53  2022/4/25
      ************************************************************************/
-    public static String toUnicode(String source){
+    public static String toUnicode(String source) {
         StringBuffer sb = new StringBuffer();
-        char [] source_char = source.toCharArray();
+        char[] source_char = source.toCharArray();
         String unicode = null;
         for (char c : source_char) {
             unicode = Integer.toHexString(c);
@@ -89,5 +89,30 @@ public class StringUtil {
             start = end;
         }
         return builder.toString();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 最长公共前缀
+     * @params:
+     * @return:
+     * @createTime: 16:59  2022/5/5
+     * @updateTime: 16:59  2022/5/5
+     ************************************************************************/
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0)
+            return "";
+        String ans = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            int j = 0;
+            for (; j < ans.length() && j < strs[i].length(); j++) {
+                if (ans.charAt(j) != strs[i].charAt(j))
+                    break;
+            }
+            ans = ans.substring(0, j);
+            if (ans.equals(""))
+                return ans;
+        }
+        return ans;
     }
 }
