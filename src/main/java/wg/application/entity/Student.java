@@ -1,7 +1,11 @@
 package wg.application.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.Objects;
 
 /*************************************************************
  * @Package wg.application.entity
@@ -85,14 +89,82 @@ public class Student {
     public Student() {
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", id=" + id +
+                ", sex=" + sex +
+                ", birthday='" + birthday + '\'' +
+                '}';
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: lang3
+     * @params:
+     * @return:
+     * @createTime: 16:11  2022/5/10
+     * @updateTime: 16:11  2022/5/10
+     ************************************************************************/
     // @Override
-    // public String toString() {
-    //     return "Student{" +
-    //             "name='" + name + '\'' +
-    //             ", age=" + age +
-    //             ", id=" + id +
-    //             ", sex=" + sex +
-    //             ", birthday='" + birthday + '\'' +
-    //             '}';
+    // public boolean equals(Object o) {
+    //     if (this == o) return true;
+    //
+    //     if (o == null || getClass() != o.getClass()) return false;
+    //
+    //     Student student = (Student) o;
+    //
+    //     return new EqualsBuilder().append(name, student.name).append(age, student.age).append(id, student.id).append(sex, student.sex).append(birthday, student.birthday).isEquals();
     // }
+    //
+    // @Override
+    // public int hashCode() {
+    //     return new HashCodeBuilder(17, 37).append(name).append(age).append(id).append(sex).append(birthday).toHashCode();
+    // }
+
+
+    /************************************************************************
+     * @author: wg
+     * @description: guava
+     * @params:
+     * @return:
+     * @createTime: 16:11  2022/5/10
+     * @updateTime: 16:11  2022/5/10
+     ************************************************************************/
+    // @Override
+    // public boolean equals(Object o) {
+    //     if (this == o) return true;
+    //     if (o == null || getClass() != o.getClass()) return false;
+    //     Student student = (Student) o;
+    //     return Objects.equal(name, student.name) && Objects.equal(age, student.age) && Objects.equal(id, student.id) && Objects.equal(sex, student.sex) && Objects.equal(birthday, student.birthday);
+    // }
+    //
+    // @Override
+    // public int hashCode() {
+    //     return Objects.hashCode(name, age, id, sex, birthday);
+    // }
+
+
+    /************************************************************************
+     * @author: wg
+     * @description: java7+
+     * @params:
+     * @return:
+     * @createTime: 16:12  2022/5/10
+     * @updateTime: 16:12  2022/5/10
+     ************************************************************************/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return name.equals(student.name) && age.equals(student.age) && id.equals(student.id) && sex.equals(student.sex) && birthday.equals(student.birthday);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age, id, sex, birthday);
+    }
 }
