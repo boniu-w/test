@@ -134,4 +134,20 @@ public class ListTest {
         System.out.println(user);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: foreach
+     * @params:
+     * @return:
+     * @createTime: 15:42  2022/5/11
+     * @updateTime: 15:42  2022/5/11
+     ************************************************************************/
+    public void testForeach(){
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+    }
+
 }

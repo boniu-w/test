@@ -227,4 +227,25 @@ public class MathTest {
         float maxValue = Float.MAX_VALUE;
         System.out.println("maxValue = " + maxValue); // 3.4028235E38
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 乘除
+     * @params:
+     * @return:
+     * @createTime: 13:57  2022/5/12
+     * @updateTime: 13:57  2022/5/12
+     ************************************************************************/
+    @Test
+    public void multiplyTest() {
+        int a = 123;
+        int b = a << 1;
+
+        System.out.println(b); // 246
+
+        boolean f = b >> 1 == a;
+        System.out.println(f); // true
+
+        System.out.println(a >> 1); // 61
+    }
 }

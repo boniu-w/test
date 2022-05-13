@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.Objects;
 
 /*************************************************************
@@ -13,8 +14,9 @@ import java.util.Objects;
  * @date 2020/9/3 14:15
  * @version
  * @Copyright
+ * @description: 不序列化, 无法使用 redis 存储
  *************************************************************/
-public class Student {
+public class Student  implements Serializable {
 
     @NotBlank(message = "用户名不能为空")
     private String name;

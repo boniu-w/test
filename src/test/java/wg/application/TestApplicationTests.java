@@ -2005,4 +2005,10 @@ public class TestApplicationTests {
 
         System.out.println(user);
     }
+
+    @Test
+    public void detectTest(){
+        JsonDetectTestEntity jsonDetectTestEntity = new JsonDetectTestEntity("123", "123");
+        System.out.println(jsonDetectTestEntity);
+    }
 }

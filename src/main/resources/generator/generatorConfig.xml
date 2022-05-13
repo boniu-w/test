@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <properties resource="application-sevenme.properties" />
+    <properties resource="datasource-sevenme.properties" />
 
     <context id="Mysql" defaultModelType="flat">
         <property name="beginningDelimiter" value="`" />
