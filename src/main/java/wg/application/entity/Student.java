@@ -15,8 +15,12 @@ import java.util.Objects;
  * @version
  * @Copyright
  * @description: 不序列化, 无法使用 redis 存储
+ * 强烈建议所有可序列化类显式声明serialVersionUID值，因为默认的 serialVersionUID 计算对类详细信息高度敏感，
+ * 这些详细信息可能因编译器实现而异，因此在反序列化过程中可能会导致意外的InvalidClassExceptions。
  *************************************************************/
-public class Student  implements Serializable {
+public class Student implements Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     @NotBlank(message = "用户名不能为空")
     private String name;
@@ -80,6 +84,7 @@ public class Student  implements Serializable {
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
+
     public Student(String name, Integer age, Integer id, Integer sex, String birthday) {
         this.name = name;
         this.age = age;
