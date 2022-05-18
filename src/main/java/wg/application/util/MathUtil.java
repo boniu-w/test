@@ -283,6 +283,22 @@ public class MathUtil {
 
     /************************************************************************
      * @author: wg
+     * @description: a 的 b 次方
+     * @params:
+     * @return:
+     * @createTime: 16:54  2022/5/17
+     * @updateTime: 16:54  2022/5/17
+     ************************************************************************/
+    public static long pow(int a, int b) {
+        long p = 1;
+        for (int i = 1; i <= b; i++) {
+            p *= a;
+        }
+        return p;
+    }
+
+    /************************************************************************
+     * @author: wg
      * @description: 求对数
      * @params:
      * @return:

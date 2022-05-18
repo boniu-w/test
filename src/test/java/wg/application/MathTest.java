@@ -248,4 +248,21 @@ public class MathTest {
 
         System.out.println(a >> 1); // 61
     }
+
+    @Test
+    public void powTest() {
+        long s = MathUtil.pow(2, 3);
+        System.out.println(s);
+    }
+
+    /**
+     * null +=
+     */
+    @Test
+    public void nullPlus() {
+        Integer i = null;
+
+        i += 1;
+        System.out.println(i);
+    }
 }
