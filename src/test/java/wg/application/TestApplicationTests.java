@@ -2007,8 +2007,14 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void detectTest(){
+    public void detectTest() {
         JsonDetectTestEntity jsonDetectTestEntity = new JsonDetectTestEntity("123", "123");
         System.out.println(jsonDetectTestEntity);
+    }
+
+    @Test
+    public void testFinal() {
+        final BigDecimal a = null;
+        System.out.println(a);
     }
 }

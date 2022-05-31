@@ -1,10 +1,6 @@
 package wg.application.util;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 该类提供对集合类的高效操作
@@ -68,5 +64,24 @@ public class CollectionUtil {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static <T> Collection<T> getDifferentNoDuplicate(Collection<T> collmax, Collection<T> collmin) {
         return new HashSet(getDifferent(collmax, collmin));
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 找相同
+     * @params:
+     * @return:
+     * @createTime: 17:22  2022/5/31
+     * @updateTime: 17:22  2022/5/31
+     ************************************************************************/
+    public static <T> Collection<T> getSame(Collection<T> list1, Collection<T> list2) {
+        ArrayList<T> exist = new ArrayList<>(list2);
+        ArrayList<T> same = new ArrayList<>(list2);
+
+        exist.removeAll(list1);
+
+        same.removeAll(exist);
+
+        return same;
     }
 }

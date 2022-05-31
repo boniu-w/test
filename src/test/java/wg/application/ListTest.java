@@ -150,4 +150,45 @@ public class ListTest {
 
     }
 
+    @Test
+    public void testSame(){
+        // 集合一
+
+        List<String> first=new ArrayList<>();
+
+        first.add("jim");
+
+        first.add("tom");
+
+        first.add("jack");
+
+//集合二
+
+        List<String> second=new ArrayList<>();
+
+        second.add("jack");
+
+        second.add("happy");
+
+        second.add("sun");
+
+        second.add("good");
+
+        // Collection exists=new ArrayList(second);
+        //
+        // Collection notexists=new ArrayList(second);
+        //
+        // exists.removeAll(first);
+        //
+        // System.out.println("_second中不存在于_set中的："+exists);
+        //
+        // notexists.removeAll(exists);
+        //
+        // System.out.println("相同："+notexists);
+
+        Object[] objects = CollectionUtil.getSame(first, second).toArray();
+        List<String> collect = new ArrayList<>(CollectionUtil.getSame(first, second));
+        System.out.println(objects);
+    }
+
 }
