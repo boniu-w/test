@@ -8,9 +8,7 @@ import wg.application.entity.Student;
 import wg.application.entity.User;
 import wg.application.util.CollectionUtil;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /************************************************************************
@@ -129,7 +127,7 @@ public class ListTest {
         User user = new User();
         user.setAge(5);
 
-        BeanUtil.copyProperties(student,user);
+        BeanUtil.copyProperties(student, user);
 
         System.out.println(user);
     }
@@ -142,7 +140,7 @@ public class ListTest {
      * @createTime: 15:42  2022/5/11
      * @updateTime: 15:42  2022/5/11
      ************************************************************************/
-    public void testForeach(){
+    public void testForeach() {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
@@ -151,10 +149,10 @@ public class ListTest {
     }
 
     @Test
-    public void testSame(){
+    public void testSame() {
         // 集合一
 
-        List<String> first=new ArrayList<>();
+        List<String> first = new ArrayList<>();
 
         first.add("jim");
 
@@ -164,7 +162,7 @@ public class ListTest {
 
 //集合二
 
-        List<String> second=new ArrayList<>();
+        List<String> second = new ArrayList<>();
 
         second.add("jack");
 
@@ -189,6 +187,119 @@ public class ListTest {
         Object[] objects = CollectionUtil.getSame(first, second).toArray();
         List<String> collect = new ArrayList<>(CollectionUtil.getSame(first, second));
         System.out.println(objects);
+    }
+
+    /**
+     * 测试 group by
+     * 测试结果: 并不会触发空指针
+     */
+    @Test
+    public void testGroup() {
+        Student student = new Student();
+        ArrayList<Student> list1 = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            student = new Student();
+            student.setAge(i);
+            list1.add(student);
+        }
+
+        Student student1 = new Student();
+        student1.setAge(1);
+        list1.add(student1);
+
+        list1.clear();
+
+        Map<Integer, List<Student>> ageMap = list1.stream().collect(Collectors.groupingBy(Student::getAge));
+        System.out.println(ageMap);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: flatMap: 把二维list 转成 一维 的 (把几个小的list转换到一个大的list)
+     * @params:
+     * @return:
+     * @createTime: 17:09  2022/6/7
+     * @updateTime: 17:09  2022/6/7
+     ************************************************************************/
+    @Test
+    public void testFlatMap() {
+        List<String> teamIndia = Arrays.asList("Virat", "Dhoni", "Jadeja");
+        List<String> teamAustralia = Arrays.asList("Warner", "Watson", "Smith");
+        List<String> teamEngland = Arrays.asList("Alex", "Bell", "Broad");
+        List<String> teamNewZeland = Arrays.asList("Kane", "Nathan", "Vettori");
+        List<String> teamSouthAfrica = Arrays.asList("AB", "Amla", "Faf");
+        List<String> teamWestIndies = Arrays.asList("Sammy", "Gayle", "Narine");
+        List<String> teamSriLanka = Arrays.asList("Mahela", "Sanga", "Dilshan");
+        List<String> teamPakistan = Arrays.asList("Misbah", "Afridi", "Shehzad");
+
+        List<List<String>> playersInWorldCup2016 = new ArrayList<>();
+        playersInWorldCup2016.add(teamIndia);
+        playersInWorldCup2016.add(teamAustralia);
+        playersInWorldCup2016.add(teamEngland);
+        playersInWorldCup2016.add(teamNewZeland);
+        playersInWorldCup2016.add(teamSouthAfrica);
+        playersInWorldCup2016.add(teamWestIndies);
+        playersInWorldCup2016.add(teamSriLanka);
+        playersInWorldCup2016.add(teamPakistan);
+
+        playersInWorldCup2016.forEach(System.out::println);
+
+        // Let's print all players before Java 8
+        List<String> listOfAllPlayers = new ArrayList<>();
+
+        for (List<String> team : playersInWorldCup2016) {
+            listOfAllPlayers.addAll(team);
+        }
+
+        System.out.println("Players playing in world cup 2016");
+        System.out.println(listOfAllPlayers);
+
+
+        // Now let's do this in Java 8 using FlatMap
+        List<String> flatMapList = playersInWorldCup2016
+                .stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        System.out.println("List of all Players using Java 8");
+        System.out.println(flatMapList);
+
+        // -------------------------------------------------------------------------------------------------------------
+        ArrayList<Student> studentList1 = new ArrayList<>();
+        ArrayList<Student> studentList2 = new ArrayList<>();
+        ArrayList<Student> studentList3 = new ArrayList<>();
+        Student student = new Student();
+        for (int i = 0; i < 3; i++) {
+            student = new Student();
+            student.setId(i);
+            student.setAge(0);
+
+            studentList1.add(student);
+
+            student = new Student();
+            student.setId((i + 10) << 1);
+            student.setAge(10);
+            studentList2.add(student);
+
+            student = new Student();
+            student.setId((i + 20) << 1);
+            student.setAge(20);
+            studentList3.add(student);
+        }
+
+        ArrayList<ArrayList<Student>> list = new ArrayList<>();
+        list.add(studentList1);
+        list.add(studentList2);
+        list.add(studentList3);
+
+        list.forEach(System.out::println);
+
+        List<Student> studentList = list.stream()
+                .flatMap(Collection::stream)
+                .distinct()
+                .collect(Collectors.toList());
+
+        studentList.forEach(System.out::println);
     }
 
 }
