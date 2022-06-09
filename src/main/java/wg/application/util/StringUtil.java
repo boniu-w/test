@@ -115,4 +115,20 @@ public class StringUtil {
         }
         return ans;
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 在数字前面加 n 个 0
+     * @params:
+     * @return:
+     * @createTime: 15:35  2022/6/8
+     * @updateTime: 15:35  2022/6/8
+     ************************************************************************/
+    public static String paddingZero(int numeral, int length) {
+        String codeFormat = "%0" + String.valueOf(length) + "d"; // %04d
+
+        return String.format(codeFormat, numeral);
+    }
+
+
 }

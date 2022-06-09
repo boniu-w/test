@@ -158,8 +158,8 @@ public class StringTest {
      * unicode
      */
     @Test
-    public void unicodeTest(){
-        String str="zujie";
+    public void unicodeTest() {
+        String str = "zujie";
         String unicode = StringUtil.toUnicode(str);
         System.out.println(unicode);
 
@@ -171,8 +171,8 @@ public class StringTest {
     }
 
     @Test
-    public void test11(){
-        String filePath="/pims-ld/components_water/edc0f89e483835c138d4a3698db8edc9ca564683d58ededa994c5bf4934f613e/103A3397-FCE1-4806-B38F-BB4EA8DFB630_4_5005_c.jpeg";
+    public void test11() {
+        String filePath = "/pims-ld/components_water/edc0f89e483835c138d4a3698db8edc9ca564683d58ededa994c5bf4934f613e/103A3397-FCE1-4806-B38F-BB4EA8DFB630_4_5005_c.jpeg";
         // String[] split = filePath.split("/");
         // for (String s : split) {
         //     System.out.println(s);
@@ -188,7 +188,24 @@ public class StringTest {
 
         String objectName = "";
 
-        objectName =filePath.split("/pims-ld")[1];
+        objectName = filePath.split("/pims-ld")[1];
         System.out.println(objectName);
+    }
+
+    @Test
+    public void test12() {
+        String a = "001";
+        String b = "010";
+
+        int compareTo = a.compareTo(b);
+        System.out.println(compareTo);
+
+
+        System.out.println(Integer.valueOf(a));
+        System.out.println(Integer.valueOf(b));
+
+        String c="-090";
+        String substring = c.substring(c.lastIndexOf("-"));
+        System.out.println(substring);
     }
 }
