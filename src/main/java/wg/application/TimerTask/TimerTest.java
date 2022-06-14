@@ -7,8 +7,6 @@ import wg.application.service.UserService;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 @Component
 public class TimerTest {
@@ -40,7 +38,7 @@ public class TimerTest {
      ************************************************************************/
     @Scheduled(cron = "0 36 10 2 11 *")
     public void testSpringBootTimerTask(){
-        List<User> all = userService.getAll();
+        List<User> all = userService.list();
         all.forEach(System.out::println);
     }
 }

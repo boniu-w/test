@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="wg.application.dao.Test03Mapper">
+<mapper namespace="wg.application.mapper.Test03Mapper">
   <resultMap id="BaseResultMap" type="wg.application.entity.Test03">
     <!--
       WARNING - @mbg.generated

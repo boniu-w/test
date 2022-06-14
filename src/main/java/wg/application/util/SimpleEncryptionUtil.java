@@ -1,4 +1,4 @@
-package wg.application.security;
+package wg.application.util;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import java.util.Random;
  * @author: wg
  * @date: 10:41  2021/10/12
  ************************************************************************/
-public class CommonEncryption {
+public class SimpleEncryptionUtil {
     private static final int i;
 
     static {

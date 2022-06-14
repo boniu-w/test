@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>my tools</title>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="top" style="background-color: rgb(128,0,34); height: 40px; margin-top: 0px; ">
+
+    </div>
+
+    <div style="background-color: rgb(248,248,255); height: 40px; margin-top: 0px; ">
+
+    </div>
+
+    <div style="background-color: rgb(0,47,167); height: 40px; margin-top: 0px; ">
+
+    </div>
+
+    <div class="form-group module" style="margin-top: 10px;">
+        <form>
+            <div class="form-group row">
+                <label for="beforeText" class="col-sm-2 col-form-label label-text"
+                       style="color: rgb(0,47,167)">汉字: </label>
+                <div class="col-sm-10">
+                    <input id="beforeText" class="form-control" type="text" placeholder="Default input">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="sub" class="col-sm-2 col-form-label label-text">点击转换</label>
+                <div class="col-sm-2">
+                    <input id="sub" type="button" class="form-control" onclick="deformText()" value="点击转换">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="afterwardsText" class="col-sm-2 col-form-label label-text">转换后: </label>
+                <div class="col-sm-10">
+                    <input id="afterwardsText" class="form-control" type="text" placeholder="Default input">
+                </div>
+            </div>
+        </form>
+
+        <style>
+            .module {
+                border: 1px solid black;
+            }
+            .label-text {
+                color: rgb(0,47,167);
+            }
+
+        </style>
+
+        <script>
+
+            function deformText() {
+                var beforeText = $("#beforeText").val();
+                var afterwardsText= $("#afterwardsText").val();
+                var formData = {
+                    "beforeText": beforeText
+                }
+
+                $.ajax({
+                    type: "get",
+                    data: { "beforeText": beforeText },
+                    url: "https://localhost:33333/wg/mytoolscontroller/to_unicode",
+                    success: function (response) {
+                        $("#afterwardsText").val(response)
+                    },
+                    error: function (response) {
+
+                    }
+                })
+            }
+
+        </script>
+    </div>
+
+    <div>
+
+    </div>
+
+</div>
+</body>
+</html>

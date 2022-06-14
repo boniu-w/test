@@ -14,7 +14,6 @@ public class AuthorInfo {
     private String phone;
     private Map<String,String> son;
 
-
     public Map<String, String> getSon() {
         return son;
     }

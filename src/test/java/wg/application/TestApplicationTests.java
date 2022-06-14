@@ -1,5 +1,8 @@
 package wg.application;
 
+import cn.hutool.Hutool;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.system.*;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
@@ -11,18 +14,23 @@ import org.apache.commons.collections.MultiMap;
 import org.apache.commons.collections.map.MultiValueMap;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
+import sun.awt.OSInfo;
 import wg.application.TimerTask.ScheduledTest;
+import wg.application.algorithm.IdWorker;
+import wg.application.exception.Assert;
+import wg.application.jackson.JacksonTest;
+import wg.application.jsoup.JsoupTest;
 import wg.application.message.ErrorMessageOfApp;
 import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
 import wg.application.enumeration.CodeEnum;
 import wg.application.gc.GcEntity;
-import wg.application.security.CommonEncryption;
+import wg.application.string.StringTest;
+import wg.application.util.SimpleEncryptionUtil;
 import wg.application.thread.TaskTest;
-import wg.application.util.CalendarUtil;
-import wg.application.util.WgJsonUtil;
-import wg.application.util.CommonUtil;
+import wg.application.util.*;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
@@ -36,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
@@ -108,6 +117,8 @@ public class TestApplicationTests {
     /*****************************************************
      * @params:
      * @description: 反射
+     * getDeclaredField: 可以获取本类所有的字段，包括private的，但是不能获取继承来的字段
+     * getField: 只能获取public的，包括从父类继承来的字段
      * @author: wg
      * @date: 2021/7/12 14:38
      *****************************************************/
@@ -130,6 +141,16 @@ public class TestApplicationTests {
         Student student = new Student();
         student.setAge(123);
         student.setName("wg");
+
+        Field[] fields = Student.class.getFields();
+        System.out.println("fields.length -> " + fields.length);
+        Arrays.stream(fields).forEach(System.out::println);
+
+        // 可以获取本类所有的字段，包括private的，但是不能获取继承来的字段
+        Field idField = Student.class.getDeclaredField("id");
+        System.out.println(idField);
+        System.out.println(idField.get(student));
+        System.out.println(idField.getName());
 
         Field field = Student.class.getField("id");
         System.out.println(field.get(student));
@@ -1489,10 +1510,19 @@ public class TestApplicationTests {
      ************************************************************************/
     @Test
     public void decrypt() {
-        String s = CommonEncryption.displacementEncryption("hello world!");
+        String s = SimpleEncryptionUtil.displacementEncryption("hello world!");
         System.out.println(s);
-        String decrypt = CommonEncryption.displacementDecrypt(s, CommonEncryption.getStaticDigit());
+        System.out.println();
+
+        int staticDigit = SimpleEncryptionUtil.getStaticDigit();
+        System.out.println(staticDigit);
+        String decrypt = SimpleEncryptionUtil.displacementDecrypt(s, SimpleEncryptionUtil.getStaticDigit());
         System.out.println(decrypt);
+        System.out.println();
+
+        System.out.println(staticDigit);
+        String s1 = SimpleEncryptionUtil.displacementDecrypt(s);
+        System.out.println(s1);
     }
 
     /************************************************************************
@@ -1773,7 +1803,7 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void testEnum(){
+    public void testEnum() {
         System.out.println(CodeEnum.SUCCESS.getCode());
     }
 
@@ -1786,11 +1816,205 @@ public class TestApplicationTests {
      * @updateTime: 14:57  2022/3/1
      ************************************************************************/
     @Test
-    public void getErrorMessage(){
+    public void getErrorMessage() {
         ErrorMessageOfApp message = new ErrorMessageOfApp();
         Properties properties = message.get();
 
         System.out.println(properties);
     }
-    
+
+    /************************************************************************
+     * @author: wg
+     * @description: http 测试
+     * @params:
+     * @return:
+     * @createTime: 10:18  2022/3/2
+     * @updateTime: 10:18  2022/3/2
+     ************************************************************************/
+    @Test
+    public void testHttp() {
+        String domain = HttpContextUtils.getDomain();
+        System.out.println(domain);
+
+        String origin = HttpContextUtils.getOrigin();
+        System.out.println(origin);
+    }
+
+    @Test
+    public void testMessage() {
+        Locale locale = LocaleContextHolder.getLocale();
+        System.out.println();
+
+        String message = MessageUtils.getMessage(10001, "123");
+        System.out.println(message);
+    }
+
+    @Test
+    public void testImage() {
+        byte a = 52;
+        int i = MathUtil.byteToInt(a);
+        System.out.println(i);
+        // String imageFile = "C:\\Users\\wg\\Pictures\\Saved Pictures\\上云下路-大一点123.jpg";
+        // String txtFile = "C:\\Users\\wg\\Pictures\\Saved Pictures\\上云下路.txt";
+        // ImageUtil.imageToHex(imageFile, txtFile);
+        // ImageUtil.hexToImage(txtFile, imageFile);
+    }
+
+    @Test
+    public void testIdWorker() {
+        IdWorker idWorker = new IdWorker(1, 1, 1);
+        long l = idWorker.nextId1();
+        System.out.println(l);
+
+        long l1 = idWorker.nextId();
+        System.out.println(l1);
+
+        IdWorker idWorker1 = new IdWorker();
+        long l2 = idWorker1.nextId1();
+        System.out.println(l2);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: jackson
+     * @params:
+     * @return:
+     * @createTime: 10:41  2022/3/30
+     * @updateTime: 10:41  2022/3/30
+     ************************************************************************/
+    @Test
+    public void jacksonTest() {
+        JacksonTest jacksonTest = new JacksonTest();
+        jacksonTest.test1();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: timeUnit 测试
+     * @params:
+     * @return:
+     * @createTime: 12:53  2022/4/12
+     * @updateTime: 12:53  2022/4/12
+     ************************************************************************/
+    @Test
+    public void timeUnit() {
+        long l1 = TimeUnit.DAYS.toSeconds(36500);
+        System.out.println(l1);
+        System.out.println(Integer.MAX_VALUE);
+        long l = TimeUnit.DAYS.toDays(36500);
+        System.out.println(l);
+
+        List a = null;
+        Assert.isNull(a, "123");
+        Object collect = a.stream().collect(Collectors.toList());
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: stringutils test
+     * @params:
+     * @return:
+     * @createTime: 11:39  2022/4/22
+     * @updateTime: 11:39  2022/4/22
+     ************************************************************************/
+    @Test
+    public void stringUtilsTest() {
+        StringTest stringTest = new StringTest();
+        String utilTest = stringTest.utilTest();
+        System.out.println("TestApplicationTests.stringUtilsTest  " + utilTest);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: jsoup 解析html
+     * @params:
+     * @return:
+     * @createTime: 11:39  2022/4/22
+     * @updateTime: 11:39  2022/4/22
+     ************************************************************************/
+    @Test
+    public void testJsoup() {
+        JsoupTest jsoupTest = new JsoupTest();
+        jsoupTest.test1();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description:
+     * @params:
+     * @return:
+     * @createTime: 10:00  2022/4/26
+     * @updateTime: 10:00  2022/4/26
+     ************************************************************************/
+    @Test
+    public void nullListTest() {
+        List<Object> list = null;
+        if (list.size() == 0) {
+            System.out.println("---");
+        }
+    }
+
+    @Test
+    public void hutoolTest() {
+        Set<Class<?>> allUtils = Hutool.getAllUtils();
+        allUtils.forEach(System.out::println);
+    }
+
+    @Test
+    public void hutoolTest1() {
+        OSInfo.WindowsVersion windowsVersion = OSInfo.getWindowsVersion();
+        System.out.println(windowsVersion);
+
+        OSInfo.OSType osType = OSInfo.getOSType();
+        System.out.println(osType);
+
+        System.out.println();
+        OsInfo osInfo = new OsInfo();
+        System.out.println(osInfo);
+
+        System.out.println();
+        JavaInfo javaInfo = SystemUtil.getJavaInfo();
+        System.out.println(javaInfo);
+
+        System.out.println();
+        JvmInfo jvmInfo = new JvmInfo();
+        System.out.println(jvmInfo);
+
+        System.out.println();
+        JvmSpecInfo jvmSpecInfo = new JvmSpecInfo();
+        System.out.println(jvmSpecInfo);
+
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: copy test
+     * @params:
+     * @return:
+     * @createTime: 10:52  2022/5/7
+     * @updateTime: 10:52  2022/5/7
+     ************************************************************************/
+    @Test
+    public void copyTest() {
+        Student student = new Student();
+        student.setId(123);
+        student.setAge(33);
+
+        User user = new User();
+        BeanUtil.copyProperties(student, user, "age");
+
+        System.out.println(user);
+    }
+
+    @Test
+    public void detectTest() {
+        JsonDetectTestEntity jsonDetectTestEntity = new JsonDetectTestEntity("123", "123");
+        System.out.println(jsonDetectTestEntity);
+    }
+
+    @Test
+    public void testFinal() {
+        final BigDecimal a = null;
+        System.out.println(a);
+    }
 }

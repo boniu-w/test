@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wg.application.mapper.InformationSchemaMapper">
+
+    <select id="selectInformationSchema" resultType="wg.application.entity.InformationSchema"
+            parameterType="String">
+        SELECT
+        *
+        FROM
+        INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+        WHERE
+        referenced_table_name = #{referencedTableName}
+    </select>
+
+    <delete id="deleteData">
+        delete from ${tableName} where ${columnName} = #{columnVal}
+    </delete>
+
+    <select id="getDataCount" resultType="int">
+        select count(*) from ${tableName} where ${columnName} = #{masterTableId}
+    </select>
+
+    <select id="getIds" resultType="String">
+        select id from ${tableName} where ${columnName} = #{masterTableId}
+    </select>
+
+    <select id="getAllTablesName" resultType="String">
+        SELECT
+        table_name
+        FROM
+        information_schema.tables
+        WHERE
+        table_schema = #{tableName}
+    </select>
+</mapper>

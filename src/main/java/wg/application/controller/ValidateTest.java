@@ -45,7 +45,6 @@ public class ValidateTest {
         return ResultData.build().data("student -> " + student);
     }
 
-
     @RequestMapping(value = "/validatePost", method = RequestMethod.POST)
     @ResponseBody
     public ResultData validatePost(Map map,

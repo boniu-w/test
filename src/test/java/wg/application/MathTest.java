@@ -121,7 +121,7 @@ public class MathTest {
     @Test
     public void testBit() {
         String str = "-100";
-        byte[][] bytes = MathUtil.stringToBits(str);
+        byte[][] bytes = MathUtil.stringToBit(str);
 
         // [0, 0, 1, 0, 1, 1, 0, 1]
         // [0, 0, 1, 1, 0, 0, 0, 1]
@@ -134,7 +134,7 @@ public class MathTest {
         System.out.println("----------");
 
         byte b = -100;
-        byte[] bit = MathUtil.byteToBitOfArray(b);
+        byte[] bit = MathUtil.byteToBit(b);
         System.out.println(Arrays.toString(bit)); // [1, 0, 0, 1, 1, 1, 0, 0]
 
         System.out.println("-------------");
@@ -226,5 +226,43 @@ public class MathTest {
 
         float maxValue = Float.MAX_VALUE;
         System.out.println("maxValue = " + maxValue); // 3.4028235E38
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 乘除
+     * @params:
+     * @return:
+     * @createTime: 13:57  2022/5/12
+     * @updateTime: 13:57  2022/5/12
+     ************************************************************************/
+    @Test
+    public void multiplyTest() {
+        int a = 123;
+        int b = a << 1;
+
+        System.out.println(b); // 246
+
+        boolean f = b >> 1 == a;
+        System.out.println(f); // true
+
+        System.out.println(a >> 1); // 61
+    }
+
+    @Test
+    public void powTest() {
+        long s = MathUtil.pow(2, 3);
+        System.out.println(s);
+    }
+
+    /**
+     * null +=
+     */
+    @Test
+    public void nullPlus() {
+        Integer i = null;
+
+        i += 1;
+        System.out.println(i);
     }
 }

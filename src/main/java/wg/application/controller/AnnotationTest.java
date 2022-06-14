@@ -16,12 +16,10 @@ import wg.application.vo.Result;
 @RequestMapping(value = "/annotationTest")
 public class AnnotationTest {
 
-
     @RequestMapping(value = "/annotationTest")
     @RequiredRole(value = "admin76")
     public Result annotationTest() {
         System.out.println("---annotationTest-----");
-
 
         return Result.ok();
     }

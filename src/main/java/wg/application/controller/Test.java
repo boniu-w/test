@@ -24,8 +24,9 @@ import wg.application.exception.WgException;
 import wg.application.service.AspectService;
 import wg.application.service.LiuShuiInterface;
 import wg.application.service.TestInterface;
-import wg.application.util.IPUtils;
+import wg.application.util.IPUtil;
 import wg.application.util.JdbcUtil;
+import wg.application.util.MessageUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -834,10 +835,18 @@ public class Test {
 
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 本机ip
+     * @params:
+     * @return:
+     * @createTime: 10:46  2022/5/5
+     * @updateTime: 10:46  2022/5/5
+     ************************************************************************/
     @RequestMapping(value = "/ipTest")
     @ResponseBody
     public String ipTest(HttpServletRequest request) {
-        String ipAddr = IPUtils.getIpAddr(request);
+        String ipAddr = IPUtil.getIp(request);
 
         return ipAddr;
 
@@ -1586,7 +1595,20 @@ public class Test {
         } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
 
+    @GetMapping(value = "/test_message_source")
+    public void testMessageSource() {
+        String message = MessageUtils.getMessage(10001);
+        System.out.println(message);
+
+         message = MessageUtils.getMessage(10001,"skdjhfs");
+        System.out.println(message);
+
+        // Locale.US 不能用 Locale.ENGLISH 替代, 因为配置文件的名字 不匹配
+        String message1 = MessageUtils.getMessage(10002, null, Locale.US);
+        System.out.println(message1);
+        return;
     }
 
 }

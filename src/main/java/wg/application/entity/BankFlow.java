@@ -10,6 +10,7 @@ import java.util.Objects;
 
 //@TableName(value = "BANK_STATEMENT")
 public class BankFlow implements Serializable {
+    private static final Long serialVersionUID = 1L;
 
     @Excel(name = "id")
     private String id;

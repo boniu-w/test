@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: ubuntu
+  messages:
+    basename: i18n.messages_common
+    encoding: UTF-8
 
 wg:
   name: wg
@@ -9,10 +12,3 @@ wg:
   phone: "234324"
   son:
     name: "123"
-
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath:mapper/*.xml
-
-

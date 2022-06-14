@@ -7,7 +7,9 @@ server:
     key-password: 123456
     key-store-password: 123456
     key-alias: tomcat
-    protoclo: TLS
+    protocol: TLS
+  servlet:
+    context-path: /wg
 
 spring:
   datasource:
@@ -15,15 +17,46 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-#  security:
-#    user:
-#      name: admin
-#      password: 123
-#      roles: admin
+  redis:
+    database: 0
+    host: localhost
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+      shutdown-timeout: 100ms
+    password: ''
+    port: 6379
 
 report:
   dir: E:\pandoc-2.16.1\wg\
 
+# 程序监控
+management:
+  trace:
+    http:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+      show-components: always
+      status:
+        http-mapping: # 设置不同健康状态对应的响应状态码
+          DOWN: 503
+        order: FATAL, DOWN, OUT_OF_SERVICE, UP, UNKNOWN # 状态排序
 
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:wg/application/mapper/xml/*Mapper.xml
 
+logging:
+  config: classpath:logback-spring.xml

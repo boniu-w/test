@@ -1,4 +1,4 @@
-// package wg.application.security;
+// package wg.application.config.security;
 //
 // import com.fasterxml.jackson.databind.ObjectMapper;
 // import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,14 @@
 // import java.util.HashMap;
 // import java.util.Map;
 //
+// /************************************************************************
+//  * @author: wg
+//  * @description:
+//  * @params:
+//  * @return:
+//  * @createTime: 15:14  2022/3/30
+//  * @updateTime: 15:14  2022/3/30
+//  ************************************************************************/
 // @Configuration
 // public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //     @Autowired
@@ -47,8 +55,15 @@
 //
 //     @Override
 //     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//         super.configure(auth);
-//         auth.userDetailsService(userService);
+//         auth
+//                 .inMemoryAuthentication()
+//                 .withUser("user")
+//                 .password("password")
+//                 .roles("USER")
+//                 .and()
+//                 .withUser("admin")
+//                 .password("admin")
+//                 .roles("USER", "ADMIN");
 //     }
 //
 //     @Override

@@ -1,17 +1,19 @@
 package wg.application.util;
 
+import cn.hutool.core.io.resource.ClassPathResource;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 @Component
 public class TableUtil {
@@ -214,5 +216,6 @@ public class TableUtil {
     //         }
     //     }
     // }
+
 
 }

@@ -13,13 +13,11 @@ import wg.application.entity.User;
 import javax.annotation.PostConstruct;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +30,7 @@ public class CommonUtil {
     private static CommonUtil commonUtil;
 
     @PostConstruct
-    public void initWgUtil() {
+    public void initCommonUtil() {
         commonUtil = this;
     }
 
@@ -460,7 +458,7 @@ public class CommonUtil {
 
     /************************************************************************
      * @author: wg
-     * @description: nacos 使用的密码加密策略
+     * @description: 加密字符串, nacos 使用的密码加密策略
      * @params:
      * @return:
      * @createTime: 15:25  2022/2/24
@@ -470,6 +468,14 @@ public class CommonUtil {
         return new BCryptPasswordEncoder().encode(password);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 这个是错误演示, 文件 必须在 resource/static 下才有用, 在 main/java/** 下没用
+     * @params:
+     * @return:
+     * @createTime: 9:57  2022/3/2
+     * @updateTime: 9:57  2022/3/2
+     ************************************************************************/
     public static Properties getProperties(String path) {
         Properties properties = new Properties();
 
@@ -483,20 +489,62 @@ public class CommonUtil {
         return null;
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 通过 classPathResource,  读取 任意位置 下面的配置文件(json, xml, properties, yaml, yml)
+     * @params:
+     * @return:
+     * @createTime: 9:29  2022/3/2
+     * @updateTime: 9:29  2022/3/2
+     ************************************************************************/
     public static Properties getProperties(ClassPathResource classPathResource) {
         Properties properties = new Properties();
         try {
             File file = File.createTempFile(Objects.requireNonNull(classPathResource.getFilename()), null);
-            // File file = new File("./" + classPathResource.getFilename());
             FileUtils.copyInputStreamToFile(classPathResource.getInputStream(), file);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             properties.load(bufferedReader);
-            // file.delete();
+            bufferedReader.close();
+            file.delete();
             return properties;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 会有类型转换问题, 待解决, 错误示范 在 service/ExcelTest 里面
+     * @params:
+     * @return:
+     * @createTime: 17:24  2022/3/4
+     * @updateTime: 17:24  2022/3/4
+     ************************************************************************/
+    public static <T> T mapToObject(Map<String, Object> map, Class<T> clazz) {
+        if (map == null) {
+            return null;
+        }
+        T obj = null;
+        try {
+            obj = clazz.newInstance();
+
+            Field[] fields = obj.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                int mod = field.getModifiers();
+                if (Modifier.isStatic(mod) || Modifier.isFinal(mod)) {
+                    continue;
+                }
+                field.setAccessible(true);
+                String fieldName = field.getName();
+                if (map.containsKey(fieldName)) {
+                    field.set(obj, map.get(fieldName));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return obj;
     }
 
 }

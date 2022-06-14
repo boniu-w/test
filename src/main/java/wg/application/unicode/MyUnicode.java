@@ -6,7 +6,7 @@ public class MyUnicode {
 
     public static void main(String[] args) {
         try {
-            test3();
+            test1();
         } catch (Exception e) {
             System.out.println("error " + e.getMessage());
         }
