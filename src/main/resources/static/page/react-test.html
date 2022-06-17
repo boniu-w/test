@@ -15,18 +15,54 @@
 <div id="app">
 
 </div>
+<script type="text/javascript">
+    function demo() {
+        console.log("this: ", this)
+    }
+
+    window.onload = demo();
+</script>
 <script type="text/babel">
+    const className = "title";
+
+    // 这是个对象 object
+    // const Good = (
+    //     <div>
+    //         <span>123</span>
+    //     </div>
+    // )
+
+    // 这是个 function
+    class Good extends React.Component {
+        render() {
+            return (
+                <div>
+                    <span>good</span>
+                </div>
+            )
+        }
+    }
+
     // 必须添加type="text/babel",否则不识别JSX语法
     class App extends React.Component {
-    render() {
-      return(
-        <div>
-          <h1>Hello World</h1>
-        </div>
-      )
+        render() {
+            console.log("this: ", this);
+            return (
+                <div className={className.toLocaleUpperCase()}>
+                    <h1 style={{color: "orange", fontSize: "30px"}}>Hello World</h1>
+                    <Good></Good>
+                </div>
+            )
+        }
     }
-  }
-  ReactDOM.render(<App />, document.getElementById('app'))
+
+    ReactDOM.render(<App/>, document.getElementById('app'));
+
+    console.log("xu ni ", App);
+
+    console.log(typeof App);
+
 </script>
+
 </body>
 </html>

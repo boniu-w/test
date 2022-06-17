@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react-test-1</title>
+    <!-- 引入 react -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <!-- 引入 react-dom -->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <!-- 引入 Babel，使浏览器可以识别 JSX 语法，如果不使用 JSX 语法，可以不引入 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+<body>
+<div id="app">
+
+</div>
+
+<script type="text/babel">
+
+    const myData = [
+        {name: "tom", age: 19, id: 1},
+        {name: "react", age: 18, id: 2}
+    ]
+
+ /*   class Data extends React.Component {
+        render() {
+            console.log("this: ", this);
+            return (
+                <div>
+                    {
+                        myData.map((item, index) => {
+                            return <li key={item.id}>{item.name}</li>
+                        })
+                    }
+
+                </div>
+            )
+        }
+    }*/
+
+    function Data() {
+        console.log("this: ", this);
+        return (
+            <div>
+                {
+                    myData.map((item, index) => {
+                        return <li key={item.id}>{item.name}</li>
+                    })
+                }
+
+            </div>
+        )
+    }
+
+    ReactDOM.render(<Data/>, document.getElementById("app"))
+
+</script>
+</body>
+</html>

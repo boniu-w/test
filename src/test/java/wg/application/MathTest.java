@@ -6,6 +6,7 @@ import wg.application.util.MathUtil;
 import wg.application.util.CommonUtil;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 import java.util.Arrays;
 
 public class MathTest {
@@ -265,4 +266,22 @@ public class MathTest {
         i += 1;
         System.out.println(i);
     }
+
+    @Test
+    public void arithmeticTest() {
+        double a = 0.9;
+        double b = 0.8;
+
+        double v = a + b;
+        System.out.println(v);
+
+        // ResultSet
+
+        double temp = a;
+        a = b;
+        b = temp;
+
+        System.out.println(a + " " + b);
+    }
+
 }
