@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClassTest</title>
+
+    <script src="../../../js/react-17.0.1/react.development.js"></script>
+    <script src="../../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../../../js/babel/babel-7.0.0/babel.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script type="text/babel">
+
+    class Person {
+        name;
+        age;
+
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        speak() {
+            console.log(`${this.name},${this.age}`)
+
+            return "tom"
+        }
+    }
+
+    const p1 = new Person("tom", 13)
+    p1.name = "lili"
+
+    console.log(p1)
+
+    console.log(p1.name)
+
+    let speak = p1.speak()
+    console.log(speak)
+</script>
+
+<script type="text/babel">
+
+    class Person {
+
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        speak() {
+            console.log(`${this.name},${this.age}`)
+
+            return "tom2"
+        }
+    }
+
+    const p1 = new Person("tom2", 133)
+    p1.name = "lili2"
+
+    console.log(p1)
+
+    console.log(p1.name)
+
+    let speak = p1.speak()
+    console.log(speak)
+
+    const Student = {
+        name: "xixi",
+        age: 13
+    }
+
+    console.log("Student: ", Student);
+    console.log(typeof Student)
+
+    let P1 = {
+        name,
+        age,
+    }
+
+    console.log("P1: ", P1)
+    console.log(typeof P1)
+</script>
+</body>
+</html>
