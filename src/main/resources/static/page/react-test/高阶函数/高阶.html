@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高阶</title>
+
+    <script src="../../../js/react-17.0.1/react.development.js"></script>
+    <script src="../../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../../../js/babel/babel-7.0.0/babel.js"></script>
+</head>
+<body>
+<div id="div1">
+
+</div>
+
+<script type="text/babel">
+
+    class MyComponent extends React.Component {
+
+        state = {
+            userName: "",
+            password: null
+        }
+
+        handleSubmit = (event) => {
+            event.preventDefault() // 阻止 默认行为
+            // alert(event.target)
+
+            let {userName, password} = this.state
+
+            console.log("userName: ", userName)
+            console.log("{userName}: ", {userName})
+        }
+
+        // 高阶函数
+        saveFormData = (paramName) => {
+
+            console.log("paramName: ", paramName)
+            return (event) => {
+                console.log("event.target.value: ", event.target.value)
+
+                this.setState({[paramName]: event.target.value})
+            }
+        }
+
+        render() {
+            return (
+                <div>
+                    <form action="http://www.baidu.com" onSubmit={this.handleSubmit}>
+                        name: <input onChange={this.saveFormData('userName')} name="userName"/>
+                        password: <input onChange={this.saveFormData('password')} name="password"/>
+                        <button> submmit</button>
+                    </form>
+                </div>
+            )
+        }
+
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById("div1"))
+
+
+</script>
+</body>
+</html>
