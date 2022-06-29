@@ -284,4 +284,21 @@ public class MathTest {
         System.out.println(a + " " + b);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 移位运算 优先级 并不比加减运算高
+     * @params:
+     * @return:
+     * @createTime: 15:35  2022/6/28
+     * @updateTime: 15:35  2022/6/28
+     ************************************************************************/
+    @Test
+    public void testYiwei() {
+        int i = (1 << 2) - 1 << 2;
+        System.out.println(i);
+
+        int j = 1 << 2 - 1 << 2;
+        System.out.println(j);
+    }
+
 }
