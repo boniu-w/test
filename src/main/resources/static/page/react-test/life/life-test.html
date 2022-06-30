@@ -22,6 +22,7 @@
             ReactDOM.unmountComponentAtNode(document.getElementById("div1"))
         }
 
+        // 常用
         componentDidMount() {
             this.op = setInterval(() => {
                 let {opacity} = this.state;
@@ -31,6 +32,7 @@
             }, 200)
         }
 
+        // 常用
         componentWillUnmount() {
             clearInterval(this.op)
         }
