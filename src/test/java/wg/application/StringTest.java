@@ -204,8 +204,24 @@ public class StringTest {
         System.out.println(Integer.valueOf(a));
         System.out.println(Integer.valueOf(b));
 
-        String c="-090";
+        String c = "-090";
         String substring = c.substring(c.lastIndexOf("-"));
         System.out.println(substring);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 转 二进制 字符串
+     * @params:
+     * @return:
+     * @createTime: 16:53  2022/6/30
+     * @updateTime: 16:53  2022/6/30
+     ************************************************************************/
+    @Test
+    public void toBinary() {
+        int num = 7;
+
+        String s = Integer.toBinaryString(num);
+        System.out.println(s);
     }
 }

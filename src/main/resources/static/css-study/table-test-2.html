@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>悬浮table头</title>
+    <style type="text/css">
+        th{background: green}
+        th,td{line-height: 200px;border: 1px solid #eee;width: 200px;}
+        .table{word-break:break-all;word-wrap:break-word}
+    </style>
+</head>
+<body>
+<div style="width: 100%;height: 50px;background: yellow;">导航栏</div>
+<table id="header_table" style="top: 0;z-index: 1000;margin-bottom: 0px;" class="table">
+    <thead id="t_thead">
+    <tr>
+        <th>标题一</th>
+        <th>标题二</th>
+        <th>标题三</th>
+        <th>标题四</th>
+        <th>标题五</th>
+    </tr>
+    </thead>
+</table>
+<table id="body_table" class="table">
+    <tbody>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    <tr><td>内容一</td><td>内容二</td><td>内容三</td><td>内容四</td><td>内容五</td></tr>
+    </tbody>
+</table>
+</body>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    // 调整上下表宽度统一
+    var tableHd = $("#header_table");
+    var tableTop = tableHd.offset().top;
+    $(window).scroll(function(){
+        var _t = $(window).scrollTop();
+
+        if(_t-tableTop>=0){
+            //table-header 已经到窗口顶部了
+            tableHd.css({
+                "position":"fixed"
+            })
+        }else{
+            tableHd.css({
+                "position":"static"
+            })
+        }
+    });
+    autoWidth();
+    function autoWidth(){
+        var body_first_tr = $('#body_table').width();
+        $('#header_table').width(body_first_tr);
+
+
+        for(var i=0;i<5;i++){
+            var header_id = '#body_table tbody tr:eq(0) td:eq('+i+')';
+            var body_id = '#header_table thead tr:eq(0) th:eq('+i+')';
+            var body_first_tr = $(header_id).width();
+            $(body_id).width(body_first_tr);
+        }
+        //console.log(body_first_tr);
+    }
+    $(window).resize(function () {//当浏览器大小变化时
+        autoWidth();
+    });
+</script>
+</html>
