@@ -304,8 +304,19 @@ public class MathTest {
         int a = 100;
         int i1 = a >> 3;
         System.out.println(i1);
+
+        System.out.println(1 << 31);
+        System.out.println((1 << 31) - 1);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 异或: 相同为0，不同为1
+     * @params:
+     * @return:
+     * @createTime: 15:51  2022/7/8
+     * @updateTime: 15:51  2022/7/8
+     ************************************************************************/
     @Test
     public void testYihuo() {
         int i = 2;
