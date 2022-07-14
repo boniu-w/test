@@ -2,6 +2,7 @@ package wg.application.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.http.HttpStatus;
 import wg.application.constant.CommonConstant;
 
 import java.io.Serializable;
@@ -99,7 +100,7 @@ public class Result<T> implements Serializable {
 
     public Result<T> success(String message) {
         this.message = message;
-        this.code = CommonConstant.SC_OK_200;
+        this.code = HttpStatus.OK.value();
         this.success = true;
         return this;
     }
@@ -108,15 +109,15 @@ public class Result<T> implements Serializable {
     public static Result<Object> ok() {
         Result<Object> r = new Result<Object>();
         r.setSuccess(true);
-        r.setCode(CommonConstant.SC_OK_200);
-        r.setMessage("成功");
+        r.setCode(HttpStatus.OK.value());
+        r.setMessage(HttpStatus.OK.getReasonPhrase());
         return r;
     }
 
     public static Result<Object> ok(String msg) {
         Result<Object> r = new Result<Object>();
         r.setSuccess(true);
-        r.setCode(CommonConstant.SC_OK_200);
+        r.setCode(HttpStatus.OK.value());
         r.setMessage(msg);
         return r;
     }
@@ -124,7 +125,7 @@ public class Result<T> implements Serializable {
     public static Result<Object> ok(Object data) {
         Result<Object> r = new Result<Object>();
         r.setSuccess(true);
-        r.setCode(CommonConstant.SC_OK_200);
+        r.setCode(HttpStatus.OK.value());
         r.setResult(data);
         return r;
     }

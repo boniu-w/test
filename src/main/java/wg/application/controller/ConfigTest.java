@@ -17,13 +17,13 @@ import wg.application.config.PropertiesTest;
  ********************************************************/
 @Controller
 @RequestMapping(value = "/configTest")
-//@Configuration
+// @Configuration
 public class ConfigTest {
 
     @Autowired
     PropertiesTest propertiesTest;
 
-    //@Value(value = "${wg.name}")
+    @Value(value = "${wg.name}")
     String name;
 
     /*************************************************************
@@ -35,6 +35,7 @@ public class ConfigTest {
     @RequestMapping(value = "/getName")
     @ResponseBody
     public String getName() {
+        System.out.println(name);
 
         //PropertiesTest propertiesTest = new PropertiesTest();
         name = propertiesTest.getName();

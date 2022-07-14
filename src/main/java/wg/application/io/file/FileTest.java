@@ -21,7 +21,7 @@ public class FileTest {
     }
 
     /************************************************************************
-     * @description: 文件的 md5 值
+     * @description: 文件的 md5 值, 可用于验证文件是否被改动过
      * @author: wg
      * @date: 10:57  2021/11/26
      * @params:

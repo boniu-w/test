@@ -8,12 +8,17 @@ import java.util.Date;
 
 public class LocalDateTimeWg {
 
+    public static void main(String[] args) {
+        // test();
+        contrastDate();
+    }
+
     /************************************************************************
      * @description: 各种转换
      * @author: wg
-     * @date:  11:26  2021/9/29
+     * @date: 11:26  2021/9/29
      ************************************************************************/
-    public void test() {
+    public static void test() {
         DateTimeFormatter ftf1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter ftf2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         ZoneId zoneId = ZoneId.systemDefault();
@@ -72,5 +77,29 @@ public class LocalDateTimeWg {
         LocalDate longToLocalDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault()).toLocalDate();
         LocalDateTime beginTime = LocalDateTime.of(longToLocalDate, LocalTime.MIN);
         return LocalDateTime.from(beginTime).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 日期加减, 比较
+     * @params:
+     * @return:
+     * @createTime: 14:42  2022/5/9
+     * @updateTime: 14:42  2022/5/9
+     ************************************************************************/
+    public static void contrastDate() {
+        //获取当前日期
+        LocalDateTime date1 = LocalDateTime.now();
+
+        LocalDateTime date2 = LocalDateTime.of(LocalDate.now(), LocalTime.now().plusHours(28));
+
+        LocalDateTime date3 = date1.plusHours(-25);
+
+        int i = date1.compareTo(date2);
+        System.out.println(i);
+
+        int i1 = date1.compareTo(date3);
+        System.out.println(i1);
+
     }
 }

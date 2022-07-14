@@ -1,4 +1,4 @@
-package wg.application.dao;
+package wg.application.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
