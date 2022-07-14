@@ -1,6 +1,10 @@
 package wg.application.util;
 
 import java.util.*;
+<<<<<<< HEAD
+=======
+import java.util.stream.Collectors;
+>>>>>>> master
 
 /**
  * 该类提供对集合类的高效操作
@@ -84,4 +88,32 @@ public class CollectionUtil {
 
         return same;
     }
+<<<<<<< HEAD
+=======
+
+    /************************************************************************
+     * @description: 计算 list 里 的某个 项的 和
+     * map 键相同 值求和
+     * @author: wg
+     * @date: 16:51  2021/12/8
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static Map<Integer, Long> calculateSum(ArrayList<Map<Integer, Long>> list) {
+        Map<Integer, Long> sumMap = new HashMap<>();
+        list.stream().map(item -> {
+            item.forEach((k, v) -> {
+                Long aLong = sumMap.get(k);
+                if (aLong == null) {
+                    sumMap.put(k, v);
+                } else {
+                    aLong += v;
+                    sumMap.put(k, aLong);
+                }
+            });
+            return sumMap;
+        }).collect(Collectors.toList());
+        return sumMap;
+    }
+>>>>>>> master
 }

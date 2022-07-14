@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test1</title>
+
+    <script src="./../../js/react-17.0.1/react.development.js"></script>
+    <script src="./../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="./../../js/babel/babel-7.0.0/babel.js"></script>
+</head>
+<body>
+<div id="div1">
+
+</div>
+<script type="text/babel">
+    // 换车
+    class Mychange extends React.Component {
+
+        state = {
+            car: ["benz", "bmw", "audi"]
+        }
+
+        render() {
+            let {car} = this.state;
+            return (
+                <div>
+                    <span>{car[0]}</span>
+                    <button onClick={this.changeCar}> change car</button>
+                </div>
+            )
+        }
+
+        a = this.state.car;
+
+        changeCar = () => {
+            let {car} = this.state
+
+            if (car.length > 1) {
+                car = car.slice(1, car.length);
+                // car.shift(); 这个方法 行不通
+                console.log("car => ", car)
+            } else if (car.length === 1) {
+                car = this.a;
+
+                console.log("a ", this.a)
+            }
+
+            this.setState({car: car})
+        }
+    }
+
+    ReactDOM.render(<Mychange/>, document.getElementById("div1"))
+
+</script>
+</body>
+</html>

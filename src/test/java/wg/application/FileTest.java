@@ -6,8 +6,12 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.util.FileUtil;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
+=======
+import java.io.*;
+>>>>>>> master
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -38,4 +42,22 @@ public class FileTest {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
+=======
+
+    @Test
+    public void testIo() {
+        try {
+            OutputStream outputStream = new FileOutputStream("");
+            byte[] bytes = new byte[1024];
+
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+>>>>>>> master
 }

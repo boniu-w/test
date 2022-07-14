@@ -6,7 +6,9 @@ import wg.application.util.MathUtil;
 import wg.application.util.CommonUtil;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 import java.util.Arrays;
+import java.util.BitSet;
 
 public class MathTest {
 
@@ -265,4 +267,88 @@ public class MathTest {
         i += 1;
         System.out.println(i);
     }
+<<<<<<< HEAD
+=======
+
+    @Test
+    public void arithmeticTest() {
+        double a = 0.9;
+        double b = 0.8;
+
+        double v = a + b;
+        System.out.println(v);
+
+        // ResultSet
+
+        double temp = a;
+        a = b;
+        b = temp;
+
+        System.out.println(a + " " + b);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 移位运算 优先级 并不比加减运算高
+     * @params:
+     * @return:
+     * @createTime: 15:35  2022/6/28
+     * @updateTime: 15:35  2022/6/28
+     ************************************************************************/
+    @Test
+    public void testYiwei() {
+        int i = (1 << 2) - 1 << 2;
+        System.out.println(i);
+
+        int j = 1 << 2 - 1 << 2;
+        System.out.println(j);
+
+        int a = 100;
+        int i1 = a >> 3;
+        System.out.println(i1);
+
+        System.out.println(1 << 31);
+        System.out.println((1 << 31) - 1);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 异或: 相同为0，不同为1
+     * @params:
+     * @return:
+     * @createTime: 15:51  2022/7/8
+     * @updateTime: 15:51  2022/7/8
+     ************************************************************************/
+    @Test
+    public void testYihuo() {
+        int i = 2;
+        int b = 4;
+
+        int i1 = i ^ b;
+        System.out.println(i1);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: `&` (与运算): 两位同时为“1”，结果才为“1”，否则为0
+     * `|` (或运算) : 参加运算的两个对象只要有一个为1，其值为1。
+     * @params:
+     * @return:
+     * @createTime: 16:46  2022/6/30
+     * @updateTime: 16:46  2022/6/30
+     ************************************************************************/
+    @Test
+    public void testHuo() {
+        int a = 2;
+        int b = 3;
+        int i = a | b;
+        System.out.println(i);
+
+        int c = 0x07;
+
+        int i1 = a & c;
+        System.out.println(i1);
+    }
+
+>>>>>>> master
 }

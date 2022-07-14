@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props 简写</title>
+
+    <script src="../../../js/react-17.0.1/react.development.js"></script>
+    <script src="../../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../../../js/babel/babel-7.0.0/babel.js"></script>
+    <script src="../../../js/prop/prop-15.7.2/prop-types.js"></script>
+</head>
+<body>
+<div id="test1">
+
+</div>
+
+<div id="test2">
+
+</div>
+
+<script type="text/babel">
+
+    class Person extends React.Component {
+
+        static propTypes = {
+            name: PropTypes.string.isRequired,
+            age: PropTypes.number,
+            speak: PropTypes.func
+        }
+
+        static defaultProps = {
+            age: 18,
+            sex: 1
+        }
+
+        render() {
+            console.log(this.props)
+            let {name, age, sex, speak} = this.props
+            let s = {speak};
+            console.log(s)
+            return (
+                <div>
+                    <li>{name}</li>
+                    <li>{age}</li>
+                    <li>{sex}</li>
+                </div>
+            )
+        }
+    }
+
+    let p1 = {
+        name: "tom",
+        age: 13,
+        sex: 0
+    }
+
+    let p2 = {
+        name: "jim",
+        age: 14,
+
+    }
+
+    function speak() {
+        console.log("hello")
+    }
+
+    ReactDOM.render(<Person {...p1} speak={speak}/>, document.getElementById("test1"))
+    ReactDOM.render(<Person {...p2}/>, document.getElementById("test2"))
+
+</script>
+</body>
+</html>
