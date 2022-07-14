@@ -1,6 +1,7 @@
 package wg.application.tool;
 
 import wg.application.util.CommonUtil;
+import wg.application.util.StringUtil;
 
 /************************************************************************
  * @author: wg
@@ -18,8 +19,8 @@ public class Tools {
      * @createTime: 10:11  2022/7/11
      * @updateTime: 10:11  2022/7/11
      ************************************************************************/
-    public static void encodePassword(){
-        String password="aa6a5a0b33cfdaaf0c942939ad6d5e08150236abd95312aad4a94a39fec7315b";
+    public static void encodePassword() {
+        String password = "aa6a5a0b33cfdaaf0c942939ad6d5e08150236abd95312aad4a94a39fec7315b";
         String s = CommonUtil.passwordEncode(password);
         System.out.println(s);
 
@@ -37,6 +38,9 @@ public class Tools {
      * @createTime: 10:13  2022/7/11
      * @updateTime: 10:13  2022/7/11
      ************************************************************************/
+    public String stringToUnicode(String str) {
+        return StringUtil.toUnicode(str);
+    }
 
     /************************************************************************
      * @author: wg
@@ -46,4 +50,7 @@ public class Tools {
      * @createTime: 10:14  2022/7/11
      * @updateTime: 10:14  2022/7/11
      ************************************************************************/
+    public String unicodeToString(String unicode){
+        return StringUtil.decodeUnicode(unicode);
+    }
 }

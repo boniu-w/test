@@ -6,7 +6,7 @@ package wg.application.thread;
  * @date 2021/2/24 15:11
  * @version
  * @Copyright
- * @discription
+ * @discription volatile 测试
  *************************************************************/
 public class SyncTest implements Runnable {
 
@@ -63,7 +63,7 @@ public class SyncTest implements Runnable {
     public static void main(String[] args) {
         SyncTest t = new SyncTest();
 
-        // t.m();
+        // t.m(); // NullPointerException
         // t.m1();
         // t.m2();
         // System.out.println(t.count);
@@ -82,9 +82,9 @@ public class SyncTest implements Runnable {
         for (int i = 0; i < 100; i++) {
             new Thread(t::m2, "线程别名 " + i).start();
         }
-        // for (int i = 0; i < 100; i++) {
-        //     new Thread(t::m2, "线程别名 " + i).start();
-        //     new Thread(t::m3, "线程别名 " + i).start();
-        // }
+        for (int i = 0; i < 100; i++) {
+            new Thread(t::m2, "m2 线程别名 " + i).start();
+            new Thread(t::m3, "m3 线程别名 " + i).start();
+        }
     }
 }
