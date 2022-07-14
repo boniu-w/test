@@ -1,5 +1,7 @@
 package wg.application.util;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -316,5 +318,32 @@ public class MathUtil {
             val = val >> 1;
         } while (val > 0);
         return list;
+    }
+
+    /************************************************************************
+     * @description: 转成科学计数法
+     * @author: wg
+     * @date: 16:04  2021/11/11
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static String double2ScientificNotation(double num) {
+        if (isInteger(String.valueOf(num))) {
+            if (num > -9999 || num <= 9999) {
+                return String.valueOf(((int) num));
+            }
+        }
+        if (num < 0.001 || num > 1000) {
+            String str = String.format("%E", num);//获取直接格式化结果
+            str = str.replace("E-0", "E-");//将E-0N处理为E-N
+            // 处理结果
+            String temp = str.substring(0, str.indexOf("E"));
+            // 精确到小数点后3位
+            String f = String.format("%.3f", Double.parseDouble(temp));
+            str = f + str.substring(str.indexOf("E"));
+            return str;
+        } else {
+            return String.valueOf(new BigDecimal(String.valueOf(num)).setScale(3, RoundingMode.HALF_UP).doubleValue());
+        }
     }
 }

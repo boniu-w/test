@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>受控组件</title>
+
+    <script src="../../../js/react-17.0.1/react.development.js"></script>
+    <script src="../../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../../../js/babel/babel-7.0.0/babel.js"></script>
+</head>
+<body>
+<div id="div1">
+
+</div>
+
+<script type="text/babel">
+
+    class MyComponent extends React.Component {
+
+        state = {
+            userName: "",
+            password: null
+        }
+
+        saveUserName = (event) => {
+            console.log(event.target.value)
+
+            this.setState({userName: event.target.value})
+        }
+
+        savePassword = (event) => {
+            console.log(event.target.value)
+
+            this.setState({password: event.target.value})
+        }
+
+        handleSubmit = (event) => {
+            event.preventDefault() // 阻止 默认行为
+            // alert(event.target)
+
+            let {userName, password} = this.state
+
+            console.log("userName: ", userName)
+            console.log("{userName}: ", {userName})
+        }
+
+        render() {
+            return (
+                <div>
+                    <form action="http://www.baidu.com" onSubmit={this.handleSubmit}>
+                        name: <input onChange={this.saveUserName} name="userName"/>
+                        password: <input onChange={this.savePassword} name="password"/>
+                        <button> submmit</button>
+                    </form>
+                </div>
+            )
+        }
+
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById("div1"))
+
+
+</script>
+</body>
+</html>

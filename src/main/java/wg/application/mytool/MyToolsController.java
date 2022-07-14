@@ -34,4 +34,8 @@ public class MyToolsController {
 
         return LongUtil.toDatetime(Long.parseLong(m));
     }
+
+    /**
+     * 进制转换
+     */
 }

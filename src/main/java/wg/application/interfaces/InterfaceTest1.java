@@ -1,4 +1,4 @@
-package wg.application.interfaceWg;
+package wg.application.interfaces;
 
 import java.util.Collection;
 

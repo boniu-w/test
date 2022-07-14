@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>life-test</title>
+
+    <script src="../../../js/react-17.0.1/react.development.js"></script>
+    <script src="../../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../../../js/babel/babel-7.0.0/babel.js"></script>
+</head>
+<body>
+<div id="div1"></div>
+<script type="text/babel">
+    class LifeTest extends React.Component {
+
+        state = {
+            opacity: 1
+        }
+
+        doReact = () => {
+            console.log(this)
+            ReactDOM.unmountComponentAtNode(document.getElementById("div1"))
+        }
+
+        // 常用
+        componentDidMount() {
+            this.op = setInterval(() => {
+                let {opacity} = this.state;
+                opacity -= 0.1
+                if (opacity <= 0) opacity = 1
+                this.setState({opacity})
+            }, 200)
+        }
+
+        // 常用
+        componentWillUnmount() {
+            clearInterval(this.op)
+        }
+
+        render() {
+            let {opacity} = this.state
+            return (
+                <div>
+                    <h1 style={{opacity: opacity}}>学不会react 怎么办</h1>
+
+                    <button onClick={this.doReact}>不糊了</button>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<LifeTest/>, document.getElementById("div1"))
+</script>
+</body>
+</html>

@@ -2,10 +2,10 @@ package wg.application;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import wg.application.date.DateTestWg;
 import wg.application.util.DateUtils;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Date;
 
 /************************************************************************
@@ -27,5 +27,11 @@ public class DateTest {
         System.out.println(decimal);
         System.out.println(i);
         System.out.println(date1);
+    }
+
+    @Test
+    public void test2(){
+        DateTestWg dateTestWg = new DateTestWg();
+        dateTestWg.test1();
     }
 }

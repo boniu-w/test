@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create-ref</title>
+
+    <script src="../../../js/react-17.0.1/react.development.js"></script>
+    <script src="../../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../../../js/babel/babel-7.0.0/babel.js"></script>
+</head>
+<body>
+<div id="div1">
+
+</div>
+
+<script type="text/babel">
+
+    class MyComponent extends React.Component {
+        myRef = React.createRef();
+
+        render() {
+            return (
+                <div>
+                    <input ref={this.myRef}/>
+                    <button ref="button1" onClick={this.popup}>click</button>
+
+                </div>
+            )
+        }
+
+        popup = () => {
+            console.log("popup: ", this.myRef);
+
+            console.log("myRef: ", this.myRef.current.value)
+        }
+
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById("div1"))
+</script>
+</body>
+</html>

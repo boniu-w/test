@@ -302,4 +302,63 @@ public class ListTest {
         studentList.forEach(System.out::println);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法,
+     * 它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常
+     *  Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组
+     * @params:
+     * @return:
+     * @createTime: 9:38  2022/6/15
+     * @updateTime: 9:38  2022/6/15
+     ************************************************************************/
+    @Test
+    public void arrayTest() {
+        String[] str = new String[]{"yang", "hao"};
+        List<String> list = Arrays.asList(str);
+
+        // list.add("123");
+        // System.out.println(list); // UnsupportedOperationException
+
+        // ↓↓******************* start <Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组> *******************↓↓
+        str[0] = "79";
+        System.out.println(list);
+        // ↑↑******************* end  <Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组>  *******************↑↑
+
+    }
+
+    @Test
+    public void removeTest(){
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String item = iterator.next();
+            if (1==1) {
+                iterator.remove();
+            }
+        }
+        System.out.println(list);
+
+        List<String> list1 = new ArrayList<>();
+        list1.add("1");
+        list1.add("2");
+        for (String item : list1) {
+            if ("1".equals(item)) {
+                list1.remove(item);
+            }
+        }
+
+        // ConcurrentModificationException
+        for (String item : list1) {
+            if ("2".equals(item)) {
+                list1.remove(item);
+            }
+        }
+
+        System.out.println(list1);
+
+    }
+
 }

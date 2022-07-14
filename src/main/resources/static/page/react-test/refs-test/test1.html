@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>refs-test1</title>
+
+    <script src="../../../js/react-17.0.1/react.development.js"></script>
+    <script src="../../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../../../js/babel/babel-7.0.0/babel.js"></script>
+</head>
+<body>
+<div id="div1">
+
+</div>
+<script type="text/babel">
+    class MyComponent extends React.Component {
+        render() {
+            return (
+                <div>
+                    <input ref="input1"/>
+                    <button ref="button1" onClick={this.popup}>click</button>
+                    <input ref={currentNode => this.input2 = currentNode} onBlur={this.myBlur}/>
+                    <input ref={this.myBlur2} onBlur={this.myBlur}/>
+
+                </div>
+            )
+        }
+
+        popup = () => {
+            console.log("popup: ", this);
+
+            let {input1} = this.refs
+            console.log({input1})
+            console.log(input1.value)
+        }
+
+        // 回调式 ref
+        myBlur = () => {
+            console.log("myBlur: ", this)
+
+            let {input2} = this
+
+            console.log(input2.value)
+        }
+
+        // 回调式 ref
+        myBlur2 = (node) => {
+            console.log("node: ", node)
+            console.log(node.value)
+        }
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById("div1"))
+</script>
+</body>
+</html>

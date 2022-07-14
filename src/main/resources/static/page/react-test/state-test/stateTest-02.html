@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>state-test-02</title>
+
+    <script src="../../../js/react-17.0.1/react.development.js"></script>
+    <script src="../../../js/react-17.0.1/react-dom.development.js"></script>
+    <script src="../../../js/babel/babel-7.0.0/babel.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+<script type="text/babel">
+
+    class Page extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {weather: ['hot', 'cool'], isHot: true};
+            this.demo = this.changeWeather.bind(this);
+        }
+
+        render() {
+            let isHot = this.state.isHot;
+            console.log(isHot)
+
+            return (
+                <div>
+                    <h1 id="wea"
+                        onClick={this.demo}>今天很{this.state.isHot === true ? this.state.weather[0] : this.weather[1]}</h1>
+                    <h1>{this.props.name}</h1>
+                </div>
+            )
+        }
+
+        changeWeather() {
+            console.log('changeWeather => ', this)
+
+            let hot = this.state.isHot;
+        }
+    }
+
+    ReactDOM.render(<Page/>, document.getElementById("app"))
+
+</script>
+
+</body>
+</html>
