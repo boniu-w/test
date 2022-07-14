@@ -37,15 +37,15 @@ public class MyUnicode {
 
     }
 
-    public static void test3() throws Exception {
-        try {
-            // double x = Math.abs(-123.45);
-            double x = Math.round(-123.45);
-            assert x >= 0 : "x must >= 0";
-            System.out.println(x);
-        } catch (Exception e) {
-            System.out.println("error=" + e.getMessage());
-        }
-    }
+    // public static void test3() throws Exception {
+    //     try {
+    //         // double x = Math.abs(-123.45);
+    //         double x = Math.round(-123.45);
+    //         assert x >= 0 : "x must >= 0";
+    //         System.out.println(x);
+    //     } catch (Exception e) {
+    //         System.out.println("error=" + e.getMessage());
+    //     }
+    // }
 
 }

@@ -109,10 +109,10 @@ public class StringTest {
         System.out.println(integer);
 
         String s = "      ";
-        System.out.println(s.length());
-        System.out.println(StringUtils.isEmpty(s));
-        System.out.println(s.trim().length());
-        System.out.println(StringUtils.isEmpty(s.trim()));
+        System.out.println(s.length()); // 6
+        System.out.println(StringUtils.isEmpty(s)); // false
+        System.out.println(s.trim().length()); // 0
+        System.out.println(StringUtils.isEmpty(s.trim())); // true
     }
 
     /************************************************************************
@@ -192,10 +192,18 @@ public class StringTest {
         System.out.println(objectName);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 字符串的比较大小
+     * @params:
+     * @return:
+     * @createTime: 10:17  2022/7/11
+     * @updateTime: 10:17  2022/7/11
+     ************************************************************************/
     @Test
     public void test12() {
-        String a = "001";
-        String b = "010";
+        String a = "1";
+        String b = "0100";
 
         int compareTo = a.compareTo(b);
         System.out.println(compareTo);
@@ -204,8 +212,24 @@ public class StringTest {
         System.out.println(Integer.valueOf(a));
         System.out.println(Integer.valueOf(b));
 
-        String c="-090";
+        String c = "-090";
         String substring = c.substring(c.lastIndexOf("-"));
         System.out.println(substring);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 转 二进制 字符串
+     * @params:
+     * @return:
+     * @createTime: 16:53  2022/6/30
+     * @updateTime: 16:53  2022/6/30
+     ************************************************************************/
+    @Test
+    public void toBinary() {
+        int num = 7;
+
+        String s = Integer.toBinaryString(num);
+        System.out.println(s);
     }
 }
