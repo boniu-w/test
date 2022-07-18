@@ -1,5 +1,7 @@
 package wg.application.proto.asmeb31g;
 
+import com.sevenme.assessment.defect.corrosion.Asmeb31gGrpc;
+import com.sevenme.assessment.defect.corrosion.Asmeb31gProto;
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -29,16 +31,16 @@ public class Asmeb31gClient {
 
     public void test() {
         System.out.println("------- test  ");
-        Asmeb31gProto.Level0Request level0Request = Asmeb31gProto.Level0Request
+        Asmeb31gProto.Asmeb31gLevel0Request level0Request = Asmeb31gProto.Asmeb31gLevel0Request
                 .newBuilder()
                 .setDepth(1F)
                 .setWallThickness(1F)
                 .setLength(1F)
                 .setOutsideDiameter(1F)
                 .build();
-        Asmeb31gProto.Level0Response level0Response;
+        Asmeb31gProto.Asmeb31gLevel0Response level0Response;
 
-        Asmeb31gProto.Level1Request level1Request = Asmeb31gProto.Level1Request.newBuilder()
+        Asmeb31gProto.Asmeb31gLevel1Request level1Request = Asmeb31gProto.Asmeb31gLevel1Request.newBuilder()
                 .setDepth(1F)
                 .setWallThickness(1F)
                 .setLength(1F)
@@ -47,7 +49,7 @@ public class Asmeb31gClient {
                 .setSafetyFactor(1F)
                 .setMaop(1F)
                 .build();
-        Asmeb31gProto.Level1Response level1Response;
+        Asmeb31gProto.Asmeb31gLevel1Response level1Response;
 
         try {
             level0Response = blockingStub.level0AssessmentIn1991(level0Request);
