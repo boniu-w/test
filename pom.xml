@@ -64,6 +64,8 @@
         <javadoc.skip>false</javadoc.skip>
         <springloaded.version>1.2.5.RELEASE</springloaded.version>
         <mahout.version>0.9</mahout.version>
+        <protoc.version>3.19.2</protoc.version>
+        <grpc.version>1.47.0</grpc.version><!-- CURRENT_GRPC_VERSION -->
     </properties>
 
     <dependencies>
@@ -362,9 +364,65 @@
             <version>1.1.6</version>
         </dependency>
 
+        <!-- grpc -->
+        <!--<dependency>-->
+        <!--    <groupId>io.grpc</groupId>-->
+        <!--    <artifactId>grpc-netty-shaded</artifactId>-->
+        <!--    <version>1.47.0</version>-->
+        <!--    <scope>runtime</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--    <groupId>io.grpc</groupId>-->
+        <!--    <artifactId>grpc-protobuf</artifactId>-->
+        <!--    <version>1.47.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--    <groupId>io.grpc</groupId>-->
+        <!--    <artifactId>grpc-stub</artifactId>-->
+        <!--    <version>1.47.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency> &lt;!&ndash; necessary for Java 9+ &ndash;&gt;-->
+        <!--    <groupId>org.apache.tomcat</groupId>-->
+        <!--    <artifactId>annotations-api</artifactId>-->
+        <!--    <version>6.0.53</version>-->
+        <!--    <scope>provided</scope>-->
+        <!--</dependency>-->
+
+        <!--↓↓ grpc -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty-shaded</artifactId>
+            <version>1.47.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>1.47.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>1.47.0</version>
+        </dependency>
+        <dependency> <!-- necessary for Java 9+ -->
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>annotations-api</artifactId>
+            <version>6.0.53</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--↑↑ grpc -->
     </dependencies>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.6.2</version>
+            </extension>
+        </extensions>
+
         <plugins>
             <!--<plugin>-->
             <!--    &lt;!&ndash; Build an executable JAR &ndash;&gt;-->
@@ -509,6 +567,30 @@
                     </includes>
                 </configuration>
             </plugin>
+
+            <!--↓↓ proto 插件-->
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <configuration>
+                    <protocArtifact>com.google.protobuf:protoc:3.19.2:exe:${os.detected.classifier}</protocArtifact>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.47.0:exe:${os.detected.classifier}</pluginArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <protoSourceRoot>src/main/resources/proto/</protoSourceRoot>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--↑↑ proto 插件-->
+
         </plugins>
 
         <resources>

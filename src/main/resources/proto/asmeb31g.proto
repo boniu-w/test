@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+option java_package = "wg.application.proto.asmeb31g";
+option java_outer_classname = "Asmeb31gProto";
+
+service Asmeb31g {
+    rpc Level0AssessmentIn1991 (Level0Request) returns (Level0Response);
+    rpc Level1AssessmentIn1991 (Level1Request) returns (Level1Response);
+    rpc Level0AssessmentIn2009 (Level0Request) returns (Level0Response);
+    rpc Level1AssessmentIn2009 (Level1Request) returns (Level1Response);
+}
+
+message Level0Request {
+    float depth = 1;
+    float wall_thickness = 2;
+    float length = 3;
+    float outside_diameter = 4;
+}
+
+message Level0Response {
+    string result = 1;
+}
+
+message Level1Request {
+    float depth = 1;
+    float wall_thickness = 2;
+    float length = 3;
+    float outside_diameter = 4;
+    float smys = 5;
+    float safety_factor = 6;
+    float maop = 7;
+}
+
+message Level1Response {
+    string result = 1;
+    double residual_strength = 2;
+}
+
