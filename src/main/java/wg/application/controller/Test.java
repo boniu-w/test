@@ -843,11 +843,16 @@ public class Test {
      * @createTime: 10:46  2022/5/5
      * @updateTime: 10:46  2022/5/5
      ************************************************************************/
-    @RequestMapping(value = "/ipTest")
+    @RequestMapping(value = "/ip_test")
     @ResponseBody
     public String ipTest(HttpServletRequest request) {
         String ipAddr = IPUtil.getIp(request);
+        String ipAddress = IPUtil.getIpAddress(request);
+        System.out.println("ipAddress: "+ipAddress);
 
+        System.out.println();
+        String outIPV4 = IPUtil.getOutIPV4();
+        System.out.println("outIPV4: "+outIPV4);
         return ipAddr;
 
     }

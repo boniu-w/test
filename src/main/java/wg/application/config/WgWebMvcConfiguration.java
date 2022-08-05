@@ -31,13 +31,14 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-          .addResourceLocations("classpath:/static/")
-          .addResourceLocations("classpath:/static/**")
-          .addResourceLocations("classpath:/static/**/**")
-          .addResourceLocations("classpath:/templates/")
-          .addResourceLocations("classpath:/templates/**")
-          .addResourceLocations("classpath:/static/bootstrap/337/**")
-          .addResourceLocations("classpath:/public/**")
+                .addResourceLocations("classpath:/static/")
+                .addResourceLocations("classpath:/static/**")
+                .addResourceLocations("classpath:/static/**/**")
+                .addResourceLocations("classpath:/templates/")
+                .addResourceLocations("classpath:/templates/**")
+                .addResourceLocations("classpath:/static/bootstrap/337/**")
+                .addResourceLocations("classpath:/public/**")
+                .addResourceLocations("classpath:/city/**")
         ;
         //super.addResourceHandlers(registry);
     }

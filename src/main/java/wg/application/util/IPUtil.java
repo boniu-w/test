@@ -26,14 +26,12 @@ import java.util.regex.Pattern;
 public class IPUtil {
     private static Logger logger = LoggerFactory.getLogger(IPUtil.class);
 
-    // public static void main(String[] args) throws Exception {
-    //     String interIP1 = IPUtil.getInterIP1();
-    //     String outIPV4 = IPUtil.getOutIPV4();
-    //     System.out.println(IPUtil.getInterIP1());
-    //     System.out.println(IPUtil.getInterIP2());
-    //     System.out.println(IPUtil.getOutIPV4());
-    //
-    // }
+    public static void main(String[] args) throws Exception {
+        System.out.println(IPUtil.getInterIP1());
+        System.out.println(IPUtil.getInterIP2());
+        System.out.println(IPUtil.getOutIPV4());
+
+    }
 
     /************************************************************************
      * @author: wg
@@ -181,9 +179,9 @@ public class IPUtil {
         }
     }
 
-    public static void main(String[] args) {
-        String ip="42.122.18.64";
-        String addressByIP = getAddressByIP(ip);
-        System.out.println(addressByIP);
-    }
+    // public static void main(String[] args) {
+    //     String ip="42.122.18.64";
+    //     String addressByIP = getAddressByIP(ip);
+    //     System.out.println(addressByIP);
+    // }
 }

@@ -60,3 +60,6 @@ mybatis:
 
 logging:
   config: classpath:logback-spring.xml
+
+grpc:
+  assessment: localhost:8867

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Objects;
 
 public class MathTest {
 
@@ -346,6 +347,26 @@ public class MathTest {
 
         int i1 = a & c;
         System.out.println(i1);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: bigdecimal equals
+     * @params:
+     * @return:
+     * @createTime: 14:35  2022/8/2
+     * @updateTime: 14:35  2022/8/2
+     ************************************************************************/
+    @Test
+    public void bigDecimalEquals() {
+        BigDecimal a = new BigDecimal("0.00");
+        Double b = 0D;
+
+        boolean equals = Objects.equals(a.doubleValue(), b); // true
+        System.out.println(equals); // true
+
+        boolean b1 = a.doubleValue() == 0; // true
+        System.out.println(b1); // true
     }
 
 }
