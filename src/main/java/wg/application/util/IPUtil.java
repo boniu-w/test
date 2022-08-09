@@ -1,18 +1,18 @@
 package wg.application.util;
 
-import cn.hutool.extra.servlet.ServletUtil;
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpResponse;
-import cn.hutool.json.JSONObject;
+import cn.hutool.core.util.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
+import oshi.SystemInfo;
+import oshi.hardware.HWDiskStore;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.hardware.NetworkIF;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Enumeration;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,10 +27,12 @@ public class IPUtil {
     private static Logger logger = LoggerFactory.getLogger(IPUtil.class);
 
     public static void main(String[] args) throws Exception {
-        System.out.println(IPUtil.getInterIP1());
-        System.out.println(IPUtil.getInterIP2());
-        System.out.println(IPUtil.getOutIPV4());
-
+        // System.out.println(IPUtil.getInterIP1());
+        // System.out.println(IPUtil.getInterIP2());
+        // System.out.println(IPUtil.getOutIPV4());
+        System.out.println("--------");
+        IPUtil.getOutIp();
+        System.out.println("IPUtil.getOutIp()");
     }
 
     /************************************************************************
@@ -42,39 +44,41 @@ public class IPUtil {
      * @updateTime: 10:58  2022/5/5
      ************************************************************************/
     public static String getIpAddress(HttpServletRequest request) {
-        String Xip = request.getHeader("X-Real-IP");
-        String XFor = request.getHeader("X-Forwarded-For");
-        if (!StringUtils.isEmpty(XFor) && !"unKnown".equalsIgnoreCase(XFor)) {
-            //多次反向代理后会有多个ip值，第一个ip才是真实ip
-            int index = XFor.indexOf(",");
-            if (index != -1) {
-                return XFor.substring(0, index);
-            } else {
-                return XFor;
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_CLIENT_IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        // 本机访问
+        if ("localhost".equalsIgnoreCase(ip) || "127.0.0.1".equalsIgnoreCase(ip) || "0:0:0:0:0:0:0:1".equalsIgnoreCase(ip)) {
+            // 根据网卡取本机配置的IP
+            InetAddress inet;
+            try {
+                inet = InetAddress.getLocalHost();
+                ip = inet.getHostAddress();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
             }
         }
-        XFor = Xip;
-        if (!StringUtils.isEmpty(XFor) && !"unKnown".equalsIgnoreCase(XFor)) {
-            return XFor;
+        // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
+        if (null != ip && ip.length() > 15) {
+            if (ip.indexOf(",") > 15) {
+                ip = ip.substring(0, ip.indexOf(","));
+            }
         }
-        if (StringUtils.isEmpty(XFor) || "unknown".equalsIgnoreCase(XFor)) {
-            XFor = request.getHeader("Proxy-Client-IP");
-        }
-        if (StringUtils.isEmpty(XFor) || "unknown".equalsIgnoreCase(XFor)) {
-            XFor = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (StringUtils.isEmpty(XFor) || "unknown".equalsIgnoreCase(XFor)) {
-            XFor = request.getHeader("HTTP_CLIENT_IP");
-        }
-        if (StringUtils.isEmpty(XFor) || "unknown".equalsIgnoreCase(XFor)) {
-            XFor = request.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-        if (StringUtils.isEmpty(XFor) || "unknown".equalsIgnoreCase(XFor)) {
-            XFor = request.getRemoteAddr();
-        }
-        return XFor;
+        return ip;
     }
-
 
     public static String getInterIP1() throws Exception {
         return InetAddress.getLocalHost().getHostAddress();
@@ -144,38 +148,52 @@ public class IPUtil {
         return ip;
     }
 
-    /************************************************************************
-     * @author: wg
-     * @description: 本机ip
-     * @params:
-     * @return:
-     * @createTime: 10:58  2022/5/5
-     * @updateTime: 10:58  2022/5/5
-     ************************************************************************/
-    public static String getIp(HttpServletRequest request) {
-        return ServletUtil.getClientIP(request, null);
-    }
-
-
     /**
      * 根据IP地址获取地理位置
      */
-    public static String getAddressByIP(String ip) {
-        if (StringUtils.isEmpty(ip)) {
-            return "";
+
+    /**
+     * 获取本机 mac地址
+     */
+    public static String getMacAddress() throws Exception {
+        // 取mac地址
+        byte[] macAddressBytes = NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).getHardwareAddress();
+        // 下面代码是把mac地址拼装成String
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < macAddressBytes.length; i++) {
+            if (i != 0) {
+                sb.append("-");
+            }
+            // mac[i] & 0xFF 是为了把byte转化为正整数
+            String s = Integer.toHexString(macAddressBytes[i] & 0xFF);
+            sb.append(s.length() == 1 ? 0 + s : s);
         }
-        if ("127.0.0.1".equals(ip)) {
-            return "局域网，无法获取位置";
-        }
-        String url = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?resource_id=6006&format=json&query=" + ip;
-        HttpResponse res = HttpRequest.get(url).execute();
-        if (200 != res.getStatus()) {
-            return "获取位置失败";
-        } else {
-            JSONObject resJson = new JSONObject(res.body());
-            cn.hutool.json.JSONArray jsonArray = resJson.getJSONArray("data");
-            resJson=  new JSONObject(""+jsonArray.get(0));
-            return resJson.getStr("location");
+        return sb.toString().trim().toUpperCase();
+    }
+
+    public static void getOutIp() {
+        SystemInfo systemInfo = new SystemInfo();
+        // 启动参数 加上 -DnetworkIFName=ens33 去指定网卡名
+        Properties properties = System.getProperties();
+        System.out.println();
+        String ifName = System.getProperty("networkIFName");
+
+        ifName="wlan1";
+
+        HardwareAbstractionLayer hardware = systemInfo.getHardware();
+        NetworkIF[] networkIFs = hardware.getNetworkIFs();
+
+        for (NetworkIF net : networkIFs) {
+            String netName = net.getName();
+            if (netName.equalsIgnoreCase(ifName) && StrUtil.isNotEmpty(ifName)) {
+                String macaddr = net.getMacaddr();
+                String ip4 = Arrays.toString(net.getIPv4addr());
+                String ip6 = Arrays.toString(net.getIPv6addr());
+
+                System.out.println("macaddr: " + macaddr);
+                System.out.println("ip4: " + ip4);
+                System.out.println("ip6: " + ip6);
+            }
         }
     }
 

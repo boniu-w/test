@@ -396,6 +396,21 @@
             <version>2.6.5</version>
         </dependency>
 
+        <!-- oshi-core 主机监控 -->
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>3.9.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sun.jna/jna -->
+        <!--<dependency>-->
+        <!--    <groupId>com.sun.jna</groupId>-->
+        <!--    <artifactId>jna</artifactId>-->
+        <!--    <version>3.0.9</version>-->
+        <!--</dependency>-->
+
+
     </dependencies>
 
     <build>
