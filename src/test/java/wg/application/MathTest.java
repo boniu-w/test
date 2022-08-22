@@ -1,5 +1,6 @@
 package wg.application;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import wg.application.math.FloatTest;
 import wg.application.util.MathUtil;
@@ -367,6 +368,12 @@ public class MathTest {
 
         boolean b1 = a.doubleValue() == 0; // true
         System.out.println(b1); // true
+    }
+
+    @Test
+    public void getRandomString(){
+        String s = RandomStringUtils.randomAlphanumeric(32);
+        System.out.println(s);
     }
 
 }

@@ -25,7 +25,7 @@ import wg.application.service.AspectService;
 import wg.application.service.LiuShuiInterface;
 import wg.application.service.TestInterface;
 import wg.application.util.ComputerUtil;
-import wg.application.util.IPUtil;
+import wg.application.util.IpUtil;
 import wg.application.util.JdbcUtil;
 import wg.application.util.MessageUtils;
 
@@ -41,8 +41,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.net.Inet4Address;
-import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -868,7 +866,7 @@ public class Test {
         // System.out.println("interIP1: " + interIP1);
         // System.out.println("interIP2: " + interIP2);
 
-        IPUtil.getOutIp();
+        IpUtil.getOutIp();
 
         return "";
     }

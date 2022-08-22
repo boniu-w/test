@@ -16,6 +16,22 @@ import java.util.Arrays;
 public final class LongArray implements Buffer, Cloneable {
 
     /**
+     * The actual size in words.
+     */
+    private int actualSizeInWords = 1;
+
+    /**
+     * The buffer (array of 64-bit words)
+     */
+    private long[] buffer = null;
+
+    /**
+     * The Constant DEFAULT_BUFFER_SIZE: default memory allocation when the
+     * object is constructed.
+     */
+    private static final int DEFAULT_BUFFER_SIZE = 4;
+
+    /**
      * Creates a buffer with default size
      */
     public LongArray() {
@@ -216,21 +232,4 @@ public final class LongArray implements Buffer, Cloneable {
         }
         return size;
     }
-    
-    /**
-     * The actual size in words.
-     */
-    private int actualSizeInWords = 1;
-    
-    /**
-     * The buffer (array of 64-bit words)
-     */
-    private long buffer[] = null;
-    
-    /**
-     * The Constant DEFAULT_BUFFER_SIZE: default memory allocation when the
-     * object is constructed.
-     */
-    private static final int DEFAULT_BUFFER_SIZE = 4;
-    
 }

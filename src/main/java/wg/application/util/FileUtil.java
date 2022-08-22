@@ -68,22 +68,22 @@ public class FileUtil {
     /**
      * MultipartFile 转 File
      *
-     * @param file
+     * @param multipartFile
      * @throws Exception
      */
-    public static File multipartFileToFile(MultipartFile file) throws Exception {
+    public static File multipartFileToFile(MultipartFile multipartFile) throws Exception {
 
-        File toFile = null;
-        if (file.equals("") || file.getSize() <= 0) {
-            file = null;
+        File file = null;
+        if (multipartFile.equals("") || multipartFile.getSize() <= 0) {
+            multipartFile = null;
         } else {
             InputStream ins = null;
-            ins = file.getInputStream();
-            toFile = new File(file.getOriginalFilename());
-            inputStreamToFile(ins, toFile);
+            ins = multipartFile.getInputStream();
+            file = new File(multipartFile.getOriginalFilename());
+            inputStreamToFile(ins, file);
             ins.close();
         }
-        return toFile;
+        return file;
     }
 
     //获取流文件
