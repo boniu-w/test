@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import wg.application.mapper.UserMapper;
 import wg.application.entity.User;
-import wg.application.entity.UserExample;
+import wg.application.entity.example.UserExample;
 
 import java.util.List;
 

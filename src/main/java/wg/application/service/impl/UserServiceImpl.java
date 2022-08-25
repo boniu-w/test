@@ -1,6 +1,5 @@
 package wg.application.service.impl;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,13 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import wg.application.entity.User;
-import wg.application.entity.UserExample;
-import wg.application.exception.WgException;
+import wg.application.entity.example.UserExample;
 import wg.application.mapper.UserMapper;
 import wg.application.service.UserService;
 
 import javax.annotation.Resource;
-import java.util.Collection;
 import java.util.List;
 
 /************************************************************************

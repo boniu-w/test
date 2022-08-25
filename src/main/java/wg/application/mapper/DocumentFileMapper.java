@@ -3,7 +3,7 @@ package wg.application.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import wg.application.entity.DocumentFile;
-import wg.application.entity.DocumentFileExample;
+import wg.application.entity.example.DocumentFileExample;
 
 public interface DocumentFileMapper {
     /**

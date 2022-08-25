@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import wg.application.entity.User;
-import wg.application.entity.UserExample;
+import wg.application.entity.example.UserExample;
 
 @Mapper
 public interface UserMapper {

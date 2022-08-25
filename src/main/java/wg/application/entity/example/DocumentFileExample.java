@@ -1,4 +1,4 @@
-package wg.application.entity;
+package wg.application.entity.example;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

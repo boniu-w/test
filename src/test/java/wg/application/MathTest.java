@@ -7,9 +7,7 @@ import wg.application.util.MathUtil;
 import wg.application.util.CommonUtil;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.Objects;
 
 public class MathTest {
@@ -320,12 +318,23 @@ public class MathTest {
      * @updateTime: 15:51  2022/7/8
      ************************************************************************/
     @Test
-    public void testYihuo() {
-        int i = 2;
+    public void testYiHuo() {
+        int a = 2;
         int b = 4;
 
-        int i1 = i ^ b;
-        System.out.println(i1);
+        int i1 = a ^ b;
+        System.out.println(i1); // 6
+
+        int i = a ^ b ^ a;
+        System.out.println(i); // i = 4
+
+        // 交换值, 而不用中间变量
+        a = a ^ b; // a1 = a^b
+        b = b ^ a; // b = b^a1 = b^a^b = a
+        a = a ^ b; // a = a^b^a = b
+
+        System.out.printf("a= %d, b= %d", a, b);
+
     }
 
     /************************************************************************
@@ -371,7 +380,7 @@ public class MathTest {
     }
 
     @Test
-    public void getRandomString(){
+    public void getRandomString() {
         String s = RandomStringUtils.randomAlphanumeric(32);
         System.out.println(s);
     }
