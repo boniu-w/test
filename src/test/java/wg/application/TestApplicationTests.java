@@ -37,6 +37,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -103,7 +104,7 @@ public class TestApplicationTests {
     public void defaultValue() {
         boolean b;
         b = 0 < 0;
-        System.out.println(b);
+        System.out.println(b); // false
     }
 
 
@@ -170,6 +171,14 @@ public class TestApplicationTests {
 
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 计算 list 中 某个字符串出现的次数
+     * @params:
+     * @return:
+     * @createTime: 9:27  2022/9/6
+     * @updateTime: 9:27  2022/9/6
+     ************************************************************************/
     @Test
     public void duboTest() {
         // 局
@@ -179,15 +188,18 @@ public class TestApplicationTests {
         list.add("300028,319485,542246,708949");
         list.add("300028,319485,542246,1");
 
-        //int frequency = 0;
-        //HashMap<Object, Object> map = new HashMap<>();
-        //for (int i = 0; i < list.size(); i++) {
-        //    frequency = Collections.frequency(list, list.get(i));
-        //    map.put(list.get(i), frequency);
-        //}
-        //
-        //System.out.println(map);
+        // ↓↓******************* start <计算出现的次数> *******************↓↓
+        int frequency = 0;
+        HashMap<Object, Object> map = new HashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            frequency = Collections.frequency(list, list.get(i));
+            map.put(list.get(i), frequency);
+        }
 
+        System.out.println(map);
+        // ↑↑******************* end  <计算出现的次数>  *******************↑↑
+
+        // ↓↓******************* start <把list 按 逗号拆开, 计算各个元素出现的次数> *******************↓↓
         // 人员id
         List<String> useridList = new ArrayList<>();
         useridList.add("300028");
@@ -195,7 +207,6 @@ public class TestApplicationTests {
         useridList.add("708949");
         useridList.add("542246");
         useridList.add("1");
-
 
         int count = 0;
         HashMap<String, Integer> hashMap = new HashMap<>();
@@ -222,6 +233,8 @@ public class TestApplicationTests {
             count = 0;
         }
         System.out.println(hashMap);
+        // ↑↑******************* end  <把list 按 逗号拆开, 计算各个元素出现的次数>  *******************↑↑
+
     }
 
     @Test
@@ -291,6 +304,15 @@ public class TestApplicationTests {
         System.err.println(tr.toString().replaceFirst(",", ""));
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 开方
+     * @params:
+     * @return:
+     * @createTime: 9:42  2022/9/6
+     * @updateTime: 9:42  2022/9/6
+     ************************************************************************/
+    @Test
     public void getPrescription() {
         double sqrt = sqrt(24, 5);
         System.out.println(sqrt);
@@ -318,7 +340,7 @@ public class TestApplicationTests {
 
         } while (Math.abs(mid * mid - n) > threshold);
 
-        return new BigDecimal(mid).setScale(precision, BigDecimal.ROUND_DOWN).doubleValue();
+        return new BigDecimal(mid).setScale(precision, RoundingMode.HALF_UP).doubleValue();
     }
 
     /***************************************************
@@ -328,7 +350,7 @@ public class TestApplicationTests {
      ***************************************************/
     @Test
     public void sort() {
-        int[] arr = {1, 3, 56, 4, 67, 23, 43};
+        int[] arr = {1, 3, 56, 4, 67, 23, 43, 7, 42};
 
         int a = 0;
         for (int j = 0; j < arr.length - 1; j++) {
@@ -342,20 +364,8 @@ public class TestApplicationTests {
             System.out.println(Arrays.toString(arr));
         }
 
-
-        //for (int i = 0; i < arr.length - 1; i++) {
-        //    if (arr[i] > arr[i + 1]) {
-        //         a = arr[i];
-        //        arr[i] = arr[i + 1];
-        //        arr[i + 1] = a;
-        //    }
-        //System.out.println(Arrays.toString(arr));
-        //}
-
-
-        //System.out.println(Arrays.toString(arr));
-
-
+        System.out.println();
+        System.out.println(Arrays.toString(arr));
     }
 
     /**
@@ -452,9 +462,14 @@ public class TestApplicationTests {
         String[] split = s.trim().split("  ");
         System.out.println(Arrays.toString(split));
 
+        System.out.println();
+        System.out.println(StringUtil.toHalfAngle(Arrays.toString(split)));
+
+        System.out.println();
         String s1 = "谢  勇";
         String[] split1 = s1.trim().split("  ");
         System.out.println(Arrays.toString(split1));
+
 
     }
 
@@ -511,7 +526,7 @@ public class TestApplicationTests {
 
         System.out.println(stringBuilder.toString().substring(0, stringBuilder.length() - 1));
 
-        /********************第二种情况*************************************/
+        /********************第二种方法, 空格的asc码为32*************************************/
         String me = "王  刚";
 
         System.out.println(me.replace(" ", ""));
@@ -526,11 +541,14 @@ public class TestApplicationTests {
         }
 
         System.out.println(builder.toString());
+    }
 
+    @Test
+    public void equalsTest(){
         int a = 0;
         String as = "0";
-        System.out.println(as.equals(a));
-
+        System.out.println(as.equals(a)); // false
+        System.out.println(Objects.equals(a, as)); // false
     }
 
     @Test
@@ -567,24 +585,17 @@ public class TestApplicationTests {
         String jsondata = "{\"contend\":[{\"bid\":\"22\",\"carid\":\"0\"},{\"bid\":\"23\",\"carid\":\"0\"}],\"result\":100,\"total\":2}";
         JSONObject jsonObject = JSON.parseObject(jsondata);
         //map对象
-        Map<String, Object> data = new HashMap<>();
-        //循环转换
-        Iterator it = jsonObject.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, Object> entry = (Map.Entry<String, Object>) it.next();
-            data.put(entry.getKey(), entry.getValue());
-        }
-        System.out.println("map对象:" + data.toString());
+        Map<String, Object> data = new HashMap<>(jsonObject);
+        System.out.println("map对象:" + data);
 
+        System.out.println();
         Object contend = data.get("contend");
         System.out.println(contend);
 
         System.out.println();
 
-        /************ -> 下面的简洁  ************/
-
+        /************ ->  ************/
         HashMap<String, String> hashMap = new HashMap<>();
-
         JSONArray ss = jsonObject.getJSONArray("contend");
         if (ss != null) {
             for (int i = 0; i < ss.size(); i++) {
@@ -593,11 +604,9 @@ public class TestApplicationTests {
                 String v = jsonObject1.getString("carid");
                 hashMap.put(k, v);
             }
-
         }
 
         System.out.println(hashMap);
-
     }
 
     /****************************************************************
@@ -668,9 +677,7 @@ public class TestApplicationTests {
             Statement statement = conn.createStatement();
             boolean executeDrop = statement.execute(dropTable);
             boolean executeCreate = statement.execute(createTableSql);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }

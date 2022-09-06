@@ -89,7 +89,7 @@ public class MathTest {
      * @return:
      ************************************************************************/
     @Test
-    public void test3() {
+    public void testIsNumber() {
         boolean number = CommonUtil.isNumber("-1.00000000000E-4");
         System.out.println(number);
     }
@@ -102,7 +102,7 @@ public class MathTest {
      * @return:
      ************************************************************************/
     @Test
-    public void test4() {
+    public void testIsInteger() {
         boolean number = CommonUtil.isInteger("0.001");
         System.out.println(number);
 
@@ -144,7 +144,7 @@ public class MathTest {
     }
 
     @Test
-    public void test03() {
+    public void testFloat() {
         FloatTest test01 = new FloatTest();
         test01.test02();
     }

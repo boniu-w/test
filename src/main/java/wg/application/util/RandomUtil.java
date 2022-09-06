@@ -35,4 +35,11 @@ public class RandomUtil {
             return sb.toString();
         }
     }
+
+    public static void main(String[] args) {
+        final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
+        String code = RandomUtil.randomString(BASE_CHECK_CODES, 32);
+
+        System.out.println(code);
+    }
 }
