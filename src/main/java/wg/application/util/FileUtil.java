@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.Map;
 
 /************************************************************************
@@ -131,5 +133,29 @@ public class FileUtil {
         //替换上传文件名字中的空格
         fileName = fileName.replaceAll("\\s", "");
         return fileName;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 获取文件hash值
+     * @params:
+     * @return:
+     * @createTime: 12:57  2022/9/8
+     * @updateTime: 12:57  2022/9/8
+     ************************************************************************/
+    public static String getHexHash(MultipartFile multipartFile) throws Exception {
+        // 对 multipartfile 的内容 生成 hash
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        messageDigest.update(multipartFile.getBytes());
+        byte[] digest1 = messageDigest.digest();
+        return new BigInteger(1, digest1).toString(16);
+    }
+
+    public static String getHexHash(File file) throws Exception {
+        // 对 file 的内容 生成 hash
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        messageDigest.update(cn.hutool.core.io.FileUtil.readBytes(file));
+        byte[] digest1 = messageDigest.digest();
+        return new BigInteger(1, digest1).toString(16);
     }
 }

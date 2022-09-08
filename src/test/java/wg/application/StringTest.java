@@ -163,7 +163,7 @@ public class StringTest {
         String unicode = StringUtil.toUnicode(str);
         System.out.println(unicode);
 
-        String decodeUnicode = StringUtil.decodeUnicode(unicode);
+        String decodeUnicode = StringUtil.decodeUnicode("\\u914D\\u7F6E");
         System.out.println(decodeUnicode);
 
         String s = StringUtil.decodeUnicode2(unicode);

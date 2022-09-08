@@ -19,6 +19,7 @@ import org.springframework.util.ObjectUtils;
 import sun.awt.OSInfo;
 import wg.application.TimerTask.ScheduledTest;
 import wg.application.algorithm.IdWorker;
+import wg.application.config.WgProperty;
 import wg.application.exception.Assert;
 import wg.application.jackson.JacksonTest;
 import wg.application.jsoup.JsoupTest;
@@ -32,6 +33,7 @@ import wg.application.util.SimpleEncryptionUtil;
 import wg.application.thread.TaskTest;
 import wg.application.util.*;
 
+import javax.annotation.Resource;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -55,7 +57,6 @@ import java.util.stream.Stream;
 
 @SpringBootTest
 public class TestApplicationTests {
-
 
     /****************************************************************
      * 下面两个方法都是将hashmap 转成 字符串 ,自己写的util 不行;
@@ -2008,6 +2009,7 @@ public class TestApplicationTests {
         student.setAge(33);
 
         User user = new User();
+        // 忽略字段 复制
         BeanUtil.copyProperties(student, user, "age");
 
         System.out.println(user);
