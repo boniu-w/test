@@ -2672,7 +2672,7 @@ public class Vsop87dEarthUtil {
     }
 
     public static void main(String[] args) {
-        double jd = CalendarUtil.toJulianDate(1987, 4, 10, 0, 0, 0.0);
+        double jd = CalendarUtil.toJulianDate(2022, 8, 11, 0, 0, 0.0);
         double l = getSunEclipticLongitudeForEarth(jd);
         double b = getSunEclipticLatitudeForEarth(jd);
         double r = getSunRadiusForEarth(jd);
@@ -2684,6 +2684,9 @@ public class Vsop87dEarthUtil {
         System.out.println(r);
         System.out.println(dl);
         System.out.println(db);
+
+        double earthEclipticLongitudeForSun = getEarthEclipticLongitudeForSun(jd);
+        System.out.println("光行差: "+earthEclipticLongitudeForSun);
     }
 
 }

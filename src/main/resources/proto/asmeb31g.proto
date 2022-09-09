@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package assessment.defect.corrosion;
+
+option java_multiple_files = false;
+option java_package = "com.sevenme.assessment.defect.corrosion";
+option java_outer_classname = "Asmeb31gProto";
+
+service Asmeb31g {
+    rpc Level0AssessmentIn1991 (Asmeb31gLevel0Request) returns (Asmeb31gLevel0Response);
+    rpc Level1AssessmentIn1991 (Asmeb31gLevel1Request) returns (Asmeb31gLevel1Response);
+    rpc Level0AssessmentIn2009 (Asmeb31gLevel0Request) returns (Asmeb31gLevel0Response);
+    rpc Level1AssessmentIn2009 (Asmeb31gLevel1Request) returns (Asmeb31gLevel1Response);
+}
+
+message Asmeb31gLevel0Request {
+    float depth = 1;
+    float wall_thickness = 2;
+    float length = 3;
+    float outside_diameter = 4;
+}
+
+message Asmeb31gLevel0Response {
+    string result = 1;
+}
+
+message Asmeb31gLevel1Request {
+    float depth = 1;
+    float wall_thickness = 2;
+    float length = 3;
+    float outside_diameter = 4;
+    float smys = 5;
+    float safety_factor = 6;
+    float maop = 7;
+}
+
+message Asmeb31gLevel1Response {
+    string result = 1;
+    double residual_strength = 2;
+}
+

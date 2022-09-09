@@ -3,7 +3,7 @@ package wg.application.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import wg.application.entity.Test03;
-import wg.application.entity.Test03Example;
+import wg.application.entity.example.Test03Example;
 
 public interface Test03Mapper {
     /**

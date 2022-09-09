@@ -1,6 +1,6 @@
 # \u914D\u7F6E https
 server:
-  port: 33333
+  port: 33335
   ssl:
     enabled: true
     key-store: /usr/local/keystore/https-wg.keystore
@@ -11,12 +11,17 @@ server:
     protocol: TLS
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://10.12.12.66:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 report:
   dir: /data/sevenme/report/
+
+wg:
+  jwt:
+    secret: Fr0WK4WppCqKRZKuMakH8qvbZ9HuFyg5
+    header: X-Auth-Token
 
 

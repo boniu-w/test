@@ -1,14 +1,14 @@
 package wg.application;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import wg.application.math.FloatTest;
 import wg.application.util.MathUtil;
 import wg.application.util.CommonUtil;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
 import java.util.Arrays;
-import java.util.BitSet;
+import java.util.Objects;
 
 public class MathTest {
 
@@ -89,7 +89,7 @@ public class MathTest {
      * @return:
      ************************************************************************/
     @Test
-    public void test3() {
+    public void testIsNumber() {
         boolean number = CommonUtil.isNumber("-1.00000000000E-4");
         System.out.println(number);
     }
@@ -102,7 +102,7 @@ public class MathTest {
      * @return:
      ************************************************************************/
     @Test
-    public void test4() {
+    public void testIsInteger() {
         boolean number = CommonUtil.isInteger("0.001");
         System.out.println(number);
 
@@ -144,7 +144,7 @@ public class MathTest {
     }
 
     @Test
-    public void test03() {
+    public void testFloat() {
         FloatTest test01 = new FloatTest();
         test01.test02();
     }
@@ -267,8 +267,6 @@ public class MathTest {
         i += 1;
         System.out.println(i);
     }
-<<<<<<< HEAD
-=======
 
     @Test
     public void arithmeticTest() {
@@ -320,12 +318,23 @@ public class MathTest {
      * @updateTime: 15:51  2022/7/8
      ************************************************************************/
     @Test
-    public void testYihuo() {
-        int i = 2;
+    public void testYiHuo() {
+        int a = 2;
         int b = 4;
 
-        int i1 = i ^ b;
-        System.out.println(i1);
+        int i1 = a ^ b;
+        System.out.println(i1); // 6
+
+        int i = a ^ b ^ a;
+        System.out.println(i); // i = 4
+
+        // 交换值, 而不用中间变量
+        a = a ^ b; // a1 = a^b
+        b = b ^ a; // b = b^a1 = b^a^b = a
+        a = a ^ b; // a = a^b^a = b
+
+        System.out.printf("a= %d, b= %d", a, b);
+
     }
 
     /************************************************************************
@@ -350,5 +359,29 @@ public class MathTest {
         System.out.println(i1);
     }
 
->>>>>>> master
+    /************************************************************************
+     * @author: wg
+     * @description: bigdecimal equals
+     * @params:
+     * @return:
+     * @createTime: 14:35  2022/8/2
+     * @updateTime: 14:35  2022/8/2
+     ************************************************************************/
+    @Test
+    public void bigDecimalEquals() {
+        BigDecimal a = new BigDecimal("0.00");
+        Double b = 0D;
+
+        boolean equals = Objects.equals(a.doubleValue(), b); // true
+        System.out.println(equals); // true
+
+        boolean b1 = a.doubleValue() == 0; // true
+        System.out.println(b1); // true
+    }
+
+    @Test
+    public void getRandomString() {
+        String s = RandomStringUtils.randomAlphanumeric(32);
+        System.out.println(s);
+    }
 }

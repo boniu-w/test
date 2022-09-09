@@ -1,6 +1,10 @@
 package wg.application.util;
 
 import io.jsonwebtoken.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 import wg.application.entity.AuthorizerDetail;
 
 import java.time.Instant;
@@ -18,8 +22,12 @@ import java.util.Date;
  * @version
  * @Copyright
  *************************************************************/
+@ConfigurationProperties(prefix = "wg.jwt")
+@Component
 public class JwtTokenUtil {
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenUtil.class);
 
+    private static String secret;
 
     /****************************************************************
      * 生成token
@@ -27,23 +35,27 @@ public class JwtTokenUtil {
      * @time: 2020/8/21 14:46
      ****************************************************************/
     public static String generateJwtToken() {
+        String role = "";
+        String userId = "";
+        String userName="";
         LocalDateTime now = LocalDateTime.now();
         ZonedDateTime zonedDateTime = now.atZone(ZoneId.systemDefault());
         Date date = Date.from(Instant.from(zonedDateTime));
 
-        LocalDateTime plus = now.plus(10, ChronoUnit.SECONDS);
+        LocalDateTime plus = now.plus(100, ChronoUnit.SECONDS);
         ZonedDateTime time = plus.atZone(ZoneId.systemDefault());
         Date expirationDate = Date.from(time.toInstant());
 
         String jwtToken = Jwts.builder()
-          .setHeaderParam("type", "JWT")
-          .setIssuedAt(date)
-          .setExpiration(expirationDate)
-          .setIssuer("wg")
-          .claim("username", "www")
-          .claim("authorizerCodeList", new ArrayList<String>())
-          .signWith(SignatureAlgorithm.HS512, "SignatureAlgorithm.HS512")
-          .compact();
+                .setHeaderParam("type", "JWT")
+                .setIssuedAt(date)
+                .setExpiration(expirationDate)
+                .setSubject(userId)
+                .setIssuer(userName)
+                .claim("role", role)
+                .claim("userId", userId)
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
 
         return jwtToken;
     }
@@ -64,14 +76,14 @@ public class JwtTokenUtil {
         Date expirationDate = Date.from(time.toInstant());
 
         String jwtToken = Jwts.builder()
-          .setHeaderParam("type", "JWT")
-          .setIssuedAt(date)
-          .setExpiration(expirationDate)
-          .setIssuer(authorizerDetail.getUserId())
-          .claim(authorizerDetail.userName, authorizerDetail.getUserName())
-          .claim("authorizerDetail.authorityCodeList", new ArrayList<String>())
-          .signWith(SignatureAlgorithm.HS512, "SignatureAlgorithm.HS512")
-          .compact();
+                .setHeaderParam("type", "JWT")
+                .setIssuedAt(date)
+                .setExpiration(expirationDate)
+                .setIssuer(authorizerDetail.getUserId())
+                .claim(authorizerDetail.userName, authorizerDetail.getUserName())
+                .claim("authorizerDetail.authorityCodeList", new ArrayList<String>())
+                .signWith(SignatureAlgorithm.HS512, "SignatureAlgorithm.HS512")
+                .compact();
 
         System.out.println("jwtToken:  " + jwtToken);
         return jwtToken;
@@ -109,6 +121,33 @@ public class JwtTokenUtil {
         return claimsJws;
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 解析, 验证 token
+     * @params:
+     * @return:
+     * @createTime: 11:07  2022/9/6
+     * @updateTime: 11:07  2022/9/6
+     ************************************************************************/
+    public static Claims analyseToken(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            // claims.get
+
+            return Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            logger.debug("validate is token error ", e);
+            return null;
+        }
+    }
+
     /****************************************************************
      * 过期 重新生成
      * @author: wg
@@ -136,5 +175,4 @@ public class JwtTokenUtil {
 
         return claimsJws;
     }
-
 }
