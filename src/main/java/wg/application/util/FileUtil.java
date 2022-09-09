@@ -3,12 +3,17 @@ package wg.application.util;
 import cn.hutool.core.io.resource.ClassPathResource;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.security.MessageDigest;
+import java.util.List;
 import java.util.Map;
 
 /************************************************************************
@@ -18,6 +23,9 @@ import java.util.Map;
  * @updateTime: 16:50 2022/3/14
  ************************************************************************/
 public class FileUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
+
     /************************************************************************
      * @author: wg
      * @description: 把 map 写入 json 文件中
@@ -157,5 +165,62 @@ public class FileUtil {
         messageDigest.update(cn.hutool.core.io.FileUtil.readBytes(file));
         byte[] digest1 = messageDigest.digest();
         return new BigInteger(1, digest1).toString(16);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 获取文件夹下所有文件
+     * @params:
+     * @return:
+     * @createTime: 17:28  2022/9/8
+     * @updateTime: 17:28  2022/9/8
+     ************************************************************************/
+    public static List<File> getAllFile(String path, List<File> fileList) throws IOException {
+        File file = new File(path);
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (null != files && files.length > 0) {
+                for (File file1 : files) {
+                    BasicFileAttributes basicFileAttributes = Files.readAttributes(file1.toPath(), BasicFileAttributes.class);
+                    if (basicFileAttributes.isRegularFile()) {
+                        fileList.add(file1);
+                    } else if (basicFileAttributes.isDirectory()) {
+                        getAllFile(file1.getPath(), fileList);
+                    }
+                }
+            }
+        }
+
+        return fileList;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 清空文件夹 和 文件
+     * @params:
+     * @return:
+     * @createTime: 9:50  2022/9/9
+     * @updateTime: 9:50  2022/9/9
+     ************************************************************************/
+    public static boolean deleteDir(String path) {
+        File file = new File(path);
+        if (!file.exists()) {//判断是否待删除目录是否存在
+            logger.info("The dir are not exists!");
+            return false;
+        }
+
+        String[] content = file.list();//取得当前目录下所有文件和文件夹
+        for (String name : content) {
+            File temp = new File(path, name);
+            if (temp.isDirectory()) {//判断是否是目录
+                deleteDir(temp.getAbsolutePath());//递归调用，删除目录里的内容
+                temp.delete();//删除空目录
+            } else {
+                if (!temp.delete()) {//直接删除文件
+                    logger.error("Failed to delete " + name);
+                }
+            }
+        }
+        return true;
     }
 }

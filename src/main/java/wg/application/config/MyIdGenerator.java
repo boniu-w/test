@@ -5,9 +5,6 @@ import org.slf4j.LoggerFactory;
 import wg.application.algorithm.IdWorker1;
 import wg.application.util.IpUtil;
 
-import javax.annotation.PostConstruct;
-import java.io.Serializable;
-
 /************************************************************************
  * @author: wg
  * @description: jpa中 id 用雪花算法生成

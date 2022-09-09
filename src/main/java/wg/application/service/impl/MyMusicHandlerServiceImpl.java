@@ -28,8 +28,16 @@ public class MyMusicHandlerServiceImpl {
     @Resource
     SongMapper songMapper;
 
+    /************************************************************************
+     * @author: wg
+     * @description: 从多个文件夹获取歌曲, 保存到数据库
+     * @params:
+     * @return:
+     * @createTime: 17:15  2022/9/8
+     * @updateTime: 17:15  2022/9/8
+     ************************************************************************/
     public void execute() throws Exception {
-        String path = "E:\\BaiduNetdiskDownload\\music";
+        String path = "H:\\copy-music-1";
         String path1 = "H:\\music";
 
         List<String> pathList = new ArrayList<>();
@@ -45,57 +53,63 @@ public class MyMusicHandlerServiceImpl {
     public void insertOrUpdate(List<Song> songList, List<Song> databaseSongs) {
         if (songList.size() > 0) {
             // 相同 部分, 用 databaseSongs 去比较
-            List<Song> listSame = databaseSongs.stream()
-                    .filter(databaseSong ->
-                            songList.stream()
-                                    .map(Song::getHexHash)
-                                    .collect(Collectors.toList())
-                                    .contains(databaseSong.getHexHash())
-                    )
-                    .collect(Collectors.toList());
-
             // List<Song> listSame = databaseSongs.stream()
             //         .filter(databaseSong ->
             //                 songList.stream()
             //                         .map(Song::getHexHash)
             //                         .collect(Collectors.toList())
             //                         .contains(databaseSong.getHexHash())
-            //                         &&
-            //                         songList.stream()
-            //                                 .map(Song::getLocation)
-            //                                 .collect(Collectors.toList())
-            //                                 .contains(databaseSong.getLocation())
             //         )
             //         .collect(Collectors.toList());
 
-            // 不同部分 用 songList 去比较
-            List<Song> listDiff = songList.stream()
-                    .filter(song ->
-                            !databaseSongs.stream()
+            List<Song> listSame = databaseSongs.stream()
+                    .filter(databaseSong ->
+                            songList.stream()
                                     .map(Song::getHexHash)
                                     .collect(Collectors.toList())
-                                    .contains(song.getHexHash())
+                                    .contains(databaseSong.getHexHash())
+                                    &&
+                                    songList.stream()
+                                            .map(Song::getLocation)
+                                            .collect(Collectors.toList())
+                                            .contains(databaseSong.getLocation())
                     )
                     .collect(Collectors.toList());
 
+            // 不同部分 用 songList 去比较
             // List<Song> listDiff = songList.stream()
             //         .filter(song ->
             //                 !databaseSongs.stream()
             //                         .map(Song::getHexHash)
             //                         .collect(Collectors.toList())
             //                         .contains(song.getHexHash())
-            //                         ||
-            //                         !databaseSongs.stream()
-            //                                 .map(Song::getLocation)
-            //                                 .collect(Collectors.toList())
-            //                                 .contains(song.getLocation())
             //         )
             //         .collect(Collectors.toList());
+
+            List<Song> listDiff = songList.stream()
+                    .filter(song ->
+                            !databaseSongs.stream()
+                                    .map(Song::getHexHash)
+                                    .collect(Collectors.toList())
+                                    .contains(song.getHexHash())
+                                    ||
+                                    !databaseSongs.stream()
+                                            .map(Song::getLocation)
+                                            .collect(Collectors.toList())
+                                            .contains(song.getLocation())
+                    )
+                    .collect(Collectors.toList());
 
             int insertCount = 0;
             MyIdGenerator myIdGenerator = new MyIdGenerator();
             if (listDiff.size() > 0) {
                 for (Song song : listDiff) {
+                    // for (Song databaseSong : databaseSongs) {
+                    //     if (song.getHexHash().equals(databaseSong.getHexHash())) {
+                    //         databaseSong.setLocation(song.getLocation());
+                    //     }
+                    // }
+
                     song.setId(myIdGenerator.generate());
                     song.setCreateDatetime(LocalDateTime.now());
                     insertCount += songMapper.insert(song);
