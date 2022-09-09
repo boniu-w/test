@@ -196,7 +196,7 @@ public class FileUtil {
 
     /************************************************************************
      * @author: wg
-     * @description: 清空文件夹 和 文件
+     * @description: 清空文件夹下面的所有文件, 但保留这个文件夹
      * @params:
      * @return:
      * @createTime: 9:50  2022/9/9
@@ -209,6 +209,14 @@ public class FileUtil {
             return false;
         }
 
+        if (file.isFile()) {
+            boolean delete = file.delete();
+            if (!delete) {
+                logger.error("文件删除失败");
+                return false;
+            }
+        }
+
         String[] content = file.list();//取得当前目录下所有文件和文件夹
         for (String name : content) {
             File temp = new File(path, name);
@@ -216,7 +224,8 @@ public class FileUtil {
                 deleteDir(temp.getAbsolutePath());//递归调用，删除目录里的内容
                 temp.delete();//删除空目录
             } else {
-                if (!temp.delete()) {//直接删除文件
+                //直接删除文件
+                if (!temp.delete()) {
                     logger.error("Failed to delete " + name);
                 }
             }

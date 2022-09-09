@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import wg.application.service.impl.MyFileHandlerServiceImpl;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 /************************************************************************
  * @author: wg
@@ -25,6 +26,15 @@ public class MyFileController {
         try {
             myFileHandlerService.distinctFile();
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping(value = "/test_delete_file")
+    public void testDeleteFileInput(){
+        try {
+            myFileHandlerService.testDeleteInputStream();
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

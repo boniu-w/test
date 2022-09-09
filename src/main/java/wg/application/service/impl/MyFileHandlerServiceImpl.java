@@ -1,5 +1,7 @@
 package wg.application.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import wg.application.util.FileUtil;
 
@@ -7,6 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /************************************************************************
  * @author: wg
@@ -16,6 +19,7 @@ import java.util.List;
  ************************************************************************/
 @Service
 public class MyFileHandlerServiceImpl {
+    private static final Logger logger = LoggerFactory.getLogger(MyFileHandlerServiceImpl.class);
 
     /************************************************************************
      * @author: wg
@@ -28,12 +32,9 @@ public class MyFileHandlerServiceImpl {
     public void distinctFile() throws Exception {
         // ↓↓******************* start <1. 复制文件夹下的所有文件> *******************↓↓
         String path = "H:\\test-copy";
-
         List<File> fileList = new ArrayList<>();
+        FileUtil.getAllFile(path, fileList);
 
-        fileList = FileUtil.getAllFile(path, fileList);
-
-        // allFile.forEach(System.out::println);
         System.out.println(fileList.size());
 
         // 用 map 来去重
@@ -50,20 +51,60 @@ public class MyFileHandlerServiceImpl {
         fileHashMap.forEach((k, v) -> distinctFile.add(v));
         // ↑↑******************* end  <code>  *******************↑↑
 
-        // 2. 清空这个文件夹
-        FileUtil.deleteDir(path);
 
-        // ↓↓******************* start <3. 把这个文件重新粘贴到这个文件夹下> *******************↓↓
-        File newFile = null;
+        // ↓↓******************* start <复制到临时文件夹, 流中文件删不掉, 另一个程序正在使用此文件> *******************↓↓
+        FileInputStream fileInputStream = null;
+        HashMap<FileInputStream, String> streamStringHashMap = new HashMap<>();
 
         for (File file1 : distinctFile) {
-            // if (!file1.exists()) file1.createNewFile();
-            FileInputStream fileInputStream = new FileInputStream(file1);
-            newFile = new File(path + "\\" + file1.getName());
-            if (!newFile.exists()) newFile.createNewFile();
-            cn.hutool.core.io.FileUtil.writeFromStream(fileInputStream, newFile);
+            fileInputStream = new FileInputStream(file1);
+            String name = file1.getName();
+            streamStringHashMap.put(fileInputStream, name);
+        }
+
+        final String tempPath = "H:\\temp1";
+        File tempDir = null;
+        for (Map.Entry<FileInputStream, String> entry : streamStringHashMap.entrySet()) {
+            FileInputStream inputStream = entry.getKey();
+            String name = entry.getValue();
+            tempDir = new File(tempPath);
+            if (!tempDir.exists()) tempDir.mkdir();
+            cn.hutool.core.io.FileUtil.writeFromStream(inputStream, new File(tempPath, name));
         }
         // ↑↑******************* end  <code>  *******************↑↑
+
+        // 清空这个文件夹
+        FileUtil.deleteDir(path);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试删除 流中文件
+     * 测试结果: 流中文件无法删除 ->  另一个程序正在使用此文件，进程无法访问。
+     * @params:
+     * @return:
+     * @createTime: 10:54  2022/9/9
+     * @updateTime: 10:54  2022/9/9
+     ************************************************************************/
+    public void testDeleteInputStream() throws IOException {
+        final String path = "H:\\test-copy\\IDEA快捷键.txt";
+        File file = new File(path);
+
+        // ArrayList<File> files = new ArrayList<>();
+        // List<File> allFile = FileUtil.getAllFile(path, files);
+
+        FileInputStream fileInputStream = new FileInputStream(path);
+
+        // boolean delete = file.delete();
+        boolean delete = cn.hutool.core.io.FileUtil.del(file);
+        if (!delete) {
+            logger.error("MyFileHandlerServiceImpl 文件删除失败");
+        }
+
+        // FileUtil.deleteDir(path);
+
+        cn.hutool.core.io.FileUtil.writeFromStream(fileInputStream, new File(path));
+
     }
 
 }
