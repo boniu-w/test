@@ -13,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -210,8 +212,7 @@ public class FileUtil {
         }
 
         if (file.isFile()) {
-            boolean delete = file.delete();
-            if (!delete) {
+            if (!file.delete()) {
                 logger.error("文件删除失败");
                 return false;
             }
@@ -231,5 +232,51 @@ public class FileUtil {
             }
         }
         return true;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 读取一个文件夹下的所有文件, 去重后 保存 到 临时文件夹中, 之后 清空这个文件夹下的所有内容, 但保留这个文件夹
+     * @params: path: 源文件所在目录  tempPath: 临时目录
+     * @return:
+     * @createTime: 17:16  2022/9/8
+     * @updateTime: 17:16  2022/9/8
+     ************************************************************************/
+    public  static void copyToTempDir(String path, String tempPath) throws Exception {
+        // ↓↓******************* start <1. 读取文件夹下的所有文件, 然后去重> *******************↓↓
+        List<File> fileList = new ArrayList<>();
+        getAllFile(path, fileList);
+
+        // 用 map 来去重
+        HashMap<String, File> fileHashMap = new HashMap<>();
+        String hexHash = "";
+        for (File file : fileList) {
+            hexHash = getHexHash(file);
+            fileHashMap.put(hexHash, file);
+        }
+        // ↑↑******************* end  <code>  *******************↑↑
+
+        // ↓↓******************* start <复制到临时文件夹, 流中文件删不掉, 另一个程序正在使用此文件> *******************↓↓
+        FileInputStream fileInputStream = null;
+        HashMap<FileInputStream, String> streamStringHashMap = new HashMap<>();
+
+        for (File file1 : fileHashMap.values()) {
+            fileInputStream = new FileInputStream(file1);
+            String name = file1.getName();
+            streamStringHashMap.put(fileInputStream, name);
+        }
+
+        File tempDir = null;
+        for (Map.Entry<FileInputStream, String> entry : streamStringHashMap.entrySet()) {
+            FileInputStream inputStream = entry.getKey();
+            String name = entry.getValue();
+            tempDir = new File(tempPath);
+            if (!tempDir.exists()) tempDir.mkdir();
+            cn.hutool.core.io.FileUtil.writeFromStream(inputStream, new File(tempPath, name));
+        }
+        // ↑↑******************* end  <code>  *******************↑↑
+
+        // 清空这个文件夹
+        deleteDir(path);
     }
 }

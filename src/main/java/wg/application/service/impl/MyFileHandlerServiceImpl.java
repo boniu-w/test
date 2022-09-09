@@ -23,15 +23,14 @@ public class MyFileHandlerServiceImpl {
 
     /************************************************************************
      * @author: wg
-     * @description: 读取一个文件夹下的所有文件, 去重后 保存, 意在去除文件夹 和 去重
+     * @description: 读取一个文件夹下的所有文件, 去重后 保存 到 临时文件夹中, 之后 清空这个文件夹下的所有内容, 但保留这个文件夹
      * @params:
      * @return:
      * @createTime: 17:16  2022/9/8
      * @updateTime: 17:16  2022/9/8
      ************************************************************************/
-    public void distinctFile() throws Exception {
-        // ↓↓******************* start <1. 复制文件夹下的所有文件> *******************↓↓
-        String path = "H:\\test-copy";
+    public void distinctFile(String path, String tempPath) throws Exception {
+        // ↓↓******************* start <1. 读取文件夹下的所有文件, 然后去重> *******************↓↓
         List<File> fileList = new ArrayList<>();
         FileUtil.getAllFile(path, fileList);
 
@@ -62,7 +61,6 @@ public class MyFileHandlerServiceImpl {
             streamStringHashMap.put(fileInputStream, name);
         }
 
-        final String tempPath = "H:\\temp1";
         File tempDir = null;
         for (Map.Entry<FileInputStream, String> entry : streamStringHashMap.entrySet()) {
             FileInputStream inputStream = entry.getKey();

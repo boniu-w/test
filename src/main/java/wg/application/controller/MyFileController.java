@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wg.application.service.impl.MyFileHandlerServiceImpl;
+import wg.application.util.FileUtil;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -24,7 +25,11 @@ public class MyFileController {
     @GetMapping(value = "/handler_my_file")
     public void handlerMyFile(){
         try {
-            myFileHandlerService.distinctFile();
+            final String path = "H:\\test-copy";
+            final String tempPath = "H:\\temp1";
+
+            FileUtil.copyToTempDir(path, tempPath);
+            // myFileHandlerService.distinctFile(path, tempPath);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
