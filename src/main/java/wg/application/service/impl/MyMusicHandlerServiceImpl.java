@@ -39,10 +39,12 @@ public class MyMusicHandlerServiceImpl {
     public void execute() throws Exception {
         String path = "H:\\copy-music-1";
         String path1 = "H:\\music";
+        String path2 = "/home/wg/Music";
 
         List<String> pathList = new ArrayList<>();
         pathList.add(path);
         pathList.add(path1);
+        pathList.add(path2);
 
         List<Song> handler = handler(pathList);
         List<Song> databaseSongs = songMapper.selectByExample(new SongExample());
@@ -188,47 +190,48 @@ public class MyMusicHandlerServiceImpl {
         Song song = null;
         String name = "";
 
-        if (file.isDirectory()) {
-            File[] files = file.listFiles();
-            if (null != files && files.length > 0) {
-                for (File file1 : files) {
-                    BasicFileAttributes basicFileAttributes = Files.readAttributes(file1.toPath(), BasicFileAttributes.class);
-                    if (basicFileAttributes.isRegularFile()) {
-                        song = new Song();
-                        song.setLocation(file.getPath());
-                        song.setSize(basicFileAttributes.size());
-                        song.setDelFlag(0);
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                File[] files = file.listFiles();
+                if (null != files && files.length > 0) {
+                    for (File file1 : files) {
+                        BasicFileAttributes basicFileAttributes = Files.readAttributes(file1.toPath(), BasicFileAttributes.class);
+                        if (basicFileAttributes.isRegularFile()) {
+                            song = new Song();
+                            song.setLocation(file.getPath());
+                            song.setSize(basicFileAttributes.size());
+                            song.setDelFlag(0);
 
-                        name = file1.getName();
+                            name = file1.getName();
 
-                        // 后缀
-                        if (name.indexOf(".") > 0) {
-                            song.setSuffix(name.substring(name.lastIndexOf(".") + 1));
+                            // 后缀
+                            if (name.indexOf(".") > 0) {
+                                song.setSuffix(name.substring(name.lastIndexOf(".") + 1));
+                            }
+
+                            if (name.contains("-") && name.indexOf(".") > 0) {
+                                // 歌名
+                                song.setName(name.substring(name.indexOf("-"), name.indexOf(".")).trim());
+                                // 歌手名
+                                song.setSinger(name.substring(0, name.indexOf("-")).trim());
+                            } else {
+                                song.setName(name.substring(0, name.lastIndexOf(".")));
+                            }
+
+                            if (null != song.getName() && song.getName().contains("-")) {
+                                song.setName(song.getName().replace("-", "").trim());
+                            }
+
+                            song.setHexHash(FileUtil.getHexHash(file1));
+
+                            songList.add(song);
+                        } else if (basicFileAttributes.isDirectory()) {
+                            handlerDirectory(file1.getPath(), songList);
                         }
-
-                        if (name.contains("-") && name.indexOf(".") > 0) {
-                            // 歌名
-                            song.setName(name.substring(name.indexOf("-"), name.indexOf(".")).trim());
-                            // 歌手名
-                            song.setSinger(name.substring(0, name.indexOf("-")).trim());
-                        } else {
-                            song.setName(name.substring(0, name.lastIndexOf(".")));
-                        }
-
-                        if (null != song.getName() && song.getName().contains("-")) {
-                            song.setName(song.getName().replace("-", "").trim());
-                        }
-
-                        song.setHexHash(FileUtil.getHexHash(file1));
-
-                        songList.add(song);
-                    } else if (basicFileAttributes.isDirectory()) {
-                        handlerDirectory(file1.getPath(), songList);
                     }
                 }
             }
         }
-
         return songList;
     }
 

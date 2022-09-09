@@ -18,6 +18,15 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - classpath:wg/application/mapper/xml/*Mapper.xml
+
+logging:
+  config: classpath:logback-spring.xml
+
 report:
   dir: /data/sevenme/report/
 
