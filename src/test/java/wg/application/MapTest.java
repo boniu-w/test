@@ -1,23 +1,17 @@
 package wg.application;
 
-<<<<<<< HEAD
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.*;
-=======
 import com.googlecode.javaewah.EWAHCompressedBitmap;
 import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.entity.Student;
 import wg.application.util.LongArray;
 
 import java.io.*;
 import java.nio.ByteBuffer;
-import java.util.*;
 import java.util.stream.Collectors;
->>>>>>> master
+
 
 /************************************************************************
  * @author: wg
@@ -29,11 +23,7 @@ import java.util.stream.Collectors;
 public class MapTest {
 
     @Test
-<<<<<<< HEAD
-    public void test1(){
-=======
     public void test1() {
->>>>>>> master
         HashMap<String, Object> params = new HashMap<>();
 
         HashMap<String, Object> filterMap = new HashMap<>();
@@ -47,11 +37,7 @@ public class MapTest {
      * 取 map 值最大的键
      */
     @Test
-<<<<<<< HEAD
-    public void test2(){
-=======
     public void test2() {
->>>>>>> master
         Map<String, Integer> map = new HashMap();
         map.put("1", 8);
         map.put("2", 12);
@@ -60,19 +46,13 @@ public class MapTest {
         map.put("5", 11);
         map.put("6", 3);
         map.put("7", 3);
-<<<<<<< HEAD
-        List<Map.Entry<String,Integer>> list = new ArrayList(map.entrySet());
-        Collections.sort(list, (o1, o2) -> (o2.getValue() - o1.getValue()));
-=======
+
         List<Map.Entry<String, Integer>> list = new ArrayList(map.entrySet());
         Collections.sort(list, (o1, o2) -> (o2.getValue() - o1.getValue())); // 从大到小排
->>>>>>> master
 
         String key = list.get(0).getKey();
         System.out.println(key);
     }
-<<<<<<< HEAD
-=======
 
     @Test
     public void testExtend() {
@@ -341,6 +321,4 @@ public class MapTest {
         return next;
     }
 
-
->>>>>>> master
 }

@@ -302,8 +302,6 @@ public class ListTest {
         studentList.forEach(System.out::println);
     }
 
-<<<<<<< HEAD
-=======
     /************************************************************************
      * @author: wg
      * @description: 使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法,
@@ -366,5 +364,4 @@ public class ListTest {
 
     }
 
->>>>>>> master
 }

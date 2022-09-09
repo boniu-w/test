@@ -62,11 +62,8 @@ public class MahoutController {
             list = r.recommend(Long.parseLong(userId), 10);
             list.forEach(System.out::println);
             long endTime = System.currentTimeMillis();
-<<<<<<< HEAD
+
             // log.info((endTime - startTime) + "");
-=======
-            log.info((endTime - startTime) + "");
->>>>>>> master
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TasteException e) {
@@ -101,11 +98,7 @@ public class MahoutController {
             list = r.recommend(Long.parseLong(userId), 10);
             list.forEach(System.out::println);
             long endTime = System.currentTimeMillis();
-<<<<<<< HEAD
-            // log.info((endTime - startTime) + "");
-=======
-            log.info((endTime - startTime) + "");
->>>>>>> master
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TasteException e) {

@@ -1,18 +1,12 @@
 package wg.application;
 
-import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.util.FileUtil;
-
-<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
-=======
 import java.io.*;
->>>>>>> master
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -42,8 +36,6 @@ public class FileTest {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
-=======
 
     @Test
     public void testIo() {
@@ -59,5 +51,4 @@ public class FileTest {
         }
 
     }
->>>>>>> master
 }

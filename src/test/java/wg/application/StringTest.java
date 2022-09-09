@@ -158,13 +158,9 @@ public class StringTest {
      * unicode
      */
     @Test
-<<<<<<< HEAD
-    public void unicodeTest(){
-        String str="zujie";
-=======
     public void unicodeTest() {
         String str = "zujie";
->>>>>>> master
+
         String unicode = StringUtil.toUnicode(str);
         System.out.println(unicode);
 
@@ -176,13 +172,9 @@ public class StringTest {
     }
 
     @Test
-<<<<<<< HEAD
-    public void test11(){
-        String filePath="/pims-ld/components_water/edc0f89e483835c138d4a3698db8edc9ca564683d58ededa994c5bf4934f613e/103A3397-FCE1-4806-B38F-BB4EA8DFB630_4_5005_c.jpeg";
-=======
     public void test11() {
         String filePath = "/pims-ld/components_water/edc0f89e483835c138d4a3698db8edc9ca564683d58ededa994c5bf4934f613e/103A3397-FCE1-4806-B38F-BB4EA8DFB630_4_5005_c.jpeg";
->>>>>>> master
+
         // String[] split = filePath.split("/");
         // for (String s : split) {
         //     System.out.println(s);
@@ -197,12 +189,6 @@ public class StringTest {
         //         .append(split[4]);
 
         String objectName = "";
-
-<<<<<<< HEAD
-        objectName =filePath.split("/pims-ld")[1];
-        System.out.println(objectName);
-    }
-=======
         objectName = filePath.split("/pims-ld")[1];
         System.out.println(objectName);
     }
@@ -247,5 +233,5 @@ public class StringTest {
         String s = Integer.toBinaryString(num);
         System.out.println(s);
     }
->>>>>>> master
+
 }
