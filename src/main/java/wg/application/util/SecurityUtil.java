@@ -1,7 +1,13 @@
 package wg.application.util;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.RandomStringUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 /************************************************************************
  * @author: wg
@@ -16,4 +22,9 @@ public class SecurityUtil {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
     }
 
+    public static void main(String[] args) throws DecoderException {
+        String salt = RandomStringUtils.randomAlphanumeric(20);
+        System.out.println(salt);
+
+    }
 }

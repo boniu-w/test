@@ -346,4 +346,99 @@ public class MathUtil {
             return String.valueOf(new BigDecimal(String.valueOf(num)).setScale(3, RoundingMode.HALF_UP).doubleValue());
         }
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 计算 质数的个数 总和
+     * @params:
+     * @return:
+     * @createTime: 16:51  2022/8/22
+     * @updateTime: 16:51  2022/8/22
+     ************************************************************************/
+    public static void primeNumCount(int n) {
+        long start = System.currentTimeMillis();    // 取开始时间
+        // 质数 个数总和
+        int sum = 0;
+        // 1000万以内的所有质数
+        // 用数组将1000万以内的数分为两大派系，质数用0代替数值，合数用1代替数值；
+        // 一开始默认全部为质数，所以值全部为0，等到开始筛选的时候再把为合数的赋值为1
+        int[] num = new int[n];
+        num[0] = 1;          // 由于1规定不是质数，所以要提前用1标值
+        // 根据埃氏筛法的结论，要得到自然数  N 以内的全部质数，必须把不大于" 二次根号  N "的所有质数的倍数剔除，剩下的就是质数
+        double prescription = Math.sqrt(n);
+        for (int i = 2; i <= prescription; i++) {
+            // 开始把所有质数的倍数剔除，剩下的就是质数
+            for (int j = i * i; j <= n; j += i) {
+                // 从i*i开始去除，因为比i*i小的倍数，已经在前面去除过了
+                // 例如：i=5
+                // 5的2倍（10），3倍（15），在i=2的时候，已经去除过了
+
+                num[j - 1] = 1;   // 把质数的倍数剔除，也就是赋值为1，不是质数就是合数
+            }
+        }
+        // 遍历数组，把值为0的数全部统计出来，得到质数之和
+        for (int j : num) {
+            if (j == 0)
+                sum++;
+        }
+        System.out.println(n + "以内的质数有" + sum + "个");
+        long end = System.currentTimeMillis();
+        System.out.println("The time cost is " + (end - start));
+        System.out.println("");
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 判断是否是质数
+     * @params:
+     * @return:
+     * @createTime: 16:51  2022/8/22
+     * @updateTime: 16:51  2022/8/22
+     ************************************************************************/
+    public static boolean isPrimeNum(int num) {
+        boolean flag = true;
+        for (int i = 2; i < num; i++) {
+            if (num % i == 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 1000 以内的质数
+     * @params:
+     * @return:
+     * @createTime: 16:51  2022/8/22
+     * @updateTime: 16:51  2022/8/22
+     ************************************************************************/
+    public static void test1() {
+        //由于偶数中只有2是质数，此处直接将2的值进行输出，如下代码中查找质数时，只需考虑奇数即可
+        System.out.print(2 + " ");
+        OUT:
+        //1不是质数，2是质数但是已经打印输出，因此循环中i的值从3开始即可，i+=2是因为在循环中我们不再考虑偶数
+        for (int i = 3; i <= 1000; i += 2) {
+            //请补充程序判断i是否是质数并打印i，如果是质数按照 System.out.print(i+" "); 格式进行打印
+            for (int j = 2; j < i; j++) {
+                if (i % j == 0) {
+                    //如果i对j求余数等于0说明i不是质数
+                    continue OUT;
+                }
+            }
+            //说明i是质数
+            System.out.print(i + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        boolean primeNum = isPrimeNum(31);
+        System.out.println(primeNum);
+
+        // primeNumCount(7);
+        // test1();
+    }
+
+
 }

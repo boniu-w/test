@@ -330,6 +330,9 @@ public class ListTest {
     @Test
     public void removeTest(){
         List<String> list = new ArrayList<>();
+        int sum = list.stream().mapToInt(e -> (int) Long.parseLong(e)).sum();
+        System.out.println("sum: "+sum);
+
         list.add("1");
         list.add("2");
         Iterator<String> iterator = list.iterator();

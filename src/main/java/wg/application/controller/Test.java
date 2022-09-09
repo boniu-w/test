@@ -24,7 +24,8 @@ import wg.application.exception.WgException;
 import wg.application.service.AspectService;
 import wg.application.service.LiuShuiInterface;
 import wg.application.service.TestInterface;
-import wg.application.util.IPUtil;
+import wg.application.util.ComputerUtil;
+import wg.application.util.IpUtil;
 import wg.application.util.JdbcUtil;
 import wg.application.util.MessageUtils;
 
@@ -843,13 +844,39 @@ public class Test {
      * @createTime: 10:46  2022/5/5
      * @updateTime: 10:46  2022/5/5
      ************************************************************************/
-    @RequestMapping(value = "/ipTest")
+    @RequestMapping(value = "/ip_test")
     @ResponseBody
     public String ipTest(HttpServletRequest request) {
-        String ipAddr = IPUtil.getIp(request);
 
-        return ipAddr;
+        // String ipAddress = IPUtil.getIpAddress(request);
+        // System.out.println("ipAddress: " + ipAddress);
+        //
+        // System.out.println();
+        // String outIPV4 = IPUtil.getOutIPV4();
+        // System.out.println("outIPV4: " + outIPV4);
+        //
+        // String interIP1 = null;
+        // String interIP2 = null;
+        // try {
+        //     interIP1 = IPUtil.getInterIP1();
+        //     interIP2 = IPUtil.getInterIP2();
+        // } catch (Exception e) {
+        //     throw new RuntimeException(e);
+        // }
+        // System.out.println("interIP1: " + interIP1);
+        // System.out.println("interIP2: " + interIP2);
 
+        IpUtil.getOutIp();
+
+        return "";
+    }
+
+    @RequestMapping(value = "/computer_test")
+    @ResponseBody
+    public String computerTest(HttpServletRequest request) {
+        ComputerUtil.getHardware();
+
+        return "";
     }
 
     /************ ->接口测试 开始 ************/
@@ -1602,7 +1629,7 @@ public class Test {
         String message = MessageUtils.getMessage(10001);
         System.out.println(message);
 
-         message = MessageUtils.getMessage(10001,"skdjhfs");
+        message = MessageUtils.getMessage(10001, "skdjhfs");
         System.out.println(message);
 
         // Locale.US 不能用 Locale.ENGLISH 替代, 因为配置文件的名字 不匹配

@@ -2,6 +2,7 @@ package wg.application.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -264,6 +265,32 @@ public class StringUtil {
             System.out.print(String.format("%-10s", strs[i]));
         }
         return null;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 获取字符的 asc 码 值
+     * @params:
+     * @return:
+     * @createTime: 11:43  2022/9/8
+     * @updateTime: 11:43  2022/9/8
+     ************************************************************************/
+    public Integer getAsc(Character character) {
+        Integer integer = Integer.valueOf(character);
+        return integer;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 判断是全角还是半角
+     * @params:
+     * @return:
+     * @createTime: 12:15  2022/9/8
+     * @updateTime: 12:15  2022/9/8
+     ************************************************************************/
+    public boolean isHalf(Character character) {
+        Integer integer = Integer.valueOf(character);
+        return integer >= 33 && integer <= 126;
     }
 
 }
