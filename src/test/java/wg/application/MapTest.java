@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.entity.Student;
 import wg.application.util.LongArray;
+import wg.application.util.MapUtil;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -319,5 +320,90 @@ public class MapTest {
         return next;
     }
 
+    @Test
+    public void removeTest() {
+        Map<String, Object> filterMap = new HashMap<>();
+
+        final String companyName = "companyName";
+        final String branchName = "branchName";
+        final String regionName = "regionName";
+        final String oilGasPoolName = "fieldName";
+
+        filterMap.put(companyName, companyName);
+        filterMap.put("123", 123);
+
+        Set<String> keySet = new HashSet<>();
+        keySet.add(companyName);
+        keySet.add(branchName);
+        keySet.add(regionName);
+        keySet.add(oilGasPoolName);
+
+        HashMap<String, Object> map = new HashMap<>(filterMap);
+
+        if (MapUtil.removeSomeKey(filterMap, keySet).isEmpty()) {
+            System.out.println("null");
+        } else {
+            filterMap.putAll(map);
+        }
+
+        System.out.println(filterMap);
+    }
+
+    @Test
+    public void onlyKeySetTest() {
+        Map<String, Object> filterMap = new HashMap<>();
+
+        final String companyName = "companyName";
+        final String branchName = "branchName";
+        final String regionName = "regionName";
+        final String oilGasPoolName = "fieldName";
+
+        filterMap.put(companyName, companyName);
+        filterMap.put("123", 123);
+
+        Set<String> keySet = new HashSet<>();
+        keySet.add(companyName);
+        keySet.add(branchName);
+        keySet.add(regionName);
+        keySet.add(oilGasPoolName);
+
+        boolean onlySomeKey = MapUtil.containsSomeKey(filterMap, keySet);
+        System.out.println(onlySomeKey);
+
+        System.out.println(filterMap);
+    }
+
+    @Test
+    public void hasOtherKeyTest() {
+        Map<String, Object> filterMap = new HashMap<>();
+
+        final String companyName = "companyName";
+        final String branchName = "branchName";
+        final String regionName = "regionName";
+        final String oilGasPoolName = "fieldName";
+
+        filterMap.put(companyName, companyName);
+        filterMap.put("123", 123);
+
+        Set<String> keySet = new HashSet<>();
+        keySet.add(companyName);
+        keySet.add(branchName);
+        keySet.add(regionName);
+        keySet.add(oilGasPoolName);
+
+        boolean b = MapUtil.hasOtherKey(filterMap, keySet);
+
+        if (b) {
+            System.out.println("has other key");
+        }
+
+        // filterMap.containsKey(keySet); // 并不能 判断 key 集合
+
+        if (MapUtil.containsKey(filterMap, keySet) && MapUtil.hasOtherKey(filterMap, keySet)) {
+            System.out.println("不仅有 keyset 里的key, 还有 之外的 key");
+        }
+
+        System.out.println(filterMap);
+    }
 
 }
