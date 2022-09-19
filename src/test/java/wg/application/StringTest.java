@@ -232,4 +232,24 @@ public class StringTest {
         String s = Integer.toBinaryString(num);
         System.out.println(s);
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: asc
+     * @params:
+     * @return:
+     * @createTime: 9:06  2022/9/19
+     * @updateTime: 9:06  2022/9/19
+     ************************************************************************/
+    @Test
+    public void testAsc() {
+        String a = "\\347\\233\\221\\346\\265\\213\\346\\243\\200\\351\\252\\214\\347\\256\\241\\347\\220\\206";
+        String[] split = a.split("\\\\");
+        for (String s : split) {
+            if (s.equals("")) continue;
+            Character character = StringUtil.toChar(Integer.parseInt(s));
+            System.out.println(character);
+        }
+    }
+
 }

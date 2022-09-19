@@ -280,6 +280,10 @@ public class StringUtil {
         return integer;
     }
 
+    public static Character toChar(int asc){
+        return (char) asc;
+    }
+
     /************************************************************************
      * @author: wg
      * @description: 判断是全角还是半角
