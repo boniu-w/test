@@ -180,4 +180,8 @@ public class DateUtils {
         DateTime dateTime = new DateTime(date);
         return dateTime.plusYears(years).toDate();
     }
+
+    public static Date toDate(Instant instant){
+        return new Date(instant.toEpochMilli());
+    }
 }

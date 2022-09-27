@@ -118,6 +118,57 @@ public class ListTest {
         different.forEach(System.out::println);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 找出多余的
+     * @params:
+     * @return:
+     * @createTime: 16:05  2022/9/27
+     * @updateTime: 16:05  2022/9/27
+     ************************************************************************/
+    @Test
+    public void testDiff() {
+        Student s0 = new Student();
+        s0.setName("a");
+
+        Student s1 = new Student();
+        s1.setName("b");
+
+        Student s2 = new Student();
+        s2.setName("c");
+
+        ArrayList<Student> minioList = new ArrayList<>();
+        minioList.add(s0);
+        minioList.add(s1);
+        minioList.add(s2);
+
+        Student s3 = new Student();
+        s3.setName("a");
+
+        Student s4 = new Student();
+        s4.setName("b");
+
+        Student s5 = new Student();
+        s5.setName("d");
+
+        Student s6 = new Student();
+        s6.setName("f");
+
+        ArrayList<Student> frontList = new ArrayList<>();
+        frontList.add(s3);
+        frontList.add(s4);
+        frontList.add(s5);
+        frontList.add(s6);
+
+        List<Student> redundant = minioList.stream()
+                .filter(student -> !frontList.stream().map(Student::getName).collect(Collectors.toList()).contains(student.getName()))
+                .collect(Collectors.toList());
+
+
+        redundant.forEach(System.out::println);
+
+    }
+
     @Test
     public void test3() {
         Student student = new Student();
@@ -328,17 +379,17 @@ public class ListTest {
     }
 
     @Test
-    public void removeTest(){
+    public void removeTest() {
         List<String> list = new ArrayList<>();
         int sum = list.stream().mapToInt(e -> (int) Long.parseLong(e)).sum();
-        System.out.println("sum: "+sum);
+        System.out.println("sum: " + sum);
 
         list.add("1");
         list.add("2");
         Iterator<String> iterator = list.iterator();
         while (iterator.hasNext()) {
             String item = iterator.next();
-            if (1==1) {
+            if (1 == 1) {
                 iterator.remove();
             }
         }

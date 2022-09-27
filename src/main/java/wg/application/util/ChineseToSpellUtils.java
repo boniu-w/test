@@ -19,7 +19,7 @@ public class ChineseToSpellUtils {
 		// String signNew = DigestUtils.md5Hex(str);
 		// System.out.println("sign=" + signNew + ",timestamp=" + timestamp);
 
-		String firstSpell = getFullSpell("王");
+		String firstSpell = getFullSpell("盥而不荐有孚顒若");
 		System.out.println(firstSpell);
 	}
 

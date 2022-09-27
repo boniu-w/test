@@ -6,6 +6,7 @@ import wg.application.date.DateTestWg;
 import wg.application.util.DateUtils;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Date;
 
 /************************************************************************
@@ -34,4 +35,17 @@ public class DateTest {
         DateTestWg dateTestWg = new DateTestWg();
         dateTestWg.test1();
     }
+
+    @Test
+    public void testFrom(){
+        Date date = new Date();
+
+        Instant now = Instant.now();
+
+        System.out.println(now.toEpochMilli());
+        System.out.println(now.toString());
+        System.out.println(Date.from(now));
+
+    }
+
 }
