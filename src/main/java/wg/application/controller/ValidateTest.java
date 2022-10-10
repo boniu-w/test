@@ -11,6 +11,7 @@ import wg.application.vo.Result;
 import wg.application.vo.ResultData;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -118,13 +119,30 @@ public class ValidateTest {
     /************************************************************************
      * @author: wg
      * @description: 测试 validator 工具
+     * 测试结果: MethodArgumentNotValidException
      * @params:
      * @return:
      * @createTime: 10:29  2022/10/10
      * @updateTime: 10:29  2022/10/10
      ************************************************************************/
     @PostMapping(value = "/test_validator_util")
-    public void testValidatorUtil(@RequestBody Student student) {
+    @ResponseBody
+    public void testValidatorUtil(@Valid @RequestBody Student student) {
+        System.out.println("<><><><><>");
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 validator 工具
+     * 测试结果: 报错, WgException
+     * @params:
+     * @return:
+     * @createTime: 10:29  2022/10/10
+     * @updateTime: 10:29  2022/10/10
+     ************************************************************************/
+    @PostMapping(value = "/_test_validator_util")
+    @ResponseBody
+    public void _testValidatorUtil(@RequestBody Student student) {
         ValidatorUtil.validateEntity(student);
         System.out.println("<><><><><>");
     }
