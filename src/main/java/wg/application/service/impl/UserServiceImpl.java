@@ -1,10 +1,10 @@
 package wg.application.service.impl;
 
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.core.authority.AuthorityUtils;
+// import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.userdetails.UserDetailsService;
+// import org.springframework.security.core.userdetails.UsernameNotFoundException;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import wg.application.entity.User;
@@ -24,13 +24,13 @@ import java.util.List;
  * @updateTime: 16:18  2022/3/30
  ************************************************************************/
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
-
+public class UserServiceImpl implements UserService  {
+//, UserDetailsService
     @Resource
     UserMapper userMapper;
 
-    @Resource
-    PasswordEncoder passwordEncoder;
+    // @Resource
+    // PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> list() {
@@ -46,22 +46,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      * @createTime: 16:17  2022/3/30
      * @updateTime: 16:17  2022/3/30
      ************************************************************************/
-    @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        // // 数据库查询方式
-        // UserExample userExample = new UserExample();
-        // userExample.createCriteria().andNameEqualTo(userName);
-        // List<User> userList = userMapper.selectByExample(userExample);
-        // if (userList == null || userList.size() == 0) {
-        //     throw new WgException("userList == 0");
-        // }
-        // return new org.springframework.security.core.userdetails.User(userName, "123", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-
-        String password = passwordEncoder.encode("123");
-        System.out.println("password -->>  " + password);
-        userName = "wg";
-        return new org.springframework.security.core.userdetails.User(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-    }
+    // @Override
+    // public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    //     // // 数据库查询方式
+    //     // UserExample userExample = new UserExample();
+    //     // userExample.createCriteria().andNameEqualTo(userName);
+    //     // List<User> userList = userMapper.selectByExample(userExample);
+    //     // if (userList == null || userList.size() == 0) {
+    //     //     throw new WgException("userList == 0");
+    //     // }
+    //     // return new org.springframework.security.core.userdetails.User(userName, "123", AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+    //
+    //     String password = passwordEncoder.encode("123");
+    //     System.out.println("password -->>  " + password);
+    //     userName = "wg";
+    //     return new org.springframework.security.core.userdetails.User(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+    // }
 }
 
 // @Service

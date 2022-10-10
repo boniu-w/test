@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import wg.application.entity.Student;
+import wg.application.util.ValidatorUtil;
 import wg.application.vo.Result;
 import wg.application.vo.ResultData;
 
@@ -57,11 +58,11 @@ public class ValidateTest {
         System.out.println("map --->>>   " + map);
 
         String sex = request.getParameter("sex");
-        System.out.println("sex -> "+sex);
+        System.out.println("sex -> " + sex);
 
         Map<String, String[]> parameterMap = request.getParameterMap();
         Iterator<Map.Entry<String, String[]>> iterator = parameterMap.entrySet().iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Map.Entry<String, String[]> next = iterator.next();
             String key = next.getKey();
             System.out.println(key);
@@ -112,5 +113,19 @@ public class ValidateTest {
         }
 
         return Result.ok("@@@@@@@@@@@  222222222222222");
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 validator 工具
+     * @params:
+     * @return:
+     * @createTime: 10:29  2022/10/10
+     * @updateTime: 10:29  2022/10/10
+     ************************************************************************/
+    @PostMapping(value = "/test_validator_util")
+    public void testValidatorUtil(@RequestBody Student student) {
+        ValidatorUtil.validateEntity(student);
+        System.out.println("<><><><><>");
     }
 }
