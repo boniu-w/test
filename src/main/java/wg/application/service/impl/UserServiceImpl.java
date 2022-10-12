@@ -5,8 +5,10 @@ package wg.application.service.impl;
 // import org.springframework.security.core.userdetails.UserDetailsService;
 // import org.springframework.security.core.userdetails.UsernameNotFoundException;
 // import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import wg.application.entity.User;
 import wg.application.entity.example.UserExample;
 import wg.application.mapper.UserMapper;
@@ -24,8 +26,8 @@ import java.util.List;
  * @updateTime: 16:18  2022/3/30
  ************************************************************************/
 @Service
-public class UserServiceImpl implements UserService  {
-//, UserDetailsService
+public class UserServiceImpl implements UserService {
+    //, UserDetailsService
     @Resource
     UserMapper userMapper;
 
@@ -36,6 +38,92 @@ public class UserServiceImpl implements UserService  {
     public List<User> list() {
         UserExample userExample = new UserExample();
         return userMapper.selectByExample(userExample);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 事务的失效
+     * 测试结果:
+     * 1: try catch 时 会失效
+     * @params:
+     * @return:
+     * @createTime: 11:34  2022/10/12
+     * @updateTime: 11:34  2022/10/12
+     ************************************************************************/
+    @Transactional(rollbackFor = Exception.class)
+    public void update() {
+        // User user = new User();
+        // user.setId(1L);
+        // user.setAge(13);
+        // userMapper.updateByPrimaryKeySelective(user);
+
+        // UserExample userExample = new UserExample();
+        // UserExample.Criteria criteria = userExample.createCriteria();
+        // criteria.andIdEqualTo(1);
+        // User user = new User();
+        // user.setAge(13);
+        // userMapper.updateByExampleSelective(user,userExample);
+
+        // try {
+        //     int i = 1 / 0;
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 事务的失效 调用另一个方法里有 try catch
+     * 测试结果:  也不行, 依然会失效
+     * @params:
+     * @return:
+     * @createTime: 15:08  2022/10/12
+     * @updateTime: 15:08  2022/10/12
+     ************************************************************************/
+    @Transactional(rollbackFor = Exception.class)
+    public void updateTestTryCatch(User user) {
+        updateTestTransactional(user);
+        // $updateTestTransactional(user); // 报错, 必须在 方法上抛出异常
+    }
+
+    public void updateTestTransactional(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+
+        try {
+            int i = 1 / 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void $updateTestTransactional(User user) throws Exception {
+        userMapper.updateByPrimaryKeySelective(user);
+
+        int i = 1 / 0;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试调用 私用方法
+     * 测试结果:
+     * 1: update方法有 @Transactional 注解, _updateTestTransactional() 没有 Transactional 注解, 发生异常时 事务是生效的, 回滚
+     * 2: update方法没有 @Transactional 注解, _updateTestTransactional() 有 Transactional 注解 发生异常时 事务不生效, 不回滚
+     * 结论: @Transactional 注解 所在的方法必须是 public 的
+     * @params:
+     * @return:
+     * @createTime: 15:13  2022/10/12
+     * @updateTime: 15:13  2022/10/12
+     ************************************************************************/
+    // @Transactional(rollbackFor = Exception.class)
+    public void updateTestPrivate(User user) {
+        _updateTestTransactional(user);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    private void _updateTestTransactional(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+
+        int i = 1 / 0;
     }
 
     /************************************************************************
@@ -63,16 +151,3 @@ public class UserServiceImpl implements UserService  {
     //     return new org.springframework.security.core.userdetails.User(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     // }
 }
-
-// @Service
-// public class UserServiceImpl implements UserService {
-//
-//     @Resource
-//     UserMapper userMapper;
-//
-//     @Override
-//     public List<User> list() {
-//         UserExample userExample = new UserExample();
-//         return userMapper.selectByExample(userExample);
-//     }
-// }

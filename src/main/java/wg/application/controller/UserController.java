@@ -1,9 +1,6 @@
 package wg.application.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import wg.application.entity.User;
 import wg.application.service.UserService;
 import wg.application.vo.Result;
@@ -19,7 +16,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping(value = "page")
-    public Result<List<User>> page(){
+    public Result<List<User>> page() {
 
         return null;
     }
@@ -33,9 +30,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/add")
-    public void add(User user){
+    public void add(User user) {
         System.out.println(user);
     }
 
 
+    @PostMapping(value = "/update_user")
+    public void updateUser(@RequestBody User user) {
+        userService.updateTestPrivate(user);
+    }
 }
