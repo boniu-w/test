@@ -76,4 +76,11 @@ public class FileTest {
         // ZipOutputStream zipOutputStream = new ZipOutputStream();
         // ZipFilesUtil.compress(file, "H:\\");
     }
+
+    @Test
+    public void testGitRebase(){
+        int a=1;
+        int b=1;
+        int c=1;
+    }
 }
