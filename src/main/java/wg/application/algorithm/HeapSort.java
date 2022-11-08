@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /************************************************************************
  * @author: wg
- * @description: 堆排序
+ * @description: 堆排序算法
  * @params:
  * @return:
  * @createTime: 10:23  2022/11/7

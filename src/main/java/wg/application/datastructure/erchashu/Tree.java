@@ -43,7 +43,7 @@ public class Tree extends AbstractTree {
  
         while (current != null) {
             parentNode = current;
-            //当前值比新插入值大
+            // 插入值较小
             if (current.data > data) {
                 current = current.leftNode;
                 //若左节点为空 则直接插入即可
@@ -52,7 +52,7 @@ public class Tree extends AbstractTree {
                     return true;
                 }
             } else {
-                //当前值小于新插入值
+                // 插入值较大
                 current = current.rightNode;
                 if (current == null) {
                     parentNode.rightNode = newNode;

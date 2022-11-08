@@ -10,10 +10,10 @@ public class TreeTest {
 
     public static void main(String[] args) {
         Tree t = new Tree();
-        t.insert(80);
         t.insert(70);
         t.insert(100);
         t.insert(90);
+        t.insert(80);
         t.insert(91);
         t.insert(9);
         t.insert(81);
