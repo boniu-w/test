@@ -1,12 +1,16 @@
 package wg.application;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import wg.application.util.StringUtil;
 import wg.application.util.CommonUtil;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
@@ -251,5 +255,26 @@ public class StringTest {
             System.out.println(character);
         }
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: null 能转成 decimal 吗 -> 可以
+     * @params:
+     * @return:
+     * @createTime: 11:04  2022/11/15
+     * @updateTime: 11:04  2022/11/15
+     ************************************************************************/
+    @Test
+    public void testNull() throws IOException {
+        Object obj = null;
+        BigDecimal bigDecimal = (BigDecimal) null;
+        System.out.println(bigDecimal);
+
+        String url = "https://search.jd.com/Search?keyword=手机&wq=手机&page=1";
+        Document document = Jsoup.connect(url).get();
+        String title = document.select("title").text();
+        System.out.println(title);
+    }
+
 
 }
