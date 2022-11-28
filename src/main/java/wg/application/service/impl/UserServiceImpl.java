@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wg.application.entity.User;
 import wg.application.entity.example.UserExample;
+import wg.application.exception.WgException;
 import wg.application.mapper.UserMapper;
 import wg.application.service.UserService;
 
@@ -94,6 +95,25 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 抛出异常, throws WgException
+     * 测试结果: 方法上 throws WgException , rollbackFor= Exception.class, 会回滚
+     * @params:
+     * @return:
+     * @createTime: 17:01  2022/11/28
+     * @updateTime: 17:01  2022/11/28
+     ************************************************************************/
+    @Transactional(rollbackFor = Exception.class)
+    public void updateTestThrows(User user) throws WgException {
+        updateTestTransactionalTestThrows(user);
+        int i = 1 / 0;
+    }
+
+    public void updateTestTransactionalTestThrows(User user) throws WgException {
+        userMapper.updateByPrimaryKeySelective(user);
     }
 
     public void $updateTestTransactional(User user) throws Exception {

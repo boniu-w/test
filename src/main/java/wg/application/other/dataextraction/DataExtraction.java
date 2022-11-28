@@ -28,4 +28,23 @@ public class DataExtraction {
             System.out.println(String.format("%s, %s, %s", sku, name, img));
         });
     }
+
+    // https://blog.csdn.net/make_1998/article/details/118728696
+    // public static void main(String[] args) throws Exception {
+    //     //第1页地址
+    //     String url = "https://blog.csdn.net/make_1998/article/details/118728696";
+    //     //发送http请求
+    //     Document document = Jsoup.connect(url).get();
+    //     //在id=J_goodsList的div下，获取所有带有data-sku属性的li标签
+    //     Elements lis = document.select("div[id=content_views]");
+    //     lis.forEach(li -> {
+    //         //获取商品sku
+    //         String sku = li.attr("data-sku");
+    //         //获取商品name
+    //         String name = li.select("div[class='p-name p-name-type-2'] a em").text();
+    //         //获取商品图片地址
+    //         String img = li.select("div[class=p-img] a img[data-lazy-img]").attr("data-lazy-img");
+    //         System.out.println(String.format("%s, %s, %s", sku, name, img));
+    //     });
+    // }
 }

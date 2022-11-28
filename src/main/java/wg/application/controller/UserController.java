@@ -2,6 +2,7 @@ package wg.application.controller;
 
 import org.springframework.web.bind.annotation.*;
 import wg.application.entity.User;
+import wg.application.exception.WgException;
 import wg.application.service.UserService;
 import wg.application.vo.Result;
 
@@ -34,9 +35,17 @@ public class UserController {
         System.out.println(user);
     }
 
-
     @PostMapping(value = "/update_user")
     public void updateUser(@RequestBody User user) {
         userService.updateTestPrivate(user);
+    }
+
+    @PostMapping(value = "/update_user_test_throws")
+    public void updateUserTestThrows(@RequestBody User user) {
+        try {
+            userService.updateTestThrows(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
