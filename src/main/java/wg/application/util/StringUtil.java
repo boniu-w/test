@@ -1,6 +1,7 @@
 package wg.application.util;
 
 import org.apache.commons.lang3.StringUtils;
+import wg.application.exception.WgException;
 
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
@@ -280,7 +281,7 @@ public class StringUtil {
         return integer;
     }
 
-    public static Character toChar(int asc){
+    public static Character toChar(int asc) {
         return (char) asc;
     }
 
@@ -297,4 +298,24 @@ public class StringUtil {
         return integer >= 33 && integer <= 126;
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 事务 调用的工具类里有 try catch
+     * 结论: 调用的工具类里有 try catch , 发生异常时 事务不生效, 不会回滚
+     * @params:
+     * @return:
+     * @createTime: 9:37  2022/11/29
+     * @updateTime: 9:37  2022/11/29
+     ************************************************************************/
+    public static void testTransaction() {
+        try {
+            int i = 1 / 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void testTransactionThrow() {
+      throw new WgException(500);
+    }
 }

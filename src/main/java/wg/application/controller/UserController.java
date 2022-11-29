@@ -48,4 +48,31 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+
+    @PostMapping(value = "/update_user_test_tool_of_try")
+    public void updateUserTestToolOfTry(@RequestBody User user) {
+        try {
+            userService.testToolClass(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping(value = "/update_user_throw")
+    public void updateUserThrow(@RequestBody User user) {
+        try {
+            userService.testThrow(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping(value = "/update_user_throw2")
+    public void updateUserThrow2(@RequestBody User user) {
+        try {
+            userService.testThrow2(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

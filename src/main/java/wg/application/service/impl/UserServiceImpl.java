@@ -6,6 +6,7 @@ package wg.application.service.impl;
 // import org.springframework.security.core.userdetails.UsernameNotFoundException;
 // import org.springframework.security.crypto.password.PasswordEncoder;
 
+import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import wg.application.entity.example.UserExample;
 import wg.application.exception.WgException;
 import wg.application.mapper.UserMapper;
 import wg.application.service.UserService;
+import wg.application.util.StringUtil;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -144,6 +146,54 @@ public class UserServiceImpl implements UserService {
         userMapper.updateByPrimaryKeySelective(user);
 
         int i = 1 / 0;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 调用的工具类里有 try catch
+     * 结论: 调用的工具类里有 try catch , 发生异常时 事务不生效, 不会回滚
+     * @params:
+     * @return:
+     * @createTime: 9:36  2022/11/29
+     * @updateTime: 9:36  2022/11/29
+     ************************************************************************/
+    @Transactional(rollbackFor = Exception.class)
+    public void testToolClass(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+        StringUtil.testTransaction();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 在方法里直接 throw exception
+     * 结论: 事务会生效, 会回滚
+     * @params:
+     * @return:
+     * @createTime: 9:54  2022/11/29
+     * @updateTime: 9:54  2022/11/29
+     ************************************************************************/
+    @Transactional(rollbackFor = Exception.class)
+    public void testThrow(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+        if (1 == 1) {
+            System.out.println("exception");
+            throw new WgException(500);
+        }
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 其他方法里 throw exception, 而本方法不 throw
+     * 结论: 事务会生效, 会回滚
+     * @params:
+     * @return:
+     * @createTime: 10:00  2022/11/29
+     * @updateTime: 10:00  2022/11/29
+     ************************************************************************/
+    @Transactional(rollbackFor = Exception.class)
+    public void testThrow2(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+        StringUtil.testTransactionThrow();
     }
 
     /************************************************************************
