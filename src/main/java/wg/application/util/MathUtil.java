@@ -349,6 +349,39 @@ public class MathUtil {
 
     /************************************************************************
      * @author: wg
+     * @description: 转成科学计数法, 保留 scale 位
+     * @params:
+     * @return:
+     * @createTime: 10:44  2022/11/30
+     * @updateTime: 10:44  2022/11/30
+     ************************************************************************/
+    public static String double2ScientificNotation(double num, int scale) {
+        if (isInteger(String.valueOf(num))) {
+            if (num > -9999 || num <= 9999) {
+                return String.valueOf(((int) num));
+            }
+        }
+        if (num < 0.001 || num > 1000) {
+            String str = String.format("%E", num);//获取直接格式化结果
+            str = str.replace("E-0", "E-");//将E-0N处理为E-N
+            // 处理结果
+            String temp = str.substring(0, str.indexOf("E"));
+            // 精确到小数点后 scale 位
+            StringBuilder stringBuilder = new StringBuilder("");
+            stringBuilder.append("%")
+                    .append(".")
+                    .append(scale)
+                    .append("f");
+            String f = String.format(stringBuilder.toString(), Double.parseDouble(temp));
+            str = f + str.substring(str.indexOf("E"));
+            return str;
+        } else {
+            return String.valueOf(new BigDecimal(String.valueOf(num)).setScale(3, RoundingMode.HALF_UP).doubleValue());
+        }
+    }
+
+    /************************************************************************
+     * @author: wg
      * @description: 计算 质数的个数 总和
      * @params:
      * @return:
@@ -438,6 +471,10 @@ public class MathUtil {
 
         // primeNumCount(7);
         // test1();
+
+        double a = -0.9128739127;
+        String b = double2ScientificNotation(a, 14);
+        System.out.println(b);
     }
 
 
