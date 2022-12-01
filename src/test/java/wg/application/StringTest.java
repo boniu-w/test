@@ -276,6 +276,14 @@ public class StringTest {
         System.out.println(title);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: string format 测试
+     * @params:
+     * @return:
+     * @createTime: 11:17  2022/11/30
+     * @updateTime: 11:17  2022/11/30
+     ************************************************************************/
     @Test
     public void formatTest() {
         //+号的用法
@@ -312,6 +320,24 @@ public class StringTest {
         System.out.println(str);
         str = String.format("<括号用法：%f %<3.1f", 4.2, 9.01);
         System.out.println(str);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 integer 与 string equals
+     * 结论: 可以比较
+     * @params:
+     * @return:
+     * @createTime: 15:29  2022/11/30
+     * @updateTime: 15:29  2022/11/30
+     ************************************************************************/
+    @Test
+    public void testEquals() {
+        Integer a = 1;
+        String b = "sdf";
+
+        boolean equals = a.equals(b);
+        System.out.println(equals);
     }
 
 }

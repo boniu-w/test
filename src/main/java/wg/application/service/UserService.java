@@ -22,4 +22,6 @@ public interface UserService {
     public void testThrow(User user);
 
     public void testThrow2(User user);
+
+    public void testTryAndThrow(User user);
 }
