@@ -75,4 +75,13 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+
+    @PostMapping(value = "/update_user_test_try_and_throw")
+    public void testTryAndThrow(@RequestBody User user) {
+        try {
+            userService.testTryAndThrow(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

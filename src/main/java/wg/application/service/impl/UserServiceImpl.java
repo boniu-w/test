@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
      * @author: wg
      * @description: 测试 事务的失效
      * 测试结果:
-     * 1: try catch 时 会失效
+     * 1: try catch 时 会失效, 发生异常不会回滚
      * @params:
      * @return:
      * @createTime: 11:34  2022/10/12
@@ -55,29 +55,29 @@ public class UserServiceImpl implements UserService {
      ************************************************************************/
     @Transactional(rollbackFor = Exception.class)
     public void update() {
-        // User user = new User();
-        // user.setId(1L);
-        // user.setAge(13);
-        // userMapper.updateByPrimaryKeySelective(user);
+        User user = new User();
+        user.setId(1L);
+        user.setAge(13);
+        userMapper.updateByPrimaryKeySelective(user);
 
-        // UserExample userExample = new UserExample();
-        // UserExample.Criteria criteria = userExample.createCriteria();
-        // criteria.andIdEqualTo(1);
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andIdEqualTo(1);
         // User user = new User();
-        // user.setAge(13);
-        // userMapper.updateByExampleSelective(user,userExample);
+        user.setAge(13);
+        userMapper.updateByExampleSelective(user,userExample);
 
-        // try {
-        //     int i = 1 / 0;
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
+        try {
+            int i = 1 / 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /************************************************************************
      * @author: wg
      * @description: 测试 事务的失效 调用另一个方法里有 try catch
-     * 测试结果:  也不行, 依然会失效
+     * 测试结果:  也不行, 依然会失效, 不会回滚
      * @params:
      * @return:
      * @createTime: 15:08  2022/10/12
@@ -183,7 +183,8 @@ public class UserServiceImpl implements UserService {
 
     /************************************************************************
      * @author: wg
-     * @description: 测试 其他方法里 throw exception, 而本方法不 throw
+     * @description:
+     * 测试: 其他方法里 throw exception, 而本方法不 throw
      * 结论: 事务会生效, 会回滚
      * @params:
      * @return:
@@ -194,6 +195,27 @@ public class UserServiceImpl implements UserService {
     public void testThrow2(User user) {
         userMapper.updateByPrimaryKeySelective(user);
         StringUtil.testTransactionThrow();
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description:
+     * 测试: try catch 加 throw exception
+     * 结论: 发生异常会回滚, 事务生效
+     * @params:
+     * @return:
+     * @createTime: 9:59  2022/12/1
+     * @updateTime: 9:59  2022/12/1
+     ************************************************************************/
+    @Transactional(rollbackFor = Exception.class)
+    public void testTryAndThrow(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+        try {
+            int i = 1 / 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new WgException(500);
+        }
     }
 
     /************************************************************************

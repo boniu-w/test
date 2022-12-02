@@ -276,4 +276,69 @@ public class StringTest {
         String title = document.select("title").text();
         System.out.println(title);
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: string format 测试
+     * @params:
+     * @return:
+     * @createTime: 11:17  2022/11/30
+     * @updateTime: 11:17  2022/11/30
+     ************************************************************************/
+    @Test
+    public void formatTest() {
+        //+号的用法
+        String str;
+        str = String.format("数字的正负表示：%+d %d %+d %d", 8, 8, -8, -8);
+        System.out.println(str);
+        //-的用法
+        str = String.format("左对齐：%-6d", 8);
+        System.out.println(str);
+        //0的用法
+        str = String.format("缺位补零：%06d", 8);
+        System.out.println(str);
+        //' '空格的用法
+        str = String.format("缺位补空格：% 6d", 8);
+        System.out.println(str);
+        str = String.format("缺位补空格：% 6d", -8);
+        System.out.println(str);
+        //,的用法
+        str = String.format("数字分组：%,d", 123456789);
+        System.out.println(str);
+        //(的用法
+        str = String.format("括号用法：%(d", -8888);
+        System.out.println(str);
+        str = String.format("括号用法：%(d", 8888);
+        System.out.println(str);
+        //#的用法
+        str = String.format("#括号用法(十六进制)：%#x", 12);
+        System.out.println(str);
+        str = String.format("#括号用法(八进制)：%#o", 12);
+        System.out.println(str);
+        //<的用法
+        str = String.format("<括号用法：%f %<3.1f", 3.14, 3.2);
+        //"%<3.1f"作用的对象是前一个"%f"所作用的对象
+        System.out.println(str);
+        str = String.format("<括号用法：%f %<3.1f", 4.2, 9.01);
+        System.out.println(str);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 integer 与 string equals
+     * 结论: 可以比较
+     * @params:
+     * @return:
+     * @createTime: 15:29  2022/11/30
+     * @updateTime: 15:29  2022/11/30
+     ************************************************************************/
+    @Test
+    public void testEquals() {
+        Integer a = 1;
+        String b = "sdf";
+
+        boolean equals = a.equals(b);
+        System.out.println(equals);
+    }
+
 }
