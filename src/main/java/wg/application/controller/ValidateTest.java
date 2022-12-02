@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import wg.application.entity.Student;
+import wg.application.util.ValidatorUtil;
 import wg.application.vo.Result;
 import wg.application.vo.ResultData;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -57,11 +59,11 @@ public class ValidateTest {
         System.out.println("map --->>>   " + map);
 
         String sex = request.getParameter("sex");
-        System.out.println("sex -> "+sex);
+        System.out.println("sex -> " + sex);
 
         Map<String, String[]> parameterMap = request.getParameterMap();
         Iterator<Map.Entry<String, String[]>> iterator = parameterMap.entrySet().iterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             Map.Entry<String, String[]> next = iterator.next();
             String key = next.getKey();
             System.out.println(key);
@@ -112,5 +114,36 @@ public class ValidateTest {
         }
 
         return Result.ok("@@@@@@@@@@@  222222222222222");
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 validator 工具
+     * 测试结果: MethodArgumentNotValidException
+     * @params:
+     * @return:
+     * @createTime: 10:29  2022/10/10
+     * @updateTime: 10:29  2022/10/10
+     ************************************************************************/
+    @PostMapping(value = "/test_validator_util")
+    @ResponseBody
+    public void testValidatorUtil(@Valid @RequestBody Student student) {
+        System.out.println("<><><><><>");
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试 validator 工具
+     * 测试结果: 报错, WgException
+     * @params:
+     * @return:
+     * @createTime: 10:29  2022/10/10
+     * @updateTime: 10:29  2022/10/10
+     ************************************************************************/
+    @PostMapping(value = "/_test_validator_util")
+    @ResponseBody
+    public void _testValidatorUtil(@RequestBody Student student) {
+        ValidatorUtil.validateEntity(student);
+        System.out.println("<><><><><>");
     }
 }

@@ -1,10 +1,8 @@
 package wg.application.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import wg.application.entity.User;
+import wg.application.exception.WgException;
 import wg.application.service.UserService;
 import wg.application.vo.Result;
 
@@ -19,7 +17,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping(value = "page")
-    public Result<List<User>> page(){
+    public Result<List<User>> page() {
 
         return null;
     }
@@ -33,9 +31,48 @@ public class UserController {
     }
 
     @PostMapping(value = "/add")
-    public void add(User user){
+    public void add(User user) {
         System.out.println(user);
     }
 
+    @PostMapping(value = "/update_user")
+    public void updateUser(@RequestBody User user) {
+        userService.updateTestPrivate(user);
+    }
 
+    @PostMapping(value = "/update_user_test_throws")
+    public void updateUserTestThrows(@RequestBody User user) {
+        try {
+            userService.updateTestThrows(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping(value = "/update_user_test_tool_of_try")
+    public void updateUserTestToolOfTry(@RequestBody User user) {
+        try {
+            userService.testToolClass(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping(value = "/update_user_throw")
+    public void updateUserThrow(@RequestBody User user) {
+        try {
+            userService.testThrow(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping(value = "/update_user_throw2")
+    public void updateUserThrow2(@RequestBody User user) {
+        try {
+            userService.testThrow2(user);
+        } catch (WgException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

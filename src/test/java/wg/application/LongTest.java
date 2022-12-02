@@ -16,5 +16,8 @@ public class LongTest {
     @Test
     public void toDatetimeTest(){
         LongUtil.toDatetime(1654499337340L);
+
+        Long aLong = Long.valueOf(null); // java.lang.NumberFormatException
+        System.out.println(aLong);
     }
 }

@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import wg.application.entity.User;
 
@@ -464,9 +463,9 @@ public class CommonUtil {
      * @createTime: 15:25  2022/2/24
      * @updateTime: 15:25  2022/2/24
      ************************************************************************/
-    public static String passwordEncode(String password) {
-        return new BCryptPasswordEncoder().encode(password);
-    }
+    // public static String passwordEncode(String password) {
+    //     return new BCryptPasswordEncoder().encode(password);
+    // }
 
     /************************************************************************
      * @author: wg

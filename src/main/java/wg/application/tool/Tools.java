@@ -20,9 +20,9 @@ public class Tools {
      * @updateTime: 10:11  2022/7/11
      ************************************************************************/
     public static void encodePassword() {
-        String password = "aa6a5a0b33cfdaaf0c942939ad6d5e08150236abd95312aad4a94a39fec7315b";
-        String s = CommonUtil.passwordEncode(password);
-        System.out.println(s);
+        // String password = "aa6a5a0b33cfdaaf0c942939ad6d5e08150236abd95312aad4a94a39fec7315b";
+        // String s = CommonUtil.passwordEncode(password);
+        // System.out.println(s);
 
     }
 

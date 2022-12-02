@@ -1,13 +1,18 @@
 package wg.application;
 
 import com.google.common.io.Files;
+import org.apache.catalina.security.SecurityUtil;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.util.FileUtil;
 import java.io.File;
 import java.io.IOException;
 import java.io.*;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 
 /************************************************************************
@@ -42,13 +47,37 @@ public class FileTest {
         try {
             OutputStream outputStream = new FileOutputStream("");
             byte[] bytes = new byte[1024];
-
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    @Test
+    public void testApacheCommonFileUtil(){
+        File file = new File("H:\\java-project\\test\\src\\test\\java\\wg\\application\\FileTest.java");
+        File[] files = ArrayUtils.toArray(file);
+        try {
+            URL[] urls = FileUtils.toURLs(files);
+            Arrays.stream(urls).forEach(System.out::println);
+            for (URL url : urls) {
+                url.getFile();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void zipTest(){
+        File file = new File("H:\\java-project\\test\\src\\test\\java\\wg\\application\\FileTest.java");
+        // ZipOutputStream zipOutputStream = new ZipOutputStream();
+        // ZipFilesUtil.compress(file, "H:\\");
+    }
+
+    @Test
+    public void testGitRebase(){
+        int a=1;
+        int b=1;
+        int c=1;
     }
 }

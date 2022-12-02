@@ -384,4 +384,23 @@ public class MathTest {
         String s = RandomStringUtils.randomAlphanumeric(32);
         System.out.println(s);
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: double 可以 强转为 int
+     * @params:
+     * @return:
+     * @createTime: 11:16  2022/11/15
+     * @updateTime: 11:16  2022/11/15
+     ************************************************************************/
+    @Test
+    public void testTransform(){
+        int randomFour = (int) ((Math.random() * 9 + 1) * 1000);
+        System.out.println(randomFour);
+        double random = Math.random();
+        System.out.println(random);
+
+        int random1 = (int) random;
+        System.out.println(random1);
+    }
 }

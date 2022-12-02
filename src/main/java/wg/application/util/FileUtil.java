@@ -153,7 +153,7 @@ public class FileUtil {
      * @createTime: 12:57  2022/9/8
      * @updateTime: 12:57  2022/9/8
      ************************************************************************/
-    public static String getHexHash(MultipartFile multipartFile) throws Exception {
+    public static String getSha256Hex(MultipartFile multipartFile) throws Exception {
         // 对 multipartfile 的内容 生成 hash
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(multipartFile.getBytes());
@@ -161,7 +161,7 @@ public class FileUtil {
         return new BigInteger(1, digest1).toString(16);
     }
 
-    public static String getHexHash(File file) throws Exception {
+    public static String getSha256Hex(File file) throws Exception {
         // 对 file 的内容 生成 hash
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         messageDigest.update(cn.hutool.core.io.FileUtil.readBytes(file));
@@ -182,8 +182,9 @@ public class FileUtil {
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             if (null != files && files.length > 0) {
+                BasicFileAttributes basicFileAttributes = null;
                 for (File file1 : files) {
-                    BasicFileAttributes basicFileAttributes = Files.readAttributes(file1.toPath(), BasicFileAttributes.class);
+                    basicFileAttributes = Files.readAttributes(file1.toPath(), BasicFileAttributes.class);
                     if (basicFileAttributes.isRegularFile()) {
                         fileList.add(file1);
                     } else if (basicFileAttributes.isDirectory()) {
@@ -204,7 +205,7 @@ public class FileUtil {
      * @createTime: 9:50  2022/9/9
      * @updateTime: 9:50  2022/9/9
      ************************************************************************/
-    public static boolean deleteDir(String path) {
+    public static boolean clearDir(String path) {
         File file = new File(path);
         if (!file.exists()) {//判断是否待删除目录是否存在
             logger.info("The dir are not exists!");
@@ -219,30 +220,34 @@ public class FileUtil {
         }
 
         String[] content = file.list();//取得当前目录下所有文件和文件夹
-        for (String name : content) {
-            File temp = new File(path, name);
-            if (temp.isDirectory()) {//判断是否是目录
-                deleteDir(temp.getAbsolutePath());//递归调用，删除目录里的内容
-                temp.delete();//删除空目录
-            } else {
-                //直接删除文件
-                if (!temp.delete()) {
-                    logger.error("Failed to delete " + name);
+        if (content != null) {
+            for (String name : content) {
+                File temp = new File(path, name);
+                if (temp.isDirectory()) {//判断是否是目录
+                    clearDir(temp.getAbsolutePath());//递归调用，删除目录里的内容
+                    temp.delete();//删除空目录
+                } else {
+                    //直接删除文件
+                    if (!temp.delete()) {
+                        logger.error("Failed to delete " + name);
+                        return false;
+                    }
                 }
             }
         }
+
         return true;
     }
 
     /************************************************************************
      * @author: wg
-     * @description: 读取一个文件夹下的所有文件, 去重后 保存 到 临时文件夹中, 之后 清空这个文件夹下的所有内容, 但保留这个文件夹
-     * @params: path: 源文件所在目录  tempPath: 临时目录
+     * @description: 读取一个文件夹下的所有文件, 去重后 保存 到 临时文件夹中,
+     * @params: path: 源文件所在目录  anotherPath: 另一个目录
      * @return:
      * @createTime: 17:16  2022/9/8
      * @updateTime: 17:16  2022/9/8
      ************************************************************************/
-    public  static void copyToTempDir(String path, String tempPath) throws Exception {
+    public static void copyToTempDir(String path, String anotherPath) throws Exception {
         // ↓↓******************* start <1. 读取文件夹下的所有文件, 然后去重> *******************↓↓
         List<File> fileList = new ArrayList<>();
         getAllFile(path, fileList);
@@ -251,12 +256,12 @@ public class FileUtil {
         HashMap<String, File> fileHashMap = new HashMap<>();
         String hexHash = "";
         for (File file : fileList) {
-            hexHash = getHexHash(file);
+            hexHash = getSha256Hex(file);
             fileHashMap.put(hexHash, file);
         }
         // ↑↑******************* end  <code>  *******************↑↑
 
-        // ↓↓******************* start <复制到临时文件夹, 流中文件删不掉, 另一个程序正在使用此文件> *******************↓↓
+        // ↓↓******************* start <复制到另一个文件夹, 流中文件删不掉, 另一个程序正在使用此文件> *******************↓↓
         FileInputStream fileInputStream = null;
         HashMap<FileInputStream, String> streamStringHashMap = new HashMap<>();
 
@@ -270,13 +275,10 @@ public class FileUtil {
         for (Map.Entry<FileInputStream, String> entry : streamStringHashMap.entrySet()) {
             FileInputStream inputStream = entry.getKey();
             String name = entry.getValue();
-            tempDir = new File(tempPath);
+            tempDir = new File(anotherPath);
             if (!tempDir.exists()) tempDir.mkdir();
-            cn.hutool.core.io.FileUtil.writeFromStream(inputStream, new File(tempPath, name));
+            cn.hutool.core.io.FileUtil.writeFromStream(inputStream, new File(anotherPath, name));
         }
         // ↑↑******************* end  <code>  *******************↑↑
-
-        // 清空这个文件夹
-        deleteDir(path);
     }
 }

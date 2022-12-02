@@ -149,23 +149,23 @@
 
         <!--安全模块-->
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.1.4.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.security</groupId>-->
+        <!--    <artifactId>spring-security-core</artifactId>-->
+        <!--    <version>5.1.4.RELEASE</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>5.1.4.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.security</groupId>-->
+        <!--    <artifactId>spring-security-web</artifactId>-->
+        <!--    <version>5.1.4.RELEASE</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>5.1.4.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.security</groupId>-->
+        <!--    <artifactId>spring-security-config</artifactId>-->
+        <!--    <version>5.1.4.RELEASE</version>-->
+        <!--</dependency>-->
 
         <!--        fast json -->
         <dependency>
@@ -409,6 +409,14 @@
         <!--    <artifactId>jna</artifactId>-->
         <!--    <version>3.0.9</version>-->
         <!--</dependency>-->
+
+        <!-- 汉语拼音 -->
+        <!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.1</version>
+        </dependency>
 
 
     </dependencies>

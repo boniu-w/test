@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.util.DateUtils;
 import java.math.BigDecimal;
 import wg.application.date.DateTestWg;
+import java.time.Instant;
 import java.util.Date;
 
 /************************************************************************
@@ -32,6 +33,18 @@ public class DateTest {
     public void test2(){
         DateTestWg dateTestWg = new DateTestWg();
         dateTestWg.test1();
+    }
+
+    @Test
+    public void testFrom(){
+        Date date = new Date();
+
+        Instant now = Instant.now();
+
+        System.out.println(now.toEpochMilli());
+        System.out.println(now.toString());
+        System.out.println(Date.from(now));
+
     }
 
 }

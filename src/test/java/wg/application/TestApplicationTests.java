@@ -2025,5 +2025,10 @@ public class TestApplicationTests {
     public void testFinal() {
         final BigDecimal a = null;
         System.out.println(a);
+
+        org.springframework.util.Assert.notNull(a, "123"); // IllegalArgumentException
+
+        System.out.println(a);
     }
+
 }

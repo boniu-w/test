@@ -40,7 +40,7 @@ public class MyFileHandlerServiceImpl {
         HashMap<String, File> fileHashMap = new HashMap<>();
         String hexHash = "";
         for (File file : fileList) {
-            hexHash = FileUtil.getHexHash(file);
+            hexHash = FileUtil.getSha256Hex(file);
             fileHashMap.put(hexHash, file);
         }
 
@@ -72,7 +72,7 @@ public class MyFileHandlerServiceImpl {
         // ↑↑******************* end  <code>  *******************↑↑
 
         // 清空这个文件夹
-        FileUtil.deleteDir(path);
+        FileUtil.clearDir(path);
     }
 
     /************************************************************************
