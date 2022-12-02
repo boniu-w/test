@@ -394,7 +394,7 @@ public class MathTest {
      * @updateTime: 11:16  2022/11/15
      ************************************************************************/
     @Test
-    public void testTransform(){
+    public void testTransform() {
         int randomFour = (int) ((Math.random() * 9 + 1) * 1000);
         System.out.println(randomFour);
         double random = Math.random();
@@ -402,5 +402,23 @@ public class MathTest {
 
         int random1 = (int) random;
         System.out.println(random1);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 两个 integer == 问题
+     * 结论: 对象判断 == 时, 用 equals
+     * @params:
+     * @return:
+     * @createTime: 17:27  2022/12/1
+     * @updateTime: 17:27  2022/12/1
+     ************************************************************************/
+    @Test
+    public void testInteger() {
+        Integer a = 1;
+        Integer b = 2;
+        if (a == b) {
+            System.out.println("=="); // 不会打印, 说明 a<>b, 可能在linux 下会相等, 待验证
+        }
     }
 }
