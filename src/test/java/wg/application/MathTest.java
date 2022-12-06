@@ -406,9 +406,10 @@ public class MathTest {
 
     /************************************************************************
      * @author: wg
-     * @description: 两个 integer == 问题
+     * @description:
+     * 描述: 两个 integer == 问题
      * 结论: 对象判断 == 时, 用 equals
-     * 下面我们就来详细解释一下，为什么是上面的结果。（下面的序号就是对应的是上面的答案序号）
+     * 说明: 下面我们就来详细解释一下，为什么是上面的结果。（下面的序号就是对应的是上面的答案序号）
      *
      * 1、int1 == int2 为true，这个我就讲了，这个都知道
      *
@@ -450,6 +451,11 @@ public class MathTest {
         System.out.println("integer3 == a1 -> " + (integer3 == a1)); // false
         System.out.println("a1 == a2 -> " + (a1 == a2)); // true
         System.out.println("a == b -> " + (a == b)); // false
+
+        Integer b1 = 128;
+        Integer b2 = new Integer(128);
+
+        System.out.println("b1 == b2 -> " + (b1 == b2)); // false
     }
 
 }
