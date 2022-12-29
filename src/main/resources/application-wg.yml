@@ -12,9 +12,6 @@ server:
     context-path: /wg
 
 spring:
-  mvc:
-    pathmatch:
-      matchingStrategy: ant_path_matcher
 #  security:
 #    user:
 #      name: wg

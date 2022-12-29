@@ -41,16 +41,6 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/public/**")
                 .addResourceLocations("classpath:/city/**")
         ;
-
-        registry.addResourceHandler("/swagger-ui/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/**")
-        ;
-    }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/swagger-ui/")
-                .setViewName("forward:/swagger-ui/index.html");
     }
 
     //@Bean
