@@ -14,6 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.text.SimpleDateFormat;
@@ -40,15 +41,17 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/public/**")
                 .addResourceLocations("classpath:/city/**")
         ;
-        //super.addResourceHandlers(registry);
+
+        registry.addResourceHandler("/swagger-ui/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/**")
+        ;
     }
 
-    //@Override
-    //public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    //    registry.addResourceHandler("/**")
-    //      .addResourceLocations("file:" + upLoadPath + "//", "file:" + webAppPath + "//")
-    //      .addResourceLocations(staticLocations.split(","));
-    //}
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/swagger-ui/")
+                .setViewName("forward:/swagger-ui/index.html");
+    }
 
     //@Bean
     //public TicketFilter initTicketFilter(){

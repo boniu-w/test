@@ -339,6 +339,12 @@ public class StringTest {
 
         boolean equals = a.equals(b);
         System.out.println(equals);
+
+        System.out.println("\n");
+        System.out.println("----");
+
+        System.out.print("\n");
+        System.out.print("000");
     }
 
 }
