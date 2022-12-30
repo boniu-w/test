@@ -12,10 +12,20 @@ server:
     context-path: /wg
 
 spring:
-#  security:
-#    user:
-#      name: wg
-#      password: 123
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: -1
+      max-request-size: -1
+  profiles:
+    active: wg
+  messages:
+    basename: i18n.messages_common
+    encoding: UTF-8
+  #  security:
+  #    user:
+  #      name: wg
+  #      password: 123
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
@@ -71,11 +81,20 @@ mybatis:
 
 logging:
   config: classpath:logback-spring.xml
+  level:
+    com.alibaba.nacos.client.config.impl: WARN
 
 grpc:
   assessment: localhost:8867
 
 wg:
+  name: wg
+  gender: 1
+  birthday: "123123"
+  phone: "234324"
+  son:
+    name: "123"
   jwt:
     secret: Fr0WK4WppCqKRZKuMakH8qvbZ9HuFyg5
     header: X-Auth-Token
+
