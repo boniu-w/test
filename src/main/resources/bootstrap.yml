@@ -13,6 +13,17 @@ spring:
         file-extension: yaml #指定yaml格式的配置
         group: wg
         namespace: 14302a8a-8e59-4177-90ef-cda3d405e7d1
+        shared-configs:
+          - dataId: common-wg.yml
+            group: wg
+
+        extension-configs:
+          - dataId: datasource-wg-test.yml
+            group: wg
+
+          - dataId: custom-wg.yml
+            group: wg
+
 
 # ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
 # nacos-config-client-dev.yml
