@@ -281,7 +281,7 @@ public class RedisUtil {
      * @param key  键 不能为null
      * @param item 项 可以使多个 不能为null
      */
-    public static void hdel(String key, Object... item) {
+    public static void hDel(String key, Object... item) {
         redisUtil.redisTemplate.opsForHash().delete(key, item);
     }
 
@@ -292,7 +292,7 @@ public class RedisUtil {
      * @param item 项 不能为null
      * @return true 存在 false不存在
      */
-    public static boolean hHasKey(String key, String item) {
+    public static boolean hasKey(String key, String item) {
         return redisUtil.redisTemplate.opsForHash().hasKey(key, item);
     }
 
@@ -304,7 +304,7 @@ public class RedisUtil {
      * @param by   要增加几(大于0)
      * @return
      */
-    public static double hincr(String key, String item, double by) {
+    public static double hashIncremental(String key, String item, double by) {
         return redisUtil.redisTemplate.opsForHash().increment(key, item, by);
     }
 
@@ -316,7 +316,7 @@ public class RedisUtil {
      * @param by   要减少记(小于0)
      * @return
      */
-    public static double hdecr(String key, String item, double by) {
+    public static double hashDecrement(String key, String item, double by) {
         return redisUtil.redisTemplate.opsForHash().increment(key, item, -by);
     }
 

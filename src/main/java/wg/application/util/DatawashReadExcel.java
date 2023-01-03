@@ -26,7 +26,7 @@ import java.util.Map;
 public class DatawashReadExcel {
 
 
-    private Logger logger = LoggerFactory.getLogger(DatawashReadExcel.class);
+    private static Logger logger = LoggerFactory.getLogger(DatawashReadExcel.class);
     private static Workbook workbook;
     private static Sheet sheet;
     private static Row row;

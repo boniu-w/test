@@ -1,6 +1,6 @@
 package wg.application.token.controller;
 
-import io.swagger.annotations.ApiOperation;
+// import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +26,7 @@ public class LoginTest {
      * @param response
      * @param key
      */
-    @ApiOperation("获取验证码")
+    // @ApiOperation("获取验证码")
     @GetMapping(value = "/randomImage/{key}")
     public Result<String> randomImage(HttpServletResponse response, @PathVariable String key) {
         Result<String> res = new Result<String>();

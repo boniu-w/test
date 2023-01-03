@@ -14,6 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.text.SimpleDateFormat;
@@ -40,15 +41,7 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/public/**")
                 .addResourceLocations("classpath:/city/**")
         ;
-        //super.addResourceHandlers(registry);
     }
-
-    //@Override
-    //public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    //    registry.addResourceHandler("/**")
-    //      .addResourceLocations("file:" + upLoadPath + "//", "file:" + webAppPath + "//")
-    //      .addResourceLocations(staticLocations.split(","));
-    //}
 
     //@Bean
     //public TicketFilter initTicketFilter(){

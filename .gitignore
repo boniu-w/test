@@ -44,5 +44,3 @@ logs/
 *.log
 wg-log-error.html
 *error.html
-
-*dev.yml

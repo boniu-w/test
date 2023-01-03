@@ -197,7 +197,7 @@ public class IpUtil {
     }
     // 将127.0.0.1形式的IP地址转换成十进制整数
     public static long ipToLong(String strIp) {
-      if (Validator.isIpv4(strIp)) {
+      if (ValidatorUtil.isIpv4(strIp)) {
         long[] ip = new long[4];
         // 先找到IP地址字符串中.的位置
         int position1 = strIp.indexOf(".");

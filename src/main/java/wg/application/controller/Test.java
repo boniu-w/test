@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wg.application.component.DecipherPhone;
@@ -951,70 +950,70 @@ public class Test {
      * @author: wg
      * @time: 2020/6/23 14:44
      ****************************************************************/
-    @RequestMapping(value = "/encode")
-    @ResponseBody
-    private void encode(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encode = encoder.encode("123456");
-        String encode2 = encoder.encode("111");
-
-        System.out.println("encode -> " + encode);
-        System.out.println(encode2);
-
-
-        boolean matches = encoder.matches("111", "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe");
-        boolean matches2 = encoder.matches(password, "$2a$10$36OcV5ass16uhYBg0MWkiOZRNjIkAR0/APho.m9UoE4sZhUngsR8K");
-
-        System.out.println(matches);
-        System.out.println("matches2  " + matches2);
-
-        if (matches2) {
-            System.out.println("---------");
-        }
-
-
-        /************ matches() 源码分析 -> 开始 ************/
-
-        String a = "$2a$10$ib.SiGEAJPbl.11WhriGfuFYxwZzp.IlN0U3ttYXOboirSuOqChzy";
-        String b = "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe";
-
-        try {
-            byte[] a_bytes = a.getBytes("utf-8");
-            byte[] b_bytes = b.getBytes("utf-8");
-
-            if (a_bytes.length != b_bytes.length) {
-                System.out.println(false);
-            }
-
-            for (int i = 0; i < a_bytes.length; i++) {
-                System.out.println("a_bytes[" + i + "]   -> " + a_bytes[i]);
-
-            }
-            for (int i = 0; i < b.length(); i++) {
-
-                System.out.println("b_bytes[" + i + "]   -> " + b_bytes[i]);
-            }
-
-            if (a_bytes == b_bytes) {
-                System.out.println("a_bytes == b_bytes  " + true);
-
-            }
-
-            int result = 0;
-            // time-constant comparison
-            for (int i = 0; i < a_bytes.length; i++) {
-                result |= a_bytes[i] ^ b_bytes[i];
-            }
-
-            System.out.println("result  -> " + result);
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        /************ matches() 源码分析 -> 结束 ************/
-
-
-    }
+    // @RequestMapping(value = "/encode")
+    // @ResponseBody
+    // private void encode(String password) {
+    //     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    //     String encode = encoder.encode("123456");
+    //     String encode2 = encoder.encode("111");
+    //
+    //     System.out.println("encode -> " + encode);
+    //     System.out.println(encode2);
+    //
+    //
+    //     boolean matches = encoder.matches("111", "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe");
+    //     boolean matches2 = encoder.matches(password, "$2a$10$36OcV5ass16uhYBg0MWkiOZRNjIkAR0/APho.m9UoE4sZhUngsR8K");
+    //
+    //     System.out.println(matches);
+    //     System.out.println("matches2  " + matches2);
+    //
+    //     if (matches2) {
+    //         System.out.println("---------");
+    //     }
+    //
+    //
+    //     /************ matches() 源码分析 -> 开始 ************/
+    //
+    //     String a = "$2a$10$ib.SiGEAJPbl.11WhriGfuFYxwZzp.IlN0U3ttYXOboirSuOqChzy";
+    //     String b = "$2a$10$qc90QdnLWW0QHSUGvD95fuXh4.1VDqehenP4xTWtMVbhaymADEhhe";
+    //
+    //     try {
+    //         byte[] a_bytes = a.getBytes("utf-8");
+    //         byte[] b_bytes = b.getBytes("utf-8");
+    //
+    //         if (a_bytes.length != b_bytes.length) {
+    //             System.out.println(false);
+    //         }
+    //
+    //         for (int i = 0; i < a_bytes.length; i++) {
+    //             System.out.println("a_bytes[" + i + "]   -> " + a_bytes[i]);
+    //
+    //         }
+    //         for (int i = 0; i < b.length(); i++) {
+    //
+    //             System.out.println("b_bytes[" + i + "]   -> " + b_bytes[i]);
+    //         }
+    //
+    //         if (a_bytes == b_bytes) {
+    //             System.out.println("a_bytes == b_bytes  " + true);
+    //
+    //         }
+    //
+    //         int result = 0;
+    //         // time-constant comparison
+    //         for (int i = 0; i < a_bytes.length; i++) {
+    //             result |= a_bytes[i] ^ b_bytes[i];
+    //         }
+    //
+    //         System.out.println("result  -> " + result);
+    //
+    //     } catch (UnsupportedEncodingException e) {
+    //         e.printStackTrace();
+    //     }
+    //     /************ matches() 源码分析 -> 结束 ************/
+    //
+    //
+    // }
 
 
     /****************************************************************

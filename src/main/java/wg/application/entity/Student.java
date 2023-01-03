@@ -3,6 +3,7 @@ package wg.application.entity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
@@ -25,8 +26,9 @@ public class Student implements Serializable {
     @NotBlank(message = "用户名不能为空")
     private String name;
 
-    @NotBlank
-    @Pattern(regexp = "^[0-9]{1,2}$", message = "年龄是1-2位整数")
+    // @NotBlank  // 数字 类型不能用 这个注解, 只有 string 类型的能用
+    // @Pattern(regexp = "^[0-9]{1,2}$", message = "年龄是1-2位整数") // 数字 类型不能用 这个注解, 只有 string 类型的能用
+    @Max(value = 199)
     private Integer age;
 
     private Integer id;

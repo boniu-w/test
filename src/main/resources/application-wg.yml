@@ -12,6 +12,10 @@ server:
     context-path: /wg
 
 spring:
+#  security:
+#    user:
+#      name: wg
+#      password: 123
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
@@ -29,6 +33,13 @@ spring:
       shutdown-timeout: 100ms
     password: ''
     port: 6379
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
 
 report:
   dir: E:\pandoc-2.16.1\wg\

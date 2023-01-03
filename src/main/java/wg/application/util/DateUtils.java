@@ -15,6 +15,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 
 /**
@@ -178,5 +179,9 @@ public class DateUtils {
     public static Date addDateYears(Date date, int years) {
         DateTime dateTime = new DateTime(date);
         return dateTime.plusYears(years).toDate();
+    }
+
+    public static Date toDate(Instant instant){
+        return new Date(instant.toEpochMilli());
     }
 }

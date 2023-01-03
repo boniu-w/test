@@ -66,6 +66,8 @@
         <mahout.version>0.9</mahout.version>
         <protoc.version>3.19.2</protoc.version>
         <grpc.version>1.47.0</grpc.version><!-- CURRENT_GRPC_VERSION -->
+        <openapi.generator.version>5.1.0</openapi.generator.version>
+        <openapi.package>com.openapi</openapi.package>
     </properties>
 
     <dependencies>
@@ -149,23 +151,23 @@
 
         <!--安全模块-->
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.1.4.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.security</groupId>-->
+        <!--    <artifactId>spring-security-core</artifactId>-->
+        <!--    <version>5.1.4.RELEASE</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>5.1.4.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.security</groupId>-->
+        <!--    <artifactId>spring-security-web</artifactId>-->
+        <!--    <version>5.1.4.RELEASE</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>5.1.4.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.security</groupId>-->
+        <!--    <artifactId>spring-security-config</artifactId>-->
+        <!--    <version>5.1.4.RELEASE</version>-->
+        <!--</dependency>-->
 
         <!--        fast json -->
         <dependency>
@@ -174,12 +176,52 @@
             <version>1.2.75</version>
         </dependency>
 
-        <!--        swagger -->
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.5.22</version>
-        </dependency>
+        <!--&lt;!&ndash;        swagger &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--    <groupId>io.swagger</groupId>-->
+        <!--    <artifactId>swagger-annotations</artifactId>-->
+        <!--    <version>1.5.22</version>-->
+        <!--</dependency>-->
+
+        <!-- openapi 相关 -> 经测试 此版本有bug 不能用 ↓↓-->
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
+        <!--<dependency>-->
+        <!--    <groupId>io.springfox</groupId>-->
+        <!--    <artifactId>springfox-boot-starter</artifactId>-->
+        <!--    <version>3.0.0</version>-->
+        <!--    <exclusions>-->
+        <!--        <exclusion>-->
+        <!--            <groupId>org.springframework.plugin</groupId>-->
+        <!--            <artifactId>spring-plugin-core</artifactId>-->
+        <!--        </exclusion>-->
+        <!--    </exclusions>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.plugin</groupId>-->
+        <!--    <artifactId>spring-plugin-core</artifactId>-->
+        <!--    <version>2.0.0.RELEASE</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--    <groupId>org.openapitools</groupId>-->
+        <!--    <artifactId>jackson-databind-nullable</artifactId>-->
+        <!--    <version>0.2.1</version>-->
+        <!--</dependency>-->
+        <!-- openapi 相关 ↑↑-->
+
+        <!-- Swagger 依赖包 -->
+        <!--<dependency>-->
+        <!--    <groupId>io.springfox</groupId>-->
+        <!--    <artifactId>springfox-swagger2</artifactId>-->
+        <!--    <version>2.9.2</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--    <groupId>io.springfox</groupId>-->
+        <!--    <artifactId>springfox-swagger-ui</artifactId>-->
+        <!--    <version>2.9.2</version>-->
+        <!--</dependency>-->
+        <!-- Swagger end -->
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -198,7 +240,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -250,7 +291,6 @@
         <!--            <scope>system</scope>-->
         <!--            <systemPath>${project.basedir}/lib/jzsso.ticketFilter-1.4.8.jar</systemPath>-->
         <!--        </dependency>-->
-
 
         <!-- freemarker  -->
         <dependency>
@@ -409,6 +449,14 @@
         <!--    <artifactId>jna</artifactId>-->
         <!--    <version>3.0.9</version>-->
         <!--</dependency>-->
+
+        <!-- 汉语拼音 -->
+        <!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.1</version>
+        </dependency>
 
 
     </dependencies>
@@ -589,6 +637,37 @@
                 </executions>
             </plugin>
             <!--↑↑ proto 插件-->
+
+            <!-- openapi 插件 -->
+            <!--<plugin>-->
+            <!--    <groupId>org.openapitools</groupId>-->
+            <!--    <artifactId>openapi-generator-maven-plugin</artifactId>-->
+            <!--    <version>${openapi.generator.version}</version>-->
+            <!--    <executions>-->
+            <!--        <execution>-->
+            <!--            <id>open</id>-->
+            <!--            <goals>-->
+            <!--                <goal>generate</goal>-->
+            <!--            </goals>-->
+            <!--            <configuration>-->
+            <!--                &lt;!&ndash; API specifications should be split to multiple YML files, when the feature is implemented:-->
+            <!--                    https://github.com/OpenAPITools/openapi-generator/issues/6379 &ndash;&gt;-->
+            <!--                &lt;!&ndash;//api定义的yml文件所在&ndash;&gt;-->
+            <!--                <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>-->
+            <!--                <generatorName>spring</generatorName>-->
+            <!--                <apiPackage>${openapi.package}.open.controller</apiPackage>-->
+            <!--                <modelPackage>${openapi.package}.open.controller.model</modelPackage>-->
+            <!--                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>-->
+            <!--                <modelNamePrefix>Open</modelNamePrefix>-->
+            <!--                &lt;!&ndash;//如果api定义为 /users 或者 /oders 那么这里要加上对于的路径 order 否则无法生成对应的api接口&ndash;&gt;-->
+            <!--                <apisToGenerate>users</apisToGenerate>-->
+            <!--                <configOptions>-->
+            <!--                    <delegatePattern>true</delegatePattern>-->
+            <!--                </configOptions>-->
+            <!--            </configuration>-->
+            <!--        </execution>-->
+            <!--    </executions>-->
+            <!--</plugin>-->
 
         </plugins>
 

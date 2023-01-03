@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Queue;
 
 /*****************************************
- * description: 二叉树的代码实现
+ * description: 二叉树的代码实现, 感觉不太对
  * date: 15:30 2021/7/21
  * auth: wg
  *****************************************/
@@ -35,11 +35,22 @@ class Tree<T> {
 
         @Override
         public String toString() {
-            return this.value == null ? "" : this.value.toString();
+            return "TreeNode{" +
+                    "value=" + value +
+                    ", leftChild=" + leftChild +
+                    ", rightChild=" + rightChild +
+                    '}';
         }
     }
 
     private TreeNode<T> rootNode;//根结点
+
+    @Override
+    public String toString() {
+        return "Tree{" +
+                "rootNode=" + rootNode +
+                '}';
+    }
 
     /**
      * 查询该树的深度
@@ -346,6 +357,10 @@ class Tree<T> {
         mid.add("F");
         Tree<String> t = new Tree<>(pre, mid);
         Tree<String> t2 = new Tree<>(pre, mid);
+
+        System.out.println(t);
+        System.out.println(t2);
+
         System.out.println("前序遍历");
         t.preOrderTravel();
         System.out.println();

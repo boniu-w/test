@@ -222,7 +222,7 @@ public class MyMusicHandlerServiceImpl {
                                 song.setName(song.getName().replace("-", "").trim());
                             }
 
-                            song.setHexHash(FileUtil.getHexHash(file1));
+                            song.setHexHash(FileUtil.getSha256Hex(file1));
 
                             songList.add(song);
                         } else if (basicFileAttributes.isDirectory()) {
@@ -234,5 +234,4 @@ public class MyMusicHandlerServiceImpl {
         }
         return songList;
     }
-
 }
