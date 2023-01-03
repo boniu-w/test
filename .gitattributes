@@ -1,3 +1,2 @@
-application-wg.yml
-./src/main/resources/application-dev.yml merge=ours
-./src/main/resources/application-ubuntu.yml merge=ours
+application.yml
+./src/main/resources/application.yml merge=our
