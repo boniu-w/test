@@ -5,7 +5,7 @@ spring:
       max-file-size: -1
       max-request-size: -1
   profiles:
-    active: wg
+    active: ubuntu
   messages:
     basename: i18n.messages_common
     encoding: UTF-8
