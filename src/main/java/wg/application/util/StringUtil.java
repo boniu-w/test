@@ -301,6 +301,7 @@ public class StringUtil {
      * @author: wg
      * @description: 测试 事务 调用的工具类里有 try catch
      * 结论: 调用的工具类里有 try catch , 发生异常时 事务不生效, 不会回滚
+     * 因此, 工具类也需要抛出异常
      * @params:
      * @return:
      * @createTime: 9:37  2022/11/29
