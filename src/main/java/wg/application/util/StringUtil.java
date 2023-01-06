@@ -3,7 +3,6 @@ package wg.application.util;
 import org.apache.commons.lang3.StringUtils;
 import wg.application.exception.WgException;
 
-import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -316,6 +315,24 @@ public class StringUtil {
     }
 
     public static void testTransactionThrow() {
-      throw new WgException(500);
+        throw new WgException(500);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 二进制字符串 转十进制 int
+     * @params:
+     * @return:
+     * @createTime: 15:31  2023/1/6
+     * @updateTime: 15:31  2023/1/6
+     ************************************************************************/
+    public static int binaryString2DecimalInt(String binaryString) {
+        int sum = 0;
+        for (int i = 0; i < binaryString.length(); i++) {
+            char ch = binaryString.charAt(i);
+            if (ch > '2' || ch < '0') throw new NumberFormatException(String.valueOf(i));
+            sum = sum * 2 + (binaryString.charAt(i) - '0');
+        }
+        return sum;
     }
 }

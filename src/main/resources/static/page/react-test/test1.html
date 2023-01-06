@@ -33,6 +33,8 @@
         a = this.state.car;
 
         changeCar = () => {
+            console.log("this: ", this);
+
             let {car} = this.state
 
             if (car.length > 1) {

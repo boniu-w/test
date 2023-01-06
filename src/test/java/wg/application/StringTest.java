@@ -3,7 +3,6 @@ package wg.application;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -347,4 +346,18 @@ public class StringTest {
         System.out.print("000");
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 二进制字符串转十进制int
+     * @params:
+     * @return:
+     * @createTime: 15:32  2023/1/6
+     * @updateTime: 15:32  2023/1/6
+     ************************************************************************/
+    @Test
+    public void test2Dec() {
+        String a = "1111";
+        int i = StringUtil.binaryString2DecimalInt(a);
+        System.out.println(i);
+    }
 }

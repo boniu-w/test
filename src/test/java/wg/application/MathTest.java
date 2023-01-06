@@ -319,22 +319,57 @@ public class MathTest {
      ************************************************************************/
     @Test
     public void testYiHuo() {
+        // int a = 2;
+        // int b = 4;
+        //
+        // // int i1 = a ^ b;
+        // // System.out.println(i1); // 6
+        // //
+        // // int i = a ^ b ^ a;
+        // // System.out.println(i); // i = 4
+        //
+        // // 交换值, 而不用中间变量
+        // a = a ^ b; // a1 = a^b // 6
+        // b = b ^ a; // b = b^a1 = b^a^b = a // 2
+        // a = a ^ b; // a = a^b^a = b  // 4
+        //
+        // System.out.printf("a= %d, b= %d", a, b);
+        // System.out.println();
+
+        // 清晰版
         int a = 2;
         int b = 4;
 
-        int i1 = a ^ b;
-        System.out.println(i1); // 6
+        int i = a ^ b ^ a; // i=b=4
+        int j = a ^ b ^ b; // j=a=2 此步省略
+        int k = i ^ a ^ b; // k=a=2
 
-        int i = a ^ b ^ a;
-        System.out.println(i); // i = 4
+        // 最后 i=b, k=a
+        System.out.println(i);
+        System.out.println(k);
+    }
 
-        // 交换值, 而不用中间变量
-        a = a ^ b; // a1 = a^b
-        b = b ^ a; // b = b^a1 = b^a^b = a
-        a = a ^ b; // a = a^b^a = b
+    /************************************************************************
+     * @author: wg
+     * @description: 与 0 异或
+     * 结论: 任何数与0异或, 都是他本身
+     * @params:
+     * @return:
+     * @createTime: 13:57  2023/1/5
+     * @updateTime: 13:57  2023/1/5
+     ************************************************************************/
+    @Test
+    public void testXOR() {
+        int a = 2;
+        int b = 4;
 
-        System.out.printf("a= %d, b= %d", a, b);
+        // 与 0 异或
+        int c = 0;
+        int i2 = a ^ c;
+        int i3 = b ^ c;
 
+        System.out.println(i2); // 2
+        System.out.println(i3); // 4
     }
 
     /************************************************************************
