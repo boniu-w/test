@@ -546,4 +546,23 @@ public class CommonUtil {
         return obj;
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 反射判断 是否 有这个字段
+     * @params:
+     * @return:
+     * @createTime: 14:37  2022/8/17
+     * @updateTime: 14:37  2022/8/17
+     ************************************************************************/
+    public static <T> boolean  hasField(T t, String fieldName) {
+        Class<?> aClass = t.getClass();
+        Field[] fields = aClass.getDeclaredFields();
+        for (Field f : fields) {
+            if (fieldName.equals(f.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

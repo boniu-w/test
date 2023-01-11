@@ -1,5 +1,9 @@
 package wg.application;
 
+import cn.hutool.core.util.ReflectUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,11 +14,9 @@ import wg.application.util.StringUtil;
 import wg.application.util.CommonUtil;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /*****************************************
@@ -359,5 +361,47 @@ public class StringTest {
         String a = "1111";
         int i = StringUtil.binaryString2DecimalInt(a);
         System.out.println(i);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description:
+     * 1. jsonArray alibaba
+     * 2. list 平均值
+     * 3. jsonObject alibaba
+     * @params:
+     * @return:
+     * @createTime: 11:01  2023/1/10
+     * @updateTime: 11:01  2023/1/10
+     ************************************************************************/
+    @Test
+    public void testJsonArray() {
+        String jsonString = "[{\"key\":2,\"sectionCode\":\"M2\",\"c1\":\"222\",\"min\":222,\"c2\":\"222\"},{\"key\":1,\"sectionCode\":\"M1\",\"min\":333,\"c1\":\"333\",\"c2\":\"333\"},{\"sectionCode\":\"最小值\",\"c1\":222,\"min\":222,\"c2\":222}]";
+        JSONArray jsonArray = JSON.parseArray(jsonString);
+
+        System.out.println(jsonArray);
+
+        ArrayList<Double> mins = new ArrayList<>();
+        ArrayList<Double> cs = new ArrayList<>();
+        for (Object o : jsonArray) {
+            JSONObject jsonObject = JSON.parseObject(o.toString());
+            Map<String, Object> innerMap = jsonObject.getInnerMap();
+            if (innerMap.containsKey("key")) {
+                double min = jsonObject.getDouble("min");
+                mins.add(min);
+            } else {
+                double c1 = jsonObject.getDouble("c1");
+                double c2 = jsonObject.getDouble("c2");
+                cs.add(c1);
+                cs.add(c2);
+            }
+        }
+
+        double ma = mins.stream().mapToDouble(Double::valueOf).average().getAsDouble();
+        double ca = cs.stream().mapToDouble(Double::valueOf).average().getAsDouble();
+
+        System.out.println();
+        System.out.println(ma);
+        System.out.println(ca);
     }
 }
