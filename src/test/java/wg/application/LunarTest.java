@@ -17,18 +17,21 @@ public class LunarTest {
 
     @Test
     public void holidayTest() {
-        List<Holiday> holidays = HolidayUtil.getHolidays(2020);
+        List<Holiday> holidays = HolidayUtil.getHolidays(2023);
         System.out.println(holidays);
 
-        List<Holiday> list = HolidayUtil.getHolidays(2022, 2);
+        List<Holiday> list = HolidayUtil.getHolidays(2023, 2);
         System.out.println(list);
     }
 
     @Test
-    public void jieqiTest(){
+    public void jieqiTest() {
         Lunar lunar = new Lunar();
 
         List<String> dayJiShen = lunar.getDayJi();
-        System.out.println(dayJiShen);
+        System.out.println("忌: " + dayJiShen);
+
+        List<String> dayYi = lunar.getDayYi();
+        System.out.println("宜: " + dayYi);
     }
 }

@@ -19,8 +19,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import wg.application.annotation.Excel;
 import wg.application.entity.ExcelParams;
-import wg.application.excel.IliDetailExcel;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -29,17 +27,16 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 
 /*************************************************************
  * @Package com.Gzs.demo.SpringSecurityDemo.Common1.Utils
  * @author wg
+ * @description: 以后不要用了, 直接用 cn.afterturn.easypoi --01122023
  * @date 2020/7/2 10:00
  * @version
  * @Copyright 使用本工具 要结合 我的 Excel 注解使用,
  *************************************************************/
-
 public class ExcelUtil {
     private Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
     private static Workbook workbook;

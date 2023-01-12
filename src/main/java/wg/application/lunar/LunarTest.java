@@ -28,7 +28,7 @@ public class LunarTest {
      * 某日是否在数九中, 不在-> 空指针, 在-> 打印
      */
     public static void getShuJiu() {
-        // Solar solar = new Solar(2021, 12, 21, 14, 26, 12);
+        // Solar solar = new Solar(2023, 1, 20, 14, 26, 12);
         // Lunar lunar = solar.getLunar();
         Lunar lunar = Lunar.fromDate(new Date());
         ShuJiu shuJiu = lunar.getShuJiu();
