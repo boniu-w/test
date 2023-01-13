@@ -545,7 +545,7 @@ public class TestApplicationTests {
     }
 
     @Test
-    public void equalsTest(){
+    public void equalsTest() {
         int a = 0;
         String as = "0";
         System.out.println(as.equals(a)); // false
@@ -799,36 +799,51 @@ public class TestApplicationTests {
 
         Random random = new Random();
 
-        List<User> a = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
 
         for (int i = 0; i < 10000; i++) {
             User user = new User();
             int i1 = random.nextInt(10000);
             user.setAge(i1);
+            user.setName("wg");
 
-            a.add(user);
+            if (i / 2 == 0) user.setName("ui");
+            userList.add(user);
         }
 
-        System.out.println("===  " + a.size());
+        System.out.println("userList.size() : " + userList.size());
 
         long l1 = System.currentTimeMillis();
 
         // 第一种 常用的方式
-        HashSet<User> users = new HashSet<>(a);
+        HashSet<User> users = new HashSet<>(userList);
         long l2 = System.currentTimeMillis();
-        System.out.println("最简单的 用时: " + (l2 - l1));
+        System.out.println("set 用时: " + (l2 - l1));
         System.out.println("set -> " + users.size());
 
         long l3 = System.currentTimeMillis();
+
         // 第二种, stream 方式
-        ArrayList<User> collect = a.stream().collect(Collectors.collectingAndThen(
-                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getAge))),
-                ArrayList::new)
-        );
+        ArrayList<User> collect = userList.stream()
+                .collect(
+                        Collectors.collectingAndThen(
+                                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(User::getAge))), ArrayList::new)
+                );
+
+        // stream 多属性去重
+        ArrayList<User> collect1 = userList.stream()
+                .collect(
+                        Collectors.collectingAndThen(
+                                Collectors.toCollection(() -> {
+                                    return new TreeSet<>(Comparator.comparing(item -> item.getAge() + ";" + item.getName()));
+                                }),
+                                ArrayList::new)
+                );
 
         long l4 = System.currentTimeMillis();
         System.out.println("stream 用时: " + (l4 - l3));
-        System.out.println("---  " + collect.size());
+        System.out.println("collect.size() : " + collect.size());
+        System.out.println("collect1.size() : " + collect1.size());
     }
 
     @Test

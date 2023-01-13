@@ -2,7 +2,9 @@ package wg.application;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.*;
+
 import com.googlecode.javaewah.EWAHCompressedBitmap;
 import org.junit.Assert;
 import wg.application.entity.Student;
@@ -12,6 +14,7 @@ import wg.application.util.MapUtil;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /************************************************************************
@@ -408,4 +411,43 @@ public class MapTest {
         System.out.println(filterMap);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 融合两个map
+     * @params:
+     * @return:
+     * @createTime: 15:02  2023/1/13
+     * @updateTime: 15:02  2023/1/13
+     ************************************************************************/
+    @Test
+    public void mergeMap() {
+        Map<Integer, Integer> map1 = new HashMap<>();
+        map1.put(1, 1);
+        map1.put(2, 2);
+        map1.put(3, 3);
+        map1.put(4, 4);
+
+        Map<Integer, Integer> map2 = new HashMap<>();
+        map2.put(1, 0);
+        map2.put(5, 5);
+        map2.put(6, 6);
+        map2.put(3, 4);
+
+        //将map1和map2收集成一个流
+        Stream<Map.Entry<Integer, Integer>> concat = Stream.concat(map1.entrySet().stream(), map2.entrySet().stream());
+
+        //然后将其收集成一个新的map
+        Map<Integer, Integer> map = concat.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1));
+        map.forEach((key, value) -> {
+            System.out.println(key + ": " + value);
+        });
+
+        // 新map 谁 覆盖谁 的问题, 看代码
+        Map<Integer, Integer> map22 = concat.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v2));
+        map22.forEach((key, value) -> {
+            System.out.println(key + ": " + value);
+        });
+
+
+    }
 }
