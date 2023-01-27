@@ -9,7 +9,7 @@ import java.util.Date;
 public class LunarTest {
 
     public static void main(String[] args) {
-        // getToday();
+        getToday();
         getPerson();
         System.out.println();
         getShuJiu();
