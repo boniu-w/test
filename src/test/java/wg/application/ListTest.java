@@ -4,12 +4,14 @@ import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import wg.application.entity.Student;
 import wg.application.entity.User;
 import wg.application.util.CollectionUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /************************************************************************
  * @author: wg
@@ -414,5 +416,57 @@ public class ListTest {
         System.out.println(list1);
 
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 两个对象list 根据某些属性去重
+     * 中心思想: 利用map 的key 不重复 原理
+     * @params:
+     * @return:
+     * @createTime: 16:21  2023/1/29
+     * @updateTime: 16:21  2023/1/29
+     ************************************************************************/
+    // @Transactional(rollbackFor = Exception.class)
+    // private int insertPipe(List<PipeEntity> pipeEntityList) {
+    //     int insert = 0;
+    //     // 对 导入的表去重
+    //     ArrayList<PipeEntity> distinctExcelList = pipeEntityList.stream()
+    //             .collect(Collectors.collectingAndThen(Collectors.toCollection(() -> {
+    //                                 return new TreeSet<>(Comparator.comparing(item -> item.getPlatformInCode() + ";" + item.getPipeCode()));
+    //                             })
+    //                             , ArrayList::new)
+    //             );
+    //
+    //     Map<String, PipeEntity> excelMap = distinctExcelList.stream()
+    //             .collect(Collectors.toMap(item -> item.getPipeCode() + "-" + item.getPlatformInCode(), m -> m));
+    //
+    //     List<PipeEntity> datasourcePipeList = pipeDao.selectList(new QueryWrapper<>());
+    //     Map<String, PipeEntity> datasourcePipeMap = datasourcePipeList.stream()
+    //             .collect(Collectors.toMap(item -> item.getPipeCode() + "-" + item.getPlatformInCode(), m -> m));
+    //
+    //     // 融合 两个map
+    //     Stream<Map.Entry<String, PipeEntity>> stream = Stream.concat(datasourcePipeMap.entrySet().stream(), excelMap.entrySet().stream());
+    //     Map<String, PipeEntity> entityMap = stream.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v2));
+    //
+    //     ArrayList<PipeEntity> pipeEntities = new ArrayList<>();
+    //     UpdateWrapper<PipeEntity> updateWrapper = null;
+    //     for (PipeEntity pipeEntity : entityMap.values()) {
+    //         if (pipeEntity.getId() == null) {
+    //             updateWrapper = new UpdateWrapper<>();
+    //             updateWrapper.lambda()
+    //                     .eq(PipeEntity::getPlatformInCode, pipeEntity.getPlatformInCode())
+    //                     .eq(PipeEntity::getPipeCode, pipeEntity.getPipeCode());
+    //             pipeDao.delete(updateWrapper);
+    //
+    //             pipeEntities.add(pipeEntity);
+    //         }
+    //     }
+    //
+    //     for (PipeEntity pipeEntity : pipeEntities) {
+    //         insert += pipeDao.insert(pipeEntity);
+    //     }
+    //
+    //     return insert;
+    // }
 
 }
