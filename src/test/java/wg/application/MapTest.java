@@ -32,7 +32,7 @@ public class MapTest {
 
         HashMap<String, Object> filterMap = new HashMap<>();
 
-        filterMap.put("a", params.get("a"));
+        filterMap.put("a", params.get("a")); // {a=null}
 
         System.out.println(filterMap);
     }
@@ -442,12 +442,13 @@ public class MapTest {
             System.out.println(key + ": " + value);
         });
 
+        System.out.println();
+
         // 新map 谁 覆盖谁 的问题, 看代码
-        Map<Integer, Integer> map22 = concat.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v2));
+        Stream<Map.Entry<Integer, Integer>> concat2 = Stream.concat(map1.entrySet().stream(), map2.entrySet().stream());
+        Map<Integer, Integer> map22 = concat2.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v2));
         map22.forEach((key, value) -> {
             System.out.println(key + ": " + value);
         });
-
-
     }
 }

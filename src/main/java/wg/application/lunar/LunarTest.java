@@ -11,7 +11,7 @@ import java.util.List;
 public class LunarTest {
 
     public static void main(String[] args) {
-        // getToday();
+        getToday();
         getPerson();
         System.out.println();
         getShuJiu();
