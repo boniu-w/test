@@ -3,8 +3,10 @@ package wg.application.lunar;
 import com.nlf.calendar.Lunar;
 import com.nlf.calendar.ShuJiu;
 import com.nlf.calendar.Solar;
+import com.nlf.calendar.util.LunarUtil;
 
 import java.util.Date;
+import java.util.List;
 
 public class LunarTest {
 
@@ -13,6 +15,7 @@ public class LunarTest {
         getPerson();
         System.out.println();
         getShuJiu();
+
     }
 
     /**
@@ -40,5 +43,9 @@ public class LunarTest {
         Lunar lunar = solar.getLunar();
 
         System.out.println(lunar.toFullString());
+        List<String> dayXiongSha = lunar.getDayXiongSha();
+        for (String xs : dayXiongSha) {
+            System.out.println("今日凶煞: " + xs);
+        }
     }
 }
