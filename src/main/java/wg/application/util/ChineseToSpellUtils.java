@@ -21,6 +21,10 @@ public class ChineseToSpellUtils {
 
 		String firstSpell = getFullSpell("盥而不荐有孚顒若");
 		System.out.println(firstSpell);
+
+		String s = getFullSpell("犴");
+		System.out.println(s);
+
 	}
 
 	/**
