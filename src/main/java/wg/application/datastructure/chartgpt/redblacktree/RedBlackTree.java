@@ -1,4 +1,4 @@
-package wg.application.algorithm.chatgpt.redblacktree;
+package wg.application.datastructure.chartgpt.redblacktree;
 
 /************************************************************************
  * @author: wg
