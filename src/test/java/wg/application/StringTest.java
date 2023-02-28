@@ -404,4 +404,11 @@ public class StringTest {
         System.out.println(ma);
         System.out.println(ca);
     }
+
+    @Test
+    public void testHash256() {
+        String input = "hello world";
+        String hash256 = StringUtil.hash256(input);
+        System.out.println(hash256);
+    }
 }

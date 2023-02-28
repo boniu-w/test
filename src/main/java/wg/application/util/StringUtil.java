@@ -3,6 +3,8 @@ package wg.application.util;
 import org.apache.commons.lang3.StringUtils;
 import wg.application.exception.WgException;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -335,5 +337,34 @@ public class StringUtil {
             sum = sum * 2 + (binaryString.charAt(i) - '0');
         }
         return sum;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 将输入的字符 转换为16进制字符串
+     * @params:
+     * @return:
+     * @createTime: 15:30  2023/2/22
+     * @updateTime: 15:30  2023/2/22
+     ************************************************************************/
+    public static String hash256(String input) {
+        try {
+            // 创建SHA-256哈希函数实例
+            MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
+
+            // 将输入转换为字节数组并进行哈希计算
+            byte[] hashBytes = sha256.digest(input.getBytes());
+
+            // 将哈希值转换为十六进制字符串
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
