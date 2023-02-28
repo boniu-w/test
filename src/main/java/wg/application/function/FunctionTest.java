@@ -16,14 +16,23 @@ public class FunctionTest {
     @Resource
     private static Test test;
 
-    public static void main(String[] args) {
-        String s = "123";
-        change(s, str -> {
-            System.out.println(str);
-            return Integer.parseInt(str);
-        });
+    // public static void main(String[] args) {
+    //     String s = "123";
+    //     change(s, str -> {
+    //         System.out.println(str);
+    //         return Integer.parseInt(str);
+    //     });
+    //
+    //     test();
+    // }
 
-        test();
+    public static void main(String[] args) {
+        MyFunction myFunction = (str, num) -> {
+            return str.length() > num;
+        };
+
+        boolean hello = myFunction.test("hello", 3);
+        System.out.println(hello);
     }
 
     private static void change(String s, Function<String, Integer> function) {

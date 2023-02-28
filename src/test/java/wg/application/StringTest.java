@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
+import wg.application.function.StringLength;
 import wg.application.util.StringUtil;
 import wg.application.util.CommonUtil;
 
@@ -405,10 +406,33 @@ public class StringTest {
         System.out.println(ca);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 将字符串转为 sha256字符串
+     * @params:
+     * @return:
+     * @createTime: 15:17  2023/2/28
+     * @updateTime: 15:17  2023/2/28
+     ************************************************************************/
     @Test
     public void testHash256() {
         String input = "hello world";
         String hash256 = StringUtil.hash256(input);
         System.out.println(hash256);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: function test
+     * @params:
+     * @return:
+     * @createTime: 15:16  2023/2/28
+     * @updateTime: 15:16  2023/2/28
+     ************************************************************************/
+    @Test
+    public void testFunction(){
+        StringLength stringLength = new StringLength();
+        Integer length = stringLength.apply("hello");
+
     }
 }
