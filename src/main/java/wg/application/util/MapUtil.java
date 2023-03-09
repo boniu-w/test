@@ -1,10 +1,11 @@
 package wg.application.util;
 
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /************************************************************************
@@ -99,4 +100,53 @@ public class MapUtil {
 
         return false;
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: map 转实体类
+     * @params:
+     * @return:
+     * @createTime: 9:22  2023/3/9
+     * @updateTime: 9:22  2023/3/9
+     ************************************************************************/
+    public static <T> List<T> toObjectList(List<Map<String, Object>> detailList, Class<T> tClass) {
+        List<T> excelArrayList = new ArrayList<>();
+        // map 转实体类
+        if (detailList != null && detailList.size() > 0) {
+            T t = null;
+            for (Map<String, Object> detailMap : detailList) {
+                t = JSON.parseObject(JSON.toJSONString(detailMap), tClass);
+                if (t != null) excelArrayList.add(t);
+            }
+        }
+
+        return excelArrayList;
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 另一种写法
+     * @params:
+     * @return:
+     * @createTime: 9:24  2023/3/9
+     * @updateTime: 9:24  2023/3/9
+     ************************************************************************/
+    // public static <T> List<T> toObjectList(List<Map<String, Object>> detailList, Class<T> tClass) {
+    //     List<T> excelArrayList = new ArrayList<>();
+    //     // map 转实体类
+    //     try {
+    //         if (detailList != null && detailList.size() > 0) {
+    //             T t = null;
+    //             for (Map<String, Object> detailMap : detailList) {
+    //                 t = tClass.newInstance();
+    //                 BeanUtils.populate(t, detailMap);
+    //                 // t = JSON.parseObject(JSON.toJSONString(detailMap), tClass);
+    //                 if (t != null) excelArrayList.add(t);
+    //             }
+    //         }
+    //     } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
+    //         throw new RuntimeException(e);
+    //     }
+    //     return excelArrayList;
+    // }
 }

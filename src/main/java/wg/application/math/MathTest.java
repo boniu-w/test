@@ -14,6 +14,14 @@ import java.util.List;
 public class MathTest {
 
 
+    /************************************************************************
+     * @author: wg
+     * @description: 左移j位, 形成新long , 用于存储
+     * @params:
+     * @return:
+     * @createTime: 9:01  2023/3/8
+     * @updateTime: 9:01  2023/3/8
+     ************************************************************************/
     public static void main(String[] args) {
         long pow = 0L;
 
@@ -24,10 +32,10 @@ public class MathTest {
         // int[] a = {0, 1, 3, 31};
         for (int j : a) {
             pow += 1L << j;
-            System.out.println(pow);
+            // System.out.println(pow);
         }
 
-        List<Integer> list = MathUtil.log2(pow);
+        List<Integer> list = MathUtil.log2(1159705341952L);
         list.forEach(System.out::println);
     }
 

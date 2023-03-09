@@ -367,4 +367,18 @@ public class StringUtil {
             return null;
         }
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 两个数字型字符串是否相等
+     * @params:
+     * @return:
+     * @createTime: 17:55  2023/3/8
+     * @updateTime: 17:55  2023/3/8
+     ************************************************************************/
+    public static boolean isEqual(String str1, String str2) {
+        double num1 = Double.parseDouble(str1);
+        double num2 = Double.parseDouble(str2);
+        return Double.compare(num1, num2) == 0;
+    }
 }

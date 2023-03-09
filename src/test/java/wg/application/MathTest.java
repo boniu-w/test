@@ -493,4 +493,9 @@ public class MathTest {
         System.out.println("b1 == b2 -> " + (b1 == b2)); // false
     }
 
+    @Test
+    public void testObj() {
+        boolean equals = Objects.equals("1.6", "1.60");
+        System.out.println(equals); // false
+    }
 }
