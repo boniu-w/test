@@ -494,9 +494,9 @@
 
                 <!-- includeSystemScope 代表maven打包时会将外部引入的jar包（比如在根目录下或resource文件下新加外部jar包）打包到项目jar，在服务器上项目才能运行，不加此配置，本地可以运行，因为本地可以再lib下找到外部包，但是服务器上jar中是没有的。-->
                 <!-- 项目上线时要打开 -->
-                <!--<configuration>-->
-                <!--    <includeSystemScope>true</includeSystemScope>-->
-                <!--</configuration>-->
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
 
                 <!--<dependencies>-->
                 <!--    <dependency>-->

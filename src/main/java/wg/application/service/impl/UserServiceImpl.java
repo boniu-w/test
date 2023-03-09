@@ -128,9 +128,12 @@ public class UserServiceImpl implements UserService {
      * @author: wg
      * @description: 测试调用 私用方法
      * 测试结果:
-     * 1: update方法有 @Transactional 注解, _updateTestTransactional() 没有 Transactional 注解, 发生异常时 事务是生效的, 回滚
-     * 2: update方法没有 @Transactional 注解, _updateTestTransactional() 有 Transactional 注解 发生异常时 事务不生效, 不回滚
+     * 1: update方法有 @Transactional 注解, private _updateTestTransactional() 没有 Transactional 注解, 发生异常时 事务是生效的, 回滚
+     * 2: update方法没有 @Transactional 注解, private _updateTestTransactional() 有 Transactional 注解 发生异常时 事务不生效, 不回滚
      * 结论: @Transactional 注解 所在的方法必须是 public 的
+     * 解释: 在 Spring 中，因为 Spring 是通过 AOP 代理来实现事务的，只有公共方法才能被代理调用。这是因为，对于非公共方法，只能在类内
+     * 部调用，而 Spring 的事务管理机制是通过在代理对象中嵌入事务增强器来实现事务控制的。如果目标方法不是公共的，Spring 无法在代理对象中创建
+     * 一个包含该方法的事务增强器。因此，使用 @Transactional 注解时，确保要标记公共方法，以便 Spring 能够代理该方法并应用事务增强器。
      * @params:
      * @return:
      * @createTime: 15:13  2022/10/12
