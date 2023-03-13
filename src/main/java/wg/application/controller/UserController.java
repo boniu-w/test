@@ -84,4 +84,11 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+
+
+    @PostMapping(value = "/test_update_interceptor")
+    public void testUpdateInterceptor(User user) {
+        userService.testUpdateInterceptor(user);
+        System.out.println(user);
+    }
 }

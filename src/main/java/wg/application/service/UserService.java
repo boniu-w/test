@@ -24,4 +24,6 @@ public interface UserService {
     public void testThrow2(User user);
 
     public void testTryAndThrow(User user);
+
+    void testUpdateInterceptor(User user);
 }

@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         criteria.andIdEqualTo(1);
         // User user = new User();
         user.setAge(13);
-        userMapper.updateByExampleSelective(user,userExample);
+        userMapper.updateByExampleSelective(user, userExample);
 
         try {
             int i = 1 / 0;
@@ -245,4 +245,33 @@ public class UserServiceImpl implements UserService {
     //     userName = "wg";
     //     return new org.springframework.security.core.userdetails.User(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     // }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 测试拦截器
+     * @params:
+     * @return:
+     * @createTime: 11:07  2023/3/13
+     * @updateTime: 11:07  2023/3/13
+     ************************************************************************/
+    @Transactional(rollbackFor = Exception.class)
+    public void testUpdateInterceptor(User user) {
+        // User user = new User();
+        user.setId(1L);
+        user.setAge(13);
+        userMapper.updateByPrimaryKeySelective(user);
+
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andIdEqualTo(1);
+        // User user = new User();
+        user.setAge(13);
+        userMapper.updateByExampleSelective(user, userExample);
+
+        try {
+            int i = 1 / 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
