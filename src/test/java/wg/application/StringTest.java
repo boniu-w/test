@@ -430,9 +430,24 @@ public class StringTest {
      * @updateTime: 15:16  2023/2/28
      ************************************************************************/
     @Test
-    public void testFunction(){
+    public void testFunction() {
         StringLength stringLength = new StringLength();
         Integer length = stringLength.apply("hello");
+    }
 
+    /************************************************************************
+     * @author: wg
+     * @description:
+     * @params:
+     * @return:
+     * @createTime: 11:30  2023/3/17
+     * @updateTime: 11:30  2023/3/17
+     ************************************************************************/
+    @Test
+    public void testObjectsEquals() {
+        String a = "sdf";
+        String b = "sdf";
+
+        System.out.println(Objects.equals(a, b)); // true
     }
 }

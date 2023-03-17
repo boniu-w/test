@@ -498,4 +498,23 @@ public class MathTest {
         boolean equals = Objects.equals("1.6", "1.60");
         System.out.println(equals); // false
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 初始化数组时, 默认值
+     * @params:
+     * @return:
+     * @createTime: 16:32  2023/3/15
+     * @updateTime: 16:32  2023/3/15
+     ************************************************************************/
+    @Test
+    public void testInit() {
+        double[] doubles = new double[3];
+        System.out.println(doubles[0]);
+        System.out.println(doubles[1]);
+        System.out.println(doubles[2]);
+
+        double a = 1.111;
+        System.out.println(a);
+    }
 }

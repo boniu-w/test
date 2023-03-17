@@ -921,7 +921,6 @@ public class TestApplicationTests {
             System.out.print(v);
             System.out.println();
         });
-
     }
 
     /*****************************************************
@@ -2046,4 +2045,24 @@ public class TestApplicationTests {
         System.out.println(a);
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: break 测试, 循环 break
+     * @params:
+     * @return: break 只打断当前循环
+     * @createTime: 11:48  2023/3/16
+     * @updateTime: 11:48  2023/3/16
+     ************************************************************************/
+    @Test
+    public void testLoopBreak() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == 1) {
+                    System.out.println("j = " + j);
+                    break;
+                }
+            }
+            System.out.println("i = " + i);
+        }
+    }
 }
