@@ -9,6 +9,9 @@ import wg.application.entity.Student;
 import wg.application.entity.User;
 import wg.application.util.CollectionUtil;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -469,4 +472,38 @@ public class ListTest {
     //     return insert;
     // }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 对象list 中, 某个属性最大 的 那个对象,
+     * @params:
+     * @return:
+     * @createTime: 18:34  2023/3/27
+     * @updateTime: 18:34  2023/3/27
+     ************************************************************************/
+    @Test
+    public void testMaxObject(){
+        User xiao = new User();
+        xiao.setName("xiao");
+        xiao.setBirthday(LocalDateTime.now());
+
+        User zhong = new User();
+        zhong.setName("zhong");
+        zhong.setBirthday(LocalDateTime.now().plus(200, ChronoUnit.SECONDS));
+
+        User da = new User();
+        da.setName("da");
+        da.setBirthday(LocalDateTime.now().plus(2000, ChronoUnit.SECONDS));
+
+        ArrayList<User> userList = new ArrayList<>();
+        userList.add(zhong);
+        userList.add(xiao);
+        userList.add(da);
+
+        User max = userList.stream()
+                .max(Comparator.comparing(User::getBirthday))
+                .orElse(null);
+
+        System.out.println(max); // da
+
+    }
 }

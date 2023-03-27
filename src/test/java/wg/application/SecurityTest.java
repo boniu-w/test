@@ -43,4 +43,16 @@ public class SecurityTest {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    public void test256(){
+        File file = new File("C:\\Users\\wg\\Downloads\\ci_71207\\ci\\kfsc\\oo-ci-kfsc-common-security\\4.6.0\\oo-ci-kfsc-common-security-4.6.0.pom");
+        String hexHash = null;
+        try {
+            hexHash = FileUtil.getSha256Hex(file);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(hexHash);
+    }
 }
