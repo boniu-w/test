@@ -14,6 +14,10 @@ public class MathTest {
 
     @Test
     public void test() {
+        double a = 0;
+        double b = 0.0;
+        System.out.println(a == b); // true
+        System.out.println(b != 0); // false
 
         // scale 小数点后的位数
         double d = 2.22D;

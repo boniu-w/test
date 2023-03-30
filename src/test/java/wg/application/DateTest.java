@@ -22,11 +22,9 @@ public class DateTest {
         Date date = new Date();
         BigDecimal decimal = new BigDecimal("2.5");
         int i = decimal.multiply(new BigDecimal("365")).intValue();
-        Date date1 = DateUtils.addDateDays(date, i);
 
         System.out.println(decimal);
         System.out.println(i);
-        System.out.println(date1);
     }
 
     @Test

@@ -332,11 +332,11 @@
         <!--</dependency>-->
 
         <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-core -->
-        <!--<dependency>-->
-        <!--    <groupId>cn.hutool</groupId>-->
-        <!--    <artifactId>hutool-core</artifactId>-->
-        <!--    <version>5.7.17</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.7.17</version>
+        </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -362,13 +362,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>31.1-jre</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>2.9.9</version>
         </dependency>
 
         <dependency>

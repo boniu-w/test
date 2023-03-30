@@ -1,15 +1,14 @@
 package wg.application.interceptor;
 
-import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import wg.application.annotation.AccessLimit;
 import wg.application.util.CommonUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.time.LocalDateTime;
 
 /************************************************************************
  * author: wg
@@ -32,7 +31,7 @@ public class MyInterceptorTest extends HandlerInterceptorAdapter {
                 // arg 就是 updateTest() 方法的参数值
                 // 处理参数值的逻辑
                 if (CommonUtil.hasField(arg, "updateTime")) {
-                    CommonUtil.setter(arg, "updateTime", new LocalDateTime());
+                    CommonUtil.setter(arg, "updateTime", LocalDateTime.now());
                 }
             }
         }
