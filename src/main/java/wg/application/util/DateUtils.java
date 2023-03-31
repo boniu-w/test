@@ -9,6 +9,8 @@
 package wg.application.util;
 
 import org.apache.commons.lang3.StringUtils;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -75,7 +77,7 @@ public class DateUtils {
         }
 
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            DateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             return simpleDateFormat.parse(strDate);
         } catch (ParseException e) {
             return null;
@@ -117,8 +119,13 @@ public class DateUtils {
     public static LocalDateTime toLocalDateTime(String str) {
         // 字符串 转 LocalDateTime
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime parse = LocalDateTime.parse(str, fmt);
-        return parse;
+        return LocalDateTime.parse(str, fmt);
+    }
+
+    public static LocalDateTime toLocalDateTime(String str, String dateParrern) {
+        // 字符串 转 LocalDateTime
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(dateParrern);
+        return LocalDateTime.parse(str, fmt);
     }
 
     /************************************************************************
@@ -131,6 +138,11 @@ public class DateUtils {
      ************************************************************************/
     public static String toLocalDateTimeString(LocalDateTime localDateTime) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return fmt.format(localDateTime);
+    }
+
+    public static String toLocalDateTimeString(LocalDateTime localDateTime, String dateParrern) {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(dateParrern);
         return fmt.format(localDateTime);
     }
 }

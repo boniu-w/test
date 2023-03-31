@@ -451,6 +451,12 @@
             <version>2.5.1</version>
         </dependency>
 
+        <!-- sentinel 流量控制 -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-core</artifactId>
+            <version>1.8.6</version>
+        </dependency>
 
     </dependencies>
 
