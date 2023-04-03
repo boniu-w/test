@@ -44,3 +44,8 @@ logs/
 *.log
 wg-log-error.html
 *error.html
+
+*-ubuntu.yml
+*-wg.yml
+src/main/resources/application-ubuntu.yml
+src/main/resources/application-wg.yml
