@@ -13,7 +13,7 @@ public class Main {
         Component component = new ConcreteComponent();
         // component.operation();
         
-        Component decoratedComponent =  new ConcreteDecorator(component);
+        Component decoratedComponent = new ConcreteDecorator(component);
         decoratedComponent.operation();
         
     }

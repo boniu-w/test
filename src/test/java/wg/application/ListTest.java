@@ -24,7 +24,7 @@ import java.util.stream.Stream;
  ************************************************************************/
 @SpringBootTest
 public class ListTest {
-
+    
     /************************************************************************
      * @author: wg
      * @description: 差集
@@ -41,37 +41,37 @@ public class ListTest {
             student = new Student();
             student.setAge(i);
             list1.add(student);
-
+            
         }
-
+        
         ArrayList<Student> list2 = new ArrayList<>(list1);
         for (int i = 0; i < 1; i++) {
             student = new Student();
             student.setAge(i);
             list2.add(student);
-
+            
         }
         student = new Student();
         student.setAge(4);
         list2.add(student);
-
+        
         // list2.clear();
         // student = new Student();
         // student.setAge(4);
         // list2.add(student);
-
+        
         System.out.println("list1  ");
         list1.forEach(System.out::println);
         System.out.println("list2  ");
         list2.forEach(st -> System.out.println(st));
-
+        
         System.out.println();
         List<Student> collect = list1.stream()
                 .filter(st -> !list2.contains(st))
                 .collect(Collectors.toList());
         System.out.println("collect差集  " + collect.size());
         collect.forEach(System.out::println);
-
+        
         System.out.println();
         List<Student> collect2 = list2.stream()
                 .filter(st -> !list1.contains(st))
@@ -79,7 +79,7 @@ public class ListTest {
         System.out.println("collect2差集  " + collect2.size());
         collect2.forEach(System.out::println);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 空 null
@@ -92,13 +92,13 @@ public class ListTest {
     public void nullTest() {
         List list = null;
         // System.out.println(list.size()); // NullPointerException
-
+        
         System.out.println(ObjectUtils.isEmpty(list)); // true
         System.out.println(list == null);
         System.out.println(list != null);
-
+        
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 找不同
@@ -112,17 +112,17 @@ public class ListTest {
         ArrayList<Integer> list1 = new ArrayList<>();
         list1.add(1);
         list1.add(5);
-
+        
         ArrayList<Integer> list2 = new ArrayList<>();
         list2.add(1);
         list2.add(2);
         list2.add(3);
-
+        
         // 找出 list2 中有, list1 没有的
         Collection<Integer> different = CollectionUtil.getDifferentNoDuplicate(list1, list2);
         different.forEach(System.out::println);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 找出多余的
@@ -135,59 +135,59 @@ public class ListTest {
     public void testDiff() {
         Student s0 = new Student();
         s0.setName("a");
-
+        
         Student s1 = new Student();
         s1.setName("b");
-
+        
         Student s2 = new Student();
         s2.setName("c");
-
+        
         ArrayList<Student> minioList = new ArrayList<>();
         minioList.add(s0);
         minioList.add(s1);
         minioList.add(s2);
-
+        
         Student s3 = new Student();
         s3.setName("a");
-
+        
         Student s4 = new Student();
         s4.setName("b");
-
+        
         Student s5 = new Student();
         s5.setName("d");
-
+        
         Student s6 = new Student();
         s6.setName("f");
-
+        
         ArrayList<Student> frontList = new ArrayList<>();
         frontList.add(s3);
         frontList.add(s4);
         frontList.add(s5);
         frontList.add(s6);
-
+        
         List<Student> redundant = minioList.stream()
                 .filter(student -> !frontList.stream().map(Student::getName).collect(Collectors.toList()).contains(student.getName()))
                 .collect(Collectors.toList());
-
-
+        
+        
         redundant.forEach(System.out::println);
-
+        
     }
-
+    
     @Test
     public void test3() {
         Student student = new Student();
         student.setAge(4);
         student.setId(11111);
-
+        
         User user = new User();
         user.setAge(5);
-
+        
         BeanUtil.copyProperties(student, user);
-
+        
         System.out.println(user);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: foreach
@@ -201,33 +201,33 @@ public class ListTest {
         list.add(1);
         list.add(2);
         list.add(3);
-
+        
     }
-
+    
     @Test
     public void testSame() {
         // 集合一
-
+        
         List<String> first = new ArrayList<>();
-
+        
         first.add("jim");
-
+        
         first.add("tom");
-
+        
         first.add("jack");
 
 //集合二
-
+        
         List<String> second = new ArrayList<>();
-
+        
         second.add("jack");
-
+        
         second.add("happy");
-
+        
         second.add("sun");
-
+        
         second.add("good");
-
+        
         // Collection exists=new ArrayList(second);
         //
         // Collection notexists=new ArrayList(second);
@@ -239,12 +239,12 @@ public class ListTest {
         // notexists.removeAll(exists);
         //
         // System.out.println("相同："+notexists);
-
+        
         Object[] objects = CollectionUtil.getSame(first, second).toArray();
         List<String> collect = new ArrayList<>(CollectionUtil.getSame(first, second));
         System.out.println(objects);
     }
-
+    
     /**
      * 测试 group by
      * 测试结果: 并不会触发空指针
@@ -258,17 +258,17 @@ public class ListTest {
             student.setAge(i);
             list1.add(student);
         }
-
+        
         Student student1 = new Student();
         student1.setAge(1);
         list1.add(student1);
-
+        
         list1.clear();
-
+        
         Map<Integer, List<Student>> ageMap = list1.stream().collect(Collectors.groupingBy(Student::getAge));
         System.out.println(ageMap);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: flatMap: 把二维list 转成 一维 的 (把几个小的list转换到一个大的list)
@@ -287,7 +287,7 @@ public class ListTest {
         List<String> teamWestIndies = Arrays.asList("Sammy", "Gayle", "Narine");
         List<String> teamSriLanka = Arrays.asList("Mahela", "Sanga", "Dilshan");
         List<String> teamPakistan = Arrays.asList("Misbah", "Afridi", "Shehzad");
-
+        
         List<List<String>> playersInWorldCup2016 = new ArrayList<>();
         playersInWorldCup2016.add(teamIndia);
         playersInWorldCup2016.add(teamAustralia);
@@ -297,29 +297,29 @@ public class ListTest {
         playersInWorldCup2016.add(teamWestIndies);
         playersInWorldCup2016.add(teamSriLanka);
         playersInWorldCup2016.add(teamPakistan);
-
+        
         playersInWorldCup2016.forEach(System.out::println);
-
+        
         // Let's print all players before Java 8
         List<String> listOfAllPlayers = new ArrayList<>();
-
+        
         for (List<String> team : playersInWorldCup2016) {
             listOfAllPlayers.addAll(team);
         }
-
+        
         System.out.println("Players playing in world cup 2016");
         System.out.println(listOfAllPlayers);
-
-
+        
+        
         // Now let's do this in Java 8 using FlatMap
         List<String> flatMapList = playersInWorldCup2016
                 .stream()
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-
+        
         System.out.println("List of all Players using Java 8");
         System.out.println(flatMapList);
-
+        
         // -------------------------------------------------------------------------------------------------------------
         ArrayList<Student> studentList1 = new ArrayList<>();
         ArrayList<Student> studentList2 = new ArrayList<>();
@@ -329,35 +329,35 @@ public class ListTest {
             student = new Student();
             student.setId(i);
             student.setAge(0);
-
+            
             studentList1.add(student);
-
+            
             student = new Student();
             student.setId((i + 10) << 1);
             student.setAge(10);
             studentList2.add(student);
-
+            
             student = new Student();
             student.setId((i + 20) << 1);
             student.setAge(20);
             studentList3.add(student);
         }
-
+        
         ArrayList<ArrayList<Student>> list = new ArrayList<>();
         list.add(studentList1);
         list.add(studentList2);
         list.add(studentList3);
-
+        
         list.forEach(System.out::println);
-
+        
         List<Student> studentList = list.stream()
                 .flatMap(Collection::stream)
                 .distinct()
                 .collect(Collectors.toList());
-
+        
         studentList.forEach(System.out::println);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法,
@@ -372,23 +372,23 @@ public class ListTest {
     public void arrayTest() {
         String[] str = new String[]{"yang", "hao"};
         List<String> list = Arrays.asList(str);
-
+        
         // list.add("123");
         // System.out.println(list); // UnsupportedOperationException
-
+        
         // ↓↓******************* start <Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组> *******************↓↓
         str[0] = "79";
         System.out.println(list);
         // ↑↑******************* end  <Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组>  *******************↑↑
-
+        
     }
-
+    
     @Test
     public void removeTest() {
         List<String> list = new ArrayList<>();
         int sum = list.stream().mapToInt(e -> (int) Long.parseLong(e)).sum();
         System.out.println("sum: " + sum);
-
+        
         list.add("1");
         list.add("2");
         Iterator<String> iterator = list.iterator();
@@ -399,7 +399,7 @@ public class ListTest {
             }
         }
         System.out.println(list);
-
+        
         List<String> list1 = new ArrayList<>();
         list1.add("1");
         list1.add("2");
@@ -408,18 +408,18 @@ public class ListTest {
                 list1.remove(item);
             }
         }
-
+        
         // ConcurrentModificationException
         for (String item : list1) {
             if ("2".equals(item)) {
                 list1.remove(item);
             }
         }
-
+        
         System.out.println(list1);
-
+        
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 两个对象list 根据某些属性去重
@@ -471,7 +471,7 @@ public class ListTest {
     //
     //     return insert;
     // }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 对象list 中, 某个属性最大 的 那个对象,
@@ -481,29 +481,72 @@ public class ListTest {
      * @updateTime: 18:34  2023/3/27
      ************************************************************************/
     @Test
-    public void testMaxObject(){
+    public void testMaxObject() {
         User xiao = new User();
         xiao.setName("xiao");
         xiao.setBirthday(LocalDateTime.now());
-
+        
         User zhong = new User();
         zhong.setName("zhong");
         zhong.setBirthday(LocalDateTime.now().plus(200, ChronoUnit.SECONDS));
-
+        
         User da = new User();
         da.setName("da");
         da.setBirthday(LocalDateTime.now().plus(2000, ChronoUnit.SECONDS));
-
+        
         ArrayList<User> userList = new ArrayList<>();
         userList.add(zhong);
         userList.add(xiao);
         userList.add(da);
-
+        
         User max = userList.stream()
                 .max(Comparator.comparing(User::getBirthday))
                 .orElse(null);
-
+        
         System.out.println(max); // da
-
+        
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 适配器模式 测试
+     * 需要注意的是，由于 asList() 方法返回的只是一个视图，而非真正的 List 对象，因此需要注意一下几个问题：
+     * 无法对返回的列表进行添加元素或删除元素的操作；
+     * 无法使用 clear() 方法清空列表；
+     * 修改返回的列表中的元素值，并不会影响原始数组中的元素；
+     * 如果传入的参数是基本数据类型的数组，则会将整个数组作为一个元素添加到列表中。
+     * @params:
+     * @return:
+     * @createTime: 15:18  2023/4/4
+     * @updateTime: 15:18  2023/4/4
+     ************************************************************************/
+    @Test
+    public void testAs() {
+        User xiao = new User();
+        xiao.setName("xiao");
+        xiao.setBirthday(LocalDateTime.now());
+        
+        User zhong = new User();
+        zhong.setName("zhong");
+        zhong.setBirthday(LocalDateTime.now().plus(200, ChronoUnit.SECONDS));
+        
+        User da = new User();
+        da.setName("da");
+        da.setBirthday(LocalDateTime.now().plus(2000, ChronoUnit.SECONDS));
+        
+        User[] users = new User[3];
+        users[0] = xiao;
+        users[1] = zhong;
+        users[2] = da;
+        
+        List<User> list = Arrays.asList(users);
+        List<User[]> users1 = Collections.singletonList(users);
+        
+        int[] a = {1, 23, 2};
+        List<int[]> ints = Arrays.asList(a);
+        
+        
+        list.add(new User());
+        System.out.println(list);
     }
 }
