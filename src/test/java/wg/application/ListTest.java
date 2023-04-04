@@ -28,6 +28,8 @@ public class ListTest {
     /************************************************************************
      * @author: wg
      * @description: 差集
+     * 对象list 的差集, 取的应该是 ==, 所以 对象的差集不应该用 这个util,
+     * 应该是 比较对象的某个属性, 然后取差集, 或 重写 equals hashcode
      * @params:
      * @return:
      * @createTime: 15:48  2022/4/26
@@ -45,7 +47,7 @@ public class ListTest {
         }
         
         ArrayList<Student> list2 = new ArrayList<>(list1);
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 3; i++) {
             student = new Student();
             student.setAge(i);
             list2.add(student);
@@ -55,29 +57,35 @@ public class ListTest {
         student.setAge(4);
         list2.add(student);
         
-        // list2.clear();
-        // student = new Student();
-        // student.setAge(4);
-        // list2.add(student);
-        
         System.out.println("list1  ");
         list1.forEach(System.out::println);
         System.out.println("list2  ");
         list2.forEach(st -> System.out.println(st));
+        System.out.println();
+        // list2.clear();
+        // student = new Student();
+        // student.setAge(4);
+        // list2.add(student);
+        Collection sub1 = CollectionUtil.sub(list1, list2);
+        System.out.println("list1 短, 在前: " + sub1); // collect2差集.size() ==  0
+        
+        Collection sub = CollectionUtil.sub(list2, list1);
+        System.out.println("list2 长, 在前: " + sub); // collect2差集.size() ==  4 ;结论: 这个方法用的是 removeAll(list1) 这种方法, 所以, 基本不符合真实业务需求, 鸡肋
         
         System.out.println();
+ 
         List<Student> collect = list1.stream()
                 .filter(st -> !list2.contains(st))
                 .collect(Collectors.toList());
         System.out.println("collect差集  " + collect.size());
-        collect.forEach(System.out::println);
+        collect.forEach(System.out::println); // collect差集.size() ==  0
         
         System.out.println();
         List<Student> collect2 = list2.stream()
                 .filter(st -> !list1.contains(st))
                 .collect(Collectors.toList());
         System.out.println("collect2差集  " + collect2.size());
-        collect2.forEach(System.out::println);
+        collect2.forEach(System.out::println); // collect2差集.size() ==  1 ; 结论: 可用, 但必须 list2.size() > list1.size() ;
     }
     
     /************************************************************************

@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
  */
 
 public class CollectionUtil {
-
+    
     /**
      * 不允许实例化
      */
     private CollectionUtil() {
     }
-
+    
     /**
      * 获取两个集合的不同元素
      *
@@ -57,7 +57,7 @@ public class CollectionUtil {
         }
         return csReturn;
     }
-
+    
     /**
      * 获取两个集合的不同元素,去除重复
      *
@@ -69,7 +69,7 @@ public class CollectionUtil {
     public static <T> Collection<T> getDifferentNoDuplicate(Collection<T> collmax, Collection<T> collmin) {
         return new HashSet(getDifferent(collmax, collmin));
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 找相同
@@ -81,14 +81,14 @@ public class CollectionUtil {
     public static <T> Collection<T> getSame(Collection<T> list1, Collection<T> list2) {
         ArrayList<T> exist = new ArrayList<>(list2);
         ArrayList<T> same = new ArrayList<>(list2);
-
+        
         exist.removeAll(list1);
-
+        
         same.removeAll(exist);
-
+        
         return same;
     }
-
+    
     /************************************************************************
      * @description: 计算 list 里 的某个 项的 和
      * map 键相同 值求和
@@ -113,12 +113,12 @@ public class CollectionUtil {
         }).collect(Collectors.toList());
         return sumMap;
     }
-
+    
     /**
      * 拆分集合
      *
-     * @param <T> 泛型对象
-     * @param resList 需要拆分的集合
+     * @param <T>           泛型对象
+     * @param resList       需要拆分的集合
      * @param subListLength 每个子集合的元素个数
      * @return 返回拆分后的各个集合组成的列表
      * 代码里面用到了guava和common的结合工具类
@@ -154,15 +154,15 @@ public class CollectionUtil {
         }
         return ret;
     }
-
+    
     public static boolean isNotEmpty(Collection<?> collection) {
         return !isEmpty(collection);
     }
-
+    
     public static boolean isEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();
     }
-
+    
     public static void main(String[] args) {
         List<String> list = Lists.newArrayList();
         int size = 1099;
@@ -176,5 +176,41 @@ public class CollectionUtil {
         for (List<String> obj : temps) {
             System.out.println(String.format("row:%s -> size:%s,data:%s", ++j, obj.size(), obj));
         }
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 交集
+     * @params:
+     * @return:
+     * @createTime: 17:29  2023/4/4
+     * @updateTime: 17:29  2023/4/4
+     ************************************************************************/
+    public static Collection and(Collection list1, Collection list2) {
+        return CollectionUtils.intersection(list1, list2);
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 并集
+     * @params:
+     * @return:
+     * @createTime: 17:30  2023/4/4
+     * @updateTime: 17:30  2023/4/4
+     ************************************************************************/
+    public static Collection or(Collection list1, Collection list2) {
+        return CollectionUtils.union(list1, list2);
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 差集
+     * @params:
+     * @return:
+     * @createTime: 17:32  2023/4/4
+     * @updateTime: 17:32  2023/4/4
+     ************************************************************************/
+    public static Collection sub(Collection list1, Collection list2) {
+        return CollectionUtils.subtract(list1, list2);
     }
 }

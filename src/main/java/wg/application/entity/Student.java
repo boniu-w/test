@@ -20,73 +20,73 @@ import java.util.Objects;
  * 这些详细信息可能因编译器实现而异，因此在反序列化过程中可能会导致意外的InvalidClassExceptions。
  *************************************************************/
 public class Student implements Serializable {
-
+    
     private static final Long serialVersionUID = 1L;
-
+    
     @NotBlank(message = "用户名不能为空")
     private String name;
-
+    
     // @NotBlank  // 数字 类型不能用 这个注解, 只有 string 类型的能用
     // @Pattern(regexp = "^[0-9]{1,2}$", message = "年龄是1-2位整数") // 数字 类型不能用 这个注解, 只有 string 类型的能用
     @Max(value = 199)
     private Integer age;
-
+    
     private Integer id;
     private Integer sex;
-
+    
     private String birthday;
-
+    
     public Student(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
-
+    
     public Student(String name, Integer age, Integer sex) {
         this.name = name;
         this.age = age;
         this.sex = sex;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public Integer getAge() {
         return age;
     }
-
+    
     public void setAge(Integer age) {
         this.age = age;
     }
-
+    
     public Integer getId() {
         return id;
     }
-
+    
     public void setId(Integer id) {
         this.id = id;
     }
-
+    
     public Integer getSex() {
         return sex;
     }
-
+    
     public void setSex(Integer sex) {
         this.sex = sex;
     }
-
+    
     public String getBirthday() {
         return birthday;
     }
-
+    
     public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
-
+    
     public Student(String name, Integer age, Integer id, Integer sex, String birthday) {
         this.name = name;
         this.age = age;
@@ -94,10 +94,10 @@ public class Student implements Serializable {
         this.sex = sex;
         this.birthday = birthday;
     }
-
+    
     public Student() {
     }
-
+    
     @Override
     public String toString() {
         return "Student{" +
@@ -108,7 +108,7 @@ public class Student implements Serializable {
                 ", birthday='" + birthday + '\'' +
                 '}';
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: lang3
@@ -132,8 +132,8 @@ public class Student implements Serializable {
     // public int hashCode() {
     //     return new HashCodeBuilder(17, 37).append(name).append(age).append(id).append(sex).append(birthday).toHashCode();
     // }
-
-
+    
+    
     /************************************************************************
      * @author: wg
      * @description: guava
@@ -154,8 +154,8 @@ public class Student implements Serializable {
     // public int hashCode() {
     //     return Objects.hashCode(name, age, id, sex, birthday);
     // }
-
-
+    
+    
     /************************************************************************
      * @author: wg
      * @description: java7+
@@ -169,11 +169,13 @@ public class Student implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return name.equals(student.name) && age.equals(student.age) && id.equals(student.id) && sex.equals(student.sex) && birthday.equals(student.birthday);
+        return age.equals(student.age);
+        // return name.equals(student.name) && age.equals(student.age) && id.equals(student.id) && sex.equals(student.sex) && birthday.equals(student.birthday);
     }
-
+    
     @Override
     public int hashCode() {
-        return Objects.hash(name, age, id, sex, birthday);
+        return Objects.hash(age);
+        // return Objects.hash(name, age, id, sex, birthday);
     }
 }
