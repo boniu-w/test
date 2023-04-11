@@ -73,7 +73,7 @@ public class ListTest {
         System.out.println("list2 长, 在前: " + sub); // collect2差集.size() ==  4 ;结论: 这个方法用的是 removeAll(list1) 这种方法, 所以, 基本不符合真实业务需求, 鸡肋
         
         System.out.println();
- 
+        
         List<Student> collect = list1.stream()
                 .filter(st -> !list2.contains(st))
                 .collect(Collectors.toList());
@@ -502,12 +502,19 @@ public class ListTest {
         da.setName("da");
         da.setBirthday(LocalDateTime.now().plus(2000, ChronoUnit.SECONDS));
         
+        
+        User zuida = new User();
+        zuida.setName("zuida");
+        zuida.setBirthday(null);
+        
         ArrayList<User> userList = new ArrayList<>();
         userList.add(zhong);
         userList.add(xiao);
         userList.add(da);
+        userList.add(zuida);
         
         User max = userList.stream()
+                .filter(e -> e.getBirthday() != null)
                 .max(Comparator.comparing(User::getBirthday))
                 .orElse(null);
         
