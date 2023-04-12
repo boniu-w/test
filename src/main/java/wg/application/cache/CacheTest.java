@@ -15,9 +15,19 @@ import wg.application.entity.User;
 @Component
 public class CacheTest {
     
-    @Cacheable(key = "#user.id")
-    public Long cacheUserId(User user) {
+    /************************************************************************
+     * @author: wg
+     * @description:
+     *  `@AliasFor("cacheNames")`
+     *  `String[] value() default {};`
+     * @params:
+     * @return:
+     * @createTime: 11:32  2023/4/12
+     * @updateTime: 11:32  2023/4/12
+     ************************************************************************/
+    @Cacheable(key = "#user.id", value = "123")
+    public String cacheUserId(User user) {
         System.out.println("run cache " + user);
-        return user.getId();
+        return user.getName();
     }
 }

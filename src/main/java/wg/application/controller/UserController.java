@@ -23,9 +23,6 @@ public class UserController {
     @Resource
     CacheManager cacheManager;
     
-    @Resource
-    CacheTest cacheTest;
-    
     @GetMapping(value = "page")
     public Result<List<User>> page() {
         
@@ -39,16 +36,20 @@ public class UserController {
         result.setResult(all);
         
         // 测试缓存, 必须启动redis
-        cacheTest.cacheUserId(all.get(0));
+        CacheTest cacheBean = SpringContextUtils.getBean("cacheTest", CacheTest.class);
+        cacheBean.cacheUserId(all.get(5));  // 赵敏
         
         Cache cache = cacheManager.getCache("myCacheTest");
-        // cache.get
         String name = cache.getName();
-        System.out.println(name);
+        System.out.println("cache group name : " + name);
         
-        Cache.ValueWrapper wrapper = cache.get(all.get(0).getId());
+        Cache.ValueWrapper wrapper = cache.get(all.get(5).getId());
         Object obj = wrapper.get();
-        System.out.println(obj);
+        System.out.println("value: " + obj); // 赵敏
+        
+        Cache cache1 = cacheManager.getCache("123");
+        Cache.ValueWrapper wrapper1 = cache1.get(all.get(5).getId());
+        System.out.println(wrapper1.get()); // 赵敏
         
         return result;
     }
