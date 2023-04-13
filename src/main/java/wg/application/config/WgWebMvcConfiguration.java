@@ -101,7 +101,7 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
-        // simpleModule.addSerializer(BigDecimal.class, new CustomerDecimalSerializer()); 不管用
+        simpleModule.addSerializer(BigDecimal.class, new CustomerDecimalSerializer()); // 不管用
         
         mapper.registerModule(simpleModule);
         converter.setObjectMapper(mapper);

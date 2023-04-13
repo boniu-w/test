@@ -67,7 +67,7 @@ public class User implements Serializable {
      */
     private String gender;
     
-    // @JsonSerialize(using = CustomerDecimalSerializer.class)
+    @JsonSerialize(using = CustomerDecimalSerializer.class)
     // @JsonDeserialize(using = MyObjectIntToStringSerializer.class)
     private BigDecimal wealth;
     /**
