@@ -11,6 +11,7 @@ import wg.application.util.SpringContextUtils;
 import wg.application.vo.Result;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -33,23 +34,24 @@ public class UserController {
     public Result<List<User>> list() {
         Result<List<User>> result = new Result<>();
         List<User> all = userService.list();
+        all.get(0).setWealth(new BigDecimal("1"));
         result.setResult(all);
         
-        // 测试缓存, 必须启动redis
-        CacheTest cacheBean = SpringContextUtils.getBean("cacheTest", CacheTest.class);
-        cacheBean.cacheUserId(all.get(5));  // 赵敏
-        
-        Cache cache = cacheManager.getCache("myCacheTest");
-        String name = cache.getName();
-        System.out.println("cache group name : " + name);
-        
-        Cache.ValueWrapper wrapper = cache.get(all.get(5).getId());
-        Object obj = wrapper.get();
-        System.out.println("value: " + obj); // 赵敏
-        
-        Cache cache1 = cacheManager.getCache("123");
-        Cache.ValueWrapper wrapper1 = cache1.get(all.get(5).getId());
-        System.out.println(wrapper1.get()); // 赵敏
+        // // 测试缓存, 必须启动redis, 不想启动redis, 可以先引入github依赖,然后在配置文件中修改 spring.cache.type=caffeine
+        // CacheTest cacheBean = SpringContextUtils.getBean("cacheTest", CacheTest.class);
+        // cacheBean.cacheUserId(all.get(5));  // 赵敏
+        //
+        // Cache cache = cacheManager.getCache("myCacheTest");
+        // String name = cache.getName();
+        // System.out.println("cache group name : " + name);
+        //
+        // // Cache.ValueWrapper wrapper = cache.get(all.get(5).getId());
+        // // Object obj = wrapper.get();
+        // // System.out.println("value: " + obj); // 赵敏
+        //
+        // Cache cache1 = cacheManager.getCache("123");
+        // Cache.ValueWrapper wrapper1 = cache1.get(all.get(5).getId());
+        // System.out.println(wrapper1.get()); // 赵敏
         
         return result;
     }
