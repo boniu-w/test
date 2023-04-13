@@ -34,7 +34,7 @@ public class UserController {
     public Result<List<User>> list() {
         Result<List<User>> result = new Result<>();
         List<User> all = userService.list();
-        all.get(0).setWealth(new BigDecimal("1"));
+        all.get(0).setWealth(new BigDecimal("-99999.99"));
         result.setResult(all);
         
         // // 测试缓存, 必须启动redis, 不想启动redis, 可以先引入github依赖,然后在配置文件中修改 spring.cache.type=caffeine

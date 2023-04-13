@@ -20,7 +20,7 @@ public class CustomerDecimalSerializer extends JsonSerializer<BigDecimal> {
     @Override
     public void serialize(BigDecimal value, JsonGenerator gen, SerializerProvider serializers)
             throws IOException {
-        if (value.compareTo(new BigDecimal("1")) == 0) {
+        if (value.compareTo(new BigDecimal("-99999.99")) == 0) {
             gen.writeString("/");
         } else {
             gen.writeNumber(value);

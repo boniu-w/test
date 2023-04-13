@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
@@ -100,8 +101,9 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+        // simpleModule.addSerializer(BigDecimal.class, new CustomerDecimalSerializer()); 不管用
+        
         mapper.registerModule(simpleModule);
-
         converter.setObjectMapper(mapper);
         return converter;
     }

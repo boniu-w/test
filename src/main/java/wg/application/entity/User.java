@@ -15,9 +15,9 @@ import java.util.Objects;
  *
  * @mbg.generated do_not_delete_during_merge
  */
-// @JsonInclude(JsonInclude.Include.NON_NULL)
 public class User implements Serializable {
     
+    // 不管用
     // private Object writeReplace() throws ObjectStreamException {
     //     if (wealth.compareTo(new BigDecimal("1")) == 0) {
     //         return "/";
@@ -67,7 +67,7 @@ public class User implements Serializable {
      */
     private String gender;
     
-    @JsonSerialize(using = CustomerDecimalSerializer.class)
+    // @JsonSerialize(using = CustomerDecimalSerializer.class)
     // @JsonDeserialize(using = MyObjectIntToStringSerializer.class)
     private BigDecimal wealth;
     /**
