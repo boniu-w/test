@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import wg.application.entity.User;
 import wg.application.function.StringLength;
+import wg.application.util.DateUtils;
 import wg.application.util.StringUtil;
 import wg.application.util.CommonUtil;
 
@@ -19,6 +20,8 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /*****************************************
@@ -501,6 +504,37 @@ public class StringTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 正则
+     * @params:
+     * @return:
+     * @createTime: 15:02  2023/4/14
+     * @updateTime: 15:02  2023/4/14
+     ************************************************************************/
+    @Test
+    public void testRegex(){
+        String regex = null;
+        String regex1 = "\\d{4}(\\-|\\/|.)\\d{1,2}(\\-|\\/|.)\\d{1,2}$";
+        String regex2 = "\\d{4}(\\-|\\/|.)\\d{1,2}$";
         
+        String date1="2020/02/23";
+        String date2="2005/01";
+        
+        Matcher matcher = Pattern.compile(regex1).matcher(date1);
+        if (matcher.find()) {
+            System.out.println(regex1);
+            Date date = DateUtils.stringToDate(date1, regex1);
+            System.out.println(date);
+        }
+        
+        Matcher matcher1 = Pattern.compile(regex2).matcher(date2);
+        if (matcher1.find()) {
+            System.out.println(regex2);
+            Date date = DateUtils.stringToDate(date2, regex2);
+            System.out.println(date);
+        }
     }
 }

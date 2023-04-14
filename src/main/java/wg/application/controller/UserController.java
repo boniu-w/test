@@ -1,11 +1,13 @@
 package wg.application.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.*;
 import wg.application.cache.CacheTest;
 import wg.application.entity.User;
 import wg.application.exception.WgException;
+import wg.application.sentinel.FallBackHandler;
 import wg.application.service.UserService;
 import wg.application.util.SpringContextUtils;
 import wg.application.vo.Result;
@@ -31,6 +33,7 @@ public class UserController {
     }
     
     @GetMapping(value = "/list")
+    @SentinelResource(value = "userList", fallback = "fallbackHandler")
     public Result<List<User>> list() {
         Result<List<User>> result = new Result<>();
         List<User> all = userService.list();
@@ -117,5 +120,29 @@ public class UserController {
     public void testUpdateInterceptor(User user) {
         userService.testUpdateInterceptor(user);
         System.out.println(user);
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: sentinel test
+     * @params:
+     * @return:
+     * @createTime: 10:32  2023/4/14
+     * @updateTime: 10:32  2023/4/14
+     ************************************************************************/
+    @GetMapping(value = "/sentinel_list")
+    @SentinelResource(value = "sentinelList", fallback = "fallbackHandler")
+    public Result<List<User>> sentinelList() {
+        System.out.println("sentinel list");
+        Result<List<User>> result = new Result<>();
+        List<User> all = userService.list();
+        all.get(0).setWealth(new BigDecimal("-99999.99"));
+        
+        result.setResult(all);
+        return result;
+    }
+    
+    public void  fallbackHandler(){
+        System.out.println("usercontroller fall back");
     }
 }

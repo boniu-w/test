@@ -31,7 +31,7 @@ public class SentinelTest {
             } catch (BlockException e1) {
                 /*流控逻辑处理 - 开始*/
                 System.out.println("block!");
-                // return;
+                return;
                 /*流控逻辑处理 - 结束*/
             } finally {
                 if (entry != null) {
