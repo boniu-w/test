@@ -28,6 +28,7 @@ public class ChannelUtil {
 
     @PostConstruct
     private void initChannelUtil() {
+        System.out.println(" >>>>>>>>>>>  channelutil init  <<<<<<<<<<<");
         channelUtil = this;
     }
 

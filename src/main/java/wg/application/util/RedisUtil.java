@@ -31,6 +31,7 @@ public class RedisUtil {
 
     @PostConstruct
     public  void initRedisUtil() {
+        System.out.println(" >>>>>>>>>>>  redisUtil init  <<<<<<<<<<<");
         redisUtil = this;
     }
 

@@ -40,7 +40,7 @@ public class TimerTest {
      * @params:
      * @return:
      ************************************************************************/
-    @Scheduled(cron = "0/10 * * * * ?")
+    // @Scheduled(cron = "0/10 * * * * ?")
     public void testSpringBootTimerTask(){
         List<User> all = userService.list();
         all.forEach(System.out::println);

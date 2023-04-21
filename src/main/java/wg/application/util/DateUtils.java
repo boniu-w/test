@@ -91,12 +91,22 @@ public class DateUtils {
 
     public static LocalDateTime toLocalDateTime(Date date) {
         if (date == null) return null;
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        
+        // // 格式化 LocalDateTime
+        // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // String formattedDateTime = localDateTime.format(formatter);
+        //
+        // // 判断格式是否正确
+        // boolean isValidFormat = formattedDateTime.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}");
+        // System.out.println(isValidFormat); // true or false，取决于格式是否正确
     }
 
     public static LocalDate toLocalDate(Date date) {
         if (date == null) return null;
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Instant instant = Instant.ofEpochMilli(date.getTime());
+        return instant.atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     public static Date toDate(LocalDateTime localDateTime) {

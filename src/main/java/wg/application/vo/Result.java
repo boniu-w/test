@@ -41,7 +41,7 @@ public class Result<T> implements Serializable {
      * 返回数据对象 data
      */
     // @ApiModelProperty(value = "返回数据对象")
-    private T result;
+    private T data;
 
     /**
      * 时间戳
@@ -74,11 +74,11 @@ public class Result<T> implements Serializable {
     }
 
     public T getResult() {
-        return result;
+        return data;
     }
 
     public void setResult(T result) {
-        this.result = result;
+        this.data = result;
     }
 
     public long getTimestamp() {

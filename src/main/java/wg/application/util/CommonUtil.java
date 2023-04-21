@@ -30,6 +30,7 @@ public class CommonUtil {
 
     @PostConstruct
     public void initCommonUtil() {
+        System.out.println(" >>>>>>>>>>>  commonutil init  <<<<<<<<<<<");
         commonUtil = this;
     }
 
