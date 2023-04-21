@@ -1,15 +1,11 @@
 package wg.application.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.*;
-import wg.application.cache.CacheTest;
 import wg.application.entity.User;
 import wg.application.exception.WgException;
-import wg.application.sentinel.FallBackHandler;
 import wg.application.service.UserService;
-import wg.application.util.SpringContextUtils;
 import wg.application.vo.Result;
 
 import javax.annotation.Resource;
@@ -39,7 +35,7 @@ public class UserController {
         List<User> all = userService.list();
         all.get(0).setWealth(new BigDecimal("-99999.99"));
         all.get(0).setGender("man"); // 500
-        result.setResult(all);
+        result.setData(all);
         
         // // 测试缓存, 必须启动redis, 不想启动redis, 可以先引入github依赖,然后在配置文件中修改 spring.cache.type=caffeine
         // CacheTest cacheBean = SpringContextUtils.getBean("cacheTest", CacheTest.class);
@@ -138,7 +134,7 @@ public class UserController {
         List<User> all = userService.list();
         all.get(0).setWealth(new BigDecimal("-99999.99"));
         
-        result.setResult(all);
+        result.setData(all);
         return result;
     }
     

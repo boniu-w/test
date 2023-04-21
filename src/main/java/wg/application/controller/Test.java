@@ -19,6 +19,7 @@ import wg.application.component.TransformTitle;
 import wg.application.config.SpringIOCTest;
 import wg.application.entity.*;
 import wg.application.enumeration.Title;
+import wg.application.exception.Assert;
 import wg.application.exception.WgException;
 import wg.application.service.AspectService;
 import wg.application.service.LiuShuiInterface;
@@ -1513,22 +1514,27 @@ public class Test {
         ArrayList<User> users = new ArrayList<>();
         try {
             ResultSet resultSet = JdbcUtil.jdbcQuery("select * from user");
+            // ResultSet resultSet = JdbcUtil.jdbcQuery1("select * from user"); // java.sql.SQLException: Operation not allowed after ResultSet closed
             
-            while (resultSet.next()) {
-                User user1 = new User();
-                String name = resultSet.getString("name");
-                user1.setName(name);
-                System.out.println("name : " + name);
-                Date birthday = resultSet.getDate("birthday");
-                if (birthday != null) {
-                    LocalDateTime localDateTime = DateUtils.toLocalDateTime(birthday);
-                    user1.setBirthday(localDateTime);
-                    System.out.println("localDateTime : " + localDateTime);
-                    System.out.println("birthday : " + birthday);
+            Assert.notNull(resultSet, "resultSet cannot be null");
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    User user1 = new User();
+                    String name = resultSet.getString("name");
+                    user1.setName(name);
+                    System.out.println("name : " + name);
+                    Date birthday = resultSet.getTimestamp("birthday");
+                    if (birthday != null) {
+                        LocalDateTime localDateTime = DateUtils.toLocalDateTime(birthday);
+                        user1.setBirthday(localDateTime);
+                        System.out.println("localDateTime : " + localDateTime);
+                        System.out.println("birthday : " + birthday);
+                    }
+                    users.add(user1);
                 }
-                users.add(user1);
             }
-            userResult.setResult(users);
+            
+            userResult.setData(users);
             return userResult;
         } catch (Exception e) {
             e.printStackTrace();

@@ -277,4 +277,29 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hash(id, name, age, birthday, gender, wealth, createTime, updateTime);
     }
+    
+    /************************************************************************
+     * @author: wg
+     * @description:
+     *     这个方法是在对象被垃圾回收器回收之前被调用。具体的时间点是不确定的，取决于垃圾回收器的运行状态和策略。一般来说，当一个
+     * 对象变得不可达（即没有任何引用指向它）时，垃圾回收器就会将其标记为垃圾对象并在适当的时机回收它，回收之前会调用该对象的finalize()方法，
+     * 在该方法中可以进行一些清理工作，类似于C++中的析构函数。但是，由于垃圾回收的时机是不确定的，因此finalize()方法并不能保证一定会被执行，
+     * 也不能保证被执行的顺序。因此，不建议在该方法中编写任何关键性代码。在Java 9中，finalize()方法已经被标记为deprecated，建议使用其他方
+     * 式进行清理工作，如使用try-with-resources结构、PhantomReference等
+     *     一般情况下，即使你关闭了程序，finalize()方法也不会立即被调用。这是因为Java的垃圾回收机制并不是实时的，而是基于一些算法和策略来判断对
+     * 象是否需要被回收。垃圾回收时机是由虚拟机根据当前的内存使用情况和垃圾回收算法等因素来决定的，因此finalize()方法的调用并不是实时的，也不
+     * 能保证一定会被调用。另外，因为finalize()方法的调用是由垃圾回收器负责的，而Java虚拟机中有多种垃圾回收器，它们也可能存在一些差异，进一
+     * 步影响finalize()方法的调用。
+     *     因此，为了确保程序的正确性和可靠性，不要在finalize()方法中编写过于关键的代码，并且不要过度依赖finalize()方法的调用。
+     * 可以采用try-with-resources结构、手动释放资源等方式，在不需要对象时主动关闭相应的资源。
+     * @params:
+     * @return:
+     * @createTime: 14:33  2023/4/21
+     * @updateTime: 14:33  2023/4/21
+     ************************************************************************/
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("user 垃圾回收");
+        super.finalize();
+    }
 }

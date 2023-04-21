@@ -57,7 +57,7 @@ public class DiskTest {
                 list.add(map);
                 logger.info(map.toString());
             }
-            res.setResult(list);
+            res.setData(list);
             res.success("查询成功");
         } catch (Exception e) {
             res.error500("查询失败" + e.getMessage());

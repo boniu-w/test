@@ -73,11 +73,11 @@ public class Result<T> implements Serializable {
         this.code = code;
     }
 
-    public T getResult() {
+    public T getData() {
         return data;
     }
 
-    public void setResult(T result) {
+    public void setData(T result) {
         this.data = result;
     }
 
@@ -126,7 +126,7 @@ public class Result<T> implements Serializable {
         Result<Object> r = new Result<Object>();
         r.setSuccess(true);
         r.setCode(HttpStatus.OK.value());
-        r.setResult(data);
+        r.setData(data);
         return r;
     }
 

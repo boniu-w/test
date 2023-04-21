@@ -40,6 +40,7 @@ public class JdbcUtil {
      * @updateTime: 13:17  2023/4/21
      ************************************************************************/
     static {
+        // System.out.println(jdbcUtil.password); // 异常
         System.out.println("jdbc 静态代码块");
     }
     
@@ -67,6 +68,30 @@ public class JdbcUtil {
             conn = DriverManager.getConnection(jdbcUtil.url, jdbcUtil.user, jdbcUtil.password);
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
+            
+            return resultSet;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: try-with-resources 结构, 相当于 try-catch-finally 会 自动关闭资源
+     * @params:
+     * @return:
+     * java.sql.SQLException: Operation not allowed after ResultSet closed
+     * 说明不能 return ResultSet
+     * @createTime: 14:48  2023/4/21
+     * @updateTime: 14:48  2023/4/21
+     ************************************************************************/
+    public static ResultSet jdbcQuery1(String sql) {
+        try (Connection conn = DriverManager.getConnection(jdbcUtil.url, jdbcUtil.user, jdbcUtil.password);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            
+            Class<?> aClass = Class.forName(jdbcUtil.driver);
             
             return resultSet;
         } catch (ClassNotFoundException | SQLException e) {

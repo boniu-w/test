@@ -13,7 +13,6 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/transaction_test")
@@ -149,7 +148,7 @@ public class TransactionTest {
                 Timestamp birthday = resultSet.getTimestamp("birthday");
                 hashMap.put("birthday", birthday);
             }
-            result.setResult(hashMap);
+            result.setData(hashMap);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

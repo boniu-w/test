@@ -37,7 +37,7 @@ public class LoginTest {
             RedisUtil.set(realKey, lowerCaseCode, 60);
             String base64 = RandImageUtil.generate(code);
             res.setSuccess(true);
-            res.setResult(base64);
+            res.setData(base64);
         } catch (Exception e) {
             res.error500("获取验证码出错" + e.getMessage());
             e.printStackTrace();
