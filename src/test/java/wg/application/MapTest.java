@@ -422,6 +422,7 @@ public class MapTest {
     @Test
     public void mergeMap() {
         Map<Integer, Integer> map1 = new HashMap<>();
+        System.out.println(map1.get("get")); // null
         map1.put(1, 1);
         map1.put(2, 2);
         map1.put(3, 3);
