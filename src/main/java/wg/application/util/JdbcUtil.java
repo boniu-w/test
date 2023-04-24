@@ -26,7 +26,7 @@ public class JdbcUtil {
     
     @PostConstruct
     public void init() {
-        System.out.println(" >>>>>>>>>>>  jdbc init  <<<<<<<<<<<");
+        System.out.println(">>>>>>>>>>>  jdbc PostConstruct  <<<<<<<<<<<");
         jdbcUtil = this;
         System.out.println("jdbcUtil.password : " + jdbcUtil.password);
     }
@@ -41,8 +41,30 @@ public class JdbcUtil {
      ************************************************************************/
     static {
         // System.out.println(jdbcUtil.password); // 异常
-        System.out.println("jdbc 静态代码块");
+        System.out.println(">>>>>>>>>>>  jdbc 静态代码块  <<<<<<<<<<<");
     }
+    
+    public JdbcUtil() {
+        System.out.println(">>>>>>>>>>>  jdbc constructor  <<<<<<<<<<<");
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: Parameter 0 of constructor in wg.application.util.JdbcUtil required a bean of type 'java.lang.String' that could not be found.
+     * 注掉无参构造器后, 系统启动报错,
+     * 说明不能只有有参构造器
+     * @params:
+     * @return:
+     * @createTime: 17:12  2023/4/23
+     * @updateTime: 17:12  2023/4/23
+     ************************************************************************/
+    // public JdbcUtil(String driver, String url, String user, String password) {
+    //     System.out.println(">>>>>>>>>>>  jdbc params constructor  <<<<<<<<<<<");
+    //     this.driver = driver;
+    //     this.url = url;
+    //     this.user = user;
+    //     this.password = password;
+    // }
     
     public static void closeConn() throws SQLException {
         if (conn != null) {
