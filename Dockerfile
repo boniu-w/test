@@ -1,9 +1,9 @@
 FROM openjdk:11
 LABEL maintainer=wg
-WORKDIR /data/java-project
 
-EXPOSE 33333
+WORKDIR /opt/test
 
-COPY target/*.jar  /opt/
+COPY ./test-0.0.1-SNAPSHOT.jar /opt
+# COPY /usr/local/keystore/https-wg.keystore /opt
 
-ENTRYPOINT ["java","-jar","/data/java-project/test-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["nohup", "java","-jar","./test-0.0.1-SNAPSHOT.jar", "> test-001.log","2>&1 &"]

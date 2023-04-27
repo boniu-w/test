@@ -2,7 +2,7 @@ server:
   port: 33333
   ssl:
     enabled: true
-    key-store: d:/tomcat.keystore
+    key-store: classpath:pgp/tomcat.keystore
     key-store-type: JKS
     key-password: 123456
     key-store-password: 123456
@@ -17,13 +17,14 @@ spring:
 #      name: wg
 #      password: 123
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.12.97:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     database: 0
-    host: localhost
+    host: 192.168.12.240
+#    host: 127.0.0.1
     lettuce:
       pool:
         max-active: 8
@@ -31,7 +32,8 @@ spring:
         min-idle: 0
         max-wait: -1ms
       shutdown-timeout: 100ms
-    password: ''
+    password: redisbullseye
+#    password: ''
     port: 6379
     timeout: 5000
     jedis:

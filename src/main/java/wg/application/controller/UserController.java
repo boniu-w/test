@@ -1,11 +1,14 @@
 package wg.application.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.web.bind.annotation.*;
+import wg.application.cache.CacheTest;
 import wg.application.entity.User;
 import wg.application.exception.WgException;
 import wg.application.service.UserService;
+import wg.application.util.SpringContextUtils;
 import wg.application.vo.Result;
 
 import javax.annotation.Resource;
@@ -37,21 +40,25 @@ public class UserController {
         all.get(0).setGender("man"); // 500
         result.setData(all);
         
+        // ↓↓*******************  <测试缓存> start  *******************↓↓
+        
         // // 测试缓存, 必须启动redis, 不想启动redis, 可以先引入github依赖,然后在配置文件中修改 spring.cache.type=caffeine
-        // CacheTest cacheBean = SpringContextUtils.getBean("cacheTest", CacheTest.class);
-        // cacheBean.cacheUserId(all.get(5));  // 赵敏
-        //
-        // Cache cache = cacheManager.getCache("myCacheTest");
-        // String name = cache.getName();
-        // System.out.println("cache group name : " + name);
-        //
-        // // Cache.ValueWrapper wrapper = cache.get(all.get(5).getId());
-        // // Object obj = wrapper.get();
-        // // System.out.println("value: " + obj); // 赵敏
-        //
-        // Cache cache1 = cacheManager.getCache("123");
-        // Cache.ValueWrapper wrapper1 = cache1.get(all.get(5).getId());
-        // System.out.println(wrapper1.get()); // 赵敏
+        CacheTest cacheBean = SpringContextUtils.getBean("cacheTest", CacheTest.class);
+        cacheBean.cacheUserId(all.get(5));  // 赵敏
+        
+        Cache cache = cacheManager.getCache("myCacheTest");
+        String name = cache.getName();
+        System.out.println("cache group name : " + name);
+        
+        // Cache.ValueWrapper wrapper = cache.get(all.get(5).getId());
+        // Object obj = wrapper.get();
+        // System.out.println("value: " + obj); // 赵敏
+        
+        Cache cache1 = cacheManager.getCache("123");
+        Cache.ValueWrapper wrapper1 = cache1.get(all.get(5).getId());
+        System.out.println(wrapper1.get()); // 赵敏
+        
+        // ↑↑*******************  <测试缓存>  end  *******************↑↑
         
         return result;
     }
@@ -138,7 +145,7 @@ public class UserController {
         return result;
     }
     
-    public void  fallbackHandler(){
+    public void fallbackHandler() {
         System.out.println("usercontroller fall back");
     }
 }
