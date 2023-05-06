@@ -32,7 +32,7 @@ public class UserController {
     }
     
     @GetMapping(value = "/list")
-    @SentinelResource(value = "userList", fallback = "fallbackHandler")
+    // @SentinelResource(value = "userList", fallback = "fallbackHandler")
     public Result<List<User>> list() {
         Result<List<User>> result = new Result<>();
         List<User> all = userService.list();
