@@ -1,0 +1,60 @@
+import { FormProps, BasicColumn } from '/@/components/Table';
+import { useI18n } from '/@/hooks/web/useI18n';
+const { t } = useI18n();
+
+export function getBasicColumns(): BasicColumn[] {
+  return [
+        #foreach($haiyou in $haiyouguojiExcelList)
+             {
+             title: t('generated.${filedName}.${haiyou.fieldEn}'),
+             dataIndex: '${haiyou.fieldEn}',
+             },
+       #end
+          ]
+}
+
+export function getSearchFormConfig(): Partial<FormProps> {
+  return {
+    baseColProps: { sm: 10, md: 8, xl: 6 },
+    schemas: [
+    #set($loopCount = 3)
+
+    #if($mapArrayList.size() >=4 )
+        #foreach($i in [0..$loopCount])
+          #if($mapArrayList[$i].fieldEn)
+            {
+            field: '$mapArrayList[$i].fieldEn',
+            label: t('generated.${filedName}.$mapArrayList[$i].fieldEn'),
+            component: 'Input',
+            },
+          #end
+        #end
+    #else
+        #foreach($haiyou in $mapArrayList)
+            {
+            field: '$haiyou.fieldEn',
+            label: t('generated.${filedName}.${haiyou.fieldEn}'),
+            component: 'Input',
+            },
+           #end
+    #end
+    ],
+  };
+}
+
+export function getFormConfig(): Partial<FormProps> {
+  return {
+    baseColProps: { sm: 22, md: 22, xl: 22 },
+    labelWidth: 140,
+    showActionButtonGroup: false,
+    schemas: [
+     #foreach($haiyou in $haiyouguojiExcelList)
+      {
+        field: '${haiyou.fieldEn}',
+        label: t('generated.${filedName}.${haiyou.fieldEn}'),
+        component: 'Input',
+      },
+      #end
+    ],
+  };
+}

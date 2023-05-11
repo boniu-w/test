@@ -5,6 +5,7 @@ import wg.application.exception.WgException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -145,11 +146,26 @@ public class StringUtil {
      ************************************************************************/
     public static String getHumpString(String str) {
         String[] s = str.split("_");
-        StringBuilder stringBuilder = new StringBuilder(s[0]);
+        StringBuilder stringBuilder = new StringBuilder(s[0].toLowerCase());
         for (int k = 0; k < s.length - 1; k++) {
+            
             stringBuilder.append(s[k + 1].substring(0, 1).toUpperCase()).append(s[k + 1].substring(1));
         }
 
+        return stringBuilder.toString();
+    }
+    
+    public static String toHumpString(String str) {
+        String[] s = str.split("_");
+        String[] newStrs = new String[s.length];
+        for (int i = 0; i < newStrs.length; i++) {
+            newStrs[i] = s[i].toLowerCase();
+        }
+        StringBuilder stringBuilder = new StringBuilder(newStrs[0]);
+        for (int k = 0; k < newStrs.length - 1; k++) {
+            stringBuilder.append(newStrs[k + 1].substring(0, 1).toUpperCase()).append(newStrs[k + 1].substring(1));
+        }
+        
         return stringBuilder.toString();
     }
 
@@ -380,5 +396,19 @@ public class StringUtil {
         double num1 = Double.parseDouble(str1);
         double num2 = Double.parseDouble(str2);
         return Double.compare(num1, num2) == 0;
+    }
+    
+    public static boolean isBlank(final CharSequence cs) {
+        if (Objects.equals(cs, "null") || Objects.equals(cs, "Null") || Objects.equals(cs, "NULL")) return true;
+        int strLen;
+        if (cs == null || (strLen = cs.length()) == 0) {
+            return true;
+        }
+        for (int i = 0; i < strLen; i++) {
+            if (Character.isWhitespace(cs.charAt(i)) == false) {
+                return false;
+            }
+        }
+        return true;
     }
 }

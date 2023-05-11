@@ -1,6 +1,7 @@
 package wg.application.util;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -149,4 +150,19 @@ public class MapUtil {
     //     }
     //     return excelArrayList;
     // }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 实体类转map
+     * @params:
+     * @return:
+     * @createTime: 16:37  2023/5/11
+     * @updateTime: 16:37  2023/5/11
+     ************************************************************************/
+    public static Map object2Map(Object object){
+        String s = JSON.toJSONString(object);
+        Map map = JSONObject.toJavaObject(JSON.parseObject(s), Map.class);
+        
+        return map;
+    }
 }

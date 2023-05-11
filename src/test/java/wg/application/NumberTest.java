@@ -1,6 +1,8 @@
 package wg.application;
 
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import wg.application.util.StringUtil;
 
 /*****************************************
  * description:
@@ -9,4 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
  *****************************************/
 @SpringBootTest
 public class NumberTest {
+    
+    @Test
+    public void test() {
+        String a = "beiPinBeiJianKuCunTongJiBiao";
+        String s = StringUtil.humpToLine(a);
+        System.out.println(s);
+    }
 }

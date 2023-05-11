@@ -1,6 +1,8 @@
 package wg.application.util;
 
 import cn.hutool.core.io.resource.ClassPathResource;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -25,9 +27,9 @@ import java.util.Map;
  * @updateTime: 16:50 2022/3/14
  ************************************************************************/
 public class FileUtil {
-
+    
     private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
-
+    
     /************************************************************************
      * @author: wg
      * @description: 把 map 写入 json 文件中
@@ -39,11 +41,67 @@ public class FileUtil {
     public static void writeToJson(Map map, ClassPathResource resource) throws IOException {
         String path = resource.getAbsolutePath();
         File file = new File(path);
-
+        
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(file, map);
     }
-
+    
+    public static String mapToJsonFile(Map<String, Object> map, String path) {
+        // 创建一个 ObjectMapper 对象
+        ObjectMapper mapper = new ObjectMapper();
+        
+        // 使用 ObjectMapper 的 writeValueAsString() 方法将 Map 转换成 JSON 字符串
+        String jsonString = null;
+        try {
+            jsonString = mapper.writeValueAsString(map);
+            File file = new File(path);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            mapper.writeValue(file, jsonString);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return jsonString;
+    }
+    
+    public static void jsonbject2jsonFile(JSONObject jsonObject, String path) {
+        File file = new File(path);
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            bw.write(jsonObject.toString());
+            bw.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 把 object 写入 file 中
+     * @params:
+     * @return:
+     * @createTime: 12:46  2023/5/11
+     * @updateTime: 12:46  2023/5/11
+     ************************************************************************/
+    public static void object2file(Object obj, String path) {
+        String jsonString = JSON.toJSONString(obj);
+        int i = judgeThePath(path);
+        File file = new File(path);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+            byte[] bytes = jsonString.getBytes(StandardCharsets.UTF_8);
+            fileOutputStream.write(bytes);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+    
     /************************************************************************
      * @author: wg
      * @description: 读取 json 文件
@@ -54,11 +112,11 @@ public class FileUtil {
      ************************************************************************/
     public static JsonNode readJson(ClassPathResource resource) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-
+        
         BufferedInputStream stream = new BufferedInputStream(resource.getStream());
         byte[] buff = new byte[1024];
         StringBuilder builder = new StringBuilder();
-
+        
         int read;
         while ((read = stream.read(buff)) != -1) {
             builder.append(new String(buff, 0, read, StandardCharsets.US_ASCII));
@@ -73,10 +131,10 @@ public class FileUtil {
         //     originalFileContent.append(s).append("\n");
         // }
         // br.close();
-
+        
         // return mapper.readTree(originalFileContent.toString());
     }
-
+    
     /**
      * MultipartFile 转 File
      *
@@ -84,7 +142,7 @@ public class FileUtil {
      * @throws Exception
      */
     public static File multipartFileToFile(MultipartFile multipartFile) throws Exception {
-
+        
         File file = null;
         if (multipartFile.equals("") || multipartFile.getSize() <= 0) {
             multipartFile = null;
@@ -97,7 +155,7 @@ public class FileUtil {
         }
         return file;
     }
-
+    
     //获取流文件
     private static void inputStreamToFile(InputStream ins, File file) {
         try {
@@ -113,7 +171,7 @@ public class FileUtil {
             e.printStackTrace();
         }
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 获取文件名, 会去掉 类似这样的 `//12312/sdf.jpg` 之中的 斜杠, 只保留  `sdf.jpg`
@@ -144,7 +202,7 @@ public class FileUtil {
         fileName = fileName.replaceAll("\\s", "");
         return fileName;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 获取文件hash值
@@ -160,7 +218,7 @@ public class FileUtil {
         byte[] digest1 = messageDigest.digest();
         return new BigInteger(1, digest1).toString(16);
     }
-
+    
     public static String getSha256Hex(File file) throws Exception {
         // 对 file 的内容 生成 hash
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
@@ -168,7 +226,7 @@ public class FileUtil {
         byte[] digest1 = messageDigest.digest();
         return new BigInteger(1, digest1).toString(16);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 获取文件夹下所有文件
@@ -193,10 +251,10 @@ public class FileUtil {
                 }
             }
         }
-
+        
         return fileList;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 清空文件夹下面的所有文件, 但保留这个文件夹
@@ -211,14 +269,14 @@ public class FileUtil {
             logger.info("The dir are not exists!");
             return false;
         }
-
+        
         if (file.isFile()) {
             if (!file.delete()) {
                 logger.error("文件删除失败");
                 return false;
             }
         }
-
+        
         String[] content = file.list();//取得当前目录下所有文件和文件夹
         if (content != null) {
             for (String name : content) {
@@ -235,10 +293,10 @@ public class FileUtil {
                 }
             }
         }
-
+        
         return true;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 读取一个文件夹下的所有文件, 去重后 保存 到 临时文件夹中,
@@ -251,7 +309,7 @@ public class FileUtil {
         // ↓↓******************* start <1. 读取文件夹下的所有文件, 然后去重> *******************↓↓
         List<File> fileList = new ArrayList<>();
         getAllFile(path, fileList);
-
+        
         // 用 map 来去重
         HashMap<String, File> fileHashMap = new HashMap<>();
         String hexHash = "";
@@ -260,17 +318,17 @@ public class FileUtil {
             fileHashMap.put(hexHash, file);
         }
         // ↑↑******************* end  <code>  *******************↑↑
-
+        
         // ↓↓******************* start <复制到另一个文件夹, 流中文件删不掉, 另一个程序正在使用此文件> *******************↓↓
         FileInputStream fileInputStream = null;
         HashMap<FileInputStream, String> streamStringHashMap = new HashMap<>();
-
+        
         for (File file1 : fileHashMap.values()) {
             fileInputStream = new FileInputStream(file1);
             String name = file1.getName();
             streamStringHashMap.put(fileInputStream, name);
         }
-
+        
         File tempDir = null;
         for (Map.Entry<FileInputStream, String> entry : streamStringHashMap.entrySet()) {
             FileInputStream inputStream = entry.getKey();
@@ -280,5 +338,20 @@ public class FileUtil {
             cn.hutool.core.io.FileUtil.writeFromStream(inputStream, new File(anotherPath, name));
         }
         // ↑↑******************* end  <code>  *******************↑↑
+    }
+    
+    public static int judgeThePath(String path) {
+        File file = new File(path);
+        if (!file.exists() && !file.isDirectory()) {
+            file.getParentFile().mkdirs();
+        }
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return 1;
     }
 }
