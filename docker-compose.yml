@@ -1,0 +1,20 @@
+version: "3"
+services:
+  test:
+    image: test:0.0.1
+    build:
+      context: /home/wg/idea-project/test/
+      dockerfile: Dockerfile
+    container_name: test-wg
+    restart: always
+    ports:
+      - 33333:33333
+    command:
+      - sh
+      - -c
+      - 'java -jar test-0.0.1-SNAPSHOT.jar'
+
+networks:
+  default:
+    external:
+      name: network-test

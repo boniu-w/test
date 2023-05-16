@@ -1,9 +1,11 @@
 FROM openjdk:11
 LABEL maintainer=wg
 
-WORKDIR /opt/test
+ENV TZ=Asia/Shanghai
 
-COPY ./test-0.0.1-SNAPSHOT.jar /opt
-# COPY /usr/local/keystore/https-wg.keystore /opt
+RUN mkdir -p /opt/wgproject/test
+WORKDIR /opt/wgproject/test
 
-ENTRYPOINT ["nohup", "java","-jar","./test-0.0.1-SNAPSHOT.jar", "> test-001.log","2>&1 &"]
+COPY ./test-0.0.1-SNAPSHOT.jar /opt/wgproject/test
+
+#ENTRYPOINT ["nohup", "java","-jar","./test-0.0.1-SNAPSHOT.jar", "> test-001.log","2>&1 &"]
