@@ -9,9 +9,10 @@ package wg.application.entity;
  * @version
  * @Copyright
  ****************************************************/
-public class MyField {
+public class FieldMy {
 
     private String field;
+
     private String fieldType;
 
     public String getField() {
@@ -30,7 +31,7 @@ public class MyField {
         this.fieldType = fieldType;
     }
 
-    public MyField(String field, String fieldType) {
+    public FieldMy(String field, String fieldType) {
         this.field = field;
         this.fieldType = fieldType;
     }

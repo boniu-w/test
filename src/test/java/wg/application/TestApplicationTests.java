@@ -19,7 +19,6 @@ import org.springframework.util.ObjectUtils;
 import sun.awt.OSInfo;
 import wg.application.TimerTask.ScheduledTest;
 import wg.application.algorithm.IdWorker;
-import wg.application.config.WgProperty;
 import wg.application.exception.Assert;
 import wg.application.jackson.JacksonTest;
 import wg.application.jsoup.JsoupTest;
@@ -33,7 +32,6 @@ import wg.application.util.SimpleEncryptionUtil;
 import wg.application.thread.TaskTest;
 import wg.application.util.*;
 
-import javax.annotation.Resource;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -654,14 +652,14 @@ public class TestApplicationTests {
         HashMap<String, Object> hashMap = new HashMap<>();
 
         hashMap.put("tableName", "test_03");
-        hashMap.put("id", new MyField("id", "int"));
-        hashMap.put("userName", new MyField("user_name", "varchar(200)"));
+        hashMap.put("id", new FieldMy("id", "int"));
+        hashMap.put("userName", new FieldMy("user_name", "varchar(200)"));
 
         String dropTable = "DROP TABLE IF EXISTS " + hashMap.get("tableName");
         String createTableSql =
                 "  CREATE TABLE " + hashMap.get("tableName") + "  (\n" +
-                        ((MyField) hashMap.get("id")).getField() + "  " + ((MyField) hashMap.get("id")).getFieldType() + " not null, \n" +
-                        ((MyField) hashMap.get("userName")).getField() + "  " + ((MyField) hashMap.get("userName")).getFieldType() + "  null, \n" +
+                        ((FieldMy) hashMap.get("id")).getField() + "  " + ((FieldMy) hashMap.get("id")).getFieldType() + " not null, \n" +
+                        ((FieldMy) hashMap.get("userName")).getField() + "  " + ((FieldMy) hashMap.get("userName")).getFieldType() + "  null, \n" +
 
                         "    `create_by` varchar(32) NULL DEFAULT NULL COMMENT '创建人',\n" +
                         "    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',\n" +

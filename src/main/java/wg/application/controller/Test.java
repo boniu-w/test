@@ -1468,12 +1468,12 @@ public class Test {
         HashMap<String, Object> hashMap = new HashMap<>();
         
         hashMap.put("tableName", "user");
-        hashMap.put("id", new MyField("id", "int"));
-        hashMap.put("userName", new MyField("user_name", "varchar2(200)"));
+        hashMap.put("id", new FieldMy("id", "int"));
+        hashMap.put("userName", new FieldMy("user_name", "varchar2(200)"));
         
         String sql = "CREATE TABLE " + hashMap.get("tableName") + "  (\n" +
-                ((MyField) hashMap.get("id")).getField() + "  " + ((MyField) hashMap.get("id")).getFieldType() + " not null, \n" +
-                ((MyField) hashMap.get("userName")).getField() + "  " + ((MyField) hashMap.get("userName")).getFieldType() + " not null, \n" +
+                ((FieldMy) hashMap.get("id")).getField() + "  " + ((FieldMy) hashMap.get("id")).getFieldType() + " not null, \n" +
+                ((FieldMy) hashMap.get("userName")).getField() + "  " + ((FieldMy) hashMap.get("userName")).getFieldType() + " not null, \n" +
                 "    `create_by` varchar(32) NULL DEFAULT NULL COMMENT '创建人',\n" +
                 "    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',\n" +
                 "    `update_by` varchar(32) NULL DEFAULT NULL COMMENT '更新人',\n" +

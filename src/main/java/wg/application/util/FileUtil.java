@@ -226,6 +226,57 @@ public class FileUtil {
         byte[] digest1 = messageDigest.digest();
         return new BigInteger(1, digest1).toString(16);
     }
+
+    public static String getMD5(File file) throws Exception {
+        // 对 file 的内容 生成 hash
+        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+        messageDigest.update(cn.hutool.core.io.FileUtil.readBytes(file));
+        byte[] digest1 = messageDigest.digest();
+        return new BigInteger(1, digest1).toString(16);
+    }
+
+    private static void decryptFile(String inputFilePath, String outputFilePath, String password) throws Exception {
+        // 读取输入文件并解密内容
+        InputStream in = new FileInputStream(inputFilePath);
+        OutputStream out = new FileOutputStream(outputFilePath);
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = in.read(buffer)) > 0) {
+            for (int i = 0; i < len; i++) {
+                buffer[i] = (byte)(buffer[i] ^ password.charAt(i % password.length()));
+            }
+            out.write(buffer, 0, len);
+        }
+        in.close();
+        out.close();
+    }
+
+    public static String getSha256(File file) throws Exception {
+        byte[] fileBytes = getFileBytes(file);
+        return bytesToHex(fileBytes);
+    }
+
+    public static byte[] getFileBytes(File file) throws Exception {
+        // 对 file 的内容 生成 hash
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        try (InputStream in = new FileInputStream(file)) {
+            byte[] buffer = new byte[8192];
+            int len = in.read(buffer);
+            while (len != -1) {
+                messageDigest.update(buffer, 0, len);
+                len = in.read(buffer);
+            }
+        }
+        return messageDigest.digest();
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder result = new StringBuilder();
+        for (byte b : bytes) {
+            result.append(String.format("%02x", b));
+        }
+        return result.toString();
+    }
     
     /************************************************************************
      * @author: wg
