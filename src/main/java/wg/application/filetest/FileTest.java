@@ -18,6 +18,16 @@ public class FileTest {
         }
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: "\" -> "&#92;"
+     * 正则表达式中, \表示将下一字符标记为特殊字符。如\d表示数字字符匹配，等效于 [0-9]。
+     * \\中的第一个\表示java的转义字符\由编译器解析，第二个\是正则表达式\由正则表达式引擎解析。
+     * @params:
+     * @return:
+     * @createTime: 9:48  2023/5/17
+     * @updateTime: 9:48  2023/5/17
+     ************************************************************************/
     public static void fileTest() throws Exception {
         String path = "\\\\nas-wg\\video\\剧";
         ArrayList<File> files = new ArrayList<>();

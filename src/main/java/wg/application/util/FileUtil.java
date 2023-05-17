@@ -13,6 +13,7 @@ import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -219,6 +220,14 @@ public class FileUtil {
         return new BigInteger(1, digest1).toString(16);
     }
     
+    /************************************************************************
+     * @author: wg
+     * @description: 大文件不可用, 会出现 out of memory
+     * @params:
+     * @return:
+     * @createTime: 9:34  2023/5/17
+     * @updateTime: 9:34  2023/5/17
+     ************************************************************************/
     public static String getSha256Hex(File file) throws Exception {
         // 对 file 的内容 生成 hash
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
@@ -226,7 +235,15 @@ public class FileUtil {
         byte[] digest1 = messageDigest.digest();
         return new BigInteger(1, digest1).toString(16);
     }
-
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 大文件不可用, 会出现 out of memory
+     * @params:
+     * @return:
+     * @createTime: 9:34  2023/5/17
+     * @updateTime: 9:34  2023/5/17
+     ************************************************************************/
     public static String getMD5(File file) throws Exception {
         // 对 file 的内容 生成 hash
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -234,32 +251,61 @@ public class FileUtil {
         byte[] digest1 = messageDigest.digest();
         return new BigInteger(1, digest1).toString(16);
     }
-
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 大文件亦可用, 只是比较慢
+     * @params:
+     * @return:
+     * @createTime: 9:37  2023/5/17
+     * @updateTime: 9:37  2023/5/17
+     ************************************************************************/
+    public static String getMD5Hex(File file) throws Exception {
+        byte[] fileBytes = getFileBytes(file, "MD5");
+        return bytesToHex(fileBytes);
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 读取输入文件并解密内容
+     * @params:
+     * @return:
+     * @createTime: 9:41  2023/5/17
+     * @updateTime: 9:41  2023/5/17
+     ************************************************************************/
     private static void decryptFile(String inputFilePath, String outputFilePath, String password) throws Exception {
         // 读取输入文件并解密内容
-        InputStream in = new FileInputStream(inputFilePath);
-        OutputStream out = new FileOutputStream(outputFilePath);
+        InputStream in = Files.newInputStream(Paths.get(inputFilePath));
+        OutputStream out = Files.newOutputStream(Paths.get(outputFilePath));
         byte[] buffer = new byte[1024];
         int len;
         while ((len = in.read(buffer)) > 0) {
             for (int i = 0; i < len; i++) {
-                buffer[i] = (byte)(buffer[i] ^ password.charAt(i % password.length()));
+                buffer[i] = (byte) (buffer[i] ^ password.charAt(i % password.length()));
             }
             out.write(buffer, 0, len);
         }
         in.close();
         out.close();
     }
-
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 大文件亦可用, 只是比较慢
+     * @params:
+     * @return:
+     * @createTime: 9:34  2023/5/17
+     * @updateTime: 9:34  2023/5/17
+     ************************************************************************/
     public static String getSha256(File file) throws Exception {
         byte[] fileBytes = getFileBytes(file);
         return bytesToHex(fileBytes);
     }
-
+    
     public static byte[] getFileBytes(File file) throws Exception {
         // 对 file 的内容 生成 hash
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-        try (InputStream in = new FileInputStream(file)) {
+        try (InputStream in = Files.newInputStream(file.toPath())) {
             byte[] buffer = new byte[8192];
             int len = in.read(buffer);
             while (len != -1) {
@@ -269,7 +315,30 @@ public class FileUtil {
         }
         return messageDigest.digest();
     }
-
+    
+    /************************************************************************
+     * @author: wg
+     * @description:
+     * @params:
+     * algorithm: MD5 SHA-1 SHA-256
+     * @return:
+     * @createTime: 9:42  2023/5/17
+     * @updateTime: 9:42  2023/5/17
+     ************************************************************************/
+    public static byte[] getFileBytes(File file, String algorithm) throws Exception {
+        // 对 file 的内容 生成 hash
+        MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+        try (InputStream in = Files.newInputStream(file.toPath())) {
+            byte[] buffer = new byte[8192];
+            int len = in.read(buffer);
+            while (len != -1) {
+                messageDigest.update(buffer, 0, len);
+                len = in.read(buffer);
+            }
+        }
+        return messageDigest.digest();
+    }
+    
     private static String bytesToHex(byte[] bytes) {
         StringBuilder result = new StringBuilder();
         for (byte b : bytes) {
