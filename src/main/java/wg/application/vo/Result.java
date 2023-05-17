@@ -2,6 +2,7 @@ package wg.application.vo;
 
 // import io.swagger.annotations.ApiModel;
 // import io.swagger.annotations.ApiModelProperty;
+
 import org.springframework.http.HttpStatus;
 import wg.application.constant.CommonConstant;
 
@@ -144,6 +145,13 @@ public class Result<T> implements Serializable {
 
     public Result<T> error500(String message) {
         this.message = message;
+        //this.code = CommonConstant.SC_INTERNAL_SERVER_ERROR_500;
+        this.success = false;
+        return this;
+    }
+
+    public Result<T> error() {
+        this.message = "error";
         //this.code = CommonConstant.SC_INTERNAL_SERVER_ERROR_500;
         this.success = false;
         return this;

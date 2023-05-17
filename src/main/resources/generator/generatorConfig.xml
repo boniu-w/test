@@ -37,7 +37,7 @@
 
         <javaClientGenerator targetPackage="wg.application.mapper" targetProject="src/main/java" type="XMLMAPPER" />
 
-        <table tableName="song">
+        <table tableName="file_my">
             <!-- <ignoreColumn column="create_time" />
             <ignoreColumn column="update_time" /> -->
             <!--mysql 配置-->
