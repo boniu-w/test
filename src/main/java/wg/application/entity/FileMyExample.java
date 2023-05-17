@@ -644,6 +644,76 @@ public class FileMyExample {
             addCriterion("del_flag not between", value1, value2, "delFlag");
             return (Criteria) this;
         }
+
+        public Criteria andSha256IsNull() {
+            addCriterion("sha256 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256IsNotNull() {
+            addCriterion("sha256 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256EqualTo(String value) {
+            addCriterion("sha256 =", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256NotEqualTo(String value) {
+            addCriterion("sha256 <>", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256GreaterThan(String value) {
+            addCriterion("sha256 >", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256GreaterThanOrEqualTo(String value) {
+            addCriterion("sha256 >=", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256LessThan(String value) {
+            addCriterion("sha256 <", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256LessThanOrEqualTo(String value) {
+            addCriterion("sha256 <=", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256Like(String value) {
+            addCriterion("sha256 like", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256NotLike(String value) {
+            addCriterion("sha256 not like", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256In(List<String> values) {
+            addCriterion("sha256 in", values, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256NotIn(List<String> values) {
+            addCriterion("sha256 not in", values, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256Between(String value1, String value2) {
+            addCriterion("sha256 between", value1, value2, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256NotBetween(String value1, String value2) {
+            addCriterion("sha256 not between", value1, value2, "sha256");
+            return (Criteria) this;
+        }
     }
 
     /**

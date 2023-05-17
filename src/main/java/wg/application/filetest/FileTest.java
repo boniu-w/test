@@ -138,6 +138,7 @@ public class FileTest {
                     for (FileMy my : value) {
                         if (file.getName().equals(my.getFileName())) {
                             my.setSuffix(file.getName().substring(file.getName().lastIndexOf(".") + 1));
+                            my.setSha256(FileUtil.getSha256(file));
                             my.setUpdateTime(LocalDateTime.now());
                             i += fileMyService.update(my);
                         }
