@@ -80,7 +80,6 @@ public class FileTest {
                 }
             }
 
-
             int insert = 0;
             for (Map.Entry<String, List<File>> entry : fileMap.entrySet()) {
                 String key = entry.getKey();
