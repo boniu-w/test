@@ -30,6 +30,7 @@ import java.util.Map;
 public class FileUtil {
     
     private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
+    private static final char[] HEX_CHARS = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
     
     /************************************************************************
      * @author: wg
@@ -206,7 +207,7 @@ public class FileUtil {
     
     /************************************************************************
      * @author: wg
-     * @description: 获取文件hash值
+     * @description: 获取文件hash值,
      * @params:
      * @return:
      * @createTime: 12:57  2022/9/8
@@ -222,7 +223,7 @@ public class FileUtil {
     
     /************************************************************************
      * @author: wg
-     * @description: 大文件不可用, 会出现 out of memory
+     * @description:  文件不能大于2G的大文件不可用, 会出现 out of memory
      * @params:
      * @return:
      * @createTime: 9:34  2023/5/17
@@ -238,23 +239,7 @@ public class FileUtil {
     
     /************************************************************************
      * @author: wg
-     * @description: 大文件不可用, 会出现 out of memory
-     * @params:
-     * @return:
-     * @createTime: 9:34  2023/5/17
-     * @updateTime: 9:34  2023/5/17
-     ************************************************************************/
-    public static String getMD5(File file) throws Exception {
-        // 对 file 的内容 生成 hash
-        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-        messageDigest.update(cn.hutool.core.io.FileUtil.readBytes(file));
-        byte[] digest1 = messageDigest.digest();
-        return new BigInteger(1, digest1).toString(16);
-    }
-    
-    /************************************************************************
-     * @author: wg
-     * @description: 大文件亦可用, 只是比较慢
+     * @description: 大文件亦可用, 只是比较慢, 已优化, 现在还行
      * @params:
      * @return:
      * @createTime: 9:37  2023/5/17
@@ -277,7 +262,7 @@ public class FileUtil {
         // 读取输入文件并解密内容
         InputStream in = Files.newInputStream(Paths.get(inputFilePath));
         OutputStream out = Files.newOutputStream(Paths.get(outputFilePath));
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[16384];
         int len;
         while ((len = in.read(buffer)) > 0) {
             for (int i = 0; i < len; i++) {
@@ -306,7 +291,15 @@ public class FileUtil {
         // 对 file 的内容 生成 hash
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
         try (InputStream in = Files.newInputStream(file.toPath())) {
-            byte[] buffer = new byte[8192];
+            long buffSize = file.length();
+            if (buffSize < 512L) {
+                buffSize = 512L;
+            }
+            
+            if (buffSize > 65536L) {
+                buffSize = 65536L;
+            }
+            byte[] buffer = new byte[(int) buffSize];
             int len = in.read(buffer);
             while (len != -1) {
                 messageDigest.update(buffer, 0, len);
@@ -329,7 +322,15 @@ public class FileUtil {
         // 对 file 的内容 生成 hash
         MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
         try (InputStream in = Files.newInputStream(file.toPath())) {
-            byte[] buffer = new byte[8192];
+            long buffSize = file.length();
+            if (buffSize < 512L) {
+                buffSize = 512L;
+            }
+            
+            if (buffSize > 65536L) {
+                buffSize = 65536L;
+            }
+            byte[] buffer = new byte[(int) buffSize];
             int len = in.read(buffer);
             while (len != -1) {
                 messageDigest.update(buffer, 0, len);
@@ -473,5 +474,43 @@ public class FileUtil {
             }
         }
         return 1;
+    }
+    
+    // public static String getFastMD5(File file) throws IOException {
+    //     byte[] hash = MD5.getHash(file);
+    //     return MD5.asHex(hash);
+    // }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 测试各个算法的时间消耗
+     * @params:
+     * @return:
+     * @createTime: 11:07  2023/5/18
+     * @updateTime: 11:07  2023/5/18
+     ************************************************************************/
+    public static void main(String[] args) {
+        // File file = new File("C:\\Users\\wg\\Downloads\\大小谎言.Big.Little.Lies.S02E01.720p-天天美剧字幕组.mp4");
+        File file = new File("H:\\movie\\低俗小说\\Pulp.Fiction.1994.1080p.BluRay.H264.AAC-RARBG\\Pulp.Fiction.1994.1080p.BluRay.H264.AAC-RARBG.mp4");
+        try {
+            long timeMillis = System.currentTimeMillis();
+            // String md5 = getFastMD5(file);
+            // System.out.println(md5);
+            // System.out.println(System.currentTimeMillis() - timeMillis); // 大小谎言(735M): 1849-1903; 低俗小说(2.94G):
+            
+            // String md5Hex = getMD5Hex(file);
+            // System.out.println(md5Hex);
+            // System.out.println(System.currentTimeMillis() - timeMillis); // 大小谎言(735M): 1673-1694; 低俗小说(2.94G): 6724-6781
+            
+            // String sha256 = getSha256(file);
+            // System.out.println(sha256);
+            // System.out.println(System.currentTimeMillis() - timeMillis); // 大小谎言(735M): 3030-3064; 低俗小说(2.94G): 12384-26572
+            
+            String sha256Hex = getSha256Hex(file);
+            System.out.println(sha256Hex);
+            System.out.println(System.currentTimeMillis() - timeMillis); // 大小谎言(735M): 3443-3696; 低俗小说(2.94G): IORuntimeException: File is larger then max array size
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
