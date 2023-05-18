@@ -280,4 +280,14 @@ public class FileMy {
         sb.append("]");
         return sb.toString();
     }
+    
+    private String sha256;
+    
+    public String getSha256() {
+        return sha256;
+    }
+    
+    public void setSha256(String sha256) {
+        this.sha256 = sha256;
+    }
 }
