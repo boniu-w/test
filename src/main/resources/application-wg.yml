@@ -24,7 +24,6 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    open: false
     database: 0
 #    host: ${cloud-redis} #  没有用, 读不了, 系统启动就报错
     host: 192.168.12.240
