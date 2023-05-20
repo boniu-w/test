@@ -1,6 +1,8 @@
 package wg.application.filetest;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import wg.application.config.MyIdGenerator;
@@ -18,7 +20,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component(value = "fileTestMy")
@@ -57,17 +58,18 @@ public class FileTest {
                     return e.getAbsolutePath().split("\\\\")[5];
                 }));
 
-        for (Map.Entry<String, List<File>> entry : fileMap.entrySet()) {
-            String key = entry.getKey();
-            List<File> fileList = entry.getValue();
-            for (File file : fileList) {
-                // String sha256Hex = FileUtil.getSha256(file); // 大文件 消耗时间很长
-                // System.out.println(sha256Hex);
-                // String md5 = FileUtil.getMD5(file); // 大文件 outofmemory
-                // System.out.println(md5);
-                System.out.println(file);
-            }
-        }
+        System.out.println(fileMap.size());
+        // for (Map.Entry<String, List<File>> entry : fileMap.entrySet()) {
+        //     String key = entry.getKey();
+        //     List<File> fileList = entry.getValue();
+        //     for (File file : fileList) {
+        //         // String sha256Hex = FileUtil.getSha256(file); // 大文件 消耗时间很长
+        //         // System.out.println(sha256Hex);
+        //         // String md5 = FileUtil.getMD5(file); // 大文件 outofmemory
+        //         // System.out.println(md5);
+        //         System.out.println(file);
+        //     }
+        // }
     }
 
     @RequestMapping(value = "/save_file_test")
@@ -226,7 +228,11 @@ public class FileTest {
                                     if (StringUtil.isBlank(my.getSha256())) {
                                         String sha256 = FileUtil.getSha256(file);
                                         my.setSha256(sha256);
+                                        my.setUpdateTime(LocalDateTime.now());
+                                        update += fileMyService.update(my);
                                     }
+
+                                    // sha256 不一样 的情况
                                     // else if (Objects.equals(my.getSha256(), sha256)) {
                                     //     my.setSha256(sha256);
                                     //     my.setUpdateTime(LocalDateTime.now());
@@ -234,12 +240,11 @@ public class FileTest {
                                     // }
 
                                     // 更新 length
-                                    // if (my.getLength() == null) {
+                                    if (my.getLength() == null) {
                                         my.setLength(file.length());
-                                    // }
-
-                                    my.setUpdateTime(LocalDateTime.now());
-                                    update += fileMyService.update(my);
+                                        my.setUpdateTime(LocalDateTime.now());
+                                        update += fileMyService.update(my);
+                                    }
                                 }
                             }
                         }
@@ -251,6 +256,32 @@ public class FileTest {
             result.setSuccess(true);
             return result;
         } catch (WgException e) {
+            return result.error();
+        }
+    }
+
+    @GetMapping(value = "/getrepetitive")
+    public Result<Object> getRepetitive() {
+        Result<Object> result = new Result<>();
+        try {
+            Map<String, List<FileMy>> repetitive = fileMyService.getRepetitive();
+            result.setData(repetitive);
+
+            return result.success();
+        } catch (Exception e) {
+            return result.error();
+        }
+    }
+
+    @DeleteMapping(value = "/deleterepetitive")
+    public Result<Object> deleteRepetitive() {
+        Result<Object> result = new Result<>();
+        try {
+            Map<String, Integer> map = fileMyService.deleteRepetitive();
+            result.setData(map);
+
+            return result.success();
+        } catch (Exception e) {
             return result.error();
         }
     }

@@ -106,6 +106,11 @@ public class Result<T> implements Serializable {
         return this;
     }
 
+    public Result<T> success() {
+        this.code = HttpStatus.OK.value();
+        this.success = true;
+        return this;
+    }
 
     public static Result<Object> ok() {
         Result<Object> r = new Result<Object>();
