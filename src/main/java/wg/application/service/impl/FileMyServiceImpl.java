@@ -40,8 +40,22 @@ public class FileMyServiceImpl {
         FileMyExample example = new FileMyExample();
         FileMyExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(fileMy.getId());
+        criteria.andDelFlagIsNotNull();
         int i = fileMyMapper.updateByExampleSelective(fileMy, example);
         return i;
+    }
+
+    /**
+     * 真删
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public int delete(Long id) {
+        FileMyExample example = new FileMyExample();
+        FileMyExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(id);
+        criteria.andDelFlagIsNotNull();
+
+        return fileMyMapper.deleteByExample(example);
     }
 
     /**
