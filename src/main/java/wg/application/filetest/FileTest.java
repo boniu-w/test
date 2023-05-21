@@ -59,17 +59,6 @@ public class FileTest {
                 }));
 
         System.out.println(fileMap.size());
-        // for (Map.Entry<String, List<File>> entry : fileMap.entrySet()) {
-        //     String key = entry.getKey();
-        //     List<File> fileList = entry.getValue();
-        //     for (File file : fileList) {
-        //         // String sha256Hex = FileUtil.getSha256(file); // 大文件 消耗时间很长
-        //         // System.out.println(sha256Hex);
-        //         // String md5 = FileUtil.getMD5(file); // 大文件 outofmemory
-        //         // System.out.println(md5);
-        //         System.out.println(file);
-        //     }
-        // }
     }
 
     @RequestMapping(value = "/save_file_test")
@@ -286,4 +275,16 @@ public class FileTest {
         }
     }
 
+    @GetMapping(value = "/list")
+    public Result<Object> list() {
+        Result<Object> result = new Result<>();
+        try {
+            fileMyService.listOrder();
+
+            return result.success();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result.error();
+        }
+    }
 }
