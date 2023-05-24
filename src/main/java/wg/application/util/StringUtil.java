@@ -415,4 +415,30 @@ public class StringUtil {
     public static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
     }
+    
+    /************************************************************************
+     * @description: 判断是否是数字
+     * @author: wg
+     * @date: 15:50  2021/12/14
+     * @params:
+     * @return:
+     ************************************************************************/
+    public static boolean isNumber(String val) {
+        if (null == val || "".equals(val)) {
+            return false;
+        }
+        
+        String rex = "^[+-]?\\d*\\.?\\d*$";
+        boolean numbMatch = Pattern.matches(rex, val);
+        if (numbMatch) {
+            return numbMatch;
+        }
+        
+        rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
+        boolean compile = Pattern.matches(rex, val);
+        if (compile) {
+            return compile;
+        }
+        return false;
+    }
 }
