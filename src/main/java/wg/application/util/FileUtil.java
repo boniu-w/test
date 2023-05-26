@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -512,5 +513,20 @@ public class FileUtil {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 读取 yml 文件
+     * @params:
+     * @return:
+     * @createTime: 10:38  2023/5/26
+     * @updateTime: 10:38  2023/5/26
+     ************************************************************************/
+    public static Map<String, Object> getYmlFile(String name) throws IOException {
+        org.springframework.core.io.ClassPathResource resource = new org.springframework.core.io.ClassPathResource(name);
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        Map<String, Object> map = objectMapper.readValue(resource.getInputStream(), Map.class);
+        return map;
     }
 }

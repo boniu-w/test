@@ -17,7 +17,7 @@ import java.util.Map;
  * updateTime: 11:35 2023/3/16
  ************************************************************************/
 public class JsonUtil {
-
+    
     /************************************************************************
      * @author: wg
      * @description: jsonnode -> map
@@ -28,7 +28,7 @@ public class JsonUtil {
      ************************************************************************/
     public static Map<String, Object> convertJsonNodeToMap(JsonNode jsonNode) {
         Map<String, Object> map = new HashMap<>();
-
+        
         if (jsonNode.isObject()) {
             Iterator<String> fieldNames = jsonNode.fieldNames();
             while (fieldNames.hasNext()) {
@@ -50,21 +50,21 @@ public class JsonUtil {
                 }
             }
         }
-
+        
         return map;
     }
-
+    
     public static Map<String, Object> convertJsonNode2Map(JsonNode jsonNode) {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = mapper.convertValue(jsonNode, new TypeReference<Map<String, Object>>() {
         });
-
+        
         return map;
     }
-
+    
     public static void main(String[] args) {
         String jsonString = "{\"name\":\"John\", \"age\":30, \"city\":\"New York\"}";
-
+        
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = null;
         try {
@@ -72,13 +72,13 @@ public class JsonUtil {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        
         Map<String, Object> map = mapper.convertValue(jsonNode, new TypeReference<Map<String, Object>>() {
         });
-
+        
         System.out.println(map);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: Map 转 jsonstring
@@ -90,7 +90,7 @@ public class JsonUtil {
     public static String map2json(Map<String, Object> map) {
         // 创建一个 ObjectMapper 对象
         ObjectMapper mapper = new ObjectMapper();
-
+        
         // 使用 ObjectMapper 的 writeValueAsString() 方法将 Map 转换成 JSON 字符串
         String jsonString = null;
         try {
@@ -100,7 +100,7 @@ public class JsonUtil {
         }
         return jsonString;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 数组转 json
@@ -117,4 +117,18 @@ public class JsonUtil {
             throw new RuntimeException(e);
         }
     }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: fastjson 将 jsonstring -> JsonNode
+     * @params:
+     * @return:
+     * @createTime: 10:00  2023/5/26
+     * @updateTime: 10:00  2023/5/26
+     ************************************************************************/
+    public static JsonNode getJsonNode(String jsonStr) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readTree(jsonStr);
+    }
+    
 }
