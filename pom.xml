@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.github.boniu-w</groupId>
-    <artifactId>test</artifactId>
+    <artifactId>oldversion-05242023</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>test</name>
+    <name>oldversion-05242023</name>
     <description>my demo project for Spring Boot</description>
 
     <!-- 作者   -->

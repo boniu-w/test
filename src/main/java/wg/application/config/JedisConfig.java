@@ -3,6 +3,7 @@ package wg.application.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -38,8 +39,23 @@ public class JedisConfig {
     @Value("${spring.redis.jedis.pool.max-wait}")
     private long maxWaitMillis;
 
+    @Profile({"wg","dev"})
     @Bean
     public JedisPool generateJedisPoolFactory() {
+        System.out.println("<<<<<<<<<<<<<<<<<<  wg  >>>>>>>>>>>>>>>>>>>");
+        JedisPoolConfig poolConfig = new JedisPoolConfig();
+        poolConfig.setMaxTotal(maxActive);
+        poolConfig.setMaxIdle(maxIdle);
+        poolConfig.setMinIdle(minIdle);
+        poolConfig.setMaxWaitMillis(maxWaitMillis);
+        JedisPool jedisPool = new JedisPool(poolConfig, host, port, timeout);
+        return jedisPool;
+    }
+    
+    @Profile({"ubuntu"})
+    @Bean
+    public JedisPool generateJedisPoolFactory1() {
+        System.out.println("<<<<<<<<<<<<<<<<<<  ubuntu  >>>>>>>>>>>>>>>>>>>");
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(maxActive);
         poolConfig.setMaxIdle(maxIdle);
