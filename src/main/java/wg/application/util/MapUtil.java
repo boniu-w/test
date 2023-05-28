@@ -2,10 +2,8 @@ package wg.application.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -16,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @updateTime: 11:27 2022/3/9
  ************************************************************************/
 public class MapUtil {
-
+    
     /************************************************************************
      * @author: wg
      * @description: 检查map里所有的值是否都为空
@@ -32,32 +30,32 @@ public class MapUtil {
                 atomicBoolean.set(false);
             }
         });
-
+        
         if (atomicBoolean.get()) {
             return true;
         } else {
             return false;
         }
     }
-
+    
     public static <T> boolean isEmpty(Map<Long, T> map) {
         return null == map || map.size() == 0;
     }
-
+    
     public static <K, V> Map<K, V> removeSomeKey(Map<K, V> map, final K... keys) {
         for (K key : keys) {
             map.remove(key);
         }
         return map;
     }
-
+    
     public static Map<String, Object> removeSomeKey(Map<String, Object> map, Set<String> keySet) {
         for (String key : keySet) {
             map.remove(key);
         }
         return map;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description:
@@ -72,10 +70,10 @@ public class MapUtil {
                 return true;
             }
         }
-
+        
         return false;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 除了 这些 key 还有其他 key
@@ -86,22 +84,22 @@ public class MapUtil {
      ************************************************************************/
     public static boolean hasOtherKey(Map<String, Object> map, Set<String> keySet) {
         Map<String, Object> map2 = new HashMap<>(map);
-
+        
         for (String key : keySet) {
             map2.remove(key);
         }
-
+        
         return !map2.isEmpty();
     }
-
+    
     public static boolean containsKey(Map<String, Object> map, Set<String> keySet) {
         for (String s : keySet) {
             if (map.containsKey(s)) return true;
         }
-
+        
         return false;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: map 转实体类
@@ -120,10 +118,10 @@ public class MapUtil {
                 if (t != null) excelArrayList.add(t);
             }
         }
-
+        
         return excelArrayList;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 另一种写法
@@ -159,10 +157,36 @@ public class MapUtil {
      * @createTime: 16:37  2023/5/11
      * @updateTime: 16:37  2023/5/11
      ************************************************************************/
-    public static Map object2Map(Object object){
+    public static Map object2Map(Object object) {
         String s = JSON.toJSONString(object);
         Map map = JSONObject.toJavaObject(JSON.parseObject(s), Map.class);
         
         return map;
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 层级结构的map 根据key获取 值
+     * @params: key = wg.jwt.secret
+     * @return:
+     * @createTime: 10:57  2023/5/26
+     * @updateTime: 10:57  2023/5/26
+     ************************************************************************/
+    public static Object get(Map<String, Object> hierarchyMap, String key) {
+        if (hierarchyMap == null || key == null) {
+            return null;
+        }
+        
+        String[] split = key.split("\\.");
+        if (!hierarchyMap.containsKey(split[0])) {
+            return null;
+        }
+        
+        Object obj = hierarchyMap.get(split[0]);
+        if (obj instanceof Map) {
+            return get((Map<String, Object>) obj, key.substring(key.indexOf(".") + 1));
+        } else {
+            return obj;
+        }
     }
 }

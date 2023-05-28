@@ -2,6 +2,9 @@ package wg.application;
 
 // import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.aspectj.lang.annotation.Aspect;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -16,11 +19,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.StreamUtils;
-import wg.application.util.RedisUtil;
+import wg.application.util.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 @SpringBootApplication
@@ -33,7 +37,7 @@ import java.util.Set;
 // @NacosPropertySource(dataId = "test",groupId = "DEFAULT_GROUP",autoRefreshed = true)
 @EnableCaching
 public class TestApplication {
-
+    
     // public static void main(String[] args) {
     //     ConfigurableApplicationContext context = SpringApplication.run(TestApplication.class, args);
     //     // context.addApplicationListener(new ListenerOf());
@@ -45,11 +49,20 @@ public class TestApplication {
     
     public static void main(String[] args) throws IOException {
         // 加载 application-wg.yml 文件
+        String name = "application-wg.yml";
         ClassPathResource resource = new ClassPathResource("application-wg.yml");
         String content = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
         
         // 输出文件内容
         // System.out.println(content);
+        Map<String, Object> ymlFile = FileUtil.getYmlFile(name);
+        for (Map.Entry<String, Object> entry : ymlFile.entrySet()) {
+            System.out.println("entry.getKey() = " + entry.getKey());
+            System.out.println("entry.getValue() = " + entry.getValue());
+        }
+        
+        Object o = MapUtil.get(ymlFile, "wg.jwt");
+        System.out.println("o = " + o);
         
         // 读取 spring.redis.host 属性的值
         SpringApplication app = new SpringApplication(TestApplication.class);
@@ -67,7 +80,7 @@ public class TestApplication {
             System.out.println(key + ": " + value);
         }
     }
-
+    
 }
 
 

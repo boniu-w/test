@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.github.boniu-w</groupId>
-    <artifactId>test</artifactId>
+    <artifactId>oldversion-05242023</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>test</name>
+    <name>oldversion-05242023</name>
     <description>my demo project for Spring Boot</description>
 
     <!-- 作者   -->
@@ -478,19 +478,18 @@
             <version>1.7</version>
         </dependency>
 
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--    <groupId>org.mybatis.dynamic-sql</groupId>-->
-        <!--    <artifactId>mybatis-dynamic-sql</artifactId>-->
-        <!--    <version>1.4.1</version>-->
-        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.13.1</version>
+        </dependency>
 
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--    <groupId>jakarta.annotation</groupId>-->
-        <!--    <artifactId>jakarta.annotation-api</artifactId>-->
-        <!--    <version>2.1.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.13.0</version>
+        </dependency>
 
     </dependencies>
 

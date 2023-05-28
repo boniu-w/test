@@ -537,4 +537,11 @@ public class StringTest {
             System.out.println(date);
         }
     }
+    
+    @Test
+    public void getBytes(){
+        String a="+F7Uq/z/1dsqMPGd0U3R4hhdpg8=";
+        byte[] bytes = a.getBytes();
+        System.out.println(Arrays.toString(bytes));
+    }
 }
