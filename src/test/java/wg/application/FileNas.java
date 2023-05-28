@@ -22,7 +22,7 @@ import java.util.List;
  * @updateTime: 10:20 2022/4/27
  ************************************************************************/
 @SpringBootTest
-public class FileTest {
+public class FileNas {
 
     @Test
     public void test1() {

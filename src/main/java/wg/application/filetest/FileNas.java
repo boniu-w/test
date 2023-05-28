@@ -1,10 +1,8 @@
 package wg.application.filetest;
 
+import cn.hutool.http.server.HttpServerRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import wg.application.config.MyIdGenerator;
 import wg.application.entity.FileMy;
 import wg.application.exception.WgException;
@@ -23,9 +21,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component(value = "fileTestMy")
-@RequestMapping(value = "/file_test")
+@RequestMapping(value = "/file_nas")
 @ResponseBody
-public class FileTest {
+public class FileNas {
 
     @Resource
     FileMyServiceImpl fileMyService;
@@ -61,51 +59,46 @@ public class FileTest {
         System.out.println(fileMap.size());
     }
 
-    @RequestMapping(value = "/save_file_test")
-    public Result<Object> saveFileTest() throws Exception {
+    /**********************************************************
+     * @author: 公子求雨
+     * @description: 新增
+     * @params:
+     * @return:
+     * @date: 10:59 2023/5/28
+     **********************************************************/
+    @GetMapping(value = "/save_file_nas")
+    public Result<Object> saveFileTest(String path) throws Exception {
         Result<Object> result = new Result<>();
         try {
             List<FileMy> fileMyList = fileMyService.getAll();
 
-            String path = "\\\\nas-wg\\video\\剧";
             ArrayList<File> files = new ArrayList<>();
             List<File> allFile = FileUtil.getAllFile(path, files);
 
             Map<String, List<File>> fileMap = allFile.stream()
                     .collect(Collectors.groupingBy(e -> {
-                        return e.getAbsolutePath().split("\\\\")[5];
+                        if (e.getAbsolutePath().split("\\\\").length > 5) {
+                            return e.getAbsolutePath().split("\\\\")[5];
+                        }
+                        return e.getName();
                     }));
 
-            for (FileMy my : fileMyList) {
-                for (File file : allFile) {
-                    if (file.getName().equals(my.getFileName())) {
-                        my.setSuffix(file.getName().substring(file.getName().lastIndexOf(".") + 1));
-                        fileMyService.update(my);
-                    }
-                }
-            }
-
+            // 保存到数据库
             int insert = 0;
             for (Map.Entry<String, List<File>> entry : fileMap.entrySet()) {
-                String key = entry.getKey();
                 List<File> fileList = entry.getValue();
                 for (File file : fileList) {
-                    // String sha256Hex = FileUtil.getSha256(file); // 大文件 消耗时间很长
-                    // System.out.println(sha256Hex);
-                    // String md5 = FileUtil.getMD5(file); // 大文件 outofmemory
-                    // System.out.println(md5);
-                    System.out.println(file);
+                    FileMy fileMy = new FileMy();
+                    fileMy.setId(MyIdGenerator.idWorker1.nextId());
+                    fileMy.setFileName(file.getName());
+                    fileMy.setLength(file.length());
+                    fileMy.setAbsolutePath(file.getAbsolutePath());
+                    fileMy.setSha256(FileUtil.getSha256(file));
+                    fileMy.setSuffix(file.getName().substring(file.getName().lastIndexOf(".") + 1));
+                    fileMy.setCreateTime(LocalDateTime.now());
+                    fileMy.setUpdateTime(LocalDateTime.now());
 
-                    // FileMy fileMy = new FileMy();
-                    // fileMy.setId(MyIdGenerator.idWorker1.nextId());
-                    // fileMy.setFileName(file.getName());
-                    // fileMy.setAbsolutepath(file.getAbsolutePath());
-                    // fileMy.setCreateTime(LocalDateTime.now());
-                    // fileMy.setUpdateTime(LocalDateTime.now());
-                    // fileMy.setSuffix(file.getName().substring(file.getName().lastIndexOf(".")+1));
-                    //
-                    // insert += fileMyService.save(fileMy);
-
+                    insert += fileMyService.save(fileMy);
                 }
             }
             result.setData(insert);
