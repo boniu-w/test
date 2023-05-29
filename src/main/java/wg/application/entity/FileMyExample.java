@@ -465,6 +465,136 @@ public class FileMyExample {
             return (Criteria) this;
         }
 
+        public Criteria andLengthIsNull() {
+            addCriterion("length is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthIsNotNull() {
+            addCriterion("length is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthEqualTo(Long value) {
+            addCriterion("length =", value, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthNotEqualTo(Long value) {
+            addCriterion("length <>", value, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthGreaterThan(Long value) {
+            addCriterion("length >", value, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthGreaterThanOrEqualTo(Long value) {
+            addCriterion("length >=", value, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthLessThan(Long value) {
+            addCriterion("length <", value, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthLessThanOrEqualTo(Long value) {
+            addCriterion("length <=", value, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthIn(List<Long> values) {
+            addCriterion("length in", values, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthNotIn(List<Long> values) {
+            addCriterion("length not in", values, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthBetween(Long value1, Long value2) {
+            addCriterion("length between", value1, value2, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andLengthNotBetween(Long value1, Long value2) {
+            addCriterion("length not between", value1, value2, "length");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256IsNull() {
+            addCriterion("sha256 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256IsNotNull() {
+            addCriterion("sha256 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256EqualTo(String value) {
+            addCriterion("sha256 =", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256NotEqualTo(String value) {
+            addCriterion("sha256 <>", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256GreaterThan(String value) {
+            addCriterion("sha256 >", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256GreaterThanOrEqualTo(String value) {
+            addCriterion("sha256 >=", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256LessThan(String value) {
+            addCriterion("sha256 <", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256LessThanOrEqualTo(String value) {
+            addCriterion("sha256 <=", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256Like(String value) {
+            addCriterion("sha256 like", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256NotLike(String value) {
+            addCriterion("sha256 not like", value, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256In(List<String> values) {
+            addCriterion("sha256 in", values, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256NotIn(List<String> values) {
+            addCriterion("sha256 not in", values, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256Between(String value1, String value2) {
+            addCriterion("sha256 between", value1, value2, "sha256");
+            return (Criteria) this;
+        }
+
+        public Criteria andSha256NotBetween(String value1, String value2) {
+            addCriterion("sha256 not between", value1, value2, "sha256");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -642,136 +772,6 @@ public class FileMyExample {
 
         public Criteria andDelFlagNotBetween(Boolean value1, Boolean value2) {
             addCriterion("del_flag not between", value1, value2, "delFlag");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256IsNull() {
-            addCriterion("sha256 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256IsNotNull() {
-            addCriterion("sha256 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256EqualTo(String value) {
-            addCriterion("sha256 =", value, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256NotEqualTo(String value) {
-            addCriterion("sha256 <>", value, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256GreaterThan(String value) {
-            addCriterion("sha256 >", value, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256GreaterThanOrEqualTo(String value) {
-            addCriterion("sha256 >=", value, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256LessThan(String value) {
-            addCriterion("sha256 <", value, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256LessThanOrEqualTo(String value) {
-            addCriterion("sha256 <=", value, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256Like(String value) {
-            addCriterion("sha256 like", value, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256NotLike(String value) {
-            addCriterion("sha256 not like", value, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256In(List<String> values) {
-            addCriterion("sha256 in", values, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256NotIn(List<String> values) {
-            addCriterion("sha256 not in", values, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256Between(String value1, String value2) {
-            addCriterion("sha256 between", value1, value2, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andSha256NotBetween(String value1, String value2) {
-            addCriterion("sha256 not between", value1, value2, "sha256");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthIsNull() {
-            addCriterion("length is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthIsNotNull() {
-            addCriterion("length is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthEqualTo(Long value) {
-            addCriterion("length =", value, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthNotEqualTo(Long value) {
-            addCriterion("length <>", value, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthGreaterThan(Long value) {
-            addCriterion("length >", value, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthGreaterThanOrEqualTo(Long value) {
-            addCriterion("length >=", value, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthLessThan(Long value) {
-            addCriterion("length <", value, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthLessThanOrEqualTo(Long value) {
-            addCriterion("length <=", value, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthIn(List<Long> values) {
-            addCriterion("length in", values, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthNotIn(List<Long> values) {
-            addCriterion("length not in", values, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthBetween(Long value1, Long value2) {
-            addCriterion("length between", value1, value2, "length");
-            return (Criteria) this;
-        }
-
-        public Criteria andLengthNotBetween(Long value1, Long value2) {
-            addCriterion("length not between", value1, value2, "length");
             return (Criteria) this;
         }
     }

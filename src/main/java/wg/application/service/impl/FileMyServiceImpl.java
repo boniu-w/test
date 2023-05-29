@@ -1,14 +1,22 @@
 package wg.application.service.impl;
 
+// import org.mybatis.dynamic.sql.BasicColumn;
+// import org.mybatis.dynamic.sql.SqlBuilder;
+// import org.mybatis.dynamic.sql.render.RenderingStrategies;
+// import org.mybatis.dynamic.sql.select.QueryExpressionDSL;
+// import org.mybatis.dynamic.sql.select.SelectModel;
+// import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wg.application.entity.FileMy;
 import wg.application.entity.FileMyExample;
+// import wg.application.mapper.FileMyDynamicSqlSupport;
 import wg.application.mapper.FileMyMapper;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,6 +124,37 @@ public class FileMyServiceImpl {
         map.put("nasDeleted", nasDeleted);
         map.put("datasourceDeleted", datasourceDeleted);
         return map;
+    }
+
+    /**
+     * fileMy  排序
+     */
+    public void listOrder() {
+        // List<FileMy> all = getAll();
+        // List<FileMy> sortdList = all.stream()
+        //         .sorted(Comparator.comparing(FileMy::getUpdateTime, (o1, o2) -> o2.compareTo(o1))) // 从大到小排序
+        //         .collect(Collectors.toList());
+        // sortdList.forEach(System.out::println);
+
+        // FileMyExample example = new FileMyExample();
+        // example.setOrderByClause("update_time desc");
+        // example.createCriteria().andDelFlagIsNotNull();
+        // List<FileMy> fileMyList = fileMyMapper.selectByExample(example);
+        // fileMyList.forEach(System.out::println);
+
+        // 插件 mybatis generator 1.4.2
+        // SelectStatementProvider provider = SqlBuilder.select(FileMyDynamicSqlSupport.id, FileMyDynamicSqlSupport.fileName)
+        //         .from(FileMyDynamicSqlSupport.fileMy)
+        //         .build()
+        //         .render(RenderingStrategies.MYBATIS3);
+        // List<FileMy> fileMyList = fileMyMapper.selectMany(provider);
+        //
+        // SelectStatementProvider selectStatementProvider = SqlBuilder.select(BasicColumn.columnList())
+        //         .from(FileMyDynamicSqlSupport.fileMy)
+        //         .build()
+        //         .render(RenderingStrategies.MYBATIS3);
+        // List<FileMy> list = fileMyMapper.selectMany(selectStatementProvider);
+
     }
 
 }
