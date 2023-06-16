@@ -3,6 +3,7 @@ package wg.application.controller;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import wg.application.cache.CacheTest;
 import wg.application.entity.User;
@@ -69,7 +70,7 @@ public class UserController {
     }
     
     @PostMapping(value = "/update_user")
-    public void updateUser(@RequestBody User user) {
+    public void updateUser(@Validated @RequestBody User user) {
         userService.updateTestPrivate(user);
     }
     

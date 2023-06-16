@@ -175,6 +175,12 @@ public class StringUtil {
      * @date: 11:22  2021/9/1
      ************************************************************************/
     public static String humpToLine(String str) {
+        if (StringUtils.isBlank(str)) return "";
+        char firstChar = str.charAt(0);
+        if (!Character.isLowerCase(firstChar)) {
+            // 将首字母转换为小写，并与剩余部分拼接
+            str = Character.toLowerCase(firstChar) + str.substring(1);
+        }
         Pattern humpPattern = Pattern.compile("[A-Z]");
         Matcher matcher = humpPattern.matcher(str);
         StringBuffer sb = new StringBuffer();
