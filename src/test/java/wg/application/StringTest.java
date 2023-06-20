@@ -201,6 +201,10 @@ public class StringTest {
         String objectName = "";
         objectName = filePath.split("/pims-ld")[1];
         System.out.println(objectName);
+
+        String path="\\\\nas-wg\\wg\\影\\1994 饮食男女\\cover.jpg";
+        String[] split = path.split("\\\\");
+        Arrays.stream(split).forEach(System.out::println);
     }
     
     /************************************************************************

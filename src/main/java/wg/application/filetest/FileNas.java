@@ -14,6 +14,7 @@ import wg.application.vo.Result;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -278,6 +279,35 @@ public class FileNas {
         } catch (Exception e) {
             e.printStackTrace();
             return result.error();
+        }
+    }
+
+    @GetMapping(value = "/save")
+    public Result<Object> save(String nasAddr) {
+        // String nasAddr = "\\\\nas-wg\\wg\\影";
+        Result<Object> result = new Result<>();
+        try {
+            String[] types = {"jpg", "txt", "xlsx", "png"};
+            List<FileMy> fileMyList = fileMyService.getAll();
+
+            List<File> files = fileMyService.getFromNas(nasAddr);
+            List<File> fileList = fileMyService.filterFile(files, types);
+
+            // Map<String, List<File>> map = fileMyService.groupNasFile(fileList);
+            // List<File> length5FileList = map.get("length5");
+            // List<File> length4FileList = map.get("length4");
+
+            // int i = fileMyService.saveBatch(length5FileList);
+            // i += fileMyService.saveBatch(length4FileList);
+
+            int i = fileMyService.saveBatch(fileList);
+            result.setMessage("have insert: " + i);
+            return result.success();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return result.error();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
