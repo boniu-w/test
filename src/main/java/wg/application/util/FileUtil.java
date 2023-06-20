@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -205,7 +206,7 @@ public class FileUtil {
         fileName = fileName.replaceAll("\\s", "");
         return fileName;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 获取文件hash值,
@@ -221,10 +222,10 @@ public class FileUtil {
         byte[] digest1 = messageDigest.digest();
         return new BigInteger(1, digest1).toString(16);
     }
-
+    
     /************************************************************************
      * @author: wg
-     * @description:  文件不能大于2G的大文件不可用, 会出现 out of memory
+     * @description: 文件不能大于2G的大文件不可用, 会出现 out of memory
      * @params:
      * @return:
      * @createTime: 9:34  2023/5/17
@@ -525,7 +526,8 @@ public class FileUtil {
      ************************************************************************/
     public static Map<String, Object> getYmlFile(String name) throws IOException {
         org.springframework.core.io.ClassPathResource resource = new org.springframework.core.io.ClassPathResource(name);
-        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        // ObjectMapper objectMapper = new ObjectMapper(new YAMLMapper(new YAMLFactory())); // 2.15.0 版本写法
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());  // 2.13.0 版本写法
         Map<String, Object> map = objectMapper.readValue(resource.getInputStream(), Map.class);
         return map;
     }

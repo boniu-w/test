@@ -79,3 +79,4 @@ wg:
   jwt:
     secret: Fr0WK4WppCqKRZKuMakH8qvbZ9HuFyg5
     header: X-Auth-Token
+    filePath:

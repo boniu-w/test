@@ -17,20 +17,28 @@ import java.util.HashMap;
 @RestController
 @RequestMapping(value = "/transaction_test")
 public class TransactionTest {
+    // private static final String mysqlDriver = "com.mysql.cj.jdbc.Driver";
+    // private static final String url = "jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
+    // private static final String user = "root";
+    // private static final String password = "root";
+    
     private static final String mysqlDriver = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://127.0.0.1:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
-    private static final String user = "root";
-    private static final String password = "root";
+    private static final String url = "jdbc:mysql://192.168.12.240:13401/ci_dp_peq_strategy_asset?characterEncoding=UTF-8&useUnicode=true&serverTimezone=GMT%2B8";
+    private static final String user = "smeapp";
+    private static final String password = "smeapp123";
 
     @RequestMapping(value = "/test1")
     public void test() {
-        String sql = "select * from user";
+        String sql = "select * from risks_threats_identified";
         Connection conn = null;
         try {
             Class.forName(mysqlDriver);
             conn = DriverManager.getConnection(url, user, password);
             assert false;
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.getRow();
+            System.out.println("resultSet.getRow() = " + resultSet.getRow());
             boolean execute = preparedStatement.execute();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

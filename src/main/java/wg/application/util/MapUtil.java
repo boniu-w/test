@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.ObjectUtils;
 
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -102,65 +103,51 @@ public class MapUtil {
     
     /************************************************************************
      * @author: wg
-     * @description: map 转实体类
+     * @description: map 转 实体类
      * @params:
      * @return:
-     * @createTime: 9:22  2023/3/9
-     * @updateTime: 9:22  2023/3/9
+     * @createTime: 15:05  2023/6/1
+     * @updateTime: 15:05  2023/6/1
      ************************************************************************/
-    public static <T> List<T> toObjectList(List<Map<String, Object>> detailList, Class<T> tClass) {
-        List<T> excelArrayList = new ArrayList<>();
-        // map 转实体类
-        if (detailList != null && detailList.size() > 0) {
-            T t = null;
-            for (Map<String, Object> detailMap : detailList) {
-                t = JSON.parseObject(JSON.toJSONString(detailMap), tClass);
-                if (t != null) excelArrayList.add(t);
+    public static <T> T map2Bean(Map<String, Object> map, Class<T> clazz) {
+        T obj;
+        try {
+            obj = clazz.newInstance(); // 创建实体类对象
+            Field[] fields = clazz.getDeclaredFields(); // 获取实体类的全部成员变量
+            for (Field field : fields) {
+                field.setAccessible(true); // 设置字段可访问以便修改值
+                if (map.containsKey(field.getName())) { // 找到对应的键
+                    Object value = map.get(field.getName());
+                    field.set(obj, value); // 设置实体类对象的成员变量的值
+                }
             }
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
         }
-        
-        return excelArrayList;
+        return obj;
     }
     
     /************************************************************************
      * @author: wg
-     * @description: 另一种写法
+     * @description: 实体类 转 map
      * @params:
      * @return:
-     * @createTime: 9:24  2023/3/9
-     * @updateTime: 9:24  2023/3/9
+     * @createTime: 15:11  2023/6/1
+     * @updateTime: 15:11  2023/6/1
      ************************************************************************/
-    // public static <T> List<T> toObjectList(List<Map<String, Object>> detailList, Class<T> tClass) {
-    //     List<T> excelArrayList = new ArrayList<>();
-    //     // map 转实体类
-    //     try {
-    //         if (detailList != null && detailList.size() > 0) {
-    //             T t = null;
-    //             for (Map<String, Object> detailMap : detailList) {
-    //                 t = tClass.newInstance();
-    //                 BeanUtils.populate(t, detailMap);
-    //                 // t = JSON.parseObject(JSON.toJSONString(detailMap), tClass);
-    //                 if (t != null) excelArrayList.add(t);
-    //             }
-    //         }
-    //     } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
-    //         throw new RuntimeException(e);
-    //     }
-    //     return excelArrayList;
-    // }
-    
-    /************************************************************************
-     * @author: wg
-     * @description: 实体类转map
-     * @params:
-     * @return:
-     * @createTime: 16:37  2023/5/11
-     * @updateTime: 16:37  2023/5/11
-     ************************************************************************/
-    public static Map object2Map(Object object) {
-        String s = JSON.toJSONString(object);
-        Map map = JSONObject.toJavaObject(JSON.parseObject(s), Map.class);
-        
+    public static <T> Map<String, Object> bean2Map(T obj) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Field[] fields = obj.getClass().getDeclaredFields(); // 获取实体类的全部成员变量
+            for (Field field : fields) {
+                field.setAccessible(true); // 设置字段可访问以便取值
+                map.put(field.getName(), field.get(obj)); // 将实体类对象的成员变量的键值对放入 Map 中
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
         return map;
     }
     

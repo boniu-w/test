@@ -279,7 +279,7 @@ public class ExcelTest {
                 velocityContext.put("haiyouguojiExcelList", haiyouguojiExcelList);
                 
                 for (HaiyouguojiExcel haiyouguojiExcel : haiyouguojiExcelList) {
-                    Map map = MapUtil.object2Map(haiyouguojiExcel);
+                    Map<String, Object> map = MapUtil.bean2Map(haiyouguojiExcel);
                     if (map.get("fieldEn").toString().contains("ID")) {
                         map.remove("fieldEn");
                     }

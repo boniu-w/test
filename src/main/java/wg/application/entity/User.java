@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import wg.application.config.CustomerDecimalSerializer;
 
+import javax.validation.constraints.NotNull;
 import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -32,6 +33,7 @@ public class User implements Serializable {
      *
      * @mbg.generated
      */
+    @NotNull
     private Long id;
     
     /**

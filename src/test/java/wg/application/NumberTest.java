@@ -14,7 +14,7 @@ public class NumberTest {
     
     @Test
     public void test() {
-        String a = "beiPinBeiJianKuCunTongJiBiao";
+        String a = "BeiPinBeiJianKuCunTongJiBiao";
         String s = StringUtil.humpToLine(a);
         System.out.println(s);
     }
