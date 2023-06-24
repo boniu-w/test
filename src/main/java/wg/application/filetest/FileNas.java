@@ -1,9 +1,12 @@
 package wg.application.filetest;
 
 import cn.hutool.http.server.HttpServerRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import wg.application.config.MyIdGenerator;
+import wg.application.config.StartupMessage;
 import wg.application.entity.FileMy;
 import wg.application.exception.WgException;
 import wg.application.service.impl.FileMyServiceImpl;
@@ -16,15 +19,14 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component(value = "fileTestMy")
 @RequestMapping(value = "/file_nas")
 @ResponseBody
 public class FileNas {
+    private static final Logger logger = LoggerFactory.getLogger(FileNas.class);
 
     @Resource
     FileMyServiceImpl fileMyService;
@@ -308,6 +310,62 @@ public class FileNas {
             return result.error();
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping(value = "/savenewfiles")
+    public void saveNewFiles(@RequestBody Map<String, Object> params) {
+        String nasAddr = (String) params.get("nasAddr");
+        List<String> types = (List<String>) params.get("types");
+
+        List<File> files = null;
+        List<FileMy> all = fileMyService.getAll();
+        try {
+            files = fileMyService.getFromNas(nasAddr);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Map<String, Collection<File>> map = fileMyService._filterFile(files, types.toArray(new String[types.size()]));
+        Collection<File> outFiles = map.get("outFiles");
+        Collection<File> wantedFiles = map.get("wantedFiles");
+
+
+        Map<String, FileMy> myMap = all.stream()
+                .collect(Collectors.toMap(item -> item.getFileName() + item.getLength(), m -> m));
+        Map<String, File> fileMap = wantedFiles.stream()
+                .collect(Collectors.toMap(item -> item.getName() + item.length(), m -> m));
+
+        HashMap<String, File> addMap = new HashMap<>();
+        for (Map.Entry<String, File> entry : fileMap.entrySet()) {
+
+            if (myMap.get(entry.getKey()) == null) {
+                addMap.put(entry.getKey(), entry.getValue());
+            }
+        }
+
+        ArrayList<File> addFileList = new ArrayList<>();
+        addMap.forEach((k, v) -> addFileList.add(v));
+        List<String> addFilesName = addFileList.stream().map(File::getName).collect(Collectors.toList());
+        try {
+            int saveBatch = fileMyService.saveBatch(addFileList);
+            logger.info("已新增{}个文件, 它们分别是: {}", saveBatch, addFilesName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        // 把不想要的文件从nas删除
+        int i = 0;
+        for (File file : outFiles) {
+            i += fileMyService.deleteNas(file);
+        }
+        logger.info("已从nas删除{}个类型为{}的文件", i, types);
+    }
+
+    @GetMapping(value = "/deletenas")
+    public void deleteNas(String key) {
+        int i = fileMyService.deleteNas(new File(key));
+        if (i == 1) {
+            logger.info("已从nas删除 `{}` 这个文件", key);
         }
     }
 }

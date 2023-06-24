@@ -195,19 +195,25 @@ public class FileMyServiceImpl {
         // 保存到数据库
         int insert = 0;
         for (File file : list) {
-            FileMy fileMy = new FileMy();
-            fileMy.setId(MyIdGenerator.idWorker1.nextId());
-            fileMy.setFileName(file.getName());
-            fileMy.setLength(file.length());
-            fileMy.setAbsolutePath(file.getAbsolutePath());
-            // fileMy.setSha256(FileUtil.getSha256(file));
-            fileMy.setSuffix(file.getName().substring(file.getName().lastIndexOf(".") + 1));
-            fileMy.setCreateTime(LocalDateTime.now());
-            fileMy.setUpdateTime(LocalDateTime.now());
-
-            insert += save(fileMy);
+            insert += save(file);
         }
         return insert;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public int save(File file) throws Exception {
+        // 保存到数据库
+        FileMy fileMy = new FileMy();
+        fileMy.setId(MyIdGenerator.idWorker1.nextId());
+        fileMy.setFileName(file.getName());
+        fileMy.setLength(file.length());
+        fileMy.setAbsolutePath(file.getAbsolutePath());
+        // fileMy.setSha256(FileUtil.getSha256(file));
+        fileMy.setSuffix(file.getName().substring(file.getName().lastIndexOf(".") + 1));
+        fileMy.setCreateTime(LocalDateTime.now());
+        fileMy.setUpdateTime(LocalDateTime.now());
+
+        return save(fileMy);
     }
 
     /**********************************************************
@@ -235,10 +241,46 @@ public class FileMyServiceImpl {
         return new ArrayList<>(wantedFiles);
     }
 
+    public Map<String, Collection<File>> _filterFile(List<File> files, String[] outTypes) {
+        ArrayList<File> outFiles = new ArrayList<>();
+        Set<File> wantedFiles = new HashSet<>();
+        for (File file : files) {
+            if (hasExcludedExtension(file, Arrays.asList(outTypes))) {
+                outFiles.add(file);
+            } else {
+                wantedFiles.add(file);
+            }
+        }
+
+        System.out.println("files.size() = " + files.size());
+        System.out.println("outFiles.size() = " + outFiles.size());
+        System.out.println("wantedFiles.size() = " + wantedFiles.size());
+
+        HashMap<String, Collection<File>> map = new HashMap<>();
+        map.put("outFiles", outFiles);
+        map.put("wantedFiles", wantedFiles);
+        return map;
+    }
+
     public static boolean hasExcludedExtension(File file, List<String> excludedExtensions) {
         String fileName = file.getName();
         String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
         return excludedExtensions.contains(fileExtension.toLowerCase());
+    }
+
+    /**********************************************************
+     * @author: 公子求雨
+     * @description: 删除nas文件
+     * @params:
+     * @return:
+     * @date: 10:15 2023/6/24
+     **********************************************************/
+    public int deleteNas(File file) {
+        int i = 0;
+        if (file.delete()) {
+            i++;
+        }
+        return i;
     }
 
     // public static void main(String[] args) throws IOException {

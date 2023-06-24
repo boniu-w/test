@@ -34,6 +34,8 @@ public class FileNas {
     @Test
     public void testGuava() {
         File file = new File("H:\\java-project\\test\\src\\test\\java\\wg\\application\\FileTest.java");
+        String name = file.getName();
+        System.out.println("name = " + name);
         try {
             List<String> strings = Files.readLines(file, StandardCharsets.ISO_8859_1);
             strings.forEach(System.out::println);
