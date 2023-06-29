@@ -9,50 +9,58 @@ package wg.application.entity;
  * @Copyright
  *************************************************************/
 public class ExcelParams {
-
+    
     private Integer sheetIndex;
     private Integer titleIndex;
-    private Integer contentIndex;
-
+    private Integer contentStartIndex;
+    private Integer contentEndIndex;
     private String exportFileName;
     private String exportSheetName;
-
+    
     public Integer getSheetIndex() {
         return sheetIndex;
     }
-
+    
     public void setSheetIndex(Integer sheetIndex) {
         this.sheetIndex = sheetIndex;
     }
-
+    
     public Integer getTitleIndex() {
         return titleIndex;
     }
-
+    
     public void setTitleIndex(Integer titleIndex) {
         this.titleIndex = titleIndex;
     }
-
-    public Integer getContentIndex() {
-        return contentIndex;
+    
+    public Integer getContentStartIndex() {
+        return contentStartIndex;
     }
-
-    public void setContentIndex(Integer contentIndex) {
-        this.contentIndex = contentIndex;
+    
+    public void setContentStartIndex(Integer contentIndex) {
+        this.contentStartIndex = contentIndex;
     }
-
+    
+    public Integer getContentEndIndex() {
+        return contentEndIndex;
+    }
+    
+    public void setContentEndIndex(Integer contentEndIndex) {
+        this.contentEndIndex = contentEndIndex;
+    }
+    
     public String getExportFileName() {
         return exportFileName;
     }
-
+    
     public void setExportFileName(String exportFileName) {
         this.exportFileName = exportFileName;
     }
-
+    
     public String getExportSheetName() {
         return exportSheetName;
     }
-
+    
     public void setExportSheetName(String exportSheetName) {
         this.exportSheetName = exportSheetName;
     }

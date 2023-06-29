@@ -1,6 +1,5 @@
 package wg.application;
 
-import cn.hutool.core.util.ReflectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -12,12 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import wg.application.entity.User;
 import wg.application.function.StringLength;
+import wg.application.util.CommonUtil;
 import wg.application.util.DateUtils;
 import wg.application.util.StringUtil;
-import wg.application.util.CommonUtil;
 
 import java.io.*;
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -515,32 +513,56 @@ public class StringTest {
      * @updateTime: 15:02  2023/4/14
      ************************************************************************/
     @Test
-    public void testRegex(){
+    public void testRegex() {
         String regex = null;
         String regex1 = "\\d{4}(\\-|\\/|.)\\d{1,2}(\\-|\\/|.)\\d{1,2}$";
         String regex2 = "\\d{4}(\\-|\\/|.)\\d{1,2}$";
+        String regex3 = "\\d{4}(\\-|\\/|.|年)\\d{1,2}(月*)$";
+        String regex5 = "\\d{4}(年)\\d{1,2}(月)$";
         
-        String date1="2020/02/23";
-        String date2="2005/01";
+        String patternStr1 = "yyyy/MM/dd";
+        String patternStr2 = "yyyy/MM";
+        String patternStr3 = "yyyy年MM月";
+        
+        String date1 = "2020/02/23";
+        String date2 = "2005/01";
+        String date3 = "2023年02月";
         
         Matcher matcher = Pattern.compile(regex1).matcher(date1);
         if (matcher.find()) {
             System.out.println(regex1);
-            Date date = DateUtils.stringToDate(date1, regex1);
+            Date date = DateUtils.stringToDate(date1, patternStr1);
             System.out.println(date);
         }
         
         Matcher matcher1 = Pattern.compile(regex2).matcher(date2);
         if (matcher1.find()) {
             System.out.println(regex2);
-            Date date = DateUtils.stringToDate(date2, regex2);
+            Date date = DateUtils.stringToDate(date2, patternStr2);
             System.out.println(date);
         }
+        
+        Matcher matcher3 = Pattern.compile(regex3).matcher(date3);
+        if (matcher3.find()) {
+            System.out.println(date3);
+            Date date = DateUtils.stringToDate(date3, patternStr3);
+            System.out.println(date);
+        }
+        
+        /* 测试 regex3 的通用性  -- 是匹配的, 虽然匹配, 但为了转换成日期格式, 也就是为了匹配 patternstr3 , 不用 regex3,
+        也就是为了一一对应, 改用 regex5 最为合适 */
+        Matcher matcher4 = Pattern.compile(regex3).matcher(date2);
+        if (matcher4.find()) {
+            System.out.println(date2);
+            Date date = DateUtils.stringToDate(date2, patternStr2);
+            System.out.println(date);
+        }
+        
     }
     
     @Test
-    public void getBytes(){
-        String a="+F7Uq/z/1dsqMPGd0U3R4hhdpg8=";
+    public void getBytes() {
+        String a = "+F7Uq/z/1dsqMPGd0U3R4hhdpg8=";
         byte[] bytes = a.getBytes();
         System.out.println(Arrays.toString(bytes));
     }

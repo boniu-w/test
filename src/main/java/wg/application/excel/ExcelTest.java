@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import wg.application.entity.ExcelParams;
-import wg.application.entity.User;
 import wg.application.util.ExcelUtil;
 import wg.application.util.FileUtil;
 import wg.application.util.MapUtil;
@@ -49,11 +48,11 @@ public class ExcelTest {
             ExcelParams excelParams = new ExcelParams();
             excelParams.setTitleIndex(0);
             excelParams.setSheetIndex(0);
-            excelParams.setContentIndex(1);
+            excelParams.setContentStartIndex(1);
             
             long currentTimeMillis = System.currentTimeMillis();
             
-            String[] excelTitle = ExcelUtil.readExcelTitle(excelParams, new IliDetailExcel());
+            String[] excelTitle = ExcelUtil.readExcelTitle(excelParams, IliDetailExcel.class);
             Map<Integer, Map<String, Object>> map = ExcelUtil.readExcelContent(workbook, excelTitle, excelParams);
             
             long l = System.currentTimeMillis();
@@ -108,11 +107,11 @@ public class ExcelTest {
             ExcelParams excelParams = new ExcelParams();
             excelParams.setTitleIndex(0);
             excelParams.setSheetIndex(0);
-            excelParams.setContentIndex(1);
+            excelParams.setContentStartIndex(1);
             
             long currentTimeMillis = System.currentTimeMillis();
             
-            String[] excelTitle = ExcelUtil.readExcelTitle(excelParams, new IliDetailExcel());
+            String[] excelTitle = ExcelUtil.readExcelTitle(excelParams, IliDetailExcel.class);
             Map<Integer, Map<String, Object>> map = ExcelUtil.readExcelContent(workbook, excelTitle, excelParams);
             Map<String, Map<String, String>> replaceMap = ExcelUtil.getImportReplaceMap(IliDetailExcel.class);
             

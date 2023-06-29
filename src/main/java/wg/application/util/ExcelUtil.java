@@ -6,7 +6,6 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -19,6 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import wg.application.annotation.Excel;
 import wg.application.entity.ExcelParams;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -42,7 +42,11 @@ public class ExcelUtil {
     private static Workbook workbook;
     private static Sheet sheet;
     private static Row row;
-
+    
+    public static Workbook getWorkbook() {
+        return workbook;
+    }
+    
     /*************************************************************
      * 初始化workbook
      * @author: wg
@@ -54,7 +58,7 @@ public class ExcelUtil {
         }
         String filename = file.getOriginalFilename();
         String ext = filename.substring(filename.lastIndexOf("."));
-
+        
         try {
             InputStream is = file.getInputStream();
             switch (ext) {
@@ -74,10 +78,10 @@ public class ExcelUtil {
         } finally {
             //System.out.println("<><><><><>< 初始化 workbook 完成 ><><><><>");
         }
-
+        
         return new HSSFWorkbook();
     }
-
+    
     public static Workbook initWorkbook(File file) throws IOException {
         if (file == null) {
             return null;
@@ -85,7 +89,7 @@ public class ExcelUtil {
         workbook = new XSSFWorkbook(new FileInputStream(file));
         return workbook;
     }
-
+    
     /***************************************************
      * 获取 前端 上传的文件信息
      * @author: wg
@@ -94,24 +98,24 @@ public class ExcelUtil {
     public static List<MultipartFile> getUploadFiles(HttpServletRequest request) {
         // (这里使用Vector，而不使用ArrayLsit，是怕引起线程安全问题，因为后面会引用到相同的内存地址)
         List<MultipartFile> fileVector = new Vector<>();
-
+        
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         if (request instanceof MultipartHttpServletRequest) {
             MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
-
+            
             Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-
+            
             if (commonsMultipartResolver.isMultipart(request)) {
                 while (iterator.hasNext()) {
                     // 将当前文件名一致的文件流放入同一个集合中
                     List<MultipartFile> fileRows = multipartHttpServletRequest.getFiles(iterator.next());
-
+                    
                     // 对文件做去重设置
                     // 判断集合是否存在，并且是否大于0
                     if (fileRows != null && fileRows.size() != 0) {
                         for (MultipartFile file : fileRows) {
                             String name = file.getName();
-
+                            
                             if (file != null && !file.isEmpty()) {
                                 fileVector.add(file);
                             }
@@ -123,13 +127,13 @@ public class ExcelUtil {
         }
         return fileVector;
     }
-
+    
     /****************************************************************
      * 读取第一行 默认是标题行
      * @author: wg
      * @time: 2020/7/2 15:05
      ****************************************************************/
-    public static <T> String[] readExcelTitle(@Nullable ExcelParams excelParams, T t) throws NullPointerException {
+    public static <T> String[] readExcelTitle(@Nullable ExcelParams excelParams, Class<T> tClass) throws NullPointerException {
         if (workbook == null) {
             try {
                 throw new Exception("Workbook对象为空！");
@@ -137,36 +141,36 @@ public class ExcelUtil {
                 e.printStackTrace();
             }
         }
-
+        
         int numberOfSheets = workbook.getNumberOfSheets();
         //System.out.println("numberOfSheets: "+numberOfSheets);
-
+        
         // sheet 所在
         if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
             sheet = workbook.getSheetAt(excelParams.getSheetIndex());
         } else {
             sheet = workbook.getSheetAt(0);
         }
-
+        
         // 标题行
         if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
             row = sheet.getRow(excelParams.getTitleIndex());
         } else {
             row = sheet.getRow(0);
         }
-
+        
         // 标题总列数
         int colNum = row.getPhysicalNumberOfCells();
         colNum = row.getLastCellNum();
         String[] title = new String[colNum];
-        Field[] fields = t.getClass().getDeclaredFields();
-
+        Field[] fields = tClass.getDeclaredFields();
+        
         // System.out.println(Arrays.toString(fields));
-
+        
         String cellValue = "";
         Excel annotation = null;
         String annotationName = "";
-
+        
         for (int i = 0; i < colNum; i++) {
             cellValue = row.getCell(i).getStringCellValue();
             for (int j = 0; j < fields.length; j++) {
@@ -179,10 +183,10 @@ public class ExcelUtil {
                 }
             }
         }
-
+        
         return title;
     }
-
+    
     /****************************************************************
      * 读取的 excel 内容 应该以 表头对应字段 为键 形成map
      * @author: wg
@@ -192,7 +196,7 @@ public class ExcelUtil {
                                                                      String[] titleArray,
                                                                      @Nullable ExcelParams excelParams) throws Exception {
         Map<Integer, Map<String, Object>> contentMap = new HashMap<Integer, Map<String, Object>>();
-
+        
         // 得到总行数
         if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
             sheet = workbook.getSheetAt(0);
@@ -200,7 +204,7 @@ public class ExcelUtil {
             sheet = workbook.getSheetAt(excelParams.getSheetIndex());
         }
         int rowNum = sheet.getLastRowNum();
-
+        
         // 总列数
         if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
             row = sheet.getRow(0);
@@ -208,13 +212,13 @@ public class ExcelUtil {
             row = sheet.getRow(excelParams.getTitleIndex());
         }
         int colNum = row.getPhysicalNumberOfCells();
-
+        
         // 默认正文内容应该从第二行开始,第一行为表头的标题
         int i;
-        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getContentIndex())) {
+        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getContentStartIndex())) {
             i = 1;
         } else {
-            i = excelParams.getContentIndex();
+            i = excelParams.getContentStartIndex();
         }
         HashMap<String, Object> cellValue = new HashMap<String, Object>();
         for (; i <= rowNum; i++) {
@@ -233,63 +237,10 @@ public class ExcelUtil {
         }
         return contentMap;
     }
-
-    /************************************************************************
-     * @author: wg
-     * @description: 适用于直接导入, 不需要replace等操作
-     * @params:
-     * @return:
-     * @createTime: 21:09  2022/3/8
-     * @updateTime: 21:09  2022/3/8
-     ************************************************************************/
-    public static <T> Map<Integer, T> readExcelContent(Workbook workbook,
-                                                       String[] titleArray,
-                                                       @Nullable ExcelParams excelParams,
-                                                       Class<T> tClass) throws Exception {
-        Map<Integer, T> contentMap = new HashMap<Integer, T>();
-
-        // 得到总行数
-        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
-            sheet = workbook.getSheetAt(0);
-        } else {
-            sheet = workbook.getSheetAt(excelParams.getSheetIndex());
-        }
-        int rowNum = sheet.getLastRowNum();
-
-        // 总列数
-        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
-            row = sheet.getRow(0);
-        } else {
-            row = sheet.getRow(excelParams.getTitleIndex());
-        }
-        int colNum = row.getPhysicalNumberOfCells();
-
-        // 默认正文内容应该从第二行开始,第一行为表头的标题
-        int i;
-        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getContentIndex())) {
-            i = 1;
-        } else {
-            i = excelParams.getContentIndex();
-        }
-        for (; i <= rowNum; i++) {
-            Map<String, Object> cellValue = new HashMap<String, Object>();
-            int j = 0;
-            row = sheet.getRow(i);
-            while (j < colNum) {
-                Object obj = getCellFormatValue(row.getCell(j));
-                String titleFieldName = titleArray[j];
-                cellValue.put(titleFieldName, obj);
-                j++;
-            }
-            T t = JSON.parseObject(JSON.toJSONString(cellValue), tClass);
-            contentMap.put(i, t);
-        }
-        return contentMap;
-    }
-
+    
     public static <T> Map<String, Map<String, String>> getImportReplaceMap(Class<T> tClass) throws InstantiationException, IllegalAccessException {
         Field[] declaredFields = tClass.getDeclaredFields();
-
+        
         Map<String, Map<String, String>> fieldReplaceMap = new HashMap<>();
         for (int j = 0; j < declaredFields.length; j++) {
             Excel annotation = declaredFields[j].getAnnotation(Excel.class);
@@ -322,11 +273,11 @@ public class ExcelUtil {
                 }
             }
             // 如果字典字段不为 null, 则 去 字典表里查, 查出要替换的
-
+            
         }
         return fieldReplaceMap;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 导入时只需要引用这个方法就行
@@ -338,7 +289,7 @@ public class ExcelUtil {
     public static <T> List<T> getImportList(File file, @Nullable ExcelParams excelParams, T t) throws Exception {
         List<T> list = new ArrayList<>();
         workbook = initWorkbook(file);
-        String[] titles = readExcelTitle(excelParams, t);
+        String[] titles = readExcelTitle(excelParams, t.getClass());
         Map<Integer, Map<String, Object>> contentMap = readExcelContent(workbook, titles, excelParams);
         Map<String, Map<String, String>> importReplaceMap = getImportReplaceMap(t.getClass());
         contentMap.forEach((lineIndex, objectMap) -> {
@@ -357,10 +308,10 @@ public class ExcelUtil {
             });
             list.add((T) JSON.parseObject(JSON.toJSONString(objectMap), t.getClass()));
         });
-
+        
         return list;
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 获取网络传输的excel文件
@@ -372,7 +323,7 @@ public class ExcelUtil {
     public static <T> List<T> getImportList(MultipartFile file, @Nullable ExcelParams excelParams, T t) throws Exception {
         List<T> list = new ArrayList<>();
         workbook = initWorkbook(file);
-        String[] titles = readExcelTitle(excelParams, t);
+        String[] titles = readExcelTitle(excelParams, t.getClass());
         Map<Integer, Map<String, Object>> contentMap = readExcelContent(workbook, titles, excelParams);
         Map<String, Map<String, String>> importReplaceMap = getImportReplaceMap(t.getClass());
         contentMap.forEach((lineIndex, objectMap) -> {
@@ -391,13 +342,13 @@ public class ExcelUtil {
             });
             list.add((T) JSON.parseObject(JSON.toJSONString(objectMap), t.getClass()));
         });
-
+        
         return list;
     }
-
+    
     public static <T> Map<String, Map<String, String>> getExportReplaceMap(Class<T> tClass) throws InstantiationException, IllegalAccessException {
         Field[] declaredFields = tClass.getDeclaredFields();
-
+        
         Map<String, Map<String, String>> fieldReplaceMap = new HashMap<>();
         for (int j = 0; j < declaredFields.length; j++) {
             Excel annotation = declaredFields[j].getAnnotation(Excel.class);
@@ -424,89 +375,45 @@ public class ExcelUtil {
                 }
             }
             // 如果字典字段不为 null, 则 去 字典表里查, 查出要替换的
-
+            
         }
         return fieldReplaceMap;
     }
-
+    
     /**
      * 根据Cell类型设置数据
      *
      * @param
      */
-    public static Object getCellFormatValue(Cell cell) {
-        Object cellvalue = "";
-
-        DecimalFormat decimalFormat = new DecimalFormat();
-
-        if (cell != null) {
-            switch (cell.getCellType()) {
-                case Cell.CELL_TYPE_NUMERIC: {
-                    short s = cell.getCellStyle().getDataFormat();
-                    if (ExcelDateUtil.isCellDateFormatted(cell)) {
-                        cellvalue = cell.getDateCellValue();
-                    } else {
-                        cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
-                    }
-                    break;
-                }
-                case Cell.CELL_TYPE_STRING:
-                    cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
-                    break;
-                case Cell.CELL_TYPE_BOOLEAN:
-                    cellvalue = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                case Cell.CELL_TYPE_FORMULA:
-                    cellvalue = String.valueOf(cell.getCellFormula());
-                    break;
-                case Cell.CELL_TYPE_ERROR:
-                    cellvalue = "非法字符";
-                    break;
-                case Cell.CELL_TYPE_BLANK:
-                    cellvalue = "";
-                    break;
-                default:
-                    cellvalue = "未知类型";
-                    break;
-            }
-        } else {
-            cellvalue = "";
-        }
-        return cellvalue;
-    }
-
-    // apache poi 4.1.2
     // public static Object getCellFormatValue(Cell cell) {
     //     Object cellvalue = "";
-    //     CellType cellType = cell.getCellType();
     //
     //     DecimalFormat decimalFormat = new DecimalFormat();
     //
-    //     if (cellType != null) {
-    //         switch (cellType) {
-    //             case NUMERIC: {
+    //     if (cell != null) {
+    //         switch (cell.getCellType()) {
+    //             case Cell.CELL_TYPE_NUMERIC: {
     //                 short s = cell.getCellStyle().getDataFormat();
     //                 if (ExcelDateUtil.isCellDateFormatted(cell)) {
-    //                     Date date = cell.getDateCellValue();
-    //                     cellvalue = date;
+    //                     cellvalue = cell.getDateCellValue();
     //                 } else {
     //                     cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
     //                 }
     //                 break;
     //             }
-    //             case STRING:
+    //             case Cell.CELL_TYPE_STRING:
     //                 cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
     //                 break;
-    //             case BOOLEAN:
+    //             case Cell.CELL_TYPE_BOOLEAN:
     //                 cellvalue = String.valueOf(cell.getBooleanCellValue());
     //                 break;
-    //             case FORMULA:
+    //             case Cell.CELL_TYPE_FORMULA:
     //                 cellvalue = String.valueOf(cell.getCellFormula());
     //                 break;
-    //             case ERROR:
+    //             case Cell.CELL_TYPE_ERROR:
     //                 cellvalue = "非法字符";
     //                 break;
-    //             case BLANK:
+    //             case Cell.CELL_TYPE_BLANK:
     //                 cellvalue = "";
     //                 break;
     //             default:
@@ -518,7 +425,79 @@ public class ExcelUtil {
     //     }
     //     return cellvalue;
     // }
-
+    
+    // apache poi 4.1.2
+    public static Object getCellFormatValue(Cell cell) {
+        Object cellvalue = "";
+        CellType cellType = cell.getCellType();
+        
+        DecimalFormat decimalFormat = new DecimalFormat();
+        
+        if (cellType != null) {
+            switch (cellType) {
+                case NUMERIC: {
+                    short s = cell.getCellStyle().getDataFormat();
+                    if (ExcelDateUtil.isCellDateFormatted(cell)) {
+                        Date date = cell.getDateCellValue();
+                        cellvalue = date;
+                    } else {
+                        cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
+                    }
+                    break;
+                }
+                case STRING:
+                    cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
+                    break;
+                case BOOLEAN:
+                    cellvalue = String.valueOf(cell.getBooleanCellValue());
+                    break;
+                case FORMULA:
+                    cellvalue = String.valueOf(cell.getCellFormula());
+                    break;
+                case ERROR:
+                    cellvalue = "非法字符";
+                    break;
+                case BLANK:
+                    cellvalue = "";
+                    break;
+                default:
+                    cellvalue = "未知类型";
+                    break;
+            }
+        } else {
+            cellvalue = "";
+        }
+        return cellvalue;
+    }
+    
+    public static Cell setCellValue(Cell cell, Object cellValue) {
+        if (cellValue == null) return cell;
+        
+        Workbook workbook = cell.getSheet().getWorkbook();
+        CreationHelper creationHelper = workbook.getCreationHelper();
+        
+        if (cellValue instanceof String) {
+            cell.setCellValue((String) cellValue);
+        } else if (cellValue instanceof Double) {
+            cell.setCellValue((Double) cellValue);
+        } else if (cellValue instanceof Integer) {
+            cell.setCellValue((Integer) cellValue);
+        } else if (cellValue instanceof Boolean) {
+            cell.setCellValue((Boolean) cellValue);
+        } else if (cellValue instanceof Date) {
+            cell.setCellValue((Date) cellValue);
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            dateCellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy/MM/dd"));
+            cell.setCellStyle(dateCellStyle);
+        } else if (cellValue instanceof Calendar) {
+            cell.setCellValue((Calendar) cellValue);
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            dateCellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy/MM/dd"));
+            cell.setCellStyle(dateCellStyle);
+        }
+        return cell;
+    }
+    
     /***************************************************
      * 导出excel
      * @author: wg
@@ -530,24 +509,24 @@ public class ExcelUtil {
         Date date = null;
         Float aFloat = null;
         String s = null;
-
+        
         List<T> objectList = new ArrayList<>();
         if (!StringUtils.isEmpty(data)) {
             objectList = JSON.parseArray(data, clazz);
         }
-
+        
         String fileName = excelParams.getExportFileName();
         String sheetName = excelParams.getExportSheetName();
-
+        
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet(sheetName);
         HSSFRow row = null;
         HSSFCell cell = null;
-
+        
         CellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setFillForegroundColor(HSSFColor.GOLD.index);
-        cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
-
+        // cellStyle.setFillForegroundColor(HSSFColor.GOLD.index);
+        // cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        
         /************ 把所有 带有@Excel 注解的字段拿出来 形成arrayList 以形成表头,并创建单元格写入表头标题 -> 开始 ************/
         Field[] fields = clazz.getDeclaredFields();
         ArrayList<Field> fieldArrayList = new ArrayList<>();
@@ -561,11 +540,11 @@ public class ExcelUtil {
             cell = row.createCell(i);
             Field field = fieldArrayList.get(i);
             Excel annotation = field.getAnnotation(Excel.class);
-            cell.setCellType(Cell.CELL_TYPE_STRING);
+            // cell.setCellType(Cell.CELL_TYPE_STRING);
             cell.setCellValue(annotation.name());
         }
         /************ 把所有 带有@Excel 注解的字段拿出来 形成arrayList 以形成表头,并创建单元格写入表头标题 -> 结束 ************/
-
+        
         /************ 导出表的正文 field.get(bankFlow) -> 开始 ************/
         try {
             for (int i = 0; i < objectList.size(); i++) {
@@ -573,33 +552,33 @@ public class ExcelUtil {
                 T flow = objectList.get(i);
                 for (int j = 0; j < fieldArrayList.size(); j++) {
                     cell = row.createCell(j);
-
+                    
                     //if (!StringUtils.isEmpty(flow.getTick()) && flow.getTick().equals("conditionExcel")) {
                     //    cell.setCellStyle(cellStyle);
                     //}
-
+                    
                     Field field = fieldArrayList.get(j);
-
+                    
                     //System.out.println("field.toString(): " + field.toString());
-
+                    
                     field.setAccessible(true);
-
+                    
                     if (field.get(flow) instanceof String) {
                         s = (String) field.get(flow);
                         cell.setCellValue((String) field.get(flow));
                         System.out.println(s);
-
+                        
                     }
-
+                    
                     if (field.get(flow) instanceof Timestamp) {
                         timestamp = (Timestamp) field.get(flow);
                         date = new Date(timestamp.getTime());
-
+                        
                         String format = dateFormat.format(date);
                         cell.setCellValue(format);
                         System.out.println(format);
                     }
-
+                    
                     if (field.get(flow) instanceof Float) {
                         aFloat = (Float) field.get(flow);
                         cell.setCellValue(aFloat.toString());
@@ -608,7 +587,7 @@ public class ExcelUtil {
                 }
             }
             /************ 导出表的正文 -> 结束 ************/
-
+            
             /************ 设置响应header -> 开始  ************/
             fileName = new String(fileName.getBytes(), "ISO8859-1");
             response.setContentType("application/vnd.ms-excel");
@@ -617,7 +596,7 @@ public class ExcelUtil {
             response.addHeader("Pargam", "no-cache");
             response.addHeader("Cache-Control", "no-cache");
             /************ 设置响应header -> 结束  ************/
-
+            
             /************ 流 -> 开始 ************/
             OutputStream outputStream = response.getOutputStream();
             workbook.write(outputStream);
@@ -630,5 +609,108 @@ public class ExcelUtil {
             e.printStackTrace();
         }
     }
-
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 获取上传的excel全部信息
+     * @params:
+     * @return:
+     * @createTime: 11:15  2023/6/28
+     * @updateTime: 11:15  2023/6/28
+     ************************************************************************/
+    public static Map<String, Map<Integer, Map<Integer, Cell>>> getWorkbookData(List<MultipartFile> uploadFiles) {
+        if (uploadFiles == null || uploadFiles.size() == 0) {
+            return null;
+        }
+        
+        if (uploadFiles.size() == 1) {
+            MultipartFile multipartFile = uploadFiles.get(0);
+            Workbook workbook = ExcelUtil.initWorkbook(multipartFile);
+            Map<String, Map<Integer, Map<Integer, Cell>>> workbookMap = new HashMap<>();
+            for (Sheet sheet : workbook) {
+                Map<Integer, Map<Integer, Cell>> map = new HashMap<>();
+                for (int i = 0; i < sheet.getLastRowNum(); i++) {
+                    Map<Integer, Cell> rowMap = new HashMap<>();
+                    Row rowi = sheet.getRow(i);
+                    for (int j = 0; j < rowi.getLastCellNum(); j++) {
+                        Cell cell = rowi.getCell(j);
+                        rowMap.put(j, cell);
+                    }
+                    // 忽略空行
+                    if (!MapUtil.isAllEmptyValue(rowMap)) {
+                        map.put(i, rowMap);
+                    }
+                }
+                workbookMap.put(sheet.getSheetName(), map);
+            }
+            return workbookMap;
+        }
+        return null;
+    }
+    
+    public static Map<String, Map<Integer, Map<Integer, Object>>> getWorkbookData(Map<String, Map<Integer, Map<Integer, Cell>>> workbookData) {
+        Map<String, Map<Integer, Map<Integer, Object>>> workbookMap = new HashMap<>();
+        Map<Integer, Map<Integer, Object>> rowMap = new HashMap<>();
+        Map<Integer, Object> map = new HashMap<>();
+        
+        for (Map.Entry<String, Map<Integer, Map<Integer, Cell>>> mapEntry : workbookData.entrySet()) {
+            String sheetName = mapEntry.getKey();
+            Map<Integer, Map<Integer, Cell>> value = mapEntry.getValue();
+            rowMap = new HashMap<>();
+            for (Map.Entry<Integer, Map<Integer, Cell>> entry : value.entrySet()) {
+                Integer rowIndex = entry.getKey();
+                Map<Integer, Cell> cellMap = entry.getValue();
+                map = new HashMap<>();
+                for (Map.Entry<Integer, Cell> cellEntry : cellMap.entrySet()) {
+                    Integer cellIndex = cellEntry.getKey();
+                    Cell cell = cellEntry.getValue();
+                    Object obj = ExcelUtil.getCellFormatValue(cell);
+                    map.put(cellIndex, obj);
+                }
+                rowMap.put(rowIndex, map);
+            }
+            workbookMap.put(sheetName, rowMap);
+        }
+        
+        return workbookMap;
+    }
+    
+    public static <T> List<T> getData(Workbook workbook, ExcelParams excelParams, Class<T> tClass) throws Exception {
+        String[] titles = readExcelTitle(excelParams, tClass);
+        Map<Integer, Map<String, Object>> content = readExcelContent(workbook, titles, excelParams);
+        Map<String, Map<String, String>> replaceMap = getImportReplaceMap(tClass);
+        List<T> tList = toObject(tClass, content, replaceMap);
+        
+        return tList;
+    }
+    
+    public static <T> List<T> toObject(Class<T> tClass, Map<Integer, Map<String, Object>> contentMap, Map<String, Map<String, String>> importReplaceMap) {
+        List<T> list = new ArrayList<>();
+        for (Map.Entry<Integer, Map<String, Object>> integerMapEntry : contentMap.entrySet()) {
+            Map<String, Object> objectMap = integerMapEntry.getValue();
+            for (Map.Entry<String, Object> objectEntry : objectMap.entrySet()) {
+                String fieldName = objectEntry.getKey();
+                Object cellValue = objectEntry.getValue();
+                if (importReplaceMap != null && !importReplaceMap.isEmpty()) {
+                    for (Map.Entry<String, Map<String, String>> stringMapEntry : importReplaceMap.entrySet()) {
+                        Map<String, String> replaceValues = stringMapEntry.getValue();
+                        for (Map.Entry<String, String> entry : replaceValues.entrySet()) {
+                            String excelVal = entry.getKey();
+                            String tableVal = entry.getValue();
+                            if (excelVal.equals(cellValue.toString().trim())) {
+                                objectMap.put(fieldName, tableVal);
+                            }
+                        }
+                    }
+                }
+            }
+            list.add(MapUtil.map2Bean(objectMap, tClass));
+        }
+        return list;
+    }
+    
+    public static <T> List<T> getData(MultipartFile file, ExcelParams excelParams, Class<T> tClass) throws Exception {
+        Workbook workbook = initWorkbook(file);
+        return getData(workbook, excelParams, tClass);
+    }
 }

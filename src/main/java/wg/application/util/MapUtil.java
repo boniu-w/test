@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -118,10 +120,27 @@ public class MapUtil {
                 field.setAccessible(true); // 设置字段可访问以便修改值
                 if (map.containsKey(field.getName())) { // 找到对应的键
                     Object value = map.get(field.getName());
-                    field.set(obj, value); // 设置实体类对象的成员变量的值
+                    if (value != null) {
+                        if (field.getType() == Date.class && value instanceof String) {
+                            if (StringUtil.isNotBlank((String) value)) {
+                                // 对于 Date 类型的字段，将字符串转换为 Date 对象
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 根据实际需求选择日期格式
+                                Date dateValue = dateFormat.parse((String) value);
+                                field.set(obj, dateValue);
+                            }
+                        } else if (field.getType() == Integer.class && value instanceof String) {
+                            if (StringUtil.isNotBlank((String) value)) {
+                                // 对于 Integer 类型的字段，将字符串转换为 Integer 对象
+                                Integer intValue = Integer.parseInt((String) value);
+                                field.set(obj, intValue);
+                            }
+                        } else {
+                            field.set(obj, value);
+                        }
+                    }
                 }
             }
-        } catch (InstantiationException | IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException | ParseException e) {
             e.printStackTrace();
             return null;
         }
