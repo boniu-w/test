@@ -6,20 +6,21 @@ package wg.application.service.impl;
 // import org.mybatis.dynamic.sql.select.QueryExpressionDSL;
 // import org.mybatis.dynamic.sql.select.SelectModel;
 // import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import wg.application.config.MyIdGenerator;
 import wg.application.entity.FileMy;
 import wg.application.entity.FileMyExample;
 // import wg.application.mapper.FileMyDynamicSqlSupport;
 import wg.application.mapper.FileMyMapper;
+import wg.application.util.FileUtil;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -157,4 +158,151 @@ public class FileMyServiceImpl {
 
     }
 
+    /**********************************************************
+     * @author: 公子求雨
+     * @description: 从nas处获取文件list
+     * @params:
+     * @return:
+     * @date: 22:39 2023/6/20
+     **********************************************************/
+    public List<File> getFromNas(String nasAddr) throws IOException {
+        ArrayList<File> files = new ArrayList<>();
+        List<File> allFile = FileUtil.getAllFile(nasAddr, files);
+        return allFile;
+    }
+
+    public Map<String, List<File>> groupNasFile(List<File> list) {
+        Map<String, List<File>> map = new HashMap<>();
+        ArrayList<File> length5 = new ArrayList<>();
+        ArrayList<File> length4 = new ArrayList<>();
+        for (File file : list) {
+            String[] split = file.getPath().split("\\\\");
+            if (split.length == 5) {
+                length5.add(file);
+            }
+            if (split.length == 4) {
+                length4.add(file);
+            }
+        }
+
+        map.put("length5", length5);
+        map.put("length4", length4);
+
+        return map;
+    }
+
+    public int saveBatch(List<File> list) throws Exception {
+        // 保存到数据库
+        int insert = 0;
+        for (File file : list) {
+            insert += save(file);
+        }
+        return insert;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public int save(File file) throws Exception {
+        // 保存到数据库
+        FileMy fileMy = new FileMy();
+        fileMy.setId(MyIdGenerator.idWorker1.nextId());
+        fileMy.setFileName(file.getName());
+        fileMy.setLength(file.length());
+        fileMy.setAbsolutePath(file.getAbsolutePath());
+        // fileMy.setSha256(FileUtil.getSha256(file));
+        fileMy.setSuffix(file.getName().substring(file.getName().lastIndexOf(".") + 1));
+        fileMy.setCreateTime(LocalDateTime.now());
+        fileMy.setUpdateTime(LocalDateTime.now());
+
+        return save(fileMy);
+    }
+
+    /**********************************************************
+     * @author: 公子求雨
+     * @description: 过滤掉不想要的文件
+     * @params: files: 所有文件
+     * @params: outTypes: 不想要的文件类型
+     * @return:
+     * @date: 23:37 2023/6/20
+     **********************************************************/
+    public List<File> filterFile(List<File> files, String[] outTypes) {
+        ArrayList<File> outFiles = new ArrayList<>();
+        Set<File> wantedFiles = new HashSet<>();
+        for (File file : files) {
+            if (hasExcludedExtension(file, Arrays.asList(outTypes))) {
+                outFiles.add(file);
+            } else {
+                wantedFiles.add(file);
+            }
+        }
+
+        System.out.println("files.size() = " + files.size());
+        System.out.println("outFiles.size() = " + outFiles.size());
+        System.out.println("wantedFiles.size() = " + wantedFiles.size());
+        return new ArrayList<>(wantedFiles);
+    }
+
+    public Map<String, Collection<File>> _filterFile(List<File> files, String[] outTypes) {
+        ArrayList<File> outFiles = new ArrayList<>();
+        Set<File> wantedFiles = new HashSet<>();
+        for (File file : files) {
+            if (hasExcludedExtension(file, Arrays.asList(outTypes))) {
+                outFiles.add(file);
+            } else {
+                wantedFiles.add(file);
+            }
+        }
+
+        System.out.println("files.size() = " + files.size());
+        System.out.println("outFiles.size() = " + outFiles.size());
+        System.out.println("wantedFiles.size() = " + wantedFiles.size());
+
+        HashMap<String, Collection<File>> map = new HashMap<>();
+        map.put("outFiles", outFiles);
+        map.put("wantedFiles", wantedFiles);
+        return map;
+    }
+
+    public static boolean hasExcludedExtension(File file, List<String> excludedExtensions) {
+        String fileName = file.getName();
+        String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        return excludedExtensions.contains(fileExtension.toLowerCase());
+    }
+
+    /**********************************************************
+     * @author: 公子求雨
+     * @description: 删除nas文件
+     * @params:
+     * @return:
+     * @date: 10:15 2023/6/24
+     **********************************************************/
+    public int deleteNas(File file) {
+        int i = 0;
+        if (file.delete()) {
+            i++;
+        }
+        return i;
+    }
+
+    // public static void main(String[] args) throws IOException {
+    //     String nasAddr = "\\\\nas-wg\\wg\\影";
+    //     List<File> files = getFromNas(nasAddr);
+    //
+    //     File file = files.get(0);
+    //     System.out.println(file.getName());
+    //     System.out.println(file.getPath());
+    //     System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
+    //     System.out.println(file.getTotalSpace());
+    //     System.out.println(file.getFreeSpace());
+    //     System.out.println(file.getUsableSpace());
+    //     System.out.println(file.isDirectory());
+    //     System.out.println(file.isFile());
+    //     System.out.println(file.isHidden());
+    //
+    //     File parentFile = file.getParentFile();
+    //     System.out.println(parentFile.getName());
+    //
+    //     Map<String, List<File>> map = groupNasFile(files);
+    //     List<File> length5FileList = map.get("length5");
+    //     List<File> length4FileList = map.get("length4");
+    // }
 }

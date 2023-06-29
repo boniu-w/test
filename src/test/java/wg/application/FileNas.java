@@ -22,7 +22,7 @@ import java.util.List;
  * @updateTime: 10:20 2022/4/27
  ************************************************************************/
 @SpringBootTest
-public class FileTest {
+public class FileNas {
 
     @Test
     public void test1() {
@@ -34,6 +34,8 @@ public class FileTest {
     @Test
     public void testGuava() {
         File file = new File("H:\\java-project\\test\\src\\test\\java\\wg\\application\\FileTest.java");
+        String name = file.getName();
+        System.out.println("name = " + name);
         try {
             List<String> strings = Files.readLines(file, StandardCharsets.ISO_8859_1);
             strings.forEach(System.out::println);
