@@ -1,13 +1,16 @@
 package wg.application.util;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /************************************************************************
@@ -129,11 +132,20 @@ public class MapUtil {
                                 field.set(obj, dateValue);
                             }
                         } else if (field.getType() == Integer.class && value instanceof String) {
-                            if (StringUtil.isNotBlank((String) value)) {
+                            if (StringUtil.isNotBlank((String) value) && StringUtil.isNumber(value)) {
                                 // 对于 Integer 类型的字段，将字符串转换为 Integer 对象
                                 Integer intValue = Integer.parseInt((String) value);
                                 field.set(obj, intValue);
                             }
+                        } else if (field.getType() == LocalDateTime.class && value instanceof String) {
+                            if (StringUtil.isNotBlank((String) value)) {
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                LocalDateTime dateTime = LocalDateTime.parse((String) value, formatter);
+                                field.set(obj, dateTime);
+                            }
+                        } else if (field.getType() == LocalDateTime.class && value instanceof Date) {
+                            LocalDateTime localDateTime = DateUtils.toLocalDateTime((Date) value);
+                            field.set(obj, localDateTime);
                         } else {
                             field.set(obj, value);
                         }

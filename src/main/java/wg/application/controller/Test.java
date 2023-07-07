@@ -241,7 +241,7 @@ public class Test {
         
         // 第四步，创建单元格，并设置值表头 设置表头居中
         HSSFCellStyle style = wb.createCellStyle();
-        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+        // style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
         
         //声明列对象
         HSSFCell cell = null;

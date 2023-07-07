@@ -1,10 +1,7 @@
 package wg.application.util;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -145,7 +143,7 @@ public class DatawashReadExcel {
      *
      * @param cell
      */
-    public static Object getCellFormatValue(Cell cell) {
+    /*public static Object getCellFormatValue(Cell cell) {
         Object cellvalue = "";
 
         DecimalFormat decimalFormat = new DecimalFormat();
@@ -188,10 +186,88 @@ public class DatawashReadExcel {
             cellvalue = "";
         }
         return cellvalue;
+    }*/
+    
+    /**
+     * 根据Cell类型设置数据
+     * apache poi 4.1.2
+     *
+     * @param
+     */
+    public static Object getCellFormatValue(Cell cell) {
+        Object cellvalue = "";
+        if (cell == null) {
+            return "";
+        }
+        CellType cellType = cell.getCellType();
+        
+        DecimalFormat decimalFormat = new DecimalFormat();
+        
+        if (cellType != null) {
+            switch (cellType) {
+                case NUMERIC: {
+                    if (ExcelDateUtil.isCellDateFormatted(cell)) {
+                        Date date = cell.getDateCellValue();
+                        cellvalue = date;
+                    } else {
+                        cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
+                    }
+                    break;
+                }
+                case STRING:
+                    cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
+                    break;
+                case BOOLEAN:
+                    cellvalue = String.valueOf(cell.getBooleanCellValue());
+                    break;
+                case FORMULA:
+                    cellvalue = String.valueOf(cell.getCellFormula());
+                    break;
+                case ERROR:
+                    cellvalue = "非法字符";
+                    break;
+                case BLANK:
+                    cellvalue = "";
+                    break;
+                default:
+                    cellvalue = "未知类型";
+                    break;
+            }
+        } else {
+            cellvalue = "";
+        }
+        return cellvalue;
     }
-
 
     public int getSheetQuantities() {
         return sheetQuantities;
+    }
+    
+    public static Cell setCellValue(Cell cell, Object cellValue) {
+        if (cellValue == null) return cell;
+        
+        Workbook workbook = cell.getSheet().getWorkbook();
+        CreationHelper creationHelper = workbook.getCreationHelper();
+        
+        if (cellValue instanceof String) {
+            cell.setCellValue((String) cellValue);
+        } else if (cellValue instanceof Double) {
+            cell.setCellValue((Double) cellValue);
+        } else if (cellValue instanceof Integer) {
+            cell.setCellValue((Integer) cellValue);
+        } else if (cellValue instanceof Boolean) {
+            cell.setCellValue((Boolean) cellValue);
+        } else if (cellValue instanceof Date) {
+            cell.setCellValue((Date) cellValue);
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            dateCellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy/MM/dd"));
+            cell.setCellStyle(dateCellStyle);
+        } else if (cellValue instanceof Calendar) {
+            cell.setCellValue((Calendar) cellValue);
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            dateCellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy/MM/dd"));
+            cell.setCellStyle(dateCellStyle);
+        }
+        return cell;
     }
 }

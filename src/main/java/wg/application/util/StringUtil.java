@@ -447,4 +447,23 @@ public class StringUtil {
         }
         return false;
     }
+    
+    public static boolean isNumber(Object val) {
+        if (null == val || "".equals(val)) {
+            return false;
+        }
+        
+        String rex = "^[+-]?\\d*\\.?\\d*$";
+        boolean numbMatch = Pattern.matches(rex, Objects.toString(val));
+        if (numbMatch) {
+            return numbMatch;
+        }
+        
+        rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
+        boolean compile = Pattern.matches(rex, Objects.toString(val));
+        if (compile) {
+            return compile;
+        }
+        return false;
+    }
 }
