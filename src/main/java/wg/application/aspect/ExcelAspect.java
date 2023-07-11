@@ -6,9 +6,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.FieldSignature;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
-import wg.application.annotation.Excel;
+import wg.application.excel.annotation.Excel;
 
 import java.lang.reflect.Field;
 
@@ -22,7 +21,7 @@ import java.lang.reflect.Field;
 @Component
 public class ExcelAspect {
 
-    @Pointcut("@annotation(wg.application.annotation.Excel)")
+    @Pointcut("@annotation(wg.application.excel.annotation.Excel)")
     public void excelPoint() {
     }
 

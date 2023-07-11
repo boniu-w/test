@@ -1068,34 +1068,34 @@ public class TestApplicationTests {
         BigDecimal bigDecimal = new BigDecimal(11.0000);
         String s = "11.123344";
 
-        System.out.println(bigDecimal.equals(s));
+        System.out.println(bigDecimal.equals(s)); // false
 
-        System.out.println(bigDecimal.hashCode());
-        System.out.println(s.hashCode());
+        System.out.println(bigDecimal.hashCode()); // 341
+        System.out.println(s.hashCode()); // 453475855
 
-        System.out.println(bigDecimal.toString());
-        System.out.println(String.valueOf(bigDecimal));
+        System.out.println(bigDecimal.toString()); // 11
+        System.out.println(String.valueOf(bigDecimal)); // 11
 
         DecimalFormat decimalFormat = new DecimalFormat("0.0000");
 
         String format = decimalFormat.format(Float.valueOf(s));
-        System.out.println(Float.valueOf(s));
-        System.out.println(format);
+        System.out.println(Float.valueOf(s)); // 11.123344
+        System.out.println(format); // 11.1233
 
         BigDecimal bigDecimal1 = new BigDecimal(format);
 
-        System.out.println(bigDecimal1.compareTo(bigDecimal));
+        System.out.println(bigDecimal1.compareTo(bigDecimal)); // 1
 
-        System.out.println("new BigDecimal(format): " + new BigDecimal(format));
+        System.out.println("new BigDecimal(format): " + new BigDecimal(format)); // 11.1233
 
         DecimalFormat decimalFormat1 = new DecimalFormat("0.00");
         String s1 = decimalFormat1.format(Double.valueOf(s));
-        System.out.println("new BigDecimal(s1): " + new BigDecimal(s1));
+        System.out.println("new BigDecimal(s1): " + new BigDecimal(s1)); // 11.12
 
         Object aa = "  ";
         System.out.println(ObjectUtils.isEmpty(aa)); // false
         System.out.println(ObjectUtils.isEmpty(String.valueOf(aa).trim())); // true
-        decimalFormat.format(Double.valueOf(String.valueOf(aa).trim()));
+        decimalFormat.format(Double.valueOf(String.valueOf(aa).trim())); // java.lang.NumberFormatException: empty String
 
     }
 
@@ -1110,16 +1110,16 @@ public class TestApplicationTests {
         DecimalFormat format1 = new DecimalFormat("000,000.000");
         DecimalFormat format2 = new DecimalFormat("###,###.###");
 
-        System.out.println("format1.format('11111111111') :  " + format1.format(new BigDecimal("11111111111")));
+        System.out.println("format1.format('11111111111') :  " + format1.format(new BigDecimal("11111111111"))); // 11,111,111,111.000
 
-        System.out.println("format2.format('11111111111') :  " + format2.format(new BigDecimal("11111111111")));
+        System.out.println("format2.format('11111111111') :  " + format2.format(new BigDecimal("11111111111"))); // 11,111,111,111
 
         DecimalFormat format3 = new DecimalFormat("0,000.000");
         DecimalFormat format4 = new DecimalFormat("#,###.###");
 
-        System.out.println("format3.format('0011111111111') :  " + format3.format(new BigDecimal("0011111111111")));
+        System.out.println("format3.format('0011111111111') :  " + format3.format(new BigDecimal("0011111111111"))); // 11,111,111,111.000
 
-        System.out.println("format4.format('0011111111111') :  " + format4.format(new BigDecimal("0011111111111")));
+        System.out.println("format4.format('0011111111111') :  " + format4.format(new BigDecimal("0011111111111"))); // 11,111,111,111
     }
 
     /*****************************************************

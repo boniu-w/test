@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import wg.application.entity.DutyEntity;
 import wg.application.entity.ExcelParams;
+import wg.application.excel.RisksThreatsIdentifiedAndRectificationExcel;
 import wg.application.util.ExcelUtil;
 
 import javax.servlet.ServletContext;
@@ -106,7 +107,7 @@ public class FileTest {
             
             for (MultipartFile uploadFile : uploadFiles) {
                 
-                // 2. 先初始化 workbook 确定是那种excel(.xlsx | .xls)
+                /*// 2. 先初始化 workbook 确定是那种excel(.xlsx | .xls)
                 Workbook workbook = ExcelUtil.initWorkbook(uploadFile);
                 
                 // 3. 指定参数, 如 sheetIndex, titleIndex
@@ -126,11 +127,19 @@ public class FileTest {
                 Map<Integer, Map<String, Object>> integerMapMap = ExcelUtil.readExcelContent(workbook, strings, excelParams);
                 System.out.println(integerMapMap.size() + " --- " + integerMapMap);
                 
-                // 6. 写入数据库
+                // 6. 写入数据库*/
                 
+                Workbook workbook = ExcelUtil.initWorkbook(uploadFile);
+                ExcelParams excelParams = new ExcelParams();
+                excelParams.setSheetIndex(0);  // 指定在哪个sheet
+                excelParams.setTitleIndex(4);  // 指定标题在哪一行
+                excelParams.setContentStartIndex(5);  // 指定内容起始行
+                excelParams.setContentEndIndex(11);
+                String[] title = ExcelUtil._readExcelTitle(excelParams, RisksThreatsIdentifiedAndRectificationExcel.class);
+                Map<Integer, Map<String, Object>> content = ExcelUtil.readExcelContent(workbook, title, excelParams);
+                // ExcelUtil.toObject()
+                System.out.println("content = " + content);
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

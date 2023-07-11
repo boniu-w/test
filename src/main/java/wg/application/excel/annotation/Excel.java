@@ -1,4 +1,4 @@
-package wg.application.annotation;
+package wg.application.excel.annotation;
 
 import org.springframework.core.annotation.AliasFor;
 

@@ -2,7 +2,7 @@ package wg.application.entity;
 
 //import com.baomidou.mybatisplus.annotation.TableName;
 
-import wg.application.annotation.Excel;
+import wg.application.excel.annotation.Excel;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

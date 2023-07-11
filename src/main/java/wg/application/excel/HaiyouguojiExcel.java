@@ -1,7 +1,7 @@
 package wg.application.excel;
 
 import lombok.Data;
-import wg.application.annotation.Excel;
+import wg.application.excel.annotation.Excel;
 
 import java.io.Serializable;
 

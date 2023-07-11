@@ -3,7 +3,7 @@ package wg.application.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
-import wg.application.annotation.Excel;
+import wg.application.excel.annotation.Excel;
 
 import java.util.Arrays;
 import java.util.Date;

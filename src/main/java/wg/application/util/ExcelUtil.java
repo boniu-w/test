@@ -16,8 +16,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import wg.application.annotation.Excel;
+import wg.application.excel.annotation.Excel;
 import wg.application.entity.ExcelParams;
+import wg.application.excel.annotation.ExcelAnnotation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -143,7 +144,6 @@ public class ExcelUtil {
         }
         
         int numberOfSheets = workbook.getNumberOfSheets();
-        //System.out.println("numberOfSheets: "+numberOfSheets);
         
         // sheet 所在
         if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
@@ -165,8 +165,6 @@ public class ExcelUtil {
         String[] title = new String[colNum];
         Field[] fields = tClass.getDeclaredFields();
         
-        // System.out.println(Arrays.toString(fields));
-        
         String cellValue = "";
         Excel annotation = null;
         String annotationName = "";
@@ -187,6 +185,58 @@ public class ExcelUtil {
         return title;
     }
     
+    public static <T> String[] _readExcelTitle(@Nullable ExcelParams excelParams, Class<T> tClass) throws NullPointerException {
+        if (workbook == null) {
+            try {
+                throw new Exception("Workbook对象为空！");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        int numberOfSheets = workbook.getNumberOfSheets();
+        
+        // sheet 所在
+        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
+            sheet = workbook.getSheetAt(excelParams.getSheetIndex());
+        } else {
+            sheet = workbook.getSheetAt(0);
+        }
+        
+        // 标题行
+        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
+            row = sheet.getRow(excelParams.getTitleIndex());
+        } else {
+            row = sheet.getRow(0);
+        }
+        
+        // 标题总列数
+        int colNum = row.getPhysicalNumberOfCells();
+        colNum = row.getLastCellNum();
+        String[] title = new String[colNum];
+        Field[] fields = tClass.getDeclaredFields();
+        
+        String cellValue = "";
+        ExcelAnnotation annotation = null;
+        String[] annotationName = new String[0];
+        
+        for (int i = 0; i < colNum; i++) {
+            cellValue = row.getCell(i).getStringCellValue();
+            for (int j = 0; j < fields.length; j++) {
+                if (fields[j].isAnnotationPresent(ExcelAnnotation.class)) {
+                    annotation = fields[j].getAnnotation(ExcelAnnotation.class);
+                    annotationName = annotation.name();
+                    for (String name : annotationName) {
+                        if (name.equals(cellValue)) {
+                            title[i] = fields[j].getName();
+                        }
+                    }
+                }
+            }
+        }
+        
+        return title;
+    }
     /****************************************************************
      * 读取的 excel 内容 应该以 表头对应字段 为键 形成map
      * @author: wg
@@ -220,9 +270,15 @@ public class ExcelUtil {
         } else {
             i = excelParams.getContentStartIndex();
         }
-        HashMap<String, Object> cellValue = new HashMap<String, Object>();
-        for (; i <= rowNum; i++) {
-            cellValue = new HashMap<String, Object>();
+        
+        int endIndex = rowNum;
+        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getContentEndIndex())) {
+            endIndex = excelParams.getContentEndIndex();
+        }
+        
+        LinkedHashMap<String, Object> cellValue = new LinkedHashMap<>();
+        for (; i <= endIndex; i++) {
+            cellValue = new LinkedHashMap<String, Object>();
             int j = 0;
             row = sheet.getRow(i);
             while (j < colNum) {
