@@ -18,7 +18,7 @@ public class CountCodeLines {
 
     public static void main(String[] args) {
         CountCodeLines ccl = new CountCodeLines();
-        ccl.listFile("D:\\java-project\\integrity-management");
+        ccl.listFile("H:\\java-project\\wg");
         System.out.println("空行:" + nullLines);
         System.out.println("注释行:" + annoLines);
         System.out.println("代码行：" + codeLines);

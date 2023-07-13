@@ -70,12 +70,12 @@ management:
         order: FATAL, DOWN, OUT_OF_SERVICE, UP, UNKNOWN # 状态排序
 
 mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:wg/application/mapper/xml/*Mapper.xml
 
 logging:
   config: classpath:logback-spring.xml
+  level:
+    root: error
 
 grpc:
   assessment: localhost:8867

@@ -6,6 +6,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import wg.application.cache.CacheTest;
+import wg.application.entity.Picture;
 import wg.application.entity.User;
 import wg.application.exception.WgException;
 import wg.application.service.UserService;
@@ -148,5 +149,99 @@ public class UserController {
     
     public void fallbackHandler() {
         System.out.println("usercontroller fall back");
+    }
+    
+    
+    /************************************************************************
+     * @author: wg
+     * @description: get post 测试
+     * 结论:
+     * 1. 只能有一个 requestbody
+     * 2. getmapping 时, 参数 可以是 类
+     * @params:
+     * @return:
+     * @createTime: 17:52  2023/7/11
+     * @updateTime: 17:52  2023/7/11
+     ************************************************************************/
+    /*@GetMapping(value = "/list1")
+    public Result<List<User>> list1(@RequestParam User user) {
+        Result<List<User>> result = new Result<>();
+
+        result.success("123");
+        return result;
+    }*/
+    
+    /*@GetMapping(value = "/list1")
+    public Result<User> list1(User user) {
+        Result<User> result = new Result<>();
+
+        System.out.println("user.getName() = " + user.getName());
+        // List<User> all = userService.list();
+
+        result.setData(user);
+        result.success("123");
+        return result;
+    }*/
+    
+    /*@PostMapping(value = "/list1")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "name"),
+                    @ApiImplicitParam(name = "picture", dataType = "Picture", paramType = "body")
+            }
+    )
+    public Result<User> list1(User user, @RequestBody Picture picture) {
+        Result<User> result = new Result<>();
+
+        System.out.println("user.getName() = " + user.getName());
+        // List<User> all = userService.list();
+
+        result.setData(user);
+        result.success(picture.getName());
+        return result;
+    }*/
+    
+    @PostMapping(value = "/list1")
+    // @ApiImplicitParams(
+    //         {
+    //                 @ApiImplicitParam(name = "user", dataType = "User", paramType = "body"),
+    //                 @ApiImplicitParam(name = "picture", dataType = "Picture", paramType = "body")
+    //         }
+    // )
+    public Result<User> list1(User user, @RequestBody Picture picture) {
+        Result<User> result = new Result<>();
+        
+        System.out.println("user.getName() = " + user.getName());
+        System.out.println("picture.getName() = " + picture.getName());
+        
+        result.setData(user);
+        result.success(picture.getName());
+        return result;
+    }
+    
+    
+    /************************************************************************
+     * @author: wg
+     * @description:
+     * {
+     *     "timestamp": 1689070743398,
+     *     "status": 400,
+     *     "error": "Bad Request",
+     *     "message": "Required Picture parameter 'picture' is not present",
+     *     "path": "/wg/user_controller/list1"
+     * }
+     * @params:
+     * @return:
+     * @createTime: 18:23  2023/7/11
+     * @updateTime: 18:23  2023/7/11
+     ************************************************************************/
+    @GetMapping(value = "/list1")
+    public Result<User> list1(@RequestParam(value = "picture") Picture picture) {
+        Result<User> result = new Result<>();
+        
+        System.out.println("picture.getName() = " + picture.getName());
+        
+        result.success(picture.getName());
+        return result;
     }
 }

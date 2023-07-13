@@ -76,6 +76,8 @@ mybatis:
 
 logging:
   config: classpath:logback-spring.xml
+  level:
+    root: info
 
 grpc:
   assessment: localhost:8867
