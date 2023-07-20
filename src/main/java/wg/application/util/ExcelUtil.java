@@ -27,6 +27,7 @@ import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -547,6 +548,11 @@ public class ExcelUtil {
             cell.setCellStyle(dateCellStyle);
         } else if (cellValue instanceof Calendar) {
             cell.setCellValue((Calendar) cellValue);
+            CellStyle dateCellStyle = workbook.createCellStyle();
+            dateCellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy/MM/dd"));
+            cell.setCellStyle(dateCellStyle);
+        } else if (cellValue instanceof LocalDateTime){
+            cell.setCellValue((LocalDateTime) cellValue);
             CellStyle dateCellStyle = workbook.createCellStyle();
             dateCellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy/MM/dd"));
             cell.setCellStyle(dateCellStyle);

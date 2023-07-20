@@ -421,7 +421,10 @@ public class MathTest {
     @Test
     public void getRandomString() {
         String s = RandomStringUtils.randomAlphanumeric(32);
-        System.out.println(s);
+        System.out.println(s); // jFGa1aBUIYO5SmJntxc59tDZY1RMNrnd
+        
+        String ascii = RandomStringUtils.randomAscii(32);
+        System.out.println("ascii = " + ascii); // ascii = I4<CVXUa<?!MRRZ}=j\"h&bl+)x:?3yr
     }
 
     /************************************************************************

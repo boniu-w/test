@@ -49,6 +49,7 @@ public class StringTest {
         }
         
         String s1 = (String) s; // 不报异常
+        System.out.println("s1 = " + s1); // null
         s.toString(); // 报异常 空指针
         
         Object a = new Integer(1);
@@ -65,7 +66,7 @@ public class StringTest {
         String s1 = "混合动力";
         
         if (s1.contains("混合")) {
-            System.out.println("****8  " + s1.indexOf("混合"));
+            System.out.println("****8  " + s1.indexOf("混合")); // 0
         }
         
         if (s1.contains("混里")) {
@@ -86,7 +87,7 @@ public class StringTest {
         
         String a = "SY/T 6477-2017";
         String b = "SY/T 6477";
-        System.out.println(a.contains(b));
+        System.out.println(a.contains(b)); // true
         
         String sss = "   ";
         String bbb = "";
@@ -114,7 +115,7 @@ public class StringTest {
     public void test4() {
         int i = 1;
         Integer integer = Integer.valueOf(Integer.toString(i));
-        System.out.println(integer);
+        System.out.println(integer); // 1
         
         String s = "      ";
         System.out.println(s.length()); // 6
@@ -159,7 +160,7 @@ public class StringTest {
     @Test
     public void slashTest() {
         String slash = StringUtil.slashPattern("7  ");
-        System.out.println(slash);
+        System.out.println(slash); // /7
     }
     
     /**
@@ -170,7 +171,7 @@ public class StringTest {
         String str = "zujie";
         
         String unicode = StringUtil.toUnicode(str);
-        System.out.println(unicode);
+        System.out.println(unicode); // \u007a\u0075\u006a\u0069\u0065
         
         String decodeUnicode = StringUtil.decodeUnicode("\\u914D\\u7F6E");
         System.out.println(decodeUnicode);
@@ -199,8 +200,8 @@ public class StringTest {
         String objectName = "";
         objectName = filePath.split("/pims-ld")[1];
         System.out.println(objectName);
-
-        String path="\\\\nas-wg\\wg\\影\\1994 饮食男女\\cover.jpg";
+        
+        String path = "\\\\nas-wg\\wg\\影\\1994 饮食男女\\cover.jpg";
         String[] split = path.split("\\\\");
         Arrays.stream(split).forEach(System.out::println);
     }
@@ -219,15 +220,15 @@ public class StringTest {
         String b = "0100";
         
         int compareTo = a.compareTo(b);
-        System.out.println(compareTo);
+        System.out.println(compareTo); // 1
         
         
-        System.out.println(Integer.valueOf(a));
-        System.out.println(Integer.valueOf(b));
+        System.out.println(Integer.valueOf(a)); // 1
+        System.out.println(Integer.valueOf(b)); // 100
         
         String c = "-090";
         String substring = c.substring(c.lastIndexOf("-"));
-        System.out.println(substring);
+        System.out.println(substring); // -090
     }
     
     /************************************************************************
@@ -277,12 +278,12 @@ public class StringTest {
     public void testNull() throws IOException {
         Object obj = null;
         BigDecimal bigDecimal = (BigDecimal) null;
-        System.out.println(bigDecimal);
+        System.out.println(bigDecimal); // null
         
         String url = "https://search.jd.com/Search?keyword=手机&wq=手机&page=1";
         Document document = Jsoup.connect(url).get();
         String title = document.select("title").text();
-        System.out.println(title);
+        System.out.println(title); // 手机 - 商品搜索 - 京东
     }
     
     /************************************************************************
@@ -298,37 +299,37 @@ public class StringTest {
         //+号的用法
         String str;
         str = String.format("数字的正负表示：%+d %d %+d %d", 8, 8, -8, -8);
-        System.out.println(str);
+        System.out.println(str); // +8 8 -8 -8
         //-的用法
         str = String.format("左对齐：%-6d", 8);
-        System.out.println(str);
+        System.out.println(str); // 8
         //0的用法
         str = String.format("缺位补零：%06d", 8);
-        System.out.println(str);
+        System.out.println(str); // 000008
         //' '空格的用法
         str = String.format("缺位补空格：% 6d", 8);
-        System.out.println(str);
+        System.out.println(str); //      8
         str = String.format("缺位补空格：% 6d", -8);
-        System.out.println(str);
+        System.out.println(str); //     -8
         //,的用法
         str = String.format("数字分组：%,d", 123456789);
-        System.out.println(str);
+        System.out.println(str); // 123,456,789
         //(的用法
         str = String.format("括号用法：%(d", -8888);
-        System.out.println(str);
+        System.out.println(str); // (8888)
         str = String.format("括号用法：%(d", 8888);
-        System.out.println(str);
+        System.out.println(str); // 8888
         //#的用法
         str = String.format("#括号用法(十六进制)：%#x", 12);
-        System.out.println(str);
+        System.out.println(str); // 0xc
         str = String.format("#括号用法(八进制)：%#o", 12);
-        System.out.println(str);
+        System.out.println(str); // 014
         //<的用法
         str = String.format("<括号用法：%f %<3.1f", 3.14, 3.2);
         //"%<3.1f"作用的对象是前一个"%f"所作用的对象
-        System.out.println(str);
+        System.out.println(str); // 3.140000 3.1
         str = String.format("<括号用法：%f %<3.1f", 4.2, 9.01);
-        System.out.println(str);
+        System.out.println(str); // 4.200000 4.2
     }
     
     /************************************************************************
@@ -522,7 +523,7 @@ public class StringTest {
         String regex1 = "\\d{4}(\\-|\\/|.)\\d{1,2}(\\-|\\/|.)\\d{1,2}$";
         String regex2 = "\\d{4}(\\-|\\/|.)\\d{1,2}$";
         String regex3 = "\\d{4}(\\-|\\/|.|年)\\d{1,2}(月*)$";
-        String regex5 = "\\d{4}(年)\\d{1,2}(月)$";
+        String regex5 = "\\d{4}(年)?\\d{1,2}(月)?\\d?(日)?$";
         
         String patternStr1 = "yyyy/MM/dd";
         String patternStr2 = "yyyy/MM";
@@ -562,6 +563,11 @@ public class StringTest {
             System.out.println(date);
         }
         
+        // String regex5 = "\\d{4}(年)?\\d{1,2}(月)?\\d?(日)?$";
+        String s5="20230701";
+        Pattern pattern = Pattern.compile(regex5);
+        Matcher matcher5 = pattern.matcher(s5);
+        if (matcher5.find()) System.out.println("s5 = " + s5); // s5 = 20230701
     }
     
     @Test
@@ -569,5 +575,30 @@ public class StringTest {
         String a = "+F7Uq/z/1dsqMPGd0U3R4hhdpg8=";
         byte[] bytes = a.getBytes();
         System.out.println(Arrays.toString(bytes));
+    }
+    
+    @Test
+    public void regexTest() {
+        String regx1 = "^[0-9]{4}-[0-9]{1,2}$";
+        String regx2 = "^[0-9]{4}/[0-9]{1,2}$";
+        Pattern pattern1 = Pattern.compile(regx1);
+        Pattern pattern2 = Pattern.compile(regx2);
+        
+        String monthParam = "2023-05";
+        
+        Matcher matcher1 = pattern1.matcher(monthParam);
+        Matcher matcher2 = pattern2.matcher(monthParam);
+        if (matcher1.find()) System.out.println("find"); // find
+        if (matcher2.find()) System.out.println("matcher2.find() = " + matcher2.find()); // 没打印
+        
+        String reg = "^(T|t)he";
+        String the1="the";
+        String the2="The";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(the1);
+        if (matcher.find()) System.out.println("the1 = " + the1); // the1 = the
+        
+        Matcher matcher3 = pattern.matcher(the2);
+        if (matcher3.find()) System.out.println("the2 = " + the2); // the2 = The
     }
 }
