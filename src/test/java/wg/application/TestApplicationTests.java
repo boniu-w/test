@@ -31,6 +31,7 @@ import wg.application.string.StringTest;
 import wg.application.util.SimpleEncryptionUtil;
 import wg.application.thread.TaskTest;
 import wg.application.util.*;
+import wg.application.validator.AssertUtils;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
@@ -2062,5 +2063,13 @@ public class TestApplicationTests {
             }
             System.out.println("i = " + i);
         }
+    }
+
+    @Test
+    public void assertTest() {
+        Integer i = null;
+        AssertUtils.isNull(i,"i 不能为空"); // wg.application.exception.WgException: i 不能为空
+        assert i != null; // java.lang.AssertionError
+        System.out.println(i);
     }
 }

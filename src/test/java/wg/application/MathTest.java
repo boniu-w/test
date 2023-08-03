@@ -3,42 +3,42 @@ package wg.application;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 import wg.application.math.FloatTest;
-import wg.application.util.MathUtil;
 import wg.application.util.CommonUtil;
+import wg.application.util.MathUtil;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class MathTest {
-
+    
     @Test
     public void test() {
         double a = 0;
         double b = 0.0;
         System.out.println(a == b); // true
         System.out.println(b != 0); // false
-
+        
         // scale 小数点后的位数
         double d = 2.22D;
         BigDecimal dd = new BigDecimal(d);
         int scale = dd.scale();
         System.out.println(dd); // 2.220000000000000195399252334027551114559173583984375
         System.out.println(scale); // 51
-
+        
         double i = -2.22D;
         BigDecimal ii = new BigDecimal(i);
         System.out.println(ii);  // -2.220000000000000195399252334027551114559173583984375
         System.out.println(ii.scale()); // 51
-
+        
         BigDecimal ss = new BigDecimal("2.22");
         System.out.println(ss.scale());
-
+        
         // signum 正负号
         System.out.println(dd.signum()); // 1
         System.out.println(ii.signum()); // -1
     }
-
+    
     /************************************************************************
      * @description: 科学计数法
      * @author: wg
@@ -51,40 +51,40 @@ public class MathTest {
         String a = "5.63589065441568E-4";
         double v = Double.parseDouble(a);
         System.out.println(v);
-
+        
         double v1 = 5.63589065441568E-4; // 能够识别 科学计数法
-
+        
         String notation = CommonUtil.double2ScientificNotation(v);
         System.out.println(notation);
-
+        
         String s = CommonUtil.double2ScientificNotation(0.00005D);
         System.out.println(s);
-
+        
         String s1 = CommonUtil.double2ScientificNotation(0.0005D);
         System.out.println(s1);
-
+        
         v = 0.0005D;
-
+        
         System.out.println(v < 0.0001);
     }
-
+    
     @Test
     public void test2() {
         double d = 4.9E-324D;
         System.out.println(d);
         System.out.println(new BigDecimal(d).toPlainString());
-
+        
         double d1 = 1.7976931348623157E308D;
         System.out.println(new BigDecimal(d1).toPlainString());
-
+        
         String a = "5.63589065441568E-4";
         double v = Double.parseDouble(a);
         System.out.println(v);
-
+        
         String s = CommonUtil.double2ScientificNotation(v);
         System.out.println(s);
     }
-
+    
     /************************************************************************
      * @description: 判断是否是数字
      * @author: wg
@@ -97,7 +97,7 @@ public class MathTest {
         boolean number = CommonUtil.isNumber("-1.00000000000E-4");
         System.out.println(number);
     }
-
+    
     /************************************************************************
      * @description: 是否是整数
      * @author: wg
@@ -109,14 +109,14 @@ public class MathTest {
     public void testIsInteger() {
         boolean number = CommonUtil.isInteger("0.001");
         System.out.println(number);
-
+        
         int a = -10000;
         boolean b = a < -9999;
         if (b) {
             System.out.println(b);
         }
     }
-
+    
     /************************************************************************
      * @description: bit
      * @author: wg
@@ -128,7 +128,7 @@ public class MathTest {
     public void testBit() {
         String str = "-100";
         byte[][] bytes = MathUtil.stringToBit(str);
-
+        
         // [0, 0, 1, 0, 1, 1, 0, 1]
         // [0, 0, 1, 1, 0, 0, 0, 1]
         // [0, 0, 1, 1, 0, 0, 0, 0]
@@ -136,48 +136,48 @@ public class MathTest {
         for (byte[] aByte : bytes) {
             System.out.println(Arrays.toString(aByte));
         }
-
+        
         System.out.println("----------");
-
+        
         byte b = -100;
         byte[] bit = MathUtil.byteToBit(b);
         System.out.println(Arrays.toString(bit)); // [1, 0, 0, 1, 1, 1, 0, 0]
-
+        
         System.out.println("-------------");
-
+        
     }
-
+    
     @Test
     public void testFloat() {
         FloatTest test01 = new FloatTest();
         test01.test02();
     }
-
+    
     @Test
     public void radix() {
         int l = Integer.parseInt("12", 3);
         System.out.println("表明 参数 是 3进制数 , 转成十进制后是: " + l);  //
-
+        
         String s = Integer.toString(10, 3);
         System.out.println("任意10进制数 转化成任意进制 : " + s);
-
+        
         int i = 1 % 3;
         System.out.println(i);
-
+        
         int wo = 5201314;
         String s1 = Integer.toString(5201314, 16);
         System.out.println(s1);
-
+        
         int i1 = Integer.parseInt("4f5da2", 16);
         System.out.println(i1);
     }
-
+    
     @Test
     public void float2Binary() {
         FloatTest floatTest = new FloatTest();
         floatTest.float2Binary();
     }
-
+    
     /************************************************************************
      * @description: nan
      * @author: wg
@@ -191,18 +191,18 @@ public class MathTest {
         double b = 0;
         double c = a / b;
         System.out.println(c);
-
+        
         System.out.println(Double.isNaN(c));
         System.out.println(Double.isInfinite(c));
         System.out.println(Double.isFinite(c));
-
+        
         System.out.println(((Object) c).toString());
         BigDecimal bigDecimal = new BigDecimal(c); // java.lang.NumberFormatException: Infinite or NaN
         System.out.println(bigDecimal);
-
+        
         double s = Double.NaN;
     }
-
+    
     /************************************************************************
      * @description: 最长8个数字位
      * @author: wg
@@ -220,7 +220,7 @@ public class MathTest {
         float f = 1000000.11f;
         float ff = 1000000.15f;
         float g = 10000000.11f;
-
+        
         System.out.println(a); // 1.0000001
         System.out.println(b); // 1.0000001
         System.out.println(c); // 1000.0
@@ -229,11 +229,11 @@ public class MathTest {
         System.out.println(f); // 1000000.1
         System.out.println(ff); // 1000000.1
         System.out.println(g); // 1.0E7
-
+        
         float maxValue = Float.MAX_VALUE;
         System.out.println("maxValue = " + maxValue); // 3.4028235E38
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 乘除
@@ -246,49 +246,49 @@ public class MathTest {
     public void multiplyTest() {
         int a = 123;
         int b = a << 1;
-
+        
         System.out.println(b); // 246
-
+        
         boolean f = b >> 1 == a;
         System.out.println(f); // true
-
+        
         System.out.println(a >> 1); // 61
     }
-
+    
     @Test
     public void powTest() {
         long s = MathUtil.pow(2, 3);
         System.out.println(s);
     }
-
+    
     /**
      * null +=
      */
     @Test
     public void nullPlus() {
         Integer i = null;
-
+        
         i += 1;
         System.out.println(i);
     }
-
+    
     @Test
     public void arithmeticTest() {
         double a = 0.9;
         double b = 0.8;
-
+        
         double v = a + b;
         System.out.println(v);
-
+        
         // ResultSet
-
+        
         double temp = a;
         a = b;
         b = temp;
-
+        
         System.out.println(a + " " + b);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 移位运算 优先级 并不比加减运算高
@@ -301,18 +301,18 @@ public class MathTest {
     public void testYiwei() {
         int i = (1 << 2) - 1 << 2;
         System.out.println(i);
-
+        
         int j = 1 << 2 - 1 << 2;
         System.out.println(j);
-
+        
         int a = 100;
         int i1 = a >> 3;
         System.out.println(i1);
-
+        
         System.out.println(1 << 31);
         System.out.println((1 << 31) - 1);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 异或: 相同为0，不同为1
@@ -339,20 +339,20 @@ public class MathTest {
         //
         // System.out.printf("a= %d, b= %d", a, b);
         // System.out.println();
-
+        
         // 清晰版
         int a = 2;
         int b = 4;
-
+        
         int i = a ^ b ^ a; // i=b=4
         int j = a ^ b ^ b; // j=a=2 此步省略
         int k = i ^ a ^ b; // k=a=2
-
+        
         // 最后 i=b, k=a
         System.out.println(i);
         System.out.println(k);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 与 0 异或
@@ -366,16 +366,16 @@ public class MathTest {
     public void testXOR() {
         int a = 2;
         int b = 4;
-
+        
         // 与 0 异或
         int c = 0;
         int i2 = a ^ c;
         int i3 = b ^ c;
-
+        
         System.out.println(i2); // 2
         System.out.println(i3); // 4
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: `&` (与运算): 两位同时为“1”，结果才为“1”，否则为0
@@ -391,13 +391,13 @@ public class MathTest {
         int b = 3;
         int i = a | b;
         System.out.println(i);
-
+        
         int c = 0x07;
-
+        
         int i1 = a & c;
         System.out.println(i1);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: bigdecimal equals
@@ -410,14 +410,14 @@ public class MathTest {
     public void bigDecimalEquals() {
         BigDecimal a = new BigDecimal("0.00");
         Double b = 0D;
-
+        
         boolean equals = Objects.equals(a.doubleValue(), b); // true
         System.out.println(equals); // true
-
+        
         boolean b1 = a.doubleValue() == 0; // true
         System.out.println(b1); // true
     }
-
+    
     @Test
     public void getRandomString() {
         String s = RandomStringUtils.randomAlphanumeric(32);
@@ -426,7 +426,7 @@ public class MathTest {
         String ascii = RandomStringUtils.randomAscii(32);
         System.out.println("ascii = " + ascii); // ascii = I4<CVXUa<?!MRRZ}=j\"h&bl+)x:?3yr
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: double 可以 强转为 int
@@ -441,11 +441,11 @@ public class MathTest {
         System.out.println(randomFour);
         double random = Math.random();
         System.out.println(random);
-
+        
         int random1 = (int) random;
         System.out.println(random1);
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description:
@@ -476,36 +476,36 @@ public class MathTest {
     public void testInteger() {
         int int1 = 12;
         int int2 = 12;
-
+        
         Integer integer1 = new Integer(12);
         Integer integer2 = new Integer(12);
         Integer integer3 = new Integer(127);
-
+        
         Integer a1 = 127;
         Integer a2 = 127;
-
+        
         Integer a = 128;
         Integer b = 128;
-
+        
         System.out.println("int1 == int2 -> " + (int1 == int2)); // true
         System.out.println("int1 == integer1 -> " + (int1 == integer1)); // true
         System.out.println("integer1 == integer2 -> " + (integer1 == integer2)); // false
         System.out.println("integer3 == a1 -> " + (integer3 == a1)); // false
         System.out.println("a1 == a2 -> " + (a1 == a2)); // true
         System.out.println("a == b -> " + (a == b)); // false
-
+        
         Integer b1 = 128;
         Integer b2 = new Integer(128);
-
+        
         System.out.println("b1 == b2 -> " + (b1 == b2)); // false
     }
-
+    
     @Test
     public void testObj() {
         boolean equals = Objects.equals("1.6", "1.60");
         System.out.println(equals); // false
     }
-
+    
     /************************************************************************
      * @author: wg
      * @description: 初始化数组时, 默认值
@@ -520,8 +520,34 @@ public class MathTest {
         System.out.println(doubles[0]);
         System.out.println(doubles[1]);
         System.out.println(doubles[2]);
-
+        
         double a = 1.111;
         System.out.println(a);
+    }
+    
+    /************************************************************************
+     * @author: wg
+     * @description: 逻辑运算
+     * @params:
+     * @return:
+     * @createTime: 9:57  2023/7/28
+     * @updateTime: 9:57  2023/7/28
+     ************************************************************************/
+    @Test
+    public void logicMath() {
+        int i = 0;
+        if ((++i == 1 || ++i == 2) || (++i == 3 && ++i == 4)) {
+            System.out.println(i); // 1
+        }
+        
+        int j = 0;
+        if ((++j == 33 || ++j == 22) || (++j == 3 && ++j == 4)) {
+            System.out.println(j); // 4
+        }
+        
+        int k = 0;
+        int m = ++k;
+        System.out.println(m); // 1
+        System.out.println(k); // 1
     }
 }
