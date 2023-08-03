@@ -1,15 +1,15 @@
-package wg.application.interfaces.functionalinterface;
+package wg.application.functionalinterface;
 
 /************************************************************************
  * @author: wg
- * @description: 无参, 无返回值
+ * @description: 有参数, 没有返回值
  * @params:
  * @return:
- * @createTime: 10:47  2022/6/9
- * @updateTime: 10:47  2022/6/9
+ * @createTime: 10:46  2022/6/9
+ * @updateTime: 10:46  2022/6/9
  ************************************************************************/
 @FunctionalInterface
-public interface RunnableTest {
+public interface ConsumerTest<T> {
 
-    void run();
+    void accept(T t);
 }

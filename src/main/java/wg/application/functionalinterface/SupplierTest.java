@@ -1,4 +1,4 @@
-package wg.application.interfaces.functionalinterface;
+package wg.application.functionalinterface;
 
 /************************************************************************
  * @author: wg
