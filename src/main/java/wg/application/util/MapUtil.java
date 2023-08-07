@@ -3,6 +3,7 @@ package wg.application.util;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -146,6 +147,13 @@ public class MapUtil {
                         } else if (field.getType() == LocalDateTime.class && value instanceof Date) {
                             LocalDateTime localDateTime = DateUtils.toLocalDateTime((Date) value);
                             field.set(obj, localDateTime);
+                        } else if (field.getType() == BigDecimal.class && value instanceof String) {
+                            if (StringUtil.isNotBlank((String) value)) {
+                                if (StringUtil.isNumber(value)) {
+                                    BigDecimal bigDecimal = new BigDecimal((String) value);
+                                    field.set(obj, bigDecimal);
+                                }
+                            }
                         } else {
                             field.set(obj, value);
                         }

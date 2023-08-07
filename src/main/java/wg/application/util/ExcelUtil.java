@@ -509,7 +509,8 @@ public class ExcelUtil {
                     cellvalue = String.valueOf(cell.getBooleanCellValue());
                     break;
                 case FORMULA:
-                    cellvalue = String.valueOf(cell.getCellFormula());
+                    CellType cachedFormulaResultType = cell.getCachedFormulaResultType();
+                    cellvalue = handlerFormula(cell, cachedFormulaResultType);
                     break;
                 case ERROR:
                     cellvalue = "非法字符";
@@ -523,6 +524,41 @@ public class ExcelUtil {
             }
         } else {
             cellvalue = "";
+        }
+        return cellvalue;
+    }
+
+    public static Object handlerFormula(Cell cell, CellType cachedFormulaResultType) {
+        Object cellvalue = "";
+        DecimalFormat decimalFormat = new DecimalFormat();
+
+        if (cachedFormulaResultType != null) {
+            switch (cachedFormulaResultType) {
+                case NUMERIC: {
+                    if (ExcelDateUtil.isCellDateFormatted(cell)) {
+                        Date date = cell.getDateCellValue();
+                        cellvalue = date;
+                    } else {
+                        cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
+                    }
+                    break;
+                }
+                case STRING:
+                    cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
+                    break;
+                case BOOLEAN:
+                    cellvalue = String.valueOf(cell.getBooleanCellValue());
+                    break;
+                case ERROR:
+                    cellvalue = "非法字符";
+                    break;
+                case BLANK:
+                    cellvalue = "";
+                    break;
+                default:
+                    cellvalue = "未知类型";
+                    break;
+            }
         }
         return cellvalue;
     }
