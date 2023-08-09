@@ -1,6 +1,5 @@
-package wg.application.TimerTask;
+package wg.application.timerTask;
 
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import wg.application.entity.User;
 import wg.application.service.UserService;

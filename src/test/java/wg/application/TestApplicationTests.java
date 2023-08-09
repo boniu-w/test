@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
 import sun.awt.OSInfo;
-import wg.application.TimerTask.ScheduledTest;
+import wg.application.timerTask.ScheduledTest;
 import wg.application.algorithm.IdWorker;
 import wg.application.exception.Assert;
 import wg.application.jackson.JacksonTest;

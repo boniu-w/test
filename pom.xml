@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.github.boniu-w</groupId>
-    <artifactId>oldversion-05242023</artifactId>
+    <artifactId>test</artifactId>
     <version>08092023</version>
-    <name>oldversion-05242023</name>
+    <name>test</name>
     <description>my demo project for Spring Boot</description>
 
     <!-- 作者   -->
@@ -503,21 +503,21 @@
         </extensions>
 
         <plugins>
-            <!--<plugin>-->
-            <!--    &lt;!&ndash; Build an executable JAR &ndash;&gt;-->
-            <!--    <groupId>org.apache.maven.plugins</groupId>-->
-            <!--    <artifactId>maven-jar-plugin</artifactId>-->
-            <!--    <version>3.1.0</version>-->
-            <!--    <configuration>-->
-            <!--        <archive>-->
-            <!--            <manifest>-->
-            <!--                <addClasspath>true</addClasspath>-->
-            <!--                <classpathPrefix>lib/</classpathPrefix>-->
-            <!--                <mainClass>wg.application.TestApplication</mainClass>-->
-            <!--            </manifest>-->
-            <!--        </archive>-->
-            <!--    </configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>wg.application.TestApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -530,6 +530,7 @@
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
 
+                <!-- 热部署, 不建议用 -->
                 <!--<dependencies>-->
                 <!--    <dependency>-->
                 <!--        <groupId>org.springframework</groupId>-->
@@ -540,19 +541,23 @@
             </plugin>
 
             <!-- doc 插件, 非必须 -->
-            <!--<plugin>-->
-            <!--    <groupId>org.apache.maven.plugins</groupId>-->
-            <!--    <artifactId>maven-javadoc-plugin</artifactId>-->
-            <!--    <version>3.0.1</version>-->
-            <!--    <executions>-->
-            <!--        <execution>-->
-            <!--            <id>attach-javadocs</id>-->
-            <!--            <goals>-->
-            <!--                <goal>jar</goal>-->
-            <!--            </goals>-->
-            <!--        </execution>-->
-            <!--    </executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <!-- 设置 failOnError 为 false，忽略错误, 解决error: Missing: no javadoc jar found in folder  -->
+                    <failOnError>false</failOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <!-- 源码包插件, 非必须 -->
             <plugin>
@@ -612,11 +617,6 @@
                     <verbose>true</verbose>
                 </configuration>
                 <dependencies>
-                    <!--<dependency>-->
-                    <!--    <groupId>org.mybatis</groupId>-->
-                    <!--    <artifactId>mybatis</artifactId>-->
-                    <!--    <version>3.4.6</version>-->
-                    <!--</dependency>-->
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
@@ -633,7 +633,6 @@
                     <encoding>UTF-8</encoding>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <!--                    <compilerArgs>&#45;&#45;enable-preview</compilerArgs>-->
                 </configuration>
             </plugin>
 
@@ -669,37 +668,6 @@
                 </executions>
             </plugin>
             <!--↑↑ proto 插件-->
-
-            <!-- openapi 插件 -->
-            <!--<plugin>-->
-            <!--    <groupId>org.openapitools</groupId>-->
-            <!--    <artifactId>openapi-generator-maven-plugin</artifactId>-->
-            <!--    <version>${openapi.generator.version}</version>-->
-            <!--    <executions>-->
-            <!--        <execution>-->
-            <!--            <id>open</id>-->
-            <!--            <goals>-->
-            <!--                <goal>generate</goal>-->
-            <!--            </goals>-->
-            <!--            <configuration>-->
-            <!--                &lt;!&ndash; API specifications should be split to multiple YML files, when the feature is implemented:-->
-            <!--                    https://github.com/OpenAPITools/openapi-generator/issues/6379 &ndash;&gt;-->
-            <!--                &lt;!&ndash;//api定义的yml文件所在&ndash;&gt;-->
-            <!--                <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>-->
-            <!--                <generatorName>spring</generatorName>-->
-            <!--                <apiPackage>${openapi.package}.open.controller</apiPackage>-->
-            <!--                <modelPackage>${openapi.package}.open.controller.model</modelPackage>-->
-            <!--                <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>-->
-            <!--                <modelNamePrefix>Open</modelNamePrefix>-->
-            <!--                &lt;!&ndash;//如果api定义为 /users 或者 /oders 那么这里要加上对于的路径 order 否则无法生成对应的api接口&ndash;&gt;-->
-            <!--                <apisToGenerate>users</apisToGenerate>-->
-            <!--                <configOptions>-->
-            <!--                    <delegatePattern>true</delegatePattern>-->
-            <!--                </configOptions>-->
-            <!--            </configuration>-->
-            <!--        </execution>-->
-            <!--    </executions>-->
-            <!--</plugin>-->
 
         </plugins>
 

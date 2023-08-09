@@ -1,4 +1,4 @@
-package wg.application.TimerTask;
+package wg.application.timerTask;
 
 import java.util.Date;
 import java.util.Timer;

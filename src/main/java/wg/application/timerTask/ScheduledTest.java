@@ -1,4 +1,4 @@
-package wg.application.TimerTask;
+package wg.application.timerTask;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
