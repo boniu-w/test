@@ -2,7 +2,7 @@ package wg.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import wg.application.config.CustomerDecimalSerializer;
+import wg.application.config.DecimalSerializer;
 
 import javax.validation.constraints.NotNull;
 import java.io.*;
@@ -70,7 +70,7 @@ public class User implements Serializable {
     // @JsonSerialize(using = CustomerDecimalSerializer.class) // 500
     private String gender;
     
-    @JsonSerialize(using = CustomerDecimalSerializer.class)
+    @JsonSerialize(using = DecimalSerializer.class)
     // @JsonDeserialize(using = CustomerDecimalDeSerializer.class)
     private BigDecimal wealth;
     /**

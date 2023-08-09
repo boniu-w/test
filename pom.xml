@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.github.boniu-w</groupId>
     <artifactId>oldversion-05242023</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>08092023</version>
     <name>oldversion-05242023</name>
     <description>my demo project for Spring Boot</description>
 

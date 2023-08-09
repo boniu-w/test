@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  * @createTime: 14:56  2023/4/13
  * @updateTime: 14:56  2023/4/13
  ************************************************************************/
-public class CustomerDecimalSerializer extends JsonSerializer<BigDecimal> {
+public class DecimalSerializer extends JsonSerializer<BigDecimal> {
     
     @Override
     public void serialize(BigDecimal value, JsonGenerator gen, SerializerProvider serializers)
