@@ -52,7 +52,7 @@ public class SystemInfoTest {
         String releaseDate = firmware.getReleaseDate();
         System.out.println("firmware.getReleaseDate()"+ releaseDate);
         System.out.println("  release date: " + (firmware.getReleaseDate() == null ? "unknown"
-                : firmware.getReleaseDate() == null ? "unknown" : DateUtils.stringToDate(firmware.getReleaseDate(), null)));
+                : firmware.getReleaseDate() == null ? "unknown" : DateUtils.parseToDate(firmware.getReleaseDate(), null)));
         final Baseboard baseboard = computerSystem.getBaseboard();
         System.out.println("baseboard:");
         System.out.println("  manufacturer: " + baseboard.getManufacturer());

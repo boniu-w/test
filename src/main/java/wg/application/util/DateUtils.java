@@ -8,6 +8,7 @@
 
 package wg.application.util;
 
+import cn.hutool.core.date.LocalDateTimeUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.DateFormat;
@@ -63,7 +64,7 @@ public class DateUtils {
      * @param strDate 日期字符串
      * @param pattern 日期的格式，如：DateUtils.DATE_TIME_PATTERN
      */
-    public static Date stringToDate(String strDate, String pattern) {
+    public static Date parseToDate(String strDate, String pattern) {
         if (StringUtils.isBlank(strDate)) {
             return null;
         }
@@ -85,6 +86,12 @@ public class DateUtils {
         }
     }
 
+    public static LocalDateTime parseToLocalDateTime(String dateStr, String pattern) {
+        DateTimeFormatter ofPattern = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime parse = LocalDateTime.parse(dateStr, ofPattern);
+        return parse;
+    }
+
     public static Date toDate(Instant instant) {
         return new Date(instant.toEpochMilli());
     }
@@ -93,7 +100,7 @@ public class DateUtils {
         if (date == null) return null;
         Instant instant = Instant.ofEpochMilli(date.getTime());
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-        
+
         // // 格式化 LocalDateTime
         // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         // String formattedDateTime = localDateTime.format(formatter);
@@ -113,7 +120,7 @@ public class DateUtils {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    public static Date toDate(java.time.LocalDate localDate) {
+    public static Date toDate(LocalDate localDate) {
         ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
         return Date.from(zonedDateTime.toInstant());
     }
@@ -155,4 +162,47 @@ public class DateUtils {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern(dateParrern);
         return fmt.format(localDateTime);
     }
+
+    public static boolean isDate(String dateStr) {
+        if (StringUtil.isBlank(dateStr)) return false;
+        dateStr = dateStr.replaceAll("[\"|\']", "")
+                .replaceAll("，", "")
+                .replaceAll("。", "")
+                .replaceAll("；", "")
+                .replaceAll("　", "")
+                .replaceAll("－", "-")
+                .replaceAll("／", "/")
+                .replaceAll("．", ".")
+                .replaceAll("：", ":")
+                .replaceAll("[年|月|日|时|分|秒|毫秒|微秒]", "");
+        String[] pa = {"yyyy-MM-dd", "yyyy/mm/dd", "yyyyMMdd", "yyyy.MM.dd",
+                "yyyy-MM-dd hh:mm:ss", "yyyy/mm/dd hh:mm:ss", "yyyyMMdd hh:mm:ss", "yyyy.MM.dd hh:mm:ss",
+                "yyyy-MM-dd hh:mm", "yyyy/mm/dd hh:mm", "yyyyMMdd hh:mm", "yyyy.MM.dd hh:mm",
+                "MM.dd.yyyy", "MMddyyyy", "MM-dd-yyyy", "MM/dd/yyyy",
+                "MM.dd.yyyy hh:mm:ss", "MMddyyyy hh:mm:ss", "MM-dd-yyyy hh:mm:ss", "MM/dd/yyyy hh:mm:ss",
+                "MM.dd.yyyy hh:mm", "MMddyyyy hh:mm", "MM-dd-yyyy hh:mm", "MM/dd/yyyy hh:mm"};
+
+        if (StringUtil.isNumber(dateStr) && dateStr.length() == 13) {
+            try {
+                LocalDateTime of = LocalDateTimeUtil.of(Long.parseLong(dateStr));
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        for (String pattern : pa) {
+            try {
+                Date date = parseToDate(dateStr, pattern);
+                if (date != null) {
+                    return true;
+                }
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
 }

@@ -20,10 +20,12 @@ import wg.application.excel.annotation.Excel;
 import wg.application.entity.ExcelParams;
 import wg.application.excel.annotation.ExcelAnnotation;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -334,75 +336,7 @@ public class ExcelUtil {
         }
         return fieldReplaceMap;
     }
-    
-    /************************************************************************
-     * @author: wg
-     * @description: 导入时只需要引用这个方法就行
-     * @params:
-     * @return:
-     * @createTime: 14:19  2022/3/9
-     * @updateTime: 14:19  2022/3/9
-     ************************************************************************/
-    public static <T> List<T> getImportList(File file, @Nullable ExcelParams excelParams, T t) throws Exception {
-        List<T> list = new ArrayList<>();
-        workbook = initWorkbook(file);
-        String[] titles = readExcelTitle(excelParams, t.getClass());
-        Map<Integer, Map<String, Object>> contentMap = readExcelContent(workbook, titles, excelParams);
-        Map<String, Map<String, String>> importReplaceMap = getImportReplaceMap(t.getClass());
-        contentMap.forEach((lineIndex, objectMap) -> {
-            // objectMap(字段名, 单元格的值)
-            objectMap.forEach((fieldName, cellValue) -> {
-                // replaceMap(字段名, replace = {"INT_1", "EXT_0"})
-                importReplaceMap.forEach((fieldName$, replaceValues) -> {
-                    if (fieldName.equals(fieldName$)) {
-                        replaceValues.forEach((excelVal, tableVal) -> {
-                            if (excelVal.equals(cellValue.toString().trim())) {
-                                objectMap.put(fieldName, tableVal);
-                            }
-                        });
-                    }
-                });
-            });
-            list.add((T) JSON.parseObject(JSON.toJSONString(objectMap), t.getClass()));
-        });
-        
-        return list;
-    }
-    
-    /************************************************************************
-     * @author: wg
-     * @description: 获取网络传输的excel文件
-     * @params:
-     * @return:
-     * @createTime: 14:32  2022/3/9
-     * @updateTime: 14:32  2022/3/9
-     ************************************************************************/
-    public static <T> List<T> getImportList(MultipartFile file, @Nullable ExcelParams excelParams, T t) throws Exception {
-        List<T> list = new ArrayList<>();
-        workbook = initWorkbook(file);
-        String[] titles = readExcelTitle(excelParams, t.getClass());
-        Map<Integer, Map<String, Object>> contentMap = readExcelContent(workbook, titles, excelParams);
-        Map<String, Map<String, String>> importReplaceMap = getImportReplaceMap(t.getClass());
-        contentMap.forEach((lineIndex, objectMap) -> {
-            // objectMap(字段名, 单元格的值)
-            objectMap.forEach((fieldName, cellValue) -> {
-                // replaceMap(字段名, replace = {"INT_1", "EXT_0"})
-                importReplaceMap.forEach((fieldName$, replaceValues) -> {
-                    if (fieldName.equals(fieldName$)) {
-                        replaceValues.forEach((excelVal, tableVal) -> {
-                            if (excelVal.equals(cellValue.toString().trim())) {
-                                objectMap.put(fieldName, tableVal);
-                            }
-                        });
-                    }
-                });
-            });
-            list.add((T) JSON.parseObject(JSON.toJSONString(objectMap), t.getClass()));
-        });
-        
-        return list;
-    }
-    
+
     public static <T> Map<String, Map<String, String>> getExportReplaceMap(Class<T> tClass) throws InstantiationException, IllegalAccessException {
         Field[] declaredFields = tClass.getDeclaredFields();
         
@@ -595,116 +529,16 @@ public class ExcelUtil {
         }
         return cell;
     }
-    
-    /***************************************************
-     * 导出excel
-     * @author: wg
-     * @time: 2020/4/17 15:01
-     ***************************************************/
-    public static void export(String data, HttpServletResponse response, Class<T> clazz, ExcelParams excelParams) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Timestamp timestamp = null;
-        Date date = null;
-        Float aFloat = null;
-        String s = null;
-        
-        List<T> objectList = new ArrayList<>();
-        if (!StringUtils.isEmpty(data)) {
-            objectList = JSON.parseArray(data, clazz);
-        }
-        
-        String fileName = excelParams.getExportFileName();
-        String sheetName = excelParams.getExportSheetName();
-        
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet(sheetName);
-        HSSFRow row = null;
-        HSSFCell cell = null;
-        
-        CellStyle cellStyle = workbook.createCellStyle();
-        // cellStyle.setFillForegroundColor(HSSFColor.GOLD.index);
-        // cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        
-        /************ 把所有 带有@Excel 注解的字段拿出来 形成arrayList 以形成表头,并创建单元格写入表头标题 -> 开始 ************/
-        Field[] fields = clazz.getDeclaredFields();
-        ArrayList<Field> fieldArrayList = new ArrayList<>();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(Excel.class)) {
-                fieldArrayList.add(field);
-            }
-        }
-        row = sheet.createRow(0);
-        for (int i = 0; i < fieldArrayList.size(); i++) {
-            cell = row.createCell(i);
-            Field field = fieldArrayList.get(i);
-            Excel annotation = field.getAnnotation(Excel.class);
-            // cell.setCellType(Cell.CELL_TYPE_STRING);
-            cell.setCellValue(annotation.name());
-        }
-        /************ 把所有 带有@Excel 注解的字段拿出来 形成arrayList 以形成表头,并创建单元格写入表头标题 -> 结束 ************/
-        
-        /************ 导出表的正文 field.get(bankFlow) -> 开始 ************/
-        try {
-            for (int i = 0; i < objectList.size(); i++) {
-                row = sheet.createRow(i + 1);
-                T flow = objectList.get(i);
-                for (int j = 0; j < fieldArrayList.size(); j++) {
-                    cell = row.createCell(j);
-                    
-                    //if (!StringUtils.isEmpty(flow.getTick()) && flow.getTick().equals("conditionExcel")) {
-                    //    cell.setCellStyle(cellStyle);
-                    //}
-                    
-                    Field field = fieldArrayList.get(j);
-                    
-                    //System.out.println("field.toString(): " + field.toString());
-                    
-                    field.setAccessible(true);
-                    
-                    if (field.get(flow) instanceof String) {
-                        s = (String) field.get(flow);
-                        cell.setCellValue((String) field.get(flow));
-                        System.out.println(s);
-                        
-                    }
-                    
-                    if (field.get(flow) instanceof Timestamp) {
-                        timestamp = (Timestamp) field.get(flow);
-                        date = new Date(timestamp.getTime());
-                        
-                        String format = dateFormat.format(date);
-                        cell.setCellValue(format);
-                        System.out.println(format);
-                    }
-                    
-                    if (field.get(flow) instanceof Float) {
-                        aFloat = (Float) field.get(flow);
-                        cell.setCellValue(aFloat.toString());
-                        System.out.println(aFloat.toString());
-                    }
-                }
-            }
-            /************ 导出表的正文 -> 结束 ************/
-            
-            /************ 设置响应header -> 开始  ************/
-            fileName = new String(fileName.getBytes(), "ISO8859-1");
-            response.setContentType("application/vnd.ms-excel");
-            response.setCharacterEncoding("utf-8");
-            response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
-            response.addHeader("Pargam", "no-cache");
-            response.addHeader("Cache-Control", "no-cache");
-            /************ 设置响应header -> 结束  ************/
-            
-            /************ 流 -> 开始 ************/
-            OutputStream outputStream = response.getOutputStream();
-            workbook.write(outputStream);
-            outputStream.flush();
-            outputStream.close();
-            /************ 流 -> 结束 ************/
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    public void exportWorkbook(Workbook workbook, String fileName, HttpServletResponse response) throws IOException {
+        try (ServletOutputStream out = response.getOutputStream()) {
+            String name = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", "%20");
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + name + ".xlsx");
+
+            workbook.write(out);
+            out.flush();
         }
     }
     
@@ -772,7 +606,17 @@ public class ExcelUtil {
         
         return workbookMap;
     }
-    
+
+    public static <T> List<T> getData(File file, ExcelParams excelParams, Class<T> tClass) throws Exception {
+        Workbook workbook = initWorkbook(file);
+        return getData(workbook, excelParams, tClass);
+    }
+
+    public static <T> List<T> getData(MultipartFile file, ExcelParams excelParams, Class<T> tClass) throws Exception {
+        Workbook workbook = initWorkbook(file);
+        return getData(workbook, excelParams, tClass);
+    }
+
     public static <T> List<T> getData(Workbook workbook, ExcelParams excelParams, Class<T> tClass) throws Exception {
         String[] titles = readExcelTitle(excelParams, tClass);
         Map<Integer, Map<String, Object>> content = readExcelContent(workbook, titles, excelParams);
@@ -806,9 +650,5 @@ public class ExcelUtil {
         }
         return list;
     }
-    
-    public static <T> List<T> getData(MultipartFile file, ExcelParams excelParams, Class<T> tClass) throws Exception {
-        Workbook workbook = initWorkbook(file);
-        return getData(workbook, excelParams, tClass);
-    }
+
 }

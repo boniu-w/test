@@ -147,8 +147,8 @@ public class ExcelTest {
         String path = "static/excel/内检测数据.xlsx";
         ClassPathResource resource = new ClassPathResource(path);
         File file = resource.getFile();
-        List<IliDetailExcel> list = ExcelUtil.getImportList(file, null, new IliDetailExcel());
-        list.forEach(System.out::println);
+        // List<IliDetailExcel> list = ExcelUtil.getImportList(file, null, new IliDetailExcel());
+        // list.forEach(System.out::println);
     }
     
     @GetMapping(value = "/test")
@@ -186,8 +186,8 @@ public class ExcelTest {
         List<File> allFile = FileUtil.getAllFile(sourcePath, files);
         
         for (File file : allFile) {
-            List<HaiyouguojiExcel> list = ExcelUtil.getImportList(file, null, new HaiyouguojiExcel());
-            lists.addAll(list);
+            // List<HaiyouguojiExcel> list = ExcelUtil.getImportList(file, null, new HaiyouguojiExcel());
+            // lists.addAll(list);
         }
         
         // String path = "static/excel/监测检验.xlsx";
