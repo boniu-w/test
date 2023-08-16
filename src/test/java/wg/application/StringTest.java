@@ -17,6 +17,8 @@ import wg.application.util.StringUtil;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -577,6 +579,14 @@ public class StringTest {
         System.out.println(Arrays.toString(bytes));
     }
 
+    /************************************************************************
+     * @author: wg
+     * @description: 时间格式
+     * @params:
+     * @return:
+     * @createTime: 9:19  2023/8/16
+     * @updateTime: 9:19  2023/8/16
+     ************************************************************************/
     @Test
     public void regexTest() {
         String regx1 = "^[0-9]{4}-[0-9]{1,2}$";
@@ -641,5 +651,24 @@ public class StringTest {
         boolean b8 = DateUtils.isDate(dateStr8);
         System.out.println("b8 = " + b8); // b8 = true
 
+        String dateStr9 = "1";
+        boolean b9 = DateUtils.isDate(dateStr9);
+        System.out.println("b9 = " + b9); // b9 = false
+
+        String dateStr10 = "Sun Sep 10 08:09:00 CST 2023";
+        boolean b10 = DateUtils.isDate(dateStr10);
+        System.out.println("b10 = " + b10); // b10 = true
+
+        // 2023-08-16T09:20:15.066
+        System.out.println(LocalDateTime.now());
+        String pattern11 = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+        String dateStr11 = "2023-08-16T09:20:15.066";
+
+        DateTimeFormatter formatter11 = DateTimeFormatter.ofPattern(pattern11);
+        LocalDateTime localDateTime11 = LocalDateTime.parse(dateStr11, formatter11);
+        System.out.println("localDateTime11 = " + localDateTime11);
+
+        boolean b11 = DateUtils.isDate(dateStr11);
+        System.out.println("b11 = " + b11); // true
     }
 }

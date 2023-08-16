@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 日期处理
@@ -82,14 +83,38 @@ public class DateUtils {
             return simpleDateFormat.parse(strDate);
         } catch (ParseException e) {
             return null;
-            // throw new RuntimeException(e);
+        }
+    }
+
+    public static Date parseToDate(String strDate, String pattern, Locale locale) {
+        if (StringUtils.isBlank(strDate)) {
+            return null;
+        }
+
+        if (StringUtils.isBlank(pattern)) {
+            if (!strDate.contains(":")) {
+                pattern = DATE_PATTERN;
+            } else {
+                pattern = DATE_TIME_PATTERN;
+            }
+        }
+
+        try {
+            DateFormat simpleDateFormat = new SimpleDateFormat(pattern, locale);
+            return simpleDateFormat.parse(strDate);
+        } catch (ParseException e) {
+            return null;
         }
     }
 
     public static LocalDateTime parseToLocalDateTime(String dateStr, String pattern) {
-        DateTimeFormatter ofPattern = DateTimeFormatter.ofPattern(pattern);
-        LocalDateTime parse = LocalDateTime.parse(dateStr, ofPattern);
-        return parse;
+        try {
+            DateTimeFormatter ofPattern = DateTimeFormatter.ofPattern(pattern);
+            LocalDateTime parse = LocalDateTime.parse(dateStr, ofPattern);
+            return parse;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static Date toDate(Instant instant) {
@@ -140,9 +165,13 @@ public class DateUtils {
     }
 
     public static LocalDateTime toLocalDateTime(String str, String dateParrern) {
-        // 字符串 转 LocalDateTime
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(dateParrern);
-        return LocalDateTime.parse(str, fmt);
+        try {
+            // 字符串 转 LocalDateTime
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern(dateParrern);
+            return LocalDateTime.parse(str, fmt);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /************************************************************************
@@ -165,6 +194,19 @@ public class DateUtils {
 
     public static boolean isDate(String dateStr) {
         if (StringUtil.isBlank(dateStr)) return false;
+
+        String patternDate = "EEE MMM dd HH:mm:ss zzz yyyy";
+        Date parse = parseToDate(dateStr, patternDate, Locale.ENGLISH);
+        if (parse != null) {
+            return true;
+        }
+
+        String patternLocal = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+        LocalDateTime localDateTime = toLocalDateTime(dateStr, patternLocal);
+        if (localDateTime != null) {
+            return true;
+        }
+
         dateStr = dateStr.replaceAll("[\"|\']", "")
                 .replaceAll("，", "")
                 .replaceAll("。", "")
@@ -175,12 +217,13 @@ public class DateUtils {
                 .replaceAll("．", ".")
                 .replaceAll("：", ":")
                 .replaceAll("[年|月|日|时|分|秒|毫秒|微秒]", "");
-        String[] pa = {"yyyy-MM-dd", "yyyy/mm/dd", "yyyyMMdd", "yyyy.MM.dd",
+        String[] patterns = {"yyyy-MM-dd", "yyyy/mm/dd", "yyyyMMdd", "yyyy.MM.dd",
                 "yyyy-MM-dd hh:mm:ss", "yyyy/mm/dd hh:mm:ss", "yyyyMMdd hh:mm:ss", "yyyy.MM.dd hh:mm:ss",
                 "yyyy-MM-dd hh:mm", "yyyy/mm/dd hh:mm", "yyyyMMdd hh:mm", "yyyy.MM.dd hh:mm",
                 "MM.dd.yyyy", "MMddyyyy", "MM-dd-yyyy", "MM/dd/yyyy",
                 "MM.dd.yyyy hh:mm:ss", "MMddyyyy hh:mm:ss", "MM-dd-yyyy hh:mm:ss", "MM/dd/yyyy hh:mm:ss",
-                "MM.dd.yyyy hh:mm", "MMddyyyy hh:mm", "MM-dd-yyyy hh:mm", "MM/dd/yyyy hh:mm"};
+                "MM.dd.yyyy hh:mm", "MMddyyyy hh:mm", "MM-dd-yyyy hh:mm", "MM/dd/yyyy hh:mm"
+        };
 
         if (StringUtil.isNumber(dateStr) && dateStr.length() == 13) {
             try {
@@ -191,18 +234,39 @@ public class DateUtils {
             }
         }
 
-        for (String pattern : pa) {
-            try {
-                Date date = parseToDate(dateStr, pattern);
-                if (date != null) {
-                    return true;
-                }
-            } catch (Exception e) {
-                return false;
+        for (String pattern : patterns) {
+            Date date = parseToDate(dateStr, pattern);
+            if (date != null) {
+                return true;
             }
         }
 
         return false;
     }
 
+    public static void main(String[] args) throws ParseException {
+       /* String dateString = "Sun Sep 10 08:09:00 CST 2023";
+
+        String pattern = "EEE MMM dd hh:mm:ss zzz yyyy";
+
+        Date parse = parseToDate(dateString, pattern, Locale.US);
+        System.out.println("parse = " + parse);
+*/
+
+        System.out.println("LocalDateTime.now() : " + LocalDateTime.now());
+        System.out.println("new Date() : " + new Date());
+
+        String dateString = "Sun Sep 10 08:09:00 CST 2023";
+        Date date = new Date(dateString);
+        System.out.println("date = " + date);
+
+        // Date parse = DateFormat.getDateInstance().parse(dateString); // Unparseable date: "Sun Sep 10 08:09:00 CST 2023"
+        // System.out.println("parse = " + parse);
+
+        String pattern = "EE MM dd hh:mm:ss zzz yyyy";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime localDateTime = LocalDateTime.parse(dateString, formatter);
+
+        System.out.println("Converted LocalDateTime: " + localDateTime);
+    }
 }
