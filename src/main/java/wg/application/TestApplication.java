@@ -35,7 +35,7 @@ import java.util.Set;
 // 用于定时任务
 @EnableScheduling
 // @NacosPropertySource(dataId = "test",groupId = "DEFAULT_GROUP",autoRefreshed = true)
-@EnableCaching
+@EnableCaching  // 开启缓存
 public class TestApplication {
     
     // public static void main(String[] args) {
@@ -73,12 +73,16 @@ public class TestApplication {
         System.out.println("Redis Host: " + host);
         
         RedisUtil.getAll();
+
         
         Set<String> keys = RedisUtil.getAllKeys("*");
         for (String key : keys) {
             Object value = RedisUtil.get(key);
             System.out.println(key + ": " + value);
         }
+
+        Object dictDetails = RedisUtil.get("dict_details");
+        System.out.println("dictDetails = " + dictDetails);
     }
     
 }

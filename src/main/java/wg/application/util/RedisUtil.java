@@ -633,7 +633,7 @@ public class RedisUtil {
         List<RedisClientInfo> clientList = redisUtil.redisTemplate.getClientList();
         if (clientList != null) {
             for (RedisClientInfo redisClientInfo : clientList) {
-                System.out.println(redisClientInfo.toString());
+                System.out.println("redisClientInfo = " + redisClientInfo.getName());
             }
         }
         
@@ -641,7 +641,6 @@ public class RedisUtil {
         ListOperations<String, Object> operations = redisUtil.redisTemplate.opsForList();
         RedisOperations<String, Object> redisOperations = operations.getOperations();
         List<RedisClientInfo> clientList1 = redisOperations.getClientList();
-        System.out.println(clientList1.toString());
     }
     
     /************************************************************************
