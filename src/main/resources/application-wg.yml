@@ -12,6 +12,10 @@ server:
     context-path: /wg
 
 spring:
+#  有问题, 不管用
+  messages:
+    basename: i18n/error_message
+    encoding: UTF-8
   cache:
     type: REDIS
 #  security:
