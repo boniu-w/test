@@ -1,0 +1,1423 @@
+{
+    "traces":
+    [
+        {
+            "timestamp": 1692338198.940000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/scheduledtasks",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:56:38 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 6
+        },
+        {
+            "timestamp": 1692338150.564000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/metrics",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:55:50 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 4
+        },
+        {
+            "timestamp": 1692338083.257000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/threaddump",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:54:43 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 26
+        },
+        {
+            "timestamp": 1692337995.879000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/heapdump",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Accept-Ranges":
+                    [
+                        "bytes"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Content-Length":
+                    [
+                        "73350948"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:53:16 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/octet-stream;charset=utf-8"
+                    ]
+                }
+            },
+            "timeTaken": 2097
+        },
+        {
+            "timestamp": 1692337987.859000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/heapdump",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Accept-Ranges":
+                    [
+                        "bytes"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Content-Length":
+                    [
+                        "76027321"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:53:08 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/octet-stream;charset=utf-8"
+                    ]
+                }
+            },
+            "timeTaken": 2065
+        },
+        {
+            "timestamp": 1692337901.481000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/loggers",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:51:41 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 8
+        },
+        {
+            "timestamp": 1692337892.360000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/info",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:51:32 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 5
+        },
+        {
+            "timestamp": 1692337860.406000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/env",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:51:00 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 11
+        },
+        {
+            "timestamp": 1692337814.082000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/configprops",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:50:14 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 164
+        },
+        {
+            "timestamp": 1692337770.060000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/conditions",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:49:30 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 22
+        },
+        {
+            "timestamp": 1692337643.865000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/health",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:47:24 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 229
+        },
+        {
+            "timestamp": 1692337629.470000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/caches",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:47:09 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 6
+        },
+        {
+            "timestamp": 1692337615.589000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/auditevents",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:46:55 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 5
+        },
+        {
+            "timestamp": 1692337538.900000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator/beans",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:45:38 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 37
+        },
+        {
+            "timestamp": 1692337452.839000000,
+            "principal": null,
+            "session": null,
+            "request":
+            {
+                "method": "GET",
+                "uri": "https://localhost:33333/wg/actuator",
+                "headers":
+                {
+                    "sec-fetch-mode":
+                    [
+                        "navigate"
+                    ],
+                    "sec-fetch-site":
+                    [
+                        "none"
+                    ],
+                    "accept-language":
+                    [
+                        "zh-CN,zh;q=0.9"
+                    ],
+                    "sec-fetch-user":
+                    [
+                        "?1"
+                    ],
+                    "accept":
+                    [
+                        "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+                    ],
+                    "sec-ch-ua":
+                    [
+                        "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\""
+                    ],
+                    "sec-ch-ua-mobile":
+                    [
+                        "?0"
+                    ],
+                    "sec-ch-ua-platform":
+                    [
+                        "\"Windows\""
+                    ],
+                    "upgrade-insecure-requests":
+                    [
+                        "1"
+                    ],
+                    "host":
+                    [
+                        "localhost:33333"
+                    ],
+                    "connection":
+                    [
+                        "keep-alive"
+                    ],
+                    "accept-encoding":
+                    [
+                        "gzip, deflate, br"
+                    ],
+                    "sec-fetch-dest":
+                    [
+                        "document"
+                    ],
+                    "user-agent":
+                    [
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+                    ]
+                },
+                "remoteAddress": null
+            },
+            "response":
+            {
+                "status": 200,
+                "headers":
+                {
+                    "Transfer-Encoding":
+                    [
+                        "chunked"
+                    ],
+                    "Access-Control-Allow-Origin":
+                    [
+                        "*"
+                    ],
+                    "Date":
+                    [
+                        "Fri, 18 Aug 2023 05:44:12 GMT"
+                    ],
+                    "Content-Type":
+                    [
+                        "application/vnd.spring-boot.actuator.v2+json;charset=UTF-8"
+                    ]
+                }
+            },
+            "timeTaken": 76
+        }
+    ]
+}

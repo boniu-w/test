@@ -52,7 +52,7 @@ spring:
 report:
   dir: E:\pandoc-2.16.1\wg\
 
-# 程序监控
+# 程序监控, 程序启动后, 访问: https://localhost:33333/wg/actuator
 management:
   trace:
     http:
