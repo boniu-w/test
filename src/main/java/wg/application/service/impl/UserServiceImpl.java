@@ -6,13 +6,12 @@ package wg.application.service.impl;
 // import org.springframework.security.core.userdetails.UsernameNotFoundException;
 // import org.springframework.security.crypto.password.PasswordEncoder;
 
-import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 import wg.application.entity.User;
 import wg.application.entity.example.UserExample;
-import wg.application.exception.WgException;
+import wg.application.exception.TheException;
 import wg.application.mapper.UserMapper;
 import wg.application.service.UserService;
 import wg.application.util.StringUtil;
@@ -109,12 +108,12 @@ public class UserServiceImpl implements UserService {
      * @updateTime: 17:01  2022/11/28
      ************************************************************************/
     @Transactional(rollbackFor = Exception.class)
-    public void updateTestThrows(User user) throws WgException {
+    public void updateTestThrows(User user) throws TheException {
         updateTestTransactionalTestThrows(user);
         int i = 1 / 0;
     }
 
-    public void updateTestTransactionalTestThrows(User user) throws WgException {
+    public void updateTestTransactionalTestThrows(User user) throws TheException {
         userMapper.updateByPrimaryKeySelective(user);
     }
 
@@ -180,7 +179,7 @@ public class UserServiceImpl implements UserService {
         userMapper.updateByPrimaryKeySelective(user);
         if (1 == 1) {
             System.out.println("exception");
-            throw new WgException(500);
+            throw new TheException(500);
         }
     }
 
@@ -217,7 +216,7 @@ public class UserServiceImpl implements UserService {
             int i = 1 / 0;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new WgException(500);
+            throw new TheException(500);
         }
     }
 

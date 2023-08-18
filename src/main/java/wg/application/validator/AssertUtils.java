@@ -7,7 +7,7 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ArrayUtil;
 import org.apache.commons.lang3.StringUtils;
 import wg.application.exception.ErrorCode;
-import wg.application.exception.WgException;
+import wg.application.exception.TheException;
 
 import java.util.List;
 import java.util.Map;
@@ -21,13 +21,13 @@ import java.util.Map;
 public class AssertUtils {
     public static void isBlank(String str, String message) {
         if (org.apache.commons.lang.StringUtils.isBlank(str)) {
-            throw new WgException(message);
+            throw new TheException(message);
         }
     }
 
     public static void isNull(Object object, String message) {
         if (object == null) {
-            throw new WgException(message);
+            throw new TheException(message);
         }
     }
 
@@ -37,11 +37,11 @@ public class AssertUtils {
 
     public static void isBlank(String str, Integer code, String... params) {
         if (code == null) {
-            throw new WgException(ErrorCode.NOT_NULL, "code");
+            throw new TheException(ErrorCode.NOT_NULL, "code");
         }
 
         if (StringUtils.isBlank(str)) {
-            throw new WgException(code, params);
+            throw new TheException(code, params);
         }
     }
 
@@ -51,11 +51,11 @@ public class AssertUtils {
 
     public static void isNull(Object object, Integer code, String... params) {
         if (code == null) {
-            throw new WgException(ErrorCode.NOT_NULL, "code");
+            throw new TheException(ErrorCode.NOT_NULL, "code");
         }
 
         if (object == null) {
-            throw new WgException(code, params);
+            throw new TheException(code, params);
         }
     }
 
@@ -65,11 +65,11 @@ public class AssertUtils {
 
     public static void isArrayEmpty(Object[] array, Integer code, String... params) {
         if (code == null) {
-            throw new WgException(ErrorCode.NOT_NULL, "code");
+            throw new TheException(ErrorCode.NOT_NULL, "code");
         }
 
         if (ArrayUtil.isEmpty(array)) {
-            throw new WgException(code, params);
+            throw new TheException(code, params);
         }
     }
 
@@ -79,11 +79,11 @@ public class AssertUtils {
 
     public static void isListEmpty(List<?> list, Integer code, String... params) {
         if (code == null) {
-            throw new WgException(ErrorCode.NOT_NULL, "code");
+            throw new TheException(ErrorCode.NOT_NULL, "code");
         }
 
         if (CollUtil.isEmpty(list)) {
-            throw new WgException(code, params);
+            throw new TheException(code, params);
         }
     }
 
@@ -93,11 +93,11 @@ public class AssertUtils {
 
     public static void isMapEmpty(Map map, Integer code, String... params) {
         if (code == null) {
-            throw new WgException(ErrorCode.NOT_NULL, "code");
+            throw new TheException(ErrorCode.NOT_NULL, "code");
         }
 
         if (MapUtil.isEmpty(map)) {
-            throw new WgException(code, params);
+            throw new TheException(code, params);
         }
     }
 }

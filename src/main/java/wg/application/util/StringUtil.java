@@ -1,7 +1,7 @@
 package wg.application.util;
 
 import org.apache.commons.lang3.StringUtils;
-import wg.application.exception.WgException;
+import wg.application.exception.TheException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -340,7 +340,7 @@ public class StringUtil {
     }
     
     public static void testTransactionThrow() {
-        throw new WgException(500);
+        throw new TheException(500);
     }
     
     /************************************************************************

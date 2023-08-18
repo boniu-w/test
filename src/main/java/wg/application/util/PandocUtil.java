@@ -1,7 +1,7 @@
 package wg.application.util;
 
 import org.springframework.stereotype.Component;
-import wg.application.exception.WgException;
+import wg.application.exception.TheException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
@@ -127,7 +127,7 @@ public class PandocUtil {
             // 删除 md 和 docx
             boolean b = deleteFile(file.getName());
             if (!b) {
-                throw new WgException("删除md docx 出错");
+                throw new TheException("删除md docx 出错");
             }
 
         } catch (IOException e) {

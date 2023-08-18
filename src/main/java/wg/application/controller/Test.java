@@ -20,7 +20,7 @@ import wg.application.config.SpringIOCTest;
 import wg.application.entity.*;
 import wg.application.enumeration.Title;
 import wg.application.exception.Assert;
-import wg.application.exception.WgException;
+import wg.application.exception.TheException;
 import wg.application.service.AspectService;
 import wg.application.service.LiuShuiInterface;
 import wg.application.service.TestInterface;
@@ -555,9 +555,9 @@ public class Test {
     public void exceptionTest() {
         try {
             if (0 == 0) {
-                throw new WgException("sha cha");
+                throw new TheException("sha cha");
             }
-        } catch (WgException we) {
+        } catch (TheException we) {
             
             we.printStackTrace();
         }

@@ -13,7 +13,7 @@ import wg.application.config.MyIdGenerator;
 import wg.application.entity.ColumnEntity;
 import wg.application.entity.TableEntity;
 import wg.application.entity.User;
-import wg.application.exception.WgException;
+import wg.application.exception.TheException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -207,7 +207,7 @@ public class GenUtils {
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
             } catch (IOException e) {
-                throw new WgException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
+                throw new TheException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
             }
         }
     }
@@ -237,7 +237,7 @@ public class GenUtils {
         try {
             return new PropertiesConfiguration("generator.properties");
         } catch (ConfigurationException e) {
-            throw new WgException("获取配置文件失败，", e);
+            throw new TheException("获取配置文件失败，", e);
         }
     }
     
