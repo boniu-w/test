@@ -26,4 +26,6 @@ public interface UserService {
     public void testTryAndThrow(User user);
 
     void testUpdateInterceptor(User user);
+
+    int removeById(Long id);
 }

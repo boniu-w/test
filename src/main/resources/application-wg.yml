@@ -63,6 +63,10 @@ management:
       exposure:
         include: "*"
   endpoint:
+    env:
+      enabled: false
+    heapdump:
+      enabled: false
     health:
       enabled: true
       show-details: always

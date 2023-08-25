@@ -1,5 +1,6 @@
 package wg.application.redis.controller.springcache;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,19 @@ public class SpringcacheTest {
                     break;
                 }
             }
+
+            return result.success();
+        } catch (Exception e) {
+            return result.error();
+        }
+    }
+
+    @GetMapping(value = "/removebyid")
+    @CacheEvict(cacheNames = {"springcachetest"}, key = "#id")
+    public Result<Object> removeById(Long id) {
+        Result<Object> result = new Result<>();
+        try {
+            int i = userService.removeById(id);
 
             return result.success();
         } catch (Exception e) {

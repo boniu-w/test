@@ -43,7 +43,7 @@ public class DaoConfiguration {
             }
 
             @Override
-            public int deleteByPrimaryKey(Integer id) {
+            public int deleteByPrimaryKey(Long id) {
                 return 0;
             }
 

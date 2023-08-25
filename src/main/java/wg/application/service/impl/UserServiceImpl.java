@@ -273,4 +273,9 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public int removeById(Long id) {
+        return userMapper.deleteByPrimaryKey(id);
+    }
 }

@@ -2068,8 +2068,16 @@ public class TestApplicationTests {
     @Test
     public void assertTest() {
         Integer i = null;
-        AssertUtils.isNull(i,"i 不能为空"); // wg.application.exception.WgException: i 不能为空
+        AssertUtils.isNull(i, "i 不能为空"); // wg.application.exception.WgException: i 不能为空
         assert i != null; // java.lang.AssertionError
         System.out.println(i);
+    }
+
+    @Test
+    public void createUUID() {
+        for (int i = 0; i < 10; i++) {
+            String uuid = UUID.randomUUID().toString().replace("-", "");
+            System.out.println("uuid = " + uuid);
+        }
     }
 }

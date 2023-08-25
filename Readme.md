@@ -55,4 +55,30 @@ ENTRYPOINT ["nohup", "java","-jar","./test-0.0.1-SNAPSHOT.jar", "> test-001.log"
    exit
    ```
 
-   
+
+
+
+
+
+# 依赖
+
+
+
+ 
+
+| groupid                    | artifactid           | version     |
+| -------------------------- | -------------------- | ----------- |
+| javax.validation           | validation-api       | 2.0.1.Final |
+| junit                      | junit                | 4.13.2      |
+| com.fasterxml.jackson.core | jackson-annotations  | 2.14.2      |
+| com.fasterxml.jackson.core | jackson-databind     | 2.14.2      |
+| org.springframework        | spring-context       | 6.0.9       |
+| org.apache.commons         | commons-lang3        | 3.12.0      |
+| org.apache.commons         | commons-collections4 | 4.4         |
+|                            |                      |             |
+|                            |                      |             |
+|                            |                      |             |
+|                            |                      |             |
+|                            |                      |             |
+|                            |                      |             |
+
