@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @updateTime: 11:27 2022/3/9
  ************************************************************************/
 public class MapUtil {
-    
+
     /************************************************************************
      * @author: wg
      * @description: 检查map里所有的值是否都为空
@@ -37,32 +37,32 @@ public class MapUtil {
                 atomicBoolean.set(false);
             }
         });
-        
+
         if (atomicBoolean.get()) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     public static <T> boolean isEmpty(Map<Long, T> map) {
         return null == map || map.size() == 0;
     }
-    
+
     public static <K, V> Map<K, V> removeSomeKey(Map<K, V> map, final K... keys) {
         for (K key : keys) {
             map.remove(key);
         }
         return map;
     }
-    
+
     public static Map<String, Object> removeSomeKey(Map<String, Object> map, Set<String> keySet) {
         for (String key : keySet) {
             map.remove(key);
         }
         return map;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description:
@@ -77,10 +77,10 @@ public class MapUtil {
                 return true;
             }
         }
-        
+
         return false;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 除了 这些 key 还有其他 key
@@ -91,22 +91,22 @@ public class MapUtil {
      ************************************************************************/
     public static boolean hasOtherKey(Map<String, Object> map, Set<String> keySet) {
         Map<String, Object> map2 = new HashMap<>(map);
-        
+
         for (String key : keySet) {
             map2.remove(key);
         }
-        
+
         return !map2.isEmpty();
     }
-    
+
     public static boolean containsKey(Map<String, Object> map, Set<String> keySet) {
         for (String s : keySet) {
             if (map.containsKey(s)) return true;
         }
-        
+
         return false;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: map 转 实体类
@@ -166,7 +166,7 @@ public class MapUtil {
         }
         return obj;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 实体类 转 map
@@ -189,7 +189,32 @@ public class MapUtil {
         }
         return map;
     }
-    
+
+    /**
+     * @author: wg
+     * @description: 实体类 转 map, 忽略 null 值
+     * @params:
+     * @return:
+     * @createTime: 13:36  2023/9/5
+     * @updateTime: 13:36  2023/9/5
+     */
+    public static <T> Map<String, Object> bean2MapIgnoreNullValue(T obj) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Field[] fields = obj.getClass().getDeclaredFields(); // 获取实体类的全部成员变量
+            for (Field field : fields) {
+                field.setAccessible(true); // 设置字段可访问以便取值
+                if (field.get(obj) != null) {
+                    map.put(field.getName(), field.get(obj)); // 将实体类对象的成员变量的键值对放入 Map 中
+                }
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return map;
+    }
+
     /************************************************************************
      * @author: wg
      * @description: 层级结构的map 根据key获取 值
@@ -202,17 +227,40 @@ public class MapUtil {
         if (hierarchyMap == null || key == null) {
             return null;
         }
-        
+
         String[] split = key.split("\\.");
         if (!hierarchyMap.containsKey(split[0])) {
             return null;
         }
-        
+
         Object obj = hierarchyMap.get(split[0]);
         if (obj instanceof Map) {
             return get((Map<String, Object>) obj, key.substring(key.indexOf(".") + 1));
         } else {
             return obj;
         }
+    }
+
+
+    /************************************************************************
+     * @author: wg
+     * @description: remove 掉 entity 字段
+     * @params:
+     * @return:
+     * @createTime: 11:20  2023/9/6
+     * @updateTime: 11:20  2023/9/6
+     ************************************************************************/
+    public static <D, E> Map<String, Object> removeEntityFields(D dto, E entity) {
+        Map<String, Object> dtoMap = bean2MapIgnoreNullValue(dto);
+
+        if (dtoMap != null) {
+            Field[] entityFields = entity.getClass().getDeclaredFields();
+
+            for (Field field : entityFields) {
+                dtoMap.remove(field.getName());
+            }
+        }
+
+        return dtoMap;
     }
 }
