@@ -187,8 +187,8 @@ public class GenUtils {
         map.put("commonPackage", config.getString("commonPackage"));
         map.put("contextPath", config.getString("contextPath"));
         map.put("applicationName", config.getString("applicationName"));
-        map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
-        map.put("date", DateUtils.format(new Date(), DateUtils.DATE_PATTERN));
+        map.put("datetime", DateUtil.format(new Date(), DateUtil.DATE_TIME_PATTERN));
+        map.put("date", DateUtil.format(new Date(), DateUtil.DATE_PATTERN));
         VelocityContext context = new VelocityContext(map);
         
         

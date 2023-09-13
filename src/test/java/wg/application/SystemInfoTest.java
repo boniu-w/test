@@ -27,7 +27,7 @@ import oshi.software.os.OperatingSystem;
 import oshi.software.os.OperatingSystem.ProcessSort;
 import oshi.util.FormatUtil;
 import oshi.util.Util;
-import wg.application.util.DateUtils;
+import wg.application.util.DateUtil;
 
 /**
  * Java系统监控测试类
@@ -52,7 +52,7 @@ public class SystemInfoTest {
         String releaseDate = firmware.getReleaseDate();
         System.out.println("firmware.getReleaseDate()"+ releaseDate);
         System.out.println("  release date: " + (firmware.getReleaseDate() == null ? "unknown"
-                : firmware.getReleaseDate() == null ? "unknown" : DateUtils.parseToDate(firmware.getReleaseDate(), null)));
+                : firmware.getReleaseDate() == null ? "unknown" : DateUtil.parseToDate(firmware.getReleaseDate(), null)));
         final Baseboard baseboard = computerSystem.getBaseboard();
         System.out.println("baseboard:");
         System.out.println("  manufacturer: " + baseboard.getManufacturer());

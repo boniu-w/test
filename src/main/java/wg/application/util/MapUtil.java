@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -145,13 +146,29 @@ public class MapUtil {
                                 field.set(obj, dateTime);
                             }
                         } else if (field.getType() == LocalDateTime.class && value instanceof Date) {
-                            LocalDateTime localDateTime = DateUtils.toLocalDateTime((Date) value);
+                            LocalDateTime localDateTime = DateUtil.toLocalDateTime((Date) value);
                             field.set(obj, localDateTime);
                         } else if (field.getType() == BigDecimal.class && value instanceof String) {
                             if (StringUtil.isNotBlank((String) value)) {
                                 if (StringUtil.isNumber(value)) {
                                     BigDecimal bigDecimal = new BigDecimal((String) value);
                                     field.set(obj, bigDecimal);
+                                }
+                            }
+                        } else if (field.getType() == LocalDate.class && value instanceof LocalDateTime) {
+                            LocalDateTime localDateTime = (LocalDateTime) value;
+                            LocalDate localDate = LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth());
+                            field.set(obj, localDate);
+                        } else if (field.getType() == LocalDate.class && value instanceof Date) {
+                            LocalDateTime localDateTime = DateUtil.toLocalDateTime((Date) value);
+                            LocalDate localDate = LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth());
+                            field.set(obj, localDate);
+                        } else if (field.getType() == LocalDate.class && value instanceof String) {
+                            if (StringUtil.isNotBlank((String) value)) {
+                                LocalDateTime localDateTime = DateUtil.toLocalDateTime((String) value, "yyyy-MM-dd");
+                                if (localDateTime != null) {
+                                    LocalDate localDate = LocalDate.of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth());
+                                    field.set(obj, localDate);
                                 }
                             }
                         } else {

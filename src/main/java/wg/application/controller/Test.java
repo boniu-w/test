@@ -1525,7 +1525,7 @@ public class Test {
                     System.out.println("name : " + name);
                     Date birthday = resultSet.getTimestamp("birthday");
                     if (birthday != null) {
-                        LocalDateTime localDateTime = DateUtils.toLocalDateTime(birthday);
+                        LocalDateTime localDateTime = DateUtil.toLocalDateTime(birthday);
                         user1.setBirthday(localDateTime);
                         System.out.println("localDateTime : " + localDateTime);
                         System.out.println("birthday : " + birthday);

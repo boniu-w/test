@@ -10,9 +10,10 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import wg.application.entity.User;
+import wg.application.enumeration.OrgEnum;
 import wg.application.function.StringLength;
 import wg.application.util.CommonUtil;
-import wg.application.util.DateUtils;
+import wg.application.util.DateUtil;
 import wg.application.util.StringUtil;
 
 import java.io.*;
@@ -538,21 +539,21 @@ public class StringTest {
         Matcher matcher = Pattern.compile(regex1).matcher(date1);
         if (matcher.find()) {
             System.out.println(regex1);
-            Date date = DateUtils.parseToDate(date1, patternStr1);
+            Date date = DateUtil.parseToDate(date1, patternStr1);
             System.out.println(date);
         }
 
         Matcher matcher1 = Pattern.compile(regex2).matcher(date2);
         if (matcher1.find()) {
             System.out.println(regex2);
-            Date date = DateUtils.parseToDate(date2, patternStr2);
+            Date date = DateUtil.parseToDate(date2, patternStr2);
             System.out.println(date);
         }
 
         Matcher matcher3 = Pattern.compile(regex3).matcher(date3);
         if (matcher3.find()) {
             System.out.println(date3);
-            Date date = DateUtils.parseToDate(date3, patternStr3);
+            Date date = DateUtil.parseToDate(date3, patternStr3);
             System.out.println(date);
         }
         
@@ -561,7 +562,7 @@ public class StringTest {
         Matcher matcher4 = Pattern.compile(regex3).matcher(date2);
         if (matcher4.find()) {
             System.out.println(date2);
-            Date date = DateUtils.parseToDate(date2, patternStr2);
+            Date date = DateUtil.parseToDate(date2, patternStr2);
             System.out.println(date);
         }
 
@@ -612,51 +613,51 @@ public class StringTest {
         if (matcher3.find()) System.out.println("the2 = " + the2); // the2 = The
 
         String dateStr = "2023-05";
-        boolean b = DateUtils.isDate(dateStr);
+        boolean b = DateUtil.isDate(dateStr);
         System.out.println("b = " + b); // b = true
 
         String dateStr1 = "2023";
-        boolean b1 = DateUtils.isDate(dateStr1);
+        boolean b1 = DateUtil.isDate(dateStr1);
         System.out.println("b1 = " + b1); // b1 = false
 
         String dateStr2 = "20230504";
-        boolean b2 = DateUtils.isDate(dateStr2);
+        boolean b2 = DateUtil.isDate(dateStr2);
         System.out.println("b2 = " + b2); // b2 = true
 
         String dateStr3 = "20230504   09:11:12";
-        boolean b3 = DateUtils.isDate(dateStr3);
+        boolean b3 = DateUtil.isDate(dateStr3);
         System.out.println("b3 = " + b3); // b3 = true
 
         // 09092023 12:23:23
         String dateStr4 = "09092023 12:23:23";
-        boolean b4 = DateUtils.isDate(dateStr4);
+        boolean b4 = DateUtil.isDate(dateStr4);
         System.out.println("b4 = " + b4); // b4 = true
 
         // 12:23:23 20230809
         String dateStr5 = "12:23:23 20230809";
-        boolean b5 = DateUtils.isDate(dateStr5);
+        boolean b5 = DateUtil.isDate(dateStr5);
         System.out.println("b5 = " + b5); // b5 = false
 
         String dateStr6 = "12:23:23";
-        boolean b6 = DateUtils.isDate(dateStr6);
+        boolean b6 = DateUtil.isDate(dateStr6);
         System.out.println("b6 = " + b6); // b6 = false
 
         System.out.println();
 
         System.out.println(String.valueOf(System.currentTimeMillis()).length());
-        boolean b7 = DateUtils.isDate(String.valueOf(System.currentTimeMillis()));
+        boolean b7 = DateUtil.isDate(String.valueOf(System.currentTimeMillis()));
         System.out.println("b7 = " + b7); // b7 = true
 
         String dateStr8 = "089879；23．20238768年123";
-        boolean b8 = DateUtils.isDate(dateStr8);
+        boolean b8 = DateUtil.isDate(dateStr8);
         System.out.println("b8 = " + b8); // b8 = true
 
         String dateStr9 = "1";
-        boolean b9 = DateUtils.isDate(dateStr9);
+        boolean b9 = DateUtil.isDate(dateStr9);
         System.out.println("b9 = " + b9); // b9 = false
 
         String dateStr10 = "Sun Sep 10 08:09:00 CST 2023";
-        boolean b10 = DateUtils.isDate(dateStr10);
+        boolean b10 = DateUtil.isDate(dateStr10);
         System.out.println("b10 = " + b10); // b10 = true
 
         // 2023-08-16T09:20:15.066
@@ -668,7 +669,23 @@ public class StringTest {
         LocalDateTime localDateTime11 = LocalDateTime.parse(dateStr11, formatter11);
         System.out.println("localDateTime11 = " + localDateTime11);
 
-        boolean b11 = DateUtils.isDate(dateStr11);
+        boolean b11 = DateUtil.isDate(dateStr11);
         System.out.println("b11 = " + b11); // true
+    }
+
+    @Test
+    public void enumTest(){
+        OrgEnum[] values = OrgEnum.values();
+        for (OrgEnum value : values) {
+            System.out.println("value.getCnName() = " + value.getCnName());
+        }
+
+        System.out.println(OrgEnum.IRAQ);
+        System.out.println(OrgEnum.IRAQ.toString());
+
+        System.out.println(OrgEnum.UK.toString().equals("UK"));
+
+        OrgEnum uk = OrgEnum.valueOf("UK");
+        System.out.println(uk);
     }
 }

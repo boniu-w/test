@@ -24,7 +24,7 @@ import java.util.Locale;
  *
  * @author Mark sunlightcs@gmail.com
  */
-public class DateUtils {
+public class DateUtil {
     /**
      * 时间格式(yyyy-MM-dd)
      */
