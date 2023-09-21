@@ -82,7 +82,7 @@ public class StringTest {
         // System.out.println(s2.contains(s3.trim()));
         // System.out.println(s3.contains(s2.trim()));
 
-        List<String> list = Collections.singletonList(s2);
+        List<String> list = Collections.singletonList(s2); // 这个List中只能存放一个元素，多一个或者少一个都会导致异常。
 
         list = list.stream().filter(s -> s.contains(s3.trim())).collect(Collectors.toList());
 
@@ -674,7 +674,7 @@ public class StringTest {
     }
 
     @Test
-    public void enumTest(){
+    public void enumTest() {
         OrgEnum[] values = OrgEnum.values();
         for (OrgEnum value : values) {
             System.out.println("value.getCnName() = " + value.getCnName());
@@ -687,5 +687,29 @@ public class StringTest {
 
         OrgEnum uk = OrgEnum.valueOf("UK");
         System.out.println(uk);
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 字符串的内存地址
+     * @params:
+     * @return:
+     * @createTime: 10:31  2023/9/21
+     * @updateTime: 10:31  2023/9/21
+     ************************************************************************/
+    @Test
+    public void testNewStr() {
+        String a;
+        // System.out.println(a); // 编译报错
+        String b = null;
+        System.out.println("b = " + b);
+
+        String str = "str";
+        String str1 = "str";
+        String str2 = new String("str");
+
+        System.out.println("str == str1 :" + (str == str1)); // true
+        System.out.println("s" + "tr" == str); // true
+
     }
 }

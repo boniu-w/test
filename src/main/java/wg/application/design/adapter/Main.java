@@ -2,7 +2,7 @@ package wg.application.design.adapter;
 
 /************************************************************************
  * author: wg
- * description: 适配器模式
+ * description: 适配器模式, 重点在于 复用 原来的接口
  * 适配器模式是一种常用的设计模式，它的主要作用是将一个类的接口转换成客户端所期望的另一种接口，从而使原本由于接口不兼容而不能一起工作的类可以在一起工作。
  *
  * 适配器模式的应用非常广泛，下面列举几个典型的应用场景：
@@ -17,10 +17,20 @@ package wg.application.design.adapter;
  * updateTime: 15:34 2023/4/3
  ************************************************************************/
 public class Main {
-    
+
+
+    /************************************************************************
+     * @author: wg
+     * @description: 现有旧的类 Adaptee.specificRequest 方法, 想调用它, 但新的需求要对它进行改进, 那么, 自定义个新的接口 Target, 参数, 和 返回值
+     * 都可以不同, 在Adapter里 进行改进
+     * @params:
+     * @return:
+     * @createTime: 15:23  2023/9/21
+     * @updateTime: 15:23  2023/9/21
+     ************************************************************************/
     public static void main(String[] args) {
         Target target = new Adapter(new Adaptee());
-        target.request();
-        
+        int i = target.specificRequest("");
+        System.out.println("i = " + i);
     }
 }
