@@ -2,11 +2,9 @@ package wg.application.util;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 
 import java.io.*;
-import java.net.URI;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,7 +15,7 @@ import java.util.Set;
  * @version
  * @Copyright
  *************************************************************/
-public class WgJsonUtil {
+public class JsonUtilMyTest {
 
     @Value("${spring.datasource.oracle.url}")
     String url;

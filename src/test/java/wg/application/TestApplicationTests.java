@@ -72,13 +72,13 @@ public class TestApplicationTests {
         hashMap.put("1", "123123");
         hashMap.put("2", "123123");
 
-        String s = WgJsonUtil.hashMapToJsonString(hashMap);
+        String s = JsonUtilMyTest.hashMapToJsonString(hashMap);
         System.out.println(s);
 
 
         // 将字符串写入 文件 通过打印流
         String path = "D:\\ideaprojects\\test\\src\\main\\resources\\static\\json\\jsonData.json";
-        WgJsonUtil.jsonDataToFile(path, s);
+        JsonUtilMyTest.jsonDataToFile(path, s);
 
     }
 
@@ -96,7 +96,7 @@ public class TestApplicationTests {
 
         // 将字符串写入 文件 通过buffer流 D:\ideaprojects\test\src\main\resources\static\json
         String path = "D:\\ideaprojects\\test\\src\\main\\resources\\static\\json\\jsonData.json";
-        WgJsonUtil.jsonDataToFileByBufferedWritter(path, jsonString);
+        JsonUtilMyTest.jsonDataToFileByBufferedWritter(path, jsonString);
 
     }
 

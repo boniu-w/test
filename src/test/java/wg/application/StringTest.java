@@ -96,6 +96,18 @@ public class StringTest {
         String bbb = "";
         System.out.println(sss.equals(bbb)); // false
 
+        String a1 = "12";
+        String a2 = "18733";
+        System.out.println("a1.contains(a2) = " + a1.contains(a2)); // false
+
+        int i = a2.indexOf(a1);
+        System.out.println(a2.indexOf(a1)); // -1
+
+        String aaa = "0";
+        int ccc = 0;
+        System.out.println(Objects.equals(aaa, ccc)); // false
+        System.out.println(aaa.equals(ccc)); // false
+        System.out.println();
     }
 
     @Test
@@ -125,6 +137,10 @@ public class StringTest {
         System.out.println(StringUtils.isEmpty(s)); // false
         System.out.println(s.trim().length()); // 0
         System.out.println(StringUtils.isEmpty(s.trim())); // true
+
+        String a = null;
+        String trim = a.trim(); // NullPointerException
+        System.out.println(trim);
     }
 
     /************************************************************************
@@ -711,5 +727,32 @@ public class StringTest {
         System.out.println("str == str1 :" + (str == str1)); // true
         System.out.println("s" + "tr" == str); // true
 
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 大小写比较
+     * @params:
+     * @return:
+     * @createTime: 17:23  2023/9/22
+     * @updateTime: 17:23  2023/9/22
+     ************************************************************************/
+    @Test
+    public void testCase() {
+        String a = "UGA";
+        String b = "uga";
+        System.out.println(a.equals(b)); // false
+
+        String c = "胜多负少";
+        String upperCase = c.toUpperCase(Locale.ROOT);
+        System.out.println("upperCase = " + upperCase); // 胜多负少
+    }
+
+    @Test
+    public void testBigdecimalStringEquals() {
+        BigDecimal bigDecimal = new BigDecimal("5.00");
+        String a = "5";
+        System.out.println(bigDecimal.toPlainString());
+        System.out.println(bigDecimal.compareTo(new BigDecimal(a)));
     }
 }

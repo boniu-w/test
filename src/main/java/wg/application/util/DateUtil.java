@@ -244,6 +244,19 @@ public class DateUtil {
         return false;
     }
 
+    public static LocalDate toLocalDate(String localDateStr, String pattern) {
+        if (StringUtil.isBlank(localDateStr) || StringUtil.isBlank(pattern)) {
+            return null;
+        }
+        try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
+            LocalDate parse = LocalDate.parse(localDateStr, dateTimeFormatter);
+            return parse;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static void main(String[] args) throws ParseException {
        /* String dateString = "Sun Sep 10 08:09:00 CST 2023";
 

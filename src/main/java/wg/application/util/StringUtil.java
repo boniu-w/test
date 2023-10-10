@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
-    
+
     /************************************************************************
      * @description: 判断字符串是否以 斜杠 开头, 不是的话加 斜杠
      * @author: wg
@@ -28,7 +28,7 @@ public class StringUtil {
             return ch + str;
         }
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 转 unicode
@@ -50,7 +50,7 @@ public class StringUtil {
         }
         return sb.toString();
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 解析 unicode
@@ -61,16 +61,16 @@ public class StringUtil {
      ************************************************************************/
     public static String decodeUnicode(String unicode) {
         StringBuilder sb = new StringBuilder();
-        
+
         String[] hex = unicode.split("\\\\u");
-        
+
         for (int i = 1; i < hex.length; i++) {
             int data = Integer.parseInt(hex[i], 16);
             sb.append((char) data);
         }
         return sb.toString();
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 解析 unicode
@@ -97,7 +97,7 @@ public class StringUtil {
         }
         return builder.toString();
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 最长公共前缀
@@ -122,7 +122,7 @@ public class StringUtil {
         }
         return ans;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 在数字前面加 n 个 0
@@ -133,10 +133,10 @@ public class StringUtil {
      ************************************************************************/
     public static String paddingZero(int numeral, int length) {
         String codeFormat = "%0" + String.valueOf(length) + "d"; // %04d
-        
+
         return String.format(codeFormat, numeral);
     }
-    
+
     /************************************************************************
      * @description: 下划线转驼峰
      * @author: wg
@@ -148,13 +148,13 @@ public class StringUtil {
         String[] s = str.split("_");
         StringBuilder stringBuilder = new StringBuilder(s[0].toLowerCase());
         for (int k = 0; k < s.length - 1; k++) {
-            
+
             stringBuilder.append(s[k + 1].substring(0, 1).toUpperCase()).append(s[k + 1].substring(1));
         }
-        
+
         return stringBuilder.toString();
     }
-    
+
     public static String toHumpString(String str) {
         String[] s = str.split("_");
         String[] newStrs = new String[s.length];
@@ -165,10 +165,10 @@ public class StringUtil {
         for (int k = 0; k < newStrs.length - 1; k++) {
             stringBuilder.append(newStrs[k + 1].substring(0, 1).toUpperCase()).append(newStrs[k + 1].substring(1));
         }
-        
+
         return stringBuilder.toString();
     }
-    
+
     /************************************************************************
      * @description: 驼峰转下划线
      * @author:
@@ -188,10 +188,10 @@ public class StringUtil {
             matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
         }
         matcher.appendTail(sb);
-        
+
         return sb.toString();
     }
-    
+
     /************************************************************************
      * @description:
      * 转全角的方法(SBC case) 半角转全角
@@ -215,7 +215,7 @@ public class StringUtil {
         }
         return new String(c);
     }
-    
+
     /************************************************************************
      * @description: 任意字符串 转 半角
      * @author: wg
@@ -237,7 +237,7 @@ public class StringUtil {
         }
         return new String(c);
     }
-    
+
     /************************************************************************
      * @description: 按 指定长度 分割字符串
      * @author: wg
@@ -249,7 +249,7 @@ public class StringUtil {
         if (str.length() <= len) {
             return new String[]{str};
         }
-        
+
         String halfAngle = toHalfAngle(str);
         char[] chars = halfAngle.toCharArray();
         int i = chars.length % len == 0 ? chars.length / len : chars.length / len + 1;
@@ -265,10 +265,10 @@ public class StringUtil {
             targetString[j] = substring;
             j++;
         }
-        
+
         return targetString;
     }
-    
+
     /************************************************************************
      * @description: 每行显示 指定个数的字符串
      * @author: wg
@@ -290,7 +290,7 @@ public class StringUtil {
         }
         return null;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 获取字符的 asc 码 值
@@ -303,11 +303,11 @@ public class StringUtil {
         Integer integer = Integer.valueOf(character);
         return integer;
     }
-    
+
     public static Character toChar(int asc) {
         return (char) asc;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 判断是全角还是半角
@@ -320,7 +320,7 @@ public class StringUtil {
         Integer integer = Integer.valueOf(character);
         return integer >= 33 && integer <= 126;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 测试 事务 调用的工具类里有 try catch
@@ -338,11 +338,11 @@ public class StringUtil {
             e.printStackTrace();
         }
     }
-    
+
     public static void testTransactionThrow() {
         throw new TheException(500);
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 二进制字符串 转十进制 int
@@ -360,7 +360,7 @@ public class StringUtil {
         }
         return sum;
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 将输入的字符 转换为16进制字符串
@@ -373,23 +373,23 @@ public class StringUtil {
         try {
             // 创建SHA-256哈希函数实例
             MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
-            
+
             // 将输入转换为字节数组并进行哈希计算
             byte[] hashBytes = sha256.digest(input.getBytes());
-            
+
             // 将哈希值转换为十六进制字符串
             StringBuilder sb = new StringBuilder();
             for (byte b : hashBytes) {
                 sb.append(String.format("%02x", b));
             }
             return sb.toString();
-            
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
         }
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 两个数字型字符串是否相等
@@ -403,7 +403,7 @@ public class StringUtil {
         double num2 = Double.parseDouble(str2);
         return Double.compare(num1, num2) == 0;
     }
-    
+
     public static boolean isBlank(final CharSequence cs) {
         if (Objects.equals(cs, "null") || Objects.equals(cs, "Null") || Objects.equals(cs, "NULL")) return true;
         int strLen;
@@ -417,11 +417,11 @@ public class StringUtil {
         }
         return true;
     }
-    
+
     public static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
     }
-    
+
     /************************************************************************
      * @description: 判断是否是数字
      * @author: wg
@@ -433,13 +433,13 @@ public class StringUtil {
         if (null == val || "".equals(val)) {
             return false;
         }
-        
+
         String rex = "^[+-]?\\d*\\.?\\d*$";
         boolean numbMatch = Pattern.matches(rex, val);
         if (numbMatch) {
             return numbMatch;
         }
-        
+
         rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
         boolean compile = Pattern.matches(rex, val);
         if (compile) {
@@ -447,23 +447,76 @@ public class StringUtil {
         }
         return false;
     }
-    
+
     public static boolean isNumber(Object val) {
         if (null == val || "".equals(val)) {
             return false;
         }
-        
+
         String rex = "^[+-]?\\d*\\.?\\d*$";
         boolean numbMatch = Pattern.matches(rex, Objects.toString(val));
         if (numbMatch) {
             return numbMatch;
         }
-        
+
         rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
         boolean compile = Pattern.matches(rex, Objects.toString(val));
         if (compile) {
             return compile;
         }
         return false;
+    }
+
+    // 将字符串中的半角字符转换为全角字符
+    public static String toFullWidth(String input) {
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] >= 33 && chars[i] <= 126) {
+                chars[i] = (char) (chars[i] + 65248);
+            } else if (chars[i] == 32) {
+                chars[i] = (char) 12288; // 将空格转换为全角空格
+            }
+        }
+        return new String(chars);
+    }
+
+    // 将字符串中的全角字符转换为半角字符
+    public static String toHalfWidth(String input) {
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] >= 65281 && chars[i] <= 65374) {
+                chars[i] = (char) (chars[i] - 65248);
+            } else if (chars[i] == 12288) {
+                chars[i] = (char) 32; // 将全角空格转换为半角空格
+            }
+        }
+        return new String(chars);
+    }
+
+    public static String toStandardLocalDateStr(String localDateStr) {
+        if (StringUtil.isBlank(localDateStr)) return null;
+
+        String fs = localDateStr;
+        //下面这一行是自己手动添加的 以支持汉字格式wingzing
+        fs = fs.replaceAll("[\"|\']", "-")
+                .replaceAll("[年|月|日|时|分|秒|毫秒|微秒]", "-")
+                .replaceAll("\\\\-", "-")
+                .replaceAll("\\\\,", "-")
+                .replaceAll("\\\\.", "-")
+                .replaceAll("\\\\ ", "-")
+                .replaceAll(";@", "-")
+                .replaceAll("^\\[\\$\\-.*?\\]", "-")
+                .replaceAll("^\\[[a-zA-Z]+\\]", "-")
+                .replaceAll("/", "-")
+                .replaceAll("，", "-")
+                .replaceAll("。", "-")
+                .replaceAll("；", "-")
+                .replaceAll("　", "-")
+                .replaceAll("－", "-")
+                .replaceAll("／", "-")
+                .replaceAll("．", "-")
+                .replaceAll("：", "-");
+
+        return fs;
     }
 }

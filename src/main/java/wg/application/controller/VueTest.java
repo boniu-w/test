@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import wg.application.util.WgJsonUtil;
+import wg.application.util.JsonUtilMyTest;
 import wg.application.vo.Result;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +39,7 @@ public class VueTest {
         long round = Math.round(Math.random() * 1000);
         String path = "D:\\IdeaProjects\\genate-form\\vue-form-making\\src\\components" +
           "\\VueTemplate" + round + ".vue";
-        WgJsonUtil.jsonDataToFileByBufferedWritter(path, vueTemplate2);
+        JsonUtilMyTest.jsonDataToFileByBufferedWritter(path, vueTemplate2);
 
         return Result.ok("success");
 

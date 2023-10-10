@@ -190,13 +190,13 @@ public class MathTest {
         double a = 0;
         double b = 0;
         double c = a / b;
-        System.out.println(c);
+        System.out.println(c); // NaN
 
-        System.out.println(Double.isNaN(c));
-        System.out.println(Double.isInfinite(c));
-        System.out.println(Double.isFinite(c));
+        System.out.println(Double.isNaN(c)); // true
+        System.out.println(Double.isInfinite(c)); // false
+        System.out.println(Double.isFinite(c)); // false
 
-        System.out.println(((Object) c).toString());
+        System.out.println(((Object) c).toString()); // NaN
         BigDecimal bigDecimal = new BigDecimal(c); // java.lang.NumberFormatException: Infinite or NaN
         System.out.println(bigDecimal);
 
@@ -509,6 +509,13 @@ public class MathTest {
     public void testObj() {
         boolean equals = Objects.equals("1.6", "1.60");
         System.out.println(equals); // false
+
+        Double b = new Double(0.00);
+        double a = 0;
+        System.out.println(b.equals(a)); // true
+
+        Double c = new Double(0);
+        System.out.println(b.equals(c)); // true
     }
 
     /************************************************************************

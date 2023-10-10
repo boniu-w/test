@@ -4,8 +4,13 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+
 import wg.application.date.DateTestWg;
+import wg.application.util.DateUtil;
+import wg.application.util.StringUtil;
+
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
 /************************************************************************
@@ -18,7 +23,7 @@ import java.util.Date;
 public class DateTest {
 
     @Test
-    public void test(){
+    public void test() {
         Date date = new Date();
         BigDecimal decimal = new BigDecimal("2.5");
         int i = decimal.multiply(new BigDecimal("365")).intValue();
@@ -28,13 +33,13 @@ public class DateTest {
     }
 
     @Test
-    public void test2(){
+    public void test2() {
         DateTestWg dateTestWg = new DateTestWg();
         dateTestWg.test1();
     }
 
     @Test
-    public void testFrom(){
+    public void testFrom() {
         Date date = new Date();
 
         Instant now = Instant.now();
@@ -45,4 +50,14 @@ public class DateTest {
 
     }
 
+    @Test
+    public void testFormat() {
+        String a = "2024/05/01";
+        String pattern = "yyyy/MM/dd";
+        LocalDate localDate = DateUtil.toLocalDate(a, pattern);
+        System.out.println(localDate);
+
+        String standardLocalDatetimeStr = StringUtil.toStandardLocalDateStr(a);
+        System.out.println("standardLocalDatetimeStr = " + standardLocalDatetimeStr);
+    }
 }
