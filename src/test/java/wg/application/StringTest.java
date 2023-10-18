@@ -755,4 +755,27 @@ public class StringTest {
         System.out.println(bigDecimal.toPlainString());
         System.out.println(bigDecimal.compareTo(new BigDecimal(a)));
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: uuid test
+     * @params:
+     * @return:
+     * @createTime: 10:57  2023/10/11
+     * @updateTime: 10:57  2023/10/11
+     ************************************************************************/
+    @Test
+    public void testUUID() {
+        String u = "63bb2d8d-6233-489e-a0ce-a39452948e63";
+        UUID uuid1 = UUID.fromString(u);
+
+        System.out.println("uuid1.version() = " + uuid1.version()); // 4
+
+        String a = null;
+        String b = null;
+        String a1 = a + b;
+        String a2 = a + "-" + b;
+        System.out.println("a1 = " + a1); // nullnull
+        System.out.println("a2 = " + a2); // null-null
+    }
 }

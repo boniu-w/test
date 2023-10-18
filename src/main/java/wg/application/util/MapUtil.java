@@ -141,9 +141,18 @@ public class MapUtil {
                             }
                         } else if (field.getType() == LocalDateTime.class && value instanceof String) {
                             if (StringUtil.isNotBlank((String) value)) {
-                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                                LocalDateTime dateTime = LocalDateTime.parse((String) value, formatter);
-                                field.set(obj, dateTime);
+                                String standardLocalDateStr = StringUtil.toStandardLocalDateStr((String) value);
+                                if (DateUtil.isValidDate(standardLocalDateStr)) {
+                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                    LocalDate localDate = LocalDate.parse(standardLocalDateStr, formatter);
+                                    LocalDateTime localDateTime = DateUtil.toLocalDateTime(localDate);
+                                    field.set(obj, localDateTime);
+                                }
+                                if (DateUtil.isValidDateTime(standardLocalDateStr)) {
+                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                                    LocalDateTime dateTime = LocalDateTime.parse(standardLocalDateStr, formatter);
+                                    field.set(obj, dateTime);
+                                }
                             }
                         } else if (field.getType() == LocalDateTime.class && value instanceof Date) {
                             LocalDateTime localDateTime = DateUtil.toLocalDateTime((Date) value);
@@ -171,6 +180,9 @@ public class MapUtil {
                                     field.set(obj, localDate);
                                 }
                             }
+                        } else if (field.getType() == String.class && value instanceof Date) {
+                            String patternString = DateUtil.format((Date) value, null);
+                            field.set(obj, patternString);
                         } else {
                             field.set(obj, value);
                         }

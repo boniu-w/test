@@ -2,6 +2,7 @@ package wg.application;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
+import wg.application.entity.User;
 import wg.application.math.FloatTest;
 import wg.application.util.CommonUtil;
 import wg.application.util.MathUtil;
@@ -269,7 +270,7 @@ public class MathTest {
         Integer i = null;
 
         i += 1;
-        System.out.println(i);
+        System.out.println(i); // java.lang.NullPointerException
     }
 
     @Test
@@ -278,7 +279,7 @@ public class MathTest {
         double b = 0.8;
 
         double v = a + b;
-        System.out.println(v);
+        System.out.println(v); // 1.7000000000000002
 
         // ResultSet
 
@@ -286,7 +287,7 @@ public class MathTest {
         a = b;
         b = temp;
 
-        System.out.println(a + " " + b);
+        System.out.println(a + " " + b); // 0.8 0.9
     }
 
     /************************************************************************
@@ -416,6 +417,13 @@ public class MathTest {
 
         boolean b1 = a.doubleValue() == 0; // true
         System.out.println(b1); // true
+
+        double a1 = 0d;
+        Double a2 = 0.000D;
+        System.out.println("a1==a2 = " + (a1 == a2)); // true
+        // System.out.println("a1.toString() = " + a1.toString()); // 报错
+        BigDecimal bigDecimal = BigDecimal.valueOf(a2);
+        System.out.println("bigDecimal = " + bigDecimal); // 0.0
     }
 
     @Test
@@ -516,6 +524,17 @@ public class MathTest {
 
         Double c = new Double(0);
         System.out.println(b.equals(c)); // true
+
+        Boolean bo1 = new Boolean(true);
+        Boolean bo2 = new Boolean(false);
+        boolean bb = true;
+
+        System.out.println("bb==bo1 = " + (bb == bo1)); // true
+
+        User user = new User();
+        user.setAge(1288);
+
+        System.out.println("user.getAge() ==1288 = " + (user.getAge() == 1288)); // true
     }
 
     /************************************************************************

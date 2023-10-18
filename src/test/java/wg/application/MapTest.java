@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.entity.Student;
+import wg.application.entity.User;
 import wg.application.util.LongArray;
 import wg.application.util.MapUtil;
 
@@ -499,5 +500,41 @@ public class MapTest {
             return i;
         });
         System.out.println("prices = " + prices); // prices = {Pant=150, Shirt=201, Bag=300, Shoes=200}
+    }
+
+    @Test
+    public void collectionToMap() {
+        User user1 = new User();
+        user1.setId(123L);
+        user1.setAge(12);
+
+        User user2 = new User();
+        user2.setId(567L);
+        user2.setAge(12);
+
+        User user3 = new User();
+        user3.setId(567L);
+        user3.setAge(11);
+
+        Stream<User> userStream = Stream.of(user1, user2);
+        List<User> collect = userStream.collect(Collectors.toList());
+
+        // 使用toMap收集器，当有两个相同的键时，使用合并函数解决冲突
+        Map<Integer, User> userMap1 = collect.stream().collect(Collectors.toMap(user -> user.getAge(), m -> m, (existing, replacement) -> existing));
+        Map<Integer, User> userMap2 = collect.stream().collect(Collectors.toMap(user -> user.getAge(), m -> m, (existing, replacement) -> replacement));
+
+        System.out.println(userMap1); // {12=User{id=123, name='null', age=12, birthday=null, gender='null', wealth=null, createTime=null, updateTime=null}}
+        System.out.println(userMap2); // {12=User{id=567, name='null', age=12, birthday=null, gender='null', wealth=null, createTime=null, updateTime=null}}
+
+        List<User> collect1 = Stream.of(user1, user2, user3).collect(Collectors.toList());
+        HashMap<Long, Integer> map = collect1.stream()
+                .collect(Collectors.toMap(User::getId, User::getAge, (before, after) -> before + after, HashMap::new));
+
+        System.out.println(map); // {567=23, 123=12}
+
+        HashMap<Long, String> map1 = collect1.stream()
+                .collect(Collectors.toMap(User::getId, e -> String.valueOf(e.getAge()), (before, after) -> before + "-" + after, HashMap::new));
+
+        System.out.println("map1 = " + map1); // map1 = {567=12-11, 123=12}
     }
 }

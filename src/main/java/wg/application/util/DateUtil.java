@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Locale;
 
@@ -52,6 +53,7 @@ public class DateUtil {
      * @return 返回yyyy-MM-dd格式日期
      */
     public static String format(Date date, String pattern) {
+        if (StringUtil.isBlank(pattern)) pattern = DATE_TIME_PATTERN;
         if (date != null) {
             SimpleDateFormat df = new SimpleDateFormat(pattern);
             return df.format(date);
@@ -257,6 +259,40 @@ public class DateUtil {
         }
     }
 
+    public static boolean isValidDateTime(String input) {
+        String format = "yyyy-MM-dd Hh:mm:ss";
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            // 如果解析失败，返回false
+            return false;
+        }
+    }
+
+    public static boolean isValidDate(String input) {
+        String format = "yyyy-MM-dd";
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            LocalDate date = LocalDate.parse(input, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            // 如果解析失败，返回false
+            return false;
+        }
+    }
+
+    public static LocalDateTime toLocalDateTime(LocalDate localDate) {
+        if (localDate == null) return null;
+        try {
+            LocalDateTime localDateTime = localDate.atTime(0, 0, 0);
+            return localDateTime;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static void main(String[] args) throws ParseException {
        /* String dateString = "Sun Sep 10 08:09:00 CST 2023";
 
@@ -282,4 +318,5 @@ public class DateUtil {
 
         System.out.println("Converted LocalDateTime: " + localDateTime);
     }
+
 }

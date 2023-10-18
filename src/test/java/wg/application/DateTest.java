@@ -11,6 +11,7 @@ import wg.application.util.StringUtil;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /************************************************************************
@@ -59,5 +60,39 @@ public class DateTest {
 
         String standardLocalDatetimeStr = StringUtil.toStandardLocalDateStr(a);
         System.out.println("standardLocalDatetimeStr = " + standardLocalDatetimeStr);
+    }
+
+    @Test
+    public void testToString() {
+        Date date = new Date();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDate localDate = LocalDate.now();
+
+        System.out.println("date = " + date.toString()); // Thu Oct 12 15:16:57 CST 2023
+        System.out.println("localDateTime = " + localDateTime.toString()); // 2023-10-12T15:16:57.759
+        System.out.println("localDate = " + localDate.toString()); // 2023-10-12
+
+        boolean b = DateUtil.isDate(date.toString());
+        boolean b1 = DateUtil.isDate(localDateTime.toString());
+        boolean b2 = DateUtil.isDate(localDate.toString());
+
+        System.out.println(b); // true
+        System.out.println("b1 = " + b1); // true
+        System.out.println("b2 = " + b2); // true
+    }
+
+    @Test
+    public void testIsDateTime() {
+        String a = "2022-05-01";
+        boolean b = DateUtil.isValidDateTime(a);
+        boolean b1 = DateUtil.isValidDate(a);
+
+        System.out.println("b = " + b); // false
+        System.out.println("b1 = " + b1); // true
+
+        LocalDate localDate = DateUtil.toLocalDate(a, "yyyy-MM-dd");
+        System.out.println("localDate = " + localDate); // 2022-05-01
+        LocalDateTime localDateTime = DateUtil.toLocalDateTime(localDate);
+        System.out.println("localDateTime = " + localDateTime); // 2022-05-01T00:00
     }
 }
