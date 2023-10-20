@@ -6,6 +6,7 @@ import wg.application.entity.User;
 import wg.application.math.FloatTest;
 import wg.application.util.CommonUtil;
 import wg.application.util.MathUtil;
+import wg.application.util.StringUtil;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -593,5 +594,41 @@ public class MathTest {
         BigDecimal bigDecimal3 = bigDecimal2.stripTrailingZeros();
 
         System.out.println("bigDecimal1 = " + bigDecimal3); // 3
+
+        System.out.println("bigDecimal.toEngineeringString() = " + bigDecimal.toEngineeringString());
+    }
+
+    @Test
+    public void isInteger() {
+        String a = "11.11";
+        String a1 = "0";
+        String a2 = "sdf";
+        String a3 = "2200000000";
+
+        boolean integer = StringUtil.isInteger(a);
+        System.out.println("integer = " + integer); // false;
+
+        System.out.println("StringUtil.isInteger(a1) = " + StringUtil.isInteger(a1)); // true
+        System.out.println("StringUtil.isInteger(a2) = " + StringUtil.isInteger(a2)); // false
+        System.out.println("StringUtil.isInteger(a3) = " + StringUtil.isInteger(a3)); // false
+    }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 虚数
+     * @params:
+     * @return:
+     * @createTime: 9:41  2023/10/20
+     * @updateTime: 9:41  2023/10/20
+     ************************************************************************/
+    @Test
+    public void sqrt() {
+        int a = 3;
+        int a1 = 4;
+        int i = a - a1;
+        double aDouble = (double) i;
+        double sqrt = Math.sqrt(aDouble);
+        System.out.println("sqrt = " + sqrt); // sqrt = NaN
     }
 }
+

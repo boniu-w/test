@@ -519,4 +519,29 @@ public class StringUtil {
 
         return fs;
     }
+
+    /************************************************************************
+     * @author: wg
+     * @description: 是否为 Integer 整数
+     * @params:
+     * @return:
+     * @createTime: 10:07  2023/10/19
+     * @updateTime: 10:07  2023/10/19
+     ************************************************************************/
+    public static boolean isInteger(String str) {
+        if (isBlank(str)) {
+            return false;
+        }
+        // 使用正则表达式检查字符串是否匹配整数的模式
+        boolean matches = str.matches("^[+-]?\\d{1,10}$");
+        if (matches) {
+            try {
+                Integer.valueOf(str);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return false;
+    }
 }

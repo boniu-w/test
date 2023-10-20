@@ -292,4 +292,38 @@ public class MapUtil {
 
         return dtoMap;
     }
+
+    public static <E> Map<String, Object> removeEntityFields(Map<String, Object> dtoMap, Class<E> entityClass) {
+        if (dtoMap != null) {
+            Field[] entityFields = entityClass.getDeclaredFields();
+
+            for (Field field : entityFields) {
+                dtoMap.remove(field.getName());
+            }
+        }
+
+        return dtoMap;
+    }
+
+
+    /************************************************************************
+     * @author: wg
+     * @description: 把map里, 含有entity字段组成entityfieldmap
+     * @params:
+     * @return:
+     * @createTime: 10:06  2023/10/20
+     * @updateTime: 10:06  2023/10/20
+     ************************************************************************/
+    public static <E> Map<String, Object> separateEntityFields(Map<String, Object> dtoMap, Class<E> entityClass) {
+        Map<String, Object> map = new HashMap<>();
+        if (dtoMap != null) {
+            Field[] entityFields = entityClass.getDeclaredFields();
+
+            for (Field field : entityFields) {
+                map.put(field.getName(), dtoMap.get(field.getName()));
+            }
+        }
+
+        return map;
+    }
 }
