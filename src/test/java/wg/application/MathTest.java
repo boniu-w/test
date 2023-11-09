@@ -68,6 +68,12 @@ public class MathTest {
         v = 0.0005D;
 
         System.out.println(v < 0.0001);
+
+        boolean isNumber = StringUtil.isNumber("5.63589065441568E-40000");
+        System.out.println("isNumber = " + isNumber); // true double=0
+
+        boolean isNumber1 = StringUtil.isNumber("5.63589065441568E+40000");
+        System.out.println("isNumber1 = " + isNumber1); // true double=Infinity
     }
 
     @Test

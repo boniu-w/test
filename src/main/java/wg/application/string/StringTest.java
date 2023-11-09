@@ -1,15 +1,16 @@
 package wg.application.string;
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class StringTest {
     public static void main(String[] args) {
+        System.out.println("王刚".toLowerCase(Locale.ROOT)); // 王刚
         String s = "getRiskAssessmentData".toLowerCase();
-        System.out.println(s);
+        System.out.println(s); // getriskassessmentdata
 
         String s1 = (String) null;
         // System.out.println(s1.length()); // NullPointerException

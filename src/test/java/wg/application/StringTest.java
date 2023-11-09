@@ -777,5 +777,7 @@ public class StringTest {
         String a2 = a + "-" + b;
         System.out.println("a1 = " + a1); // nullnull
         System.out.println("a2 = " + a2); // null-null
+
+        System.out.println("A".equals("a")); // false
     }
 }

@@ -443,7 +443,12 @@ public class StringUtil {
         rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
         boolean compile = Pattern.matches(rex, val);
         if (compile) {
-            return compile;
+            try {
+                double v = Double.parseDouble(val);
+                return compile;
+            } catch (Exception e) {
+                return false;
+            }
         }
         return false;
     }

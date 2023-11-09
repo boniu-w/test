@@ -1018,6 +1018,26 @@ public class TestApplicationTests {
         System.out.println("---group---");
         Map<Integer, List<Student>> group = students.stream().collect(Collectors.groupingBy(Student::getAge));
         group.forEach((k, v) -> System.out.println(k + "=" + v));
+
+        // 判断 某个属性==null
+        Student student4 = new Student("333", null);
+        students.add(student4);
+        // List<Student> collect4 = students.stream().sorted(Comparator.nullsLast(Comparator.comparing(Student::getAge))).collect(Collectors.toList());
+        // System.out.println("collect4 = " + collect4); // NullPointerException nullsLast 只能 用于 null object 见下面例子,
+        Map<Boolean, List<Student>> collect4 = students.stream()
+                .collect(Collectors.partitioningBy(e -> e.getAge() != null));
+        List<Student> list = collect4.get(true);
+        List<Student> list1 = collect4.get(false);
+        System.out.println("list = " + list);
+        System.out.println("list1 = " + list1);
+
+
+        // nullsLast 把null 认为 大于 !null
+        Student student5 = null;
+        students.remove(3);
+        students.add(student5);
+        List<Student> collect5 = students.stream().sorted(Comparator.nullsLast(Comparator.comparing(Student::getAge))).collect(Collectors.toList());
+        System.out.println("collect5 = " + collect5);
     }
 
     /*****************************************************
