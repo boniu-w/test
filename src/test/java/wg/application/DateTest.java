@@ -9,6 +9,7 @@ import wg.application.date.DateTestWg;
 import wg.application.util.DateUtil;
 import wg.application.util.StringUtil;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -94,5 +95,17 @@ public class DateTest {
         System.out.println("localDate = " + localDate); // 2022-05-01
         LocalDateTime localDateTime = DateUtil.toLocalDateTime(localDate);
         System.out.println("localDateTime = " + localDateTime); // 2022-05-01T00:00
+
+        LocalDateTime now = LocalDateTime.now();
+
+        Duration between = Duration.between(localDateTime, now);
+        System.out.println("between.toDays() = " + between.toDays()); // 561
+
+        Duration between2 = Duration.between(now, localDateTime);
+        System.out.println("between2.toDays() = " + between2.toDays()); // -561
+
+        LocalDateTime now1 = LocalDateTime.now();
+        Duration between3 = Duration.between(now, now1);
+        System.out.println("between3.toDays() = " + between3.toDays()); // 0
     }
 }

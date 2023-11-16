@@ -1,5 +1,7 @@
 package wg.application.design.observer;
 
+import wg.application.entity.User;
+
 /************************************************************************
  * @author: wg
  * @description: 行为型模式，它定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象，当主题对象状态发生改变时，它的所有依赖者都会收到通知并更新状态。
@@ -15,32 +17,48 @@ package wg.application.design.observer;
  ************************************************************************/
 public class Main {
     public static void main(String[] args) {
-        NumberGenerator numberGenerator = new NumberGenerator();
-        
-        Observer digitObserver = new DigitObserver();
-        Observer graphObserver = new GraphObserver();
-        
-        numberGenerator.registerObserver(digitObserver);
-        numberGenerator.registerObserver(graphObserver);
-        
-        for (int i = 0; i < 10; i++) {
-            numberGenerator.generateNumber();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        
-        numberGenerator.removeObserver(digitObserver);
-        
-        for (int i = 0; i < 10; i++) {
-            numberGenerator.generateNumber();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        // NumberGenerator numberGenerator = new NumberGenerator();
+        //
+        // Observer digitObserver = new DigitObserver();
+        // Observer graphObserver = new GraphObserver();
+        //
+        // numberGenerator.registerObserver(digitObserver);
+        // numberGenerator.registerObserver(graphObserver);
+        //
+        // for (int i = 0; i < 10; i++) {
+        //     numberGenerator.generateNumber();
+        //     try {
+        //         Thread.sleep(1000);
+        //     } catch (InterruptedException e) {
+        //         e.printStackTrace();
+        //     }
+        // }
+        //
+        // numberGenerator.removeObserver(digitObserver);
+        //
+        // for (int i = 0; i < 10; i++) {
+        //     numberGenerator.generateNumber();
+        //     try {
+        //         Thread.sleep(1000);
+        //     } catch (InterruptedException e) {
+        //         e.printStackTrace();
+        //     }
+        // }
+
+        Moments moments = new Moments();
+
+        User user1 = new User();
+        user1.setName("lili");
+
+        User user2 = new User();
+        user2.setName("limei");
+
+        moments.addUser(user1);
+        moments.addUser(user2);
+
+        moments.registerObserver(user1);
+        moments.registerObserver(user2);
+
+        moments.setMessage("1111");
     }
 }
