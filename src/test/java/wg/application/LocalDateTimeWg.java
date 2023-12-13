@@ -9,8 +9,8 @@ import java.util.Date;
 public class LocalDateTimeWg {
 
     public static void main(String[] args) {
-        // test();
-        contrastDate();
+        test();
+        // contrastDate();
     }
 
     /************************************************************************
@@ -19,10 +19,13 @@ public class LocalDateTimeWg {
      * @date: 11:26  2021/9/29
      ************************************************************************/
     public static void test() {
+
         DateTimeFormatter ftf1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter ftf2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         ZoneId zoneId = ZoneId.systemDefault();
 
+
+        System.out.println("LocalDate.parse(\"2023-11-1\", ftf1).toString() = " + LocalDate.parse("2023-11-01", ftf1).toString());
         System.out.println("string -> long型的年月日：：" + LocalDate.parse("2018-03-11", ftf1).atStartOfDay(zoneId).toInstant().toEpochMilli());
         System.out.println("String -> LocalDate:  " + LocalDate.parse("2018-03-11", ftf1));
         System.out.println("String -> LocalDateTime:  " + LocalDateTime.parse("2020-07-15 00:00:00", ftf2));

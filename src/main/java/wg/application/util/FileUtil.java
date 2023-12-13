@@ -422,7 +422,7 @@ public class FileUtil {
     
     /************************************************************************
      * @author: wg
-     * @description: 读取一个文件夹下的所有文件, 去重后 保存 到 临时文件夹中,
+     * @description: 读取一个文件夹下的所有文件, 去重后 保存 到 anotherPath文件夹中,
      * @params: path: 源文件所在目录  anotherPath: 另一个目录
      * @return:
      * @createTime: 17:16  2022/9/8
