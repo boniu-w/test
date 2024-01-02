@@ -26,7 +26,7 @@ public class SpringcacheTest {
     UserService userService;
 
     @GetMapping(value = "/list")
-    @Cacheable(cacheNames = {"springcachetest"}, condition = "#user==null || #user.id==null") // 第一次会执行方法体, 然后 存入redis, 之后 再调用就不走方法体, 直接从redis获取
+    @Cacheable(key = "'userlist'", cacheNames = {"springcachetest"}, condition = "#user==null || #user.id==null") // 第一次会执行方法体, 然后 存入redis, 之后 再调用就不走方法体, 直接从redis获取
     public Result<Object> list(User user) {
         Result<Object> result = new Result<>();
         try {
