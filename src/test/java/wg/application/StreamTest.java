@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /************************************************************************
@@ -61,5 +63,24 @@ public class StreamTest {
         // reduce：将集合中的元素合并为一个值。
         int sum = numbers.stream().reduce(0, Integer::sum);
         System.out.println("Sum: " + sum);
+    }
+
+
+    /**
+     * 找出重复元素
+     */
+    @Test
+    public void duplicate(){
+        List<String> list = Arrays.asList("Apple", "Banana", "Cherry", "Apple", "Orange");
+
+        Map<String, Long> countMap = list.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        List<String> duplicates = countMap.entrySet().stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        System.out.println("Duplicate elements: " + duplicates);
     }
 }

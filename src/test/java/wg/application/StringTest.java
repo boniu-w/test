@@ -779,5 +779,9 @@ public class StringTest {
         System.out.println("a2 = " + a2); // null-null
 
         System.out.println("A".equals("a")); // false
+
+        u=null;
+        boolean contains = u.contains("123");
+        System.out.println("contains = " + contains);
     }
 }

@@ -29,10 +29,17 @@ public class ThreadLocalTest {
 
         ThreadLocal<String> threadLocal = new ThreadLocal<>();
         System.out.println(threadLocal.toString());
+        threadLocal.set("1");
 
+        ThreadLocal<String> threadLocal2 = new ThreadLocal<>();
+        threadLocal2.set("2");
     }
 
-    public static void main(String[] args) {
+    public static void getThreadLocal( ThreadLocal<String> threadLocal){
+        System.out.println("threadLocal.get() = " + threadLocal.get());
+    }
+
+    public static void main(String[] args) throws InterruptedException {
         char[] a1 = "123456789".toCharArray();
         char[] a2 = "abcdefghi".toCharArray();
 
@@ -55,6 +62,20 @@ public class ThreadLocalTest {
 
         t1.start();
         t2.start();
+
+        // ↓**********************************************
+        Thread.sleep(1);
+
+        ThreadLocal<String> threadLocal = new ThreadLocal<>();
+        System.out.println(threadLocal.toString());
+        threadLocal.set("1");
+
+        ThreadLocal<String> threadLocal2 = new ThreadLocal<>();
+        threadLocal2.set("2");
+
+        getThreadLocal(threadLocal);
+        getThreadLocal(threadLocal2);
+        // ↑**********************************************
     }
 
 

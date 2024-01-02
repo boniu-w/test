@@ -31,13 +31,6 @@ spring:
 #    host: ${cloud-redis} #  没有用, 读不了, 系统启动就报错
     host: 192.168.12.240
 #    host: 127.0.0.1
-    lettuce:
-      pool:
-        max-active: 8
-        max-idle: 8
-        min-idle: 0
-        max-wait: -1ms
-      shutdown-timeout: 100ms
     password: redisbullseye
 #    password: ''
     port: 6379
@@ -48,6 +41,13 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+      shutdown-timeout: 100ms
 
 report:
   dir: E:\pandoc-2.16.1\wg\

@@ -9,6 +9,8 @@ import wg.application.util.MathUtil;
 import wg.application.util.StringUtil;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -591,7 +593,7 @@ public class MathTest {
 
     @Test
     public void bigdecimalTest() {
-        BigDecimal bigDecimal = new BigDecimal("3.33000");
+        BigDecimal bigDecimal = new BigDecimal("3.53000");
         BigDecimal bigDecimal1 = bigDecimal.stripTrailingZeros();
 
         System.out.println("bigDecimal1 = " + bigDecimal1); // 3.33
@@ -602,6 +604,10 @@ public class MathTest {
         System.out.println("bigDecimal1 = " + bigDecimal3); // 3
 
         System.out.println("bigDecimal.toEngineeringString() = " + bigDecimal.toEngineeringString());
+
+        BigInteger bigInteger = bigDecimal.toBigInteger();
+        System.out.println("bigInteger = " + bigInteger);
+
     }
 
     @Test
@@ -635,6 +641,20 @@ public class MathTest {
         double aDouble = (double) i;
         double sqrt = Math.sqrt(aDouble);
         System.out.println("sqrt = " + sqrt); // sqrt = NaN
+    }
+
+    @Test
+    public void testtest() {
+        BigDecimal bcr = new BigDecimal("0.4");
+        BigDecimal probeCorrosionRate=new BigDecimal("0.09");
+        BigDecimal decimal = new BigDecimal("1");
+
+        BigDecimal divide = probeCorrosionRate.divide(bcr, 4, RoundingMode.HALF_UP);
+        System.out.println("divide = " + divide);
+        BigDecimal subtract = new BigDecimal("1").subtract(probeCorrosionRate.divide(bcr, 4, RoundingMode.HALF_UP))
+                .multiply(new BigDecimal("100")).setScale(4, RoundingMode.HALF_UP);
+
+        System.out.println("subtract = " + subtract);
     }
 }
 
