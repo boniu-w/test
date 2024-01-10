@@ -656,5 +656,75 @@ public class MathTest {
 
         System.out.println("subtract = " + subtract);
     }
+
+    /**
+     * @author: wg
+     * @description: 移位
+     * @params:
+     * @return:
+     * @createTime: 11:37  2024/1/4
+     * @updateTime: 11:37  2024/1/4
+     */
+    public void transpose() {
+
+        int a = 10;  // 二进制 1010
+
+        int i = a << 1;
+        System.out.println(i);  // 20 = a * 2的1次方
+        System.out.println("20 的二进制表示 : " + Integer.toBinaryString(i));
+
+
+        int i1 = a << 2;
+        System.out.println(i1);  // 40 = a * 2的2次方
+
+
+        int i2 = a << 3;
+        System.out.println(i2);  // 80 = a * 2的3次方
+
+
+        int i3 = a * (a ^ 3);  // ^  二进制的异或符
+        System.out.println(i3);
+
+        // a*3;
+        int i4 = (a << 1) + a;
+        System.out.println(i4);
+
+
+        /* 除法 */
+        int i5 = a >> 3;
+        System.out.println(i5); // 1
+
+        int i6 = (a >> 1) - a;
+        System.out.println(i6);
+
+
+        /* 与运算符用符号 "&" */
+        int i7 = a & 2;
+        int i9 = a % 4;
+        System.out.println("i7 ->= " + i7 + "   ####  i9 ->= " + i9);  // 2
+
+        int i8 = a & 1;
+        int i10 = a % 2;
+        System.out.println("i8 ->= " + i8 + "   ####  i10->  " + i10);  // 0
+        System.out.println();
+
+        int n = 1;
+        int m = (n << 3) + 2;
+        System.out.println("m - > " + m);
+        System.out.println(Integer.toBinaryString(m));
+        System.out.println();
+        int l = Integer.parseInt("12", 3);
+        System.out.println("表明 参数 是 3进制数 , 转成十进制后是:  -> " + l);  //
+        int p = Integer.parseInt("1010", 2);
+        System.out.println("表明 参数 是 2进制数 , 转成十进制后是:  -> " + p);  //
+
+        // 负数的 左右 移位
+        int k = -1;
+        System.out.println("k 的二进制表示 : " + Integer.toBinaryString(k));
+        int h = k << 1;
+        System.out.println(h);
+        System.out.println("h 的二进制表示 : " + Integer.toBinaryString(h));
+
+    }
 }
 

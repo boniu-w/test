@@ -264,6 +264,18 @@ public class StringTest {
 
         String s = Integer.toBinaryString(num);
         System.out.println(s);
+
+        int i = num << 1;
+        System.out.println("i = " + i);
+        System.out.println("i.toBinaryString = " + Integer.toBinaryString(i));
+
+        String a = "1100";
+        int ia = StringUtil.binaryString2DecimalInt(a);
+        System.out.println("ia = " + ia);
+
+        String b = "10000";
+        int ib = StringUtil.binaryString2DecimalInt(b);
+        System.out.println("ib = " + ib);
     }
 
     /************************************************************************
@@ -373,6 +385,10 @@ public class StringTest {
 
         System.out.print("\n");
         System.out.print("000");
+
+        String title ="Key Equipment  Status";
+        String title1="Key Equipment  Status";
+        System.out.println("title1.equals(title) = " + title1.equals(title));
     }
 
     /************************************************************************
@@ -780,7 +796,7 @@ public class StringTest {
 
         System.out.println("A".equals("a")); // false
 
-        u=null;
+        u = null;
         boolean contains = u.contains("123");
         System.out.println("contains = " + contains);
     }
