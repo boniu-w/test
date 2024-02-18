@@ -15,7 +15,7 @@ public class LunarTest {
         getPerson();
         System.out.println();
         getShuJiu();
-
+        getTheDay();
     }
 
     /**
@@ -26,6 +26,14 @@ public class LunarTest {
         Lunar lunar = Lunar.fromDate(new Date());
         System.out.println(lunar.toFullString());
     }
+
+    public static void getTheDay() {
+        // Date date = new Date("2024/2/13");
+        Date date = new Date("2024/2/14");
+        Lunar lunar = Lunar.fromDate(date);
+        System.out.println(lunar.toFullString());
+    }
+
 
     /**
      * 某日是否在数九中, 不在-> 空指针, 在-> 打印
