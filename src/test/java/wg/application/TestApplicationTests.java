@@ -17,19 +17,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.util.ObjectUtils;
 import sun.awt.OSInfo;
-import wg.application.timerTask.ScheduledTest;
 import wg.application.algorithm.IdWorker;
-import wg.application.exception.Assert;
-import wg.application.jackson.JacksonTest;
-import wg.application.jsoup.JsoupTest;
-import wg.application.message.ErrorMessageOfApp;
 import wg.application.datastructure.DataTest;
 import wg.application.entity.*;
 import wg.application.enumeration.CodeEnum;
+import wg.application.exception.Assert;
 import wg.application.gc.GcEntity;
+import wg.application.jackson.JacksonTest;
+import wg.application.jsoup.JsoupTest;
+import wg.application.message.ErrorMessageOfApp;
 import wg.application.string.StringTest;
-import wg.application.util.SimpleEncryptionUtil;
 import wg.application.thread.TaskTest;
+import wg.application.timerTask.ScheduledTest;
 import wg.application.util.*;
 import wg.application.validator.AssertUtils;
 
@@ -39,13 +38,15 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.*;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -1846,6 +1847,7 @@ public class TestApplicationTests {
     @Test
     public void testEnum() {
         System.out.println(CodeEnum.SUCCESS.getCode());
+        System.out.println(CodeEnum.SUCCESS.toString());
     }
 
     /************************************************************************
