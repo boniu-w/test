@@ -17,7 +17,7 @@ public class LunarTest {
 
     @Test
     public void holidayTest() {
-        List<Holiday> holidays = HolidayUtil.getHolidays(2023);
+        List<Holiday> holidays = HolidayUtil.getHolidays(2024);
         System.out.println(holidays);
 
         List<Holiday> list = HolidayUtil.getHolidays(2023, 2);
