@@ -295,6 +295,10 @@ public class StringTest {
             Character character = StringUtil.toChar(Integer.parseInt(s));
             System.out.println(character);
         }
+
+        String b = "我";
+        int i = b.codePointAt(0); // 会得到“我”字的Unicode编码
+        System.out.println("i = " + i); // 25105
     }
 
     /************************************************************************
@@ -386,8 +390,8 @@ public class StringTest {
         System.out.print("\n");
         System.out.print("000");
 
-        String title ="Key Equipment  Status";
-        String title1="Key Equipment  Status";
+        String title = "Key Equipment  Status";
+        String title1 = "Key Equipment  Status";
         System.out.println("title1.equals(title) = " + title1.equals(title));
     }
 
