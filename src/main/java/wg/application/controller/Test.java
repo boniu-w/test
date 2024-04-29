@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wg.application.component.DecipherPhone;
 import wg.application.component.TransformTitle;
+import wg.application.config.Animal;
 import wg.application.config.SpringIOCTest;
 import wg.application.entity.*;
 import wg.application.enumeration.Title;
@@ -1578,8 +1579,8 @@ public class Test {
         System.out.println("user.getUsers().size() :  " + users);
     }
     
-    // @Resource(name = "animal")
-    // public Animal animal;
+    @Resource(name = "animal1")
+    public Animal animal;
     
     /*****************************************************
      * @params:
@@ -1590,7 +1591,7 @@ public class Test {
     @RequestMapping(value = "/testResource")
     @ResponseBody
     public void testResource() {
-        // System.out.println(animal.getGenus());
+        System.out.println(animal.getGenus());
     }
     
     @GetMapping(value = "/houjian")
