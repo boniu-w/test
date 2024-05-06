@@ -24,13 +24,13 @@ public class DateTestWg {
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(US_PATTERN, Locale.US);
         String format = dateTimeFormatter.format(zonedDateTime);
-        System.out.println(format);
+        System.out.println(format); // Tue, April/30/2024 15:58
 
         LocalDateTime localDateTime = LocalDateTime.now();
         String format1 = DateTimeFormatter.ISO_DATE_TIME.format(localDateTime);
-        System.out.println(format1);
+        System.out.println(format1); // 2024-04-30T15:58:13.445
 
         String format2 = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(zonedDateTime);
-        System.out.println(format2);
+        System.out.println(format2); // 2024-04-30T15:58:13.42+08:00
     }
 }

@@ -30,8 +30,8 @@ public class DateTest {
         BigDecimal decimal = new BigDecimal("2.5");
         int i = decimal.multiply(new BigDecimal("365")).intValue();
 
-        System.out.println(decimal);
-        System.out.println(i);
+        System.out.println(decimal); // 2.5
+        System.out.println(i); // 912
     }
 
     @Test
