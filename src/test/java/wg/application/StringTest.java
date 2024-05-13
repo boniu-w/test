@@ -746,7 +746,18 @@ public class StringTest {
 
         System.out.println("str == str1 :" + (str == str1)); // true
         System.out.println("s" + "tr" == str); // true
+        System.out.println("str" == str2); // false
+        System.out.println("str==str2 = " + (str == str2)); // false
 
+        User user = new User();
+        user.setName(str);
+
+        System.out.println("user.getName() == str1 = " + (user.getName() == str1)); // true
+
+        User user1 = new User();
+        user1.setName(str);
+
+        System.out.println("user.getName() == user1.getName() = " + (user.getName() == user1.getName())); // true
     }
 
     /************************************************************************
