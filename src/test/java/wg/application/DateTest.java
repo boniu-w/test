@@ -2,17 +2,13 @@ package wg.application;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.math.BigDecimal;
-
 import wg.application.date.DateTestWg;
 import wg.application.util.DateUtil;
 import wg.application.util.StringUtil;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /************************************************************************
@@ -107,5 +103,43 @@ public class DateTest {
         LocalDateTime now1 = LocalDateTime.now();
         Duration between3 = Duration.between(now, now1);
         System.out.println("between3.toDays() = " + between3.toDays()); // 0
+    }
+
+    /**
+     * @author: wg
+     * @description: Date 构造函数中的年份是从 1900 年开始计算的，所以 123 表示 2023 年，124 表示 2024 年。月份从 0 开始，所以 4 表示 5月。
+     * @params:
+     * @return:
+     * @createTime: 17:39  2024/5/16
+     * @updateTime: 17:39  2024/5/16
+     */
+    @Test
+    public void testSub() {
+        Date date = new Date(123, 10, 1);
+
+        // 计算相差的年数
+        LocalDate commissioningDateTime = date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        // 获取当前时间的LocalDateTime
+        LocalDateTime now = LocalDateTime.now();
+        // Period between = Period.between(commissioningDateTime, now);
+
+        long yearsDifference = ChronoUnit.YEARS.between(commissioningDateTime, now);
+        System.out.println("yearsDifference = " + yearsDifference);
+
+        Date date1 = new Date(123, 4, 1);
+        LocalDateTime commissioningDateTime1 = date1.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        // 获取当前时间的LocalDateTime
+        now = LocalDateTime.now();
+        yearsDifference = ChronoUnit.YEARS.between(commissioningDateTime1, now);
+        System.out.println("yearsDifference = " + yearsDifference);
+
+        String dateStr = "2023/05/01";
+        LocalDate localDate = DateUtil.toLocalDate(dateStr, "yyyy/MM/dd");
+        long between = ChronoUnit.YEARS.between(localDate, now);
+        System.out.println("between = " + between);
     }
 }

@@ -130,5 +130,26 @@ public class JsonUtil {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readTree(jsonStr);
     }
-    
+
+    public static <T> String toJsonString(T t) {
+        // 使用 Jackson 的 ObjectMapper 将对象转换为 JSON 字符串
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(t);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static <T> T toClass(String jsonStr, Class<T> tClass) {
+        // 使用 Jackson 的 ObjectMapper 将 JSON 字符串转换为 Java 对象
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(jsonStr, tClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

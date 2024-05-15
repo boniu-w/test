@@ -1,0 +1,17 @@
+{
+  "carbonSteelSandErosion": {
+    "pipeOutsideDiameter": 273.1,
+    "thickness": 12.7,
+    "steelDensity": 7800,
+    "curvatureRadius": 1.5,
+    "particleDensity": 2000,
+    "particleDiameter": 2000,
+    "mp": 0.1,
+    "liquidPhaseViscosity": 0.0011,
+    "gasPhaseViscosity": 1,
+    "liquidDensity": 960,
+    "gasPhaseDensity": 0.717,
+    "vgs": 20000,
+    "vls": 50000
+  }
+}
