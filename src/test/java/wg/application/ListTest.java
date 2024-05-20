@@ -490,6 +490,10 @@ public class ListTest {
      ************************************************************************/
     @Test
     public void testMaxObject() {
+        User xiao1 = new User();
+        xiao1.setName("xiao1");
+        xiao1.setBirthday(LocalDateTime.now());
+
         User xiao = new User();
         xiao.setName("xiao");
         xiao.setBirthday(LocalDateTime.now());
@@ -519,6 +523,19 @@ public class ListTest {
                 .orElse(null);
 
         System.out.println(max); // da
+
+        // 如果有多个最大值 分别记录
+        userList.add(xiao1);
+        Optional<User> maxed = userList.stream()
+                .filter(e -> e.getBirthday() != null)
+                .min(Comparator.comparing(User::getBirthday));
+
+        if (maxed.isPresent()){
+            User user = maxed.get();
+
+            String name = user.getName();
+            System.out.println("name = " + name);
+        }
 
     }
 
