@@ -3,6 +3,8 @@ package wg.application.exception;
 
 import wg.application.util.MessageUtils;
 
+import java.text.MessageFormat;
+
 /********************************************************
  * @Package wg.application.exception
  * @author wg
@@ -15,6 +17,22 @@ public class TheException extends RuntimeException {
     private String msg;
 
     public TheException() {
+    }
+
+    /**
+     * @author: wg
+     * @description: {0} 形式占位符 使用: MessageFormat.format(message, args);
+     * %s 形式占位符 使用: String.format(message, args);
+     * @params:
+     * @return:
+     * @createTime: 10:59  2024/5/21
+     * @updateTime: 10:59  2024/5/21
+     */
+    public TheException(String message, Object... args) {
+        super(MessageFormat.format(message, args));
+        // super(String.format(message, args));
+        this.code = ErrorCode.INTERNAL_SERVER_ERROR;
+        this.msg = message;
     }
 
     public TheException(int code) {
