@@ -1,7 +1,7 @@
 package wg.application.service;
 
 import wg.application.entity.User;
-import wg.application.exception.TheException;
+import wg.application.exception.WgException;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface UserService {
 
     public void updateTestPrivate(User user);
 
-    void updateTestThrows(User user) throws TheException;
+    void updateTestThrows(User user) throws WgException;
 
     void testToolClass(User user);
 

@@ -17,7 +17,7 @@ public final class Assert {
 
     public static void isTrue(boolean expression, String message, Object... params) {
         if (!expression) {
-            throw new TheException(message);
+            throw new WgException(message);
         }
     }
 
@@ -27,7 +27,7 @@ public final class Assert {
 
     public static void isNull(Object object, String message, Object... params) {
         if (object == null) {
-            throw new TheException(message);
+            throw new WgException(message);
         }
     }
 
@@ -57,11 +57,11 @@ public final class Assert {
 
     public static void isArrayEmpty(Object[] array, Integer code, String... params) {
         if (code == null) {
-            throw new TheException(ErrorCode.NOT_NULL, "code");
+            throw new WgException(ErrorCode.NOT_NULL, "code");
         }
 
         if (ArrayUtil.isEmpty(array)) {
-            throw new TheException(code, params);
+            throw new WgException(code, params);
         }
     }
 
@@ -71,11 +71,11 @@ public final class Assert {
 
     public static void isListEmpty(List<?> list, Integer code, String... params) {
         if (code == null) {
-            throw new TheException(ErrorCode.NOT_NULL, "code");
+            throw new WgException(ErrorCode.NOT_NULL, "code");
         }
 
         if (CollUtil.isEmpty(list)) {
-            throw new TheException(code, params);
+            throw new WgException(code, params);
         }
     }
 
@@ -85,17 +85,17 @@ public final class Assert {
 
     public static void isMapEmpty(Map map, Integer code, String... params) {
         if (code == null) {
-            throw new TheException(ErrorCode.NOT_NULL, "code");
+            throw new WgException(ErrorCode.NOT_NULL, "code");
         }
 
         if (MapUtil.isEmpty(map)) {
-            throw new TheException(code, params);
+            throw new WgException(code, params);
         }
     }
 
     public static void isFalse(boolean bool, String message) {
         if (!bool) {
-            throw new TheException(message);
+            throw new WgException(message);
         }
     }
 }

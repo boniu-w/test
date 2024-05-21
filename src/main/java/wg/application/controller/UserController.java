@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import wg.application.cache.CacheTest;
 import wg.application.entity.Picture;
 import wg.application.entity.User;
-import wg.application.exception.TheException;
+import wg.application.exception.WgException;
 import wg.application.service.UserService;
 import wg.application.util.SpringContextUtils;
 import wg.application.vo.Result;
@@ -79,7 +79,7 @@ public class UserController {
     public void updateUserTestThrows(@RequestBody User user) {
         try {
             userService.updateTestThrows(user);
-        } catch (TheException e) {
+        } catch (WgException e) {
             throw new RuntimeException(e);
         }
     }
@@ -88,7 +88,7 @@ public class UserController {
     public void updateUserTestToolOfTry(@RequestBody User user) {
         try {
             userService.testToolClass(user);
-        } catch (TheException e) {
+        } catch (WgException e) {
             throw new RuntimeException(e);
         }
     }
@@ -97,7 +97,7 @@ public class UserController {
     public void updateUserThrow(@RequestBody User user) {
         try {
             userService.testThrow(user);
-        } catch (TheException e) {
+        } catch (WgException e) {
             throw new RuntimeException(e);
         }
     }
@@ -106,7 +106,7 @@ public class UserController {
     public void updateUserThrow2(@RequestBody User user) {
         try {
             userService.testThrow2(user);
-        } catch (TheException e) {
+        } catch (WgException e) {
             throw new RuntimeException(e);
         }
     }
@@ -115,7 +115,7 @@ public class UserController {
     public void testTryAndThrow(@RequestBody User user) {
         try {
             userService.testTryAndThrow(user);
-        } catch (TheException e) {
+        } catch (WgException e) {
             throw new RuntimeException(e);
         }
     }

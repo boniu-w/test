@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import wg.application.config.MyIdGenerator;
 import wg.application.entity.FileMy;
-import wg.application.exception.TheException;
+import wg.application.exception.WgException;
 import wg.application.service.impl.FileMyServiceImpl;
 import wg.application.util.CollectionUtil;
 import wg.application.util.FileUtil;
@@ -105,7 +105,7 @@ public class FileNas {
             result.setData(insert);
             result.setSuccess(true);
             return result;
-        } catch (TheException e) {
+        } catch (WgException e) {
             return result.error();
         }
     }
@@ -148,7 +148,7 @@ public class FileNas {
             result.setData(i);
             result.setSuccess(true);
             return result;
-        } catch (TheException e) {
+        } catch (WgException e) {
             return result.error();
         }
     }
@@ -238,7 +238,7 @@ public class FileNas {
             result.setData(update + insert);
             result.setSuccess(true);
             return result;
-        } catch (TheException e) {
+        } catch (WgException e) {
             return result.error();
         }
     }

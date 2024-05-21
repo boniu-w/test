@@ -1,7 +1,7 @@
 package wg.application.util;
 
 import wg.application.exception.ErrorCode;
-import wg.application.exception.TheException;
+import wg.application.exception.WgException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class ThreadUtil {
             // 让当前线程处于阻塞状态，直到锁存器计数为零
             countDownLatch.await();
         } catch (InterruptedException e) {
-            throw new TheException(ErrorCode.INTERNAL_SERVER_ERROR);
+            throw new WgException(ErrorCode.INTERNAL_SERVER_ERROR);
         }
         // 通过mybatis的批量插入的方式来进行数据的插入, 这一步还是要做判空
         if (CollectionUtil.isNotEmpty(updateList)) {

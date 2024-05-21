@@ -1,7 +1,7 @@
 package wg.application.util;
 
 import cn.hutool.core.lang.PatternPool;
-import wg.application.exception.TheException;
+import wg.application.exception.WgException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -36,16 +36,16 @@ public class ValidatorUtil {
      *
      * @param object 待校验对象
      * @param groups 待校验的组
-     * @throws TheException 校验不通过，则报 WgException 异常
+     * @throws WgException 校验不通过，则报 WgException 异常
      */
-    public static void validateEntity(Object object, Class<?>... groups) throws TheException {
+    public static void validateEntity(Object object, Class<?>... groups) throws WgException {
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
         if (!constraintViolations.isEmpty()) {
             StringBuilder msg = new StringBuilder();
             for (ConstraintViolation<Object> constraint : constraintViolations) {
                 msg.append(constraint.getMessage()).append("<br>");
             }
-            throw new TheException(msg.toString());
+            throw new WgException(msg.toString());
         }
     }
 

@@ -2,7 +2,7 @@ package wg.application;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import wg.application.exception.TheException;
+import wg.application.exception.WgException;
 
 /************************************************************************
  * @author: wg
@@ -16,7 +16,7 @@ public class ExceptionTest {
     @Test
     public void test1() {
         if (1 == 1) {
-            throw new TheException("123");
+            throw new WgException("123");
         }
         System.out.println(123);
     }
