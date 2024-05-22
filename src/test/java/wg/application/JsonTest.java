@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.util.FileCopyUtils;
+import wg.application.entity.User;
 import wg.application.jackson.CarbonSteelSandErosion;
 import wg.application.jackson.QuantitativeRbiDetailDTO;
 import wg.application.util.JsonUtil;
@@ -14,6 +15,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /************************************************************************
@@ -59,6 +64,31 @@ public class JsonTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    @Test
+    public void test2(){
+        User xiao1 = new User();
+        xiao1.setName("xiao1");
+        xiao1.setBirthday(LocalDateTime.now());
+
+        User xiao = new User();
+        xiao.setName("xiao");
+        xiao.setBirthday(LocalDateTime.now());
+
+        User zhong = new User();
+        zhong.setName("zhong");
+        zhong.setBirthday(LocalDateTime.now().plus(200, ChronoUnit.SECONDS));
+
+        ArrayList<User> users = new ArrayList<>();
+        users.add(xiao1);
+        users.add(xiao);
+        users.add(zhong);
+
+        String jsonString = JsonUtil.toJsonString(users);
+        System.out.println("jsonString = " + jsonString);
+
+        List<User> list = JsonUtil.toObjList(jsonString, User.class);
+        System.out.println("list = " + list);
     }
 }

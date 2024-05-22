@@ -4,10 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /************************************************************************
@@ -131,6 +134,14 @@ public class JsonUtil {
         return mapper.readTree(jsonStr);
     }
 
+    /**
+     * @author: wg
+     * @description: 无论对象 还是 list 对象 都可以转string
+     * @params:
+     * @return:
+     * @createTime: 15:07  2024/5/22
+     * @updateTime: 15:07  2024/5/22
+     */
     public static <T> String toJsonString(T t) {
         // 使用 Jackson 的 ObjectMapper 将对象转换为 JSON 字符串
         ObjectMapper objectMapper = new ObjectMapper();
@@ -142,6 +153,14 @@ public class JsonUtil {
         }
     }
 
+    /**
+     * @author: wg
+     * @description: 转 对象
+     * @params:
+     * @return:
+     * @createTime: 15:07  2024/5/22
+     * @updateTime: 15:07  2024/5/22
+     */
     public static <T> T toClass(String jsonStr, Class<T> tClass) {
         // 使用 Jackson 的 ObjectMapper 将 JSON 字符串转换为 Java 对象
         ObjectMapper objectMapper = new ObjectMapper();
@@ -149,6 +168,24 @@ public class JsonUtil {
             return objectMapper.readValue(jsonStr, tClass);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * @author: wg
+     * @description: 转 对象 list
+     * @params:
+     * @return:
+     * @createTime: 15:07  2024/5/22
+     * @updateTime: 15:07  2024/5/22
+     */
+    public static <T> List<T> toObjList(String jsonString, Class<T> tClass) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(jsonString, new TypeReference<List<T>>() {
+            });
+        } catch (Exception e) {
             return null;
         }
     }

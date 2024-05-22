@@ -723,6 +723,15 @@ public class StringTest {
 
         OrgEnum uk = OrgEnum.valueOf("UK");
         System.out.println(uk);
+
+
+        String[] a = {"是_1", "否_0", "是\nYes_1", "否\nNo_0", "是Yes_1", "否No_0", "\"是\nYes\"_1", "\"否\nNo\"_0",
+                "电力系统Power system", "电力系统Power system\n"};
+        for (String s : a) {
+            if (s.equals("电力系统Power system")) {
+                System.out.println("s = " + s);
+            }
+        }
     }
 
     /************************************************************************
