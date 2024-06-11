@@ -115,7 +115,7 @@ public class DateTest {
      */
     @Test
     public void testSub() {
-        Date date = new Date(123, 10, 1);
+        Date date = new Date(123, 6, 1);
 
         // 计算相差的年数
         LocalDate commissioningDateTime = date.toInstant()
@@ -137,7 +137,7 @@ public class DateTest {
         yearsDifference = ChronoUnit.YEARS.between(commissioningDateTime1, now);
         System.out.println("yearsDifference = " + yearsDifference);
 
-        String dateStr = "2023/05/01";
+        String dateStr = "2023/06/01";
         LocalDate localDate = DateUtil.toLocalDate(dateStr, "yyyy/MM/dd");
         long between = ChronoUnit.YEARS.between(localDate, now);
         System.out.println("between = " + between);

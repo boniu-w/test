@@ -41,6 +41,11 @@ public class MathTest {
         // signum 正负号
         System.out.println(dd.signum()); // 1
         System.out.println(ii.signum()); // -1
+
+        int i1 = 10;
+        double i2 = 3;
+        double v = i1 / i2;
+        System.out.println("v = " + v); // v = 3.3333333333333335
     }
 
     /************************************************************************
@@ -76,6 +81,38 @@ public class MathTest {
 
         boolean isNumber1 = StringUtil.isNumber("5.63589065441568E+40000");
         System.out.println("isNumber1 = " + isNumber1); // true double=Infinity
+
+        boolean isNumber2 = StringUtil.isNumber("-5.63589065441568E+40000");
+        System.out.println("isNumber2 = " + isNumber2); // true double=-Infinity
+
+        double aaa = 0.00000028162103058754967;
+        String s2 = MathUtil.double2ScientificNotation(aaa);
+        System.out.println("s2 = " + s2); // s2 = 2.816E-7
+
+        double aaa1 = 0.028162103058754967;
+        String s21 = MathUtil.double2ScientificNotation(aaa1);
+        System.out.println("s21 = " + s21); // s21 = 0.028
+
+        double aaa12 = 0.0028162103058754967;
+        String s212 = MathUtil.double2ScientificNotation(aaa12);
+        System.out.println("s212 = " + s212); // s212 = 0.003
+
+        double aaa123 = 0.00028162103058754967;
+        String s2123 = MathUtil.double2ScientificNotation(aaa123);
+        System.out.println("s2123 = " + s2123); // s2123 = 2.816E-4
+
+        double aaa1231 = 4.222803117922996;
+        String s21231 = MathUtil.double2ScientificNotation(aaa1231);
+        System.out.println("s21231 = " + s21231); // s21231 = 4.223
+
+        double aaa12311 = 0.30000000000000004;
+        String s212311 = MathUtil.double2ScientificNotation(aaa12311);
+        System.out.println("s212311 = " + s212311); // s212311 = 0.3
+
+
+        double aaa123111 = 0.00001;
+        String s2123111 = MathUtil.double2ScientificNotation(aaa123111);
+        System.out.println("s2123111 = " + s2123111); // s2123111 = 1.000E-5
     }
 
     @Test
@@ -646,8 +683,9 @@ public class MathTest {
     @Test
     public void testtest() {
         BigDecimal bcr = new BigDecimal("0.4");
-        BigDecimal probeCorrosionRate=new BigDecimal("0.09");
+        BigDecimal probeCorrosionRate = new BigDecimal("0.09");
         BigDecimal decimal = new BigDecimal("1");
+        System.out.println("decimal.scale() = " + decimal.scale()); // 0
 
         BigDecimal divide = probeCorrosionRate.divide(bcr, 4, RoundingMode.HALF_UP);
         System.out.println("divide = " + divide);

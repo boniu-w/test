@@ -119,11 +119,16 @@ public class CommonUtil {
     public static void main(String[] args) {
         String[] s = subStringByFixedLength("0123456", 6);
         System.out.println(Arrays.toString(s));
+
+        test();
     }
 
     public static void test() {
         String s1 = double2ScientificNotation(5.720970255000001E-6);
-        System.out.println(s1);
+        System.out.println(s1); // 5.721E-6
+
+        String s2 = double2ScientificNotation(1);
+        System.out.println(s2); // 1.000E+00
     }
 
     /************************************************************************
