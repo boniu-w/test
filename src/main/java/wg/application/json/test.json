@@ -2,8 +2,13 @@
   "carbonSteelSandErosion": {
     "pipeOutsideDiameter": 273.1,
     "thickness": 12.7,
+<<<<<<< HEAD
     "steelDensity": 7800,
     "curvatureRadius": 1.5,
+=======
+    "SteelDensity": 7800,
+    "CurvatureRadius": 1.5,
+>>>>>>> 5b5da333cd2d58396f83c4faa87cacb9d37ee9e5
     "particleDensity": 2000,
     "particleDiameter": 2000,
     "mp": 0.1,
