@@ -1,5 +1,7 @@
 package wg.application.util;
 
+import org.apache.commons.math3.distribution.NormalDistribution;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
@@ -477,4 +479,20 @@ public class MathUtil {
         System.out.println(b);
     }
 
+    /**
+     * @author wg
+     * @description qnorm 返回值是给定概率p后的下分位点 用java apache math3 怎么写
+     * @param p 给定的概率p，例如，找到累积概率为0.95的下四分位点，例如，找到累积概率为0.95的下四分位点
+     * @return quantile 计算下四分位点（或累积概率为p的z值）
+     * @createTime 10:38  2024/6/12
+     * @updateTime 10:38  2024/6/12
+     */
+    public static double qnorm(double p) {
+        // 创建一个标准正态分布对象（均值μ=0，标准差σ=1）
+        NormalDistribution normalDist = new NormalDistribution();
+
+        // 计算下四分位点（或累积概率为p的z值）
+        double quantile = normalDist.inverseCumulativeProbability(p);
+        return quantile;
+    }
 }

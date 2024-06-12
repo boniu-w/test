@@ -3,6 +3,7 @@ package wg.application.math;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import wg.application.enumeration.WaterTypeEnum;
 import wg.application.exception.WgException;
+import wg.application.util.MathUtil;
 
 import java.util.Random;
 
@@ -279,4 +280,7 @@ public class Test {
     public static double SMYS = 285, time = 15;
     public static double ER = 0.028; // 腐蚀速率
     public static double Z = 0.9, k = 50, uO = 0.0011, uG = 0.00003, urelmax = 7.06, pr = 0.8, po = 850, pW = 1024, Qc = 0.5;
+
+
+
 }

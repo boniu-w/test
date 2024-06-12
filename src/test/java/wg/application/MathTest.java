@@ -762,7 +762,20 @@ public class MathTest {
         int h = k << 1;
         System.out.println(h);
         System.out.println("h 的二进制表示 : " + Integer.toBinaryString(h));
+    }
 
+    /**
+     * @author wg
+     * @description qnorm 返回值是给定概率p后的下分位点 用java apache math3 怎么写
+     * @createTime 10:36  2024/6/12
+     * @updateTime 10:36  2024/6/12
+     */
+    @Test
+    public void qnorm() {
+        double qnorm = MathUtil.qnorm(0.92);
+
+        double a = 2 * (3.0 + 2) / (2.0 + 1);
+        System.out.println("a = " + a);
     }
 }
 

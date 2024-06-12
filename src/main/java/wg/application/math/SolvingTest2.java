@@ -300,13 +300,13 @@ public class SolvingTest2 {
         double upperBound = 100;
         boolean found = false;
 
-        for (double i = lowerBound; i < upperBound; i += 10) {
+        for (double i = lowerBound; i < upperBound; i += 1) {
             double f1 = function.value(i);
-            double f2 = function.value(i + 10);
-            System.out.printf("Checking interval [%.2f, %.2f]: f(%.2f) = %.6f, f(%.2f) = %.6f%n", i, i + 10, i, f1, i + 10, f2);
+            double f2 = function.value(i + 1);
+            System.out.printf("Checking interval [%.2f, %.2f]: f(%.2f) = %.6f, f(%.2f) = %.6f%n", i, i + 1, i, f1, i + 1, f2);
             if (f1 * f2 < 0) {
                 lowerBound = i;
-                upperBound = i + 10;
+                upperBound = i + 1;
                 found = true;
                 break;
             }
