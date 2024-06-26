@@ -792,8 +792,8 @@ public class StringTest {
     public void testBigdecimalStringEquals() {
         BigDecimal bigDecimal = new BigDecimal("5.00");
         String a = "5";
-        System.out.println(bigDecimal.toPlainString());
-        System.out.println(bigDecimal.compareTo(new BigDecimal(a)));
+        System.out.println(bigDecimal.toPlainString()); // 5.00
+        System.out.println(bigDecimal.compareTo(new BigDecimal(a))); // 0
     }
 
     /************************************************************************
@@ -821,8 +821,18 @@ public class StringTest {
         System.out.println("A".equals("a")); // false
 
         u = null;
-        boolean contains = u.contains("123");
+        boolean contains = u.contains("123"); // java.lang.NullPointerException
         System.out.println("contains = " + contains);
     }
 
+    @Test
+    public void testHalf() {
+        String aa="1624968931691229186";
+        System.out.println("aa.length() = " + aa.length()); // 19
+        String a = "A；检维修计划不完善;操作维护程序不完善;流程波动或介质异常;老化和磨损;调查中;设备制造商问题;腐蚀;操作维护程序执行不到位;人员误操作;极端环境天气;检维修质量不合格;人为破坏;管理程序执行不到位;管理程序不完善;动物入侵破坏;检维修计划执行不到位;设计安装问题;未调查出原因";
+        String rootCauseStr = StringUtil.toHalfWidth(a);
+        System.out.println("halfWidth = " + rootCauseStr.trim()); // 中文还是中文, 英文还是英文, 全角变半角
+
+        System.out.println("\"x\".equals(\"X\")  " + "x".equals("X")); // false
+    }
 }

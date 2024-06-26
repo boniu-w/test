@@ -1,5 +1,6 @@
 package wg.application.lunar;
 
+import com.nlf.calendar.Fu;
 import com.nlf.calendar.Lunar;
 import com.nlf.calendar.ShuJiu;
 import com.nlf.calendar.Solar;
@@ -24,7 +25,9 @@ public class LunarTest {
      */
     public static void getToday() {
         Lunar lunar = Lunar.fromDate(new Date());
-        System.out.println(lunar.toFullString());
+        System.out.println("lunar.toFullString() = "+ lunar.toFullString());
+        // Fu fu = lunar.getFu(); // 没入伏 fu=null
+        // System.out.println("fu.toFullString() = " + fu.toFullString());
     }
 
     public static void getTheDay() {
@@ -42,8 +45,8 @@ public class LunarTest {
         // Solar solar = new Solar(2023, 1, 20, 14, 26, 12);
         // Lunar lunar = solar.getLunar();
         Lunar lunar = Lunar.fromDate(new Date());
-        ShuJiu shuJiu = lunar.getShuJiu();
-        System.out.println(shuJiu.toFullString());
+        // ShuJiu shuJiu = lunar.getShuJiu(); // 没入九 shuJiu=null
+        // System.out.println(shuJiu.toFullString());
     }
 
     public static void getPerson() {
