@@ -806,6 +806,11 @@ public class StringTest {
      ************************************************************************/
     @Test
     public void testUUID() {
+        for (int i = 0; i < 10; i++) {
+            String replace = UUID.randomUUID().toString().replace("-", "");
+            System.out.println(replace);
+        }
+
         String u = "63bb2d8d-6233-489e-a0ce-a39452948e63";
         UUID uuid1 = UUID.fromString(u);
 
@@ -827,12 +832,24 @@ public class StringTest {
 
     @Test
     public void testHalf() {
-        String aa="1624968931691229186";
+        String aa = "1624968931691229186";
         System.out.println("aa.length() = " + aa.length()); // 19
         String a = "A；检维修计划不完善;操作维护程序不完善;流程波动或介质异常;老化和磨损;调查中;设备制造商问题;腐蚀;操作维护程序执行不到位;人员误操作;极端环境天气;检维修质量不合格;人为破坏;管理程序执行不到位;管理程序不完善;动物入侵破坏;检维修计划执行不到位;设计安装问题;未调查出原因";
         String rootCauseStr = StringUtil.toHalfWidth(a);
         System.out.println("halfWidth = " + rootCauseStr.trim()); // 中文还是中文, 英文还是英文, 全角变半角
 
         System.out.println("\"x\".equals(\"X\")  " + "x".equals("X")); // false
+    }
+
+    @Test
+    public void testIf() {
+        if (true) {
+            System.out.println("1");
+            if (false) {
+                System.out.println(2);
+            }
+            System.out.println(3);
+        }
+        System.out.println(4);
     }
 }

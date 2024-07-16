@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test file upload</title>
+</head>
+<body>
+<input type="file" id="fileInput">
+<button onclick="uploadFile()">Upload</button>
+
+<script>
+        function uploadFile() {
+        console.log('upload--------------------------');
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files.length) {
+                alert('Please select a file to upload.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('multipartFile', fileInput.files[0]);
+
+            const url = new URL('http://localhost:9967/filemanagercontroller/upload');
+            url.searchParams.append('tableName', 'test-tablename');
+            url.searchParams.append('refId', 'test-refid');
+            url.searchParams.append('colName', 'test-colname');
+            url.searchParams.append('folderName', 'test-foldername');
+            url.searchParams.append('userInfo', '测试userinfo');
+
+            const requestOptions = {
+                method: 'POST',
+                body: formData
+            };
+
+            fetch(url, requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>

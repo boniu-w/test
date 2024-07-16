@@ -12,6 +12,13 @@ server:
     context-path: /wg
 
 spring:
+#  resources:
+#    static-locations:
+#      - classpath:/static
+#      - classpath:/public
+#      - classpath:/resources
+#      - classpath:/resources/static
+#      - classpath:/META-INF/resources/
   messages:
     basename: i18n/error_message
     encoding: UTF-8
@@ -78,6 +85,7 @@ management:
 
 mybatis:
   configuration:
+#    cache-enabled: true # 二级缓存
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:wg/application/mapper/xml/*Mapper.xml
 
@@ -93,3 +101,9 @@ wg:
   jwt:
     secret: Fr0WK4WppCqKRZKuMakH8qvbZ9HuFyg5
     header: X-Auth-Token
+
+minio:
+  bucketName: internal-inspection
+  endpoint: http://192.168.12.210:7000
+  accessKey: smeapp
+  secretKey: smeapp123
