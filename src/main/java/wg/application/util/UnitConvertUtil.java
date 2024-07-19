@@ -40,6 +40,30 @@ public class UnitConvertUtil {
         return temperatureKelvin - 273.15;
     }
 
+    /**
+     * @param MPa 是兆帕（Megapascal）
+     * @return psi 是磅力每平方英寸（pounds per square inch）
+     * @author wg
+     * @description 兆帕 转 psi
+     * @createTime 17:13  2024/7/19
+     * @updateTime 17:13  2024/7/19
+     */
+    public static double MPa2psi(double MPa) {
+        return MPa * 145.037;
+    }
+
+    /**
+     * @param psi 是磅力每平方英寸（pounds per square inch）
+     * @return MPa 是兆帕（Megapascal）
+     * @author wg
+     * @description psi 转 兆帕
+     * @createTime 17:16  2024/7/19
+     * @updateTime 17:16  2024/7/19
+     */
+    public static double psi2MPa(double psi) {
+        return psi / 145.037;
+    }
+
     public static void main(String[] args) {
         double v = celsius2fahrenheit(25);
         System.out.println("v = " + v); // 77
