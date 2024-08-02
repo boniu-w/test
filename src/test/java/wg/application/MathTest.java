@@ -234,6 +234,8 @@ public class MathTest {
      ************************************************************************/
     @Test
     public void testNan() {
+        double naN = Double.NaN;
+        System.out.println("naN = " + naN);
         double a = 0;
         double b = 0;
         double c = a / b;
@@ -776,6 +778,12 @@ public class MathTest {
 
         double a = 2 * (3.0 + 2) / (2.0 + 1);
         System.out.println("a = " + a);
+    }
+
+    @Test
+    public void test11() {
+        double i = 1E5;
+        System.out.println("i = " + i);
     }
 }
 

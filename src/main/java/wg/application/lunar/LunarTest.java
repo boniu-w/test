@@ -26,6 +26,11 @@ public class LunarTest {
     public static void getToday() {
         Lunar lunar = Lunar.fromDate(new Date());
         System.out.println("lunar.toFullString() = "+ lunar.toFullString());
+
+        List<String> dayYi = lunar.getDayYi();
+        List<String> dayJi = lunar.getDayJi();
+        System.out.println("dayYi = " + dayYi);
+        System.out.println("dayJi = " + dayJi);
         // Fu fu = lunar.getFu(); // 没入伏 fu=null
         // System.out.println("fu.toFullString() = " + fu.toFullString());
     }

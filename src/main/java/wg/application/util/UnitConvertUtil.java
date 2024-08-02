@@ -71,4 +71,6 @@ public class UnitConvertUtil {
         double v1 = fahrenheit2celsius(77);
         System.out.println("v1 = " + v1); // 25
     }
+
+    public void test(){}
 }
