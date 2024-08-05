@@ -102,7 +102,7 @@ public class TemperatureUtil {
      * @updateTime 15:32  2024/8/2
      */
     public static double drop3(double inletTemperature, double ambientTemperature, double beta) {
-        return ambientTemperature + (inletTemperature - ambientTemperature) * Math.exp(3 / (-beta));
+        return ambientTemperature + (inletTemperature - ambientTemperature) * Math.exp(-beta);
     }
 
     /**
@@ -120,8 +120,82 @@ public class TemperatureUtil {
         return _Tamb + (_Tin - _Tamb) * Math.exp(-beta * _L);
     }
 
+    /**
+     * @param centigrade 摄氏度
+     * @return 列氏度
+     * @author wg
+     * @description 摄氏度 转 列氏度
+     * @createTime 15:15  2024/8/5
+     * @updateTime 15:15  2024/8/5
+     */
+    public static double convert2Reaumur(double centigrade) {
+        return 4 / 5.0 + (centigrade + 80);
+    }
+
+    /**
+     * @param reaumur 列氏度
+     * @return 摄氏度
+     * @author wg
+     * @description 列氏度 转 摄氏度
+     * @createTime 15:15  2024/8/5
+     * @updateTime 15:15  2024/8/5
+     */
+    public static double convert2centigrade(double reaumur) {
+        return reaumur * 5 / 4.0 - 80;
+    }
+
+    /**
+     * @param temperatureCelsius 摄氏度
+     * @return fahrenheit 华氏度
+     * @author wg
+     * @description 摄氏度 -> 华氏度
+     * @createTime 16:53  2024/7/19
+     * @updateTime 16:53  2024/7/19
+     */
+    public static double celsius2fahrenheit(double temperatureCelsius) {
+        return temperatureCelsius * 9 / 5 + 32;
+    }
+
+    /**
+     * @param temperatureFahrenheit 华氏度
+     * @return 摄氏度
+     * @author wg
+     * @description 华氏度 -> 摄氏度
+     * @createTime 15:23  2024/8/5
+     * @updateTime 15:23  2024/8/5
+     */
+    public static double fahrenheit2celsius(double temperatureFahrenheit) {
+        return (temperatureFahrenheit - 32) * 5 / 9;
+    }
+
+    /**
+     * @param temperatureCelsius 摄氏度
+     * @return kelvin 开尔文
+     * @author wg
+     * @description 摄氏度 -> 开尔文
+     * @createTime 16:53  2024/7/19
+     * @updateTime 16:53  2024/7/19
+     */
+    public static double celsius2kelvin(double temperatureCelsius) {
+        return temperatureCelsius + 273.15;
+    }
+
+    /**
+     * @param temperatureKelvin 开尔文
+     * @return 摄氏度
+     * @author wg
+     * @description 开尔文 -> 摄氏度
+     * @createTime 15:24  2024/8/5
+     * @updateTime 15:24  2024/8/5
+     */
+    public static double kelvin2celsius(double temperatureKelvin) {
+        return temperatureKelvin - 273.15;
+    }
 
     public static void main(String[] args) {
+        double _K = 3.169786384922225 * Math.pow(10, -17);
+        System.out.println("_K = " + _K);
+
         // 温降系数
         double inletTemperature = 60;
         double outletTemperature = 40;
@@ -142,16 +216,20 @@ public class TemperatureUtil {
         double v1 = drop1(95, 6, beta, 10);
         System.out.println("chartgpt 公式 = " + v1);
 
-        double exp = Math.exp(-beta * 10);
-        double exp1 = Math.exp(-beta * 1);
+        double exp = Math.exp(-beta * 1000);
+        double exp1 = Math.exp(-beta * 1); // 等同与 Math.pow(Math.E, -beta * 1);
         System.out.println("exp = " + exp);
         System.out.println("exp1 = " + exp1);
+        double pow = Math.pow(Math.E, -beta * 1);
+        System.out.println("pow = " + pow);
 
         double v12 = drop2(95, 6, beta, 10000);
         System.out.println("通译千问 = " + v12);
 
         double vv3 = drop3(95, 6, beta);
         System.out.println("mathcad 公式 = " + vv3);
+
+        // 总结: 通译千问 mathcad chartgpt 公式都不对
 
     }
 }

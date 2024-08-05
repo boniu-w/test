@@ -87,6 +87,33 @@ public class PressureUtil {
         return _Pin + rou * PhysicsEnum.G.getValue() * (depthKp - depthInlet);
     }
 
+    /**
+     * @param MPa 是兆帕（Megapascal）
+     * @return psi 是磅力每平方英寸（pounds per square inch）
+     * @author wg
+     * @description 兆帕 转 psi
+     * @createTime 17:13  2024/7/19
+     * @updateTime 17:13  2024/7/19
+     */
+    public static double MPa2psi(double MPa) {
+        return MPa * 145.037;
+    }
+
+    public static double pa2psi(double Pa) {
+        return (Pa / Math.pow(10, 6)) * 145.037;
+    }
+
+    /**
+     * @param psi 是磅力每平方英寸（pounds per square inch）
+     * @return MPa 是兆帕（Megapascal）
+     * @author wg
+     * @description psi 转 兆帕
+     * @createTime 17:16  2024/7/19
+     * @updateTime 17:16  2024/7/19
+     */
+    public static double psi2MPa(double psi) {
+        return psi / 145.037;
+    }
 
     public static void main(String[] args) {
         double _Pin = 6 * Math.pow(10, 6);

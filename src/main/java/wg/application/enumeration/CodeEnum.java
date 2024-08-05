@@ -1,7 +1,8 @@
 package wg.application.enumeration;
 
 public enum CodeEnum {
-    SUCCESS(200,"success"),FAIL(404, "fail");
+    SUCCESS(200,"success"),
+    FAIL(404, "fail");
 
     private final int code;
     private final String description;
