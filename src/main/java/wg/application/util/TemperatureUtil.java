@@ -129,7 +129,7 @@ public class TemperatureUtil {
      * @updateTime 15:15  2024/8/5
      */
     public static double convert2Reaumur(double centigrade) {
-        return 4 / 5.0 + (centigrade + 80);
+        return centigrade * 1.25;
     }
 
     /**
@@ -141,7 +141,7 @@ public class TemperatureUtil {
      * @updateTime 15:15  2024/8/5
      */
     public static double convert2centigrade(double reaumur) {
-        return reaumur * 5 / 4.0 - 80;
+        return reaumur * 0.8;
     }
 
     /**
