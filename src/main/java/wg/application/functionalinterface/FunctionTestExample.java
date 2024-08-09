@@ -7,7 +7,7 @@ public class FunctionTestExample {
     /************************************************************************
      * @author: wg
      * @description:
-     * 在上面的示例中，我们首先定义了一个FunctionTest接口实例toUpperCaseFunction，用于将字符串转换为大写。然后我们使用toUpperCaseFunction实例将输入字符串"hello"转换为大写，结果为"HELLO"。
+     * 示例中，我们首先定义了一个FunctionTest接口实例toUpperCaseFunction，用于将字符串转换为大写。然后我们使用toUpperCaseFunction实例将输入字符串"hello"转换为大写，结果为"HELLO"。
      * 接下来，我们定义了一个Function接口实例reverseFunction，用于将字符串进行反转。然后我们使用toUpperCaseFunction的compose方法将toUpperCaseFunction和reverseFunction组合成一个新的函数composedFunction。这个新的函数首先将输入字符串转换为大写，然后再将结果进行反转。
      * 最后，我们使用组合后的函数composedFunction处理输入字符串"hello"，并得到最终的结果"OLLEH"，即先将字符串转换为大写"HELLO"，再将结果进行反转。
      * @params:

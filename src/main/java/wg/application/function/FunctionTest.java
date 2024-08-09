@@ -3,6 +3,7 @@ package wg.application.function;
 import wg.application.controller.Test;
 
 import javax.annotation.Resource;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /************************************************************************
@@ -33,6 +34,9 @@ public class FunctionTest {
 
         boolean hello = myFunction.test("hello", 3);
         System.out.println(hello);
+
+        Double apply = superficialVelocity().apply(1d, 2d);
+        System.out.println("apply = " + apply);
     }
 
     private static void change(String s, Function<String, Integer> function) {
@@ -43,5 +47,15 @@ public class FunctionTest {
     private static void test() {
         Test test1 = new Test();
         test1.streamTest();
+    }
+
+    /**
+     * @author wg
+     * @description 由两个变量 算结果
+     * @createTime 17:33  2024/8/8
+     * @updateTime 17:33  2024/8/8
+     */
+    public static BiFunction<Double, Double, Double> superficialVelocity() {
+        return (fluidVolumeFlow, crossSectionalArea) -> fluidVolumeFlow / crossSectionalArea;
     }
 }
