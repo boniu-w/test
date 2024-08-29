@@ -61,7 +61,7 @@ public class LunarTest {
         System.out.println(lunar.toFullString());
         List<String> dayXiongSha = lunar.getDayXiongSha();
         for (String xs : dayXiongSha) {
-            System.out.println("今日凶煞: " + xs);
+            System.out.println("那日凶煞: " + xs);
         }
     }
 }

@@ -46,6 +46,18 @@ public class MathTest {
         double i2 = 3;
         double v = i1 / i2;
         System.out.println("v = " + v); // v = 3.3333333333333335
+
+        Integer integer = new Integer(798791);
+        int aaa = 798791;
+        boolean b1 = integer == aaa;
+        System.out.println("integer == aaa " + b1); // true
+
+        Integer integer1 = new Integer(798791);
+        boolean b2 = integer == integer1;
+        System.out.println("b2 = " + b2); // false
+
+        int i3 = new BigDecimal("0.96").intValue();
+        System.out.println("0.96 的 intvalue = " + i3); // 0
     }
 
     /************************************************************************

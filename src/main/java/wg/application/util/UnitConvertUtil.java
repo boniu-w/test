@@ -64,12 +64,27 @@ public class UnitConvertUtil {
         return psi / 145.037;
     }
 
+    /**
+     * @param inch 英寸
+     * @return 毫米
+     * @author wg
+     * @description 英寸 -> mm
+     * @createTime 10:27  2024/8/6
+     * @updateTime 10:27  2024/8/6
+     */
+    public static double tomm(double inch) {
+        return inch * 25.4;
+    }
+
     public static void main(String[] args) {
         double v = celsius2fahrenheit(25);
         System.out.println("v = " + v); // 77
 
         double v1 = fahrenheit2celsius(77);
         System.out.println("v1 = " + v1); // 25
+
+        double tomm = tomm(12);
+        System.out.println("tomm = " + tomm);
     }
 
     public void test(){}

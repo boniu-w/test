@@ -141,5 +141,8 @@ public class DateTest {
         LocalDate localDate = DateUtil.toLocalDate(dateStr, "yyyy/MM/dd");
         long between = ChronoUnit.YEARS.between(localDate, now);
         System.out.println("between = " + between);
+
+        long between1 = ChronoUnit.DAYS.between(localDate, now);
+        System.out.println("相隔天数 = " + between1);
     }
 }
