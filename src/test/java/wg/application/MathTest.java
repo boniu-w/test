@@ -17,6 +17,23 @@ import java.util.Objects;
 public class MathTest {
 
     @Test
+    public void test11111() {
+        double v1 = Math.round(9.233317949991231E-5 * 10000) / 10000d;
+        System.out.println("v1 = " + v1);
+
+        Math.log(33);
+
+        double kp0 = 209.2;
+        double kp1 = 226;
+        double e0 = -7.49;
+        double e1 = -8.93;
+
+        double v = (e1 - e0) / (kp1 - kp0);
+        double atan = Math.atan(v);
+        System.out.println("atan = " + atan); // -0.08550529367820456
+    }
+
+    @Test
     public void test() {
         double a = 0;
         double b = 0.0;

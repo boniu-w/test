@@ -56,6 +56,25 @@ public class ObjectTest {
 
         // 总结: java 的 引用传递
         // ↑↑*******************  <code>  end  *******************↑↑
+
+        // ↓↓*******************  <基础类型的值传递> start  *******************↓↓
+        int a = 1000;
+        int b = a;
+        a = 2000;
+        System.out.println("b = " + b); // 1000
+
+        Integer aa = 1000;
+        Integer bb = aa;
+        aa = 2000;
+        System.out.println("bb = " + bb); // 1000
+
+        Integer aaa = new Integer(1000);
+        Integer integer = Integer.getInteger("myapp.maxConnections", 10); // 获取系统属性
+        System.out.println("integer = " + integer);
+        Integer bbb = aaa;
+        aaa = 2000;
+        System.out.println("bbb = " + bbb); // 1000
+        // ↑↑*******************  <基础类型的值传递>  end  *******************↑↑
     }
 
     /**

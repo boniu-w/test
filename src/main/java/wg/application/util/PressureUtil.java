@@ -115,6 +115,40 @@ public class PressureUtil {
         return psi / 145.037;
     }
 
+    /**
+     * @author wg
+     * @description Bar->Pa
+     * @createTime 11:08  2024/9/4
+     * @updateTime 11:08  2024/9/4
+     */
+    public static double bar2Pa(double bar) {
+        return bar * 1E5;
+    }
+
+    /**
+     * @param pa 帕
+     * @return Bar
+     * @author wg
+     * @description Pa -> Bar
+     * @createTime 11:18  2024/9/4
+     * @updateTime 11:18  2024/9/4
+     */
+    public static double pa2Bar(double pa) {
+        return pa / 1E5;
+    }
+
+    /**
+     * @param mpa 兆帕
+     * @return bar
+     * @author wg
+     * @description MPa->Bar
+     * @createTime 11:16  2024/9/4
+     * @updateTime 11:16  2024/9/4
+     */
+    public static double mPa2Bar(double mpa) {
+        return mpa * 10d;
+    }
+
     public static void main(String[] args) {
         double _Pin = 6 * Math.pow(10, 6);
         double rou = 800;

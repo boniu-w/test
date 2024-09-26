@@ -607,4 +607,32 @@ public class ListTest {
             }
         }
     }
+
+    @Test
+    public void testForeachUpdateData(){
+        User xiao = new User();
+        xiao.setName("xiao");
+        xiao.setBirthday(LocalDateTime.now());
+
+        User zhong = new User();
+        zhong.setName("zhong");
+        zhong.setBirthday(LocalDateTime.now().plus(200, ChronoUnit.SECONDS));
+
+        User da = new User();
+        da.setName("da");
+        da.setBirthday(LocalDateTime.now().plus(2000, ChronoUnit.SECONDS));
+
+        User[] users = new User[3];
+        users[0] = xiao;
+        users[1] = zhong;
+        users[2] = da;
+
+        List<User> list = Arrays.asList(users);
+        for (User user : list) {
+            user.setName("1");
+
+        }
+
+        System.out.println("list = " + list);
+    }
 }
