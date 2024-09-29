@@ -1,5 +1,7 @@
 package wg.application.test;
 
+import wg.application.entity.User;
+
 /************************************************************************
  * author wg
  * description Test00 
@@ -41,5 +43,36 @@ public class Test00 {
         double c = 0d;
         double speed = speed(a, b, c);
         System.out.println("speed = " + speed);
+
+        testTransfer();
+    }
+
+    public static void testTransfer() {
+        String a = "";
+
+        User user = new User();
+        user.setName(a);
+
+        setA(a, user);
+
+        System.out.println("a = " + a); // a =""
+        System.out.println("user = " + user); // user = User{id=null, name='111', age=null, birthday=null, gender='null', wealth=null, createTime=null, updateTime=null}
+
+        String b= new String("");
+        setA(b, user);
+        System.out.println("b = " + b); // b = ""
+
+        setAA(b, user);
+        System.out.println("b = " + b); // b =""
+    }
+
+    public static void setA(String a, User user) {
+        a = "111";
+        user.setName(a);
+    }
+
+    public static void setAA(String a, User user) {
+        a = new String("111");
+        user.setName(a);
     }
 }
