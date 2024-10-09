@@ -2,6 +2,7 @@ package wg.application.util;
 
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
+import wg.application.entity.User;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -212,5 +213,31 @@ public class CollectionUtil {
      ************************************************************************/
     public static Collection sub(Collection list1, Collection list2) {
         return CollectionUtils.subtract(list1, list2);
+    }
+
+
+    /**
+     * @author wg
+     * @description 按年龄分组, 但保持原先的顺序
+     * @param
+     * @return
+     * @createTime 17:15  2024/9/30
+     * @updateTime 17:15  2024/9/30
+     */
+    public static List<List<User>> splitByAgeStream(List<User> users) {
+        if (users == null || users.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return users.stream()
+                .reduce(new ArrayList<List<User>>(), (result, user) -> {
+                    if (result.isEmpty() || !result.get(result.size() - 1).get(0).getAge().equals(user.getAge())) {
+                        result.add(new ArrayList<>());
+                    }
+                    result.get(result.size() - 1).add(user);
+                    return result;
+                }, (result1, result2) -> {
+                    throw new UnsupportedOperationException("Parallel processing not supported");
+                });
     }
 }

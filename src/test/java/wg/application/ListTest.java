@@ -4,17 +4,14 @@ import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 import wg.application.entity.Student;
 import wg.application.entity.User;
 import wg.application.util.CollectionUtil;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /************************************************************************
  * @author: wg
@@ -530,7 +527,7 @@ public class ListTest {
                 .filter(e -> e.getBirthday() != null)
                 .min(Comparator.comparing(User::getBirthday));
 
-        if (maxed.isPresent()){
+        if (maxed.isPresent()) {
             User user = maxed.get();
 
             String name = user.getName();
@@ -597,7 +594,7 @@ public class ListTest {
         for (int i = 0; i < 10; i++) {
             if (user.getId() != null && nextId.equals(user.getId())) {
                 System.out.println("nextId = " + nextId);
-                user.setId((long) i+1);
+                user.setId((long) i + 1);
             } else {
                 user.setId((long) i);
                 user.setName("wg");
@@ -609,7 +606,7 @@ public class ListTest {
     }
 
     @Test
-    public void testForeachUpdateData(){
+    public void testForeachUpdateData() {
         User xiao = new User();
         xiao.setName("xiao");
         xiao.setBirthday(LocalDateTime.now());
@@ -634,5 +631,78 @@ public class ListTest {
         }
 
         System.out.println("list = " + list);
+    }
+
+    /**
+     * @param
+     * @return
+     * @author wg
+     * @description 分组, 但保持原先的顺序
+     * @createTime 16:56  2024/9/30
+     * @updateTime 16:56  2024/9/30
+     */
+    @Test
+    public void testGroup1() {
+        // ↓↓*******************  <初始化list> start  *******************↓↓
+        List<User> list = new ArrayList<>();
+        User currentUser = null;
+        int j = 0;
+        for (int i = 1; i < 101; i++) {
+            currentUser = new User();
+            currentUser.setName(i + "");
+            currentUser.setAge(j);
+            list.add(currentUser);
+
+            if (i / 10 >= j) {
+                j++;
+            }
+
+        }
+        System.out.println("list = " + list);
+        // ↑↑*******************  <初始化list>  end  *******************↑↑
+
+        List<List<User>> result = new ArrayList<>();
+        List<User> currentGroup = new ArrayList<>();
+        int previousAge = list.get(0).getAge();
+        currentGroup.add(list.get(0));
+
+        for (int i = 1; i < list.size(); i++) {
+            currentUser = list.get(i);
+            Integer currentAge = currentUser.getAge();
+
+            if (currentAge != previousAge) {
+                result.add(currentGroup);
+                currentGroup = new ArrayList<>();
+            }
+
+            currentGroup.add(currentUser);
+            previousAge = currentAge;
+        }
+
+        result.add(currentGroup);
+        System.out.println("result = " + result);
+    }
+
+    @Test
+    public void testGroup2(){
+        // ↓↓*******************  <初始化list> start  *******************↓↓
+        List<User> list = new ArrayList<>();
+        User currentUser = null;
+        int j = 0;
+        for (int i = 1; i < 101; i++) {
+            currentUser = new User();
+            currentUser.setName(i + "");
+            currentUser.setAge(j);
+            list.add(currentUser);
+
+            if (i / 10 >= j) {
+                j++;
+            }
+        }
+        System.out.println("list = " + list);
+        // ↑↑*******************  <初始化list>  end  *******************↑↑
+
+        List<List<User>> groupedUsers = CollectionUtil.splitByAgeStream(list);
+        System.out.println("groupedUsers = " + groupedUsers);
     }
 }

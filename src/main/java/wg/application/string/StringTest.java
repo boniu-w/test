@@ -18,6 +18,8 @@ public class StringTest {
         System.out.println("---------------------");
 
         testBit();
+
+        test();
     }
 
     public static void testBit() {
@@ -70,6 +72,16 @@ public class StringTest {
         System.out.println("第几次出现的位置: " + i1);
 
         return "";
+    }
+
+    public static void test() {
+        String s = "";
+        change(s);
+        System.out.println("s = " + s); // 没变 还是空串
+    }
+
+    public static void change(String a) {
+        a = "111";
     }
 
 }
