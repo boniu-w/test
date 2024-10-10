@@ -17,6 +17,24 @@ public class TemperaturePressureZone {
             this.label = label;
         }
 
+        /**
+         * @author wg
+         * @description 射线法就是做一条从该点出发的射线，当穿过区域边界的次数为偶数时该点在区域外，如果是奇数则在区域内：
+         * (yi > pressure) != (yj > pressure)
+         * 这一条件判断多边形的边是否跨过了点 (temperature, pressure) 的水平线，即这条边的两个端点的 y 坐标分别位于待测点的上方和下方。
+         * 如果跨越了，说明射线可能与这条边相交
+         * temperature < (xj - xi) * (pressure - yi) / (yj - yi) + xi
+         * 这是用线性插值计算射线与多边形边相交时的 x 坐标，并判断是否在待测点的右侧（即射线的方向）。这里的公式计算的是：在给定的 pressure（即待测点的 y 坐标）下，
+         * 边与水平线相交时的 x 坐标。如果这个 x 坐标大于 temperature，说明射线与边相交。
+         * if (intersect) {
+         *   inside = !inside;
+         * }
+         * 每当射线与多边形的一条边相交时，inside 状态会被取反（即从 false 变为 true，或从 true 变为 false）。射线相交的次数决定了点是否在多边形内：
+         * 如果相交次数是奇数次，点位于多边形内部。
+         * 如果相交次数是偶数次，点位于多边形外部。
+         * @createTime 9:41  2024/10/10
+         * @updateTime 9:41  2024/10/10
+         */
         boolean contains(double temperature, double pressure) {
             if (temperature == 0 && pressure == 0) {
                 return true;
