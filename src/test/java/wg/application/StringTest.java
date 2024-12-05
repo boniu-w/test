@@ -193,10 +193,10 @@ public class StringTest {
         System.out.println(unicode); // \u007a\u0075\u006a\u0069\u0065
 
         String decodeUnicode = StringUtil.decodeUnicode("\\u914D\\u7F6E");
-        System.out.println(decodeUnicode);
+        System.out.println(decodeUnicode); // 配置
 
         String s = StringUtil.decodeUnicode2(unicode);
-        System.out.println(s);
+        System.out.println(s); // zujie
     }
 
     @Test
@@ -299,6 +299,14 @@ public class StringTest {
         String b = "我";
         int i = b.codePointAt(0); // 会得到“我”字的Unicode编码
         System.out.println("i = " + i); // 25105
+
+        String t = "2024年";
+        String[] s = t.split("年");
+        System.out.println("Arrays.asList(s) = " + Arrays.asList(s)); // Arrays.asList(s) = [2024]
+
+        String t1 = "2024";
+        String[] s1 = t1.split("年");
+        System.out.println("Arrays.asList(s1) = " + Arrays.asList(s1)); // Arrays.asList(s) = [2024]
     }
 
     /************************************************************************
@@ -337,15 +345,15 @@ public class StringTest {
         System.out.println(str); // +8 8 -8 -8
         //-的用法
         str = String.format("左对齐：%-6d", 8);
-        System.out.println(str); // 8
+        System.out.println(str); // "8     "
         //0的用法
         str = String.format("缺位补零：%06d", 8);
         System.out.println(str); // 000008
         //' '空格的用法
         str = String.format("缺位补空格：% 6d", 8);
-        System.out.println(str); //      8
+        System.out.println(str); // "      8"
         str = String.format("缺位补空格：% 6d", -8);
-        System.out.println(str); //     -8
+        System.out.println(str); // "     -8"
         //,的用法
         str = String.format("数字分组：%,d", 123456789);
         System.out.println(str); // 123,456,789
@@ -851,5 +859,12 @@ public class StringTest {
             System.out.println(3);
         }
         System.out.println(4);
+    }
+
+    @Test
+    public void humpString() {
+        String a = "internal_detection_wall_thickness_threshold";
+        String humpString = StringUtil.getHumpString(a);
+        System.out.println("humpString = " + humpString);
     }
 }

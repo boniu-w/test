@@ -1,5 +1,7 @@
 package wg.application;
 
+import wg.application.util.DateUtil;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -11,6 +13,15 @@ public class LocalDateTimeWg {
     public static void main(String[] args) {
         test();
         // contrastDate();
+        long currentTimeMillis = System.currentTimeMillis();
+        System.out.println("currentTimeMillis = " + currentTimeMillis); // 1730082386158
+        Instant instant = Instant.ofEpochMilli(currentTimeMillis);
+        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.systemDefault());
+        LocalDateTime localDateTime = zonedDateTime.toLocalDateTime();
+        System.out.println("localDateTime = " + localDateTime); // 2024-10-28T10:26:26.158
+
+        LocalDateTime localDateTime1 = DateUtil.resolvingTimestamp(1111l);
+        System.out.println("localDateTime1 = " + localDateTime1); // 1970-01-01T08:00:01.111
     }
 
     /************************************************************************

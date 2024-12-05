@@ -293,6 +293,18 @@ public class DateUtil {
         }
     }
 
+    /**
+     * @author wg
+     * @description 时间戳 -> localdatetime
+     * @createTime 10:27  2024/10/28
+     * @updateTime 10:27  2024/10/28
+     */
+    public static LocalDateTime resolvingTimestamp(long timestamp) {
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.systemDefault());
+        return zonedDateTime.toLocalDateTime();
+    }
+
     public static void main(String[] args) throws ParseException {
        /* String dateString = "Sun Sep 10 08:09:00 CST 2023";
 
