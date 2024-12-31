@@ -18,6 +18,10 @@ public class MathTest {
 
     @Test
     public void test11111() {
+        int wo = 1;
+        int i11 = wo << 1;
+        System.out.println("i11 = " + i11); // 2
+
         double v1 = Math.round(9.233317949991231E-5 * 10000) / 10000d;
         System.out.println("v1 = " + v1);
 

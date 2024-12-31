@@ -24,9 +24,9 @@ public class CollectionUtil {
     /**
      * 获取两个集合的不同元素
      *
-     * @param collmax
-     * @param collmin
-     * @return
+     * @param collmax 大size, 实际并不重要, 方法里会调整
+     * @param collmin 小size
+     * @return Collection<T> 差集
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static <T> Collection<T> getDifferent(Collection<T> collmax, Collection<T> collmin) {

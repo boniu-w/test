@@ -1060,7 +1060,6 @@ public class Test {
     @RequestMapping(value = "/transpose")
     @ResponseBody
     public void transpose() {
-        
         int a = 10;  // 二进制 1010
         
         int i = a << 1;

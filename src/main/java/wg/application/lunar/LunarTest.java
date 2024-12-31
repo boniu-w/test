@@ -37,7 +37,7 @@ public class LunarTest {
 
     public static void getTheDay() {
         // Date date = new Date("2024/2/13");
-        Date date = new Date("2024/2/14");
+        Date date = new Date("1953/6/14");
         Lunar lunar = Lunar.fromDate(date);
         System.out.println(lunar.toFullString());
     }
@@ -50,8 +50,8 @@ public class LunarTest {
         // Solar solar = new Solar(2023, 1, 20, 14, 26, 12);
         // Lunar lunar = solar.getLunar();
         Lunar lunar = Lunar.fromDate(new Date());
-        // ShuJiu shuJiu = lunar.getShuJiu(); // 没入九 shuJiu=null
-        // System.out.println(shuJiu.toFullString());
+        ShuJiu shuJiu = lunar.getShuJiu(); // 没入九 shuJiu=null
+        System.out.println(shuJiu.toFullString());
     }
 
     public static void getPerson() {

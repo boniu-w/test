@@ -83,6 +83,25 @@ public class ListTest {
                 .collect(Collectors.toList());
         System.out.println("collect2差集  " + collect2.size());
         collect2.forEach(System.out::println); // collect2差集.size() ==  1 ; 结论: 可用, 但必须 list2.size() > list1.size() ;
+
+        // ****************************************************************************************************************************** //
+        // 对称差集, 另外的解决方法 CollectionUtil.getDifferentNoDuplicate();
+        List<Integer> list11 = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> list22 = Arrays.asList(4, 5, 6, 7);
+
+        // 找出 list1 和 list2 的对称差集
+        List<Integer> symmetricDifference =
+                list11.stream()
+                        .filter(e -> !list22.contains(e))  // list1 中不在 list2 的元素
+                        .collect(Collectors.toList());
+
+        symmetricDifference.addAll(
+                list22.stream()
+                        .filter(e -> !list11.contains(e))  // list2 中不在 list1 的元素
+                        .collect(Collectors.toList())
+        );
+
+        System.out.println(symmetricDifference); // 输出: [1, 2, 3, 6, 7]
     }
 
     /************************************************************************
@@ -99,9 +118,8 @@ public class ListTest {
         // System.out.println(list.size()); // NullPointerException
 
         System.out.println(ObjectUtils.isEmpty(list)); // true
-        System.out.println(list == null);
-        System.out.println(list != null);
-
+        System.out.println(list == null); // true
+        System.out.println(list != null); // false
     }
 
     /************************************************************************
@@ -125,7 +143,7 @@ public class ListTest {
 
         // 找出 list2 中有, list1 没有的
         Collection<Integer> different = CollectionUtil.getDifferentNoDuplicate(list1, list2);
-        different.forEach(System.out::println);
+        different.forEach(System.out::println); // 2, 3, 5
     }
 
     /************************************************************************
@@ -138,6 +156,7 @@ public class ListTest {
      ************************************************************************/
     @Test
     public void testDiff() {
+        // ↓↓*******************  <code> start  *******************↓↓
         Student s0 = new Student();
         s0.setName("a");
 
@@ -151,7 +170,9 @@ public class ListTest {
         minioList.add(s0);
         minioList.add(s1);
         minioList.add(s2);
+        // ↑↑*******************  <code>  end  *******************↑↑
 
+        // ↓↓*******************  <code> start  *******************↓↓
         Student s3 = new Student();
         s3.setName("a");
 
@@ -169,14 +190,14 @@ public class ListTest {
         frontList.add(s4);
         frontList.add(s5);
         frontList.add(s6);
+        // ↑↑*******************  <code>  end  *******************↑↑
+
 
         List<Student> redundant = minioList.stream()
                 .filter(student -> !frontList.stream().map(Student::getName).collect(Collectors.toList()).contains(student.getName()))
                 .collect(Collectors.toList());
 
-
-        redundant.forEach(System.out::println);
-
+        redundant.forEach(System.out::println); // Student{name='c', age=null, id=null, sex=null, birthday='null'}
     }
 
     @Test
@@ -190,7 +211,7 @@ public class ListTest {
 
         BeanUtil.copyProperties(student, user);
 
-        System.out.println(user);
+        System.out.println(user); // User{id=11111, name='null', age=4, birthday=null, gender='null', wealth=null, createTime=null, updateTime=null}
     }
 
     /************************************************************************
@@ -209,28 +230,27 @@ public class ListTest {
 
     }
 
+    /**
+     * @author wg
+     * @description 找 相同部分
+     * @param
+     * @return
+     * @createTime 17:02  2024/12/11
+     * @updateTime 17:02  2024/12/11
+     */
     @Test
     public void testSame() {
         // 集合一
-
         List<String> first = new ArrayList<>();
-
         first.add("jim");
-
         first.add("tom");
-
         first.add("jack");
 
-//集合二
-
+        //集合二
         List<String> second = new ArrayList<>();
-
         second.add("jack");
-
         second.add("happy");
-
         second.add("sun");
-
         second.add("good");
 
         // Collection exists=new ArrayList(second);
@@ -247,7 +267,7 @@ public class ListTest {
 
         Object[] objects = CollectionUtil.getSame(first, second).toArray();
         List<String> collect = new ArrayList<>(CollectionUtil.getSame(first, second));
-        System.out.println(objects);
+        System.out.println(collect); // [jack]
     }
 
     /**
@@ -271,7 +291,7 @@ public class ListTest {
         list1.clear();
 
         Map<Integer, List<Student>> ageMap = list1.stream().collect(Collectors.groupingBy(Student::getAge));
-        System.out.println(ageMap);
+        System.out.println(ageMap); // {}
     }
 
     /************************************************************************
@@ -383,9 +403,8 @@ public class ListTest {
 
         // ↓↓******************* start <Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组> *******************↓↓
         str[0] = "79";
-        System.out.println(list);
+        System.out.println(list); // [79, hao]
         // ↑↑******************* end  <Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组>  *******************↑↑
-
     }
 
     @Test
@@ -684,7 +703,7 @@ public class ListTest {
     }
 
     @Test
-    public void testGroup2(){
+    public void testGroup2() {
         // ↓↓*******************  <初始化list> start  *******************↓↓
         List<User> list = new ArrayList<>();
         User currentUser = null;
