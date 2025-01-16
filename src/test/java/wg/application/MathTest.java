@@ -15,9 +15,12 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class MathTest {
+    long aa;
 
     @Test
     public void test11111() {
+        System.out.println("aa = " + aa); // long 型的初值也是0
+
         int wo = 1;
         int i11 = wo << 1;
         System.out.println("i11 = " + i11); // 2

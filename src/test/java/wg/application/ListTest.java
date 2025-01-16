@@ -231,10 +231,10 @@ public class ListTest {
     }
 
     /**
-     * @author wg
-     * @description 找 相同部分
      * @param
      * @return
+     * @author wg
+     * @description 找 相同部分
      * @createTime 17:02  2024/12/11
      * @updateTime 17:02  2024/12/11
      */
@@ -296,7 +296,7 @@ public class ListTest {
 
     /************************************************************************
      * @author: wg
-     * @description: flatMap: 把二维list 转成 一维 的 (把几个小的list转换到一个大的list)
+     * @description: flatMap: 把二维list 转成 一维 的 (把几个小的list转换到一个大的list) 扁平化
      * @params:
      * @return:
      * @createTime: 17:09  2022/6/7
@@ -724,4 +724,27 @@ public class ListTest {
         List<List<User>> groupedUsers = CollectionUtil.splitByAgeStream(list);
         System.out.println("groupedUsers = " + groupedUsers);
     }
+
+    /**
+     * @author wg
+     * @description 复杂排序
+     * @createTime 10:58  2025/1/16
+     * @updateTime 10:58  2025/1/16
+     */
+    @Test
+    public void sorted() {
+        // subseaPipelineDTOList = subseaPipelineDTOList.stream()
+        //         .sorted(Comparator.comparing(this::getFirstCreateTime).reversed())
+        //         .toList();
+        //
+    }
+
+    // private LocalDateTime getFirstCreateTime(SubseaPipelineDTO subseaPipelineDTO) {
+    //     return Optional.ofNullable(subseaPipelineDTO.getProbeHistoryDTOList())
+    //             .flatMap(list -> list.stream()
+    //                     .filter(e -> e.getCreateTime() != null)
+    //                     .max(Comparator.comparing(ProbeHistoryDTO::getCreateTime)))
+    //             .map(ProbeHistoryDTO::getCreateTime)
+    //             .orElse(LocalDateTime.parse("1900-01-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+    // }
 }

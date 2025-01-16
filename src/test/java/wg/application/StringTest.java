@@ -33,6 +33,36 @@ import java.util.stream.Collectors;
 @SpringBootTest
 public class StringTest {
 
+    /**
+     * @author wg
+     * @description 测试if没有大括号会怎样
+     * @createTime 10:55  2025/1/10
+     * @updateTime 10:55  2025/1/10
+     */
+    @Test
+    public void testDaKuoHao() {
+        // int a = 11;
+        // int b = 2;
+        // if (a == 1)
+        //     System.out.println(a);
+        // if (b == 2) {
+        //     System.out.println(a);
+        // } else {
+        //     System.out.println(10);
+        // }
+        // System.out.println(b);
+
+        int a = 11;
+        int b = 2;
+        if (a == 11)
+            if (b == 22)
+                System.out.println(a);
+            else
+                System.out.println(10);
+        System.out.println(b);
+        System.out.println(b);
+    }
+
     /*****************************************************
      * @params:
      * @description: (String)、toString、String.valueOf 的区别
@@ -41,6 +71,12 @@ public class StringTest {
      *****************************************************/
     @Test
     public void test1() {
+        String aaa="2024";
+        String substring = aaa.substring(0, 3);
+        System.out.println("substring = " + substring); // 202
+        String substring1 = aaa.substring(0, 4);
+        BigDecimal bigDecimal = new BigDecimal(substring1);
+        System.out.println("bigDecimal = " + bigDecimal.intValue());
 
         Object s = null;
 
