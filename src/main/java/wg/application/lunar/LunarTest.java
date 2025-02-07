@@ -1,9 +1,6 @@
 package wg.application.lunar;
 
-import com.nlf.calendar.Fu;
-import com.nlf.calendar.Lunar;
-import com.nlf.calendar.ShuJiu;
-import com.nlf.calendar.Solar;
+import com.nlf.calendar.*;
 import com.nlf.calendar.util.LunarUtil;
 
 import java.util.Date;
@@ -56,6 +53,10 @@ public class LunarTest {
 
     public static void getPerson() {
         Solar solar = new Solar(1985, 7, 7, 20, 26, 12);
+        // Solar solar = new Solar(1984, 7, 7, 20, 26, 12);
+        // Solar solar = new Solar(2022, 3, 13, 13, 38, 12); // 王一迪
+        // Solar solar = new Solar(2016, 3, 25, 13, 38, 12); // 王一凡
+
         Lunar lunar = solar.getLunar();
 
         System.out.println(lunar.toFullString());
@@ -63,5 +64,17 @@ public class LunarTest {
         for (String xs : dayXiongSha) {
             System.out.println("那日凶煞: " + xs);
         }
+
+        EightChar eightChar = lunar.getEightChar();
+        System.out.println("eightChar = " + eightChar);
+
+        List<String> baZiWuXing = lunar.getBaZiWuXing();
+        System.out.println("baZiWuXing = " + baZiWuXing);
+
+        List<String> baZiShiShenGan = lunar.getBaZiShiShenGan();
+        System.out.println("baZiShiShenGan = " + baZiShiShenGan);
+
+        List<String> baZiShiShenZhi = lunar.getBaZiShiShenZhi();
+        System.out.println("baZiShiShenZhi = " + baZiShiShenZhi);
     }
 }

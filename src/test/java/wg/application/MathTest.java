@@ -19,6 +19,19 @@ public class MathTest {
 
     @Test
     public void test11111() {
+        // 测试 i++
+        int m = 0;
+        for (int i = m++; i < 3; i++) {
+            System.out.println("i = " + i); // 0,1,2
+            System.out.println("m = " + m); // 1, 1, 1
+        }
+        System.out.println("循环后 m = " + m); // 1
+        m = 0;
+        // 测试 ++i;
+        for (int i = ++m; i < 3; i++) {
+            System.out.println("i = " + i); // 1,2
+        }
+
         System.out.println("aa = " + aa); // long 型的初值也是0
 
         int wo = 1;
