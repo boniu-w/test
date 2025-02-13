@@ -313,7 +313,7 @@ public class DateUtil {
         Date parse = parseToDate(dateString, pattern, Locale.US);
         System.out.println("parse = " + parse);
 */
-
+        System.out.println("localDateTime.toString() = " + DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now()));
         System.out.println("LocalDateTime.now() : " + LocalDateTime.now());
         System.out.println("new Date() : " + new Date());
 
@@ -329,6 +329,11 @@ public class DateUtil {
         LocalDateTime localDateTime = LocalDateTime.parse(dateString, formatter);
 
         System.out.println("Converted LocalDateTime: " + localDateTime);
+
     }
 
+    public static String toString(LocalDateTime localDateTime) {
+
+        return localDateTime.toString();
+    }
 }
