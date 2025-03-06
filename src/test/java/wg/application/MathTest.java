@@ -829,10 +829,31 @@ public class MathTest {
         System.out.println("a = " + a);
     }
 
+    /**
+     * @author wg
+     * @description bigdecimal 的equals
+     * BigDecimal 比较时是基于其值和精度的
+     * map.get() 是基于 equals
+     * @param
+     * @return
+     * @createTime 14:12  2025/3/6
+     * @updateTime 14:12  2025/3/6
+     */
     @Test
     public void test11() {
         double i = 1E5;
         System.out.println("i = " + i);
+
+        BigDecimal bigDecimal = new BigDecimal("4.1000");
+        BigDecimal bigDecimal1 = new BigDecimal("4.1");
+        int i1 = bigDecimal.compareTo(bigDecimal1);
+        System.out.println("i1 = " + i1);                   // 0
+        boolean equals = bigDecimal.equals(bigDecimal1);
+        System.out.println("equals = " + equals);           // false
+
+        BigDecimal bigDecimal2 = bigDecimal.stripTrailingZeros();
+        System.out.println("bigDecimal2 = " + bigDecimal2); // 4.1
+        System.out.println("bigDecimal = " + bigDecimal);   // 4.1000
     }
 }
 
