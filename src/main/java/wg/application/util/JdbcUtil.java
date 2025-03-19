@@ -8,7 +8,7 @@ import java.sql.*;
 
 @Component
 public class JdbcUtil {
-    
+
     @Value("${spring.datasource.driver-class-name}")
     String driver;
     @Value("${spring.datasource.url}")
@@ -17,20 +17,20 @@ public class JdbcUtil {
     String user;
     @Value("${spring.datasource.password}")
     String password;
-    
+
     private static JdbcUtil jdbcUtil;
-    
+
     public static Connection conn;
     public static PreparedStatement preparedStatement;
     public static ResultSet resultSet;
-    
+
     @PostConstruct
     public void init() {
         System.out.println(">>>>>>>>>>>  jdbc PostConstruct  <<<<<<<<<<<");
         jdbcUtil = this;
         System.out.println("jdbcUtil.password : " + jdbcUtil.password);
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: 先于 @postConstruct 执行
@@ -43,11 +43,11 @@ public class JdbcUtil {
         // System.out.println(jdbcUtil.password); // 异常
         System.out.println(">>>>>>>>>>>  jdbc 静态代码块  <<<<<<<<<<<");
     }
-    
+
     public JdbcUtil() {
         System.out.println(">>>>>>>>>>>  jdbc constructor  <<<<<<<<<<<");
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: Parameter 0 of constructor in wg.application.util.JdbcUtil required a bean of type 'java.lang.String' that could not be found.
@@ -65,7 +65,6 @@ public class JdbcUtil {
     //     this.user = user;
     //     this.password = password;
     // }
-    
     public static void closeConn() throws SQLException {
         if (conn != null) {
             resultSet.close();
@@ -76,7 +75,7 @@ public class JdbcUtil {
             System.out.println("conn 关闭完成");
         }
     }
-    
+
     /************************************************************************
      * @description: jdbc 查询
      * @author: wg
@@ -84,20 +83,22 @@ public class JdbcUtil {
      * @params:
      * @return:
      ************************************************************************/
-    public static ResultSet jdbcQuery(String sql) {
+    public static ResultSet jdbcQuery(String sql) throws SQLException {
         try {
             Class.forName(jdbcUtil.driver);
             conn = DriverManager.getConnection(jdbcUtil.url, jdbcUtil.user, jdbcUtil.password);
             preparedStatement = conn.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
-            
+
             return resultSet;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             return null;
+        } finally {
+            closeConn();
         }
     }
-    
+
     /************************************************************************
      * @author: wg
      * @description: try-with-resources 结构, 相当于 try-catch-finally 会 自动关闭资源
@@ -112,9 +113,9 @@ public class JdbcUtil {
         try (Connection conn = DriverManager.getConnection(jdbcUtil.url, jdbcUtil.user, jdbcUtil.password);
              PreparedStatement preparedStatement = conn.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
-            
+
             Class<?> aClass = Class.forName(jdbcUtil.driver);
-            
+
             return resultSet;
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
