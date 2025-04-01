@@ -13,6 +13,10 @@ public class ArrayTest {
 
     @Test
     public void test() {
+        double[] gasMolarRatios = new double[0];
+        double gasMolarRatio = gasMolarRatios[0]; // ArrayIndexOutOfBoundsException
+        System.out.println("gasMolarRatio = " + gasMolarRatio);
+
         String[] types = {"jpg", "txt", "xlsx", "png"};
         List<String> collect = Arrays.stream(types).collect(Collectors.toList());
 
