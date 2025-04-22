@@ -2,13 +2,17 @@ package wg.application;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import wg.application.entity.User;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /************************************************************************
  * author: wg
@@ -82,5 +86,80 @@ public class StreamTest {
                 .collect(Collectors.toList());
 
         System.out.println("Duplicate elements: " + duplicates);
+    }
+
+    /**
+     * @author wg
+     * @description 测试 peek
+     * @param
+     * @return
+     * @createTime 15:05  2025/4/22
+     * @updateTime 15:05  2025/4/22
+     */
+    @Test
+    public void testPeek(){
+        List<Integer> integers = new ArrayList<>();
+        integers.add(1);
+        integers.add(1);
+        integers.add(1);
+        integers.add(1);
+        integers = integers.stream()
+                .peek(e -> {
+                    if (e == 1) {
+                        e = 100;
+                    }
+                    return;
+                })
+                .collect(Collectors.toList());
+
+        // 修改不成功
+        for (Integer integer : integers) {
+            System.out.println("integer = " + integer);
+        }
+
+        for (Integer e : integers) {
+            if (e == 1) {
+                e = 100;
+            }
+        }
+        // 修改不成功
+        for (Integer integer : integers) {
+            System.out.println("integer = " + integer);
+        }
+
+
+        User xiao1 = new User();
+        xiao1.setName("xiao1");
+        xiao1.setBirthday(LocalDateTime.now());
+
+        User xiao = new User();
+        xiao.setName("xiao");
+        xiao.setBirthday(LocalDateTime.now());
+
+        User zhong = new User();
+        zhong.setName("zhong");
+        zhong.setBirthday(LocalDateTime.now().plus(200, ChronoUnit.SECONDS));
+
+        User da = new User();
+        da.setName("da");
+        da.setBirthday(LocalDateTime.now().plus(2000, ChronoUnit.SECONDS));
+
+        // 修改成功
+        List<User> users = new ArrayList<>();
+        users.add(xiao);
+        users.add(xiao1);
+        users.add(zhong);
+        users.add(da);
+        users= users.stream()
+                .peek(e->{
+                    if (e.getName().equals("da")){
+                        e.setName("111111111111");
+                    }
+                })
+                .collect(Collectors.toList());
+
+        for (User user : users) {
+            System.out.println("user.getName() = " + user.getName());
+        }
     }
 }
