@@ -3,6 +3,7 @@ package wg.application.util;
 import org.apache.commons.lang3.StringUtils;
 import wg.application.exception.WgException;
 
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
@@ -548,5 +549,29 @@ public class StringUtil {
             }
         }
         return false;
+    }
+
+    public static boolean isNumber0(String val) {
+        if (val == null || val.isEmpty()) {
+            return false;
+        }
+        // 统一的正则表达式，覆盖所有合法数字格式
+        String regex = "^[+-]?" +
+                // 整数或小数部分
+                "(?:\\d+\\.?\\d*|\\d*\\.?\\d+)" +
+                // 科学计数法部分（可选）
+                "(?:[eE][+-]?\\d+)?$";
+        return Pattern.matches(regex, val);
+    }
+
+    public static void main(String[] args) {
+        String val ="123.";
+        boolean number = isNumber(val);
+        System.out.println("number = " + number);
+        BigDecimal bigDecimal = new BigDecimal(val);
+        System.out.println("bigDecimal = " + bigDecimal);
+
+        boolean number0 = isNumber0(val);
+        System.out.println("number0 = " + number0);
     }
 }
