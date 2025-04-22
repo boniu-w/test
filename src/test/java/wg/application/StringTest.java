@@ -71,7 +71,7 @@ public class StringTest {
      *****************************************************/
     @Test
     public void test1() {
-        String aaa="2024";
+        String aaa = "2024";
         String substring = aaa.substring(0, 3);
         System.out.println("substring = " + substring); // 202
         String substring1 = aaa.substring(0, 4);
@@ -902,5 +902,34 @@ public class StringTest {
         String a = "internal_detection_wall_thickness_threshold";
         String humpString = StringUtil.getHumpString(a);
         System.out.println("humpString = " + humpString);
+    }
+
+    // 图解内存变化
+    // 调用 test0 前：
+    // test.reason → "" (地址 0x100)
+    //
+    // 调用 test0 时：
+    //         test0.reason (拷贝的引用) → "" (地址 0x100)
+    //
+    // 执行 test0.reason = "111" 后：
+    // test0.reason → "111" (地址 0x200)
+    // test.reason 仍然 → "" (地址 0x100)
+    @Test
+    public void test() {
+        String reason = "";
+        test0(reason);
+        System.out.println("reason = " + reason); // ""
+
+        // 可变容器
+        String[] reasonArray = {""};
+        test0Array(reasonArray);
+        System.out.println("reasonArray[0] = " + reasonArray[0]); // 111
+    }
+
+    void test0(String reason) {
+        reason = "111";
+    }
+    void test0Array(String[] reasonArray) {
+        reasonArray[0] = "111";
     }
 }
