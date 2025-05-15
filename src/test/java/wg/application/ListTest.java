@@ -496,6 +496,9 @@ public class ListTest {
     //     return insert;
     // }
 
+
+    static boolean a = true;
+
     /************************************************************************
      * @author: wg
      * @description: 对象list 中, 某个属性最大 的 那个对象,
@@ -553,6 +556,16 @@ public class ListTest {
             System.out.println("name = " + name);
         }
 
+        // Optional 测试
+        zuida.setAge(null);
+        zuida.setStudent(null);
+        Optional.ofNullable(zuida)
+                .map(User::getStudent)
+                .map(Student::getAge)
+                .filter(e -> e == 2)
+                .ifPresent(e -> a = false);
+
+        System.out.println("a = " + a);
     }
 
     /************************************************************************

@@ -18,6 +18,7 @@ import wg.application.util.StringUtil;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -409,6 +410,11 @@ public class StringTest {
         System.out.println(str); // 3.140000 3.1
         str = String.format("<括号用法：%f %<3.1f", 4.2, 9.01);
         System.out.println(str); // 4.200000 4.2
+
+        BigDecimal corrosionRate = new BigDecimal("0.1");
+        String level = "sdf";
+        String format = String.format("腐蚀速率%s是%s腐蚀或以上", corrosionRate, level);
+        System.out.println("format = " + format);
     }
 
     /************************************************************************
@@ -929,7 +935,11 @@ public class StringTest {
     void test0(String reason) {
         reason = "111";
     }
+
     void test0Array(String[] reasonArray) {
         reasonArray[0] = "111";
+        SecureRandom random = new SecureRandom();
+        String algorithm = random.getAlgorithm();
+        System.out.println("algorithm = " + algorithm);
     }
 }

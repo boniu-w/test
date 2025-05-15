@@ -310,4 +310,14 @@ public class User implements Serializable, ObserverMsg {
     public void update(String msg) {
         System.out.println("my friend update the Moments: " + msg);
     }
+
+    Student student;
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 }

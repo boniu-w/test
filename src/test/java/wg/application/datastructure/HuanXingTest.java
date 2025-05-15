@@ -11,7 +11,7 @@ import wg.application.datastructure.huangxingduilie.CircularQueue;
  * @updateTime: 17:25 2022/11/8
  ************************************************************************/
 @SpringBootTest
-public class HuangXingTest {
+public class HuanXingTest {
 
     @Test
     public void test1() {

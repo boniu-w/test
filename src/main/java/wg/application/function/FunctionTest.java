@@ -101,7 +101,7 @@ public class FunctionTest {
         };
 
         /*functionValueAccuracy
-        在创建 BrentSolver 实例时，代码 UnivariateSolver brentSolver = new BrentSolver(1e-10, 1e-14, 1000); 里的参数依次是 absoluteAccuracy（绝对精度）、relativeAccuracy（相对精度）和 functionValueAccuracy（函数值精度）。
+        在创建 BrentSolver 实例时，代码 UnivariateSolver brentSolver = new BrentSolver(1e-10, 1e-14, 1000); 里的参数依次是 relativeAccuracy（相对精度）, absoluteAccuracy（绝对精度）、和 functionValueAccuracy（函数值精度）。
         functionValueAccuracy 指的是求解过程中允许的函数值误差范围。求解器的目标是找到使得函数 f(x) 的值尽可能接近 0 的 x 值。当求解过程中函数值 |f(x)| 小于 functionValueAccuracy 时，就认为找到了一个满足精度要求的根。
         例如，若 functionValueAccuracy 设置为 1e - 14，那么当某次迭代得到的函数值 f(x) 的绝对值小于 1e - 14 时，求解器就会认为找到了一个合适的根，从而停止迭代。它是对求解结果的函数值的一个精度约束，反映了求解结果在函数值层面上与理论根（函数值为 0）的接近程度。
         maxEval
