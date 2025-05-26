@@ -454,6 +454,47 @@ public class StringUtil {
         return false;
     }
 
+    /**
+     * @author wg
+     * @description 错误的, 别用
+     * @createTime 14:41  2025/5/16
+     * @updateTime 14:41  2025/5/16
+     */
+    public static boolean isNumber2(String val) {
+        if (null == val || "".equals(val)) {
+            return false;
+        }
+
+        String rex = "^[+-]?\\d+\\.?\\d*$";
+        boolean numbMatch = Pattern.matches(rex, val);
+        if (numbMatch) {
+            return numbMatch;
+        }
+
+        rex = "^[+-]?\\d+\\.?\\d*[Ee]*[+-]*\\d+$";
+        boolean compile = Pattern.matches(rex, val);
+        if (compile) {
+            return compile;
+        }
+        return false;
+    }
+
+    public static boolean isNumber3(String val) {
+        if (val == null || val.isEmpty()) {
+            return false;
+        }
+
+        // 匹配整数或小数（允许形式如 123, 123.45, .45, 123.）
+        String decimalRegex = "^[+-]?(\\d+\\.?\\d*|\\.\\d+)$";
+        if (Pattern.matches(decimalRegex, val)) {
+            return true;
+        }
+
+        // 匹配科学计数法（必须包含 E/e，且指数部分不能有非法符号）
+        String scientificRegex = "^[+-]?(\\d+\\.?\\d*|\\.\\d+)[eE][+-]?\\d+$";
+        return Pattern.matches(scientificRegex, val);
+    }
+
     public static boolean isNumber(Object val) {
         if (null == val || "".equals(val)) {
             return false;
@@ -564,8 +605,36 @@ public class StringUtil {
         return Pattern.matches(regex, val);
     }
 
+    public static BigDecimal toDecimal(String value) {
+        return StringUtil.isNotBlank(value) && StringUtil.isNumber(value)
+                ? new BigDecimal(value)
+                : null;
+    }
+
+    // 辅助方法：安全地将字符串转换为Double
+    public static Double toDoubleSafely(String value) {
+        if (StringUtil.isNotBlank(value) && StringUtil.isNumber(value)) {
+            try {
+                return Double.parseDouble(value);
+            } catch (NumberFormatException e) {
+                // 记录日志或处理异常
+                // log.warn("Failed to parse value: {}", value, e);
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public static double toDouble(String str, double defaultValue) {
+        try {
+            return Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
     public static void main(String[] args) {
-        String val ="123.";
+        String val = "123.";
         boolean number = isNumber(val);
         System.out.println("number = " + number);
         BigDecimal bigDecimal = new BigDecimal(val);

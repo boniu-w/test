@@ -162,6 +162,12 @@ public class MathTest {
         double aaa123111 = 0.00001;
         String s2123111 = MathUtil.double2ScientificNotation(aaa123111);
         System.out.println("s2123111 = " + s2123111); // s2123111 = 1.000E-5
+
+        String sdf = "6-58";
+        boolean number1 = StringUtil.isNumber(sdf);   // false
+        boolean number2 = StringUtil.isNumber2(sdf);  // true
+        System.out.println("number1 = " + number1);
+        System.out.println("number2 = " + number2);
     }
 
     @Test
@@ -830,12 +836,12 @@ public class MathTest {
     }
 
     /**
+     * @param
+     * @return
      * @author wg
      * @description bigdecimal 的equals
      * BigDecimal 比较时是基于其值和精度的
      * map.get() 是基于 equals
-     * @param
-     * @return
      * @createTime 14:12  2025/3/6
      * @updateTime 14:12  2025/3/6
      */

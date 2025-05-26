@@ -40,10 +40,9 @@ public class ExceptionTest {
             int i = 2 / 0;
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("mess: "+ e.getMessage());
+            e.printStackTrace();
         }
-
-        System.out.println("test2  ");
     }
 
     public static void main(String[] args) {
