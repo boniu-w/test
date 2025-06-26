@@ -8,6 +8,7 @@ import wg.application.entity.Student;
 import wg.application.entity.User;
 import wg.application.util.CollectionUtil;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -760,4 +761,12 @@ public class ListTest {
     //             .map(ProbeHistoryDTO::getCreateTime)
     //             .orElse(LocalDateTime.parse("1900-01-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     // }
+
+    @Test
+    public void testNonNull(){
+        // BigDecimal[] bigDecimals=null;
+        // List<BigDecimal> bigDecimalList=null;
+        // boolean b = CollectionUtil.allNonNull(bigDecimalList);
+        // System.out.println("b = " + b);
+    }
 }

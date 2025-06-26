@@ -33,7 +33,8 @@ public class JdbcUtil {
 
     /************************************************************************
      * @author: wg
-     * @description: 先于 @postConstruct 执行
+     * @description: 先于 @postConstruct 执行, 先于 构造函数 执行
+     * 执行顺序为: 静态代码块 -> 构造函数 -> @PostConstruct
      * @params:
      * @return:
      * @createTime: 13:17  2023/4/21

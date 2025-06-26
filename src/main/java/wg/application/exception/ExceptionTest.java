@@ -1,5 +1,8 @@
 package wg.application.exception;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ExceptionTest {
 
     /************************************************************************
@@ -40,8 +43,10 @@ public class ExceptionTest {
             int i = 2 / 0;
 
         } catch (Exception e) {
-            System.out.println("mess: "+ e.getMessage());
-            e.printStackTrace();
+            log.error("发生异常", e);
+            // System.out.println("mess: "+ e.getMessage());
+            // System.out.println("e = " + e);
+            // e.printStackTrace();
         }
     }
 

@@ -26,7 +26,7 @@ public class SpringcacheTest {
     UserService userService;
 
     @GetMapping(value = "/list")
-    @Cacheable(cacheNames = {"springcachetest"}, key = "'userlist'", condition = "#user==null || #user.id==null") // 第一次会执行方法体, 然后 存入redis, 之后 再调用就不走方法体, 直接从redis获取
+    @Cacheable(cacheNames = {"springcachetest"}, key = "'userlist'", condition = "@nullCheckerUtils.allFieldsNull(#user)") // 第一次会执行方法体, 然后 存入redis, 之后 再调用就不走方法体, 直接从redis获取
     public Result<Object> list(User user) {
         Result<Object> result = new Result<>();
         try {
@@ -58,7 +58,7 @@ public class SpringcacheTest {
     }
 
     @GetMapping(value = "/removebyid")
-    @CacheEvict(cacheNames = {"springcachetest"}, key = "#id")
+    @CacheEvict(cacheNames = {"springcachetest"}, key = "#id") // 当执行此方法时, getById()这个方法获取的缓存会失效
     public Result<Object> removeById(Long id) {
         Result<Object> result = new Result<>();
         try {

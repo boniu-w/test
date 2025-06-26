@@ -7,6 +7,8 @@ import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import static java.lang.Math.*;
@@ -336,8 +338,8 @@ public class MathUtil {
             }
         }
         if (num < 0.001 || num > 1000) {
-            String str = String.format("%E", num);//获取直接格式化结果
-            str = str.replace("E-0", "E-");//将E-0N处理为E-N
+            String str = String.format("%E", num);// 获取直接格式化结果
+            str = str.replace("E-0", "E-");// 将E-0N处理为E-N
             // 处理结果
             String temp = str.substring(0, str.indexOf("E"));
             // 精确到小数点后3位
@@ -364,8 +366,8 @@ public class MathUtil {
             }
         }
         if (num < 0.001 || num > 1000) {
-            String str = String.format("%E", num);//获取直接格式化结果
-            str = str.replace("E-0", "E-");//将E-0N处理为E-N
+            String str = String.format("%E", num);// 获取直接格式化结果
+            str = str.replace("E-0", "E-");// 将E-0N处理为E-N
             // 处理结果
             String temp = str.substring(0, str.indexOf("E"));
             // 精确到小数点后 scale 位
@@ -450,19 +452,19 @@ public class MathUtil {
      * @updateTime: 16:51  2022/8/22
      ************************************************************************/
     public static void test1() {
-        //由于偶数中只有2是质数，此处直接将2的值进行输出，如下代码中查找质数时，只需考虑奇数即可
+        // 由于偶数中只有2是质数，此处直接将2的值进行输出，如下代码中查找质数时，只需考虑奇数即可
         System.out.print(2 + " ");
         OUT:
-        //1不是质数，2是质数但是已经打印输出，因此循环中i的值从3开始即可，i+=2是因为在循环中我们不再考虑偶数
+        // 1不是质数，2是质数但是已经打印输出，因此循环中i的值从3开始即可，i+=2是因为在循环中我们不再考虑偶数
         for (int i = 3; i <= 1000; i += 2) {
-            //请补充程序判断i是否是质数并打印i，如果是质数按照 System.out.print(i+" "); 格式进行打印
+            // 请补充程序判断i是否是质数并打印i，如果是质数按照 System.out.print(i+" "); 格式进行打印
             for (int j = 2; j < i; j++) {
                 if (i % j == 0) {
-                    //如果i对j求余数等于0说明i不是质数
+                    // 如果i对j求余数等于0说明i不是质数
                     continue OUT;
                 }
             }
-            //说明i是质数
+            // 说明i是质数
             System.out.print(i + " ");
         }
     }
@@ -480,10 +482,10 @@ public class MathUtil {
     }
 
     /**
-     * @author wg
-     * @description qnorm 返回值是给定概率p后的下分位点 用java apache math3 怎么写
      * @param p 给定的概率p，例如，找到累积概率为0.95的下四分位点，例如，找到累积概率为0.95的下四分位点
      * @return quantile 计算下四分位点（或累积概率为p的z值）
+     * @author wg
+     * @description qnorm 返回值是给定概率p后的下分位点 用java apache math3 怎么写
      * @createTime 10:38  2024/6/12
      * @updateTime 10:38  2024/6/12
      */
@@ -494,5 +496,21 @@ public class MathUtil {
         // 计算下四分位点（或累积概率为p的z值）
         double quantile = normalDist.inverseCumulativeProbability(p);
         return quantile;
+    }
+
+    /**
+     * @author wg
+     * @description 对 objcet 设置小数位
+     * @createTime 15:52 2025/6/3
+     * @updateTime 15:52 2025/6/3
+     */
+    public static void round(Supplier<Double> getter, Consumer<Double> setter, int decimalPlaces) {
+        Double value = getter.get();
+        if (value != null) {
+            double scale = Math.pow(10, decimalPlaces);
+            setter.accept(Math.round(value * scale) / scale);
+        } else {
+            setter.accept(null);
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
 import wg.application.entity.User;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -239,5 +240,21 @@ public class CollectionUtil {
                 }, (result1, result2) -> {
                     throw new UnsupportedOperationException("Parallel processing not supported");
                 });
+    }
+
+    /**
+     * @author wg
+     * @description 是否全非null
+     * @createTime 17:27 2025/5/29
+     * @updateTime 17:27 2025/5/29
+     */
+    public static boolean allNonNull(Object ...arg) {
+        for (Object item : arg) {
+            if (item == null) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

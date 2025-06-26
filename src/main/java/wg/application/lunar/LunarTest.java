@@ -12,6 +12,8 @@ public class LunarTest {
         getToday();
         getPerson();
         System.out.println();
+
+        getFu();
         getShuJiu();
         getTheDay();
     }
@@ -49,6 +51,12 @@ public class LunarTest {
         Lunar lunar = Lunar.fromDate(new Date());
         ShuJiu shuJiu = lunar.getShuJiu(); // 没入九 shuJiu=null
         System.out.println(shuJiu.toFullString());
+    }
+
+    public static void getFu(){
+        Lunar lunar = Lunar.fromDate(new Date());
+        Fu fu = lunar.getFu();
+        System.out.println("fu = " + fu);
     }
 
     public static void getPerson() {

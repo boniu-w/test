@@ -383,7 +383,7 @@ public class StringTest {
         //-的用法
         str = String.format("左对齐：%-6d", 8);
         System.out.println(str); // "8     "
-        //0的用法
+        // 0的用法
         str = String.format("缺位补零：%06d", 8);
         System.out.println(str); // 000008
         //' '空格的用法
@@ -581,9 +581,9 @@ public class StringTest {
         user.setWealth(new BigDecimal("-99999.99"));
 
         try {
-            //创建一个ObjectOutputStream输出流
+            // 创建一个ObjectOutputStream输出流
             ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(filePath));
-            //将对象序列化到文件filePath
+            // 将对象序列化到文件filePath
             outStream.writeObject(user);
 
             ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(filePath));
@@ -657,6 +657,12 @@ public class StringTest {
         Pattern pattern = Pattern.compile(regex5);
         Matcher matcher5 = pattern.matcher(s5);
         if (matcher5.find()) System.out.println("s5 = " + s5); // s5 = 20230701
+
+        String now = String.valueOf(LocalDateTime.now());
+        System.out.println("now = " + now);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        LocalDateTime parse = LocalDateTime.parse(now, dateTimeFormatter);
+        System.out.println("parse = " + parse);
     }
 
     @Test
@@ -941,5 +947,17 @@ public class StringTest {
         SecureRandom random = new SecureRandom();
         String algorithm = random.getAlgorithm();
         System.out.println("algorithm = " + algorithm);
+    }
+
+    @Test
+    public void testIsNumber() {
+        String a = " -23";
+        boolean number = StringUtil.isNumber(a);
+
+        System.out.println("number = " + number);   // false
+        System.out.println("StringUtil.isNumber(a.trim()) = " + StringUtil.isNumber(a.trim())); // true
+
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("now.toString() = " + now.toString());
     }
 }
