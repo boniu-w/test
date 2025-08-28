@@ -1,5 +1,9 @@
 package wg.application.algorithm;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.concurrent.ThreadLocalRandom;
 
 /*****************************************
@@ -174,7 +178,7 @@ public class IdWorker {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownHostException, SocketException {
         System.out.println(1 & 4596);
         System.out.println(2 & 4596);
         System.out.println(6 & 4596);
@@ -185,6 +189,18 @@ public class IdWorker {
         for (int i = 0; i < 131; i++) {
             System.out.println(worker.nextId());
         }
+
+        InetAddress localHost = InetAddress.getLocalHost();
+        String hostAddress = InetAddress.getLocalHost().getHostAddress();
+        System.out.println("hostAddress = " + hostAddress);
+        long workerId = (InetAddress.getLocalHost().getHostAddress().hashCode()) % 32;
+        NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localHost);
+        String name = networkInterface.getName();
+        System.out.println("name = " + name);
+        long datacenterId = (NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).hashCode()) % 32;
+
+        System.out.println("workerId = " + workerId);
+        System.out.println("datacenterId = " + datacenterId);
     }
 
 }
