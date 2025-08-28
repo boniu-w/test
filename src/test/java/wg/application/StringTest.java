@@ -993,4 +993,33 @@ public class StringTest {
         System.out.println("binaryString = " + binaryString);
         System.out.println("binaryString2 = " + binaryString2);
     }
+
+    /**
+     * @param
+     * @return
+     * @author wg
+     * @description double -> 二进制字符串
+     * @createTime 15:35 2025/8/28
+     * @updateTime 15:35 2025/8/28
+     */
+    @Test
+    public void doubleToBinary() {
+        double num = -10.25;
+
+        // 转换成 IEEE754 的 long 表示
+        long bits = Double.doubleToLongBits(num);
+
+        // 转换成 64 位二进制字符串
+        String binary = String.format("%64s", Long.toBinaryString(bits))
+                .replace(' ', '0');
+
+        System.out.println("原始数: " + num);
+        System.out.println("Long.toBinaryString(bits) = " + Long.toBinaryString(bits));
+        System.out.println("二进制: " + binary);
+
+        // 分段显示
+        System.out.println("符号位: " + binary.substring(0, 1));
+        System.out.println("指数位: " + binary.substring(1, 12));
+        System.out.println("尾数位: " + binary.substring(12));
+    }
 }

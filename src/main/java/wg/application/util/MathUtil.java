@@ -513,4 +513,21 @@ public class MathUtil {
             setter.accept(null);
         }
     }
+
+    /**
+     * @param
+     * @return
+     * @author wg
+     * @description double -> 二进制字符串
+     * @createTime 15:52 2025/8/28
+     * @updateTime 15:52 2025/8/28
+     */
+    public String doubleToBinary(double num) {
+        // 转换成 IEEE754 的 long 表示
+        long bits = Double.doubleToLongBits(num);
+
+        // 转换成 64 位二进制字符串
+        return String.format("%64s", Long.toBinaryString(bits))
+                .replace(' ', '0');
+    }
 }
