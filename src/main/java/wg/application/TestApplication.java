@@ -63,6 +63,9 @@ public class TestApplication {
         
         Object o = MapUtil.get(ymlFile, "wg.jwt");
         System.out.println("o = " + o);
+
+        Object secret = MapUtil.get(ymlFile, "wg.jwt.secret");
+        System.out.println("wg.jwt.secret = " + secret);
         
         // 读取 spring.redis.host 属性的值
         SpringApplication app = new SpringApplication(TestApplication.class);

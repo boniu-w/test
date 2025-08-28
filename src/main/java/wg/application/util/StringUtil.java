@@ -405,12 +405,18 @@ public class StringUtil {
         return Double.compare(num1, num2) == 0;
     }
 
+    /**
+     * @author wg
+     * @description 全是空白格, 也认定为空
+     * @createTime 14:53 2025/8/20
+     * @updateTime 14:53 2025/8/20
+     */
     public static boolean isBlank(final CharSequence cs) {
-        if (Objects.equals(cs, "null") || Objects.equals(cs, "Null") || Objects.equals(cs, "NULL")) return true;
         int strLen;
         if (cs == null || (strLen = cs.length()) == 0) {
             return true;
         }
+        if (Objects.equals(cs, "null") || Objects.equals(cs, "Null") || Objects.equals(cs, "NULL")) return true;
         for (int i = 0; i < strLen; i++) {
             if (Character.isWhitespace(cs.charAt(i)) == false) {
                 return false;

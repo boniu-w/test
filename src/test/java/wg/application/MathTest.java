@@ -1,6 +1,8 @@
 package wg.application;
 
+import cn.hutool.core.util.NumberUtil;
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 import wg.application.entity.User;
 import wg.application.math.FloatTest;
@@ -126,13 +128,19 @@ public class MathTest {
         System.out.println(v < 0.0001);
 
         boolean isNumber = StringUtil.isNumber("5.63589065441568E-40000");
-        System.out.println("isNumber = " + isNumber); // true double=0
+        System.out.println("isNumber = " + isNumber);               // true double=0
 
         boolean isNumber1 = StringUtil.isNumber("5.63589065441568E+40000");
-        System.out.println("isNumber1 = " + isNumber1); // true double=Infinity
+        System.out.println("isNumber1 = " + isNumber1);             // true double=Infinity
 
         boolean isNumber2 = StringUtil.isNumber("-5.63589065441568E+40000");
-        System.out.println("isNumber2 = " + isNumber2); // true double=-Infinity
+        System.out.println("isNumber2 = " + isNumber2);             // true double=-Infinity
+        boolean number = NumberUtil.isNumber("-5.");
+        System.out.println("number = " + number);                   // true
+        boolean creatable = NumberUtils.isCreatable("-5.63589065441568E+40000");
+        System.out.println("creatable = " + creatable);             // true
+        Double aDouble = NumberUtils.createDouble("-5.63589065441568E+40000");
+        System.out.println("aDouble = " + aDouble);                 // aDouble = -Infinity
 
         double aaa = 0.00000028162103058754967;
         String s2 = MathUtil.double2ScientificNotation(aaa);
@@ -860,6 +868,16 @@ public class MathTest {
         BigDecimal bigDecimal2 = bigDecimal.stripTrailingZeros();
         System.out.println("bigDecimal2 = " + bigDecimal2); // 4.1
         System.out.println("bigDecimal = " + bigDecimal);   // 4.1000
+    }
+
+    @Test
+    public void testAny() {
+        double a = 2400d * (1 / 6d);
+        double b = 1500 * (5 / 6d);
+        double s = a + b;
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+        System.out.println("s = " + s);
     }
 }
 

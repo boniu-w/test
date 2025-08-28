@@ -929,6 +929,8 @@ public class StringTest {
     @Test
     public void test() {
         String reason = "";
+        boolean blank = StringUtil.isBlank(reason);
+        System.out.println("blank = " + blank);
         test0(reason);
         System.out.println("reason = " + reason); // ""
 
@@ -936,6 +938,11 @@ public class StringTest {
         String[] reasonArray = {""};
         test0Array(reasonArray);
         System.out.println("reasonArray[0] = " + reasonArray[0]); // 111
+
+        // StringBuilder
+        StringBuilder builder = new StringBuilder();
+        testStringBuilder(builder);
+        System.out.println("builder.toString() = " + builder.toString()); // 111
     }
 
     void test0(String reason) {
@@ -947,6 +954,10 @@ public class StringTest {
         SecureRandom random = new SecureRandom();
         String algorithm = random.getAlgorithm();
         System.out.println("algorithm = " + algorithm);
+    }
+
+    void testStringBuilder(StringBuilder reason){
+        reason.append("111");
     }
 
     @Test

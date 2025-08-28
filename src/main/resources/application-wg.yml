@@ -11,23 +11,26 @@ server:
   servlet:
     context-path: /wg
 
+#cloud:
+#  redis: 192.168.12.240
+
 spring:
-#  resources:
-#    static-locations:
-#      - classpath:/static
-#      - classpath:/public
-#      - classpath:/resources
-#      - classpath:/resources/static
-#      - classpath:/META-INF/resources/
+  #  resources:
+  #    static-locations:
+  #      - classpath:/static
+  #      - classpath:/public
+  #      - classpath:/resources
+  #      - classpath:/resources/static
+  #      - classpath:/META-INF/resources/
   messages:
     basename: i18n/error_message
     encoding: UTF-8
   cache:
     type: REDIS
-#  security:
-#    user:
-#      name: wg
-#      password: 123
+  #  security:
+  #    user:
+  #      name: wg
+  #      password: 123
   datasource:
     url: jdbc:mysql://localhost:3306/wg?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
@@ -35,11 +38,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     database: 0
-#    host: ${cloud-redis} #  没有用, 读不了, 系统启动就报错
+      #    host: ${cloud.redis}
+    #    host: @cloud-redis@  # 在pom.xml里 profiles
     host: 192.168.12.240
-#    host: 127.0.0.1
+    #    host: 127.0.0.1
     password: redisbullseye
-#    password: ''
+    #    password: ''
     port: 6379
     timeout: 5000
     jedis:
@@ -85,7 +89,7 @@ management:
 
 mybatis:
   configuration:
-#    cache-enabled: true # 二级缓存
+    #    cache-enabled: true # 二级缓存
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:wg/application/mapper/xml/*Mapper.xml
 
