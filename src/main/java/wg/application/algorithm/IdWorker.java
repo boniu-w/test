@@ -1,5 +1,8 @@
 package wg.application.algorithm;
 
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -179,15 +182,15 @@ public class IdWorker {
      * @param args
      */
     public static void main(String[] args) throws UnknownHostException, SocketException {
-        System.out.println(1 & 4596);
+        System.out.println(1L & 4095L);
         System.out.println(2 & 4596);
         System.out.println(6 & 4596);
         System.out.println(6 & 4596);
         System.out.println(6 & 4596);
         System.out.println(6 & 4596);
-        IdWorker worker = new IdWorker(1, 1, 1);
+        IdWorker worker = new IdWorker(1, 1, 0);
         for (int i = 0; i < 131; i++) {
-            System.out.println(worker.nextId());
+            // System.out.println(worker.nextId());
         }
 
         InetAddress localHost = InetAddress.getLocalHost();
@@ -201,6 +204,13 @@ public class IdWorker {
 
         System.out.println("workerId = " + workerId);
         System.out.println("datacenterId = " + datacenterId);
+
+        Snowflake snowflake = IdUtil.getSnowflake();
+        long nextId = snowflake.nextId();
+        System.out.println("nextId = " + nextId);
+
+        Snowflake snowflake1 = IdUtil.getSnowflake(workerId, datacenterId);
+        System.out.println("snowflake1.nextId() = " + snowflake1.nextId());
     }
 
 }

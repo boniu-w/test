@@ -956,7 +956,7 @@ public class StringTest {
         System.out.println("algorithm = " + algorithm);
     }
 
-    void testStringBuilder(StringBuilder reason){
+    void testStringBuilder(StringBuilder reason) {
         reason.append("111");
     }
 
@@ -970,5 +970,27 @@ public class StringTest {
 
         LocalDateTime now = LocalDateTime.now();
         System.out.println("now.toString() = " + now.toString());
+    }
+
+    /**
+     * @author wg
+     * @description 位运算
+     * @createTime 15:33 2025/8/28
+     * @updateTime 15:33 2025/8/28
+     */
+    @Test
+    public void testRadix() {
+        String binaryStr = "100";                           // 4
+        String binaryStr2 = "101";                          // 5
+        int anInt = Integer.parseInt(binaryStr, 2);
+        System.out.println("anInt = " + anInt);             // 4
+        System.out.println("Integer.parseInt(\"101\", 2) = " + Integer.parseInt("101", 2));  // 5
+
+        System.out.println("4|5 = " + (4 | 5));             // 5
+        System.out.println("(4&5) = " + (4 & 5));           // 4
+        String binaryString = Integer.toBinaryString((4 | 5));
+        String binaryString2 = Integer.toBinaryString((4 & 5));
+        System.out.println("binaryString = " + binaryString);
+        System.out.println("binaryString2 = " + binaryString2);
     }
 }
