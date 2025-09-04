@@ -838,6 +838,7 @@ public class MathTest {
     @Test
     public void qnorm() {
         double qnorm = MathUtil.qnorm(0.92);
+        System.out.println("qnorm = " + qnorm);
 
         double a = 2 * (3.0 + 2) / (2.0 + 1);
         System.out.println("a = " + a);

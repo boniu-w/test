@@ -14,6 +14,7 @@ import wg.application.enumeration.OrgEnum;
 import wg.application.function.StringLength;
 import wg.application.util.CommonUtil;
 import wg.application.util.DateUtil;
+import wg.application.util.MathUtil;
 import wg.application.util.StringUtil;
 
 import java.io.*;
@@ -1005,6 +1006,8 @@ public class StringTest {
     @Test
     public void doubleToBinary() {
         double num = -10.25;
+        String doubleToBinary = MathUtil.doubleToBinary(num);
+        System.out.println("doubleToBinary = " + doubleToBinary);
 
         // 转换成 IEEE754 的 long 表示
         long bits = Double.doubleToLongBits(num);

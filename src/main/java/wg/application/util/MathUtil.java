@@ -455,12 +455,15 @@ public class MathUtil {
         // 由于偶数中只有2是质数，此处直接将2的值进行输出，如下代码中查找质数时，只需考虑奇数即可
         System.out.print(2 + " ");
         OUT:
+        // java中的标签语法
         // 1不是质数，2是质数但是已经打印输出，因此循环中i的值从3开始即可，i+=2是因为在循环中我们不再考虑偶数
         for (int i = 3; i <= 1000; i += 2) {
             // 请补充程序判断i是否是质数并打印i，如果是质数按照 System.out.print(i+" "); 格式进行打印
             for (int j = 2; j < i; j++) {
                 if (i % j == 0) {
                     // 如果i对j求余数等于0说明i不是质数
+                    // 这里的 continue OUT; 表示：跳过当前外层循环（OUT 标签标识的循环）的剩余代码，直接进入外层循环的下一次迭代。
+                    // 如果没有 OUT 标签，单纯写 continue;，只会跳过当前内层循环的剩余代码，进入内层循环的下一次迭代（这会导致逻辑错误，无法正确判断质数）。
                     continue OUT;
                 }
             }
@@ -479,11 +482,14 @@ public class MathUtil {
         double a = -0.9128739127;
         String b = double2ScientificNotation(a, 14);
         System.out.println(b);
+
+        System.out.println("0.1+0.2 = " + (0.1 + 0.2)); // 0.30000000000000004
+        System.out.println("test3() = " + test3());     // 0.30000000000000004
     }
 
     /**
-     * @param p 给定的概率p，例如，找到累积概率为0.95的下四分位点，例如，找到累积概率为0.95的下四分位点
-     * @return quantile 计算下四分位点（或累积概率为p的z值）
+     * @param p 给定的概率p，例如，找到累积概率为0.95的下四分位点
+     * @return quantile 计算 下四分位点（或累积概率为p的z值）
      * @author wg
      * @description qnorm 返回值是给定概率p后的下分位点 用java apache math3 怎么写
      * @createTime 10:38  2024/6/12
@@ -522,12 +528,31 @@ public class MathUtil {
      * @createTime 15:52 2025/8/28
      * @updateTime 15:52 2025/8/28
      */
-    public String doubleToBinary(double num) {
+    public static String doubleToBinary(double num) {
         // 转换成 IEEE754 的 long 表示
         long bits = Double.doubleToLongBits(num);
 
         // 转换成 64 位二进制字符串
         return String.format("%64s", Long.toBinaryString(bits))
                 .replace(' ', '0');
+    }
+
+    public static double test2() {
+        return 0.1 + 0.2;
+    }
+
+    /**
+     * @param
+     * @return
+     * @author wg
+     * @description strictfp 用于强制浮点数运算遵循 IEEE 754 标准，确保在不同硬件 / 平台上运算结果一致（避免因 CPU 浮点精度差异导致结果不同）。
+     * 不常用原因：
+     * 现代 JVM 和硬件已能保证大部分场景下的浮点一致性；
+     * 会限制一些硬件的浮点优化，可能降低性能。
+     * @createTime 14:38 2025/9/4
+     * @updateTime 14:38 2025/9/4
+     */
+    public static strictfp double test3() {
+        return 0.1 + 0.2;
     }
 }
