@@ -411,6 +411,45 @@ public class MathTest {
      ************************************************************************/
     @Test
     public void testYiwei() {
+        {
+            int x = 1;
+            int y = x << 1;
+            System.out.println("y = " + y);  // 2(10)
+
+            int z = x << 2;
+            System.out.println("z = " + z);  // 4(100)
+
+            int w = x << 3;
+            System.out.println("w = " + w);  // 8(1000)
+        }
+
+        {
+            int x = 0;
+            int y = x << 1;
+            System.out.println("y = " + y);  // 0(00)
+
+            int z = x << 2;
+            System.out.println("z = " + z);  // 0(000)
+
+            int w = x << 3;
+            System.out.println("w = " + w);  // 0(0000)
+        }
+
+        {
+            int x = 3;                       // (11)
+            int y = x << 1;
+            System.out.println("y = " + y);  // 6(110)
+
+            int z = x << 2;
+            System.out.println("z = " + z);  // 12(1100)
+
+            int w = x << 3;
+            System.out.println("w = " + w);  // 24(11000)
+
+            // 结论: 左移一位是x^2, 左移2位是x^3, 左移三位是x^4
+        }
+
+
         int i = (1 << 2) - 1 << 2;
         System.out.println(i);
 
@@ -876,9 +915,14 @@ public class MathTest {
         double a = 2400d * (1 / 6d);
         double b = 1500 * (5 / 6d);
         double s = a + b;
-        System.out.println("a = " + a);
-        System.out.println("b = " + b);
-        System.out.println("s = " + s);
+        System.out.println("a = " + a); // 400.0
+        System.out.println("b = " + b); // 1250.0
+        System.out.println("s = " + s); // 1650.0
+
+        double x = 0.0000000000000001;
+        double y = 1e-16;
+        int compare = Double.compare(x, y);
+        System.out.println("compare = " + compare); // 0
     }
 }
 
