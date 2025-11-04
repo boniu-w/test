@@ -3,6 +3,7 @@ package wg.application;
 import cn.hutool.core.util.NumberUtil;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.math3.complex.Complex;
 import org.junit.Test;
 import wg.application.entity.User;
 import wg.application.math.FloatTest;
@@ -782,6 +783,10 @@ public class MathTest {
         double aDouble = (double) i;
         double sqrt = Math.sqrt(aDouble);
         System.out.println("sqrt = " + sqrt); // sqrt = NaN
+
+        Complex complex = new Complex(-4, 0);
+        Complex sqrt1 = complex.sqrt();
+        System.out.println("sqrt1 = " + sqrt1);                 // (0.0, 2.0)
     }
 
     @Test
