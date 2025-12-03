@@ -46,6 +46,9 @@ public class DateTest {
         System.out.println(now.toString());
         System.out.println(Date.from(now));
 
+        LocalDateTime now1 = LocalDateTime.now();
+        LocalDateTime plussed = now1.plusDays(-35);
+        System.out.println("plussed = " + plussed);
     }
 
     @Test

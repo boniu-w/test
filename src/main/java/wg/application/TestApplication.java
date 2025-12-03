@@ -37,7 +37,7 @@ import java.util.Set;
 // @NacosPropertySource(dataId = "test",groupId = "DEFAULT_GROUP",autoRefreshed = true)
 @EnableCaching  // 开启缓存
 public class TestApplication {
-    
+
     // public static void main(String[] args) {
     //     ConfigurableApplicationContext context = SpringApplication.run(TestApplication.class, args);
     //     // context.addApplicationListener(new ListenerOf());
@@ -46,13 +46,13 @@ public class TestApplication {
     //     // Map<String, Object> systemProperties = environment.getSystemProperties();
     //     // systemProperties.forEach((k, v) -> System.out.println(k + ": " + v));
     // }
-    
+
     public static void main(String[] args) throws IOException {
         // 加载 application-wg.yml 文件
         String name = "application-wg.yml";
         ClassPathResource resource = new ClassPathResource("application-wg.yml");
         String content = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
-        
+
         // 输出文件内容
         // System.out.println(content);
         Map<String, Object> ymlFile = FileUtil.getYmlFile(name);
@@ -60,24 +60,29 @@ public class TestApplication {
             System.out.println("entry.getKey() = " + entry.getKey());
             System.out.println("entry.getValue() = " + entry.getValue());
         }
-        
+
         Object o = MapUtil.get(ymlFile, "wg.jwt");
         System.out.println("o = " + o);
 
         Object secret = MapUtil.get(ymlFile, "wg.jwt.secret");
         System.out.println("wg.jwt.secret = " + secret);
-        
+
         // 读取 spring.redis.host 属性的值
         SpringApplication app = new SpringApplication(TestApplication.class);
-        Environment env = app.run(args).getEnvironment();
-        String host = env.getProperty("spring.redis.host");
-        
+        ConfigurableApplicationContext context = app.run(args);
+        ConfigurableEnvironment environment = context.getEnvironment();
+        String host = environment.getProperty("spring.redis.host");
+
+        Map<String, Object> systemProperties = environment.getSystemProperties();
+        systemProperties.forEach((k, v) -> System.out.println(k + ": " + v));
+
+
         // 输出属性值
         System.out.println("Redis Host: " + host);
-        
+
         RedisUtil.getAll();
 
-        
+
         Set<String> keys = RedisUtil.getAllKeys("*");
         for (String key : keys) {
             Object value = RedisUtil.get(key);
@@ -87,7 +92,7 @@ public class TestApplication {
         Object dictDetails = RedisUtil.get("dict_details");
         System.out.println("dictDetails = " + dictDetails);
     }
-    
+
 }
 
 

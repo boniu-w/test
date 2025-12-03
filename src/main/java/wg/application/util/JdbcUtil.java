@@ -45,6 +45,7 @@ public class JdbcUtil {
         System.out.println(">>>>>>>>>>>  jdbc 静态代码块  <<<<<<<<<<<");
     }
 
+    // 如果在构造函数中直接调用 DAO 的方法（而不是定义 Lambda），就会立即触发 NullPointerException
     public JdbcUtil() {
         System.out.println(">>>>>>>>>>>  jdbc constructor  <<<<<<<<<<<");
     }
