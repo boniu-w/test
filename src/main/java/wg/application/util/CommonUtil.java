@@ -18,6 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -571,4 +572,41 @@ public class CommonUtil {
         return false;
     }
 
+    /**
+     * @author wg
+     * @description 是否全是 true
+     * @createTime 17:51 2025/5/29
+     * @updateTime 17:51 2025/5/29
+     */
+    public static boolean allTrue(Supplier<Boolean>... conditions) {
+        for (Supplier<Boolean> condition : conditions) {
+            if (!condition.get()) {
+                return false; // 短路
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @author wg
+     * @description 有true吗
+     * @createTime 17:47 2025/5/29
+     * @updateTime 17:47 2025/5/29
+     */
+    public static boolean anyTrue(Supplier<Boolean>... conditions) {
+        for (Supplier<Boolean> condition : conditions) {
+            if (condition != null && condition.get()) {
+                return true;   // 短路，只要为 true 就返回
+            }
+        }
+        return false;
+    }
+
+    public static boolean contains(String src, String... args) {
+        if (src == null) return false;
+        for (String arg : args) {
+            if (src.contains(arg)) return true;
+        }
+        return false;
+    }
 }

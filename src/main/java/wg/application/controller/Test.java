@@ -41,6 +41,8 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -1299,6 +1301,16 @@ public class Test {
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println(localDateTime);
 
+        DateTimeFormatter ofPattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String format = LocalDateTime.now().format(ofPattern);
+        System.out.println("format = " + format);
+
+        LocalDateTime parse = LocalDateTime.parse(format, ofPattern);
+        System.out.println("parse = " + parse);
+
+        LocalDateTime localDateTime1 = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+        System.out.println("localDateTime1 = " + localDateTime1);
+
         LocalDateTime of = LocalDateTime.of(localDate, localTime);
         System.out.println(of);
 
@@ -1307,7 +1319,6 @@ public class Test {
 
         LocalDateTime atTime = localDate.atTime(14, 25, 8);
         System.out.println("atTime -> " + atTime);
-
 
         int dayOfYear = localDateTime.getDayOfYear();
         System.out.println(dayOfYear);
