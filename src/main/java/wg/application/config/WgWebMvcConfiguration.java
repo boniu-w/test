@@ -11,16 +11,26 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import wg.application.interceptor.FangshuaInterceptor;
+import wg.application.interceptor.MyInterceptor;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 
 @Configuration
-public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
+public class WgWebMvcConfiguration implements WebMvcConfigurer {
+
+    @Resource
+    private FangshuaInterceptor interceptor;
+
+    @Resource
+    MyInterceptor myInterceptor;
 
     /***************************************************
      * 这里配置静态资源文件的路径导包都是默认的直接导入就可以
@@ -46,7 +56,7 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
     }
 
     //@Bean
-    //public TicketFilter initTicketFilter(){
+    // public TicketFilter initTicketFilter(){
     //    return  new TicketFilter();
     //}
 
@@ -63,7 +73,7 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration corsConfiguration = new CorsConfiguration();
-        //是否允许请求带有验证信息
+        // 是否允许请求带有验证信息
         corsConfiguration.setAllowCredentials(true);
         // 允许访问的客户端域名
         corsConfiguration.addAllowedOrigin("*");
@@ -91,21 +101,40 @@ public class WgWebMvcConfiguration extends WebMvcConfigurationSupport {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         ObjectMapper mapper = new ObjectMapper();
 
-        //返回的日期格式转换
+        // 返回的日期格式转换
         // mapper.findAndRegisterModules(); // 注册 jsr310 , 不管用, 可能是版本问题, 待解决
         // mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false); // 不管用, 可能是版本问题, 待解决
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         mapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
 
-        //返回时Long类型转String类型
+        // 返回时Long类型转String类型
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
         simpleModule.addSerializer(BigDecimal.class, new DecimalSerializer()); // 不管用
-        
+
         mapper.registerModule(simpleModule);
         converter.setObjectMapper(mapper);
         return converter;
+    }
+
+    /**
+     * @param
+     * @return
+     * @author wg
+     * @description 注意配置里 有
+     * servlet.context-path: /wg
+     * 但这里addPathPatterns不加 /wg
+     * 只加 controller 上的
+     * @createTime 17:29 2025/12/26
+     * @updateTime 17:29 2025/12/26
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(myInterceptor)
+                // .addPathPatterns("/**");                      // 在所有请求上加拦截器
+                .addPathPatterns("/user_controller/**")         // 在user_controller的所有请求上加拦截器 user_controller
+                .excludePathPatterns("/js/**", "/cs/**", "/page/**"); // 表示排除静态资源的访问，避免拦截器对静态资源的干扰。
     }
 }

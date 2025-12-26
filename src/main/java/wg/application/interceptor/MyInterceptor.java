@@ -17,16 +17,18 @@ import java.time.LocalDateTime;
  * updateTime: 11:02 2023/3/13
  ************************************************************************/
 @Component
-public class MyInterceptorTest extends HandlerInterceptorAdapter {
+public class MyInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("更新拦截器");
-        //判断请求是否属于方法的请求
+        System.out.println("正在通过拦截器");
+        // 判断请求是否属于方法的请求
         if (handler instanceof HandlerMethod) {
+            System.out.println("handler = " + handler);
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
             if (method.getName().equals("testUpdateInterceptor")) {
+                System.out.println("正在访问 testUpdateInterceptor");
                 Object arg = handlerMethod.getMethodParameters()[0];
                 // arg 就是 updateTest() 方法的参数值
                 // 处理参数值的逻辑
