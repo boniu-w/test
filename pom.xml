@@ -82,6 +82,13 @@
     </profiles>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.shredzone.commons/commons-suncalc -->
+        <dependency>
+            <groupId>org.shredzone.commons</groupId>
+            <artifactId>commons-suncalc</artifactId>
+            <version>3.11</version>
+        </dependency>
+
         <!--引入minio后, 程序无法启动-->
         <!--<dependency>
             <groupId>io.minio</groupId>
