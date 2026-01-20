@@ -148,4 +148,15 @@ public class DateTest {
         long between1 = ChronoUnit.DAYS.between(localDate, now);
         System.out.println("相隔天数 = " + between1);
     }
+
+    @Test
+    public void beforeAfter(){
+        LocalDateTime theDay = LocalDateTime.of(2026, 1, 11, 23, 59);
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("theDay = " + theDay);
+
+        boolean before = now.isBefore(theDay);
+        System.out.println("before = " + before);
+    }
+
 }
