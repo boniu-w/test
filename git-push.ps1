@@ -16,9 +16,12 @@ function Run-GitCommand {
         exit $LASTEXITCODE
     }
 }
+Run-GitCommand "git stash" "git stash failed"
 
 Run-GitCommand "git push origin master" "Push origin master failed"
 Run-GitCommand "git push gitee master" "Push gitee master failed"
+
+Run-GitCommand "git stash pop" "git stash pop failed"
 
 Write-Host "========== Git Operation Script Completed ==========" -ForegroundColor Green
 pause
