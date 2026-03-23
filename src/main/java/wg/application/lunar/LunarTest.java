@@ -24,12 +24,14 @@ public class LunarTest {
      */
     public static void getToday() {
         Lunar lunar = Lunar.fromDate(new Date());
-        System.out.println("lunar.toFullString() = "+ lunar.toFullString());
+        // Solar solar = new Solar(2025,12, 31);
+        // Lunar lunar = new Lunar(solar);
+        System.out.println("今天 : "+ lunar.toFullString());
 
         List<String> dayYi = lunar.getDayYi();
         List<String> dayJi = lunar.getDayJi();
-        System.out.println("dayYi = " + dayYi);
-        System.out.println("dayJi = " + dayJi);
+        System.out.println("宜 : " + dayYi);
+        System.out.println("忌 : " + dayJi);
         // Fu fu = lunar.getFu(); // 没入伏 fu=null
         // System.out.println("fu.toFullString() = " + fu.toFullString());
     }
@@ -61,10 +63,10 @@ public class LunarTest {
 
     public static void getPerson() {
         // Lunar lunar = new Lunar(1985, 5, 20, 19, 38, 12);
-        Solar solar = new Solar(1985, 7, 7, 20, 1, 12);
+        // Solar solar = new Solar(1985, 7, 7, 20, 1, 12);
         // Solar solar = new Solar(1984, 7, 7, 20, 26, 12);
         // Solar solar = new Solar(2022, 3, 13, 13, 38, 12); // 王一迪
-        // Solar solar = new Solar(2016, 3, 25, 13, 38, 12); // 王一凡
+         Solar solar = new Solar(2016, 3, 25, 19, 20, 12); // 王一凡
 
         Lunar lunar = solar.getLunar();
 
@@ -75,15 +77,15 @@ public class LunarTest {
         }
 
         EightChar eightChar = lunar.getEightChar();
-        System.out.println("eightChar = " + eightChar);
+        System.out.println("八字 = " + eightChar);
 
         List<String> baZiWuXing = lunar.getBaZiWuXing();
-        System.out.println("baZiWuXing = " + baZiWuXing);
+        System.out.println("五行 = " + baZiWuXing);
 
         List<String> baZiShiShenGan = lunar.getBaZiShiShenGan();
-        System.out.println("baZiShiShenGan = " + baZiShiShenGan);
+        System.out.println("天干 = " + baZiShiShenGan);
 
         List<String> baZiShiShenZhi = lunar.getBaZiShiShenZhi();
-        System.out.println("baZiShiShenZhi = " + baZiShiShenZhi);
+        System.out.println("地支 = " + baZiShiShenZhi);
     }
 }

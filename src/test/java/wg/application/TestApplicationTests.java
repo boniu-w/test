@@ -1846,6 +1846,7 @@ public class TestApplicationTests {
 
     @Test
     public void testEnum() {
+        System.out.println(CodeEnum.SUCCESS.name());
         System.out.println(CodeEnum.SUCCESS.getCode());
         System.out.println(CodeEnum.SUCCESS.toString());
     }

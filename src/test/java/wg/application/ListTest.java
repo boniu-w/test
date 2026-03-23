@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import wg.application.entity.Student;
 import wg.application.entity.User;
 import wg.application.util.CollectionUtil;
+import wg.application.util.PageUtil;
+import wg.application.vo.PageResult;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -336,6 +338,8 @@ public class ListTest {
         System.out.println("Players playing in world cup 2016");
         System.out.println(listOfAllPlayers);
 
+        PageResult<String> paginate = PageUtil.paginate(listOfAllPlayers, 1, 10);
+        System.out.println("paginate = " + paginate);
 
         // Now let's do this in Java 8 using FlatMap
         List<String> flatMapList = playersInWorldCup2016
@@ -385,6 +389,9 @@ public class ListTest {
     }
 
     /************************************************************************
+     * Map<String, Integer> areaNameNumMap = enclosedAreaVOList.stream()
+     *                 .filter(e -> StringUtil.isNotBlank(e.getAreaName()))
+     *                 .collect(Collectors.groupingBy(EnclosedAreaVO::getAreaName, Collectors.summingInt(EnclosedAreaVO::getPersonNum)));
      * @author: wg
      * @description: 使用工具类 Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法,
      * 它的 add/remove/clear 方法会抛出 UnsupportedOperationException 异常

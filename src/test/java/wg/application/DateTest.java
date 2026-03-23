@@ -8,6 +8,7 @@ import wg.application.util.StringUtil;
 
 import java.math.BigDecimal;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -22,6 +23,26 @@ public class DateTest {
 
     @Test
     public void test() {
+        LocalDate today = LocalDate.of(2026, 1, 29);
+        // LocalDate today = LocalDate.now();
+        LocalDate yesterday = today.minusDays(1);
+        LocalDateTime todayTime = today.atTime(LocalTime.MAX).truncatedTo(ChronoUnit.MILLIS);
+        LocalDateTime yesterdayTime = yesterday.atTime(LocalTime.MAX);
+        String todayStr = todayTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String yesterdayStr = yesterdayTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+        System.out.println("yesterdayStr = " + yesterdayStr);
+        System.out.println("todayStr = " + todayStr);
+        System.out.println("todayTime = " + todayTime);
+
+        ZoneOffset zoneOffset = ZoneOffset.ofHours(8);
+        OffsetDateTime todayOffsetDateTime = OffsetDateTime.of(todayTime, zoneOffset);
+        System.out.println("offsetDateTime = " + todayOffsetDateTime);
+
+        LocalDateTime todayStartTime = today.atStartOfDay();
+        OffsetDateTime todayStartOffsetDateTime = OffsetDateTime.of(todayStartTime, zoneOffset);
+        System.out.println("todayStartOffsetDateTime = " + todayStartOffsetDateTime);
+
         Date date = new Date();
         BigDecimal decimal = new BigDecimal("2.5");
         int i = decimal.multiply(new BigDecimal("365")).intValue();
@@ -150,7 +171,7 @@ public class DateTest {
     }
 
     @Test
-    public void beforeAfter(){
+    public void beforeAfter() {
         LocalDateTime theDay = LocalDateTime.of(2026, 1, 11, 23, 59);
         LocalDateTime now = LocalDateTime.now();
         System.out.println("theDay = " + theDay);
