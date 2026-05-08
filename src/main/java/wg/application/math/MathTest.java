@@ -3,6 +3,7 @@ package wg.application.math;
 import wg.application.util.MathUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /************************************************************************
@@ -29,10 +30,11 @@ public class MathTest {
         for (int i = 0; i < a.length; i++) {
             a[i] = i;
         }
-        // int[] a = {0, 1, 3, 31};
+        System.out.println("Arrays.toString(a) = " + Arrays.toString(a)); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
         for (int j : a) {
+            System.out.println("pow = " + pow);
             pow += 1L << j;
-            // System.out.println(pow);
+            System.out.println("Long.toBinaryString(pow) = " + Long.toBinaryString(pow));
         }
 
         List<Integer> list = MathUtil.log2(1159705341952L);

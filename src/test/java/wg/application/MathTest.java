@@ -22,6 +22,20 @@ public class MathTest {
 
     @Test
     public void test11111() {
+        int a = 9;
+        int b = a++;
+        System.out.println("a = " + a);    // 10
+        System.out.println("b = " + b);    // 9
+        int c = ++a;
+        System.out.println("a2 = " + a);   // 11
+        System.out.println("c = " + c);    // 11
+        int d = c--;
+        System.out.println("d = " + d);    // 11
+        System.out.println("c2 = " + c);   // 10
+        int e = --d;
+        System.out.println("d2 = " + d);   // 10
+        System.out.println("e = " + e);    // 10
+
         // 测试 i++
         int m = 0;
         for (int i = m++; i < 3; i++) {
@@ -928,6 +942,20 @@ public class MathTest {
         double y = 1e-16;
         int compare = Double.compare(x, y);
         System.out.println("compare = " + compare); // 0
+    }
+
+    @Test
+    public void testWuFuHaoYiwei() {
+        int a = 2;
+        long b = a >>> 1;
+        System.out.println("b = " + b); // 1
+
+        int c = -2;
+        System.out.println("Long.toBinaryString(c) = " + Long.toBinaryString(c)); // 1111111111111111111111111111111111111111111111111111111111111110
+        long d = c >>> 1;
+        System.out.println("d = " + d); // 2147483647
+        System.out.println("Long.toBinaryString(d) = " + Long.toBinaryString(d)); // 1111111111111111111111111111111
+
     }
 }
 
