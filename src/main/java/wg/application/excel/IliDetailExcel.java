@@ -4,6 +4,7 @@ import lombok.Data;
 import wg.application.excel.annotation.Excel;
 
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
@@ -25,7 +26,7 @@ public class IliDetailExcel {
     @Excel(name = "尺寸类型", replace = {"PINH_9898"})
     private String dimension;
     @Excel(name = "周向")
-    private Date orientation;
+    private LocalTime orientation;
     @Excel(name = "缺陷深度 %")
     private BigDecimal depth;
     @Excel(name = "缺陷长度 mm")

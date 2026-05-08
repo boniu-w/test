@@ -28,25 +28,25 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/excel")
 public class ExcelTest {
 
+    public static void main(String[] args) {
+        importExcelReplaceTest(null);
+        // try {
+        //     // getList();
+        //     // testHaiyou();
+        //     List<HaiyouguojiExcel> haiyouguoji = getHaiyouguoji();
+        //     testVelocity(haiyouguoji);
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+    }
+
     // public static void main(String[] args) {
-    //     // importExcelReplaceTest(null);
     //     try {
-    //         // getList();
-    //         // testHaiyou();
-    //         List<HaiyouguojiExcel> haiyouguoji = getHaiyouguoji();
-    //         testVelocity(haiyouguoji);
+    //         getHaiyouguoji();
     //     } catch (Exception e) {
     //         e.printStackTrace();
     //     }
     // }
-
-    public static void main(String[] args) {
-        try {
-            getHaiyouguoji();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void importExcel(MultipartFile file) {
         String path = "static/excel/内检测数据.xlsx";

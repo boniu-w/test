@@ -37,10 +37,12 @@ import java.util.*;
  * @Copyright 使用本工具 要结合 我的 Excel 注解使用,
  *************************************************************/
 public class ExcelUtil {
-    private Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
     private static Workbook workbook;
     private static Sheet sheet;
     private static Row row;
+    
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##########");
     
     public static Workbook getWorkbook() {
         return workbook;
@@ -134,55 +136,53 @@ public class ExcelUtil {
      ****************************************************************/
     public static <T> String[] readExcelTitle(@Nullable ExcelParams excelParams, Class<T> tClass) throws NullPointerException {
         if (workbook == null) {
-            try {
-                throw new Exception("Workbook对象为空！");
-            } catch (Exception e) {
-                e.printStackTrace();
+            throw new IllegalStateException("Workbook对象为空！");
+        }
+
+        // sheet 所在
+        int sheetIndex = (excelParams != null && excelParams.getSheetIndex() != null)
+                ? excelParams.getSheetIndex() : 0;
+        sheet = workbook.getSheetAt(sheetIndex);
+
+        // 标题行
+        // 标题行
+        int titleIndex = (excelParams != null && excelParams.getTitleIndex() != null)
+                ? excelParams.getTitleIndex() : 0;
+        row = sheet.getRow(titleIndex);
+
+        if (row == null) {
+            throw new IllegalStateException("标题行为空！");
+        }
+
+        // 标题总列数
+        int colNum = row.getLastCellNum();
+        String[] title = new String[colNum];
+
+        // 构建字段名映射表，提高查找效率
+        Field[] fields = tClass.getDeclaredFields();
+        Map<String, String> fieldNameMap = new HashMap<>();
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(Excel.class)) {
+                Excel annotation = field.getAnnotation(Excel.class);
+                fieldNameMap.put(annotation.name(), field.getName());
             }
         }
-        
-        int numberOfSheets = workbook.getNumberOfSheets();
-        
-        // sheet 所在
-        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
-            sheet = workbook.getSheetAt(excelParams.getSheetIndex());
-        } else {
-            sheet = workbook.getSheetAt(0);
-        }
-        
-        // 标题行
-        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
-            row = sheet.getRow(excelParams.getTitleIndex());
-        } else {
-            row = sheet.getRow(0);
-        }
-        
-        // 标题总列数
-        int colNum = row.getPhysicalNumberOfCells();
-        colNum = row.getLastCellNum();
-        String[] title = new String[colNum];
-        Field[] fields = tClass.getDeclaredFields();
-        
-        String cellValue = "";
-        Excel annotation = null;
-        String annotationName = "";
-        
+
+        // 填充标题数组
         for (int i = 0; i < colNum; i++) {
-            cellValue = row.getCell(i).getStringCellValue();
-            for (int j = 0; j < fields.length; j++) {
-                if (fields[j].isAnnotationPresent(Excel.class)) {
-                    annotation = fields[j].getAnnotation(Excel.class);
-                    annotationName = annotation.name();
-                    if (annotationName.equals(cellValue)) {
-                        title[i] = fields[j].getName();
-                    }
+            Cell cell = row.getCell(i);
+            if (cell != null) {
+                String cellValue = cell.getStringCellValue();
+                String fieldName = fieldNameMap.get(cellValue);
+                if (fieldName != null) {
+                    title[i] = fieldName;
                 }
             }
         }
-        
+
         return title;
     }
-    
+
     public static <T> String[] _readExcelTitle(@Nullable ExcelParams excelParams, Class<T> tClass) throws NullPointerException {
         if (workbook == null) {
             try {
@@ -243,92 +243,83 @@ public class ExcelUtil {
     public static Map<Integer, Map<String, Object>> readExcelContent(Workbook workbook,
                                                                      String[] titleArray,
                                                                      @Nullable ExcelParams excelParams) throws Exception {
-        Map<Integer, Map<String, Object>> contentMap = new HashMap<Integer, Map<String, Object>>();
-        
-        // 得到总行数
-        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
-            sheet = workbook.getSheetAt(0);
-        } else {
-            sheet = workbook.getSheetAt(excelParams.getSheetIndex());
+        if (workbook == null) {
+            throw new IllegalArgumentException("Workbook不能为空");
         }
-        int rowNum = sheet.getLastRowNum();
-        
-        // 总列数
-        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
-            row = sheet.getRow(0);
-        } else {
-            row = sheet.getRow(excelParams.getTitleIndex());
+        if (titleArray == null || titleArray.length == 0) {
+            throw new IllegalArgumentException("标题数组不能为空");
         }
-        int colNum = row.getPhysicalNumberOfCells();
-        
-        // 默认正文内容应该从第二行开始,第一行为表头的标题
-        int i;
-        if (ObjectUtils.isEmpty(excelParams) || ObjectUtils.isEmpty(excelParams.getContentStartIndex())) {
-            i = 1;
-        } else {
-            i = excelParams.getContentStartIndex();
-        }
-        
-        int endIndex = rowNum;
-        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getContentEndIndex())) {
-            endIndex = excelParams.getContentEndIndex();
-        }
-        
-        LinkedHashMap<String, Object> cellValue = new LinkedHashMap<>();
-        for (; i <= endIndex; i++) {
-            cellValue = new LinkedHashMap<String, Object>();
-            int j = 0;
-            row = sheet.getRow(i);
-            while (j < colNum) {
-                Object obj = getCellFormatValue(row.getCell(j));
-                cellValue.put(titleArray[j], obj);
-                j++;
+
+        // 获取sheet
+        int sheetIndex = (excelParams != null && excelParams.getSheetIndex() != null)
+                ? excelParams.getSheetIndex() : 0;
+        sheet = workbook.getSheetAt(sheetIndex);
+
+        // 获取起始行
+        int contentStartIndex = (excelParams != null && excelParams.getContentStartIndex() != null)
+                ? excelParams.getContentStartIndex() : 1;
+        int endIndex = (excelParams != null && excelParams.getContentEndIndex() != null)
+                ? excelParams.getContentEndIndex() : sheet.getLastRowNum();
+
+        Map<Integer, Map<String, Object>> contentMap = new HashMap<>();
+
+        for (int i = contentStartIndex; i <= endIndex; i++) {
+            Row currentRow = sheet.getRow(i);
+            if (currentRow == null) {
+                continue;
             }
+
+            LinkedHashMap<String, Object> cellValue = new LinkedHashMap<>();
+            for (int j = 0; j < titleArray.length; j++) {
+                Cell cell = currentRow.getCell(j);
+                Object value = getCellFormatValue(cell);
+                cellValue.put(titleArray[j], value);
+            }
+
             // 忽略空行
             if (!MapUtil.isAllEmptyValue(cellValue)) {
                 contentMap.put(i, cellValue);
             }
         }
+
         return contentMap;
     }
-    
-    public static <T> Map<String, Map<String, String>> getImportReplaceMap(Class<T> tClass) throws InstantiationException, IllegalAccessException {
+
+
+    public static <T> Map<String, Map<String, String>> getImportReplaceMap(Class<T> tClass) {
         Field[] declaredFields = tClass.getDeclaredFields();
-        
         Map<String, Map<String, String>> fieldReplaceMap = new HashMap<>();
-        for (int j = 0; j < declaredFields.length; j++) {
-            Excel annotation = declaredFields[j].getAnnotation(Excel.class);
-            String fieldName = declaredFields[j].getName();
+
+        for (Field field : declaredFields) {
+            Excel annotation = field.getAnnotation(Excel.class);
+            if (annotation == null) {
+                continue;
+            }
+
+            String fieldName = field.getName();
             String dicCode = annotation.dicCode();
-            String dictTable = annotation.dictTable();
-            String dicText = annotation.dicText();
-            boolean anImport = annotation.isImport();
-            boolean anExport = annotation.isExport();
-            // 如果字典字段为 null, 则 只替换 replace 字段
+
+            // 如果没有字典代码，只处理replace字段
             if (org.apache.commons.lang3.StringUtils.isEmpty(dicCode)) {
                 String[] replace = annotation.replace();
-                HashMap<String, String> replaceMap = new HashMap<>();
-                if (replace.length > 0) {
-                    for (int k = 0; k < replace.length; k++) {
-                        String replaceVal = replace[k];
+                if (replace != null && replace.length > 0) {
+                    HashMap<String, String> replaceMap = new HashMap<>();
+                    for (String replaceVal : replace) {
                         String[] split = replaceVal.split("_");
                         if (split.length == 2) {
                             replaceMap.put(split[0], split[1]);
-                            // if (anImport) {
-                            //     replaceMap.put(split[0], split[1]);
-                            // }
-                            // if (anExport) {
-                            //     replaceMap.put(split[1], split[0]);
-                            // }
                         }
                     }
-                    // 解析 replace 得到完整的 map 之后, 用字段名为键, 存储起来
-                    fieldReplaceMap.put(fieldName, replaceMap);
+                    if (!replaceMap.isEmpty()) {
+                        fieldReplaceMap.put(fieldName, replaceMap);
+                    }
                 }
+            } else {
+                // TODO: 实现字典表查询逻辑
+                logger.warn("字段 {} 使用了字典代码 {}，但字典查询功能尚未实现", fieldName, dicCode);
             }
-            // 如果字典字段不为 null, 则 去 字典表里查, 查出要替换的
-            
         }
+
         return fieldReplaceMap;
     }
 
@@ -414,82 +405,106 @@ public class ExcelUtil {
     
     // apache poi 4.1.2
     public static Object getCellFormatValue(Cell cell) {
-        Object cellvalue = "";
+        if (cell == null) {
+            return "";
+        }
+        
         CellType cellType = cell.getCellType();
+        if (cellType == null) {
+            return "";
+        }
         
-        DecimalFormat decimalFormat = new DecimalFormat();
-        
-        if (cellType != null) {
+        try {
             switch (cellType) {
-                case NUMERIC: {
-                    short s = cell.getCellStyle().getDataFormat();
-                    if (ExcelDateUtil.isCellDateFormatted(cell)) {
-                        Date date = cell.getDateCellValue();
-                        cellvalue = date;
-                    } else {
-                        cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
-                    }
-                    break;
-                }
+                case NUMERIC:
+                    return handleNumericCell(cell);
                 case STRING:
-                    cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
-                    break;
+                    return handleStringCell(cell);
                 case BOOLEAN:
-                    cellvalue = String.valueOf(cell.getBooleanCellValue());
-                    break;
+                    return String.valueOf(cell.getBooleanCellValue());
                 case FORMULA:
-                    CellType cachedFormulaResultType = cell.getCachedFormulaResultType();
-                    cellvalue = handlerFormula(cell, cachedFormulaResultType);
-                    break;
-                case ERROR:
-                    cellvalue = "非法字符";
-                    break;
+                    return handleFormulaCell(cell);
                 case BLANK:
-                    cellvalue = "";
-                    break;
+                    return "";
+                case ERROR:
+                    logger.warn("单元格包含错误值，位置: {}", getCellPosition(cell));
+                    return "";
                 default:
-                    cellvalue = "未知类型";
-                    break;
+                    logger.warn("未知单元格类型: {}, 位置: {}", cellType, getCellPosition(cell));
+                    return "";
             }
-        } else {
-            cellvalue = "";
+        } catch (Exception e) {
+            logger.error("读取单元格数据异常，位置: {}, 错误: {}", getCellPosition(cell), e.getMessage());
+            return "";
         }
-        return cellvalue;
     }
-
-    public static Object handlerFormula(Cell cell, CellType cachedFormulaResultType) {
-        Object cellvalue = "";
-        DecimalFormat decimalFormat = new DecimalFormat();
-
-        if (cachedFormulaResultType != null) {
-            switch (cachedFormulaResultType) {
-                case NUMERIC: {
-                    if (ExcelDateUtil.isCellDateFormatted(cell)) {
-                        Date date = cell.getDateCellValue();
-                        cellvalue = date;
-                    } else {
-                        cellvalue = decimalFormat.format(cell.getNumericCellValue()).replace(",", "");
-                    }
-                    break;
-                }
-                case STRING:
-                    cellvalue = cell.getRichStringCellValue().getString().replace(",", "");
-                    break;
-                case BOOLEAN:
-                    cellvalue = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                case ERROR:
-                    cellvalue = "非法字符";
-                    break;
-                case BLANK:
-                    cellvalue = "";
-                    break;
-                default:
-                    cellvalue = "未知类型";
-                    break;
+    
+    private static Object handleNumericCell(Cell cell) {
+        if (org.apache.poi.ss.usermodel.DateUtil.isCellDateFormatted(cell)) {
+        // if (ExcelDateUtil.isCellDateFormatted(cell)) {
+            return cell.getDateCellValue();
+        } else {
+            double numericValue = cell.getNumericCellValue();
+            if (numericValue == Math.floor(numericValue) && !Double.isInfinite(numericValue)) {
+                return String.valueOf((long) numericValue);
+            } else {
+                return DECIMAL_FORMAT.format(numericValue);
             }
         }
-        return cellvalue;
+    }
+    
+    private static Object handleStringCell(Cell cell) {
+        String value = cell.getRichStringCellValue().getString();
+        return value != null ? value.trim() : "";
+    }
+    
+    private static Object handleFormulaCell(Cell cell) {
+        try {
+            CellType cachedResultType = cell.getCachedFormulaResultType();
+            if (cachedResultType == null) {
+                return "";
+            }
+            
+            switch (cachedResultType) {
+                case NUMERIC:
+                    return handleNumericCell(cell);
+                case STRING:
+                    return handleStringCell(cell);
+                case BOOLEAN:
+                    return String.valueOf(cell.getBooleanCellValue());
+                case BLANK:
+                    return "";
+                case ERROR:
+                    logger.warn("公式单元格计算结果为错误，位置: {}", getCellPosition(cell));
+                    return "";
+                default:
+                    return "";
+            }
+        } catch (Exception e) {
+            logger.error("计算公式值异常，位置: {}, 错误: {}", getCellPosition(cell), e.getMessage());
+            return "";
+        }
+    }
+    
+    private static String getCellPosition(Cell cell) {
+        if (cell == null) return "未知";
+        Row row = cell.getRow();
+        if (row == null) return "未知";
+        Sheet sheet = row.getSheet();
+        String sheetName = sheet != null ? sheet.getSheetName() : "未知";
+        int rowIndex = row.getRowNum() + 1;
+        int colIndex = cell.getColumnIndex() + 1;
+        return String.format("%s!%s%d", sheetName, getColumnLetter(colIndex), rowIndex);
+    }
+    
+    private static String getColumnLetter(int columnIndex) {
+        StringBuilder columnLetter = new StringBuilder();
+        while (columnIndex > 0) {
+            columnIndex--;
+            columnLetter.insert(0, (char) ('A' + columnIndex % 26));
+            columnIndex /= 26;
+        }
+        return columnLetter.toString();
     }
     
     public static Cell setCellValue(Cell cell, Object cellValue) {
@@ -620,29 +635,34 @@ public class ExcelUtil {
         
         return tList;
     }
-    
-    public static <T> List<T> toObject(Class<T> tClass, Map<Integer, Map<String, Object>> contentMap, Map<String, Map<String, String>> importReplaceMap) {
-        List<T> list = new ArrayList<>();
-        for (Map.Entry<Integer, Map<String, Object>> integerMapEntry : contentMap.entrySet()) {
-            Map<String, Object> objectMap = integerMapEntry.getValue();
-            for (Map.Entry<String, Object> objectEntry : objectMap.entrySet()) {
-                String fieldName = objectEntry.getKey();
-                Object cellValue = objectEntry.getValue();
-                if (importReplaceMap != null && !importReplaceMap.isEmpty()) {
-                    for (Map.Entry<String, Map<String, String>> stringMapEntry : importReplaceMap.entrySet()) {
-                        Map<String, String> replaceValues = stringMapEntry.getValue();
-                        for (Map.Entry<String, String> entry : replaceValues.entrySet()) {
-                            String excelVal = entry.getKey();
-                            String tableVal = entry.getValue();
-                            if (excelVal.equals(cellValue.toString().trim())) {
-                                objectMap.put(fieldName, tableVal);
-                            }
+
+    public static <T> List<T> toObject(Class<T> tClass, Map<Integer, Map<String, Object>> contentMap,
+                                       Map<String, Map<String, String>> importReplaceMap) {
+        List<T> list = new ArrayList<>(contentMap.size());
+
+        for (Map.Entry<Integer, Map<String, Object>> entry : contentMap.entrySet()) {
+            Map<String, Object> objectMap = entry.getValue();
+
+            // 先处理替换逻辑
+            if (importReplaceMap != null && !importReplaceMap.isEmpty()) {
+                for (Map.Entry<String, Object> fieldEntry : objectMap.entrySet()) {
+                    String fieldName = fieldEntry.getKey();
+                    Object cellValue = fieldEntry.getValue();
+
+                    Map<String, String> replaceValues = importReplaceMap.get(fieldName);
+                    if (replaceValues != null && cellValue != null) {
+                        String trimmedValue = cellValue.toString().trim();
+                        String replacedValue = replaceValues.get(trimmedValue);
+                        if (replacedValue != null) {
+                            objectMap.put(fieldName, replacedValue);
                         }
                     }
                 }
             }
+
             list.add(MapUtil.map2Bean(objectMap, tClass));
         }
+
         return list;
     }
 

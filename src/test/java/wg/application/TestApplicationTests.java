@@ -632,7 +632,7 @@ public class TestApplicationTests {
     public void app() {
         int i = 1 << 24;
         System.out.println(i);
-        System.out.println(Integer.toBinaryString(i));
+        System.out.println(Integer.toBinaryString(i));  // 1000000000000000000000000
 
         int maxValue = Integer.MAX_VALUE;
         System.out.println(Integer.toBinaryString(maxValue));
