@@ -35,7 +35,13 @@ public class MathTest {
         int e = --d;
         System.out.println("d2 = " + d);   // 10
         System.out.println("e = " + e);    // 10
-
+        System.out.println("--------------- = ");
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+        System.out.println("c = " + c);
+        System.out.println("d = " + d);
+        System.out.println("e = " + e);
+        System.out.println("--------------- = ");
         // 测试 i++
         int m = 0;
         for (int i = m++; i < 3; i++) {

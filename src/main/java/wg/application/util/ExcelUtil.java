@@ -627,7 +627,7 @@ public class ExcelUtil {
         return getData(workbook, excelParams, tClass);
     }
 
-    public static <T> List<T> getData(Workbook workbook, ExcelParams excelParams, Class<T> tClass) throws Exception {
+    private static <T> List<T> getData(Workbook workbook, ExcelParams excelParams, Class<T> tClass) throws Exception {
         String[] titles = readExcelTitle(excelParams, tClass);
         Map<Integer, Map<String, Object>> content = readExcelContent(workbook, titles, excelParams);
         Map<String, Map<String, String>> replaceMap = getImportReplaceMap(tClass);
@@ -636,7 +636,7 @@ public class ExcelUtil {
         return tList;
     }
 
-    public static <T> List<T> toObject(Class<T> tClass, Map<Integer, Map<String, Object>> contentMap,
+    private static <T> List<T> toObject(Class<T> tClass, Map<Integer, Map<String, Object>> contentMap,
                                        Map<String, Map<String, String>> importReplaceMap) {
         List<T> list = new ArrayList<>(contentMap.size());
 

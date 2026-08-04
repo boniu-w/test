@@ -6,12 +6,65 @@ import wg.application.exception.WgException;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtil {
+    // 定义中文特有标点与英文标点的映射表
+    private static final Map<Character, Character> SPECIAL_MAPPING = new HashMap<>();
+    // 1. 定义半角转中文特殊标点的映射表
+    private static final Map<Character, Character> HALF_TO_SPECIAL_MAP = new HashMap<>();
 
+    static {
+        HALF_TO_SPECIAL_MAP.put('.', '。');
+        HALF_TO_SPECIAL_MAP.put(',', '、'); // 注意：半角逗号转中文顿号，或者你也可以映射为全角逗号 '，'
+
+        HALF_TO_SPECIAL_MAP.put('"', '“'); // 默认映射为左双引号
+        HALF_TO_SPECIAL_MAP.put('\'', '‘'); // 默认映射为左单引号
+
+        HALF_TO_SPECIAL_MAP.put('<', '《');
+        HALF_TO_SPECIAL_MAP.put('>', '》');
+
+        HALF_TO_SPECIAL_MAP.put('(', '（');
+        HALF_TO_SPECIAL_MAP.put(')', '）');
+        HALF_TO_SPECIAL_MAP.put('[', '【');
+        HALF_TO_SPECIAL_MAP.put(']', '】');
+
+        HALF_TO_SPECIAL_MAP.put('-', '—');
+
+        // 中文句号、顿号
+        SPECIAL_MAPPING.put('。', '.');
+        SPECIAL_MAPPING.put('、', ',');
+
+        // 中文引号（双引号）
+        SPECIAL_MAPPING.put('“', '"');
+        SPECIAL_MAPPING.put('”', '"');
+
+        // 中文引号（单引号）
+        SPECIAL_MAPPING.put('‘', '\'');
+        SPECIAL_MAPPING.put('’', '\'');
+
+        // 中文书名号、直角引号
+        SPECIAL_MAPPING.put('《', '<');
+        SPECIAL_MAPPING.put('》', '>');
+        SPECIAL_MAPPING.put('〈', '<');
+        SPECIAL_MAPPING.put('〉', '>');
+
+        // 中文括号
+        SPECIAL_MAPPING.put('（', '(');
+        SPECIAL_MAPPING.put('）', ')');
+        SPECIAL_MAPPING.put('【', '[');
+        SPECIAL_MAPPING.put('】', ']');
+        SPECIAL_MAPPING.put('「', '[');
+        SPECIAL_MAPPING.put('」', ']');
+
+        // 中文破折号、省略号
+        SPECIAL_MAPPING.put('—', '-');
+        SPECIAL_MAPPING.put('…', '.');
+    }
     /************************************************************************
      * @description: 判断字符串是否以 斜杠 开头, 不是的话加 斜杠
      * @author: wg
@@ -218,7 +271,7 @@ public class StringUtil {
     }
 
     /************************************************************************
-     * @description: 任意字符串 转 半角
+     * @description: 任意字符串 转 半角, 它无法处理中文特有的标点符号
      * @author: wg
      * @date: 11:11  2021/11/12
      * @params:
@@ -520,27 +573,84 @@ public class StringUtil {
         return false;
     }
 
-    // 将字符串中的半角字符转换为全角字符
-    public static String toFullWidth(String input) {
+    /**
+     * 半角转全角（包含标准全角字符与中文特殊标点）
+     * 一般情况不用这个, 用 toFullWidth()
+     */
+    public static String toFullWidthAll(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
         char[] chars = input.toCharArray();
         for (int i = 0; i < chars.length; i++) {
-            if (chars[i] >= 33 && chars[i] <= 126) {
-                chars[i] = (char) (chars[i] + 65248);
-            } else if (chars[i] == 32) {
-                chars[i] = (char) 12288; // 将空格转换为全角空格
+            // 1. 优先检查是否在中文特殊标点映射表中
+            if (HALF_TO_SPECIAL_MAP.containsKey(chars[i])) {
+                chars[i] = HALF_TO_SPECIAL_MAP.get(chars[i]);
             }
+            // 2. 处理半角空格 (ASCII 32) -> 全角空格 (12288)
+            else if (chars[i] == 32) {
+                chars[i] = (char) 12288;
+            }
+            // 3. 处理标准半角可见字符 (ASCII 33 ~ 126) -> 全角字符
+            else if (chars[i] >= 33 && chars[i] <= 126) {
+                chars[i] = (char) (chars[i] + 65248);
+            }
+        }
+        return new String(chars);
+    }
+
+    /**
+     * 半角转全角（英文和数字保持半角，中文保持全角，标点符号转为全角）
+     */
+    public static String toFullWidth(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            // 1. 优先检查是否在中文特殊标点映射表中
+            if (HALF_TO_SPECIAL_MAP.containsKey(c)) {
+                chars[i] = HALF_TO_SPECIAL_MAP.get(c);
+            }
+            // 2. 处理半角空格 (ASCII 32) -> 全角空格 (12288)
+            else if (c == 32) {
+                chars[i] = (char) 12288;
+            }
+            // 3. 英文大小写字母和数字保持半角，不做转换
+            else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+                // 保持半角不变
+            }
+            // 4. 其他半角标点符号 (ASCII 33 ~ 126) -> 全角字符
+            else if (c >= 33 && c <= 126) {
+                chars[i] = (char) (c + 65248);
+            }
+            // 5. 已经是全角字符（中文等），保持不变
         }
         return new String(chars);
     }
 
     // 将字符串中的全角字符转换为半角字符
     public static String toHalfWidth(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
         char[] chars = input.toCharArray();
         for (int i = 0; i < chars.length; i++) {
+            // 1. 处理标准全角 ASCII 字符（包含全角冒号、分号、字母、数字等）
             if (chars[i] >= 65281 && chars[i] <= 65374) {
                 chars[i] = (char) (chars[i] - 65248);
-            } else if (chars[i] == 12288) {
-                chars[i] = (char) 32; // 将全角空格转换为半角空格
+            }
+            // 2. 处理全角空格
+            else if (chars[i] == 12288) {
+                chars[i] = (char) 32;
+            }
+            // 3. 处理中文特有标点符号
+            else if (SPECIAL_MAPPING.containsKey(chars[i])) {
+                chars[i] = SPECIAL_MAPPING.get(chars[i]);
             }
         }
         return new String(chars);

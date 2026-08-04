@@ -2103,4 +2103,43 @@ public class TestApplicationTests {
             System.out.println("uuid = " + uuid);
         }
     }
+
+    @Test
+    public void testHashcode(){
+        // student 有自己的 hashcode() 方法
+        Student student = new Student();
+        int i = student.hashCode();
+        System.out.println("i = " + i); // 31
+        student.setName("sdf");
+        int i1 = student.hashCode();
+        System.out.println("i1 = " + i1); // 31
+
+        Student student1 = new Student();
+        int i2 = student1.hashCode();
+        System.out.println("i2 = " + i2); // 31
+        student1.setName("333");
+        int i3 = student1.hashCode();
+        System.out.println("i3 = " + i3); // 31
+
+        HashSet<Student> students = new HashSet<>();
+        students.add(student);
+        students.add(student1);
+        System.out.println("students.size() = " + students.size()); // 1
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Teacher teacher = new Teacher();
+        int i4 = teacher.hashCode();
+        System.out.println("i4 = " + i4); // 225290371
+
+        Teacher teacher1 = new Teacher();
+        int i5 = teacher1.hashCode();
+        System.out.println("i5 = " + i5); // 1169146729
+
+        boolean equals = teacher.equals(teacher1);
+        System.out.println("equals = " + equals); // false
+
+        HashSet<Teacher> teachers = new HashSet<>();
+        teachers.add(teacher);
+        teachers.add(teacher1);
+        System.out.println("hashSet.size = " + teachers.size()); // 2
+    }
 }

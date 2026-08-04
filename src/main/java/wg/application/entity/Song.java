@@ -1,6 +1,7 @@
 package wg.application.entity;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  *
@@ -618,5 +619,17 @@ public class Song {
         sb.append(", size=").append(size);
         sb.append("]");
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Song song = (Song) o;
+        return Objects.equals(id, song.id) && Objects.equals(name, song.name) && Objects.equals(location, song.location) && Objects.equals(isPrivate, song.isPrivate) && Objects.equals(description, song.description) && Objects.equals(hexHash, song.hexHash) && Objects.equals(createDatetime, song.createDatetime) && Objects.equals(updateDatetime, song.updateDatetime) && Objects.equals(createUserId, song.createUserId) && Objects.equals(updateUserId, song.updateUserId) && Objects.equals(delFlag, song.delFlag) && Objects.equals(album, song.album) && Objects.equals(singer, song.singer) && Objects.equals(suffix, song.suffix) && Objects.equals(isCover, song.isCover) && Objects.equals(issueDate, song.issueDate) && Objects.equals(size, song.size);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, location, isPrivate, description, hexHash, createDatetime, updateDatetime, createUserId, updateUserId, delFlag, album, singer, suffix, isCover, issueDate, size);
     }
 }

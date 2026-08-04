@@ -7,6 +7,7 @@ package wg.application.thread;
  * @version
  * @Copyright
  * @discription volatile 测试
+ * synchronized(this) 只会阻塞同样锁 this 的代码，不会阻止你调用这个 Service 的普通方法。
  *************************************************************/
 public class SyncTest implements Runnable {
 

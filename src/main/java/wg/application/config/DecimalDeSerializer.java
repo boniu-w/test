@@ -20,7 +20,7 @@ public class DecimalDeSerializer extends JsonDeserializer<BigDecimal> {
     public BigDecimal deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         String value = p.getValueAsString();
         if ("/".equals(value)) {
-            return new BigDecimal("-99999.99");
+            return null;
         } else {
             return new BigDecimal(value);
         }

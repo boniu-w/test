@@ -62,13 +62,13 @@ public class LunarTest {
     }
 
     public static void getPerson() {
-        // Lunar lunar = new Lunar(1985, 5, 20, 19, 38, 12);
+        Lunar lunar = new Lunar(1985, 5, 20, 19, 38, 12);
         // Solar solar = new Solar(1985, 7, 7, 20, 1, 12);
         // Solar solar = new Solar(1984, 7, 7, 20, 26, 12);
         // Solar solar = new Solar(2022, 3, 13, 13, 38, 12); // 王一迪
-         Solar solar = new Solar(2016, 3, 25, 19, 20, 12); // 王一凡
 
-        Lunar lunar = solar.getLunar();
+         // Solar solar = new Solar(2016, 3, 25, 19, 20, 12); // 王一凡
+        // Lunar lunar = solar.getLunar();
 
         System.out.println(lunar.toFullString());
         List<String> dayXiongSha = lunar.getDayXiongSha();

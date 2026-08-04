@@ -12,10 +12,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import wg.application.entity.User;
 import wg.application.enumeration.OrgEnum;
 import wg.application.function.StringLength;
-import wg.application.util.CommonUtil;
-import wg.application.util.DateUtil;
-import wg.application.util.MathUtil;
-import wg.application.util.StringUtil;
+import wg.application.util.*;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -896,6 +893,13 @@ public class StringTest {
         System.out.println("halfWidth = " + rootCauseStr.trim()); // 中文还是中文, 英文还是英文, 全角变半角
 
         System.out.println("\"x\".equals(\"X\")  " + "x".equals("X")); // false
+
+        String quanjiao = "；：、，";
+        String halfWidth = StringUtil.toHalfWidth(quanjiao);
+        System.out.println("halfWidth = " + halfWidth);
+
+        String fullAngle = StringUtil.toFullAngle(halfWidth);
+        System.out.println("fullAngle = " + fullAngle);
     }
 
     @Test
@@ -1024,5 +1028,20 @@ public class StringTest {
         System.out.println("符号位: " + binary.substring(0, 1));
         System.out.println("指数位: " + binary.substring(1, 12));
         System.out.println("尾数位: " + binary.substring(12));
+    }
+
+    @Test
+    public void test123() {
+        String a = "actualOutletTemperature";
+        String b = a.toLowerCase().replace(" ", "_");
+        System.out.println("b = " + b);
+        String humpString = StringUtil.toHumpString(b);
+        System.out.println("humpString = " + humpString);
+        String humpToLine = StringUtil.humpToLine(a);
+        System.out.println("humpToLine = " + humpToLine);
+
+        String d = "&#064;";
+        String cnASCII = ChineseToSpellUtils.getCnASCII(d);
+        System.out.println("cnASCII = " + cnASCII);
     }
 }
