@@ -2106,7 +2106,7 @@ public class TestApplicationTests {
 
     @Test
     public void testHashcode(){
-        // student 有自己的 hashcode() 方法
+        // student 有自己的 hashCode() 和 equals() 方法
         Student student = new Student();
         int i = student.hashCode();
         System.out.println("i = " + i); // 31
@@ -2126,6 +2126,7 @@ public class TestApplicationTests {
         students.add(student1);
         System.out.println("students.size() = " + students.size()); // 1
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Teacher 没有自己的 hashCode() 和 equals() 方法
         Teacher teacher = new Teacher();
         int i4 = teacher.hashCode();
         System.out.println("i4 = " + i4); // 225290371
