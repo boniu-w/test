@@ -1,0 +1,160 @@
+#foreach($dto in $dtos)
+#set($index = $foreach.index)
+#set($service = $services.get($index))
+#set($entity = $es.get($index))
+#set($excel = $excels.get($index))
+
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.CollectionUtils;
+import ci.dp.peq.strategy.asset.svc.excel.util.ExcelUtil;
+import ci.dp.peq.strategy.asset.svc.service.${excel};
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+
+@PostMapping(value = "/getExcel")
+@Operation(summary = "获取excel数据")
+public R<Object> getExcel(HttpServletRequest request,
+                          HttpServletResponse response) {
+    try {
+        List<MultipartFile> uploadFiles = ExcelUtil.getUploadFiles(request);
+        List<${dto}> excel = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(uploadFiles)) {
+            for (MultipartFile uploadFile : uploadFiles) {
+                excel = ${service}.getExcel(uploadFile, response, "uga");
+            }
+        }
+        if ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".equals(response.getContentType())) {
+            return null;
+        }
+        return R.ok(excel, "预防性维修和故障性维修工单数量比 导入成功");
+    } catch (Exception e) {
+        log.error("预防性维修和故障性维修工单数量比 导入出错", e);
+        return R.failed("预防性维修和故障性维修工单数量比 导入出错");
+    }
+}
+
+@GetMapping(value = "/exportTemplate")
+@Operation(summary = "模板导出")
+public void exportExcelTemplate(${dto} params, HttpServletResponse response) throws Exception {
+    ${service}.exportTemplate(params, response);
+}
+
+@GetMapping(value = "/export")
+@Operation(summary = "数据导出")
+public void exportExcel(${dto} params, HttpServletResponse response) throws Exception {
+    ${service}.exportData(params, response);
+}
+
+
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+
+   List<${dto}> getExcel(MultipartFile multipartFile, HttpServletResponse response, String bu) throws Exception;
+
+    void exportTemplate(${dto} params, HttpServletResponse response) throws Exception;
+
+    void exportData(${dto} params, HttpServletResponse response) throws Exception;
+
+
+import ci.dp.peq.strategy.asset.svc.excel.${excel};
+import ci.dp.peq.strategy.asset.svc.excel.util.ExcelUtil;
+import ci.dp.peq.strategy.asset.svc.util.CommonUtils;
+import ci.dp.peq.strategy.asset.svc.util.ImportUtil;
+import ci.dp.peq.strategy.asset.svc.util.StringUtil;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+import java.util.function.Function;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+private HashMap<String, Map<String, ${entity}>> repeatInDatasource() {
+        List<${entity}> list = this.list();
+        if (CollectionUtils.isEmpty(list)) return new LinkedHashMap<>();
+        Map<String, ${entity}> monthMap = list.stream()
+                .collect(Collectors.toMap(${entity}::getMonth, Function.identity(), (oldVal, newVal) -> newVal));
+        HashMap<String, Map<String, ${entity}>> hashMap = new HashMap<>();
+        hashMap.put("month", monthMap);
+        return hashMap;
+    }
+
+    /**
+     * 初始化 Excel 导入校验配置。
+     *
+     * @return 校验配置对象
+     */
+    private ImportUtil.ValidateConfig<${entity}> initValidateConfig() {
+        String[] requiredFields = new String[]{"month", "ytdRate", "monthlyRate"};
+        Map<String, Pattern> formatMap =ImportUtil.getYearMonthFormatMap();
+        String[] repeatFields = new String[]{"month"};
+        HashMap<String, Map<String, ${entity}>> hashMap = repeatInDatasource();
+        ImportUtil.ValidateConfig<${entity}> validateConfig = new ImportUtil.ValidateConfig<${entity}>();
+        validateConfig.setRequiredFields(requiredFields);
+        validateConfig.setFormatMap(formatMap);
+        validateConfig.setRepeatFields(repeatFields);
+        validateConfig.setDatasourceMap(hashMap);
+
+        return validateConfig;
+    }
+
+    @Override
+    public List<${dto}> getExcel(MultipartFile multipartFile, HttpServletResponse response, String bu) throws Exception {
+        String originalFilename = multipartFile.getOriginalFilename();
+        ImportUtil.ValidateConfig<${entity}> validateConfig = initValidateConfig();
+        ImportUtil.ExcelContext<${excel}> excelContext = ImportUtil.readExcel(multipartFile, ${excel}.class, validateConfig);
+        LinkedHashMap<Integer, String> errorMap = excelContext.getErrorMap();
+        if (errorMap != null && !errorMap.isEmpty()) {
+            String baseName = "";
+            if (StringUtil.isNotBlank(originalFilename)) {
+                baseName = originalFilename.contains(".")
+                        ? originalFilename.substring(0, originalFilename.lastIndexOf("."))
+                        : originalFilename;
+            }
+
+            ImportUtil.exportWorkbook(excelContext.getWorkbook(), baseName + "-error", response);
+            return null;
+        }
+        List<${excel}> excelList = excelContext.getList();
+        List<${excel}> sortedList = ImportUtil.sortList(excelList, ${excel}::getIndex);
+        return CommonUtils.copyList(sortedList, ${dto}::new);
+    }
+
+    @Override
+    public void exportTemplate(${dto} params, HttpServletResponse response) throws Exception {
+        ExcelUtil.exportTemplate("static/${excel}.xlsx", response,
+                "Oil barrel maintenance cost(桶油检修成本)");
+    }
+
+    @Override
+    public void exportData(${dto} params, HttpServletResponse response) throws Exception {
+        // 1. 查询数据
+        List<${dto}> list = list(params);
+        List<${excel}> excels = CommonUtils.copyList(list, ${excel}::new);
+
+        // 2. 加载模板文件
+        Workbook workbook = ExcelUtil.loadTemplateWorkbook("static/${excel}.xlsx");
+        Sheet sheet = workbook.getSheetAt(0);
+
+        // 3. 读取表头、获取注解映射
+        Object[] cellFormatValues = ExcelUtil.readHeaderValues(sheet.getRow(0));
+        String[] excelTitles = ExcelUtil.getAnnotationNames(${excel}.class);
+        String[] fieldNames = ExcelUtil.getFieldNames(${excel}.class);
+
+        int colCount = sheet.getRow(0).getLastCellNum();
+        int dataStartRow = 1;
+
+        // 4. 捕获样式、移除旧数据、写入数据、输出响应
+        CellStyle[] columnStyles = ExcelUtil.getTemplateStyle(workbook, sheet, colCount, dataStartRow);
+        ExcelUtil.removeDataFromTemplate(sheet, dataStartRow, sheet.getLastRowNum());
+        ExcelUtil.writeData(excels, sheet, dataStartRow, colCount, cellFormatValues, excelTitles, fieldNames, columnStyles);
+        ExcelUtil.returnResponse(response, workbook, "桶油检修成本");
+    }
+
+#end
