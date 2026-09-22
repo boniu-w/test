@@ -333,21 +333,21 @@ public class MathUtil {
      ************************************************************************/
     public static String double2ScientificNotation(double num) {
         if (isInteger(String.valueOf(num))) {
-            if (num > -9999 || num <= 9999) {
+            if (num > -9999 && num <= 9999) {
                 return String.valueOf(((int) num));
             }
         }
-        if (num < 0.001 || num > 1000) {
+        if (Math.abs(num) < 0.001 || Math.abs(num) > 1000) {
             String str = String.format("%E", num);// 获取直接格式化结果
             str = str.replace("E-0", "E-");// 将E-0N处理为E-N
             // 处理结果
-            String temp = str.substring(0, str.indexOf("E"));
+            String temp = str.substring(0, str.indexOf('E'));
             // 精确到小数点后3位
             String f = String.format("%.3f", Double.parseDouble(temp));
-            str = f + str.substring(str.indexOf("E"));
+            str = f + str.substring(str.indexOf('E'));
             return str;
         } else {
-            return String.valueOf(new BigDecimal(String.valueOf(num)).setScale(3, RoundingMode.HALF_UP).doubleValue());
+            return String.valueOf(BigDecimal.valueOf(num).setScale(3, RoundingMode.HALF_UP).doubleValue());
         }
     }
 
@@ -361,15 +361,15 @@ public class MathUtil {
      ************************************************************************/
     public static String double2ScientificNotation(double num, int scale) {
         if (isInteger(String.valueOf(num))) {
-            if (num > -9999 || num <= 9999) {
+            if (num > -9999 && num <= 9999) {
                 return String.valueOf(((int) num));
             }
         }
-        if (num < 0.001 || num > 1000) {
+        if (Math.abs(num) < 0.001 || Math.abs(num) > 1000) {
             String str = String.format("%E", num);// 获取直接格式化结果
             str = str.replace("E-0", "E-");// 将E-0N处理为E-N
             // 处理结果
-            String temp = str.substring(0, str.indexOf("E"));
+            String temp = str.substring(0, str.indexOf('E'));
             // 精确到小数点后 scale 位
             StringBuilder stringBuilder = new StringBuilder("");
             stringBuilder.append("%")
@@ -377,10 +377,10 @@ public class MathUtil {
                     .append(scale)
                     .append("f");
             String f = String.format(stringBuilder.toString(), Double.parseDouble(temp));
-            str = f + str.substring(str.indexOf("E"));
+            str = f + str.substring(str.indexOf('E'));
             return str;
         } else {
-            return String.valueOf(new BigDecimal(String.valueOf(num)).setScale(3, RoundingMode.HALF_UP).doubleValue());
+            return String.valueOf(BigDecimal.valueOf(num).setScale(scale, RoundingMode.HALF_UP).doubleValue());
         }
     }
 

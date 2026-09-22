@@ -636,7 +636,8 @@ public class ExcelUtil {
         return tList;
     }
 
-    private static <T> List<T> toObject(Class<T> tClass, Map<Integer, Map<String, Object>> contentMap,
+    public static <T> List<T> toObject(Class<T> tClass,
+                                       Map<Integer, Map<String, Object>> contentMap,
                                        Map<String, Map<String, String>> importReplaceMap) {
         List<T> list = new ArrayList<>(contentMap.size());
 
