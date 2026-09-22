@@ -749,14 +749,33 @@ public class StringUtil {
         }
     }
 
+    /**
+     * 将所属月份（如 2026-1 / 2026/01 / 2026.1）统一归一化为 yyyy-MM。
+     * 无法解析时返回原值。
+     */
+    private String normalizeAssociatedMonth(Object associatedMonth) {
+        if (associatedMonth == null) return "";
+        String s = associatedMonth.toString().trim();
+        if (s.isEmpty()) return "";
+        String[] parts = s.split("[-/.]");
+        if (parts.length != 2) return s;
+        try {
+            int year = Integer.parseInt(parts[0].trim());
+            int month = Integer.parseInt(parts[1].trim());
+            return String.format("%04d-%02d", year, month);
+        } catch (NumberFormatException e) {
+            return s;
+        }
+    }
+
     public static void main(String[] args) {
         String val = "123.";
-        boolean number = isNumber(val);
+        boolean number = isNumber(val);  // true
         System.out.println("number = " + number);
         BigDecimal bigDecimal = new BigDecimal(val);
         System.out.println("bigDecimal = " + bigDecimal);
 
-        boolean number0 = isNumber0(val);
+        boolean number0 = isNumber0(val); // true
         System.out.println("number0 = " + number0);
     }
 }
