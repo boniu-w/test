@@ -135,7 +135,7 @@ public class FileTest {
                 excelParams.setTitleIndex(4);  // 指定标题在哪一行
                 excelParams.setContentStartIndex(5);  // 指定内容起始行
                 excelParams.setContentEndIndex(11);
-                String[] title = ExcelUtil._readExcelTitle(excelParams, RisksThreatsIdentifiedAndRectificationExcel.class);
+                String[] title = ExcelUtil._readExcelTitle(workbook, excelParams, RisksThreatsIdentifiedAndRectificationExcel.class);
                 Map<Integer, Map<String, Object>> content = ExcelUtil.readExcelContent(workbook, title, excelParams);
                 // ExcelUtil.toObject()
                 System.out.println("content = " + content);

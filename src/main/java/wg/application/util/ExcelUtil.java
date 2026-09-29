@@ -1,7 +1,9 @@
 package wg.application.util;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,16 +40,9 @@ import java.util.*;
  *************************************************************/
 public class ExcelUtil {
     private static Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
-    private static Workbook workbook;
-    private static Sheet sheet;
-    private static Row row;
-    
+
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##########");
-    
-    public static Workbook getWorkbook() {
-        return workbook;
-    }
-    
+
     /*************************************************************
      * 初始化workbook
      * @author: wg
@@ -65,13 +60,10 @@ public class ExcelUtil {
             switch (ext) {
                 case ".xls":
                 case ".et":
-                    workbook = new HSSFWorkbook(is);
-                    return workbook;
+                    return new HSSFWorkbook(is);
                 case ".xlsx":
-                    workbook = new XSSFWorkbook(is);
-                    return workbook;
+                    return new XSSFWorkbook(is);
                 default:
-                    workbook = null;
                     return null;
             }
         } catch (IOException e) {
@@ -79,16 +71,15 @@ public class ExcelUtil {
         } finally {
             //System.out.println("<><><><><>< 初始化 workbook 完成 ><><><><>");
         }
-        
+
         return new HSSFWorkbook();
     }
-    
+
     public static Workbook initWorkbook(File file) throws IOException {
         if (file == null) {
             return null;
         }
-        workbook = new XSSFWorkbook(new FileInputStream(file));
-        return workbook;
+        return new XSSFWorkbook(new FileInputStream(file));
     }
     
     /***************************************************
@@ -129,61 +120,7 @@ public class ExcelUtil {
         return fileVector;
     }
     
-    /****************************************************************
-     * 读取第一行 默认是标题行
-     * @author: wg
-     * @time: 2020/7/2 15:05
-     ****************************************************************/
-    public static <T> String[] readExcelTitle(@Nullable ExcelParams excelParams, Class<T> tClass) throws NullPointerException {
-        if (workbook == null) {
-            throw new IllegalStateException("Workbook对象为空！");
-        }
-
-        // sheet 所在
-        int sheetIndex = (excelParams != null && excelParams.getSheetIndex() != null)
-                ? excelParams.getSheetIndex() : 0;
-        sheet = workbook.getSheetAt(sheetIndex);
-
-        // 标题行
-        // 标题行
-        int titleIndex = (excelParams != null && excelParams.getTitleIndex() != null)
-                ? excelParams.getTitleIndex() : 0;
-        row = sheet.getRow(titleIndex);
-
-        if (row == null) {
-            throw new IllegalStateException("标题行为空！");
-        }
-
-        // 标题总列数
-        int colNum = row.getLastCellNum();
-        String[] title = new String[colNum];
-
-        // 构建字段名映射表，提高查找效率
-        Field[] fields = tClass.getDeclaredFields();
-        Map<String, String> fieldNameMap = new HashMap<>();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(Excel.class)) {
-                Excel annotation = field.getAnnotation(Excel.class);
-                fieldNameMap.put(annotation.name(), field.getName());
-            }
-        }
-
-        // 填充标题数组
-        for (int i = 0; i < colNum; i++) {
-            Cell cell = row.getCell(i);
-            if (cell != null) {
-                String cellValue = cell.getStringCellValue();
-                String fieldName = fieldNameMap.get(cellValue);
-                if (fieldName != null) {
-                    title[i] = fieldName;
-                }
-            }
-        }
-
-        return title;
-    }
-
-    public static <T> String[] _readExcelTitle(@Nullable ExcelParams excelParams, Class<T> tClass) throws NullPointerException {
+    public static <T> String[] _readExcelTitle(Workbook workbook, @Nullable ExcelParams excelParams, Class<T> tClass) throws NullPointerException {
         if (workbook == null) {
             try {
                 throw new Exception("Workbook对象为空！");
@@ -191,33 +128,35 @@ public class ExcelUtil {
                 e.printStackTrace();
             }
         }
-        
+
         int numberOfSheets = workbook.getNumberOfSheets();
-        
+
         // sheet 所在
+        Sheet sheet;
         if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
             sheet = workbook.getSheetAt(excelParams.getSheetIndex());
         } else {
             sheet = workbook.getSheetAt(0);
         }
-        
+
         // 标题行
+        Row row;
         if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
             row = sheet.getRow(excelParams.getTitleIndex());
         } else {
             row = sheet.getRow(0);
         }
-        
+
         // 标题总列数
         int colNum = row.getPhysicalNumberOfCells();
         colNum = row.getLastCellNum();
         String[] title = new String[colNum];
         Field[] fields = tClass.getDeclaredFields();
-        
+
         String cellValue = "";
         ExcelAnnotation annotation = null;
         String[] annotationName = new String[0];
-        
+
         for (int i = 0; i < colNum; i++) {
             cellValue = row.getCell(i).getStringCellValue();
             for (int j = 0; j < fields.length; j++) {
@@ -232,9 +171,62 @@ public class ExcelUtil {
                 }
             }
         }
-        
+
         return title;
     }
+
+    public static <T> String[] readExcelTitle(Workbook workbook, @Nullable ExcelParams excelParams, Class<T> tClass) throws NullPointerException {
+        if (workbook == null) {
+            try {
+                throw new Exception("Workbook对象为空！");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        int numberOfSheets = workbook.getNumberOfSheets();
+        // sheet 所在
+        Sheet sheet;
+        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getSheetIndex())) {
+            sheet = workbook.getSheetAt(excelParams.getSheetIndex());
+        } else {
+            sheet = workbook.getSheetAt(0);
+        }
+        // 标题行
+        Row row;
+        if (!ObjectUtils.isEmpty(excelParams) && !ObjectUtils.isEmpty(excelParams.getTitleIndex())) {
+            row = sheet.getRow(excelParams.getTitleIndex());
+        } else {
+            row = sheet.getRow(0);
+        }
+        // 标题总列数
+        int colNum = row.getPhysicalNumberOfCells();
+        colNum = row.getLastCellNum();
+        String[] title = new String[colNum];
+        Field[] fields = tClass.getDeclaredFields();
+
+        String cellValue = "";
+        Excel annotation = null;
+        String annotationName = "";
+
+        for (int i = 0; i < colNum; i++) {
+            if (row.getCell(i) != null) {
+                cellValue = row.getCell(i).getStringCellValue();
+                for (int j = 0; j < fields.length; j++) {
+                    if (fields[j].isAnnotationPresent(Excel.class)) {
+                        annotation = fields[j].getAnnotation(Excel.class);
+                        annotationName = annotation.name().toLowerCase(Locale.ROOT);
+                        if (StringUtil.isNotBlank(cellValue)
+                                && StringUtil.isNotBlank(annotationName)
+                                && annotationName.equals(cellValue.trim().toLowerCase(Locale.ROOT))) {
+                            title[i] = fields[j].getName();
+                        }
+                    }
+                }
+            }
+        }
+        return title;
+    }
+
     /****************************************************************
      * 读取的 excel 内容 应该以 表头对应字段 为键 形成map
      * @author: wg
@@ -253,7 +245,7 @@ public class ExcelUtil {
         // 获取sheet
         int sheetIndex = (excelParams != null && excelParams.getSheetIndex() != null)
                 ? excelParams.getSheetIndex() : 0;
-        sheet = workbook.getSheetAt(sheetIndex);
+        Sheet sheet = workbook.getSheetAt(sheetIndex);
 
         // 获取起始行
         int contentStartIndex = (excelParams != null && excelParams.getContentStartIndex() != null)
@@ -628,7 +620,7 @@ public class ExcelUtil {
     }
 
     private static <T> List<T> getData(Workbook workbook, ExcelParams excelParams, Class<T> tClass) throws Exception {
-        String[] titles = readExcelTitle(excelParams, tClass);
+        String[] titles = readExcelTitle(workbook, excelParams, tClass);
         Map<Integer, Map<String, Object>> content = readExcelContent(workbook, titles, excelParams);
         Map<String, Map<String, String>> replaceMap = getImportReplaceMap(tClass);
         List<T> tList = toObject(tClass, content, replaceMap);
@@ -667,4 +659,18 @@ public class ExcelUtil {
         return list;
     }
 
+    public static void copyStyle(CellStyle oldCellStyle, CellStyle newCellStyle) {
+        if (oldCellStyle instanceof XSSFCellStyle && newCellStyle instanceof XSSFCellStyle) {
+            XSSFCellStyle oldXSSFCellStyle = (XSSFCellStyle) oldCellStyle;
+            XSSFCellStyle newXSSFCellStyle = (XSSFCellStyle) newCellStyle;
+            newXSSFCellStyle.cloneStyleFrom(oldXSSFCellStyle);
+        } else if (oldCellStyle instanceof HSSFCellStyle && newCellStyle instanceof HSSFCellStyle) {
+            HSSFCellStyle oldHSSFCellStyle = (HSSFCellStyle) oldCellStyle;
+            HSSFCellStyle newHSSFCellStyle = (HSSFCellStyle) newCellStyle;
+            newHSSFCellStyle.cloneStyleFrom(oldHSSFCellStyle);
+        } else {
+            // Handle other cases or throw an exception
+            // throw new UnsupportedOperationException("Cannot clone styles between HSSFCellStyle and XSSFCellStyle");
+        }
+    }
 }

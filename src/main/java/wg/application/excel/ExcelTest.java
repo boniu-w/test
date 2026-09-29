@@ -61,7 +61,7 @@ public class ExcelTest {
 
             long currentTimeMillis = System.currentTimeMillis();
 
-            String[] excelTitle = ExcelUtil.readExcelTitle(excelParams, IliDetailExcel.class);
+            String[] excelTitle = ExcelUtil.readExcelTitle(workbook, excelParams, IliDetailExcel.class);
             Map<Integer, Map<String, Object>> map = ExcelUtil.readExcelContent(workbook, excelTitle, excelParams);
 
             long l = System.currentTimeMillis();
@@ -120,7 +120,7 @@ public class ExcelTest {
 
             long currentTimeMillis = System.currentTimeMillis();
 
-            String[] excelTitle = ExcelUtil.readExcelTitle(excelParams, IliDetailExcel.class);
+            String[] excelTitle = ExcelUtil.readExcelTitle(workbook, excelParams, IliDetailExcel.class);
             Map<Integer, Map<String, Object>> map = ExcelUtil.readExcelContent(workbook, excelTitle, excelParams);
             Map<String, Map<String, String>> replaceMap = ExcelUtil.getImportReplaceMap(IliDetailExcel.class);
 
